@@ -1,10 +1,11 @@
-ActiveAdmin.register Studio do
+ActiveAdmin.register Page do
 
   
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :name, :description, :location_id
+  # permit_params :list, :of, :attributes, :on, :model
+  permit_params :title, :content
   #
   # or
   #
@@ -14,11 +15,4 @@ ActiveAdmin.register Studio do
   #  permitted
   # end
   
-  index do
-    column :name
-    column :description
-    column :location
-    default_actions
-  end
-    
 end
