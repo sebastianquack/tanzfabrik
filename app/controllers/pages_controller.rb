@@ -5,6 +5,14 @@ class PagesController < ApplicationController
   def show
   end
 
+  def update
+    page = Page.find(params[:id])
+    page.title = params[:content][:page_title][:value]
+    page.content = params[:content][:page_content][:value]
+    page.save!
+    render text: ""
+  end
+
   private
 
   def set_page

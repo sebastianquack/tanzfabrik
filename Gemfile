@@ -45,3 +45,4 @@ end
 
 gem 'activeadmin', github: 'gregbell/active_admin'
 
+gem 'mercury-rails', github: 'jejacks0n/mercury'
