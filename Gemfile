@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+ruby "2.1.0"
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
@@ -44,8 +46,14 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'activeadmin', github: 'gregbell/active_admin'
+#gem "activeadmin", "~> 0.6.3"
+#gem 'formtastic', github: 'justinfrench/formtastic'
+gem "formtastic", "2.3.0.rc2"
 
 gem 'mercury-rails', github: 'jejacks0n/mercury'
 
 gem 'friendly_id', '~> 5.0.0'
+
+gem "paperclip"
+
 

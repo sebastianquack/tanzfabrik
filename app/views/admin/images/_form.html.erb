@@ -1,0 +1,25 @@
+
+<%= semantic_form_for [:admin, @image], :html => { :multipart => true } do |f| %>
+
+<%= f.inputs "Details" do %>
+    <%= f.input :description %>
+    <%= f.input :license %>
+<% end %>
+
+<%= f.inputs "Image" do %>
+
+<!--  this throws a weird error:
+      f.input :attachment, :as => :file 
+      so we use regular rails file field helper instead of formtastic 
+-->
+
+<li>
+<%= f.label :attachment, "File" %>
+<%= f.file_field :attachment %>
+</li>
+    
+<% end %>
+
+<%= f.actions %>
+
+<% end %>
