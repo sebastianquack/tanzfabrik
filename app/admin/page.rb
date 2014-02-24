@@ -15,4 +15,22 @@ ActiveAdmin.register Page do
   #  permitted
   # end
   
+  index do
+    column :title
+    column :slug
+    column :content
+    default_actions
+  end
+  
+  form do |f|
+    f.inputs "Details" do
+      f.input :title
+    end
+    f.inputs "Content" do
+      f.input :content
+    end
+    f.actions
+  end
+  
+  
 end

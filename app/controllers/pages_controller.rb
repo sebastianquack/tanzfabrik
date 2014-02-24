@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   end
 
   def update
-    page = Page.find(params[:id])
+    page = Page.friendly.find(params[:id])
     page.title = params[:content][:page_title][:value]
     page.content = params[:content][:page_content][:value]
     page.save!
@@ -16,7 +16,7 @@ class PagesController < ApplicationController
   private
 
   def set_page
-    @page = Page.find(params[:id])
+    @page = Page.friendly.find(params[:id])    
   end
 
 end
