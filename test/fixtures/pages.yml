@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  content: MyText
+  title: Welcome
+  slug: welcome
+  content: TODO
 
 two:
-  title: MyString
-  content: MyText
+  title: About
+  slug: about
+  content: TODO

@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  description: MyText
-  address: MyText
+kreuzberg:
+  name: Kreuzberg
+  description: TODO
+  address: "Möckernstr.68, 10965 Berlin"
 
-two:
-  name: MyString
-  description: MyText
-  address: MyText
+wedding:
+  name: Wedding
+  description: TODO
+  address: "Uferstr. 23, 13357 Berlin"

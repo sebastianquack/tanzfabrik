@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyText
-  location_id: 1
-  rentable: 
+  name: 1
+  description: "Helles, sehr weitläufiges Studio, ideal für Bewegungsfolgen, die viel Raum beanspruchen."
+  location: kreuzberg
+  rentable: true
 
 two:
-  name: MyString
-  description: MyText
-  location_id: 1
-  rentable: 
+  name: 4
+  description: "Das Uferstudio 4 ist das Künstlerresidenzstudio der Tanzfabrik Berlin und wird auch für öffentliche Proben und Showings genutzt."
+  location: wedding
+  rentable: true

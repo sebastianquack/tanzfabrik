@@ -2,7 +2,8 @@ module Mercury
   module Authentication
 
     def can_edit?
-      true # check here to see if the user is logged in/has access
+      return admin_user_signed_in?
     end
+
   end
 end
