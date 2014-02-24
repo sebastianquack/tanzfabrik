@@ -14,4 +14,10 @@ ActiveAdmin.register Studio do
   #  permitted
   # end
   
+  index do
+    column :name
+    column :description
+    column :location
+  end
+    
 end

@@ -13,5 +13,12 @@ ActiveAdmin.register Location do
   #  permitted << :other if resource.something?
   #  permitted
   # end
+
+  index do
+    column :name
+    column :description
+    column :address
+    default_actions
+  end
   
 end
