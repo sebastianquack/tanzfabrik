@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140224171718) do
+ActiveRecord::Schema.define(version: 20140224231801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,53 @@ ActiveRecord::Schema.define(version: 20140224171718) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "event_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: true do |t|
+    t.integer  "type_id"
+    t.string   "title"
+    t.text     "description"
+    t.string   "warning"
+    t.float    "price"
+    t.string   "language"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events_tags", force: true do |t|
+    t.integer  "event_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events_times", force: true do |t|
+    t.integer  "event_id"
+    t.time     "time"
+    t.integer  "duration"
+    t.integer  "studio_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "festivals", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "festivals_events", force: true do |t|
+    t.integer  "festival_id"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
@@ -71,6 +118,10 @@ ActiveRecord::Schema.define(version: 20140224171718) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.integer  "studio_id"
+    t.integer  "person_id"
+    t.integer  "event_id"
+    t.integer  "festival_id"
   end
 
   create_table "locations", force: true do |t|
@@ -91,11 +142,32 @@ ActiveRecord::Schema.define(version: 20140224171718) do
 
   add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
 
+  create_table "people", force: true do |t|
+    t.string   "name"
+    t.text     "bio"
+    t.string   "typ"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "persons_events", force: true do |t|
+    t.integer  "event_id"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "studios", force: true do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "location_id"
     t.boolean  "rentable"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -16,7 +16,7 @@ ActiveAdmin.register Image do
 
   index do
     column "Image" do |image|
-        link_to(image_tag(image.attachment.url(:thumb), :height => '50'), admin_image_path(image))
+        link_to image_tag(image.attachment.url(:thumb), :height => '50'), admin_image_path(image)
     end
     column :description
     column :license

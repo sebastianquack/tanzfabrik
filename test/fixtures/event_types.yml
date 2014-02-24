@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Performance
+
+two:
+  name: Workshop
+
+three:
+  name: Kurs
+
+four:
+  name: Profitraining
+  
+five:
+  name: Performance-Projekt
+  
+six:
+  name: Kindertanz
