@@ -5,10 +5,11 @@ ActiveAdmin.register Person do
   permit_params :id, :name, :bio, :role, :image, :event_ids => []
 
   index do
+    selectable_column
     column :name
     column :role
     column "Events" do |person|
-      person.events.map { |e| e.title }.join ', '
+        person.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
     end
     column "Image" do |person|
         link_to image_tag(person.image.url(:thumb), :height => '50'), admin_image_path(person) if person.image.exists?
@@ -25,7 +26,7 @@ ActiveAdmin.register Person do
       row :name
       row :role
       row "Events" do |person|
-        person.events.map { |e| e.title }.join ', '
+        person.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
       end      
       row :bio
       row :image do

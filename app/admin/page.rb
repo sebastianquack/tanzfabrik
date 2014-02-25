@@ -17,6 +17,7 @@ ActiveAdmin.register Page do
   # end
   
   index do
+    selectable_column
     column "URL" do |page|
       link_to page.slug, page
     end

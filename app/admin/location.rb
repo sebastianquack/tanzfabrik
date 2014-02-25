@@ -16,10 +16,26 @@ ActiveAdmin.register Location do
   # end
 
   index do
+    selectable_column
     column :name
     column :description
     column :address
     default_actions
   end
+  
+  show do
+    attributes_table do
+      row :name
+      row :description
+      row :address
+      row "Studios" do |location|
+        location.studios.map { |s| (link_to s.name, admin_studio_path(s)) }.join(', ').html_safe
+      end      
+    end
+    active_admin_comments
+  end
+  
+    
+    
   
 end

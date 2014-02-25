@@ -16,6 +16,7 @@ ActiveAdmin.register Studio do
   # end
   
   index do
+    selectable_column
     column :location
     column :name
     column :description

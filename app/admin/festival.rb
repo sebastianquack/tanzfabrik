@@ -5,10 +5,11 @@ ActiveAdmin.register Festival do
   permit_params :name, :description, :event_ids => []
   
   index do
+    selectable_column
     column :name
     column :description
     column "Events" do |festival|
-      festival.events.map { |e| e.title }.join ', '
+      festival.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
     end
     
     column "Image" do |festival|
@@ -25,7 +26,7 @@ ActiveAdmin.register Festival do
       row :name
       row :description
       row "Events" do |festival|
-        festival.events.map { |e| e.title }.join ', '
+        festival.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
       end      
       row :image do
         image_tag(festival.image.url) if festival.image.exists?
@@ -41,22 +42,6 @@ ActiveAdmin.register Festival do
       f.input :events, :as => :check_boxes
     end
 
-    #f.inputs do
-    #  f.has_many :events, :allow_destroy => true, :heading => 'Events', :new_record => true do |ef|
-    #    ef.input :title
-    #  end
-    #end
-
-    #f.inputs "Events" do
-    #  f.has_many :festivals_events do |ef|
-    #    if !ef.object.nil?
-          # show the destroy checkbox only if it is an existing record
-    #      ef.input :_destroy, :as => :boolean, :label => "Destroy?"
-    #    end
-    #    ef.input :event
-    #  end
-    #end
-    
     if f.object.image.exists?
       f.inputs "Current image" do     
         f.template.content_tag(:li) do
