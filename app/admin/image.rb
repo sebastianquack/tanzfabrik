@@ -1,6 +1,6 @@
 ActiveAdmin.register Image do
 
-  
+  menu false
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -34,17 +34,17 @@ ActiveAdmin.register Image do
     active_admin_comments
   end
 
-# we need to use custom form, because formtastic file helper throws weird error
+# we might want to use custom form, because formtastic file helper throws weird error
   form :partial => "form"
 
 #  form :html => { :enctype => "multipart/form-data" } do |f|
-#    f.inputs "Details" do
+#      f.inputs "Details" do
 #      f.input :description
 #      f.input :license
 #    end
-#    f.inputs "Image" do            
+#    f.inputs "Image" do         
 #      f.input :attachment, :as => :file # this is the error
-#      f.file_field :attachment
+#      f.file_field :attachment # use regular rails helper instead
 #    end    
 #    f.actions
 #  end

@@ -17,10 +17,28 @@ ActiveAdmin.register Page do
   # end
   
   index do
+    column "URL" do |page|
+      link_to page.slug, page
+    end
     column :title
-    column :slug
     column :content
-    default_actions
+    actions do |page|
+        link_to "Wysiwig", '/editor/pages/' + page.slug, :class => "member_link"
+    end
+  end
+
+  filter :title
+  filter :content
+  
+  show do
+    attributes_table do
+      row "URL" do |page|
+        link_to page.slug, page
+      end
+      row :title
+      row :content
+    end
+    active_admin_comments
   end
   
   form do |f|

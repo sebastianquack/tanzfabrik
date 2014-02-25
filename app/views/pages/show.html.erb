@@ -4,5 +4,8 @@
 </div>
 
 <% if admin_user_signed_in? %>
-    <p><%= link_to "Edit Page", "/editor" + request.path, id: "edit_link" %></p>
+    <p id="edit_link">
+        <%= link_to "Edit Page", "/editor" + request.path, id: "edit_link" %>
+        <%= link_to "Admin area", admin_root_path %>
+    </p>
 <% end %>

@@ -1,4 +1,4 @@
-class EventsTimes < ActiveRecord::Base
+class EventTime < ActiveRecord::Base
   belongs_to :event
   belongs_to :studio
 end
