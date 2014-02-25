@@ -4,7 +4,7 @@ ActiveAdmin.register Image do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :description, :license, :attachment
+  permit_params :description, :license, :attachment, :studio_id, :person_id, :event_id, :festival_id
   #
   # or
   #

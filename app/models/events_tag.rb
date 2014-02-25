@@ -1,4 +1,4 @@
-class EventsTags < ActiveRecord::Base
+class EventsTag < ActiveRecord::Base
   belongs_to :event
   belongs_to :tag
 end
