@@ -1,10 +1,4 @@
-<h1 id="page_title" data-mercury="simple"><%= @page.title %></h1>
-
-<div id="page_content" data-mercury="full">
-    <%= @page.content.html_safe %>
-</div>
-
-<%= render "admin_link" %>
+<%= render "/pages/editable_content" %>
 
 <% Studio.order('location_id').all.each do |studio| %>
 <div>
@@ -14,5 +8,3 @@
   <p><%= studio.location.address %></p>
 </div>
 <% end %>
-
-<%= render "/navigation/default" %>
