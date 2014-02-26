@@ -10,11 +10,14 @@ class PagesController < ApplicationController
         redirect_to root_path
       end
     else
-      @page = Page.friendly.find('welcome')
+      @page = Page.friendly.find('start')
     end
 
-    # try to show template with page slug name if exists      
+    # try to show special template with page slug name if exists      
     if @page
+
+      # todo: load special data here if needed depending on slug
+
       if File.exists?(Rails.root.join("app", "views", "pages", "#{@page.slug}.html.erb"))
         render "#{@page.slug}" and return
       end

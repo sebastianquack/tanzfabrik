@@ -1,0 +1,18 @@
+<h1 id="page_title" data-mercury="simple"><%= @page.title %></h1>
+
+<div id="page_content" data-mercury="full">
+    <%= @page.content.html_safe %>
+</div>
+
+<%= render "admin_link" %>
+
+<% Studio.order('location_id').all.each do |studio| %>
+<div>
+  <h2><%= studio.location.name + " " + studio.name %></h2>
+  <%= image_tag studio.image.url if studio.image.exists? %>
+  <p><%= studio.description %></p>
+  <p><%= studio.location.address %></p>
+</div>
+<% end %>
+
+<%= render "/navigation/default" %>

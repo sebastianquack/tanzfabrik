@@ -13,3 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+
+$(function() {
+
+  function handler(event) {
+    $(event.target).children('ul').toggle();
+    event.stopPropagation();
+  }
+
+  $("ul.nav li").click(handler);
+
+});

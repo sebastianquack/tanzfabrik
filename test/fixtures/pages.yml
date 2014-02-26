@@ -1,11 +1,76 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: Welcome
-  slug: welcome
+0:
+  title: Start
+  slug: start
   content: TODO
 
-two:
-  title: About
-  slug: about
+1_1_5:
+  title: Contact Jam
+  slug: contact_jam
+  content: TODO
+  
+1_1_7:
+  title: Preise
+  slug: preise
+  content: TODO
+
+1_1_8:
+  title: Öffnungszeiten
+  slug: oeffnungszeiten
+  content: TODO
+
+1_2_1: 
+  title: Über Dance Intensive
+  slug: ueber_dance_intensive
+  content: TODO
+
+1_2_4:
+  title: Bewerbung
+  slug: bewerbung
+  content: TODO
+  
+2_5:
+  title: APAP netzwerk
+  slug: apap_netzwerk
+  content: TODO
+
+3:
+  title: Profil & Partner
+  slug: profil_partner
+  content: TODO
+
+4:
+  title: Tickets
+  slug: tickets
+  content: TODO
+
+5_1:
+  title: Studios
+  slug: studios
+  content: TODO
+
+5_2:
+  title: Vermietungsinfo
+  slug: vermietungsinfo
+  content: TODO
+
+6_1:
+  title: Kontakt
+  slug: kontakt
+  content: TODO
+  
+6_2:
+  title: AGBs
+  slug: agbs
+  content: TODO
+  
+6_3:
+  title: Impressum
+  slug: impressum
+  content: TODO
+
+6_4:
+  title: Lageplan
+  slug: lageplan
   content: TODO
