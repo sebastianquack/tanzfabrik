@@ -16,7 +16,6 @@ ActiveAdmin.register Image do
 
   index do
     selectable_column
-
     column "Image" do |image|
         link_to image_tag(image.attachment.url(:thumb), :height => '50'), admin_image_path(image)
     end

@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   menu :priority => 1
 
-  permit_params :title, :description, :type_id, :festival_ids => [], :person_ids => [], event_times_attributes: [:id, :datetime, :duration, :studio_id, :_destroy]
+  permit_params :title, :description, :type_id, :image, :festival_ids => [], :person_ids => [], event_times_attributes: [:id, :datetime, :duration, :studio_id, :_destroy]
 
   index do 
     selectable_column
@@ -57,7 +57,7 @@ ActiveAdmin.register Event do
       f.input :people, :as => :check_boxes
     end
 
-    f.inputs "Event Times" do
+    f.inputs "Event times" do
       f.has_many :event_times, heading: false, :new_record => true, :allow_destroy => true do |et_f|
         et_f.inputs do
           et_f.input :datetime, :label => false, :include_blank => false, :start_year => 2014  
@@ -67,7 +67,21 @@ ActiveAdmin.register Event do
       end
     end
     
-
+    if f.object.image.exists?
+      f.inputs "Current image" do     
+        f.template.content_tag(:li) do
+          f.template.image_tag(f.object.image.url(:thumb))
+        end
+      end
+    end
+    
+    f.inputs "New image" do     
+      # use regular rails helper instead of formtastic, avoid weird error
+      f.template.content_tag(:li) do
+        f.file_field :image
+      end
+    end    
+    
     f.actions
   end
   

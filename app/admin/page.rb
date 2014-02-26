@@ -24,7 +24,7 @@ ActiveAdmin.register Page do
     column :title
     column :content
     actions do |page|
-        link_to "Wysiwig", '/editor/pages/' + page.slug, :class => "member_link"
+        link_to "Wysiwig", '/editor/' + page.slug, :class => "member_link"
     end
   end
 

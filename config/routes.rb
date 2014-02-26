@@ -1,4 +1,6 @@
 Tanzfabrik::Application.routes.draw do
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
   
   mount Mercury::Engine => '/'
   Mercury::Engine.routes
@@ -7,13 +9,11 @@ Tanzfabrik::Application.routes.draw do
   
   get 'admin' => 'admin/pages#index'
   ActiveAdmin.routes(self)
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  resources :pages
-    
-  root 'home#index'
+  resources :pages, :only => [:show, :update], :path => ''
+
+  # You can have the root of your site routed with "root"    
+  root 'pages#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

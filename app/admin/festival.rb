@@ -2,7 +2,7 @@ ActiveAdmin.register Festival do
 
   menu :priority => 2
 
-  permit_params :name, :description, :event_ids => []
+  permit_params :name, :description, :image, :event_ids => []
   
   index do
     selectable_column
@@ -13,7 +13,7 @@ ActiveAdmin.register Festival do
     end
     
     column "Image" do |festival|
-        link_to image_tag(festival.image.url(:thumb), :height => '50'), admin_image_path(festival) if festival.image.exists?
+      image_tag(festival.image.url) if festival.image.exists?
     end
     default_actions
   end

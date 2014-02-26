@@ -12,7 +12,7 @@ ActiveAdmin.register Person do
         person.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
     end
     column "Image" do |person|
-        link_to image_tag(person.image.url(:thumb), :height => '50'), admin_image_path(person) if person.image.exists?
+      image_tag(person.image.url) if person.image.exists?
     end
     default_actions
   end

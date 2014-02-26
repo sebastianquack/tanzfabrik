@@ -21,7 +21,7 @@ ActiveAdmin.register Studio do
     column :name
     column :description
     column "Image" do |studio|
-        link_to image_tag(studio.image.url(:thumb), :height => '50'), admin_image_path(studio) if studio.image.exists?
+      image_tag(studio.image.url) if studio.image.exists?
     end
     default_actions
   end
