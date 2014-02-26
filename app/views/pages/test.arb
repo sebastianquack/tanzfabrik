@@ -1,0 +1,10 @@
+Studio.order('location_id').all.each do |studio|
+  div do
+    h2 studio.location.name + " " + studio.name
+    ul do
+      li studio.description, :class => "testclass"
+      li studio.location.address  
+    end
+    img :src => studio.image.url if studio.image.exists?      
+  end
+end

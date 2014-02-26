@@ -28,6 +28,9 @@ class PagesController < ApplicationController
     end
   end
 
+  def test
+  end
+
   def update
     page = Page.friendly.find(params[:id])
     page.title = params[:content][:page_title][:value]

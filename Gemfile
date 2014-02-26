@@ -54,4 +54,6 @@ gem 'friendly_id', '~> 5.0.0'
 
 gem "paperclip"
 
+gem "arbre"
+
 

@@ -189,6 +189,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  arbre
   coffee-rails (~> 4.0.0)
   formtastic!
   friendly_id (~> 5.0.0)

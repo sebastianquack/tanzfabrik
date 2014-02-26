@@ -10,8 +10,9 @@ Tanzfabrik::Application.routes.draw do
   get 'admin' => 'admin/pages#index'
   ActiveAdmin.routes(self)
 
-  resources :pages, :only => [:show, :update], :path => ''
+  get 'test' => 'pages#test'
 
+  resources :pages, :only => [:show, :update], :path => ''
   # You can have the root of your site routed with "root"    
   root 'pages#show'
 
