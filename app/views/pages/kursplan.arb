@@ -9,9 +9,9 @@ Location.all.each do |location|
     h2 location.name
     para location.address
 
-    # get event times for this location
-    ets = location.event_times
-            
+    # get event details for this location
+    eds = location.event_details
+                           
     table do
 
       # display table headers with weekdays
@@ -21,27 +21,26 @@ Location.all.each do |location|
           th day
         end
       end
-      
-      # group event times by time
-      et_by_time = ets.group_by {|et| et.datetime.strftime("%R")} # grouped by time
-      logger.debug et_by_time
+            
+      # group event details by time
+      ed_by_time = eds.group_by {|ed| ed.time.strftime("%R")} # grouped by time
 
       # go through times
-      et_by_time.each do |time, ets_t|
+      ed_by_time.each do |time, eds_t|
         tr do
         
           # display time in first column
-          td l ets_t.first.datetime, :format=>:hours_minutes
+          td l eds_t.first.time, :format=>:hours_minutes
 
           # group events at this time by weekday
-          et_by_weekday = ets_t.group_by {|et| et.datetime.strftime("%u")} # group by weekday
+          ed_by_weekday = eds_t.group_by {|ed| ed.start_date.strftime("%u")} # group by weekday
 
           # loop over all weekdays and display events 
           days.each_with_index do |day, index|          
             td do
-              if et_by_weekday[index.to_s]
-                et_by_weekday[index.to_s].each do |et_w|
-                  a et_w.event.title + " (" + "Studio " + et_w.studio.name + ")", :href => event_path(et_w.event) 
+              if ed_by_weekday[index.to_s]
+                ed_by_weekday[index.to_s].each do |ed_w|
+                  a ed_w.event.title + " (" + "Studio " + ed_w.studio.name + ")", :href => event_path(ed_w.event) 
                 end
                 
               end

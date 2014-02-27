@@ -2,12 +2,16 @@ ActiveAdmin.register Event do
 
   menu :priority => 1
 
-  permit_params :title, :description, :type_id, :image, :festival_ids => [], :person_ids => [], event_times_attributes: [:id, :datetime, :duration, :studio_id, :_destroy]
+  permit_params :title, :description, :warning, :type_id, :image, 
+    :festival_ids => [], :person_ids => [], 
+    event_details_attributes: [:id, :start_date, :end_date, :time, :duration, :studio_id, :repeat_mode_id, :_destroy],
+    people_attributes: [:id, :name, :_destroy],
+    person_events_attributes: [:id, :person_id, :event_id, :_destroy]
 
   index do 
     selectable_column
-    column "Times" do |event|
-      event.event_times.map { |t| t.datetime.to_s }.join('<br>').html_safe
+    column "Details" do |event|
+      event.event_details.map { |t| t.datetime(:default) }.join('<br>').html_safe
     end
 
     column "Festivals" do |event|
@@ -28,8 +32,8 @@ ActiveAdmin.register Event do
 
   show do 
     attributes_table do
-      row "Times" do |event|
-        event.event_times.map { |t| t.datetime.to_s + ", " + link_to(t.studio.location.name + " " + t.studio.name, admin_studio_path(t.studio)) + ", " + t.duration.to_s + " Minuten" }.join('<br>').html_safe
+      row "Details" do |event|
+        event.event_details.map { |t| t.datetime(:default) + ", " + link_to(t.studio.location.name + " " + t.studio.name, admin_studio_path(t.studio)) + ", " + t.duration.to_s + " Minuten" }.join('<br>').html_safe
       end
 
       row :title
@@ -50,20 +54,44 @@ ActiveAdmin.register Event do
 
 
   form do |f|
-    f.inputs "Details" do
+    f.inputs "Basic Info" do
       f.input :title
       f.input :description
+      f.input :warning
       f.input :type, :include_blank => false, :hint => (link_to "Manage Event Types", admin_event_types_path)
-      f.input :festivals, :as => :check_boxes
-      f.input :people, :as => :check_boxes
+      #f.input :festivals, :as => :check_boxes
+      #f.input :people, :as => :check_boxes
     end
 
-    f.inputs "Event times" do
-      f.has_many :event_times, heading: false, :new_record => true, :allow_destroy => true do |et_f|
+    f.inputs "Festivals auswählen" do
+      f.has_many :festival_events, heading: false, :new_record => true, :allow_destroy => true do |f_f|
+        f_f.inputs do
+          f_f.input :festival, :include_blank => false
+        end
+      end
+    end
+
+    f.inputs "Personen auswählen" do
+      f.has_many :person_events, heading: false, :new_record => true, :allow_destroy => true do |p_f|
+        p_f.inputs do
+          p_f.input :person, :include_blank => false
+        end
+      end
+    end
+
+    f.inputs "Event Details" do
+      f.has_many :event_details, heading: false, :new_record => true, :allow_destroy => true do |et_f|
         et_f.inputs do
-          et_f.input :datetime, :label => false, :include_blank => false, :start_year => 2014  
+          et_f.input :start_date, :include_blank => false, :start_year => 2014, :as => :datepicker
+          et_f.input :repeat_mode, :include_blank => false, :collection => RepeatMode.order('id DESC').load.map {|r| [ r.description, r.id] }
+          et_f.input :end_date, :include_blank => false, :start_year => 2014, :as => :datepicker
+
+          et_f.input :time, :label => false, :include_blank => false, :as => :time_select
           et_f.input :duration
-          et_f.input :studio, :include_blank => false, :collection => Studio.order(:location_id).all.map {|s| [ s.location.name + " " + s.name, s.id] }
+          
+          et_f.input :studio, :include_blank => false, :collection => Studio.order(:location_id).load.map {|s| [ s.location.name + " " + s.name, s.id] }
+          
+
         end
       end
     end

@@ -15,10 +15,10 @@ para event.description unless event.description.empty?
 
 h2 "Zeiten"
 ul do
-  event.event_times.each do |event_time|
+  event.event_details.each do |event_detail|
     li do
-      text_node (l event_time.datetime, :format => :default) + ", "
-      a event_time.full_location, :href => root_path + "studios"
+      text_node event_detail.datetime(:default) + ", "
+      a event_detail.full_location, :href => root_path + "studios"
     end
   end
 end

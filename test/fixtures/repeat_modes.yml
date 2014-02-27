@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: einmalig
+  rule: 
+
+two:
+  description: wöchentlich
+  rule: 
+
+three:
+  description: täglich
+  rule: 
+
