@@ -54,6 +54,26 @@
   title: Bewerbung
   slug: bewerbung
   content: TODO
+
+2_1:
+  title: Programm
+  slug: programm
+  content: TODO
+
+2_2:
+  title: Projekte & Festivals
+  slug: festivals
+  content: TODO
+
+2_3:
+  title: Künstler
+  slug: kuenstler
+  content: TODO
+
+2_4:
+  title: Residenzen
+  slug: residenzen
+  content: TODO
   
 2_5:
   title: APAP netzwerk

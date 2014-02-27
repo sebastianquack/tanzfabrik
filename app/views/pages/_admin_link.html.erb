@@ -1,6 +1,6 @@
 <% if admin_user_signed_in? %>
     <p id="edit_link">
-        <%= link_to "Edit Page", "/editor/" + @page.slug, id: "edit_link" %>
+        <%= link_to "Edit page", "/editor/" + @page.slug, id: "edit_link" %>
         <%= link_to "Admin area", admin_root_path %>
     </p>
 <% end %>

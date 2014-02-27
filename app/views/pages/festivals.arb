@@ -1,0 +1,9 @@
+render "/pages/editable_content"
+
+ul do
+  Festival.all.each do |festival|
+    li do
+      a festival.name, :href => festival_path(festival)
+    end
+  end
+end

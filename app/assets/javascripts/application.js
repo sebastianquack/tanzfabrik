@@ -11,10 +11,11 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 
-$(function() {
+$(document).ready(function() {
 
   function handler(event) {
     $(event.target).children('ul').toggle();

@@ -7,4 +7,9 @@ class EventTime < ActiveRecord::Base
   def init
       self.duration = 60
   end
+
+  def full_location
+    self.studio.location.name + " " + self.studio.name
+  end
+
 end

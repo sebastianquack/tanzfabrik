@@ -1,0 +1,9 @@
+h1 person.name
+
+img :src => person.image.url if person.image.exists?
+
+para person.bio
+
+div do
+  person.events.map { |p| (link_to p.title, event_path(p)) }.join(', ').html_safe
+end

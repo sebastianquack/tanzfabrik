@@ -15,7 +15,7 @@ ActiveAdmin.register Event do
     end
     column :type
     column "People" do |event|
-      event.people.map { |p| (link_to p.name, admin_person_path(p)) }.join.html_safe
+      event.people.map { |p| (link_to p.name, admin_person_path(p)) }.join(', ').html_safe
     end
     column :title
     actions
@@ -33,9 +33,10 @@ ActiveAdmin.register Event do
       end
 
       row :title
+      row :description
       row :type
       row "People" do |event|
-        event.people.map { |p| (link_to p.name, admin_person_path(p)) }.join.html_safe
+        event.people.map { |p| (link_to p.name, admin_person_path(p)) }.join(', ').html_safe
       end
       row "Festivals" do |event|
         event.festivals.map { |f| (link_to f.name, admin_festival_path(f)) }.join(', ').html_safe

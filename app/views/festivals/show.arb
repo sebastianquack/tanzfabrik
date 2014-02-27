@@ -1,0 +1,9 @@
+h1 festival.name
+
+img :src => festival.image.url if festival.image.exists?
+
+para festival.description
+
+div do
+  festival.events.map { |e| (link_to e.title, event_path(e)) }.join(', ').html_safe
+end      

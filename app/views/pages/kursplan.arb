@@ -1,16 +1,58 @@
 render "/pages/editable_content"
 
+# TODO: get all weekdays from locale
+days = I18n.t(:"date.day_names")
+
+# loop over locations
 Location.all.each do |location|
   div do
     h2 location.name
     para location.address
-  
-    location.event_times.each do |event_time|
-      div do
-        h3 event_time.event.title
-        para event_time.datetime
-        img :src => event_time.event.image.url if event_time.event.image.exists?
+
+    # get event times for this location
+    ets = location.event_times
+            
+    table do
+
+      # display table headers with weekdays
+      tr do
+        th "Zeit"
+        days.each do |day|
+          th day
+        end
       end
-    end
+      
+      # group event times by time
+      et_by_time = ets.group_by {|et| et.datetime.strftime("%R")} # grouped by time
+      logger.debug et_by_time
+
+      # go through times
+      et_by_time.each do |time, ets_t|
+        tr do
+        
+          # display time in first column
+          td l ets_t.first.datetime, :format=>:hours_minutes
+
+          # group events at this time by weekday
+          et_by_weekday = ets_t.group_by {|et| et.datetime.strftime("%u")} # group by weekday
+
+          # loop over all weekdays and display events 
+          days.each_with_index do |day, index|          
+            td do
+              if et_by_weekday[index.to_s]
+                et_by_weekday[index.to_s].each do |et_w|
+                  a et_w.event.title + " (" + "Studio " + et_w.studio.name + ")", :href => event_path(et_w.event) 
+                end
+                
+              end
+              
+            end
+          end
+          
+        end
+      end
+      
+    end  
+      
   end
 end

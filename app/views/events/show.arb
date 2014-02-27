@@ -1,0 +1,24 @@
+h1 event.title
+para do
+  event.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe
+end
+para event.type.name
+
+img :src => event.image.url if event.image.exists?
+
+para event.description unless event.description.empty?
+
+# disply list of festivals - not necessary at this point
+# div do
+#   event.festivals.map { |f| (link_to f.name, festival_path(f)) }.join(', ').html_safe
+# end
+
+h2 "Zeiten"
+ul do
+  event.event_times.each do |event_time|
+    li do
+      text_node (l event_time.datetime, :format => :default) + ", "
+      a event_time.full_location, :href => root_path + "studios"
+    end
+  end
+end

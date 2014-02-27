@@ -1,5 +1,5 @@
 ul :class => "nav" do
-  li link_to "Start", root_path + "kursplan"
+  li link_to "Start", root_path
   li "Tanz = Bereich Schule" do
     ul do
       li "1.1. Tanzklassen" do
@@ -33,10 +33,10 @@ ul :class => "nav" do
   end
   li "Fabrik = Bereich Produktion" do
     ul do
-      li "2.1. Programm"
-      li "2.2. Projekte & Festivals"
-      li "2.3. Künstler"
-      li "2.4. Residenzen"
+      li link_to "2.1. Programm", root_path + "programm"
+      li link_to "2.2. Projekte & Festivals", root_path + "festivals"
+      li link_to "2.3. Künstler", root_path + "kuenstler"
+      li link_to "2.4. Residenzen", root_path + "residenzen"
       li link_to "2.5. APAP netzwerk", root_path + "apap_netzwerk"
     end
   end
