@@ -5,9 +5,34 @@
   slug: start
   content: TODO
 
+1_1_1:
+  title: Kursplan
+  slug: kursplan
+  content: TODO
+
+1_1_2:
+  title: Performance-Projekte
+  slug: performance_projekte
+  content: TODO
+
+1_1_3:
+  title: Profitraining
+  slug: profitraining
+  content: TODO
+
+1_1_4:
+  title: Kindertanz
+  slug: kindertanz
+  content: TODO
+
 1_1_5:
   title: Contact Jam
   slug: contact_jam
+  content: TODO
+
+1_1_6:
+  title: Lehrer
+  slug: lehrer
   content: TODO
   
 1_1_7:

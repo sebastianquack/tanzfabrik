@@ -56,10 +56,12 @@ ActiveAdmin.register Studio do
         end
       end
       f.inputs "New image" do     
+        # works now because we use paperclip 3.5
+        f.input :image, :as => :file 
         # use regular rails helper instead of formtastic, avoid weird error
-        f.template.content_tag(:li) do
-          f.file_field :image
-        end
+        #f.template.content_tag(:li) do
+        #  f.file_field :image
+        #end
       end    
       f.actions
   end

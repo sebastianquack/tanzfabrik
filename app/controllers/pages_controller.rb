@@ -8,12 +8,12 @@ class PagesController < ApplicationController
       @page = Page.where(:slug => params[:id]).first 
       if @page
         # try to show special template with page slug name if exists      
-        if File.exists?(Rails.root.join("app", "views", "pages", "#{@page.slug}.html.erb"))
+        if !Dir.glob(Rails.root.join("app", "views", "pages", "#{@page.slug}.*")).empty?
           render "#{@page.slug}" and return
         end
       else
         # if page doesn't exist in db, check if template exists
-        if File.exists?(Rails.root.join("app", "views", "pages", "#{params[:id]}.html.erb"))
+        if !Dir.glob(Rails.root.join("app", "views", "pages", "#{params[:id]}.*")).empty?
           # if yes, render that template
           render "#{params[:id]}" and return
         else
@@ -26,9 +26,6 @@ class PagesController < ApplicationController
       @page = Page.friendly.find('start')
       render "start" and return # this works even if page start is not in db and exists only as template
     end
-  end
-
-  def test
   end
 
   def update

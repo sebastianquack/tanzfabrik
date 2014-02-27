@@ -1,0 +1,16 @@
+render "/pages/editable_content"
+
+Location.all.each do |location|
+  div do
+    h2 location.name
+    para location.address
+  
+    location.event_times.each do |event_time|
+      div do
+        h3 event_time.event.title
+        para event_time.datetime
+        img :src => event_time.event.image.url if event_time.event.image.exists?
+      end
+    end
+  end
+end

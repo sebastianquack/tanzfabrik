@@ -1,0 +1,59 @@
+ul :class => "nav" do
+  li link_to "Start", root_path + "kursplan"
+  li "Tanz = Bereich Schule" do
+    ul do
+      li "1.1. Tanzklassen" do
+        ul do
+          li link_to "1.1.1. Kursplan", root_path + "kursplan"
+          li link_to "1.1.2. Performanceprojekte", root_path + "performance_projekte"
+          li link_to "1.1.3. Profitraining", root_path + "profitraining"
+          li link_to "1.1.4. Kindertanz", root_path + "kindertanz"
+          li link_to "1.1.5. Contact Jam", root_path + "contact_jam"
+          li link_to "1.1.6. Lehrer", root_path + "lehrer"
+          li link_to "1.1.7. Preise", root_path + "preise"
+          li link_to "1.1.8. Öffnungszeiten", root_path + "oeffnungszeiten"
+        end
+      end
+      li "1.2. Dance Intensive" do
+        ul do
+          li link_to "1.2.1. Über Dance Intensive", root_path + "ueber_dance_intensive"
+          li "1.2.2. Programm"
+          li "1.2.3. Lehrer"
+          li link_to "1.2.4. Bewerbung", root_path + "bewerbung"
+        end
+      end
+      li "1.3. Workshops" do
+        ul do
+          li "1.3.1. Programm"
+          li "1.3.2. Stundenplan"
+          li "1.3.3. Onlineanmeldung"
+        end
+      end
+    end 
+  end
+  li "Fabrik = Bereich Produktion" do
+    ul do
+      li "2.1. Programm"
+      li "2.2. Projekte & Festivals"
+      li "2.3. Künstler"
+      li "2.4. Residenzen"
+      li link_to "2.5. APAP netzwerk", root_path + "apap_netzwerk"
+    end
+  end
+  li link_to "Profil & Partner", root_path + "profil_partner"
+  li link_to "Tickets", root_path + "tickets"
+  li "Vermietung" do
+    ul do
+      li link_to "Studios", root_path + "studios"
+      li link_to "Vermietungsinfo", root_path + "vermietungsinfo"
+    end
+  end
+  li "Service" do
+    ul do
+      li link_to "Kontakt", root_path + "kontakt"
+      li link_to "AGBs", root_path + "agbs"
+      li link_to "Impressum", root_path + "impressum"
+      li link_to "Lageplan", root_path + "lageplan"
+    end
+  end
+end
