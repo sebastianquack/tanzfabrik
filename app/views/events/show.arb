@@ -18,7 +18,7 @@ h2 "Details"
 event.event_details.each do |ed|
   para a (ed.studio.location.name + " " + ed.studio.name), :href => root_path + "studios"
   ul do
-    ed.occurences.each do |oc|
+    ed.occurrences.each do |oc|
       li (l oc, :format => :default)
     end  
   end

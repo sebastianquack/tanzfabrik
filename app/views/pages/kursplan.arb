@@ -25,22 +25,28 @@ Location.all.each do |location|
       # group event details by time
       ed_by_time = eds.group_by {|ed| ed.time.strftime("%R")} # grouped by time
 
-      # go through times
+      # go through event details per time
       ed_by_time.each do |time, eds_t|
         tr do
         
           # display time in first column
           td l eds_t.first.time, :format=>:hours_minutes
 
-          # group events at this time by weekday
-          ed_by_weekday = eds_t.group_by {|ed| ed.start_date.strftime("%u")} # group by weekday
+          # collect occurrences from this event detail
+          occurrences = []
+          eds_t.each do |e|
+            occurrences += e.occurrences_with_self # assemble a big array with [[date1, ed], [date2, ed],...]
+          end
+
+          # group occurrences by weekday
+          oc_by_weekday = occurrences.group_by {|oc| oc[0].strftime("%w")} # group by weekday
 
           # loop over all weekdays and display events 
-          days.each_with_index do |day, index|          
+          days.each_with_index do |day, index|
             td do
-              if ed_by_weekday[index.to_s]
-                ed_by_weekday[index.to_s].each do |ed_w|
-                  a ed_w.event.title + " (" + "Studio " + ed_w.studio.name + ")", :href => event_path(ed_w.event) 
+              if oc_by_weekday[index.to_s]                          
+                oc_by_weekday[index.to_s].each do |oc|
+                  a oc[1].event.title + " (" + "Studio " + oc[1].studio.name + ")", :href => event_path(oc[1].event) 
                 end
                 
               end

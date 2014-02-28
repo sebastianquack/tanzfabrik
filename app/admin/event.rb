@@ -36,7 +36,7 @@ ActiveAdmin.register Event do
         event.event_details.each do |ed|
           a (ed.studio.location.name + " " + ed.studio.name), :href => admin_studio_path(ed.studio)
           ul do
-            ed.occurences.each do |oc|
+            ed.occurrences.each do |oc|
               li span(l oc, :format => :default)
             end  
           end
