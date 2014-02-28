@@ -10,7 +10,7 @@ Location.all.each do |location|
     para location.address
 
     # get event details for this location
-    events = location.events.of_types(['Kurs', 'Performance-Projekt', 'Kindertanz'])
+    events = location.events.of_types([3, 5, 6])
     eds = []
     events.each do |event|
       eds += event.event_details
@@ -50,7 +50,7 @@ Location.all.each do |location|
             td do
               if oc_by_weekday[index.to_s]                          
                 oc_by_weekday[index.to_s].each do |oc|
-                  a oc[1].event.title + " (" + "Studio " + oc[1].studio.name + ")", :href => event_path(oc[1].event) 
+                  a oc[1].event.type.name + " " + oc[1].event.title + " (" + "Studio " + oc[1].studio.name + ")", :href => event_path(oc[1].event) 
                 end
                 
               end

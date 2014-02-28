@@ -6,7 +6,8 @@ ActiveAdmin.register Event do
     :festival_ids => [], :person_ids => [], 
     event_details_attributes: [:id, :start_date, :end_date, :time, :duration, :studio_id, :repeat_mode_id, :_destroy],
     people_attributes: [:id, :name, :_destroy],
-    person_events_attributes: [:id, :person_id, :event_id, :_destroy]
+    person_events_attributes: [:id, :person_id, :event_id, :_destroy],
+    festival_events_attributes: [:id, :event_id, :festival_id, :_destroy]
 
   index do 
     selectable_column

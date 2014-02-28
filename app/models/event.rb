@@ -19,17 +19,20 @@ class Event < ActiveRecord::Base
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
-  def self.of_types type_names
+  def self.of_types types
     r = []
-    type_names.each do |type_name|
-      r += self.of_type(type_name)
+    types.each do |type|
+      r += self.of_type(type)
     end
     return r
   end
 
-  def self.of_type type_name
-    #return self.joins(:type).where(:event_types => {:name => type_name})
-    event_type = EventType.where(:name => type_name).first
+  def self.of_type type
+    if type.is_a? String
+      event_type = EventType.where(:name => type).first
+    else
+      event_type = EventType.find(type)
+    end
     if event_type
       return self.where(:type_id => event_type.id).to_a    
     else

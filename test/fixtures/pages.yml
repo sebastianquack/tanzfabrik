@@ -50,9 +50,24 @@
   slug: ueber_dance_intensive
   content: TODO
 
+1_2_2: 
+  title: Dance Intensive Programm
+  slug: dance_intensive_programm
+  content: TODO
+
+1_2_3: 
+  title: Dance Intensive Lehrer
+  slug: dance_intensive_lehrer
+  content: TODO
+
 1_2_4:
   title: Bewerbung
-  slug: bewerbung
+  slug: dance_intensive_bewerbung
+  content: TODO
+
+1_3_1:
+  title: Workshop Programm
+  slug: workshop_programm
   content: TODO
 
 2_1:

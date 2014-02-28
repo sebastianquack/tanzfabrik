@@ -1,0 +1,22 @@
+render "/pages/editable_content"
+
+trainings = Event.of_type("Profitraining")
+sorted_trainings = trainings.sort_by { |t| t.event_details.first.start_date }
+sorted_trainings.each do |training| 
+  h3 (l training.event_details.first.start_date, :format => :month_day) + ' - ' + (l training.event_details.first.end_date, :format => :month_day)
+  h2 training.title
+  para do
+    training.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe
+  end
+  para training.description
+  #a "Mehr Infos", :href => event_path(training) 
+  training.event_details.each do |ed|
+    para a (ed.studio.location.name + " " + ed.studio.name), :href => root_path + "studios"
+    ul do
+      ed.occurrences.each do |oc|
+        li (l oc, :format => :default)
+      end  
+    end
+  end    
+
+end
