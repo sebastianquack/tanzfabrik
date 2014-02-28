@@ -5,6 +5,8 @@ class EventDetail < ActiveRecord::Base
   belongs_to :studio
   belongs_to :repeat_mode
 
+  delegate :type, :to => :event, :allow_nil => true
+
   after_initialize :init
 
   def init
@@ -59,5 +61,5 @@ class EventDetail < ActiveRecord::Base
     end
     return r
   end
-  
+    
 end

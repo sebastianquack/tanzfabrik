@@ -10,7 +10,11 @@ Location.all.each do |location|
     para location.address
 
     # get event details for this location
-    eds = location.event_details
+    events = location.events.of_types(['Kurs', 'Performance-Projekt', 'Kindertanz'])
+    eds = []
+    events.each do |event|
+      eds += event.event_details
+    end
                            
     table do
 
@@ -32,16 +36,16 @@ Location.all.each do |location|
           # display time in first column
           td l eds_t.first.time, :format=>:hours_minutes
 
-          # collect occurrences from this event detail
+          # collect occurrences from these event details (they all have the same time but different dates)
           occurrences = []
           eds_t.each do |e|
             occurrences += e.occurrences_with_self # assemble a big array with [[date1, ed], [date2, ed],...]
           end
 
-          # group occurrences by weekday
-          oc_by_weekday = occurrences.group_by {|oc| oc[0].strftime("%w")} # group by weekday
+          # group all these occurrences by weekday
+          oc_by_weekday = occurrences.group_by {|oc| oc[0].strftime("%w")} 
 
-          # loop over all weekdays and display events 
+          # loop over all weekdays and display the event details for each occurence at the proper weekday 
           days.each_with_index do |day, index|
             td do
               if oc_by_weekday[index.to_s]                          
