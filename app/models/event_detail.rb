@@ -29,8 +29,13 @@ class EventDetail < ActiveRecord::Base
     return I18n.l(self.datetime, :format => format)
   end
 
-  def occurences     
-    schedule = Schedule.from_hash((eval self.repeat_mode.rule), :start_date_override => self.datetime)    
+  def occurences    
+    if eval self.repeat_mode.rule
+      schedule = Schedule.from_hash((eval self.repeat_mode.rule), :start_date_override => self.datetime)
+    else
+      schedule = Schedule.new(self.datetime)
+    end
+          
     if self.end_date
       return schedule.occurrences(self.end_date)
     else
