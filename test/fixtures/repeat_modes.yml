@@ -2,13 +2,14 @@
 
 one:
   description: einmalig
-  rule: 
+  rule: ''
 
 two:
   description: wöchentlich
-  rule: 
+  rule: '{:start_date=>"2014-02-28 02:12:26 +0100", :rrules=>[{:validations=>{}, :rule_type=>"IceCube::WeeklyRule", :interval=>1}], :exrules=>[], :rtimes=>[], :extimes=>[]}'
 
 three:
   description: täglich
-  rule: 
+  rule: '{:start_date=>"2014-02-28 02:12:26 +0100", :rrules=>[{:validations=>{}, :rule_type=>"IceCube::DailyRule", :interval=>1}], :exrules=>[], :rtimes=>[], :extimes=>[]}'
+
 

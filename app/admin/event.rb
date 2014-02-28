@@ -11,7 +11,7 @@ ActiveAdmin.register Event do
   index do 
     selectable_column
     column "Details" do |event|
-      event.event_details.map { |t| t.datetime(:default) }.join('<br>').html_safe
+      event.event_details.map { |t| t.datetime_l(:default) }.join('<br>').html_safe
     end
 
     column "Festivals" do |event|
@@ -33,7 +33,14 @@ ActiveAdmin.register Event do
   show do 
     attributes_table do
       row "Details" do |event|
-        event.event_details.map { |t| t.datetime(:default) + ", " + link_to(t.studio.location.name + " " + t.studio.name, admin_studio_path(t.studio)) + ", " + t.duration.to_s + " Minuten" }.join('<br>').html_safe
+        event.event_details.each do |ed|
+          a (ed.studio.location.name + " " + ed.studio.name), :href => admin_studio_path(ed.studio)
+          ul do
+            ed.occurences.each do |oc|
+              li span(l oc, :format => :default)
+            end  
+          end
+        end    
       end
 
       row :title
@@ -83,7 +90,7 @@ ActiveAdmin.register Event do
       f.has_many :event_details, heading: false, :new_record => true, :allow_destroy => true do |et_f|
         et_f.inputs do
           et_f.input :start_date, :include_blank => false, :start_year => 2014, :as => :datepicker
-          et_f.input :repeat_mode, :include_blank => false, :collection => RepeatMode.order('id DESC').load.map {|r| [ r.description, r.id] }
+          et_f.input :repeat_mode, :include_blank => false, :collection => RepeatMode.order('id DESC').load.map {|r| [ r.description, r.id] }, :hint => (link_to "Manage Repeat Modes", admin_repeat_modes_path)
           et_f.input :end_date, :include_blank => false, :start_year => 2014, :as => :datepicker
 
           et_f.input :time, :label => false, :include_blank => false, :as => :time_select

@@ -13,12 +13,14 @@ para event.description unless event.description.empty?
 #   event.festivals.map { |f| (link_to f.name, festival_path(f)) }.join(', ').html_safe
 # end
 
-h2 "Zeiten"
-ul do
-  event.event_details.each do |event_detail|
-    li do
-      text_node event_detail.datetime(:default) + ", "
-      a event_detail.full_location, :href => root_path + "studios"
-    end
+h2 "Details"
+
+event.event_details.each do |ed|
+  para a (ed.studio.location.name + " " + ed.studio.name), :href => root_path + "studios"
+  ul do
+    ed.occurences.each do |oc|
+      li (l oc, :format => :default)
+    end  
   end
-end
+end    
+

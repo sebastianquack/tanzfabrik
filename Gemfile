@@ -56,5 +56,5 @@ gem 'friendly_id', '~> 5.0.0'
 gem "paperclip", '~> 3.5' # newer paperclip does not play nicely with formtastic
 
 gem "arbre"
-
+gem "ice_cube"
 
