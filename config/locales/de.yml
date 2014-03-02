@@ -32,9 +32,11 @@ de:
     - Samstag
     formats:
       weekday: "%A"
+      month: "%B"
       default: ! '%d.%m.%Y'
       long: '%d. %B %Y'
       short: '%d.%m.'
+      short_day: '%A, %d.%m.'
       short_end: '-%d.%m.'
       month_day: '%e. %B'
     month_names:
@@ -197,6 +199,7 @@ de:
       default: ! '%A, %d. %B %Y, %H:%M Uhr'
       long: ! '%A, %d. %B %Y, %H:%M Uhr'
       short: ! '%d. %B, %H:%M Uhr'
+      short_day: '%A, %d.%m.'      
     pm: nachmittags
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:

@@ -1,0 +1,88 @@
+# festival timetable: show all weeks that have occurrences of events
+# kursplan: show for specific week
+
+# pass week into timetable as local
+# if variable not present, use start of current week
+unless defined? start_date
+  start_date = Date.today.beginning_of_week # gets current monday
+end
+
+# create array of dates to look at
+dates = [start_date]
+6.times do |i|
+  dates.push (dates[i] + 1.day)
+end
+
+# create a big array of all the events details TODO: optimize
+details = []
+events.each do |event|
+  details += event.event_details
+end
+
+# do all the calculations
+table_data = []
+
+# first row
+table_data[0] = []
+table_data[0][0] = "Zeit"
+dates.each_with_index do |date, index|
+  table_data[0][index + 1] = l date, :format=>:short_day
+end
+
+row_index = 1
+
+# go through event details per time
+details_by_time = details.group_by {|detail| detail.time.strftime("%R")}
+details_by_time.each do |time, details|
+
+  # go through dates = columns
+  dates.each_with_index do |date, column_index|
+    
+    # check if a detail has an occurrence on this day
+    details.each do |detail|          
+      if detail.occurs_on?(date)
+        unless table_data[row_index]
+          table_data[row_index] = [] # initialize row if that hasen't happened yet
+        end          
+        unless table_data[row_index][column_index + 1]
+          table_data[row_index][column_index + 1] = [] # initialize a column if that hasen't happened yet
+        end
+        table_data[row_index][column_index + 1].push(detail) 
+      end
+    end  
+  end
+
+  # only if there was an occurrence in this row, add time to first column
+  if table_data[row_index]
+    table_data[row_index][0] = details.first.time # keep time object so we can sort and format
+    row_index += 1
+  end
+end  
+
+# display the table
+table do
+  tr do
+    table_data[0].each do |header|
+      th header
+    end
+  end
+  table_data.shift
+  table_data.sort! { |a,b| a[0] <=> b[0] }
+  table_data.each do |row|
+    tr do
+      row.each_with_index do |data, index|
+        if index == 0 
+          td l data, :format=>:hours_minutes
+        else
+          td do
+            data.map { |detail| link_to(
+              detail.event.type.name + " " + detail.event.title + " (" + detail.studio.location.name + " " + detail.studio.name + ")", 
+              event_path(detail.event))  
+            }.join('<br>').html_safe if data
+          end          
+        end
+      end
+    end
+  end
+end
+

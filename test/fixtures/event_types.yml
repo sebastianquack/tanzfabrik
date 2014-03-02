@@ -23,3 +23,16 @@ five:
 six:
   id: 6
   name: Kindertanz
+
+seven:
+  id: 7
+  name: Showing
+
+eight:
+  id: 8
+  name: Lecture-Performance
+
+nine:
+  id: 9
+  name: Gespräch/Talk
+  

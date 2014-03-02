@@ -8,18 +8,23 @@ workshops_not_in_festivals.each do |workshop|
 end 
 
 # get festivals with workshops
-festivals_with_workshops = Festival.joins(:events).where(:events => { :type_id => 2 })
+festivals_with_workshops = Festival.joins(:events).where(:events => { :type_id => 2 }).group('festivals.id')
 
 festivals_with_workshops.each do |festival|
   div do
     h2 festival.name
     ul do 
-      festival.events.where(:type_id => 2).each do |workshop| 
+      festival.events.where(:type_id => 2).order('title ASC').each do |workshop| 
         li do
-          workshop.people.map { |p| p.name }.join(', ') + ": " + workshop.title
+          link_text = ""
+          if workshop.people.length > 0
+            link_text += workshop.people.map { |p| p.name }.join(', ') + ": "
+          end
+          link_text += workshop.title
+          a link_text, :href => event_path(workshop)
         end
       end
     end
-    a "Programm von " + festival.name, :href => festival_path(festival)
+    a "Programm-Übersicht von " + festival.name, :href => festival_path(festival)
   end
 end 

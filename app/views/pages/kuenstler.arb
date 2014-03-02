@@ -1,0 +1,12 @@
+render "/pages/editable_content"
+
+Person.by_event_types([1, 7, 8, 9]).each do |person|
+  div do
+    h2 person.name
+    para img :src => person.image.url if person.image.exists?
+    a "Biographie", :href => person_path(person)
+    para do
+      person.events.map { |e| (link_to e.type.name + " " + e.title, event_path(e)) }.join(', ').html_safe
+    end
+  end
+end

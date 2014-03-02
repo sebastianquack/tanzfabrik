@@ -1,0 +1,21 @@
+show_festival = nil if !defined? show_festival
+
+render :partial => "events/basic_info", :locals => {:event => event, :show_festival => show_festival}
+
+img :src => event.image.url if event.image.exists?
+
+para do
+  event.description unless event.description.empty?
+end
+
+event.event_details.each do |detail|
+  span "Termine:"
+  ul do
+    detail.occurrences.each do |occurrence|
+      li do
+        text_node l occurrence, :format => :default
+        a (detail.studio.location.name + " " + detail.studio.name), :href => root_path + "studios"
+      end
+    end  
+  end
+end    

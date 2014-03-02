@@ -24,3 +24,9 @@ en:
   time:
     formats:
       hours_minutes: "%l:%M %p"
+      short_day: '%A, %d.%m.'
+  date:
+    formats:
+      short_day: '%A, %m/%d'
+      month: "%B"
+

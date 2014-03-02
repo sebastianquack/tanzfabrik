@@ -1,0 +1,20 @@
+if params[:start_date]
+  start_date = Date.parse(params[:start_date])
+else 
+  start_date = Date.today.beginning_of_week # gets current monday      
+end
+  
+a "previous week", :href => root_url + "events?start_date=" + (start_date - 1.week).to_s
+a "next week", :href => root_url + "events?start_date=" + (start_date + 1.week).to_s
+
+# loop over locations
+Location.all.each do |location|
+  div do
+    h2 location.name
+    para location.address
+
+    # get event details for this location
+    events = location.events
+    render :partial => "/events/timetable", :locals => {:events => events, :start_date => start_date}          
+  end
+end

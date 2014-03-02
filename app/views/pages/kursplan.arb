@@ -1,7 +1,13 @@
 render "/pages/editable_content"
 
-# TODO: get all weekdays from locale
-days = I18n.t(:"date.day_names")
+if params[:start_date]
+  start_date = Date.parse(params[:start_date])
+else 
+  start_date = Date.today.beginning_of_week # gets current monday      
+end
+  
+a "previous week", :href => root_url + "kursplan?start_date=" + (start_date - 1.week).to_s
+a "next week", :href => root_url + "kursplan?start_date=" + (start_date + 1.week).to_s
 
 # loop over locations
 Location.all.each do |location|
@@ -10,58 +16,8 @@ Location.all.each do |location|
     para location.address
 
     # get event details for this location
-    events = location.events.of_types([3, 5, 6])
-    eds = []
-    events.each do |event|
-      eds += event.event_details
-    end
-                           
-    table do
-
-      # display table headers with weekdays
-      tr do
-        th "Zeit"
-        days.each do |day|
-          th day
-        end
-      end
-            
-      # group event details by time
-      ed_by_time = eds.group_by {|ed| ed.time.strftime("%R")} # grouped by time
-
-      # go through event details per time
-      ed_by_time.each do |time, eds_t|
-        tr do
-        
-          # display time in first column
-          td l eds_t.first.time, :format=>:hours_minutes
-
-          # collect occurrences from these event details (they all have the same time but different dates)
-          occurrences = []
-          eds_t.each do |e|
-            occurrences += e.occurrences_with_self # assemble a big array with [[date1, ed], [date2, ed],...]
-          end
-
-          # group all these occurrences by weekday
-          oc_by_weekday = occurrences.group_by {|oc| oc[0].strftime("%w")} 
-
-          # loop over all weekdays and display the event details for each occurence at the proper weekday 
-          days.each_with_index do |day, index|
-            td do
-              if oc_by_weekday[index.to_s]                          
-                oc_by_weekday[index.to_s].each do |oc|
-                  a oc[1].event.type.name + " " + oc[1].event.title + " (" + "Studio " + oc[1].studio.name + ")", :href => event_path(oc[1].event) 
-                end
-                
-              end
-              
-            end
-          end
+    events = location.events.of_types([3, 5, 6])    
+    render :partial => "/events/timetable", :locals => {:events => events, :start_date => start_date}
           
-        end
-      end
-      
-    end  
-      
   end
 end

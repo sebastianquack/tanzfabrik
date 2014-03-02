@@ -4,6 +4,29 @@ img :src => festival.image.url if festival.image.exists?
 
 para festival.description
 
+if festival.event_details.length > 0
+
+  # determine start_date
+  start_dates = []
+  start_dates[0] = festival.event_details.order('start_date ASC').first.start_date.beginning_of_week
+
+  # todo: check if festival goes over multiple weeks, display other weeks as well
+  end_date = festival.event_details.order('end_date DESC').to_a.last.end_date
+
+  num_weeks = ((end_date - start_dates[0]) / 7).to_i
+  num_weeks.times do |i|
+    start_dates.push start_dates[i] + 1.week
+  end
+
+  events = festival.events
+  start_dates.each do |start_date|
+    para render :partial => "/events/timetable", :locals => {:events => events, :start_date => start_date}
+  end
+
+end
+
 div do
-  festival.events.map { |e| (link_to e.title, event_path(e)) }.join(', ').html_safe
-end      
+  festival.events.order('title ASC').each do |event|
+    div render :partial => "/events/show", :locals => {:event => event}
+  end
+end
