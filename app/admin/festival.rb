@@ -20,6 +20,8 @@ ActiveAdmin.register Festival do
   
   filter :name
   filter :description
+   
+  config.per_page = 10
     
   show do
     attributes_table do

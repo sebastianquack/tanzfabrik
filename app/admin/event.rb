@@ -9,6 +9,8 @@ ActiveAdmin.register Event do
     person_events_attributes: [:id, :person_id, :event_id, :_destroy],
     festival_events_attributes: [:id, :event_id, :festival_id, :_destroy]
 
+  config.per_page = 10
+
   index do 
     selectable_column
     column "Details" do |event|

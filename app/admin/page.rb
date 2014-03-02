@@ -31,6 +31,8 @@ ActiveAdmin.register Page do
   filter :title
   filter :content
   
+  config.per_page = 10
+  
   show do
     attributes_table do
       row "URL" do |page|

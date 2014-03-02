@@ -21,6 +21,8 @@ ActiveAdmin.register Person do
   filter :role
   filter :events
   
+  config.per_page = 10
+  
   show do
     attributes_table do
       row :name

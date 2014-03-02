@@ -9,8 +9,8 @@ end
 h2 l start_date, :format => :month
   
 para do  
-  a "previous month", :href => root_url + "programm?start_date=" + (start_date - 1.month).to_s
-  a "next month", :href => root_url + "programm?start_date=" + (start_date + 1.month).to_s
+  a "vorheriger Monat", :href => root_url + "programm?start_date=" + (start_date - 1.month).to_s
+  a "nächster Monat", :href => root_url + "programm?start_date=" + (start_date + 1.month).to_s
 end
   
 # load events of types 1, 7, 8 or 9 that have a start_date earlier than the end of this month and an end_date later than the start of this month

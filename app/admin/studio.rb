@@ -27,6 +27,8 @@ ActiveAdmin.register Studio do
   end
   
   filter :location
+  
+  config.per_page = 10
     
   show do
     attributes_table do

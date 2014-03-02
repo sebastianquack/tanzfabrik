@@ -6,8 +6,8 @@ else
   start_date = Date.today.beginning_of_week # gets current monday      
 end
   
-a "previous week", :href => root_url + "kursplan?start_date=" + (start_date - 1.week).to_s
-a "next week", :href => root_url + "kursplan?start_date=" + (start_date + 1.week).to_s
+a "vorherige Woche", :href => root_url + "kursplan?start_date=" + (start_date - 1.week).to_s
+a "nächste Woche", :href => root_url + "kursplan?start_date=" + (start_date + 1.week).to_s
 
 # loop over locations
 Location.all.each do |location|
