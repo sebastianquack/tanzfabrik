@@ -1,5 +1,5 @@
 render "/pages/editable_content"
 
-Event.of_type("Performance-Projekt").each do |project| 
+Event.of_types([5]).each do |project| 
   a project.title, :href => event_path(project) 
 end
