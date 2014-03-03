@@ -5,7 +5,9 @@ para do
   event.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe
 end
 para do
-  text_node event.type.name
+  text_node event.type.name + " "
+  text_node event.tags.map { |t| t.name }.join(', ').html_safe
+
   if event.festivals.length > 0 && show_festival
     text_node ", Teil von "
     span event.festivals.map { |f| (link_to f.name, festival_path(f)) }.join(', ').html_safe

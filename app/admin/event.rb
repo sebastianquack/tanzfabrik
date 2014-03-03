@@ -7,7 +7,8 @@ ActiveAdmin.register Event do
     event_details_attributes: [:id, :start_date, :end_date, :time, :duration, :studio_id, :repeat_mode_id, :_destroy],
     people_attributes: [:id, :name, :_destroy],
     person_events_attributes: [:id, :person_id, :event_id, :_destroy],
-    festival_events_attributes: [:id, :event_id, :festival_id, :_destroy]
+    festival_events_attributes: [:id, :event_id, :festival_id, :_destroy],
+    :tag_ids => []
 
   config.per_page = 10
 
@@ -21,6 +22,9 @@ ActiveAdmin.register Event do
       event.festivals.map { |f| (link_to f.name, admin_festival_path(f)) }.join(', ').html_safe
     end
     column :type
+    column "Tags" do |event|
+      event.tags.map { |t| (link_to t.name, admin_tag_path(t)) }.join(', ').html_safe
+    end
     column "People" do |event|
       event.people.map { |p| (link_to p.name, admin_person_path(p)) }.join(', ').html_safe
     end
@@ -49,6 +53,9 @@ ActiveAdmin.register Event do
       row :title
       row :description
       row :type
+      row "Tags" do |event|
+        event.tags.map { |t| (link_to t.name, admin_tag_path(t)) }.join(', ').html_safe
+      end
       row "People" do |event|
         event.people.map { |p| (link_to p.name, admin_person_path(p)) }.join(', ').html_safe
       end
@@ -69,8 +76,7 @@ ActiveAdmin.register Event do
       f.input :description
       f.input :warning
       f.input :type, :include_blank => false, :hint => (link_to "Manage Event Types", admin_event_types_path)
-      #f.input :festivals, :as => :check_boxes
-      #f.input :people, :as => :check_boxes
+      f.input :tags, :as => :check_boxes, :hint => (link_to "Manage Tags", admin_tags_path)
     end
 
     f.inputs "Festivals auswählen" do
@@ -89,7 +95,7 @@ ActiveAdmin.register Event do
       end
     end
 
-    f.inputs "Event Details" do
+    f.inputs "Zeiten und Orte" do
       f.has_many :event_details, heading: false, :new_record => true, :allow_destroy => true do |et_f|
         et_f.inputs do
           et_f.input :start_date, :include_blank => false, :start_year => 2014, :as => :datepicker
@@ -107,14 +113,14 @@ ActiveAdmin.register Event do
     end
     
     if f.object.image.exists?
-      f.inputs "Current image" do     
+      f.inputs "Aktuelles Bild" do     
         f.template.content_tag(:li) do
           f.template.image_tag(f.object.image.url(:thumb))
         end
       end
     end
     
-    f.inputs "New image" do     
+    f.inputs "Neues Bild" do     
       # use regular rails helper instead of formtastic, avoid weird error
       f.template.content_tag(:li) do
         f.file_field :image

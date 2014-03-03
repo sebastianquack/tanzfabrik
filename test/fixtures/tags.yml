@@ -1,0 +1,30 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  name: ohne Vorkenntnisse
+
+two:
+  id: 2
+  name: Anfänger
+
+three:
+  id: 3
+  name: Mittelstufe
+
+four:
+  id: 4
+  name: Fortgeschrittene
+
+five:
+  id: 5
+  name: Bewegungserfahrung
+
+six:
+  id: 6
+  name: offen für alle Niveaus
+  
+seven:
+  id: 7
+  name: mit Live-Percussion
+

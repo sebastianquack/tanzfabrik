@@ -1,0 +1,22 @@
+render "/pages/editable_content"
+
+events = Event.joins(:type, :event_details).where('event_details.end_date >= ? AND event_details.end_date <= ?', Time.now, Time.now + 30.days).order('event_details.start_date ASC')
+
+events.each do |event|
+
+  event.event_details.each do |detail|
+      
+    # check if there is an occurrence this month
+    occurrences = detail.occurrences_between Time.now, Time.now + 30.days
+          
+    if occurrences.length > 0
+      div do      
+        text_node occurrences.map {|o| l o, :format => :short_day }.join(', ')
+        #render :partial => "events/basic_info", :locals => {:event => detail.event, :show_festival => true}
+        a detail.event.type.name + " " + detail.event.title, :href => event_path(detail.event)
+      end
+    end
+      
+  end
+  
+end

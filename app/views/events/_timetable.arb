@@ -76,7 +76,9 @@ table do
         else
           td do
             data.map { |detail| link_to(
-              detail.event.type.name + " " + detail.event.title + " (" + detail.studio.location.name + " " + detail.studio.name + ")", 
+              detail.event.type.name + " " + detail.event.title + " " +
+              detail.event.tags.map { |t| t.name }.join(', ') +
+               " (" + detail.studio.location.name + " " + detail.studio.name + ")", 
               event_path(detail.event))  
             }.join('<br>').html_safe if data
           end          
