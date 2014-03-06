@@ -1,4 +1,5 @@
 class Festival < ActiveRecord::Base
+  translates :name, :description
 
   has_many :festival_events
   has_many :events, :through => :festival_events

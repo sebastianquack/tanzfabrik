@@ -2,7 +2,7 @@ ActiveAdmin.register Person do
 
   menu :priority => 3  
 
-  permit_params :id, :name, :bio, :role, :image, :event_ids => []
+  permit_params :id, :name, :bio_de, :bio_en, :role, :image, :event_ids => []
 
   index do
     selectable_column
@@ -42,7 +42,8 @@ ActiveAdmin.register Person do
       f.inputs "Details" do
         f.input :name
         f.input :role
-        f.input :bio
+        f.input :bio_de
+        f.input :bio_en
         f.input :events, :as => :check_boxes
       end
       if f.object.image.exists?

@@ -2,29 +2,29 @@
 
 one:
   id: 1
-  name: ohne Vorkenntnisse
+  name_de: ohne Vorkenntnisse
 
 two:
   id: 2
-  name: Anfänger
+  name_de: Anfänger
 
 three:
   id: 3
-  name: Mittelstufe
+  name_de: Mittelstufe
 
 four:
   id: 4
-  name: Fortgeschrittene
+  name_de: Fortgeschrittene
 
 five:
   id: 5
-  name: Bewegungserfahrung
+  name_de: Bewegungserfahrung
 
 six:
   id: 6
-  name: offen für alle Niveaus
+  name_de: offen für alle Niveaus
   
 seven:
   id: 7
-  name: mit Live-Percussion
+  name_de: mit Live-Percussion
 

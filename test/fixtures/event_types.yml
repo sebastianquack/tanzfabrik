@@ -2,37 +2,37 @@
 
 one:
   id: 1
-  name: Performance
+  name_de: Performance
 
 two:
   id: 2
-  name: Workshop
+  name_de: Workshop
 
 three:
   id: 3
-  name: Kurs
+  name_de: Kurs
 
 four:
   id: 4
-  name: Profitraining
+  name_de: Profitraining
   
 five:
   id: 5
-  name: Performance-Projekt
+  name_de: Performance-Projekt
   
 six:
   id: 6
-  name: Kindertanz
+  name_de: Kindertanz
 
 seven:
   id: 7
-  name: Showing
+  name_de: Showing
 
 eight:
   id: 8
-  name: Lecture-Performance
+  name_de: Lecture-Performance
 
 nine:
   id: 9
-  name: Gespräch/Talk
+  name_de: Gespräch/Talk
   

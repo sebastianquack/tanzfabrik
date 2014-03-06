@@ -4,8 +4,8 @@ else
   start_date = Date.today.beginning_of_week # gets current monday      
 end
   
-a "vorherige Woche", :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date - 1.week).to_s)
-a "nächste Woche", :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date + 1.week).to_s)
+a t(:previous_week), :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date - 1.week).to_s)
+a t(:next_week), :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date + 1.week).to_s)
   
 # loop over locations
 Location.all.each do |location|

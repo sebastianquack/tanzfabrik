@@ -5,7 +5,7 @@ ActiveAdmin.register Studio do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :name, :description, :location_id, :rentable, :image
+  permit_params :name, :description_de, :description_en, :location_id, :rentable, :image
   #
   # or
   #
@@ -48,7 +48,8 @@ ActiveAdmin.register Studio do
       end
       f.inputs "Details" do
         f.input :name
-        f.input :description
+        f.input :description_de
+        f.input :description_en
       end
       if f.object.image.exists?
         f.inputs "Current image" do     

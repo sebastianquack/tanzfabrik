@@ -9,8 +9,8 @@ end
 h2 l start_date, :format => :month
   
 para do
-  a "vorheriger Monat", :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date - 1.month).to_s)
-  a "nächster Monat", :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date + 1.month).to_s)
+  a t(:previous_month), :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date - 1.month).to_s)
+  a t(:next_month), :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date + 1.month).to_s)
 end
   
 # load events of types 1, 7, 8 or 9 that have a start_date earlier than the end of this month and an end_date later than the start of this month
@@ -27,7 +27,7 @@ events.each do |event|
       div do      
         text_node occurrences.map {|o| l o, :format => :short_day }.join(', ')
         render :partial => "events/basic_info", :locals => {:event => detail.event, :show_festival => true}
-        a "mehr", :href => event_path(detail.event)
+        a t(:more), :href => event_path(detail.event)
       end
     end
       

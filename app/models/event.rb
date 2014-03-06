@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  translates :title, :description, :warning, fallback: :any
+
   belongs_to :type, :class_name => "EventType"
 
   has_many :festival_events

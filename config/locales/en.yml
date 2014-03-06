@@ -20,7 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  section_start: "Start"
+  section_school: "Dancing / School"
+  section_classes: "Classes"
+  section_dance_intensive: "Dance Intensive"
+  section_workshops: "Workshops"
+  section_production: "Factory / Production"
+  section_rental: "Spaces"
+  section_service: "Service"
+
+  next_week: "Next Week"
+  previous_week: "Previous Week"
+  next_month: "Next Month"
+  previous_month: "Previous Month"
+  more: "more"
   time:
     formats:
       hours_minutes: "%l:%M %p"

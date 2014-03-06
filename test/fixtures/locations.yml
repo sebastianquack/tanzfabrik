@@ -2,10 +2,10 @@
 
 kreuzberg:
   name: Kreuzberg
-  description: TODO
+  description_de: TODO
   address: "Möckernstr. 68, 10965 Berlin"
 
 wedding:
   name: Wedding
-  description: TODO
+  description_de: TODO
   address: "Uferstr. 23, 13357 Berlin"

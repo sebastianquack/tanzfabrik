@@ -14,7 +14,7 @@ festivals_with_workshops.each do |festival|
   div do
     h2 festival.name
     ul do 
-      festival.events.where(:type_id => 2).order('title ASC').each do |workshop| 
+      festival.events.where(:type_id => 2).order('title_de ASC').each do |workshop| 
         li do
           link_text = ""
           if workshop.people.length > 0

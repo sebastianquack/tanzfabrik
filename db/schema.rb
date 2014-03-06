@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228132010) do
+ActiveRecord::Schema.define(version: 20140306144848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,26 +69,31 @@ ActiveRecord::Schema.define(version: 20140228132010) do
   end
 
   create_table "event_types", force: true do |t|
-    t.string   "name"
+    t.string   "name_de"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name_en"
   end
 
-  add_index "event_types", ["name"], name: "index_event_types_on_name", unique: true, using: :btree
+  add_index "event_types", ["name_de"], name: "index_event_types_on_name_de", unique: true, using: :btree
 
   create_table "events", force: true do |t|
     t.integer  "type_id"
-    t.string   "title"
-    t.text     "description"
-    t.string   "warning"
+    t.string   "title_de"
+    t.text     "description_de"
+    t.string   "warning_de"
     t.float    "price"
-    t.string   "language"
+    t.string   "language_de"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "title_en"
+    t.text     "description_en"
+    t.string   "warning_en"
+    t.string   "language_en"
   end
 
   create_table "festival_events", force: true do |t|
@@ -99,14 +104,16 @@ ActiveRecord::Schema.define(version: 20140228132010) do
   end
 
   create_table "festivals", force: true do |t|
-    t.string   "name"
-    t.text     "description"
+    t.string   "name_de"
+    t.text     "description_de"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "name_en"
+    t.text     "description_en"
   end
 
   create_table "friendly_id_slugs", force: true do |t|
@@ -139,25 +146,28 @@ ActiveRecord::Schema.define(version: 20140228132010) do
 
   create_table "locations", force: true do |t|
     t.string   "name"
-    t.text     "description"
+    t.text     "description_de"
     t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description_en"
   end
 
   create_table "pages", force: true do |t|
-    t.string   "title"
-    t.text     "content"
+    t.string   "title_de"
+    t.text     "content_de"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.string   "title_en"
+    t.text     "content_en"
   end
 
   add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
 
   create_table "people", force: true do |t|
     t.string   "name"
-    t.text     "bio"
+    t.text     "bio_de"
     t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -165,6 +175,7 @@ ActiveRecord::Schema.define(version: 20140228132010) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.text     "bio_en"
   end
 
   create_table "person_events", force: true do |t|
@@ -175,15 +186,16 @@ ActiveRecord::Schema.define(version: 20140228132010) do
   end
 
   create_table "repeat_modes", force: true do |t|
-    t.text     "description"
+    t.text     "description_de"
     t.text     "rule"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description_en"
   end
 
   create_table "studios", force: true do |t|
     t.string   "name"
-    t.text     "description"
+    t.text     "description_de"
     t.integer  "location_id"
     t.boolean  "rentable"
     t.datetime "created_at"
@@ -192,12 +204,14 @@ ActiveRecord::Schema.define(version: 20140228132010) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.text     "description_en"
   end
 
   create_table "tags", force: true do |t|
-    t.string   "name"
+    t.string   "name_de"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name_ed"
   end
 
 end

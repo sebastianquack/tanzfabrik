@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   menu :priority => 1
 
-  permit_params :title, :description, :warning, :type_id, :image, 
+  permit_params :title_de, :description_de, :warning_de, :title_en, :description_en, :warning_en, :type_id, :image, 
     :festival_ids => [], :person_ids => [], 
     event_details_attributes: [:id, :start_date, :end_date, :time, :duration, :studio_id, :repeat_mode_id, :_destroy],
     people_attributes: [:id, :name, :_destroy],
@@ -72,9 +72,12 @@ ActiveAdmin.register Event do
 
   form do |f|
     f.inputs "Basic Info" do
-      f.input :title
-      f.input :description
-      f.input :warning
+      f.input :title_de
+      f.input :title_en
+      f.input :description_de
+      f.input :description_en
+      f.input :warning_de
+      f.input :warning_en
       f.input :type, :include_blank => false, :hint => (link_to "Manage Event Types", admin_event_types_path)
       f.input :tags, :as => :check_boxes, :hint => (link_to "Manage Tags", admin_tags_path)
     end

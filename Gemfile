@@ -56,3 +56,4 @@ gem "paperclip", '~> 3.5' # newer paperclip does not play nicely with formtastic
 gem "arbre"
 gem "ice_cube"
 
+gem 'traco'

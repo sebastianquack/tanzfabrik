@@ -5,7 +5,7 @@ render :partial => "events/basic_info", :locals => {:event => event, :show_festi
 img :src => event.image.url if event.image.exists?
 
 para do
-  event.description unless event.description.empty?
+  event.description #unless event.description.empty?
 end
 
 event.event_details.each do |detail|

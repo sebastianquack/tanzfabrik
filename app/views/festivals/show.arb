@@ -26,7 +26,7 @@ if festival.event_details.length > 0
 end
 
 div do
-  festival.events.order('title ASC').each do |event|
+  festival.events.order('title_de ASC').each do |event|
     div render :partial => "/events/show", :locals => {:event => event}
   end
 end

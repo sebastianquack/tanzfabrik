@@ -1,136 +1,141 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 0:
-  title: Start
+  title_de: Start
   slug: start
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 1_1_1:
-  title: Kursplan
+  title_de: Kursplan
   slug: kursplan
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 1_1_2:
-  title: Performance-Projekte
+  title_de: Performance-Projekte
   slug: performance_projekte
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 1_1_3:
-  title: Profitraining
+  title_de: Profitraining
   slug: profitraining
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 1_1_4:
-  title: Kindertanz
+  title_de: Kindertanz
   slug: kindertanz
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 1_1_5:
-  title: Contact Jam
+  title_de: Contact Jam
   slug: contact_jam
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 1_1_6:
-  title: Lehrer
+  title_de: Lehrer
   slug: lehrer
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
   
 1_1_7:
-  title: Preise
+  title_de: Preise
   slug: preise
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 1_1_8:
-  title: Öffnungszeiten
+  title_de: Öffnungszeiten
   slug: oeffnungszeiten
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 1_2_1: 
-  title: Über Dance Intensive
+  title_de: Über Dance Intensive
   slug: ueber_dance_intensive
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 1_2_2: 
-  title: Dance Intensive Programm
+  title_de: Dance Intensive Programm
   slug: dance_intensive_programm
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 1_2_3: 
-  title: Dance Intensive Lehrer
+  title_de: Dance Intensive Lehrer
   slug: dance_intensive_lehrer
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 1_2_4:
-  title: Bewerbung
+  title_de: Bewerbung
   slug: dance_intensive_bewerbung
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 1_3_1:
-  title: Workshop Programm
+  title_de: Workshop Programm
   slug: workshop_programm
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
+
+1_3_2:
+  title_de: Workshop Anmeldung
+  slug: workshop_anmeldung
+  content_de: Diesen Text kann man frei editieren
 
 2_1:
-  title: Programm
+  title_de: Programm
   slug: programm
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 2_2:
-  title: Projekte & Festivals
+  title_de: Projekte & Festivals
   slug: festivals
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 2_3:
-  title: Künstler
+  title_de: Künstler
   slug: kuenstler
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 2_4:
-  title: Residenzen
+  title_de: Residenzen
   slug: residenzen
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
   
 2_5:
-  title: APAP netzwerk
+  title_de: APAP netzwerk
   slug: apap_netzwerk
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 3:
-  title: Profil & Partner
+  title_de: Profil & Partner
   slug: profil_partner
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 4:
-  title: Tickets
+  title_de: Tickets
   slug: tickets
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 5_1:
-  title: Studios
+  title_de: Studios
   slug: studios
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 5_2:
-  title: Vermietungsinfo
+  title_de: Vermietungsinfo
   slug: vermietungsinfo
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 6_1:
-  title: Kontakt
+  title_de: Kontakt
   slug: kontakt
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
   
 6_2:
-  title: AGBs
+  title_de: AGBs
   slug: agbs
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
   
 6_3:
-  title: Impressum
+  title_de: Impressum
   slug: impressum
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren
 
 6_4:
-  title: Lageplan
+  title_de: Lageplan
   slug: lageplan
-  content: Diesen Text kann man frei editieren
+  content_de: Diesen Text kann man frei editieren

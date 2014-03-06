@@ -1,4 +1,6 @@
 class Studio < ActiveRecord::Base
+  translates :description
+  
   belongs_to :location
 
   has_many :event_details

@@ -2,12 +2,12 @@
 
 one:
   name: 1
-  description: "Helles, sehr weitläufiges Studio, ideal für Bewegungsfolgen, die viel Raum beanspruchen."
+  description_de: "Helles, sehr weitläufiges Studio, ideal für Bewegungsfolgen, die viel Raum beanspruchen."
   location: kreuzberg
   rentable: true
 
 two:
   name: 4
-  description: "Das Uferstudio 4 ist das Künstlerresidenzstudio der Tanzfabrik Berlin und wird auch für öffentliche Proben und Showings genutzt."
+  description_de: "Das Uferstudio 4 ist das Künstlerresidenzstudio der Tanzfabrik Berlin und wird auch für öffentliche Proben und Showings genutzt."
   location: wedding
   rentable: true

@@ -2,62 +2,66 @@ def page_url(id)
   url_for :controller => 'pages', :action => 'show', :id => id
 end
 
+def link_to_page(id)
+  page = Page.find(id)
+  link_to page.title, page_url(id)
+end
+
 ul :class => "nav" do
-  li link_to "Start", root_path
-  li "Tanz = Bereich Schule" do
+  li link_to t(:section_start), root_path
+  li t(:section_school) do
     ul do
-      li "1.1. Tanzklassen" do
+      li t(:section_classes) do
         ul do
-          li link_to "1.1.1. Kursplan", page_url("kursplan")
-          li link_to "1.1.2. Performanceprojekte", page_url("performance_projekte")
-          li link_to "1.1.3. Profitraining", page_url("profitraining")
-          li link_to "1.1.4. Kindertanz", page_url("kindertanz")
-          li link_to "1.1.5. Contact Jam", page_url("contact_jam")
-          li link_to "1.1.6. Lehrer", page_url("lehrer")
-          li link_to "1.1.7. Preise", page_url("preise")
-          li link_to "1.1.8. Öffnungszeiten", page_url("oeffnungszeiten")
+          li link_to_page("kursplan")
+          li link_to_page("performance_projekte")
+          li link_to_page("profitraining")
+          li link_to_page("kindertanz")
+          li link_to_page("contact_jam")
+          li link_to_page("lehrer")
+          li link_to_page("preise")
+          li link_to_page("oeffnungszeiten")
         end
       end
-      li "1.2. Dance Intensive" do
+      li t(:section_dance_intensive) do
         ul do
-          li link_to "1.2.1. Über Dance Intensive", page_url("ueber_dance_intensive")
-          li link_to "1.2.2. Programm", page_url("dance_intensive_programm")
-          li link_to "1.2.3. Lehrer", page_url("dance_intensive_lehrer")
-          li link_to "1.2.4. Bewerbung", page_url("dance_intensive_bewerbung")
+          li link_to_page("ueber_dance_intensive")
+          li link_to_page("dance_intensive_programm")
+          li link_to_page("dance_intensive_lehrer")
+          li link_to_page("dance_intensive_bewerbung")
         end
       end
-      li "1.3. Workshops" do
+      li t(:section_workshops) do
         ul do
-          li link_to "1.3.1. Programm", page_url("workshop_programm")
-          #li "1.3.2. Stundenplan")
-          li "1.3.3. Onlineanmeldung", "#"
+          li link_to_page("workshop_programm")
+          li link_to_page("workshop_anmeldung")
         end
       end
     end 
   end
-  li "Fabrik = Bereich Produktion" do
+  li t(:section_production) do
     ul do
-      li link_to "2.1. Programm", page_url("programm")
-      li link_to "2.2. Projekte & Festivals", page_url("festivals")
-      li link_to "2.3. Künstler", page_url("kuenstler")
-      li link_to "2.4. Residenzen", page_url("residenzen")
-      li link_to "2.5. APAP netzwerk", page_url("apap_netzwerk")
+      li link_to_page("programm")
+      li link_to_page("festivals")
+      li link_to_page("kuenstler")
+      li link_to_page("residenzen")
+      li link_to_page("apap_netzwerk")
     end
   end
-  li link_to "Profil & Partner", page_url("profil_partner")
-  li link_to "Tickets", page_url("tickets")
-  li "Vermietung" do
+  li link_to_page("profil_partner")
+  li link_to_page("tickets")
+  li t(:section_rental) do
     ul do
-      li link_to "Studios", page_url("studios")
-      li link_to "Vermietungsinfo", page_url("vermietungsinfo")
+      li link_to_page("studios")
+      li link_to_page("vermietungsinfo")
     end
   end
-  li "Service" do
+  li t(:section_service) do
     ul do
-      li link_to "Kontakt", page_url("kontakt")
-      li link_to "AGBs", page_url("agbs")
-      li link_to "Impressum", page_url("impressum")
-      li link_to "Lageplan", page_url("lageplan")
+      li link_to_page("kontakt")
+      li link_to_page("agbs")
+      li link_to_page("impressum")
+      li link_to_page("lageplan")
     end
   end
 end

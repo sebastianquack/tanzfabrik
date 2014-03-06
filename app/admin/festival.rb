@@ -2,7 +2,7 @@ ActiveAdmin.register Festival do
 
   menu :priority => 2
 
-  permit_params :name, :description, :image, :event_ids => []
+  permit_params :name_de, :description_de, :name_en, :description_en, :image, :event_ids => []
   
   index do
     selectable_column
@@ -39,8 +39,10 @@ ActiveAdmin.register Festival do
 
   form do |f|
     f.inputs do
-      f.input :name
-      f.input :description
+      f.input :name_de
+      f.input :name_en
+      f.input :description_de
+      f.input :description_en
       f.input :events, :as => :check_boxes
     end
 

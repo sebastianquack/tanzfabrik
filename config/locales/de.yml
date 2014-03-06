@@ -1,4 +1,19 @@
 de:
+  section_start: "Start"
+  section_school: "Tanz / Bereich Schule"
+  section_classes: "Tanzklassen"
+  section_dance_intensive: "Dance Intensive"
+  section_workshops: "Workshops"
+  section_production: "Fabrik / Bereich Produktion"
+  section_rental: "Vermietung"
+  section_service: "Service"
+
+  next_week: "Nächste Woche"
+  previous_week: "Vorherige Woche"
+  next_month: "Vorheriger Monat"
+  previous_month: "Nächster Monat"
+  more: "mehr"
+
   date:
     abbr_day_names:
     - So
