@@ -1,59 +1,63 @@
+def page_url(id)
+  url_for :controller => 'pages', :action => 'show', :id => id
+end
+
 ul :class => "nav" do
   li link_to "Start", root_path
   li "Tanz = Bereich Schule" do
     ul do
       li "1.1. Tanzklassen" do
         ul do
-          li link_to "1.1.1. Kursplan", root_path + "kursplan"
-          li link_to "1.1.2. Performanceprojekte", root_path + "performance_projekte"
-          li link_to "1.1.3. Profitraining", root_path + "profitraining"
-          li link_to "1.1.4. Kindertanz", root_path + "kindertanz"
-          li link_to "1.1.5. Contact Jam", root_path + "contact_jam"
-          li link_to "1.1.6. Lehrer", root_path + "lehrer"
-          li link_to "1.1.7. Preise", root_path + "preise"
-          li link_to "1.1.8. Öffnungszeiten", root_path + "oeffnungszeiten"
+          li link_to "1.1.1. Kursplan", page_url("kursplan")
+          li link_to "1.1.2. Performanceprojekte", page_url("performance_projekte")
+          li link_to "1.1.3. Profitraining", page_url("profitraining")
+          li link_to "1.1.4. Kindertanz", page_url("kindertanz")
+          li link_to "1.1.5. Contact Jam", page_url("contact_jam")
+          li link_to "1.1.6. Lehrer", page_url("lehrer")
+          li link_to "1.1.7. Preise", page_url("preise")
+          li link_to "1.1.8. Öffnungszeiten", page_url("oeffnungszeiten")
         end
       end
       li "1.2. Dance Intensive" do
         ul do
-          li link_to "1.2.1. Über Dance Intensive", root_path + "ueber_dance_intensive"
-          li link_to "1.2.2. Programm", root_path + "dance_intensive_programm"
-          li link_to "1.2.3. Lehrer", root_path + "dance_intensive_lehrer"
-          li link_to "1.2.4. Bewerbung", root_path + "dance_intensive_bewerbung"
+          li link_to "1.2.1. Über Dance Intensive", page_url("ueber_dance_intensive")
+          li link_to "1.2.2. Programm", page_url("dance_intensive_programm")
+          li link_to "1.2.3. Lehrer", page_url("dance_intensive_lehrer")
+          li link_to "1.2.4. Bewerbung", page_url("dance_intensive_bewerbung")
         end
       end
       li "1.3. Workshops" do
         ul do
-          li link_to "1.3.1. Programm", root_path + "workshop_programm"
-          #li "1.3.2. Stundenplan"
-          li "1.3.3. Onlineanmeldung"
+          li link_to "1.3.1. Programm", page_url("workshop_programm")
+          #li "1.3.2. Stundenplan")
+          li "1.3.3. Onlineanmeldung", "#"
         end
       end
     end 
   end
   li "Fabrik = Bereich Produktion" do
     ul do
-      li link_to "2.1. Programm", root_path + "programm"
-      li link_to "2.2. Projekte & Festivals", root_path + "festivals"
-      li link_to "2.3. Künstler", root_path + "kuenstler"
-      li link_to "2.4. Residenzen", root_path + "residenzen"
-      li link_to "2.5. APAP netzwerk", root_path + "apap_netzwerk"
+      li link_to "2.1. Programm", page_url("programm")
+      li link_to "2.2. Projekte & Festivals", page_url("festivals")
+      li link_to "2.3. Künstler", page_url("kuenstler")
+      li link_to "2.4. Residenzen", page_url("residenzen")
+      li link_to "2.5. APAP netzwerk", page_url("apap_netzwerk")
     end
   end
-  li link_to "Profil & Partner", root_path + "profil_partner"
-  li link_to "Tickets", root_path + "tickets"
+  li link_to "Profil & Partner", page_url("profil_partner")
+  li link_to "Tickets", page_url("tickets")
   li "Vermietung" do
     ul do
-      li link_to "Studios", root_path + "studios"
-      li link_to "Vermietungsinfo", root_path + "vermietungsinfo"
+      li link_to "Studios", page_url("studios")
+      li link_to "Vermietungsinfo", page_url("vermietungsinfo")
     end
   end
   li "Service" do
     ul do
-      li link_to "Kontakt", root_path + "kontakt"
-      li link_to "AGBs", root_path + "agbs"
-      li link_to "Impressum", root_path + "impressum"
-      li link_to "Lageplan", root_path + "lageplan"
+      li link_to "Kontakt", page_url("kontakt")
+      li link_to "AGBs", page_url("agbs")
+      li link_to "Impressum", page_url("impressum")
+      li link_to "Lageplan", page_url("lageplan")
     end
   end
 end

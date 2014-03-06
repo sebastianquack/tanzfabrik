@@ -14,7 +14,7 @@ event.event_details.each do |detail|
     detail.occurrences.each do |occurrence|
       li do
         text_node l occurrence, :format => :default
-        a (detail.studio.location.name + " " + detail.studio.name), :href => root_path + "studios"
+        a (detail.studio.location.name + " " + detail.studio.name), :href => url_for(:controller => 'pages', :action => 'show', :id => 'studios')
       end
     end  
   end

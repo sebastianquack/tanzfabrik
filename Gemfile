@@ -49,8 +49,6 @@ end
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'formtastic', github: 'justinfrench/formtastic'
 
-gem 'mercury-rails', github: 'jejacks0n/mercury'
-
 gem 'friendly_id', '~> 5.0.0'
 
 gem "paperclip", '~> 3.5' # newer paperclip does not play nicely with formtastic

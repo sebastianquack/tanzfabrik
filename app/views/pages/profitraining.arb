@@ -11,7 +11,7 @@ trainings.each do |training|
   para training.description
   #a "Mehr Infos", :href => event_path(training) 
   training.event_details.each do |ed|
-    para a (ed.studio.location.name + " " + ed.studio.name), :href => root_path + "studios"
+    para a (ed.studio.location.name + " " + ed.studio.name), :href => url_for(:controller => 'pages', :action => 'show', :id => 'studios')
     ul do
       ed.occurrences.each do |oc|
         li (l oc, :format => :default)

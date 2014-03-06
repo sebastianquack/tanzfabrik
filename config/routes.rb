@@ -1,20 +1,20 @@
 Tanzfabrik::Application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  
-  mount Mercury::Engine => '/'
-  Mercury::Engine.routes
-  
+    
   devise_for :admin_users, ActiveAdmin::Devise.config
   
   get 'admin' => 'admin/pages#index'
   ActiveAdmin.routes(self)
 
-  resources :events, :only => [:show, :index]
-  resources :people, :only => [:show]
-  resources :festivals, :only => [:show]
+  scope "/:locale" do
+    resources :events, :only => [:show, :index]
+    resources :people, :only => [:show]
+    resources :festivals, :only => [:show]
+    resources :pages, :only => [:show, :update], :path => ''
+  end
+  get '/:locale' => 'pages#show'
 
-  resources :pages, :only => [:show, :update], :path => ''
   # You can have the root of your site routed with "root"    
   root 'pages#show'
 
