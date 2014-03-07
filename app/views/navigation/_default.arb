@@ -7,7 +7,7 @@ def link_to_page(id)
   link_to page.title, page_url(id)
 end
 
-ul :class => "nav" do
+ul :class => "navigation" do
   li link_to t(:section_start), root_path
   li t(:section_school) do
     ul do

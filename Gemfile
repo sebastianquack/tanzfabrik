@@ -57,3 +57,9 @@ gem "arbre"
 gem "ice_cube"
 
 gem 'traco'
+
+gem 'bootstrap-sass', '~> 3.1.1'
+gem 'x-editable-rails'
+
+
+

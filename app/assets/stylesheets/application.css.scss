@@ -11,5 +11,10 @@
  *= require_self
  */
 
-ul.nav ul { display: none; }
-ul.nav li { cursor: pointer; }
+@import "bootstrap";
+@import "editable/bootstrap-editable";
+@import "editable/inputs-ext/bootstrap-wysihtml5";
+@import "editable/inputs-ext/wysiwyg-color";
+
+ul.navigation ul { display: none; }
+ul.navigation li { cursor: pointer; }

@@ -1,7 +1,7 @@
 module PagesHelper
 
   def xeditable? object = nil
-    true # Or something like current_user.xeditable?
+    admin_user_signed_in?
   end
 
 end

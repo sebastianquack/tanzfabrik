@@ -1,0 +1,5 @@
+if page
+  h1 editable page, :title
+  div editable page, :content, :type => "wysihtml5"
+  hr
+end

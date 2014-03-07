@@ -19,13 +19,10 @@ ActiveAdmin.register Page do
   index do
     selectable_column
     column "URL" do |page|
-      link_to page.slug, page
+      link_to page.slug, page_path(page)
     end
     column :title
     column :content
-    actions do |page|
-        link_to "Wysiwig", '/editor/' + page.slug, :class => "member_link"
-    end
   end
 
   filter :title

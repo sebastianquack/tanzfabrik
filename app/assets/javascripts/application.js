@@ -14,6 +14,13 @@
 //= require jquery.turbolinks
 //= require turbolinks
 
+//= require bootstrap
+//= require editable/bootstrap-editable
+//= require editable/inputs-ext/wysihtml5
+//= require editable/inputs-ext/bootstrap-wysihtml5
+//= require editable/inputs-ext/wysihtml5-editable
+//= require editable/rails
+
 $(document).ready(function() {
 
   function handler(event) {
@@ -21,6 +28,23 @@ $(document).ready(function() {
     event.stopPropagation();
   }
 
-  $("ul.nav li").click(handler);
+  $("ul.navigation li").click(handler);
+
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  
+  $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+  $.fn.editable.defaults.mode = 'inline';
+
+  $(".editable").editable();
+
+  /*
+  $("a[rel~=popover], .has-popover").popover();
+  $("a[rel~=tooltip], .has-tooltip").tooltip();
+  */
 
 });
