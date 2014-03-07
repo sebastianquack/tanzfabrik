@@ -13,6 +13,7 @@ de:
   next_month: "Vorheriger Monat"
   previous_month: "Nächster Monat"
   more: "mehr"
+  dates: "Termine"
 
   date:
     abbr_day_names:

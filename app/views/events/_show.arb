@@ -9,7 +9,7 @@ para do
 end
 
 event.event_details.each do |detail|
-  span "Termine:"
+  span t(:dates)
   ul do
     detail.occurrences.each do |occurrence|
       li do

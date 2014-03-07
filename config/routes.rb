@@ -7,6 +7,8 @@ Tanzfabrik::Application.routes.draw do
   get 'admin' => 'admin/pages#index'
   ActiveAdmin.routes(self)
 
+  resources :pages
+
   scope "/:locale" do
     resources :events, :only => [:show, :index]
     resources :people, :only => [:show]
