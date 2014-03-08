@@ -15,11 +15,11 @@
 //= require turbolinks
 
 //= require bootstrap
+//= require bootstrap-wysihtml5/b3
 //= require editable/bootstrap-editable
-//= require editable/inputs-ext/wysihtml5
-//= require editable/inputs-ext/bootstrap-wysihtml5
 //= require editable/inputs-ext/wysihtml5-editable
 //= require editable/rails
+
 
 $(document).ready(function() {
 
@@ -38,6 +38,7 @@ $(document).ready(function() {
   });
   
   $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+
   $.fn.editable.defaults.mode = 'inline';
 
   $(".editable").editable();
@@ -46,5 +47,12 @@ $(document).ready(function() {
   $("a[rel~=popover], .has-popover").popover();
   $("a[rel~=tooltip], .has-tooltip").tooltip();
   */
+  
+  $('.textarea').wysihtml5();
 
 });
+
+// for wysihtml5
+$(document).on('page:load', function(){
+  window['rangy'].initialized = false
+})
