@@ -32,7 +32,7 @@ ActiveAdmin.register Event do
     actions
   end
 
-  filter :title
+  filter :title_de
   filter :type
   filter :festivals
   filter :people

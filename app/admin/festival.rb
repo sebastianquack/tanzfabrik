@@ -18,8 +18,8 @@ ActiveAdmin.register Festival do
     default_actions
   end
   
-  filter :name
-  filter :description
+  filter :name_de
+  filter :description_de
    
   config.per_page = 10
     

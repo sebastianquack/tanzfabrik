@@ -25,8 +25,8 @@ ActiveAdmin.register Page do
     column :content
   end
 
-  filter :title
-  filter :content
+  filter :title_de
+  filter :content_de
   
   config.per_page = 10
   
