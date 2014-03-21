@@ -62,6 +62,7 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'x-editable-rails'
 gem 'bootstrap-wysihtml5-rails'
 
+gem 'rails_12factor', group: :production
 
 
 
