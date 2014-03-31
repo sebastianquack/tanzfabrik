@@ -69,25 +69,9 @@ ActiveAdmin.register Event do
     active_admin_comments
   end
 
-
   form do |f|
-    f.inputs "Basic Info" do
-      f.input :title_de
-      f.input :title_en
-      f.input :description_de
-      f.input :description_en
-      f.input :warning_de
-      f.input :warning_en
+    f.inputs "Typ" do
       f.input :type, :include_blank => false, :hint => (link_to "Manage Event Types", admin_event_types_path)
-      f.input :tags, :as => :check_boxes, :hint => (link_to "Manage Tags", admin_tags_path)
-    end
-
-    f.inputs "Festivals auswählen" do
-      f.has_many :festival_events, heading: false, :new_record => true, :allow_destroy => true do |f_f|
-        f_f.inputs do
-          f_f.input :festival, :include_blank => false
-        end
-      end
     end
 
     f.inputs "Personen auswählen" do
@@ -98,6 +82,31 @@ ActiveAdmin.register Event do
       end
     end
 
+    f.inputs "Basic info" do
+      f.input :title_de
+      f.input :title_en
+      f.input :description_de
+      f.input :description_en
+      f.input :warning_de
+      f.input :warning_en
+      f.input :tags, :as => :check_boxes, :hint => (link_to "Manage Tags", admin_tags_path)
+    end
+
+    if f.object.image.exists?
+      f.inputs "Aktuelles Bild" do     
+        f.template.content_tag(:li) do
+          f.template.image_tag(f.object.image.url(:thumb))
+        end
+      end
+    end
+    
+    f.inputs "Neues Bild" do     
+      # use regular rails helper instead of formtastic, avoid weird error
+      f.template.content_tag(:li) do
+        f.file_field :image
+      end
+    end    
+    
     f.inputs "Zeiten und Orte" do
       f.has_many :event_details, heading: false, :new_record => true, :allow_destroy => true do |et_f|
         et_f.inputs do
@@ -114,21 +123,14 @@ ActiveAdmin.register Event do
         end
       end
     end
-    
-    if f.object.image.exists?
-      f.inputs "Aktuelles Bild" do     
-        f.template.content_tag(:li) do
-          f.template.image_tag(f.object.image.url(:thumb))
+        
+    f.inputs "Festivals auswählen" do
+      f.has_many :festival_events, heading: false, :new_record => true, :allow_destroy => true do |f_f|
+        f_f.inputs do
+          f_f.input :festival, :include_blank => false
         end
       end
     end
-    
-    f.inputs "Neues Bild" do     
-      # use regular rails helper instead of formtastic, avoid weird error
-      f.template.content_tag(:li) do
-        f.file_field :image
-      end
-    end    
     
     f.actions
   end
