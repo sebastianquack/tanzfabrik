@@ -3,6 +3,9 @@ render "/pages/editable_content"
 Event.of_types([6]).each do |event| 
   h2 event.title
   para do
+    event.type.name + " " + event.tags.map { |t| t.name }.join(', ').html_safe  
+  end
+  para do
     event.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe
   end
   a "Mehr Infos", :href => event_path(event) 
