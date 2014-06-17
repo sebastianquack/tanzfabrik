@@ -64,8 +64,9 @@ gem 'bootstrap-wysihtml5-rails'
 
 gem 'google-webfonts'
 gem 'html5shiv-rails'
+gem "autoprefixer-rails"
 
-gem 'sprockets_better_errors'
+# gem 'sprockets_better_errors'
 
 group :production do
 	gem 'rails_12factor'
