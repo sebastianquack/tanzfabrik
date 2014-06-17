@@ -21,6 +21,8 @@ module Tanzfabrik
     config.i18n.default_locale = :de
     
     config.serve_static_assets = true
+
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     
   end
 end

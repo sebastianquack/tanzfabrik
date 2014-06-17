@@ -23,13 +23,14 @@
 
 $(document).ready(function() {
 
+/*
   function handler(event) {
     $(event.target).children('ul').toggle();
     event.stopPropagation();
   }
 
   $("ul.navigation li").click(handler);
-
+*/
 
   $.ajaxSetup({
     headers: {

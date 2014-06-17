@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="de"><!-- TODO: lang -->
 <head>  
   <title>Tanzfabrik</title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>  
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= google_webfonts_link_tag :roboto %>
   <%= csrf_meta_tags %>
+	<!--[if lt IE 9]>
+	  <%= javascript_include_tag 'html5shiv-printshiv' %>
+	<![endif]-->  
 </head>
 <body>
 
-<%= yield %>
+<div class="container">
+	<%= render "/navigation/default" %>
 
-<hr>
-<%= render "/navigation/default" %>
+	<section id="main">
+		<%= yield %>
+	</section>
+</div>
 
 </body>
 </html>

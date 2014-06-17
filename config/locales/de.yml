@@ -1,10 +1,11 @@
 de:
   section_start: "Start"
-  section_school: "Tanz / Bereich Schule"
+  section_school: "Tanz"
   section_classes: "Tanzklassen"
   section_dance_intensive: "Dance Intensive"
   section_workshops: "Workshops"
-  section_production: "Fabrik / Bereich Produktion"
+  section_production: "Fabrik"
+  section_berlin: "Berlin"
   section_rental: "Vermietung"
   section_service: "Service"
 
