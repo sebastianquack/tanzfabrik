@@ -9,8 +9,8 @@ div :id => "header" do
   end
 
   a :href => root_path, :id => "logo" do
-    img :src => asset_path("/assets/tanzfabrik-logo.gif")
-    img :src => asset_path("/assets/tanzfabrik-logo-hover.gif")
+    img :src => asset_path("tanzfabrik-logo.gif")
+    img :src => asset_path("tanzfabrik-logo-hover.gif")
   end
 
   nav :id => "top-menu" do
