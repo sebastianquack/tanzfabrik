@@ -65,8 +65,11 @@ gem 'bootstrap-wysihtml5-rails'
 gem 'google-webfonts'
 gem 'html5shiv-rails'
 
-gem 'rails_12factor', group: :production
+gem 'sprockets_better_errors'
 
+group :production do
+	gem 'rails_12factor'
+end
 
 
 
