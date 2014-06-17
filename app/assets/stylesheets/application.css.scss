@@ -57,6 +57,37 @@ $menu-font-letter-spacing: 2px;
 	@include make-xs-column(5);
 }
 
+/**** test ****/
+
+.test {
+	@include make-row();
+}
+
+#header {
+	margin-bottom:40px;
+}
+
+.test .c1 {
+	@include make-xs-column(1);
+}
+
+.test .c2 {
+	@include make-xs-column(2);
+}
+
+.test .c5 {
+	@include make-xs-column(5);
+}
+
+.test .c10 {
+	@include make-xs-column(10);
+}
+
+.test div {
+	background-color: gray;
+	text-align:center;
+	border: solid black 1px;
+}
 
 /**** background ****/
 
@@ -94,16 +125,16 @@ $menu-font-letter-spacing: 2px;
 #logo {
 	display:block;
 	position:relative;
-	width:120px;
-	height:130px;
-}
+	min-height:130px;}
 
 #logo img {
 	display:block;
 	position:absolute;
 	top:0;
 	left:0;
-	transition: opacity 0.2s;
+	width:120px;
+	height:130px;	
+	transition: opacity 0.2s linear;
 }
 
 #logo img:nth-child(1) {
