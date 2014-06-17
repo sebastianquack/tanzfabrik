@@ -16,7 +16,7 @@ Location.all.each do |location|
     para location.address
 
     # get event details for this location
-    events = location.events.of_types([3, 5, 6])    
+    events = location.events.of_types([3, 4, 5, 6])    
     render :partial => "/events/timetable", :locals => {:events => events, :start_date => start_date}
           
   end

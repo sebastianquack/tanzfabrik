@@ -23,6 +23,7 @@ ActiveAdmin.register Page do
     end
     column :title
     column :content
+    default_actions
   end
 
   filter :title_de
