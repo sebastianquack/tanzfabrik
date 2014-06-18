@@ -8,9 +8,28 @@ div :id => "header" do
     link_to page.title, page_url(id)
   end
 
-  a :href => root_path, :id => "logo" do
-    img :src => asset_path("tanzfabrik-logo.gif")
-    img :src => asset_path("tanzfabrik-logo-hover.gif")
+  div :id => "language-logo" do 
+  
+    ul :id => "language-select" do
+      li do
+        a :hreflang => "de" do
+          abbr "de", :lang => "de", :title => "Deutsch"
+        end
+      end
+      li do
+        a :hreflang => "en" do
+          abbr "en", :lang => "en", :title => "English"
+        end
+      end
+    end
+
+    div :id => "logo" do
+      a :href => root_path do
+        img :src => asset_path("tanzfabrik-logo.gif")
+        img :src => asset_path("tanzfabrik-logo-hover.gif")
+      end
+    end
+
   end
 
   nav :id => "top-menu" do

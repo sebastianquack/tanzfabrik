@@ -60,7 +60,7 @@ $menu-font-letter-spacing: 2px;
 	@include make-row();
 }
 
-#logo {
+#language-logo {
 	@include make-xs-column(1);
 }
 
@@ -131,20 +131,47 @@ $menu-font-letter-spacing: 2px;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2ffffff', endColorstr='#69ffffff',GradientType=0 ); /* IE6-8 */
 }
 
+/**** Top Menu: Language Select ****/
+
+#language-select {
+  position:absolute;
+  left:0;
+  top:0;
+  -webkit-transform: rotate(270deg) translateX(-1em) translateY(-0.7em);
+  text-transform:uppercase;
+}
+
+#language-select {
+  list-style-type: none;
+  margin:0;
+  padding:0;
+}
+
+#language-select li {
+  float:left;
+}
+
+#language-select li:nth-child(2):before {
+  content: " /";
+  white-space:pre;
+}
+
 /**** Top Menu: Logo ****/
 
 #logo {
+	clear:both;
 	display:block;
+	float:right;
 	position:relative;
-	min-height:130px;}
+	width: 120px;
+	height: 130px;
+	}
 
 #logo img {
 	display:block;
 	position:absolute;
 	top:0;
 	left:0;
-	width:120px;
-	height:130px;	
 	transition: opacity 0.2s linear;
 }
 
@@ -181,7 +208,6 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 }
 
 ul.navigation li { 
-	cursor: pointer;
 	white-space:nowrap; 
 }
 
@@ -218,12 +244,31 @@ ul.navigation > li > ul > li > ul > li {
   text-transform:none;
 }
 
-/**** navigation animation **/
+/**** navigation interaction **/
+
+ul.navigation li {
+	cursor: default;
+}
+
+ul.navigation a {
+	text-decoration: none;
+}
+
+ul.navigation > li > ul a,
+ul.navigation:hover > li > span{
+  color:black; 
+}
+
+ul.navigation > li > span,
+ul.navigation > li:hover > span,
+ul.navigation > li:hover li:hover,
+ul.navigation > li:hover li:hover a:hover {
+  color:red; 
+}
 
 ul.navigation > li > ul > li > ul {
   display: none; 
 }
-
 
 ul.navigation > li > ul > li:hover > ul {
 	  display: block;
