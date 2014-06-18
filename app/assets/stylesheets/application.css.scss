@@ -17,8 +17,19 @@
 /**** Bootstrap setup ****/
 
 $font-family-base: "Roboto";
-$grid-columns: 6; /* column width: 144px */;
-$grid-gutter-width: 16;
+$grid-columns: 6; /* column width: 144px */
+$grid-gutter-width: 16px;
+
+$brand-primary:         #F50015;
+/*
+$brand-success:         #5cb85c !default;
+$brand-info:            #5bc0de !default;
+$brand-warning:         #f0ad4e !default;
+$brand-danger:          #d9534f !default;
+*/
+
+$link-color:            $brand-primary;
+$link-hover-color:      lighten($link-color, 5%);
 
 /*
 $screen-xs: 1024px;
@@ -57,14 +68,15 @@ $menu-font-letter-spacing: 2px;
 	@include make-xs-column(5);
 }
 
+#header {
+	margin-bottom:40px;
+}
+
 /**** test ****/
+
 
 .test {
 	@include make-row();
-}
-
-#header {
-	margin-bottom:40px;
 }
 
 .test .c1 {
@@ -83,8 +95,7 @@ $menu-font-letter-spacing: 2px;
 	@include make-xs-column(10);
 }
 
-.test div {
-	background-color: gray;
+.test div.content {
 	text-align:center;
 	border: solid black 1px;
 }
@@ -181,7 +192,7 @@ ul.navigation > li {
 }
 
 ul.navigation > li span {
-  min-width:80px;
+  min-width:70px;
   display: inline-block;
 }
 
