@@ -23,7 +23,7 @@ module Tanzfabrik
     config.serve_static_assets = true
 
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-    config.assets.precompile += %w('application_edit.js')
+    config.assets.precompile += ['application_edit.js', 'application_edit.css']
     
   end
 end
