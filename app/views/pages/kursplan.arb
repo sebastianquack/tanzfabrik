@@ -1,4 +1,31 @@
-render "/pages/editable_content"
+header :id => "headlines", :class => "headlines-kursplan" do
+  div :class => "main" do
+    div :class => "line1" do
+      h1 :class => "title" do
+        span editable page, :title
+      end
+    end
+    div :class => "line2 open-close" do
+      div :class => "open" do
+        div editable page, :content, :type => "wysihtml5"
+        div t(:close), :class => "close-trigger"
+      end
+      div :class => "closed open-trigger" do
+        div "Wichtige Infos"
+      end
+    end    
+    div :class => "line3" do
+      ul do
+        li do
+          a "Kursplan als PDF"
+        end
+        li do
+          a "Preise als PDF"
+        end
+      end
+    end      
+  end
+end
 
 if params[:start_date]
   start_date = Date.parse(params[:start_date])

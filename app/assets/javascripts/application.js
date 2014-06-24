@@ -13,24 +13,34 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require turbolinks
-
 //= require bootstrap
-//= require bootstrap-wysihtml5/b3
-//= require editable/bootstrap-editable
-//= require editable/inputs-ext/wysihtml5-editable
-//= require editable/rails
 
 
 $(document).ready(function() {
 
-/*
-  function handler(event) {
-    $(event.target).children('ul').toggle();
-    event.stopPropagation();
-  }
+  $(".open-trigger").click( function() {
+    $(this).parents('.open-close').addClass("opened")
+  });
 
-  $("ul.navigation li").click(handler);
-*/
+  $(".close-trigger").click(function () {
+    $(this).parents('.open-close').removeClass("opened")
+  });
+
+});
+
+var setMaxHeight = function(elem) {
+    var oldMaxHeight = elem.css("max-height")
+    elem.css("visibility", "hidden")
+    elem.css("max-height", "400px")
+    var maxHeight = elem.outerHeight()
+    elem.css("max-height", oldMaxHeight)
+    elem.css("visibility", "visible")
+    elem.css("max-height", maxHeight)
+}
+
+/**** EDIT ****/
+
+$(document).ready(function() {
 
   $.ajaxSetup({
     headers: {
@@ -44,10 +54,10 @@ $(document).ready(function() {
 
   $(".editable").editable();
 
-  /*
+  
   $("a[rel~=popover], .has-popover").popover();
   $("a[rel~=tooltip], .has-tooltip").tooltip();
-  */
+  
   
   $('.textarea').wysihtml5();
 

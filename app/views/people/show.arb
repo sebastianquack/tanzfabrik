@@ -1,4 +1,4 @@
-h1 person.name
+h3 person.name
 
 img :src => person.image.url if person.image.exists?
 

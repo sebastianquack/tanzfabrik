@@ -9,7 +9,7 @@ end
 
 # create array of dates to look at
 dates = [start_date]
-6.times do |i|
+4.times do |i|
   dates.push (dates[i] + 1.day)
 end
 
@@ -60,7 +60,7 @@ details_by_time.each do |time, details|
 end  
 
 # display the table
-table do
+table :class => "timetable" do
   tr do
     table_data[0].each do |header|
       th header

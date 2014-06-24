@@ -8,8 +8,15 @@ div :id => "header" do
     link_to page.title, page_url(id)
   end
 
+  ul :id => "secondary-menu" do
+    li link_to_page("kontakt")
+    li link_to_page("lageplan")
+    li link_to_page("agbs")
+    li link_to_page("impressum")
+  end
+
   div :id => "language-logo" do 
-  
+
     ul :id => "language-select" do
       li do
         a :hreflang => "de" do

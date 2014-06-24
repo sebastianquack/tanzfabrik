@@ -3,8 +3,10 @@
 <head>  
   <title>Tanzfabrik</title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>  
+  <%= stylesheet_link_tag "application_edit", media: "all", "data-turbolinks-track" => true %> 
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= google_webfonts_link_tag :roboto %>
+  <%= javascript_include_tag "application_edit", "data-turbolinks-track" => true %>
+  <%= google_webfonts_link_tag :roboto => [400, 700] %>
   <%= csrf_meta_tags %>
 	<!--[if lt IE 9]>
 	  <%= javascript_include_tag 'html5shiv-printshiv' %>
@@ -12,41 +14,13 @@
 </head>
 <body>
 
-<div class="container">
-	<%= render "/navigation/default" %>
-
-	<section class="test">
-		<div class="c1">
-			<div class="content">1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</div>
-		</div>
-		<div class="c1">
-			<div class="content">1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</div>
-		</div>
-		<div class="c1">
-			<div class="content">1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</div>
-		</div>
-		<div class="c1">
-			<div class="content">1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</div>
-		</div>
-		<div class="c1">
-			<div class="content">1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</div>
-		</div>
-		<div class="c1">
-			<div class="content">1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</div>
-		</div>								
-	</section>
-	<section class="test">
-		<div class="c1">1</div>
-		<div class="c5">5</div>
-	</section>
-	<!--section class="test">
-		<div class="c2">2</div>
-		<div class="c10">10</div>
-	</section-->
-
-	<section id="main">
-		<%= yield %>
-	</section>
+<div id="overall-container">
+	<div class="container">
+		<%= render "/navigation/default" %>
+		<section id="content">
+			<%= yield %>
+		</section>
+	</div>
 </div>
 
 </body>

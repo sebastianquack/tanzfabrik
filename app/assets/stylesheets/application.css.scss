@@ -10,9 +10,10 @@
  *
  *= require application_fonts
  *= require_self
- *= require bootstrap-wysihtml5/b3
  *= require non-responsive
  */
+
+@import "bourbon";
 
 /**** Bootstrap setup ****/
 
@@ -28,8 +29,8 @@ $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 */
 
-$link-color:            $brand-primary;
-$link-hover-color:      lighten($link-color, 5%);
+$link-color:            black;
+$link-hover-color:      $brand-primary;
 
 /*
 $screen-xs: 1024px;
@@ -51,12 +52,44 @@ $container-large-desktop:      ((960px + $grid-gutter-width));
 
 /**** Variables ****/
 
-$menu-font-family: "LuxiMonoBold";
-$menu-font-letter-spacing: 2px;
+$vertical-menu-width: 500px;
+$overall-container-margin: 32px; /* margin for vertical secondary menu */
 
-/**** Layout ****/
+/**** Resets ****/
 
-#header, #main {
+h1,h2 {
+	margin:0;
+	padding:0;
+}
+
+a:hover, a:focus {
+		text-decoration: none;
+		cursor: pointer;
+}
+
+/**** Mixins ****/
+
+@mixin menu-font($font-size) {
+	font-family: "LuxiMonoBold", Georgia, serif;
+	letter-spacing: 2px;
+	font-size: $font-size;
+}
+
+@mixin border-line($border-position, $border-color) {
+	content: " ";
+	display:block;
+	border: 0px solid $border-color;
+	@if $border-position == "top" {
+		border-width:1px 0 0 0;
+	}
+	@else {
+		border-width:0 0 1px 0;
+	}
+}
+
+/**** Layout rows/columns ****/
+
+#header, #headlines, .test {
 	@include make-row();
 }
 
@@ -68,41 +101,35 @@ $menu-font-letter-spacing: 2px;
 	@include make-xs-column(5);
 }
 
+.basic {
+	@include make-xs-column(4);
+	@include make-xs-column-push(2);
+}
+
+.details {
+	@include make-xs-column(2);
+	@include make-xs-column-pull(4);
+}
+
+/**** Layout spacing/position ****/
+
+body {
+	min-height: $vertical-menu-width;
+}
+
+#overall-container {
+	margin: 0 auto;
+	padding: 0 $overall-container-margin;
+}
+
 #header {
 	margin-bottom:40px;
-}
-
-/**** test ****/
-
-
-.test {
-	@include make-row();
-}
-
-.test .c1 {
-	@include make-xs-column(1);
-}
-
-.test .c2 {
-	@include make-xs-column(2);
-}
-
-.test .c5 {
-	@include make-xs-column(5);
-}
-
-.test .c10 {
-	@include make-xs-column(10);
-}
-
-.test div.content {
-	text-align:center;
-	border: solid black 1px;
+	position:relative;
 }
 
 /**** background ****/
 
-#main:after, #main:before {
+#header:after, #header:before {
 	position:fixed;
 	top:0;
 	left:0;
@@ -110,7 +137,7 @@ $menu-font-letter-spacing: 2px;
 	height:100%;
 }
 
-#main:after {
+#header:after {
 	z-index:-2;
 	background: url("http://www.ruhrnachrichten.de/storage/pic/mdhl/artikelbilder/lokales/mz-mlz-evz-gz/mslo/msfe/2844603_3_111129ms-ku-tanzFoto_275_a.jpg?version=1387197953");
 	background-size: cover;
@@ -118,7 +145,7 @@ $menu-font-letter-spacing: 2px;
 	background-repeat: no-repeat;
 }
 
-#main:before {
+#header:before {
 	z-index:-1;
 	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
 	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjk1Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjElIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuOTciLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjQxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
@@ -134,26 +161,28 @@ $menu-font-letter-spacing: 2px;
 /**** Top Menu: Language Select ****/
 
 #language-select {
-  position:absolute;
-  left:0;
-  top:0;
-  -webkit-transform: rotate(270deg) translateX(-1em) translateY(-0.7em);
-  text-transform:uppercase;
-}
-
-#language-select {
+	@include menu-font(90%);
+	text-transform: uppercase;
+	list-style-type: none;
+	width:$vertical-menu-width;
+	position: absolute;
+	overflow: hidden;
+	text-align: right;
+	@include transform(translateX(-$vertical-menu-width) rotate(-90deg));
+	@include transform-origin(right top);  
   list-style-type: none;
   margin:0;
   padding:0;
 }
 
 #language-select li {
-  float:left;
+  display:inline-block;
 }
 
 #language-select li:nth-child(2):before {
-  content: " /";
-  white-space:pre;
+  content: "/";
+  display:inline-block;
+  
 }
 
 /**** Top Menu: Logo ****/
@@ -172,7 +201,7 @@ $menu-font-letter-spacing: 2px;
 	position:absolute;
 	top:0;
 	left:0;
-	transition: opacity 0.2s linear;
+	transition: opacity 0.2s cubic-bezier(0.445, 0.050, 0.550, 0.950);
 }
 
 #logo img:nth-child(1) {
@@ -195,9 +224,8 @@ $menu-font-letter-spacing: 2px;
 /**** Top Menu: Navigation ****/
 
 ul.navigation {
+  @include menu-font(100%);
   list-style-type:none;
-  font-family: $menu-font-family;
-  letter-spacing: $menu-font-letter-spacing;
   text-transform:uppercase;  
 }
 
@@ -287,8 +315,242 @@ ul.navigation, ul.navigation ul, ul.navigation li {
   transition: opacity 0.2s;
 }
 
+/**** secondary menu ****/
+
+#secondary-menu {
+	@include menu-font(87%);
+	text-transform: lowercase;
+	list-style-type: none;
+	width:$vertical-menu-width;
+	position: absolute;
+	overflow: hidden;
+	text-align: right;
+	@include transform(translateX(-($vertical-menu-width + $overall-container-margin)) rotate(-90deg));
+	@include transform-origin(right top);
+	padding-top: 1em;
+}
+
+#secondary-menu li {
+	display:inline-block;
+	padding-left:1em;
+}
+
 /**** main ****/
 
-#main {
+#content {
 	clear:both;
+}
+
+/**** headlines ****/
+
+#headlines {
+	.before {
+		@include make-xs-column(2);
+	}
+	.main {
+		@include make-xs-column(5);
+		@include make-xs-column-offset(1);
+	}
+	.before + .main {
+		@include make-xs-column-offset(0);
+		@include make-xs-column(4);
+	}
+}
+
+#headlines {
+
+	.line1 {
+		overflow: hidden;
+		line-height: 2em;
+
+		h1 {
+			line-height:2em;
+		}
+
+		a.next, a.registration {
+			float:right;
+			font-size: 90%;
+		}
+
+		a.registration {
+			font-size: 90%;
+		}		
+	}
+
+	.title {
+		float:left;
+		@include menu-font(100%);
+		text-transform: uppercase;
+		color:red;
+	}
+
+	.line2:before , .line3:before {
+		@include border-line(top, black);
+	}
+
+	.line2 {
+		line-height:2em;
+
+		.open {
+			padding-bottom: 0em;
+			position:relative;
+			overflow: hidden;
+			height:0;
+			opacity:0;
+			@include transition (opacity 0.3s);
+
+			.close-trigger {
+				position:absolute;
+				right:0;
+				bottom:0;
+				font-size: 0.8em;
+			}
+
+			.close-trigger:hover {
+					color:red;
+					cursor:pointer;
+						
+			}	
+		}
+
+		.closed {
+
+
+			:hover {
+					color:red;
+					cursor:pointer;
+			}
+
+			:after {
+				content: " >";
+				white-space: pre;
+			}
+		}
+	}
+
+	.line2.opened {
+		.open {
+			padding-bottom: 2em;
+			height:auto;
+			opacity:1;
+		}
+
+		.closed {
+			height:0;
+			opacity:0;
+		}
+
+	}
+
+	.line3 {
+		font-size:0.8em;
+		line-height:2em;
+
+		ul {
+			list-style-type: none;
+			margin:0;
+			padding: 0;
+
+			li {
+				float:left;
+				margin-right:1em;
+			}
+		}
+	}
+}
+
+/**** timetable ****/
+
+table.timetable {
+
+	tr {
+		@include make-row();
+
+		th, td {
+			@include make-xs-column(1);
+		}
+
+		th:before, td:before {
+			@include border-line(top, red);
+		}		
+	}
+}
+
+/**** general pages ****/
+
+h2 {
+	@include menu-font(100%);
+	text-transform: uppercase;
+}
+
+.basic:before {
+	@include border-line(top,black);
+}
+
+.details:before {
+	@include border-line(top,red);
+}
+
+.basic, .details {
+	/*padding-top:0.5em;*/
+}
+
+/**** events ****/
+
+.event .details .time-place {
+	list-style-type: none;
+	margin:0;
+	padding:0;
+	@include menu-font(90%);
+
+	li {
+		border: 0px solid red;
+		border-width: 0 0 1px 0;
+	}
+
+	time {
+		display:block;
+		color:red;
+	}
+
+	.place {
+		display:block;
+	}
+}
+
+.event .basic {
+	.teacher {
+		font-size: 0.85em;
+		font-weight: 900;
+	}
+}
+
+/**** teachers ****/
+
+.teacher .basic {
+	height:10em;
+	overflow-y: hidden;
+	position:relative;
+}
+
+.teacher .basic:after {
+	content: "mehr";
+	float:left;
+	position:absolute;
+	bottom:0;
+}
+
+.teacher .image, .teacher .info {
+	@include make-xs-column(3);
+}
+
+.teacher h3 {
+	font-size: 1em;
+	font-weight: 700;
+	margin:0 0 1em 0;
+	padding:0;
+}
+
+.teacher .classes {
+	font-size: 0.8em;
 }

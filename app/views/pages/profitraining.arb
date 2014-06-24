@@ -3,7 +3,7 @@ render "/pages/editable_content"
 trainings = Event.of_types([4])
 #sorted_trainings = trainings.sort_by { |t| t.event_details.first.start_date }
 trainings.each do |training| 
-  h3 (l training.event_details.first.start_date, :format => :month_day) + ' - ' + (l training.event_details.first.end_date, :format => :month_day)
+  time (l training.event_details.first.start_date, :format => :month_day) + ' - ' + (l training.event_details.first.end_date, :format => :month_day)
   h2 training.title
   para do
     training.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe
@@ -17,6 +17,5 @@ trainings.each do |training|
         li (l oc, :format => :default)
       end  
     end
-  end    
-
+  end
 end

@@ -1,5 +1,22 @@
 if page
-  h1 editable page, :title
-  div editable page, :content, :type => "wysihtml5"
-  hr
-end
+	header :id => "headlines", :class => "headlines-teachers" do
+	  div :class => "before"
+	  div :class => "main" do
+	    div :class => "line1" do
+	      h1 :class => "title" do
+	        text_node editable page, :title
+	      end
+	    end
+	  end
+	end
+
+  div :class => "row page" do
+    div :class => "basic" do
+      div editable page, :content, :type => "wysihtml5"
+    end
+    div :class => "details" do
+    end
+  end
+
+end	
+
