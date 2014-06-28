@@ -1,21 +1,61 @@
-render "/pages/editable_content"
+header :id => "headlines", :class => "headlines-kursplan" do
+  div :class => "main" do
+    div :class => "line1" do
+      h1 :class => "title" do
+        span editable page, :title
+      end
+    end
+    div :class => "line2 open-close" do
+      div :class => "open" do
+        div editable page, :content, :type => "wysihtml5"
+        div t(:close), :class => "close-trigger"
+      end
+      div :class => "closed open-trigger" do
+        div "Wichtige Infos"
+      end
+    end    
+    div :class => "line3" do
+      ul do
+        li do
+          a "Kursplan als PDF"
+        end
+        li do
+          a "Preise als PDF"
+        end
+      end
+    end      
+  end
+end
 
 trainings = Event.of_types([4])
 #sorted_trainings = trainings.sort_by { |t| t.event_details.first.start_date }
 trainings.each do |training| 
-  time (l training.event_details.first.start_date, :format => :month_day) + ' - ' + (l training.event_details.first.end_date, :format => :month_day)
-  h2 training.title
-  para do
-    training.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe
-  end
-  para training.description
+
   #a "Mehr Infos", :href => event_path(training) 
   training.event_details.each do |ed|
-    para a (ed.studio.location.name + " " + ed.studio.name), :href => url_for(:controller => 'pages', :action => 'show', :id => 'studios')
-    ul do
-      ed.occurrences.each do |oc|
-        li (l oc, :format => :default)
-      end  
+    # para a (ed.studio.location.name + " " + ed.studio.name), :href => url_for(:controller => 'pages', :action => 'show', :id => 'studios')
+    ul :class => "timetable" do
+      li do
+        div :class => "header" do
+          time (l training.event_details.first.start_date, :format => :month_day) + ' - ' + (l training.event_details.first.end_date, :format => :month_day), :class => "time-range"
+        end
+        ul do
+          5.times do |wday|
+            oc = ed.occurrences.select { |oc| oc.wday ==  wday+1 }.first
+            li do 
+              if oc
+                time (l oc, :format => :timetable), :class => "day"
+                h2 training.title
+                para do
+                  training.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe
+                end
+                time (l oc, :format => :hours_minutes), :class => "time"
+                para training.description
+              end
+            end    
+          end
+        end
+      end
     end
   end
 end

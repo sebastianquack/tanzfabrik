@@ -17,9 +17,11 @@
 <div id="overall-container">
 	<div class="container">
 		<%= render "/navigation/default" %>
-		<section id="content">
-			<%= yield %>
-		</section>
+    <div id="content-container">
+		  <section id="content">
+			 <%= yield %>
+		  </section>
+    </div>
 	</div>
 </div>
 

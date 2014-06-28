@@ -89,7 +89,7 @@ a:hover, a:focus {
 
 /**** Layout rows/columns ****/
 
-#header, #headlines, .test {
+#header, #headlines {
 	@include make-row();
 }
 
@@ -124,6 +124,12 @@ body {
 
 #header {
 	margin-bottom:40px;
+	position:relative;
+}
+
+#content-container {
+	overflow:hidden;
+	width:100%;
 	position:relative;
 }
 
@@ -459,12 +465,13 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 	}
 }
 
-/**** timetable ****/
+/**** timetables ****/
 
 table.timetable {
 
+	width:100%;
+
 	tr {
-		@include make-row();
 
 		th, td {
 			@include make-xs-column(1);
@@ -474,6 +481,38 @@ table.timetable {
 			@include border-line(top, red);
 		}		
 	}
+}
+
+ul.timetable {
+
+	list-style-type: none;
+	margin:0;
+	padding:0;
+
+	ul {
+		list-style-type: none;
+		margin:0;
+		padding:0;		
+	}
+
+	> li {
+
+		@include make-row();
+	
+		li, .header {
+			@include make-xs-column(1);
+		}
+
+		li:before, .header:before {
+			@include border-line(top, red);
+		}
+
+		.day:after {
+			@include border-line(top, black);
+		}		
+
+	}
+
 }
 
 /**** general pages ****/
