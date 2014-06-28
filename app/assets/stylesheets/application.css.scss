@@ -8,12 +8,20 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require application_fonts
  *= require_self
  *= require non-responsive
  */
 
 @import "bourbon";
+
+/**** Load Fonts ****/
+
+@include font-face(LuxiMonoBold, 'luximb-webfont-westernlatin', bold, normal, $asset-pipeline: true);
+/*
+@include font-face(LuxiMonoRegular, 'luximr-webfont', normal, normal, $asset-pipeline: true);
+@include font-face(LuxiMonoOblique, 'luximri-webfont', normal, italic, $asset-pipeline: true);
+@include font-face(LuxiMonoBoldOblique, 'luximbi-webfont', bold, italic, $asset-pipeline: true);
+*/
 
 /**** Bootstrap setup ****/
 
