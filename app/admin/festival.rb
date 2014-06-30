@@ -2,9 +2,10 @@ ActiveAdmin.register Festival do
 
   menu :priority => 2
 
-  permit_params :name_de, :description_de, :name_en, :description_en, :event_ids => [], 
+  permit_params :name_de, :description_de, :name_en, :description_en, :feature_on_welcome_screen, :event_ids => [], 
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment, :_destroy]
+    
   
   index do
     selectable_column
@@ -16,11 +17,13 @@ ActiveAdmin.register Festival do
     column "images" do |festival|
       festival.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
+    column "feature", :feature_on_welcome_screen
     default_actions
   end
   
   filter :name_de
   filter :description_de
+  filter :feature_on_welcome_screen
    
   config.per_page = 10
     
@@ -28,6 +31,7 @@ ActiveAdmin.register Festival do
     attributes_table do
       row :name
       row :description
+      row :feature_on_welcome_screen
       row "Events" do |festival|
         festival.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
       end      
@@ -79,9 +83,35 @@ ActiveAdmin.register Festival do
       end
     end
     
-    
+    f.inputs "Special" do
+      f.input :feature_on_welcome_screen
+    end
     
     f.actions
+  end
+  
+  controller do
+    def reset_events
+      Event.where(:feature_on_welcome_screen => true).load.each do |event|
+        event.feature_on_welcome_screen = false
+        event.save
+      end        
+      Festival.where(:feature_on_welcome_screen => true).load.each do |festival|
+        festival.feature_on_welcome_screen = false
+        festival.save
+      end        
+    end
+    alias_method :create_event, :create
+    def create
+      reset_events if params[:festival][:feature_on_welcome_screen] == "1"
+      create_event
+    end
+    alias_method :update_event, :update
+    def update
+      #logger.debug params
+      reset_events if params[:festival][:feature_on_welcome_screen] == "1"
+      update_event
+    end
   end
   
   
