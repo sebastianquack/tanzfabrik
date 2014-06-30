@@ -18,13 +18,14 @@ div :id => "header" do
   div :id => "language-logo" do 
 
     ul :id => "language-select" do
-      li do
-        a :hreflang => "de" do
+      
+      li :class => (I18n.locale == :de ? ("selected") : ("unselected")) do
+        a :href => "/?locale=de", :hreflang => "de" do
           abbr "de", :lang => "de", :title => "Deutsch"
         end
       end
-      li do
-        a :hreflang => "en" do
+      li :class => (I18n.locale == :en ? ("selected") : ("unselected")) do
+        a :href => "/?locale=en", :hreflang => "en" do
           abbr "en", :lang => "en", :title => "English"
         end
       end
