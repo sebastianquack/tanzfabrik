@@ -30,8 +30,8 @@ class PagesController < ApplicationController
 
   def update
     page = Page.friendly.find(params[:id])
-    page.title = params[:value] if params[:name] == "title"
-    page.content = params[:value] if params[:name] == "content"
+    page.title = params[:page][:title] if params[:page][:title]
+    page.content = params[:page][:content] if params[:page][:content]
     page.save!
     render status: 200, json: page.to_json
   end
