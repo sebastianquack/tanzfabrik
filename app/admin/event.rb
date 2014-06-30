@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   menu :priority => 1
 
-  permit_params :title_de, :description_de, :warning_de, :title_en, :description_en, :warning_en, :type_id, :image, 
+  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :image, 
     :festival_ids => [], :person_ids => [], 
     event_details_attributes: [:id, :start_date, :end_date, :time, :duration, :studio_id, :repeat_mode_id, :_destroy],
     people_attributes: [:id, :name, :_destroy],
@@ -52,6 +52,7 @@ ActiveAdmin.register Event do
 
       row :title
       row :description
+      row :info
       row :type
       row "Tags" do |event|
         event.tags.map { |t| (link_to t.name, admin_tag_path(t)) }.join(', ').html_safe
@@ -87,6 +88,8 @@ ActiveAdmin.register Event do
       f.input :title_en
       f.input :description_de
       f.input :description_en
+      f.input :info_de
+      f.input :info_en
       f.input :warning_de
       f.input :warning_en
       f.input :tags, :as => :check_boxes, :hint => (link_to "Manage Tags", admin_tags_path)
