@@ -26,9 +26,10 @@ div :class => "row event" do
       
       render :partial => "events/basic_info", :locals => {:event => event, :show_festival => show_festival}
 
-      para do
-        event.description #unless event.description.empty?
-      end
+      div editable event, :description, :type => "wysihtml5"
+      
+      a "> Dieses Event bearbeiten", :href => edit_admin_event_path(event) if admin_user_signed_in?
+
     end
   end
 
