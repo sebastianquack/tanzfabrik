@@ -60,29 +60,31 @@ details_by_time.each do |time, details|
 end  
 
 # display the table
-table :class => "timetable" do
-  tr do
-    table_data[0].each do |header|
-      th header
-    end
-  end
-  table_data.shift
-  table_data.sort! { |a,b| a[0] <=> b[0] }
-  table_data.each do |row|
+div :class => "timetable-container" do
+  table :class => "timetable" do
     tr do
-      row.each_with_index do |data, index|
-        if index == 0 
-          td l data, :format=>:hours_minutes
-        else
-          td do
-            data.map { |detail| link_to(
-              detail.event.people.map { |p| p.name }.join(', ') + ": " +
-              detail.event.type.name + " " + detail.event.title + " (" +
-              detail.event.tags.map { |t| t.name + ', ' }.join('') +
-              detail.studio.location.name + " " + detail.studio.name + ")", 
-              event_path(detail.event))  
-            }.join('<br>').html_safe if data
-          end          
+      table_data[0].each do |header|
+        th header
+      end
+    end
+    table_data.shift
+    table_data.sort! { |a,b| a[0] <=> b[0] }
+    table_data.each do |row|
+      tr do
+        row.each_with_index do |data, index|
+          if index == 0 
+            td l data, :format=>:hours_minutes
+          else
+            td do
+              data.map { |detail| link_to(
+                detail.event.people.map { |p| p.name }.join(', ') + ": " +
+                detail.event.type.name + " " + detail.event.title + " (" +
+                detail.event.tags.map { |t| t.name + ', ' }.join('') +
+                detail.studio.location.name + " " + detail.studio.name + ")", 
+                event_path(detail.event))  
+              }.join('<br>').html_safe if data
+            end          
+          end
         end
       end
     end
