@@ -21,15 +21,8 @@
 </head>
 <body>
 
-  <!-- hier das Hintergrundbild -->
-  <% if Festival.where(:feature_on_welcome_screen => true).length > 0 %>
-    <%= image_tag Festival.where(:feature_on_welcome_screen => true).first.images.first.attachment.url(:medium) %>
-  <% elsif Event.where(:feature_on_welcome_screen => true).length > 0 %>
-    <%= image_tag Image.where(:feature_on_welcome_screen => true).first.images.first.attachment.url(:medium) %>
-  <% elsif Image.where(:show_on_welcome_screen => true).length > 0 %>
-    <!-- hier müsste man noch täglich wechseln mit pseudorandom -->
-    <%= image_tag Image.where(:show_on_welcome_screen => true).first.attachment.url(:medium) %>
-  <% end %>
+<%= image_tag @bg_image_url %>
+
 
 <div id="overall-container">
 	<div class="container">

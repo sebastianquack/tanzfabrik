@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :set_locale
+  before_action :set_background_image
  
   def set_locale
     if params[:locale]
@@ -13,6 +14,34 @@ class ApplicationController < ActionController::Base
     else
       I18n.locale = I18n.default_locale
     end
+  end
+
+  def set_background_image
+    @bg_image_url = ""
+    
+    festivals = Festival.where(:feature_on_welcome_screen => true)
+    if festivals.length > 0
+      if festivals.first.images.length > 0
+        @bg_image_url = festivals.first.images.first.attachment.url(:medium)
+        return
+      end
+    end
+
+    events = Event.where(:feature_on_welcome_screen => true)
+    if events.length > 0
+      if events.first.images.length > 0
+        @bg_image_url = events.first.images.first.attachment.url(:medium)
+        return
+      end
+    end
+        
+    images = Image.where(:show_on_welcome_screen => true)
+    if images.length > 0
+      # hier müsste man noch täglich wechseln mit pseudorandom
+      @bg_image_url = images.first.attachment.url(:medium)
+      return
+    end
+    
   end
   
   def default_url_options(options={})
