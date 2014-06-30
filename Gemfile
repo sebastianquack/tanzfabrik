@@ -62,7 +62,17 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'x-editable-rails'
 gem 'bootstrap-wysihtml5-rails'
 
-gem 'rails_12factor', group: :production
+gem 'google-webfonts'
+gem 'html5shiv-rails'
+gem "autoprefixer-rails"
+
+gem 'bourbon'
+
+# gem 'sprockets_better_errors'
+
+group :production do
+	gem 'rails_12factor'
+end
 
 
 

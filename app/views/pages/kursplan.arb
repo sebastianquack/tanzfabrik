@@ -1,4 +1,31 @@
-render "/pages/editable_content"
+header :id => "headlines", :class => "headlines-kursplan" do
+  div :class => "main" do
+    div :class => "line1" do
+      h1 :class => "title" do
+        span editable page, :title
+      end
+    end
+    div :class => "line2 open-close" do
+      div :class => "open" do
+        div editable page, :content, :type => "wysihtml5"
+        div t(:close), :class => "close-trigger"
+      end
+      div :class => "closed open-trigger" do
+        div "Wichtige Infos"
+      end
+    end    
+    div :class => "line3" do
+      ul do
+        li do
+          a "Kursplan als PDF"
+        end
+        li do
+          a "Preise als PDF"
+        end
+      end
+    end      
+  end
+end
 
 if params[:start_date]
   start_date = Date.parse(params[:start_date])
@@ -14,10 +41,9 @@ Location.all.each do |location|
   div do
     h2 location.name
     para location.address
-
-    # get event details for this location
-    events = location.events.of_types([3, 4, 5, 6])    
-    render :partial => "/events/timetable", :locals => {:events => events, :start_date => start_date}
-          
   end
+
+  # get event details for this location
+  events = location.events.of_types([3, 4, 5, 6])    
+  render :partial => "/events/timetable", :locals => {:events => events, :start_date => start_date}
 end

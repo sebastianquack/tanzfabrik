@@ -13,23 +13,63 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require turbolinks
-
 //= require bootstrap
-//= require bootstrap-wysihtml5/b3
-//= require editable/bootstrap-editable
-//= require editable/inputs-ext/wysihtml5-editable
-//= require editable/rails
 
 
 $(document).ready(function() {
 
-  function handler(event) {
-    $(event.target).children('ul').toggle();
-    event.stopPropagation();
-  }
+  $(".open-trigger").click( function() {
+    $(this).parents('.open-close').addClass("opened")
+  });
 
-  $("ul.navigation li").click(handler);
+  $(".close-trigger").click(function () {
+    $(this).parents('.open-close').removeClass("opened")
+  });
 
+  initMenuContentHide()
+
+});
+
+var initMenuContentHide = function () {
+  last_menu3Height = null
+  $("#top-menu ul ul li").on("mouseenter mouseleave", function () { 
+    menu3 = $("#top-menu ul ul ul:visible")
+    menu3Height = menu3.outerHeight()
+    if (last_menu3Height != menu3Height) {
+      last_menu3Height = menu3Height
+      if (menu3Height == null) {
+        delta = 0
+      }
+      else {
+        menu3Offset = menu3.offset().top
+        contentOffset = $("#content-container").offset().top
+        delta = menu3Offset + menu3Height - contentOffset
+      }
+      if (delta > 0) {
+        $("#content").css("margin-top", -delta + "px")
+        $("#content-container").css("top", delta + "px")
+      }
+      else {
+        $("#content").css("margin-top", "0px")
+        $("#content-container").css("top", "0px")
+      }
+    }
+  })
+}
+
+var setMaxHeight = function(elem) {
+    var oldMaxHeight = elem.css("max-height")
+    elem.css("visibility", "hidden")
+    elem.css("max-height", "400px")
+    var maxHeight = elem.outerHeight()
+    elem.css("max-height", oldMaxHeight)
+    elem.css("visibility", "visible")
+    elem.css("max-height", maxHeight)
+}
+
+/**** EDIT ****/
+
+$(document).ready(function() {
 
   $.ajaxSetup({
     headers: {
@@ -43,10 +83,10 @@ $(document).ready(function() {
 
   $(".editable").editable();
 
-  /*
+  
   $("a[rel~=popover], .has-popover").popover();
   $("a[rel~=tooltip], .has-tooltip").tooltip();
-  */
+  
   
   $('.textarea').wysihtml5();
 

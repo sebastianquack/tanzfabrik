@@ -1,10 +1,11 @@
 de:
   section_start: "Start"
-  section_school: "Tanz / Bereich Schule"
+  section_school: "Tanz"
   section_classes: "Tanzklassen"
   section_dance_intensive: "Dance Intensive"
   section_workshops: "Workshops"
-  section_production: "Fabrik / Bereich Produktion"
+  section_production: "Fabrik"
+  section_berlin: "Berlin"
   section_rental: "Vermietung"
   section_service: "Service"
 
@@ -14,6 +15,7 @@ de:
   previous_month: "Vorheriger Monat"
   more: "mehr"
   dates: "Termine"
+  close: "schließen"
 
   date:
     abbr_day_names:
@@ -54,8 +56,9 @@ de:
       short: '%d.%m.'
       short_day: '%A, %d.%m.'
       short_end: '-%d.%m.'
+      timetable: '%a, %d.%m.%Y'
       month_day: '%e. %B'
-    month_names:
+    month_names: 
     - 
     - Januar
     - Februar
@@ -215,7 +218,8 @@ de:
       default: ! '%A, %d. %B %Y, %H:%M Uhr'
       long: ! '%A, %d. %B %Y, %H:%M Uhr'
       short: ! '%d. %B, %H:%M Uhr'
-      short_day: '%A, %d.%m.'      
+      short_day: '%A, %d.%m.'     
+      timetable: '%a, %d.%m.%Y' 
     pm: nachmittags
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:

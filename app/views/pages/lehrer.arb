@@ -1,12 +1,32 @@
-render "/pages/editable_content"
+header :id => "headlines", :class => "headlines-teachers" do
+  div :class => "before"
+  div :class => "main" do
+    div :class => "line1" do
+      h1 :class => "title" do
+        text_node editable page, :title
+      end
+    end
+  end
+end
 
 Person.by_event_types([3, 5, 6]).each do |person|
-  div do
-    h2 person.name
-    para img :src => person.image.url if person.image.exists?
-    a "Biographie", :href => person_path(person)
-    para do
-      person.events.map { |e| (link_to e.type.name + " " + e.title, event_path(e)) }.join(', ').html_safe
+  div :class => "row teacher" do
+    div :class => "basic" do
+      para person.bio, :class => "expand-more"
+    end
+    div :class => "details" do
+      div :class => "row" do
+        div :class => "image" do
+          img :src => person.image.url if person.image.exists?
+        end
+        div :class => "info" do
+          h3 person.name
+          a "Biographie", :href => person_path(person)
+          para :class => "classes" do
+            person.events.map { |e| (link_to e.type.name + " " + e.title, event_path(e)) }.join('<br>').html_safe
+          end
+        end
+      end
     end
   end
 end

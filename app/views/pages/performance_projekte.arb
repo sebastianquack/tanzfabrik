@@ -1,5 +1,40 @@
-render "/pages/editable_content"
+header :id => "headlines", :class => "headlines-performance-projecte" do
+  div :class => "main" do
+    div :class => "line1" do
+      h1 :class => "title" do
+        text_node editable page, :title
+      end
+    end
+  end
+end
 
 Event.of_types([5]).each do |project| 
-  a project.title, :href => event_path(project) 
+
+  div :class => "row event" do
+    div :class => "basic" do 
+      div :class => "content" do
+        a :href => event_path(project) do
+          h2 project.title
+          para project.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe, :class => "teacher"
+          para do
+            project.description #unless event.description.empty?
+          end
+        end
+      end
+    end
+
+    div :class => "details" do
+      div :class => "content" do
+
+        div :class => "time-range" do
+          time "01. 01. 2014"
+          text_node " - "
+          time "01. 01. 2014"
+        end
+
+        small "10 Monate, 20 Klassen pro Woche, individuelle Betreuung, 320€ pro Monat"
+
+      end    
+    end
+  end  
 end
