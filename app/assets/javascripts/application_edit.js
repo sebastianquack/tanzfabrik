@@ -15,3 +15,30 @@
 //= require editable/inputs-ext/wysihtml5-editable
 //= require editable/rails
 
+$(document).ready(function() {
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  
+  $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+
+  $.fn.editable.defaults.mode = 'inline';
+
+  $(".editable").editable();
+
+  
+  $("a[rel~=popover], .has-popover").popover();
+  $("a[rel~=tooltip], .has-tooltip").tooltip();
+  
+  
+  $('.textarea').wysihtml5();
+
+});
+
+// for wysihtml5
+$(document).on('page:load', function(){
+  window['rangy'].initialized = false
+})
