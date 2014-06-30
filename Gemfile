@@ -51,7 +51,9 @@ gem 'formtastic', github: 'justinfrench/formtastic'
 
 gem 'friendly_id', '~> 5.0.0'
 
-gem "paperclip", '~> 3.5' # newer paperclip does not play nicely with formtastic
+#gem "paperclip", '~> 3.5' # newer paperclip does not play nicely with formtastic
+gem "paperclip", "4.1.1"
+gem 'aws-sdk'
 
 gem "arbre"
 gem "ice_cube"

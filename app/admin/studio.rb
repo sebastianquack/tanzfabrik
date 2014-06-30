@@ -5,7 +5,7 @@ ActiveAdmin.register Studio do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :name, :description_de, :description_en, :location_id, :rentable, :image
+  permit_params :name, :description_de, :description_en, :location_id, :rentable, :images_attributes => [:id, :description, :license, :attachment, :_destroy]
   #
   # or
   #
@@ -20,8 +20,8 @@ ActiveAdmin.register Studio do
     column :location
     column :name
     column :description
-    column "Image" do |studio|
-      image_tag(studio.image.url) if studio.image.exists?
+    column "images" do |page|
+      page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
     default_actions
   end
@@ -35,8 +35,8 @@ ActiveAdmin.register Studio do
       row :location
       row :name
       row :description
-      row :image do
-        image_tag(studio.image.url) if studio.image.exists?
+      row "images" do |page|
+        page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
     end
     active_admin_comments
@@ -51,21 +51,20 @@ ActiveAdmin.register Studio do
         f.input :description_de
         f.input :description_en
       end
-      if f.object.image.exists?
-        f.inputs "Current image" do     
-          f.template.content_tag(:li) do
-            f.template.image_tag(f.object.image.url(:thumb))
+      f.inputs "Images" do
+        f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
+          f_f.inputs do
+            f_f.input :description
+            f_f.input :license
+            if f_f.object.attachment.exists?
+              f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.image_tag(f_f.object.attachment.url(:thumb))
+            else
+              f_f.input :attachment, :as => :file, :required => false
+            end
           end
         end
       end
-      f.inputs "New image" do     
-        # works now because we use paperclip 3.5
-        f.input :image, :as => :file 
-        # use regular rails helper instead of formtastic, avoid weird error
-        #f.template.content_tag(:li) do
-        #  f.file_field :image
-        #end
-      end    
+    
       f.actions
   end
         

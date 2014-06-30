@@ -8,7 +8,7 @@ class Festival < ActiveRecord::Base
   #accepts_nested_attributes_for :festival_events, :allow_destroy => true
   #accepts_nested_attributes_for :events, :allow_destroy => true
 
-  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
-  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
-
+  has_many :images
+  accepts_nested_attributes_for :images, :allow_destroy => true
+  
 end

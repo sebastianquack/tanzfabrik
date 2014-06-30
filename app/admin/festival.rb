@@ -2,7 +2,7 @@ ActiveAdmin.register Festival do
 
   menu :priority => 2
 
-  permit_params :name_de, :description_de, :name_en, :description_en, :image, :event_ids => []
+  permit_params :name_de, :description_de, :name_en, :description_en, :event_ids => [], :images_attributes => [:id, :description, :license, :attachment, :_destroy]
   
   index do
     selectable_column
@@ -11,9 +11,8 @@ ActiveAdmin.register Festival do
     column "Events" do |festival|
       festival.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
     end
-    
-    column "Image" do |festival|
-      image_tag(festival.image.url) if festival.image.exists?
+    column "images" do |festival|
+      festival.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
     default_actions
   end
@@ -30,8 +29,8 @@ ActiveAdmin.register Festival do
       row "Events" do |festival|
         festival.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
       end      
-      row :image do
-        image_tag(festival.image.url) if festival.image.exists?
+      row "images" do |festival|
+        festival.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
     end
     active_admin_comments
@@ -46,20 +45,19 @@ ActiveAdmin.register Festival do
       f.input :events, :as => :check_boxes
     end
 
-    if f.object.image.exists?
-      f.inputs "Current image" do     
-        f.template.content_tag(:li) do
-          f.template.image_tag(f.object.image.url(:thumb))
+    f.inputs "Images" do
+      f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
+        f_f.inputs do
+          f_f.input :description
+          f_f.input :license
+          if f_f.object.attachment.exists?
+            f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.image_tag(f_f.object.attachment.url(:thumb))
+          else
+            f_f.input :attachment, :as => :file, :required => false
+          end
         end
       end
     end
-    
-    f.inputs "New image" do     
-      # use regular rails helper instead of formtastic, avoid weird error
-      f.template.content_tag(:li) do
-        f.file_field :image
-      end
-    end    
     
     
     f.actions

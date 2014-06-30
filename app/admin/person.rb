@@ -2,7 +2,7 @@ ActiveAdmin.register Person do
 
   menu :priority => 3  
 
-  permit_params :id, :name, :bio_de, :bio_en, :role, :image, :event_ids => []
+  permit_params :id, :name, :bio_de, :bio_en, :role, :event_ids => [], :images_attributes => [:id, :description, :license, :attachment, :_destroy]
 
   index do
     selectable_column
@@ -11,8 +11,8 @@ ActiveAdmin.register Person do
     column "Events" do |person|
         person.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
     end
-    column "Image" do |person|
-      image_tag(person.image(:thumb)) if person.image.exists?
+    column "images" do |person|
+      person.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
     default_actions
   end
@@ -31,8 +31,8 @@ ActiveAdmin.register Person do
         person.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
       end      
       row :bio
-      row :image do
-        image_tag(person.image.url) if person.image.exists?
+      row "images" do |person|
+        person.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
     end
     active_admin_comments
@@ -46,19 +46,20 @@ ActiveAdmin.register Person do
         f.input :bio_en
         f.input :events, :as => :check_boxes
       end
-      if f.object.image.exists?
-        f.inputs "Current image" do     
-          f.template.content_tag(:li) do
-            f.template.image_tag(f.object.image.url(:thumb))
+      f.inputs "Images" do
+        f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
+          f_f.inputs do
+            f_f.input :description
+            f_f.input :license
+            if f_f.object.attachment.exists?
+              f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.image_tag(f_f.object.attachment.url(:thumb))
+            else
+              f_f.input :attachment, :as => :file, :required => false
+            end
           end
         end
       end
-      f.inputs "New image" do     
-        # use regular rails helper instead of formtastic, avoid weird error
-        f.template.content_tag(:li) do
-          f.file_field :image
-        end
-      end    
+    
       f.actions
   end
 

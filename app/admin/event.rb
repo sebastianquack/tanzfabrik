@@ -2,13 +2,14 @@ ActiveAdmin.register Event do
 
   menu :priority => 1
 
-  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :image, 
+  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id,
     :festival_ids => [], :person_ids => [], 
     event_details_attributes: [:id, :start_date, :end_date, :time, :duration, :studio_id, :repeat_mode_id, :_destroy],
     people_attributes: [:id, :name, :_destroy],
     person_events_attributes: [:id, :person_id, :event_id, :_destroy],
     festival_events_attributes: [:id, :event_id, :festival_id, :_destroy],
-    :tag_ids => []
+    :tag_ids => [],
+    :images_attributes => [:id, :description, :license, :attachment, :_destroy]
 
   config.per_page = 10
 
@@ -17,7 +18,9 @@ ActiveAdmin.register Event do
     column "Details" do |event|
       event.event_details.map { |t| t.datetime_l(:default) }.join('<br>').html_safe
     end
-
+    column "images" do |event|
+      event.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
+    end
     column "Festivals" do |event|
       event.festivals.map { |f| (link_to f.name, admin_festival_path(f)) }.join(', ').html_safe
     end
@@ -63,8 +66,8 @@ ActiveAdmin.register Event do
       row "Festivals" do |event|
         event.festivals.map { |f| (link_to f.name, admin_festival_path(f)) }.join(', ').html_safe
       end
-      row :image do
-        image_tag(event.image.url) if event.image.exists?
+      row "images" do |event|
+        event.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
     end
     active_admin_comments
@@ -95,20 +98,19 @@ ActiveAdmin.register Event do
       f.input :tags, :as => :check_boxes, :hint => (link_to "Manage Tags", admin_tags_path)
     end
 
-    if f.object.image.exists?
-      f.inputs "Aktuelles Bild" do     
-        f.template.content_tag(:li) do
-          f.template.image_tag(f.object.image.url(:thumb))
+    f.inputs "Images" do
+      f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
+        f_f.inputs do
+          f_f.input :description
+          f_f.input :license
+          if f_f.object.attachment.exists?
+            f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.image_tag(f_f.object.attachment.url(:thumb))
+          else
+            f_f.input :attachment, :as => :file, :required => false
+          end
         end
       end
     end
-    
-    f.inputs "Neues Bild" do     
-      # use regular rails helper instead of formtastic, avoid weird error
-      f.template.content_tag(:li) do
-        f.file_field :image
-      end
-    end    
     
     f.inputs "Zeiten und Orte" do
       f.has_many :event_details, heading: false, :new_record => true, :allow_destroy => true do |et_f|

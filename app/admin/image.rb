@@ -36,18 +36,17 @@ ActiveAdmin.register Image do
   end
 
 # we might want to use custom form, because formtastic file helper throws weird error
-  form :partial => "form"
+  #form :partial => "form"
 
-#  form :html => { :enctype => "multipart/form-data" } do |f|
-#      f.inputs "Details" do
-#      f.input :description
-#      f.input :license
-#    end
-#    f.inputs "Image" do         
-#      f.input :attachment, :as => :file # this is the error
-#      f.file_field :attachment # use regular rails helper instead
-#    end    
-#    f.actions
-#  end
+  form :html => { :enctype => "multipart/form-data" } do |f|
+      f.inputs "Details" do
+      f.input :description
+      f.input :license
+    end
+    f.inputs "Image" do         
+      f.input :attachment, :as => :file, :required => false
+    end    
+    f.actions
+  end
   
 end
