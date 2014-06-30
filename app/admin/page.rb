@@ -6,7 +6,9 @@ ActiveAdmin.register Page do
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # permit_params :list, :of, :attributes, :on, :model
-  permit_params :title_de, :content_de, :title_en, :content_en, :images_attributes => [:id, :description, :license, :attachment, :_destroy]
+  permit_params :title_de, :content_de, :title_en, :content_en, 
+    :images_attributes => [:id, :description, :license, :attachment, :_destroy],
+    :downloads_attributes => [:id, :description_de, :description_en, :attachment, :_destroy]
 
   #
   # or
@@ -48,6 +50,10 @@ ActiveAdmin.register Page do
       row "images" do |page|
         page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
+      row "downloads" do |page|
+        page.downloads.map { |d| link_to(d.description, d.attachment.url) }.join('').html_safe
+      end
+      
     end
     active_admin_comments
   end
@@ -68,6 +74,19 @@ ActiveAdmin.register Page do
           f_f.input :license
           if f_f.object.attachment.exists?
             f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.image_tag(f_f.object.attachment.url(:thumb))
+          else
+            f_f.input :attachment, :as => :file, :required => false
+          end
+        end
+      end
+    end
+    f.inputs "Downloads" do
+      f.has_many :downloads, heading: false, :new_record => true, :allow_destroy => true do |f_f|
+        f_f.inputs do
+          f_f.input :description_de
+          f_f.input :description_en
+          if f_f.object.attachment.exists?
+            f_f.input :attachment, :as => :file, :required => false, :hint => link_to(f_f.object.attachment.original_filename, f_f.object.attachment.url)
           else
             f_f.input :attachment, :as => :file, :required => false
           end

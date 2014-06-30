@@ -1,8 +1,17 @@
 h1 festival.name
 
-img :src => festival.image.url if festival.image.exists?
+img :src => festival.images.first.attachment.url if festival.images.length > 0
 
 para festival.description
+
+ul do
+  festival.downloads.each do |download|        
+    li do
+      a download.description, :href => download.attachment.url
+    end
+  end
+end      
+
 
 if festival.event_details.length > 0
 

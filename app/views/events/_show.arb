@@ -34,7 +34,7 @@ div :class => "row event" do
 
   div :class => "details" do
     div :class => "content" do
-      img :src => event.image.url if event.image.exists? # TODO: set width and height
+      img :src => event.images.first.attachment.url if event.images.length > 0 
 
       event.event_details.each do |detail|
         ul :class => "time-place" do

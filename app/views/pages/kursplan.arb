@@ -16,11 +16,10 @@ header :id => "headlines", :class => "headlines-kursplan" do
     end    
     div :class => "line3" do
       ul do
-        li do
-          a "Kursplan als PDF"
-        end
-        li do
-          a "Preise als PDF"
+        page.downloads.each do |download|        
+          li do
+            a download.description, :href => download.attachment.url
+          end
         end
       end
     end      
