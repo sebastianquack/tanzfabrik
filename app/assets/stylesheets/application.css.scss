@@ -62,8 +62,11 @@ $container-large-desktop:      ((960px + $grid-gutter-width));
 
 $vertical-menu-width: 500px;
 $overall-container-margin: 32px; /* margin for vertical secondary menu */
+$admin-link-color: #0088cc;
+$line-height: 1.4em;
+$vertical-box-padding: 0.4em;
 
-/**** Resets ****/
+/**** General Styles ****/
 
 h1,h2 {
 	margin:0;
@@ -73,6 +76,28 @@ h1,h2 {
 a:hover, a:focus {
 		text-decoration: none;
 		cursor: pointer;
+}
+
+#content {
+	line-height: $line-height;
+	font-size: 1em;
+}
+
+.admin-nav {
+	float:right;
+	padding: 1em 0 1em 1em;
+
+	a {
+		padding-right: 1em;
+	}
+
+	a:last-child {
+		padding-right:0;
+	}
+}
+
+.admin-only a {
+	color:$admin-link-color;
 }
 
 /**** Mixins ****/
@@ -477,6 +502,8 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 .timetable-container {
 	@include make-row();
 
+	margin-bottom:2.5em;
+
 	.tags {
 		@include make-xs-column(5);
 		@include make-xs-column-offset(1);
@@ -487,15 +514,47 @@ table.timetable {
 
 	width:100%;
 
+	.day {
+		padding: $vertical-box-padding 0;
+		@include border-line(bottom, red);
+	}
+
+	.studio {
+
+		@include border-line(top, red);
+		position:relative;
+		top:-1px;
+		padding: $vertical-box-padding 0;
+
+		@include menu-font(100%);
+		text-transform: uppercase;
+
+		.location-name {
+			float:left;
+		}
+
+		.studio-name {
+			float:right;
+		}
+	}
+
 	tr {
 
 		th, td {
 			@include make-xs-column(1);
 		}
 
-		th:before, td:before {
-			@include border-line(top, red);
-		}		
+		th {
+			font-weight:normal;
+			color:red;
+		}
+	}
+
+	.event {
+		height: 6 * $line-height + 2 * $vertical-box-padding;
+		padding: $vertical-box-padding 0;
+		
+		@include border-line(bottom, black);
 	}
 }
 
@@ -511,7 +570,7 @@ ul.timetable {
 		padding:0;		
 	}
 
-	> li {
+	> ul >li {
 
 		@include make-row();
 	
@@ -528,14 +587,18 @@ ul.timetable {
 		}		
 
 	}
-
+	
+	h3, h4 {
+		font-size: 1em;
+	}
 }
 
 .timetable .event {
+
 	.title {
 		font-weight: bold;
 	}
-	.teacher {
+	.teacher{ 
 	}
 	.warning {
 		color:red;
@@ -543,10 +606,22 @@ ul.timetable {
 	time {
 		font-weight: bold;
 	}
+
+	.title {
+		height: 2 * $line-height;
+		overflow:hidden;
+	}
+
+	.teacher, .warning, .time {
+		height:$line-height;
+		overflow:hidden;
+	}		
 }
+
 
 dl.tags {
 	font-size: 90%;
+	margin: 2 * $vertical-box-padding 0 0 0;
 	dt, dd {
 		float:left;
 		font-weight: normal;

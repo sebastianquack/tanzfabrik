@@ -11,7 +11,7 @@ header :id => "headlines", :class => "headlines-kursplan" do
         div t(:close), :class => "close-trigger"
       end
       div :class => "closed open-trigger" do
-        div "Wichtige Infos"
+        div t :kursplan_more
       end
     end    
     div :class => "line3" do
@@ -33,9 +33,9 @@ else
 end
 
 if admin_user_signed_in?
-  div :class => "btn-group admin-only" do
-    a "< " + t(:previous_week), :class => "btn btn-default", :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date - 1.week).to_s) 
-    a t(:next_week) + " >", :class => "btn btn-default", :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date + 1.week).to_s)
+  div :class => "admin-only admin-nav" do
+    a "< " + t(:previous_week), :class => "", :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date - 1.week).to_s) 
+    a t(:next_week) + " >", :class => "", :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date + 1.week).to_s)
   end
 end
 

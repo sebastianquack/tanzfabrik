@@ -17,6 +17,9 @@ de:
   dates: "Termine"
   close: "schließen"
 
+  kursplan_more: "Wichtige Infos zu den Tanzklassen. Änderungen im Stundenplan vorbehalten."
+  profitraining_more: "Wichtige Infos zum Profitraining."
+
   date:
     abbr_day_names:
     - So
@@ -56,8 +59,7 @@ de:
       short: '%d.%m.'
       short_day: '%A, %d.%m.'
       short_end: '-%d.%m.'
-      timetable: '%a, %d.%m.%Y'
-      month_day: '%e. %B'
+      month_day: '%e. %B.'
     month_names: 
     - 
     - Januar
@@ -219,7 +221,7 @@ de:
       long: ! '%A, %d. %B %Y, %H:%M Uhr'
       short: ! '%d. %B, %H:%M Uhr'
       short_day: '%A, %d.%m.'     
-      timetable: '%a, %d.%m.%Y' 
+      timetable: '%a, %d.%m.%Y'
     pm: nachmittags
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:

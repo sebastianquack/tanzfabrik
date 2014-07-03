@@ -25,7 +25,7 @@ tags = []
 
 # first row
 table_data[0] = []
-table_data[0][0] = "Studio"
+table_data[0][0] = ""
 dates.each_with_index do |date, index|
   table_data[0][index + 1] = l date, :format=>:weekday
 end
@@ -39,15 +39,16 @@ details_by_studio.each do |time, details|
   # go through dates = columns
   dates.each_with_index do |date, column_index|
     
+    unless table_data[row_index]
+      table_data[row_index] = [] # initialize row if that hasen't happened yet
+    end          
+    unless table_data[row_index][column_index + 1]
+      table_data[row_index][column_index + 1] = [] # initialize a column if that hasen't happened yet
+    end    
+
     # check if a detail has an occurrence on this day
     details.each do |detail|          
       if detail.occurs_on?(date)
-        unless table_data[row_index]
-          table_data[row_index] = [] # initialize row if that hasen't happened yet
-        end          
-        unless table_data[row_index][column_index + 1]
-          table_data[row_index][column_index + 1] = [] # initialize a column if that hasen't happened yet
-        end
         table_data[row_index][column_index + 1].push(detail)
         tags += detail.event.tags
       end
@@ -56,7 +57,8 @@ details_by_studio.each do |time, details|
 
   # only if there was an occurrence in this row, add time to first column
   if table_data[row_index]
-    table_data[row_index][0] = details.first.studio.location.name + " " + details.first.studio.name # keep time object so we can sort and format
+    table_data[row_index][0]  = div details.first.studio.location.name, :class => "location-name"
+    table_data[row_index][0] += div details.first.studio.name, :class => "studio-name"
     row_index += 1
   end
 end  
@@ -64,21 +66,27 @@ end
 # display the table
 div :class => "timetable-container" do
   table :class => "timetable" do
-    tr do
-      table_data[0].each do |header|
-        th header
+    thead do  
+      tr do
+        table_data[0].each do |header|
+          th do
+            div header, :class => (header == "" ? "" : "day")
+          end
+        end
       end
     end
     table_data.shift
-    table_data.sort! { |a,b| a[0] <=> b[0] }
+    table_data.sort! { |a,b| a[0].to_s <=> b[0].to_s }
     table_data.each do |row|
       tr do
         row.each_with_index do |data, index|
           if index == 0 
-            td data
+            th do
+              div data, :class => (data == "" ? "" : "studio")
+            end
           else
             td do
-              if data
+              if data != []
                 data.each do |detail|
                   article :class => "event" do              
                     div :class => "title" do
@@ -99,6 +107,8 @@ div :class => "timetable-container" do
                     end
                   end
                 end
+              else
+                article :class => "event empty-event"
               end
             end          
           end

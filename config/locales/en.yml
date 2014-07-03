@@ -21,11 +21,11 @@
 
 en:
   section_start: "Start"
-  section_school: "Dancing / School"
+  section_school: "Tanz"
   section_classes: "Classes"
   section_dance_intensive: "Dance Intensive"
   section_workshops: "Workshops"
-  section_production: "Factory / Production"
+  section_production: "Fabrik"
   section_berlin: "Berlin"
   section_rental: "Spaces"
   section_service: "Service"
@@ -36,13 +36,18 @@ en:
   previous_month: "Previous Month"
   more: "more"
   dates: "Dates"
+
+  kursplan_more: "Wichtige Infos zu den Tanzklassen. Änderungen im Stundenplan vorbehalten."
+  profitraining_more: "Wichtige Infos zum Profitraining."
     
   time:
     formats:
       hours_minutes: "%l:%M %p"
       short_day: '%A, %d.%m.'
+      timetable: '%a, %m/%d/%Y'
   date:
     formats:
+      weekday: "%A"
       short_day: '%A, %m/%d'
-      month: "%B"
-
+      month: "%B" 
+      month_day: '%m/%d'
