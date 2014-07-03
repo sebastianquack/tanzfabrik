@@ -31,16 +31,20 @@ if params[:start_date]
 else 
   start_date = Date.today.beginning_of_week # gets current monday      
 end
-  
-a t(:previous_week), :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date - 1.week).to_s)
-a t(:next_week), :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date + 1.week).to_s)
+
+if admin_user_signed_in?
+  div :class => "btn-group admin-only" do
+    a "< " + t(:previous_week), :class => "btn btn-default", :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date - 1.week).to_s) 
+    a t(:next_week) + " >", :class => "btn btn-default", :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date + 1.week).to_s)
+  end
+end
 
 # loop over locations
 Location.all.each do |location|
-  div do
-    h2 location.name
-    para location.address
-  end
+  #div do
+  #  h2 location.name
+  #  para location.address
+  #end
 
   # get event details for this location
   events = location.events.of_types([3, 4, 5, 6])    

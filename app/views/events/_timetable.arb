@@ -21,19 +21,20 @@ end
 
 # do all the calculations
 table_data = []
+tags = []
 
 # first row
 table_data[0] = []
-table_data[0][0] = "Zeit"
+table_data[0][0] = "Studio"
 dates.each_with_index do |date, index|
-  table_data[0][index + 1] = l date, :format=>:short_day
+  table_data[0][index + 1] = l date, :format=>:weekday
 end
 
 row_index = 1
 
 # go through event details per time
-details_by_time = details.group_by {|detail| detail.time.strftime("%R")}
-details_by_time.each do |time, details|
+details_by_studio = details.group_by {|detail| detail.studio}
+details_by_studio.each do |time, details|
 
   # go through dates = columns
   dates.each_with_index do |date, column_index|
@@ -47,14 +48,15 @@ details_by_time.each do |time, details|
         unless table_data[row_index][column_index + 1]
           table_data[row_index][column_index + 1] = [] # initialize a column if that hasen't happened yet
         end
-        table_data[row_index][column_index + 1].push(detail) 
+        table_data[row_index][column_index + 1].push(detail)
+        tags += detail.event.tags
       end
     end  
   end
 
   # only if there was an occurrence in this row, add time to first column
   if table_data[row_index]
-    table_data[row_index][0] = details.first.time # keep time object so we can sort and format
+    table_data[row_index][0] = details.first.studio.location.name + " " + details.first.studio.name # keep time object so we can sort and format
     row_index += 1
   end
 end  
@@ -73,20 +75,41 @@ div :class => "timetable-container" do
       tr do
         row.each_with_index do |data, index|
           if index == 0 
-            td l data, :format=>:hours_minutes
+            td data
           else
             td do
-              data.map { |detail| link_to(
-                detail.event.people.map { |p| p.name }.join(', ') + ": " +
-                detail.event.type.name + " " + detail.event.title + " (" +
-                detail.event.tags.map { |t| t.name + ', ' }.join('') +
-                detail.studio.location.name + " " + detail.studio.name + ")", 
-                event_path(detail.event))  
-              }.join('<br>').html_safe if data
+              if data
+                data.each do |detail|
+                  article :class => "event" do              
+                    div :class => "title" do
+                      text_node detail.event.title.html_safe if detail.event.title
+                    end
+                    div :class => "teacher" do
+                      text_node detail.event.people[0].name.html_safe if detail.event.people[0]
+                    end
+                    div :class => "teacher" do
+                      text_node detail.event.people[1].name.html_safe if detail.event.people[1]
+                    end
+                    div :class => "warning" do
+                      text_node detail.event.warning.html_safe if detail.event.warning
+                    end
+                    div :class => "time-footnotes" do
+                      time l detail.starttime, :format => :hours_minutes
+                      span "(" + detail.event.tags.map { |t| t.id }.join('/') + ")" if detail.event.tags.length > 0
+                    end
+                  end
+                end
+              end
             end          
           end
         end
       end
+    end
+  end
+  dl :class => "tags" do
+    tags.each do |tag|
+      dt "(" + tag.id.to_s + ")"
+      dd tag.name
     end
   end
 end

@@ -476,9 +476,16 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 
 .timetable-container {
 	@include make-row();
+
+	.tags {
+		@include make-xs-column(5);
+		@include make-xs-column-offset(1);
+	}
 }
 
 table.timetable {
+
+	width:100%;
 
 	tr {
 
@@ -522,6 +529,35 @@ ul.timetable {
 
 	}
 
+}
+
+.timetable .event {
+	.title {
+		font-weight: bold;
+	}
+	.teacher {
+	}
+	.warning {
+		color:red;
+	}
+	time {
+		font-weight: bold;
+	}
+}
+
+dl.tags {
+	font-size: 90%;
+	dt, dd {
+		float:left;
+		font-weight: normal;
+	}
+	dt:after {
+		content: " = ";
+		white-space: pre;
+	}
+	dd {
+		padding-right:1em;
+	}
 }
 
 /**** general pages ****/
