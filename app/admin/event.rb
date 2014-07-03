@@ -2,12 +2,12 @@ ActiveAdmin.register Event do
 
   menu :priority => 1
 
-  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id,
+  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :feature_on_welcome_screen,
     :festival_ids => [], :person_ids => [], 
-    event_details_attributes: [:id, :start_date, :end_date, :time, :duration, :studio_id, :repeat_mode_id, :_destroy],
-    people_attributes: [:id, :name, :_destroy],
-    person_events_attributes: [:id, :person_id, :event_id, :_destroy],
-    festival_events_attributes: [:id, :event_id, :festival_id, :_destroy],
+    :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :repeat_mode_id, :_destroy],
+    :people_attributes => [:id, :name, :_destroy],
+    :person_events_attributes => [:id, :person_id, :event_id, :_destroy],
+    :festival_events_attributes => [:id, :event_id, :festival_id, :_destroy],
     :tag_ids => [],
     :images_attributes => [:id, :description, :license, :attachment, :_destroy]
 
@@ -32,6 +32,7 @@ ActiveAdmin.register Event do
       event.people.map { |p| (link_to p.name, admin_person_path(p)) }.join(', ').html_safe
     end
     column :title
+    column "feature", :feature_on_welcome_screen
     actions
   end
 
@@ -39,6 +40,7 @@ ActiveAdmin.register Event do
   filter :type
   filter :festivals
   filter :people
+  filter :feature_on_welcome_screen
 
   show do 
     attributes_table do
@@ -69,6 +71,7 @@ ActiveAdmin.register Event do
       row "images" do |event|
         event.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
+      row :feature_on_welcome_screen
     end
     active_admin_comments
   end
@@ -137,7 +140,35 @@ ActiveAdmin.register Event do
       end
     end
     
+    f.inputs "Special" do
+      f.input :feature_on_welcome_screen
+    end
+    
     f.actions
+  end
+  
+  controller do
+    def reset_events
+      Event.where(:feature_on_welcome_screen => true).load.each do |event|
+        event.feature_on_welcome_screen = false
+        event.save
+      end        
+      Festival.where(:feature_on_welcome_screen => true).load.each do |festival|
+        festival.feature_on_welcome_screen = false
+        festival.save
+      end        
+    end
+    alias_method :create_event, :create
+    def create
+      reset_events if params[:event][:feature_on_welcome_screen] == "1"
+      create_event
+    end
+    alias_method :update_event, :update
+    def update
+      #logger.debug params
+      reset_events if params[:event][:feature_on_welcome_screen] == "1"
+      update_event
+    end
   end
   
   

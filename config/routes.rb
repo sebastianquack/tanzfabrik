@@ -8,6 +8,7 @@ Tanzfabrik::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :pages, :only => [:update]
+  resources :events, :only => [:update]
 
   scope "/:locale" do
     resources :events, :only => [:show, :index]

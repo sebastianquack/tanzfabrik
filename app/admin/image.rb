@@ -1,10 +1,10 @@
 ActiveAdmin.register Image do
 
-  menu false
+  menu :priority => 10
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :description, :license, :attachment, :studio_id, :person_id, :event_id, :festival_id
+  permit_params :description, :license, :attachment, :studio_id, :person_id, :event_id, :festival_id, :show_on_welcome_screen
   #
   # or
   #
@@ -21,13 +21,18 @@ ActiveAdmin.register Image do
     end
     column :description
     column :license
+    column :show_on_welcome_screen
     default_actions
   end
+
+  filter :description
+  filter :show_on_welcome_screen
 
   show do
     attributes_table do
       row :description
       row :license
+      row :show_on_welcome_screen
       row :image do
         image_tag(image.attachment.url)
       end
@@ -42,6 +47,7 @@ ActiveAdmin.register Image do
       f.inputs "Details" do
       f.input :description
       f.input :license
+      f.input :show_on_welcome_screen
     end
     f.inputs "Image" do         
       f.input :attachment, :as => :file, :required => false

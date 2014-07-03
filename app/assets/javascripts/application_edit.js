@@ -24,6 +24,7 @@ $(document).ready(function() {
   });
   
   $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+  $.fn.editable.defaults.wysihtml5 = {"image": false, "lists":false, "font-styles":false};
 
   $.fn.editable.defaults.mode = 'inline';
 
@@ -34,7 +35,7 @@ $(document).ready(function() {
   $("a[rel~=tooltip], .has-tooltip").tooltip();
   
   
-  $('.textarea').wysihtml5();
+  //$('.textarea').wysihtml5();
 
 });
 

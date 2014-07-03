@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630132842) do
+ActiveRecord::Schema.define(version: 20140630143509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20140630132842) do
     t.string   "language_en"
     t.string   "info_de"
     t.string   "info_en"
+    t.boolean  "feature_on_welcome_screen"
   end
 
   create_table "festival_events", force: true do |t|
@@ -129,6 +130,7 @@ ActiveRecord::Schema.define(version: 20140630132842) do
     t.datetime "image_updated_at"
     t.string   "name_en"
     t.text     "description_en"
+    t.boolean  "feature_on_welcome_screen"
   end
 
   create_table "friendly_id_slugs", force: true do |t|
@@ -158,6 +160,7 @@ ActiveRecord::Schema.define(version: 20140630132842) do
     t.integer  "event_id"
     t.integer  "festival_id"
     t.integer  "page_id"
+    t.boolean  "show_on_welcome_screen"
   end
 
   create_table "locations", force: true do |t|
