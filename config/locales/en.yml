@@ -39,6 +39,7 @@ en:
 
   kursplan_more: "Wichtige Infos zu den Tanzklassen. Änderungen im Stundenplan vorbehalten."
   profitraining_more: "Wichtige Infos zum Profitraining."
+  holiday: "Ferien"
     
   time:
     formats:
@@ -48,6 +49,7 @@ en:
   date:
     formats:
       weekday: "%A"
+      short: '%m/%d'
       short_day: '%A, %m/%d'
       month: "%B" 
       month_day: '%m/%d'

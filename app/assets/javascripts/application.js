@@ -20,16 +20,27 @@ $(document).ready(function() {
 
   $(".open-trigger").click( function() {
     $(this).parents('.open-close').addClass("opened")
+    $(this).parents('.open-close-shade').addClass("shaded")
   });
 
   $(".close-trigger").click(function () {
     $(this).parents('.open-close').removeClass("opened")
+    $(this).parents('.open-close-shade').removeClass("shaded")
   });
+
+  /*
+  $(".open-close-shade").click(function () {
+    $('.open-close').removeClass("opened")
+    $('.open-close-shade').removeClass("shaded")
+  });
+  */
+
 
   initMenuContentHide()
 
 });
 
+// clip #content on top where it is behind an opened 3rd level menu
 var initMenuContentHide = function () {
   last_menu3Height = null
   $("#top-menu ul ul li").on("mouseenter mouseleave", function () { 

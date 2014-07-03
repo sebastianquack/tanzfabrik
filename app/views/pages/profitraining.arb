@@ -15,12 +15,11 @@ header :id => "headlines", :class => "headlines-kursplan" do
       end
     end    
     div :class => "line3" do
-      ul do
-        li do
-          a "Kursplan als PDF"
-        end
-        li do
-          a "Preise als PDF"
+     ul do
+        page.downloads.each do |download|        
+          li do
+            a download.description, :href => download.attachment.url
+          end
         end
       end
     end      
@@ -35,18 +34,19 @@ ul :class => "timetable" do
     #a "Mehr Infos", :href => event_path(training) 
     training.event_details.each do |ed|
       # para a (ed.studio.location.name + " " + ed.studio.name), :href => url_for(:controller => 'pages', :action => 'show', :id => 'studios')
+      beginning_of_week = ed.occurrences.first.beginning_of_week
       ul :class => "week" do
         li do
           div :class => "header" do
-            time (l training.event_details.first.start_date, :format => :month_day) + ' - ' + (l training.event_details.first.end_date, :format => :month_day), :class => "time-range"
+            time (l training.event_details.first.start_date, :format => :short) + '-' + (l training.event_details.first.end_date, :format => :short), :class => "time-week"
           end
           ul do
             5.times do |wday|
               oc = ed.occurrences.select { |oc| oc.wday ==  wday+1 }.first
               li do 
+                time (l (beginning_of_week+wday.days), :format => :timetable), :class => ( oc ? "day" : "day holiday")
                 if oc
                   div :class => "event"do
-                    time (l oc, :format => :timetable), :class => "day"
                     h4 :class => "title" do 
                       text_node training.title if training.title
                     end
@@ -54,14 +54,16 @@ ul :class => "timetable" do
                       training.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe
                     end            
                     div :class => "time" do
-                      time (l oc, :format => :hours_minutes), :class => "time"
+                      time (l oc, :format => :hours_minutes), :class => "course-time"
                     end
                     div :class => "description" do
                       para training.description.html_safe if training.description
                     end
                   end
                 else 
-                  div :class => "event empty-event"
+                  div :class => "event empty-event" do
+                    div t :holiday, :class => "holiday"
+                  end
                 end
               end    
             end

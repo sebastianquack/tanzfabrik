@@ -89,8 +89,14 @@ div :class => "timetable-container" do
               if data != []
                 data.each do |detail|
                   article :class => "event" do              
-                    div :class => "title" do
-                      text_node detail.event.title.html_safe if detail.event.title
+                    div :class => "title-description open-close" do
+                      h4 :class => "title open-trigger" do
+                        text_node detail.event.title.html_safe if detail.event.title
+                      end
+                      div :class => "description" do
+                        span t(:schliessen), :class => "close-trigger"
+                        para text_node detail.event.description.html_safe if detail.event.description
+                      end
                     end
                     div :class => "teacher" do
                       text_node detail.event.people[0].name.html_safe if detail.event.people[0]
@@ -102,7 +108,7 @@ div :class => "timetable-container" do
                       text_node detail.event.warning.html_safe if detail.event.warning
                     end
                     div :class => "time-footnotes" do
-                      time l detail.starttime, :format => :hours_minutes
+                      time l(detail.starttime, :format => :hours_minutes), :class => "course-time"
                       span "(" + detail.event.tags.map { |t| t.id }.join('/') + ")" if detail.event.tags.length > 0
                     end
                   end

@@ -26,27 +26,29 @@ header :id => "headlines", :class => "headlines-kursplan" do
   end
 end
 
-if params[:start_date]
-  start_date = Date.parse(params[:start_date])
-else 
-  start_date = Date.today.beginning_of_week # gets current monday      
-end
-
-if admin_user_signed_in?
-  div :class => "admin-only admin-nav" do
-    a "< " + t(:previous_week), :class => "", :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date - 1.week).to_s) 
-    a t(:next_week) + " >", :class => "", :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date + 1.week).to_s)
+div :class => "open-close-shade" do
+  if params[:start_date]
+    start_date = Date.parse(params[:start_date])
+  else 
+    start_date = Date.today.beginning_of_week # gets current monday      
   end
-end
 
-# loop over locations
-Location.all.each do |location|
-  #div do
-  #  h2 location.name
-  #  para location.address
-  #end
+  if admin_user_signed_in?
+    div :class => "admin-only admin-nav" do
+      a "< " + t(:previous_week), :class => "", :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date - 1.week).to_s) 
+      a t(:next_week) + " >", :class => "", :href => (url_for :controller => 'pages', :action => 'show', :id => 'kursplan', :start_date => (start_date + 1.week).to_s)
+    end
+  end
 
-  # get event details for this location
-  events = location.events.of_types([3, 4, 5, 6])    
-  render :partial => "/events/timetable", :locals => {:events => events, :start_date => start_date}
+  # loop over locations
+  Location.all.each do |location|
+    #div do
+    #  h2 location.name
+    #  para location.address
+    #end
+
+    # get event details for this location
+    events = location.events.of_types([3, 4, 5, 6])    
+    render :partial => "/events/timetable", :locals => {:events => events, :start_date => start_date}
+  end
 end
