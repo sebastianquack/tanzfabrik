@@ -19,7 +19,7 @@
     </style>
 	<![endif]-->  
 </head>
-<body>
+<body<%= " data-no-turbolink" if admin_user_signed_in? %>>
 
 <%#= image_tag @bg_image_url %>
 

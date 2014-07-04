@@ -68,7 +68,7 @@ $vertical-box-padding: 0.3em;
 
 /**** General Styles ****/
 
-h1,h2.h3,h4 {
+h1,h2,h3,h4 {
 	margin:0;
 	padding:0;
 }
@@ -735,6 +735,28 @@ h2 {
 	/*padding-top:0.5em;*/
 }
 
+.basic {
+	.description {
+		padding-top: $vertical-box-padding;
+	}
+}
+
+.details {
+	.image-container {
+		padding-top: $vertical-box-padding + 0.3em;
+
+		img {
+			width:100%;
+			padding-bottom:1em;
+		}		
+	}
+
+	.image-license {
+		display:block;
+		font-size: 90%;
+	}
+}
+
 /**** events ****/
 
 .event .details .time-place {
@@ -767,30 +789,31 @@ h2 {
 
 /**** teachers ****/
 
-.teacher .basic {
-	height:10em;
-	overflow-y: hidden;
+.teachers .basic .description {
 	position:relative;
+	padding-top:$vertical-box-padding;
+
+	p {
+		height:10 * $line-height;
+		overflow-y: hidden;
+	}
 }
 
-.teacher .basic:after {
-	content: "mehr";
-	float:left;
-	position:absolute;
-	bottom:0;
+.teachers .basic .description.opened p {
+	height:auto;
 }
 
-.teacher .image, .teacher .info {
+.teachers .image-container, .teachers .info {
 	@include make-xs-column(3);
 }
 
-.teacher h3 {
+.teachers h3 {
 	font-size: 1em;
 	font-weight: 700;
 	margin:0 0 1em 0;
-	padding:0;
+	padding-top:$vertical-box-padding;
 }
 
-.teacher .classes {
+.teachers .classes {
 	font-size: 0.8em;
 }

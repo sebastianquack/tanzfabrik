@@ -11,8 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-// require jquery.turbolinks // stört editable
-// require turbolinks
+//= require jquery.turbolinks 
+//= require turbolinks
 //= require bootstrap
 
 

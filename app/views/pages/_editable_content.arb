@@ -12,9 +12,15 @@ if page
 
   div :class => "row page" do
     div :class => "basic" do
-      div editable page, :content, :type => "wysihtml5"
+      div editable(page, :content, :type => "wysihtml5"), :class => "description"
     end
     div :class => "details" do
+      if page.images.length > 0 
+        div :class => "image-container" do
+          img :src => page.images.first.attachment.url(:medium_detail_column), :title => page.images.first.description, :alt => page.images.first.description
+          small page.images.first.license, :class => "image-license"
+        end
+      end
     end
   end
 
