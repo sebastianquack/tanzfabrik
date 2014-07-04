@@ -10,18 +10,22 @@ header :id => "headlines", :class => "headlines-teachers" do
 end
 
 Person.by_event_types([1, 7, 8, 9]).each do |person|
-  div :class => "row teacher" do
+  div :class => "row teachers" do
     div :class => "basic" do
-      para person.bio, :class => "expand-more"
+      div :class => "description open-close" do
+        para person.bio
+        div t(:more), :class => "open-trigger"
+        div t(:close), :class => "close-trigger"
+      end
     end
     div :class => "details" do
       div :class => "row" do
-        div :class => "image" do
-          img :src => person.image.url if person.image.exists?
+        div :class => "image-container" do
+          img :src => person.images.first.attachment.url(:medium) if person.images.exists?
         end
         div :class => "info" do
           h3 person.name
-          a "Biographie", :href => person_path(person)
+          #a "Biographie", :href => person_path(person)
           para :class => "classes" do
             person.events.map { |e| (link_to e.type.name + " " + e.title, event_path(e)) }.join('<br>').html_safe
           end

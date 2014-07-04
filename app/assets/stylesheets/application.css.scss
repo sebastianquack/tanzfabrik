@@ -113,6 +113,14 @@ a abbr {
 	/*opacity:0.4;*/
 }
 
+/* fades table behind opened description popup */
+.shaded td > * > *:not(.opened), 
+.shaded th, 
+.shaded dl, 
+.shaded :empty {
+  opacity:0.3;
+}
+
 /**** Mixins ****/
 
 @mixin menu-font($font-size) {
@@ -555,8 +563,9 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 			}
 		}
 
-		.title {
+		.title:hover {
 			cursor: pointer;
+			color:#19CBFA;
 		}
 	}
 

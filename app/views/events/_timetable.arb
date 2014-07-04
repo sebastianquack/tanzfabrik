@@ -95,7 +95,7 @@ div :class => "timetable-container" do
                       end
                       div :class => "description" do
                         span t(:schliessen), :class => "close-trigger"
-                        para text_node detail.event.description.html_safe if detail.event.description
+                        para detail.event.description.html_safe if detail.event.description
                       end
                     end
                     div :class => "teacher" do
