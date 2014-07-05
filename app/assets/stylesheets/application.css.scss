@@ -96,7 +96,7 @@ a:hover, a:focus {
 	}
 }
 
-.admin-only a {
+.admin-only a, a.admin-only {
 	color:$admin-link-color;
 }
 
@@ -417,6 +417,10 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 
 #headlines {
 
+	a.next, a.previous {
+		@include menu-font(100%);
+	}
+
 	.line1 {
 		overflow: hidden;
 		line-height: 2em;
@@ -427,7 +431,6 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 
 		a.next, a.registration {
 			float:right;
-			font-size: 90%;
 		}
 
 		a.registration {
@@ -746,7 +749,7 @@ h2 {
 
 .basic {
 	.description {
-		padding-top: $vertical-box-padding;
+		margin: $vertical-box-padding 0;
 	}
 }
 
@@ -796,6 +799,42 @@ h2 {
 	}
 }
 
+.event .content {
+	padding: $vertical-box-padding 0;
+}
+
+.event-performanceprojekt {
+	.title, .teacher {
+		display: inline;
+	}
+	.teacher {
+		padding-left:1em;
+	}
+	.description {
+		line-height: $line-height;
+		height: 3 * $line-height;
+		overflow: hidden;
+		margin: 0;
+	}
+	.more {
+		margin-top: -0.1em;
+		line-height: $line-height;
+	}
+	.more:after {
+		content: " >";
+	}
+	.time-duration {
+		@include menu-font(100%);
+		color:red;
+	}
+	.info {
+		display: table-cell;
+		vertical-align: bottom;
+		padding-top: $vertical-box-padding;
+		height: 4 / 0.9 * $line-height + $vertical-box-padding;
+	}
+}
+
 /**** teachers ****/
 
 .teachers .basic .description {
@@ -804,6 +843,7 @@ h2 {
 
 	p {
 		height:10 * $line-height;
+		min-height:10 * $line-height;
 		overflow-y: hidden;
 	}
 }

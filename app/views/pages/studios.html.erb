@@ -3,7 +3,11 @@
 <% Studio.order('location_id').load.each do |studio| %>
 <div>
   <h2><%= studio.location.name + " " + studio.name %></h2>
-  <%= image_tag studio.image.url if studio.image.exists? %>
+  <% if studio.images.length > 0 %>
+    <div class="image-container">
+      <%= image_tag studio.images.first.attachment.url %>
+    </div>
+  <% end %>
   <p><%= studio.description %></p>
   <p><%= studio.location.address %></p>
 </div>

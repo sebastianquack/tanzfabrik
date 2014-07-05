@@ -28,14 +28,20 @@ div :class => "row event" do
 
       div editable event, :description, :type => "wysihtml5"
       
-      a "> Dieses Event bearbeiten", :href => edit_admin_event_path(event) if admin_user_signed_in?
+      div :class => "admin-only admin-nav" do
+        a "> Dieses Event bearbeiten", :href => edit_admin_event_path(event) if admin_user_signed_in?
+      end
 
     end
   end
 
   div :class => "details" do
     div :class => "content" do
-      img :src => event.images.first.attachment.url if event.images.length > 0 
+      if event.images.length > 0
+        div :class => "image-container" do
+          img :src => event.images.first.attachment.url
+        end
+      end
 
       event.event_details.each do |detail|
         ul :class => "time-place" do

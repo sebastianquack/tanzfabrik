@@ -1,4 +1,5 @@
 header :id => "headlines", :class => "headlines-performance-projecte" do
+  div :class => "before"
   div :class => "main" do
     div :class => "line1" do
       h1 :class => "title" do
@@ -10,15 +11,14 @@ end
 
 Event.of_types([5]).each do |project| 
 
-  div :class => "row event" do
-    div :class => "basic" do 
+  div :class => "row event event-performanceprojekt" do
+    div :class => "basic" do   
       div :class => "content" do
-        a :href => event_path(project) do
-          h2 project.title
-          para project.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe, :class => "teacher"
-          para do
-            project.description #unless event.description.empty?
-          end
+        a :href => "events/"+ project.id.to_s do # TODO: fix URL generation
+          h2 project.title, :class => "title"
+          para project.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
+          para project.description, :class => "description" #unless event.description.empty?
+          div t(:more), :class => "more"
         end
       end
     end
@@ -26,13 +26,13 @@ Event.of_types([5]).each do |project|
     div :class => "details" do
       div :class => "content" do
 
-        div :class => "time-range" do
-          time "01. 01. 2014"
+        div :class => "time-duration" do
+          time l project.event_details.first.starttime, :format => :day
           text_node " - "
-          time "01. 01. 2014"
+          time l project.event_details.last.endtime, :format => :day
         end
 
-        small "10 Monate, 20 Klassen pro Woche, individuelle Betreuung, 320€ pro Monat"
+        small project.info, :class => "info"
 
       end    
     end
