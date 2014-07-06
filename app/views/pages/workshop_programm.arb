@@ -80,6 +80,34 @@ end
 # get workshops with no festival
 workshops_not_in_festivals = Event.includes(:festival_events).where( :festival_events => { :event_id => nil } ).where(:type_id => 2)
 
-workshops_not_in_festivals.each do |workshop|
-  para a workshop.people.map { |p| p.name }.join(', ') + ": " + workshop.title, :href => event_path(workshop)
-end 
+if workshops_not_in_festivals.length > 0
+  ul :class => "workshops" do 
+    li :class => "week" do
+      div :class => "time-duration" do
+        text_node "START" #time festival.startdate
+        text_node "-"
+        text_node "END" #time festival.enddate
+      end
+      ul :class => "classes" do
+        workshops_not_in_festivals.each do |workshop| 
+          li :class => "class" do
+            a :href => "events/" + workshop.id.to_s do
+              h4 workshop.title, :href => event_path(workshop), :class => "title"
+              span workshop.people.map { |p| p.name }.join(', '), :class => "teacher" if workshop.people.length > 0
+              div :class => "class-data" do
+                time "START", :class => "time-start"
+                text_node "-"
+                time "END", :class => "time-end"
+                span "___,-€", :class => "price price-normal"
+                span "(___,-€)", :class => "price price-reduced"
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+
+
