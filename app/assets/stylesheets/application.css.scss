@@ -255,13 +255,13 @@ background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,
 }
 
 #language-select li {
-  display:inline-block;
+  float:right;
 }
 
-#language-select li:nth-child(2):before {
+#language-select li:first-child:before {
   content: "/";
-  display:inline-block;
-  
+  float:left;
+  padding:0 0.2em;
 }
 
 /**** Top Menu: Logo ****/

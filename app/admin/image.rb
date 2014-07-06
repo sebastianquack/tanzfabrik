@@ -36,7 +36,7 @@ ActiveAdmin.register Image do
       row :license
       row :show_on_welcome_screen
       row :image do
-        image_tag(image.attachment.url)
+        image_tag(image.attachment(:medium))
       end
     end
     active_admin_comments

@@ -9,9 +9,9 @@ events.each do |event|
           
     if occurrences.length > 0
       div do      
-        text_node occurrences.map {|o| l o, :format => :short_day }.join(', ')
+        #text_node occurrences.map {|o| l o, :format => :short_day }.join(', ')
         #render :partial => "events/basic_info", :locals => {:event => detail.event, :show_festival => true}
-        a detail.event.type.name + " " + detail.event.title, :href => event_path(detail.event)
+        #a detail.event.type.name + " " + detail.event.title, :href => event_path(detail.event)
       end
     end
       
