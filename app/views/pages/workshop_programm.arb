@@ -1,30 +1,85 @@
-render "/pages/editable_content"
-
-# get workshops with no festival
-workshops_not_in_festivals = Event.includes(:festival_events).where( :festival_events => { :event_id => nil } ).where(:type_id => 2)
-
-workshops_not_in_festivals.each do |workshop|
-  para a workshop.people.map { |p| p.name }.join(', ') + ": " + workshop.title, :href => event_path(workshop)
-end 
+header :id => "headlines", :class => "headlines-event" do
+  div :class => "before" 
+  div :class => "main" do
+    div :class => "line1" do
+      h1 editable(page, :title), :class => "title"
+      a "> Online-Anmeldung", :class => "registration"
+    end
+  end
+end
 
 # get festivals with workshops
 festivals_with_workshops = Festival.joins(:events).where(:events => { :type_id => 2 }).group('festivals.id')
 
 festivals_with_workshops.each do |festival|
   div do
-    h2 festival.name
-    ul do 
-      festival.events.where(:type_id => 2).order('title_de ASC').each do |workshop| 
-        li do
-          link_text = ""
-          if workshop.people.length > 0
-            link_text += workshop.people.map { |p| p.name }.join(', ') + ": "
+    div :class => "headlines-workshop" do
+      div :class => "line2 open-close" do
+        div :class => "basic" do
+          div :class => "inline-title" do
+            h2 festival.name, :class => "title"
+            span t(:more_information), :class => "open-trigger info-link"
+            a t(:more_festival), :href => festival_path(festival), :class => "festival-link"
           end
-          link_text += workshop.title
-          a link_text, :href => event_path(workshop)
+          para festival.description, :class => "description"
+          div t(:close), :class => "close-trigger"
+        end
+        div :class => "details" do
+          div :class => "time-duration" do
+            time festival.startdate
+            text_node "-"
+            time festival.enddate
+          end
+          if festival.images.length > 0
+            div :class => "image-container" do
+              img :src => festival.images.first.attachment.url, :title => festival.images.first.description, :alt => festival.images.first.description
+            end
+          end
+        end        
+      end    
+      div :class => "line3" do
+        ul do
+          page.downloads.each do |download|        
+            li do
+              a download.description, :href => download.attachment.url
+            end
+          end
         end
       end
     end
-    a "Programm-Übersicht von " + festival.name, :href => festival_path(festival)
-  end
+
+    ul :class => "workshops" do 
+      li :class => "week" do
+        div :class => "time-duration" do
+          text_node "START" #time festival.startdate
+          text_node "-"
+          text_node "END" #time festival.enddate
+        end
+        ul :class => "classes" do
+          festival.events.where(:type_id => 2).order('title_de ASC').each do |workshop| 
+            li :class => "class" do
+              a :href => "events/" + workshop.id.to_s do
+                h4 workshop.title, :href => event_path(workshop), :class => "title"
+                span workshop.people.map { |p| p.name }.join(', '), :class => "teacher" if workshop.people.length > 0
+                div :class => "class-data" do
+                  time "START", :class => "time-start"
+                  text_node "-"
+                  time "END", :class => "time-end"
+                  span "___,-€", :class => "price price-normal"
+                  span "(___,-€)", :class => "price price-reduced"
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end 
+end
+
+# get workshops with no festival
+workshops_not_in_festivals = Event.includes(:festival_events).where( :festival_events => { :event_id => nil } ).where(:type_id => 2)
+
+workshops_not_in_festivals.each do |workshop|
+  para a workshop.people.map { |p| p.name }.join(', ') + ": " + workshop.title, :href => event_path(workshop)
 end 

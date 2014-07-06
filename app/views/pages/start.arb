@@ -1,5 +1,3 @@
-render "/pages/editable_content"
-
 events = Event.joins(:type, :event_details).where('event_details.end_date >= ? AND event_details.end_date <= ?', Time.now, Time.now + 30.days).order('event_details.start_date ASC')
 
 events.each do |event|

@@ -1,4 +1,4 @@
-div :id => "header" do
+div :id => "header", :class =>"site-background", :data => @bg_image_url do
   def page_url(id)
     url_for :controller => 'pages', :action => 'show', :id => id
   end

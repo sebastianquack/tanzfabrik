@@ -18,6 +18,8 @@
 
 $(document).ready(function() {
 
+  $("site-background:after").css("background",$("[data-site-background-url]").data("siteBackgroundUrl"));
+
   $(".open-trigger").click( function() {
     $(this).parents('.open-close').addClass("opened")
     $(this).parents('.open-close-shade').addClass("shaded")
@@ -34,7 +36,6 @@ $(document).ready(function() {
     $('.open-close-shade').removeClass("shaded")
   });
   */
-
 
   initMenuContentHide()
 

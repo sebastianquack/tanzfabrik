@@ -121,6 +121,12 @@ a abbr {
   opacity:0.3;
 }
 
+ul, li {
+	margin:0;
+	padding:0;
+	list-style-type: none;
+}
+
 /**** Mixins ****/
 
 @mixin menu-font($font-size) {
@@ -188,7 +194,7 @@ body {
 
 /**** background ****/
 
-#header:after, #header:before {
+.site-background:after, .site-background:before {
 	position:fixed;
 	top:0;
 	left:0;
@@ -196,7 +202,7 @@ body {
 	height:100%;
 }
 
-#header:after {
+.site-background:after {
 	z-index:-2;
 	background: url("http://www.ruhrnachrichten.de/storage/pic/mdhl/artikelbilder/lokales/mz-mlz-evz-gz/mslo/msfe/2844603_3_111129ms-ku-tanzFoto_275_a.jpg?version=1387197953");
 	background-size: cover;
@@ -204,7 +210,7 @@ body {
 	background-repeat: no-repeat;
 }
 
-#header:before {
+.site-background:before {
 	z-index:-1;
 	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjk1Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjElIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAuOTciLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjQxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
 	background: -moz-linear-gradient(top,  rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.97) 1%, rgba(255,255,255,0.41) 100%); /* FF3.6+ */
@@ -866,3 +872,164 @@ h2 {
 .teachers .classes {
 	font-size: 0.8em;
 }
+
+/**** workshops ****/
+
+.headlines-workshop {
+
+	.line2, .line3 {
+		@include make-row();
+	}
+
+	.line2 {
+
+		padding-bottom: $vertical-box-padding;
+
+		.details {
+			@include make-xs-column(2);
+
+			.time-duration {
+				@include menu-font(100%);
+				padding-top: $vertical-box-padding;
+				color:red;
+			}
+
+			.image-container img {
+				width:100%;
+			}			
+		}
+		.basic {
+			@include make-xs-column(4);
+			
+			.inline-title {
+				padding-top: $vertical-box-padding;
+			}
+
+			.title {
+				color:red;
+				display:inline;
+			}
+
+			.info-link, .festival-link {
+				padding-left: 1em;
+				display:inline;
+			}
+
+			.info-link:after, .festival-link:after {
+				content: " >";
+				white-space: pre;
+			}
+
+			.info-link:hover {
+				color:red;
+				cursor:pointer;
+			}
+
+			.close-trigger {
+				font-size: 0.8em;
+				float:right;
+			}
+
+			.close-trigger:hover {
+				color:red;
+				cursor:pointer;
+			}			
+		}
+	}
+
+	.line3 {
+		@include make-xs-column(6);
+		@include border-line(top, red);
+
+		font-size:0.8em;
+		line-height:2em;
+		padding-bottom: $line-height;
+
+		ul {
+			list-style-type: none;
+			margin:0;
+			padding: 0;
+
+			li {
+				float:left;
+				margin-right:1em;
+			}
+		}
+	}	
+
+	/* interaction */
+
+	.image-container, .description, .close-trigger {
+		display:none;
+		opacity:0;
+		@include transition(opacity 0.2s);
+	}
+
+	.opened .image-container, .opened .description, .opened .close-trigger {
+		display:block;
+		display:initial;
+		opacity:1;
+	}
+
+}
+
+ul.workshops {
+
+	.week {
+		@include make-row();
+
+		.time-duration {
+			@include make-xs-column(1);
+			color:red;
+			@include menu-font(100%);
+		}
+
+		.time-duration:before {
+			padding-bottom: $vertical-box-padding;
+		}
+
+		.time-duration:before, .classes:before {
+			@include border-line(top, red);
+		}
+
+		.classes {
+			@include make-xs-column(5);
+
+			.class {
+				clear:both;
+				padding: $vertical-box-padding 0;
+				@include border-line(bottom, black);
+				overflow:hidden;
+			}
+
+			.class:last-child {
+				border:none;
+			}
+
+			.class a {
+				display:block;
+			}
+
+			.title {
+				font-size: 1em;
+				font-weight: bold;
+				float:left;
+			}
+			.teacher {
+				float:left;
+				padding-left: 1em;
+			}
+			.class-data {
+				float:right;
+
+				> *:not(.time-end) {
+					padding-left:1ex;
+				}
+			}
+		}
+	}
+}
+
+
+
+

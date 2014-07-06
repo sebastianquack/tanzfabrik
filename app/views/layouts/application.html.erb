@@ -12,7 +12,7 @@
 	<!--[if lt IE 9]>
 	  <%= javascript_include_tag 'html5shiv-printshiv' %>
     <style>
-      #header:after, #header:before { background:none; }
+      #.site-background:after, #.site-background:before { background:none; }
       #secondary-menu  { position:relative; display:block; clear:both; width:100%; text-align:left;}
       #language-select { position:relative; display:block; clear:both; width:100%; }
       ul.navigation ul ul {background:white; border: 1px solid black; padding:0.5em;}
@@ -20,8 +20,6 @@
 	<![endif]-->  
 </head>
 <body<%= " data-no-turbolink" if admin_user_signed_in? %>>
-
-<%#= image_tag @bg_image_url %>
 
 <div id="overall-container">
 	<div class="container">
@@ -32,6 +30,8 @@
 		  </section>
     </div>
 	</div>
+  <div id="background" data-site-background-url="<%= @bg_image_url %>">
+  </div>
 </div>
 
 </body>

@@ -13,5 +13,13 @@ class Festival < ActiveRecord::Base
   
   has_many :downloads
   accepts_nested_attributes_for :downloads, :allow_destroy => true
+
+  def startdate
+    return "START"
+  end
+
+  def enddate
+    return "END"
+  end
   
 end
