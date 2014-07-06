@@ -32,7 +32,6 @@ ActiveAdmin.register Location do
         location.studios.map { |s| (link_to s.name, admin_studio_path(s)) }.join(', ').html_safe
       end      
     end
-    active_admin_comments
   end
   
     

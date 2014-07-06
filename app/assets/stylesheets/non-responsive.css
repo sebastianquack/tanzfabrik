@@ -7,7 +7,8 @@
 /* Account for fixed navbar */
 body {
   min-width: 970px;
-  padding-top: 70px;
+  /*padding-top: 70px;*/
+  padding-top: 0px;
   padding-bottom: 30px;
 }
 

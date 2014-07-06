@@ -11,7 +11,7 @@ ActiveAdmin.register Event do
     :tag_ids => [],
     :images_attributes => [:id, :description, :license, :attachment, :_destroy]
 
-  config.per_page = 10
+  config.per_page = 100
 
   index do 
     selectable_column

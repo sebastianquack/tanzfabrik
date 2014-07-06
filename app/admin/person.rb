@@ -21,7 +21,7 @@ ActiveAdmin.register Person do
   filter :role
   filter :events
   
-  config.per_page = 10
+  config.per_page = 100
   
   show do
     attributes_table do
@@ -35,7 +35,6 @@ ActiveAdmin.register Person do
         person.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
     end
-    active_admin_comments
   end
   
   form :html => { :enctype => "multipart/form-data" } do |f|

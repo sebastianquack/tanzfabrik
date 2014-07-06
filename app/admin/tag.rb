@@ -28,7 +28,6 @@ ActiveAdmin.register Tag do
         e.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
       end      
     end
-    active_admin_comments
   end
   
   form do |f|

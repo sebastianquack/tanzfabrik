@@ -178,7 +178,7 @@ body {
 
 #overall-container {
 	margin: 0 auto;
-	padding: 0 $overall-container-margin;
+	padding: 2 * $vertical-box-padding $overall-container-margin;
 }
 
 #header {
@@ -322,7 +322,7 @@ ul.navigation > li > ul {
 ul.navigation > li > ul > li {
   float:left;
   position:relative;
-  padding-right:1em;
+  padding-right:0.8em;
 }
 
 /* level 3 */

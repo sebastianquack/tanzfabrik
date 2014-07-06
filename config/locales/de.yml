@@ -231,6 +231,94 @@ de:
   activemodel:
     errors:
       <<: *errors
+
   activerecord:
     errors:
       <<: *errors
+    models:
+      page:
+        one: Seite
+        other: Seiten
+      event:
+        one: Ereignis
+        other: Ereignisse
+      event_detail:
+        one: Zeit und Ort
+        other: Zeiten und Orte
+      event_tag:
+        one: Attribut
+        other: Attributes
+      event_type:
+        one: Art
+        other: Arten        
+      festival:
+        one: Festival
+        other: Festivals
+      festival_event:
+        one: Festival
+        other: Festivals
+      person:
+        one: Person
+        other: Personen   
+      person_event:
+        one: Person
+        other: Personen
+      image:
+        one: Bild
+        other: Bilder 
+      tag:
+        one: Stichwort
+        other: Stichworte
+      location:
+        one: Adresse
+        other: Adressen
+      studio:
+        one: Studio
+        other: Studios
+      repeat_mode:
+        one: Wiederholung
+        other: Wiederholungen
+      download:
+        one: Download
+        other: Downloads
+    attributes:
+      page: 
+        title: Seitentitel
+        content: Text
+      event:
+        type: Art
+        title: Titel
+        description: Text
+        info: Zusatzinformation
+        warning: Warnhinweis
+      image:
+        description: Beschreibung
+        license: Copyrightnotiz
+        attachment: Datei
+        show_on_welcome_screen: Als Hintergrundbild verwenden
+      event_detail:
+        start_date: Startdatum
+        end_date: Enddatum
+        repeat_mode: Wiederholung
+        duration: Dauer
+        studio: Studio
+      festival:
+        name: Titel
+        description: Text
+        events: Ereignisse
+      person:
+        name: Name
+        role: Rolle
+      studio:
+        location: Adresse
+        name: Name
+        description: Text
+      download:
+        description: Titel
+        attachment: Datei        
+
+  formtastic:
+    update: "%{model} speichern"
+        
+
+

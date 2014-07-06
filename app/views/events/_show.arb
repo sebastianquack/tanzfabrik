@@ -2,10 +2,8 @@ show_festival = nil if !defined? show_festival
 
 if show_festival 
   header :id => "headlines", :class => "headlines-event" do
-    if event.type.name == "Performance-Projekt"
-      div :class => "before" do
-        a "<", :class => "previous"
-      end
+    div :class => "before" do
+      a "<", :class => "previous" if event.type.name == "Performance-Projekt"
     end
     div :class => "main" do
       div :class => "line1" do

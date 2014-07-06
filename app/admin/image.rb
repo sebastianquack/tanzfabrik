@@ -28,6 +28,8 @@ ActiveAdmin.register Image do
   filter :description
   filter :show_on_welcome_screen
 
+  config.per_page = 100
+
   show do
     attributes_table do
       row :description

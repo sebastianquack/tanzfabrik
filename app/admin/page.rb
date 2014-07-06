@@ -36,7 +36,7 @@ ActiveAdmin.register Page do
   filter :title_de
   filter :content_de
   
-  config.per_page = 10
+  config.per_page = 100
   
   show do
     attributes_table do
@@ -55,7 +55,6 @@ ActiveAdmin.register Page do
       end
       
     end
-    active_admin_comments
   end
   
   form do |f|

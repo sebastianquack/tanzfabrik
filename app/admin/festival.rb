@@ -25,7 +25,7 @@ ActiveAdmin.register Festival do
   filter :description_de
   filter :feature_on_welcome_screen
    
-  config.per_page = 10
+  config.per_page = 100
     
   show do
     attributes_table do
