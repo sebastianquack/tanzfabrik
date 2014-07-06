@@ -100,7 +100,7 @@ a:hover, a:focus {
 	color:$admin-link-color;
 }
 
-a abbr {
+a abbr[title] {
 	cursor:pointer;
 	border:none;
 }
@@ -231,7 +231,7 @@ body {
 	position: absolute;
 	overflow: hidden;
 	text-align: right;
-	@include transform(translateX(-$vertical-menu-width) rotate(-90deg));
+	@include transform(translateX(-$vertical-menu-width - 3px) rotate(-90deg));
 	@include transform-origin(right top);  
   list-style-type: none;
   margin:0;
