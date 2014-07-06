@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
     images = Image.where(:show_on_welcome_screen => true)
     if images.length > 0
       # hier müsste man noch täglich wechseln mit pseudorandom
-      @bg_image_url = images.first.attachment.url(:background)
+      @bg_image_url = images.sample.attachment.url(:background)
       return
     end
     
