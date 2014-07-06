@@ -26,7 +26,7 @@ ActiveAdmin.register Page do
     end
     column :title
     column :content
-    column "images" do |page|
+    column Image.model_name.human do |page|
       page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
     
@@ -47,10 +47,10 @@ ActiveAdmin.register Page do
       row :title_en
       row :content_de
       row :content_en
-      row "images" do |page|
+      row Image.model_name.human do |page|
         page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
-      row "downloads" do |page|
+      row Download.model_name.human do |page|
         page.downloads.map { |d| link_to(d.description, d.attachment.url) }.join('').html_safe
       end
       

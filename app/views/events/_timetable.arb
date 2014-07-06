@@ -109,6 +109,8 @@ div :class => "timetable-container" do
                     end
                     div :class => "time-footnotes" do
                       time l(detail.starttime, :format => :hours_minutes), :class => "course-time"
+                      text_node "-"
+                      time l(detail.endtime, :format => :hours_minutes), :class => "course-time"
                       span "(" + detail.event.tags.map { |t| t.id }.join('/') + ")" if detail.event.tags.length > 0
                     end
                   end

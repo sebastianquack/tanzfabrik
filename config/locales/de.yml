@@ -267,8 +267,8 @@ de:
         one: Bild
         other: Bilder 
       tag:
-        one: Stichwort
-        other: Stichworte
+        one: Attribut
+        other: Attribute
       location:
         one: Adresse
         other: Adressen
@@ -291,6 +291,8 @@ de:
         description: Text
         info: Zusatzinformation
         warning: Warnhinweis
+        feature_on_welcome_screen: Auf Startseite gesondert hervorheben
+        feature_on_welcome_screen_short: Hervorheben
       image:
         description: Beschreibung
         license: Copyrightnotiz
@@ -315,7 +317,7 @@ de:
         description: Text
       download:
         description: Titel
-        attachment: Datei        
+        attachment: Datei
 
   formtastic:
     update: "%{model} speichern"

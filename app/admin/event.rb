@@ -15,24 +15,24 @@ ActiveAdmin.register Event do
 
   index do 
     selectable_column
-    column "Details" do |event|
+    column EventDetail.model_name.human do |event|
       event.event_details.map { |t| t.datetime_l(:default) }.join('<br>').html_safe
     end
-    column "images" do |event|
+    column Image.model_name.human do |event|
       event.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
-    column "Festivals" do |event|
+    column Festival.model_name.human do |event|
       event.festivals.map { |f| (link_to f.name, admin_festival_path(f)) }.join(', ').html_safe
     end
     column :type
-    column "Tags" do |event|
+    column Tag.model_name.human do |event|
       event.tags.map { |t| (link_to t.name, admin_tag_path(t)) }.join(', ').html_safe
     end
-    column "People" do |event|
+    column Person.model_name.human do |event|
       event.people.map { |p| (link_to p.name, admin_person_path(p)) }.join(', ').html_safe
     end
     column :title
-    column "feature", :feature_on_welcome_screen
+    column t('activerecord.attributes.event.feature_on_welcome_screen_short'), :feature_on_welcome_screen
     actions
   end
 
@@ -44,7 +44,7 @@ ActiveAdmin.register Event do
 
   show do 
     attributes_table do
-      row "Details" do |event|
+      row EventDetail.model_name.human do |event|
         event.event_details.each do |ed|
           a (ed.studio.location.name + " " + ed.studio.name), :href => admin_studio_path(ed.studio)
           ul do
@@ -59,16 +59,16 @@ ActiveAdmin.register Event do
       row :description
       row :info
       row :type
-      row "Tags" do |event|
+      row Tag.model_name.human do |event|
         event.tags.map { |t| (link_to t.name, admin_tag_path(t)) }.join(', ').html_safe
       end
-      row "People" do |event|
+      row Person.model_name.human do |event|
         event.people.map { |p| (link_to p.name, admin_person_path(p)) }.join(', ').html_safe
       end
-      row "Festivals" do |event|
+      row Festival.model_name.human do |event|
         event.festivals.map { |f| (link_to f.name, admin_festival_path(f)) }.join(', ').html_safe
       end
-      row "images" do |event|
+      row Image.model_name.human do |event|
         event.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
       row :feature_on_welcome_screen

@@ -17,8 +17,12 @@
 
 
 $(document).ready(function() {
+  var background_image = $("[data-site-background-url]").data("siteBackgroundUrl")
+  $(".site-background:after").css("background-image",background_image)
+  console.log(background_image)
+  console.log($(".site-background:after").css("background-image"))
 
-  $("site-background:after").css("background",$("[data-site-background-url]").data("siteBackgroundUrl"));
+  $("head").append("<style>.site-background:after {background-image: url("+background_image+")}</style>")
 
   $(".open-trigger").click( function() {
     $(this).parents('.open-close').addClass("opened")

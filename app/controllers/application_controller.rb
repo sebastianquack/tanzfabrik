@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     festivals = Festival.where(:feature_on_welcome_screen => true)
     if festivals.length > 0
       if festivals.first.images.length > 0
-        @bg_image_url = festivals.first.images.first.attachment.url(:medium)
+        @bg_image_url = festivals.first.images.first.attachment.url(:background)
         return
       end
     end
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     events = Event.where(:feature_on_welcome_screen => true)
     if events.length > 0
       if events.first.images.length > 0
-        @bg_image_url = events.first.images.first.attachment.url(:medium)
+        @bg_image_url = events.first.images.first.attachment.url(:background)
         return
       end
     end
@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
     images = Image.where(:show_on_welcome_screen => true)
     if images.length > 0
       # hier müsste man noch täglich wechseln mit pseudorandom
-      @bg_image_url = images.first.attachment.url(:medium)
+      @bg_image_url = images.first.attachment.url(:background)
       return
     end
     
