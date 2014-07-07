@@ -97,5 +97,4 @@ ActiveAdmin.register Page do
     f.actions
   end
   
-  
 end

@@ -32,7 +32,7 @@ end
 
 row_index = 1
 
-# go through event details per time
+# go through event details per studio
 details_by_studio = details.group_by {|detail| detail.studio}
 details_by_studio.each do |time, details|
 
@@ -49,6 +49,7 @@ details_by_studio.each do |time, details|
     # check if a detail has an occurrence on this day
     details.each do |detail|          
       if detail.occurs_on?(date)
+        logger.debug "+++occurs" + date.to_s
         table_data[row_index][column_index + 1].push(detail)
         tags += detail.event.tags
       end
@@ -125,7 +126,7 @@ div :class => "timetable-container" do
     end
   end
   dl :class => "tags" do
-    tags.each do |tag|
+    tags.uniq.each do |tag|
       dt "(" + tag.id.to_s + ")"
       dd tag.name
     end

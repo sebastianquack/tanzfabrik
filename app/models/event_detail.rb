@@ -10,7 +10,7 @@ class EventDetail < ActiveRecord::Base
   after_initialize :init
 
   def init
-      self.duration = 60
+      self.duration = 60 if !self.duration
       if !self.end_date
         self.end_date = self.start_date
       end
