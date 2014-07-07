@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630143509) do
+ActiveRecord::Schema.define(version: 20140707095827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,8 +107,8 @@ ActiveRecord::Schema.define(version: 20140630143509) do
     t.text     "description_en"
     t.string   "warning_en"
     t.string   "language_en"
-    t.string   "info_de"
-    t.string   "info_en"
+    t.text     "info_de"
+    t.text     "info_en"
     t.boolean  "feature_on_welcome_screen"
   end
 

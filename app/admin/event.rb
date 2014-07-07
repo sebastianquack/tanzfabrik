@@ -78,7 +78,7 @@ ActiveAdmin.register Event do
 
   form do |f|
     f.inputs "Typ" do
-      f.input :type, :include_blank => false, :hint => (link_to "Manage Event Types", admin_event_types_path)
+      f.input :type, :include_blank => false, :hint => (link_to "Verwalten", admin_event_types_path)
     end
 
     f.inputs "Personen auswählen" do
@@ -98,7 +98,7 @@ ActiveAdmin.register Event do
       f.input :info_en
       f.input :warning_de
       f.input :warning_en
-      f.input :tags, :as => :check_boxes, :hint => (link_to "Manage Tags", admin_tags_path)
+      f.input :tags, :as => :check_boxes, :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)
     end
 
     f.inputs "Images" do

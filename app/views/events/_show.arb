@@ -59,7 +59,7 @@ div :class => "row event" do
         end  
       end
     
-      small event.info
+      small editable event, :info, :type => "wysihtml5"
 
     end    
   end

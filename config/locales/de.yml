@@ -293,6 +293,8 @@ de:
         warning: Warnhinweis
         feature_on_welcome_screen: Auf Startseite gesondert hervorheben
         feature_on_welcome_screen_short: Hervorheben
+        tag: Attribut
+        tags: Attribute
       image:
         description: Beschreibung
         license: Copyrightnotiz
