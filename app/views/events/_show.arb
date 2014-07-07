@@ -41,18 +41,26 @@ div :class => "row event" do
         end
       end
 
-      event.event_details.each do |detail|
-        ul :class => "time-place" do
-          detail.occurrences.each do |occurrence|
-            li do
-              time l occurrence, :format => :default
-              span :class => "place" do
-                a (detail.studio.location.name + " " + detail.studio.name), :href => url_for(:controller => 'pages', :action => 'show', :id => 'studios')
-              end
+
+      ul :class => "time-place" do
+        event.all_studios.each do |studio|
+          li do
+            #time l occurrence, :format => :day
+            #time l event.firsttime(studio)
+            div :class => "time-duration" do
+              time l event.event_details.first.starttime, :format => :day
+              span " - "
+              time l event.event_details.last.endtime, :format => :day
             end
-          end  
-        end
+            span :class => "place" do
+              a (studio.location.name + " " + studio.name), :href => url_for(:controller => 'pages', :action => 'show', :id => 'studios')
+            end
+          end
+        end  
       end
+    
+      small event.info
+
     end    
   end
 end

@@ -55,6 +55,8 @@ ul :class => "timetable" do
                     end            
                     div :class => "time" do
                       time (l oc, :format => :hours_minutes), :class => "course-time"
+                      span "-"
+                      time (l ed.endtime_clock, :format => :hours_minutes), :class => "course-time"
                     end
                     div :class => "description" do
                       para training.description.html_safe if training.description

@@ -39,6 +39,11 @@ class EventDetail < ActiveRecord::Base
     return et
   end
 
+  def endtime_clock
+    et = starttime + self.duration.minutes
+    return et
+  end
+
   def datetime_l format = :default
     return I18n.l(self.starttime, :format => format)
   end

@@ -17,29 +17,23 @@
 
 
 $(document).ready(function() {
+
+  // set background picture
   var background_image = $("[data-site-background-url]").data("siteBackgroundUrl")
   $(".site-background:after").css("background-image",background_image)
-  console.log(background_image)
-  console.log($(".site-background:after").css("background-image"))
-
   $("head").append("<style>.site-background:after {background-image: url("+background_image+")}</style>")
 
+  // open
   $(".open-trigger").click( function() {
     $(this).parents('.open-close').addClass("opened")
     $(this).parents('.open-close-shade').addClass("shaded")
   });
 
+  // close
   $(".close-trigger").click(function () {
     $(this).parents('.open-close').removeClass("opened")
     $(this).parents('.open-close-shade').removeClass("shaded")
   });
-
-  /*
-  $(".open-close-shade").click(function () {
-    $('.open-close').removeClass("opened")
-    $('.open-close-shade').removeClass("shaded")
-  });
-  */
 
   initMenuContentHide()
 

@@ -6,7 +6,7 @@ para :class => "teacher" do
 end
 para do
   if event.festivals.length > 0 && show_festival
-    text_node ", Teil von "
+    text_node "Teil von "
     span event.festivals.map { |f| (link_to f.name, festival_path(f)) }.join(', ').html_safe
   end
 end

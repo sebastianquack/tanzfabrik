@@ -782,7 +782,11 @@ h2 {
 		img {
 			width:100%;
 			padding-bottom:1em;
-		}		
+		}
+	}
+
+	.content .image-container {
+		padding-top: 0.2em;
 	}
 
 	.image-license {
@@ -796,7 +800,7 @@ h2 {
 .event .details .time-place {
 	list-style-type: none;
 	margin:0;
-	padding:0;
+	padding:0 0 $vertical-box-padding 0;
 	@include menu-font(90%);
 
 	li {
@@ -805,12 +809,12 @@ h2 {
 	}
 
 	time {
-		display:block;
 		color:red;
 	}
 
 	.place {
 		display:block;
+		padding-bottom: $vertical-box-padding ;
 	}
 }
 

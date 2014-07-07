@@ -33,4 +33,22 @@ class Event < ActiveRecord::Base
     return events
   end
 
+  def all_studios
+    studios = []
+    self.event_details.each { |ed| studios << ed.studio }
+    return studios.uniq
+  end
+
+  def firsttime studio
+    ft = new Time()
+    self.event_details.each do |ed|
+      if ed.studio == studio
+        if ed.starttime < ft
+          ft = ed.starttime
+        end
+      end
+    end
+    return ft
+  end
+
 end
