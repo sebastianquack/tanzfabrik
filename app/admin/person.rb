@@ -30,7 +30,12 @@ ActiveAdmin.register Person do
       row "Events" do |person|
         person.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
       end      
-      row :bio
+      row :bio_de do |bio|
+        bio.bio_de.html_safe if bio.bio_de
+      end
+      row :bio_en do |bio|
+        bio.bio_en.html_safe if bio.bio_en
+      end
       row "images" do |person|
         person.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
@@ -41,8 +46,8 @@ ActiveAdmin.register Person do
       f.inputs "Details" do
         f.input :name
         f.input :role
-        f.input :bio_de
-        f.input :bio_en
+        f.input :bio_de, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
+        f.input :bio_en, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
         f.input :events, :as => :check_boxes
       end
       f.inputs "Images" do

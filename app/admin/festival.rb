@@ -29,8 +29,14 @@ ActiveAdmin.register Festival do
     
   show do
     attributes_table do
-      row :name
-      row :description
+      row :name_de
+      row :name_en
+      row :description_de do |festival|
+        festival.description_de.html_safe if festival.description_de
+      end
+      row :description_en do |festival|
+        festival.description_en.html_safe if festival.description_en
+      end
       row :feature_on_welcome_screen
       row "Events" do |festival|
         festival.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
@@ -50,8 +56,8 @@ ActiveAdmin.register Festival do
     f.inputs do
       f.input :name_de
       f.input :name_en
-      f.input :description_de
-      f.input :description_en
+      f.input :description_de, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
+      f.input :description_en, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
       f.input :events, :as => :check_boxes
     end
 

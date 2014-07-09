@@ -45,8 +45,12 @@ ActiveAdmin.register Page do
       end
       row :title_de
       row :title_en
-      row :content_de
-      row :content_en
+      row :content_de do |page|
+        page.content_de.html_safe if page.content_de
+      end
+      row :content_en do |page|
+        page.content_en.html_safe if page.content_en
+      end
       row Image.model_name.human do |page|
         page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
@@ -63,8 +67,8 @@ ActiveAdmin.register Page do
       f.input :title_en
     end
     f.inputs "Content" do
-      f.input :content_de
-      f.input :content_en
+      f.input :content_de, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: [], height: :large
+      f.input :content_en, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: [], height: :large
     end
     f.inputs "Images" do
       f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|

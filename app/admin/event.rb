@@ -55,9 +55,20 @@ ActiveAdmin.register Event do
         end    
       end
 
-      row :title
-      row :description
-      row :info
+      row :title_de
+      row :title_en
+      row :description_de do |event|
+        event.description_de.html_safe if event.description_de
+      end
+      row :description_en do |event|
+        event.description_en.html_safe if event.description_en
+      end
+      row :info_de do |event|
+        event.info_de.html_safe if event.info_de
+      end
+      row :info_en do |event|
+        event.info_en.html_safe if event.info_en
+      end
       row :type
       row Tag.model_name.human do |event|
         event.tags.map { |t| (link_to t.name, admin_tag_path(t)) }.join(', ').html_safe
@@ -90,12 +101,12 @@ ActiveAdmin.register Event do
     end
 
     f.inputs "Basic info" do
-      f.input :title_de
-      f.input :title_en
-      f.input :description_de
-      f.input :description_en
-      f.input :info_de
-      f.input :info_en
+      f.input :title_de, :as => :text, :input_html => { :class => 'autogrow', :rows => 2  }
+      f.input :title_en, :as => :text, :input_html => { :class => 'autogrow', :rows => 2  }
+      f.input :description_de, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
+      f.input :description_en, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
+      f.input :info_de, as: :wysihtml5, commands: [ ], blocks: []
+      f.input :info_en, as: :wysihtml5, commands: [ ], blocks: []
       f.input :warning_de
       f.input :warning_en
       f.input :tags, :as => :check_boxes, :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)

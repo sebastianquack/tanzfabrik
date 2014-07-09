@@ -15,3 +15,14 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+body.active_admin form .activeadmin-wysihtml5 {
+  width: calc(80% - 22px) !important;
+  margin-right: 22px !important;
+}
+
+form input[type=text], form input[type=password], form input[type=email], form input[type=number], form input[type=url], form input[type=tel], form textarea,
+form select {
+  font-size:1.1em !important;
+  margin-bottom: 5px !important;
+}

@@ -34,7 +34,12 @@ ActiveAdmin.register Studio do
     attributes_table do
       row :location
       row :name
-      row :description
+      row :description_de do |studio|
+        studio.description_de.html_safe if studio.description_de
+      end
+      row :description_en do |studio|
+        studio.description_en.html_safe if studio.description_en
+      end
       row "images" do |page|
         page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
@@ -47,8 +52,8 @@ ActiveAdmin.register Studio do
       end
       f.inputs "Details" do
         f.input :name
-        f.input :description_de
-        f.input :description_en
+        f.input :description_de, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
+        f.input :description_en, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
       end
       f.inputs "Images" do
         f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|

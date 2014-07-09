@@ -49,6 +49,9 @@ end
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'formtastic', github: 'justinfrench/formtastic'
 
+gem 'activeadmin-dragonfly', github: 'stefanoverna/activeadmin-dragonfly'
+gem 'activeadmin-wysihtml5', github: 'stefanoverna/activeadmin-wysihtml5'
+
 gem 'friendly_id', '~> 5.0.0'
 
 #gem "paperclip", '~> 3.5' # newer paperclip does not play nicely with formtastic
