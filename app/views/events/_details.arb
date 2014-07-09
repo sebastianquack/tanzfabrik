@@ -1,0 +1,25 @@
+if event.images.length > 0
+  div :class => "image-container" do
+    img :src => event.images.first.attachment.url
+  end
+end
+
+
+ul :class => "time-place" do
+  event.all_studios.each do |studio|
+    li do
+      #time l occurrence, :format => :day
+      #time l event.firsttime(studio)
+      div :class => "time-duration" do
+        time l event.event_details.first.starttime, :format => :day
+        span " - "
+        time l event.event_details.last.endtime, :format => :day
+      end
+      span :class => "place" do
+        a (studio.location.name + " " + studio.name), :href => url_for(:controller => 'pages', :action => 'show', :id => 'studios')
+      end
+    end
+  end  
+end
+
+small editable event, :info, :type => "wysihtml5"

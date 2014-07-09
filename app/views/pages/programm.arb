@@ -24,8 +24,10 @@ events.each do |event|
     if occurrences.length > 0
       div do      
         text_node occurrences.map {|o| l o, :format => :short_day }.join(', ')
-        render :partial => "events/basic_info", :locals => {:event => detail.event, :show_festival => true}
-        a t(:more), :href => event_path(detail.event)
+        h2 event.title
+        span event.type.name
+        detail.studio.name
+        a t(:more), :href => "events/"+ event.id.to_s # TODO: fix URL generation
         br
       end
     end
