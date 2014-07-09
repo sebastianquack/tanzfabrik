@@ -11,7 +11,7 @@ para do
   end
 end
 
-para editable event, :description, :type => "wysihtml5"
+div editable event, :description, :type => "wysihtml5"
 
 if event.type.id == 2 #workshop
   event.people.each do |person|

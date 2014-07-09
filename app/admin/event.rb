@@ -103,8 +103,8 @@ ActiveAdmin.register Event do
     f.inputs "Basic info" do
       f.input :title_de, :as => :text, :input_html => { :class => 'autogrow', :rows => 2  }
       f.input :title_en, :as => :text, :input_html => { :class => 'autogrow', :rows => 2  }
-      f.input :description_de, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
-      f.input :description_en, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
+      f.input :description_de#, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
+      f.input :description_en#, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
       f.input :info_de, as: :wysihtml5, commands: [ ], blocks: []
       f.input :info_en, as: :wysihtml5, commands: [ ], blocks: []
       f.input :warning_de

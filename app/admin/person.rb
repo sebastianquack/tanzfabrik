@@ -46,8 +46,8 @@ ActiveAdmin.register Person do
       f.inputs "Details" do
         f.input :name
         f.input :role
-        f.input :bio_de, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
-        f.input :bio_en, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
+        f.input :bio_de#, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
+        f.input :bio_en#, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
         f.input :events, :as => :check_boxes
       end
       f.inputs "Images" do

@@ -67,8 +67,8 @@ ActiveAdmin.register Page do
       f.input :title_en
     end
     f.inputs "Content" do
-      f.input :content_de, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: [], height: :large
-      f.input :content_en, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: [], height: :large
+      f.input :content_de#, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: [], height: :large
+      f.input :content_en#, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: [], height: :large
     end
     f.inputs "Images" do
       f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
