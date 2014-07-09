@@ -15,8 +15,9 @@ end
 
 # create a big array of all the events details TODO: optimize
 details = []
-events.each do |event|
-  details += event.event_details
+events.each do |e|
+  logger.debug e.id
+  details += e.event_details
 end
 
 # do all the calculations
@@ -34,10 +35,19 @@ row_index = 1
 
 # go through event details per studio
 details_by_studio = details.group_by {|detail| detail.studio}
-details_by_studio.each do |time, details|
 
+details_by_studio.each do |studio, details|
+  
+  logger.debug "studio"
+  logger.debug studio
+  
+  logger.debug "details"
+  logger.debug details
+  
   # go through dates = columns
   dates.each_with_index do |date, column_index|
+    
+    logger.debug "checking date..." + date.to_s
     
     unless table_data[row_index]
       table_data[row_index] = [] # initialize row if that hasen't happened yet
@@ -49,7 +59,6 @@ details_by_studio.each do |time, details|
     # check if a detail has an occurrence on this day
     details.each do |detail|          
       if detail.occurs_on?(date)
-        logger.debug "+++occurs" + date.to_s
         table_data[row_index][column_index + 1].push(detail)
         tags += detail.event.tags
       end

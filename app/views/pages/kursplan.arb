@@ -41,14 +41,15 @@ div :class => "open-close-shade" do
   end
 
   # loop over locations
-  Location.all.each do |location|
+  #Location.all.each do |location|
     #div do
     #  h2 location.name
     #  para location.address
     #end
 
     # get event details for this location
-    events = location.events.of_types([3, 4, 5, 6])    
+    # events = location.events.of_types([3, 4, 5, 6])    
+    events = Event.of_types([3, 4, 5, 6])    
     render :partial => "/events/timetable", :locals => {:events => events, :start_date => start_date}
-  end
+    #end
 end

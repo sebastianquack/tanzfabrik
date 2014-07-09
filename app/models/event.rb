@@ -29,7 +29,7 @@ class Event < ActiveRecord::Base
   
   def self.of_types type_ids
     where_clause = type_ids.map {|type_id| "event_types.id = " + type_id.to_s + " " }.join(" OR ")
-    events = Event.joins(:type, :event_details).where(where_clause).order('event_details.start_date ASC')    
+    events = Event.joins(:type, :event_details).group('events.id').where(where_clause)
     return events
   end
 
