@@ -8,6 +8,6 @@ Event.of_types([6]).each do |event|
   para do
     event.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe
   end
-  a "Mehr Infos", :href => event_path(event) 
-
+  #a "Mehr Infos", :href => event_path(event) 
+  a t(:more), :href => "events/"+ event.id.to_s # TODO: fix URL generation
 end
