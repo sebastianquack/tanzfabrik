@@ -7,8 +7,8 @@ else
 end
 
 para :class => "admin-only admin-nav" do
-  a t(:previous_month) + " (" + l(start_date - 1.month, :format => :month) + ")", :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date - 1.month).to_s)
-  a t(:next_month) + " (" + l(start_date + 1.month, :format => :month) + ")", :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date + 1.month).to_s)
+  a "<" + t(:previous_week), :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date - 1.week).to_s)
+  a t(:next_week) + ">", :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date + 1.week).to_s)
 end
 
 # load events of types 1, 7, 8 or 9 that have a start_date earlier than the end of this month and an end_date later than the start of this month
