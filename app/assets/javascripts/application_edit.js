@@ -10,7 +10,8 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require bootstrap-wysihtml5/b3
+//= require bootstrap-wysihtml5
+//= require bootstrap-wysihtml5/locales/de-DE
 //= require editable/bootstrap-editable
 //= require editable/inputs-ext/wysihtml5-editable
 //= require editable/rails
@@ -24,7 +25,15 @@ $(document).ready(function() {
   });
   
   $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
-  $.fn.editable.defaults.wysihtml5 = {"image": false, "lists":false, "font-styles":false};
+  $.fn.editable.defaults.wysihtml5 = {
+    "toolbar": {
+      "image": false, 
+      "lists":false, 
+      "font-styles":false,
+      "blockquote":false,
+    },
+    "locale": "de-DE"
+  };
 
   $.fn.editable.defaults.mode = 'inline';
 
