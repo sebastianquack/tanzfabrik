@@ -97,6 +97,25 @@ class EventDetail < ActiveRecord::Base
     return o
     
   end
+
+  def occurs_between? start_date, end_date
+    schedule = self.schedule    
+    end_time = Time.new(end_date.year, end_date.month, end_date.day, 23, 59, 59, 0)
+    start_time = Time.new(start_date.year, start_date.month, start_date.day, 0, 0, 0, 0)
+
+    return schedule.occurs_between? start_time, self.endtime
+  end
+
+  def occurs_on_weekday_between? start_date, end_date
+    days = (start_date..end_date).to_a.select {|d| d.wday == start_date.wday}
+    days.each do |day|
+      if self.occurs_on? day
+        return true
+      end
+    end
+    return false
+  end  
+
     
   def occurs_on? date
     if !self.end_date
@@ -108,6 +127,14 @@ class EventDetail < ActiveRecord::Base
     else
       return false
     end
-  end  
+  end
+
+  # when start_date==end_date and empty repeat rule, extend the end_date to 1 year in the future
+  def extend_empty_end_date
+    if self.end_date == self.start_date && !self.repeat_mode.rule.empty?
+      self.end_date = Date.today + 1.year
+    end
+    return self
+  end
         
 end

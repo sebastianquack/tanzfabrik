@@ -58,7 +58,7 @@ details_by_studio.each do |studio, details|
 
     # check if a detail has an occurrence on this day
     details.each do |detail|          
-      if detail.occurs_on?(date)
+      if detail.extend_empty_end_date.occurs_on_weekday_between?(date, date + 1.month)
         table_data[row_index][column_index + 1].push(detail)
         tags += detail.event.tags
       end
