@@ -5,7 +5,7 @@
   <h2><%= studio.location.name + " " + studio.name %></h2>
   <% if studio.images.length > 0 %>
     <div class="image-container">
-      <%= image_tag studio.images.first.attachment.url %>
+      <%= image_tag studio.images.first.attachment(:small) %>
     </div>
   <% end %>
   <p><%= studio.description %></p>
