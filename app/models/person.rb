@@ -22,7 +22,7 @@ class Person < ActiveRecord::Base
       event_type = EventType.find(type)
     end
     if event_type
-      return self.joins(:events).where(:events => {:type_id => event_type.id}).to_a
+      return self.joins(:events).where(:events => {:type_id => event_type.id}).uniq.to_a
     else
       return []
     end

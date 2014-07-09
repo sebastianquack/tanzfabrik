@@ -3,16 +3,14 @@ render "/pages/editable_content"
 if params[:start_date]
   start_date = Date.parse(params[:start_date])
 else 
-  start_date = Date.today.beginning_of_month
+  start_date = Date.today
 end
 
-h2 l start_date, :format => :month
-  
-para do
-  a t(:previous_month), :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date - 1.month).to_s)
-  a t(:next_month), :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date + 1.month).to_s)
+para :class => "admin-only admin-nav" do
+  a t(:previous_month) + " (" + l(start_date - 1.month, :format => :month) + ")", :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date - 1.month).to_s)
+  a t(:next_month) + " (" + l(start_date + 1.month, :format => :month) + ")", :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date + 1.month).to_s)
 end
-  
+
 # load events of types 1, 7, 8 or 9 that have a start_date earlier than the end of this month and an end_date later than the start of this month
 events = Event.joins(:type, :event_details).where('(event_types.id = 1 OR event_types.id = 7 OR event_types.id = 8 OR event_types.id = 9) AND event_details.start_date <= ? AND event_details.end_date >= ?', start_date.end_of_month, start_date).order('event_details.start_date ASC')    
 
@@ -20,14 +18,15 @@ events.each do |event|
 
   event.event_details.each do |detail|
       
-    # check if there is an occurrence this month
-    occurrences = detail.occurrences_between start_date, start_date.end_of_month
+    # check if there is an occurrence in the next months
+    occurrences = detail.occurrences_between start_date, start_date + 3.months
           
     if occurrences.length > 0
       div do      
         text_node occurrences.map {|o| l o, :format => :short_day }.join(', ')
         render :partial => "events/basic_info", :locals => {:event => detail.event, :show_festival => true}
         a t(:more), :href => event_path(detail.event)
+        br
       end
     end
       
