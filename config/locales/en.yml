@@ -34,6 +34,7 @@ en:
   previous_week: "Previous Week"
   next_month: "Next Month"
   previous_month: "Previous Month"
+  starting_from: "from"
   more: "more"
   dates: "Dates"
   more_information: "Information"

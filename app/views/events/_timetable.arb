@@ -56,11 +56,17 @@ details_by_studio.each do |studio, details|
       table_data[row_index][column_index + 1] = [] # initialize a column if that hasen't happened yet
     end    
 
-    # check if a detail has an occurrence on this day
-    details.each do |detail|          
-      if detail.extend_empty_end_date.occurs_on_weekday_between?(date, date + 1.month)
-        table_data[row_index][column_index + 1].push(detail)
-        tags += detail.event.tags
+    # check if a detail has an occurrence during the upcoming weeks
+    details.each do |detail|
+      9.times do |i|
+        if detail.extend_empty_end_date.occurs_on?(date + i.week)
+          if i > 0
+            detail.event.warning = t(:starting_from) + " " + l(date + i.week, :format => :short)
+          end
+          table_data[row_index][column_index + 1].push(detail)
+          tags += detail.event.tags
+          break
+        end
       end
     end  
   end
