@@ -9,7 +9,7 @@ header :id => "headlines", :class => "headlines-teachers" do
   end
 end
 
-Person.by_event_types([1, 7, 8, 10]) each do |person|
+Person.by_event_types([1, 7, 8, 10]).each do |person|
   div :class => "row teachers" do
     div :class => "basic" do
       div :class => "description open-close" do

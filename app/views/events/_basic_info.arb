@@ -10,3 +10,12 @@ para do
     span event.festivals.map { |f| (link_to f.name, festival_path(f)) }.join(', ').html_safe
   end
 end
+
+para editable event, :description, :type => "wysihtml5"
+
+if event.type.id == 2 #workshop
+  event.people.each do |person|
+    para person.bio
+  end
+end
+

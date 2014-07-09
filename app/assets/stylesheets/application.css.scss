@@ -73,6 +73,10 @@ h1,h2,h3,h4 {
 	padding:0;
 }
 
+p {
+	margin-bottom: 1em;
+}
+
 a:hover, a:focus {
 		text-decoration: none;
 		cursor: pointer;
@@ -827,6 +831,10 @@ h2 {
 
 .event .content {
 	padding: $vertical-box-padding 0;
+}
+
+.event p {
+	margin-bottom: 1em;
 }
 
 .event-performanceprojekt {
