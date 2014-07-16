@@ -49,8 +49,8 @@ end
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'formtastic', github: 'justinfrench/formtastic'
 
-gem 'activeadmin-dragonfly', github: 'stefanoverna/activeadmin-dragonfly'
-gem 'activeadmin-wysihtml5', github: 'stefanoverna/activeadmin-wysihtml5'
+#gem 'activeadmin-dragonfly', github: 'stefanoverna/activeadmin-dragonfly'
+#gem 'activeadmin-wysihtml5', github: 'stefanoverna/activeadmin-wysihtml5'
 
 gem 'friendly_id', '~> 5.0.0'
 
@@ -64,7 +64,7 @@ gem "ice_cube"
 gem 'traco'
 
 gem 'bootstrap-sass', '~> 3.1.1'
-gem 'x-editable-rails'
+gem 'x-editable-rails', :git => "https://github.com/retani/x-editable-rails.git", :branch => "wysihtml5-encode-html"
 gem 'bootstrap-wysihtml5-rails'
 
 gem 'google-webfonts'

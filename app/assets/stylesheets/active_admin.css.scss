@@ -7,6 +7,10 @@
 // For example, to change the sidebar width:
 // $sidebar-width: 242px;
 
+// require bootstrap for wysihtml5
+//= require bootstrap
+//= require bootstrap-wysihtml5
+
 // Active Admin's got SASS!
 @import "active_admin/mixins";
 @import "active_admin/base";
@@ -21,8 +25,40 @@ body.active_admin form .activeadmin-wysihtml5 {
   margin-right: 22px !important;
 }
 
+// increase font size of inputs
 form input[type=text], form input[type=password], form input[type=email], form input[type=number], form input[type=url], form input[type=tel], form textarea,
 form select {
   font-size:1.1em !important;
   margin-bottom: 5px !important;
+}
+
+// fix bootstrap styles overwriting active admin
+.label {
+  font-size: 100%;
+  color:#5e6469;
+  text-align:left;
+  padding-top: 1em;
+  white-space: normal;
+}
+
+.formtastic .wysihtml5-sandbox {
+  display:block !important;
+  width:80% !important;
+  float: right !important;
+}
+
+.formtastic .inputs li {
+  clear:right;
+}
+
+.ui-datepicker-header {
+  height: auto !important;
+}
+
+// other styles
+
+.inputs .inputs .inputs {
+  box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
 }

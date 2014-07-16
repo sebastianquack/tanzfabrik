@@ -52,8 +52,8 @@ ActiveAdmin.register Studio do
       end
       f.inputs "Details" do
         f.input :name
-        f.input :description_de#, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
-        f.input :description_en#, as: :wysihtml5, commands: [ :bold, :italic, :underline, :small, :link ], blocks: []
+        f.input :description_de, :input_html => { :class => 'wysihtml5' }
+        f.input :description_en, :input_html => { :class => 'wysihtml5' }
       end
       f.inputs "Images" do
         f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|

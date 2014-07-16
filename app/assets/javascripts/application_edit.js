@@ -43,6 +43,8 @@ $(document).ready(function() {
   $("a[rel~=popover], .has-popover").popover();
   $("a[rel~=tooltip], .has-tooltip").tooltip();
   
+  console.log($('[data-wysihtml5-command=underline]'))
+  $('[data-wysihtml5-command=underline]').text("Klein");
   
   //$('.textarea').wysihtml5();
 
