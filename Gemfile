@@ -65,6 +65,8 @@ gem 'traco'
 
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'x-editable-rails', :git => "https://github.com/retani/x-editable-rails.git", :branch => "wysihtml5-encode-html"
+#gem 'x-editable-rails', :path => "/Users/holger/Documents/Projekte/tanzfabrik/x-editable-rails"
+
 gem 'bootstrap-wysihtml5-rails'
 
 gem 'google-webfonts'

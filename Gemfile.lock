@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/retani/x-editable-rails.git
-  revision: eeef7752624b5f98d80090317a56c6e9671cdefe
+  revision: 747ea17fb6f2a40f269f2f8d8e9be83932327cd5
   branch: wysihtml5-encode-html
   specs:
     x-editable-rails (1.5.3)
