@@ -109,6 +109,7 @@ div :class => "timetable-container" do
                       div :class => "description" do
                         span t(:schliessen), :class => "close-trigger"
                         para detail.event.description.html_safe if detail.event.description
+                        a "> Dieses Ereignis bearbeiten", :href => edit_admin_event_path(detail.event), :class => "admin-only admin-nav" if admin_user_signed_in?
                       end
                     end
                     div :class => "teacher" do
