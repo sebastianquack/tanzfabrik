@@ -60,9 +60,6 @@ details_by_studio.each do |studio, details|
     details.each do |detail|
       9.times do |i|
         if detail.extend_empty_end_date.occurs_on?(date + i.week)
-          if i > 0
-            detail.event.warning = t(:starting_from) + " " + l(date + i.week, :format => :short)
-          end
           table_data[row_index][column_index + 1].push(detail)
           tags += detail.event.tags
           break
