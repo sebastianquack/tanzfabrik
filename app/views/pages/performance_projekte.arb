@@ -17,7 +17,7 @@ Event.of_types([5]).each do |project|
         a :href => "events/"+ project.id.to_s do # TODO: fix URL generation
           h2 project.title, :class => "title"
           para project.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
-          para project.description, :class => "description" #unless event.description.empty?
+          para project.description.html_safe, :class => "description" #unless event.description.empty?
           div t(:more), :class => "more"
         end
       end
@@ -32,7 +32,7 @@ Event.of_types([5]).each do |project|
           time l project.event_details.last.endtime, :format => :day
         end
 
-        small project.info, :class => "info"
+        small project.info.html_safe, :class => "info"
 
       end    
     end
