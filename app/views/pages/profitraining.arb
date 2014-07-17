@@ -26,7 +26,7 @@ header :id => "headlines", :class => "headlines-kursplan" do
   end
 end
 
-trainings = Event.of_types([4])
+trainings = Event.of_types([4]).sort_by { |t| t.event_details.first.start_date }
 #sorted_trainings = trainings.sort_by { |t| t.event_details.first.start_date }
 
 ul :class => "timetable" do
@@ -34,40 +34,42 @@ ul :class => "timetable" do
     #a "Mehr Infos", :href => event_path(training) 
     training.event_details.each do |ed|
       # para a (ed.studio.location.name + " " + ed.studio.name), :href => url_for(:controller => 'pages', :action => 'show', :id => 'studios')
-      beginning_of_week = ed.occurrences.first.beginning_of_week
-      ul :class => "week" do
-        li do
-          div :class => "header" do
-            time (l training.event_details.first.start_date, :format => :short) + '-' + (l training.event_details.first.end_date, :format => :short), :class => "time-week"
-          end
-          ul do
-            5.times do |wday|
-              oc = ed.occurrences.select { |oc| oc.wday ==  wday+1 }.first
-              li do 
-                time (l (beginning_of_week+wday.days), :format => :timetable), :class => ( oc ? "day" : "day holiday")
-                if oc
-                  div :class => "event"do
-                    h4 :class => "title" do 
-                      text_node training.title if training.title
+      if ed.occurs_between? Date.today.beginning_of_week - 1.week, Date.today.beginning_of_week + 3.month
+        beginning_of_week = ed.occurrences.first.beginning_of_week
+        ul :class => "week" do
+          li do
+            div :class => "header" do
+              time (l training.event_details.first.start_date, :format => :short) + '-' + (l training.event_details.first.end_date, :format => :short), :class => "time-week"
+            end
+            ul do
+              5.times do |wday|
+                oc = ed.occurrences.select { |oc| oc.wday ==  wday+1 }.first
+                li do 
+                  time (l (beginning_of_week+wday.days), :format => :timetable), :class => ( oc ? "day" : "day holiday")
+                  if oc
+                    div :class => "event"do
+                      h4 :class => "title" do 
+                        text_node training.title if training.title
+                      end
+                      div :class => "teacher" do
+                        training.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe
+                      end            
+                      div :class => "time" do
+                        time (l oc, :format => :hours_minutes), :class => "course-time"
+                        span "-"
+                        time (l ed.endtime_clock, :format => :hours_minutes), :class => "course-time"
+                      end
+                      div :class => "description" do
+                        para training.description.html_safe if training.description
+                      end
                     end
-                    div :class => "teacher" do
-                      training.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe
-                    end            
-                    div :class => "time" do
-                      time (l oc, :format => :hours_minutes), :class => "course-time"
-                      span "-"
-                      time (l ed.endtime_clock, :format => :hours_minutes), :class => "course-time"
-                    end
-                    div :class => "description" do
-                      para training.description.html_safe if training.description
+                  else 
+                    div :class => "event empty-event" do
+                      div t :holiday, :class => "holiday"
                     end
                   end
-                else 
-                  div :class => "event empty-event" do
-                    div t :holiday, :class => "holiday"
-                  end
-                end
-              end    
+                end    
+              end
             end
           end
         end
