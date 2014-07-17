@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140709200049) do
+ActiveRecord::Schema.define(version: 20140717120005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,12 +68,16 @@ ActiveRecord::Schema.define(version: 20140709200049) do
     t.string   "description_en"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
-    t.datetime "attachment_updated_at"
+    t.string   "attachment_de_file_name"
+    t.string   "attachment_de_content_type"
+    t.integer  "attachment_de_file_size"
+    t.datetime "attachment_de_updated_at"
     t.integer  "page_id"
     t.integer  "festival_id"
+    t.string   "attachment_en_file_name"
+    t.string   "attachment_en_content_type"
+    t.integer  "attachment_en_file_size"
+    t.datetime "attachment_en_updated_at"
   end
 
   create_table "event_details", force: true do |t|

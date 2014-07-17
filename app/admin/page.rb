@@ -8,7 +8,7 @@ ActiveAdmin.register Page do
   # permit_params :list, :of, :attributes, :on, :model
   permit_params :title_de, :content_de, :title_en, :content_en, 
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
-    :downloads_attributes => [:id, :description_de, :description_en, :attachment, :_destroy]
+    :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
 
   #
   # or
@@ -55,7 +55,7 @@ ActiveAdmin.register Page do
         page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
       row Download.model_name.human do |page|
-        page.downloads.map { |d| link_to(d.description, d.attachment.url) }.join('').html_safe
+        page.downloads.map { |d| link_to(d.description_de, d.attachment_de.url) + " " + link_to(d.description_en, d.attachment_en.url) }.join(', ').html_safe
       end
       
     end
@@ -88,11 +88,16 @@ ActiveAdmin.register Page do
         f_f.inputs do
           f_f.input :description_de
           f_f.input :description_en
-          if f_f.object.attachment.exists?
-            f_f.input :attachment, :as => :file, :required => false, :hint => link_to(f_f.object.attachment.original_filename, f_f.object.attachment.url)
+          if f_f.object.attachment_de.exists?
+            f_f.input :attachment_de, :as => :file, :required => false, :hint => link_to(f_f.object.attachment_de.original_filename, f_f.object.attachment.url)
           else
-            f_f.input :attachment, :as => :file, :required => false
+            f_f.input :attachment_de, :as => :file, :required => false
           end
+          if f_f.object.attachment_en.exists?
+            f_f.input :attachment_en, :as => :file, :required => false, :hint => link_to(f_f.object.attachment_en.original_filename, f_f.object.attachment_en.url)
+          else
+            f_f.input :attachment_en, :as => :file, :required => false
+          end          
         end
       end
     end

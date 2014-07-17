@@ -55,10 +55,22 @@ form select {
   height: auto !important;
 }
 
+input[type="file"] {
+  display:inline;
+}
+
+li.file.input {
+  clear:both;
+}
+
 // other styles
 
 .inputs .inputs .inputs {
   box-shadow: none !important;
   -moz-box-shadow: none !important;
   -webkit-box-shadow: none !important;
+}
+
+p.inline-hints {
+  padding-bottom: 0.5em;
 }
