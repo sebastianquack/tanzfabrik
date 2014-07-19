@@ -1,6 +1,6 @@
 if event.images.length > 0
   div :class => "image-container" do
-    img :src => event.images.first.attachment.url
+    img :src => event.images.first.attachment.url(:medium_detail_column)
   end
 end
 

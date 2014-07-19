@@ -794,6 +794,16 @@ dl.tags {
 		}
 	}
 
+	.image-grid {
+
+		@include make-row();
+
+		img {
+			@include make-xs-column(3);
+			padding-bottom: $grid-gutter-width / 1.6;
+		}
+	}
+
 	.content .image-container {
 		padding-top: 0.2em;
 	}
@@ -832,6 +842,11 @@ dl.tags {
 		font-size: 0.85em;
 		font-weight: 900;
 	}
+}
+
+.event.single-event .basic .title {
+	@include menu-font(100%);
+	text-transform: uppercase;
 }
 
 .event .content {
@@ -1115,6 +1130,25 @@ ul.workshops {
 			padding-bottom: 1em;
 		}
 	}
+}
+
+/**** studios ****/
+
+.studios {
+	.title {
+		@include menu-font(100%);
+		text-transform: uppercase;
+		color: red;
+		padding-top: $vertical-box-padding;
+		padding-bottom: $vertical-box-padding;
+	}
+	.details .content, .basic .content {
+		padding-bottom:1em;
+		padding-top: $vertical-box-padding;
+	}
+	.basic .content {
+		padding-top:1em;
+	}	
 }
 
 

@@ -18,7 +18,7 @@ if show_festival
   end
 end
 
-div :class => "row event" do
+div :class => "row event single-event" do
   div :class => "basic" do 
     div :class => "content" do
       
