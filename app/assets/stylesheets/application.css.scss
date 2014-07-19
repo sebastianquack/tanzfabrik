@@ -68,7 +68,7 @@ $vertical-box-padding: 0.3em;
 
 /**** General Styles ****/
 
-h1,h2,h3,h4 {
+h1,h2,h3,h4,ol {
 	margin:0;
 	padding:0;
 }
@@ -172,6 +172,16 @@ ul, li {
 .details {
 	@include make-xs-column(2);
 	@include make-xs-column-pull(4);
+}
+
+.event-calendar .basic {
+	@include make-xs-column(5);
+	@include make-xs-column-push(1);
+}
+
+.event-calendar .details {
+	@include make-xs-column(1);
+	@include make-xs-column-pull(5);
 }
 
 /**** Layout spacing/position ****/
@@ -756,11 +766,6 @@ dl.tags {
 
 /**** general pages ****/
 
-h2 {
-	@include menu-font(100%);
-	text-transform: uppercase;
-}
-
 .basic:before {
 	@include border-line(top,black);
 }
@@ -841,6 +846,10 @@ h2 {
 	.title, .teacher {
 		display: inline;
 	}
+	.title {
+		@include menu-font(100%);
+		text-transform: uppercase;
+	}
 	.teacher {
 		padding-left:1em;
 	}
@@ -901,6 +910,40 @@ h2 {
 	font-size: 0.8em;
 }
 
+/**** programm ****/
+
+.event-programm {
+	.title {
+		font-size: 1em;
+		font-weight: bold;
+		padding-right: 1em;
+		float:left;
+	}
+	.type {
+		font-size:1em;
+		float:left;
+	}
+	.teacher {
+		display:block;
+		clear:both;
+	}
+	.time, .address {
+		@include menu-font(100%);
+		text-transform: uppercase;
+		color:red;		
+	}
+	.day, .location {
+			float:left;
+			clear:both;
+	}
+	.clock, .studio {
+			float:right;
+	}
+	.details {
+		padding-bottom: $vertical-box-padding;
+	}
+}
+
 /**** workshops ****/
 
 .headlines-workshop {
@@ -934,6 +977,8 @@ h2 {
 			}
 
 			.title {
+				@include menu-font(100%);
+				text-transform: uppercase;
 				color:red;
 				display:inline;
 			}

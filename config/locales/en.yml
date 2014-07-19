@@ -39,9 +39,12 @@ en:
   dates: "Dates"
   more_information: "Information"
   more_festival: "Zum Festival"
+  online_registration: "Online-Anmeldung"
+  tickets: "Tickets"
 
   kursplan_more: "Wichtige Infos zu den Tanzklassen. Änderungen im Stundenplan vorbehalten."
   profitraining_more: "Wichtige Infos zum Profitraining."
+  programm_more: "Informationen"
   holiday: "Ferien"
     
   time:
@@ -50,6 +53,7 @@ en:
       short_day: '%A, %m/%d'
       timetable: '%a, %m/%d/%Y'
       day: '%m/%d/%Y'
+      day_month: '%m/%d'
   date:
     formats:
       weekday: "%A"

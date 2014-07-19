@@ -19,9 +19,12 @@ de:
   close: "schließen"
   more_information: "Informationen"
   more_festival: "Zum Festival"
+  online_registration: "Online-Anmeldung"
+  tickets: "Tickets"
 
   kursplan_more: "Wichtige Infos zu den Tanzklassen. Änderungen im Stundenplan vorbehalten."
   profitraining_more: "Wichtige Infos zum Profitraining."
+  programm_more: "Informationen"
   holiday: "Ferien"
 
   date:
@@ -227,6 +230,7 @@ de:
       short_day: '%A, %d.%m.'     
       timetable: '%a, %d.%m.%Y'
       day: '%d.%m.%Y'
+      day_month: '%d.%m'
     pm: nachmittags
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:

@@ -34,7 +34,7 @@ ul :class => "timetable" do
     #a "Mehr Infos", :href => event_path(training) 
     training.event_details.each do |ed|
       # para a (ed.studio.location.name + " " + ed.studio.name), :href => url_for(:controller => 'pages', :action => 'show', :id => 'studios')
-      if ed.occurs_between? Date.today.beginning_of_week - 1.week, Date.today.beginning_of_week + 3.month
+      if ed.occurs_between? Date.today.beginning_of_week - 1.week, Date.today.beginning_of_week + 3.week
         beginning_of_week = ed.occurrences.first.beginning_of_week
         ul :class => "week" do
           li do

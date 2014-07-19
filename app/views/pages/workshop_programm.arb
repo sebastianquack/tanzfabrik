@@ -3,7 +3,7 @@ header :id => "headlines", :class => "headlines-event" do
   div :class => "main" do
     div :class => "line1" do
       h1 editable(page, :title), :class => "title"
-      a "> Online-Anmeldung", :class => "registration"
+      a "> " + t(:online_registration), :class => "registration"
     end
   end
 end

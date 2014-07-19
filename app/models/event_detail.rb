@@ -99,11 +99,14 @@ class EventDetail < ActiveRecord::Base
   end
 
   def occurs_between? start_date, end_date
-    schedule = self.schedule    
-    end_time = Time.new(end_date.year, end_date.month, end_date.day, 23, 59, 59, 0)
     start_time = Time.new(start_date.year, start_date.month, start_date.day, 0, 0, 0, 0)
-
-    return schedule.occurs_between? start_time, self.endtime
+    
+    if start_time > self.endtime
+      return false
+    else
+      schedule = self.schedule    
+      return schedule.occurs_between? start_time, self.endtime
+    end
   end
 
   def occurs_on_weekday_between? start_date, end_date
