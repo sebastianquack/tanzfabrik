@@ -28,10 +28,12 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :images, :allow_destroy => true
 
   validates_numericality_of :price_regular,
-      :only_integer => true
+      :only_integer => true,
+      :allow_nil => true
 
   validates_numericality_of :price_reduced,
-      :only_integer => true      
+      :only_integer => true,
+      :allow_nil => true
   
   def self.of_types type_ids
     where_clause = type_ids.map {|type_id| "event_types.id = " + type_id.to_s + " " }.join(" OR ")

@@ -129,8 +129,8 @@ ActiveAdmin.register Event do
       f.input :warning_de
       f.input :warning_en
       f.inputs :prices, :title => "Preise (für Workshops)" do
-        f.input :price_regular
-        f.input :price_reduced   
+        f.input :price_regular, :required => false
+        f.input :price_reduced, :required => false 
       end
       f.input :tags, :as => :check_boxes, :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)
     end

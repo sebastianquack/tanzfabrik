@@ -306,6 +306,8 @@ de:
         feature_on_welcome_screen_short: Hervorheben
         tag: Attribut
         tags: Attribute
+        price_regular: Normaler Preis
+        price_reduced: Ermäßigter Preis
       image:
         description: Beschreibung
         license: Copyrightnotiz
