@@ -25,7 +25,9 @@ ActiveAdmin.register Page do
       link_to page.slug, page_path(page)
     end
     column :title
-    column :content
+    column :content do |page|
+      page.content.html_safe if page.content
+    end
     column Image.model_name.human do |page|
       page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
