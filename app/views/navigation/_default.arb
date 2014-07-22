@@ -93,14 +93,6 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
               li link_to_page("vermietungsinfo")
             end
           end
-          li t(:section_service) do
-            ul do
-              li link_to_page("kontakt")
-              li link_to_page("agbs")
-              li link_to_page("impressum")
-              li link_to_page("lageplan")
-            end
-          end
         end
       end
     end

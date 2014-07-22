@@ -61,7 +61,7 @@ details_by_studio.each do |studio, details|
       9.times do |i|
         if detail.extend_empty_end_date.occurs_on?(date + i.week)
           table_data[row_index][column_index + 1].push(detail)
-          tags += detail.event.tags
+          tags += detail.tags
           break
         end
       end
@@ -125,7 +125,7 @@ div :class => "timetable-container" do
                       time l(detail.starttime, :format => :hours_minutes), :class => "course-time"
                       text_node "-"
                       time l(detail.endtime_clock, :format => :hours_minutes), :class => "course-time"
-                      span "(" + detail.event.tags.map { |t| t.id }.join('/') + ")" if detail.event.tags.length > 0
+                      span "(" + detail.tags.map { |t| t.id }.join('/') + ")" if detail.tags.length > 0
                     end
                   end
                 end

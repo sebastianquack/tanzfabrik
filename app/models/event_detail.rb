@@ -5,6 +5,12 @@ class EventDetail < ActiveRecord::Base
   belongs_to :studio
   belongs_to :repeat_mode
 
+  has_many :event_detail_tags
+  #accepts_nested_attributes_for :event_tags, :allow_destroy => true  
+
+  has_many :tags, :through => :event_detail_tags
+  accepts_nested_attributes_for :tags, :allow_destroy => true
+
   delegate :type, :to => :event, :allow_nil => true
 
   after_initialize :init

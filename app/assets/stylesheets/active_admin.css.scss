@@ -66,10 +66,15 @@ li.file.input {
 
 // other styles
 
+
 .inputs .inputs .inputs {
   box-shadow: none !important;
   -moz-box-shadow: none !important;
   -webkit-box-shadow: none !important;
+}
+
+.no-legend legend {
+  display:none;
 }
 
 p.inline-hints {
