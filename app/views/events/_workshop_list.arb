@@ -29,8 +29,16 @@ if workshops.length > 0
                   time l(workshop.event_details.first.starttime, :format => :hours_minutes), :class => "time-start"
                   text_node "-"
                   time l(workshop.event_details.first.endtime_clock, :format => :hours_minutes), :class => "time-end"
-                  span number_to_currency(workshop.price_regular, :format => "%n,- %u"), :class => "price price-normal"
-                  span "(" + number_to_currency(workshop.price_reduced, :format => "%n,- %u") + ")", :class => "price price-reduced"
+                  if workshop.price_regular.nil?
+                    span :class => "price price-blank"
+                  else
+                    span number_to_currency(workshop.price_regular, :format => "%n,- %u"), :class => "price price-normal"
+                  end
+                  if workshop.price_reduced.nil?
+                    span :class => "price price-blank"
+                  else                  
+                    span "(" + number_to_currency(workshop.price_reduced, :format => "%n,- %u") + ")", :class => "price price-reduced"
+                  end
                 end
               end
             end
