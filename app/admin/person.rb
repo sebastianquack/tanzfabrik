@@ -8,10 +8,10 @@ ActiveAdmin.register Person do
     selectable_column
     column :name
     column :role
-    column "Events" do |person|
+    column :events do |person|
         person.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
     end
-    column "images" do |person|
+    column :images do |person|
       person.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
     default_actions
@@ -27,7 +27,7 @@ ActiveAdmin.register Person do
     attributes_table do
       row :name
       row :role
-      row "Events" do |person|
+      row :events do |person|
         person.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
       end      
       row :bio_de do |bio|
@@ -36,7 +36,7 @@ ActiveAdmin.register Person do
       row :bio_en do |bio|
         bio.bio_en.html_safe if bio.bio_en
       end
-      row "images" do |person|
+      row :images do |person|
         person.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
     end
@@ -48,7 +48,7 @@ ActiveAdmin.register Person do
         f.input :role
         f.input :bio_de, :input_html => { :class => 'wysihtml5' }
         f.input :bio_en, :input_html => { :class => 'wysihtml5' }
-        f.input :events, :as => :check_boxes
+        #f.input :events, :as => :check_boxes
       end
       f.inputs "Images" do
         f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|

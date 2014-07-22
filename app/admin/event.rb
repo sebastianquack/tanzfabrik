@@ -135,7 +135,7 @@ ActiveAdmin.register Event do
       f.input :tags, :as => :check_boxes, :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)
     end
 
-    f.inputs "Images" do
+    f.inputs Image.model_name.human do
       f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
         f_f.inputs do
           f_f.input :description

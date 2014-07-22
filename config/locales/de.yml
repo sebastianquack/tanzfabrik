@@ -308,6 +308,8 @@ de:
         tags: Attribute
         price_regular: Normaler Preis
         price_reduced: Ermäßigter Preis
+        image: Bild
+        images: Bilder
       image:
         description: Beschreibung
         license: Copyrightnotiz
@@ -326,6 +328,10 @@ de:
       person:
         name: Name
         role: Rolle
+        event: Ereignis
+        events: Ereignisse
+        image: Bild
+        images: Bilder
       studio:
         location: Adresse
         name: Name

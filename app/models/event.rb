@@ -29,11 +29,13 @@ class Event < ActiveRecord::Base
 
   validates_numericality_of :price_regular,
       :only_integer => true,
-      :allow_nil => true
+      :allow_nil => true,
+      :greater_than_or_equal_to => 0
 
   validates_numericality_of :price_reduced,
       :only_integer => true,
-      :allow_nil => true
+      :allow_nil => true,
+      :greater_than_or_equal_to => 0
   
   def self.of_types type_ids
     where_clause = type_ids.map {|type_id| "event_types.id = " + type_id.to_s + " " }.join(" OR ")

@@ -12,9 +12,9 @@
  *= require bootstrap-wysihtml5
  */
 
- .editable-buttons {
+ [data-type=wysihtml5] + .editable-container .editable-buttons {
   position:relative;
-  right:17px;
+  right:82px;
  }
 
 textarea.editable-wysihtml5 {
