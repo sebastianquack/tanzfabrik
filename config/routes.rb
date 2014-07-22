@@ -9,6 +9,7 @@ Tanzfabrik::Application.routes.draw do
 
   resources :pages, :only => [:update]
   resources :events, :only => [:update]
+  resources :festivals, :only => [:update]
 
   scope "/:locale" do
     resources :events, :only => [:show, :index]

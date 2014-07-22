@@ -39,13 +39,15 @@ en:
   dates: "Dates"
   more_information: "Information"
   more_festival: "Zum Festival"
-  online_registration: "Online-Anmeldung"
+  workshop_registration: "Online-Anmeldung"
   tickets: "Tickets"
 
   kursplan_more: "Wichtige Infos zu den Tanzklassen. Änderungen im Stundenplan vorbehalten."
   profitraining_more: "Wichtige Infos zum Profitraining."
   programm_more: "Informationen"
   holiday: "Ferien"
+  festival_programm: Stage
+  festival_workshops: Workshop-Programm
     
   time:
     formats:
@@ -61,3 +63,13 @@ en:
       short_day: '%A, %m/%d'
       month: "%B" 
       month_day: '%m/%d'
+  number:
+    currency:
+      format:
+        delimiter: .
+        format: ! '%n %u'
+        precision: 0
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: €      

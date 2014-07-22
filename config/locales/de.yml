@@ -19,13 +19,15 @@ de:
   close: "schließen"
   more_information: "Informationen"
   more_festival: "Zum Festival"
-  online_registration: "Online-Anmeldung"
+  workshop_registration: "Workshop-Anmeldung"
   tickets: "Tickets"
 
   kursplan_more: "Wichtige Infos zu den Tanzklassen. Änderungen im Stundenplan vorbehalten."
   profitraining_more: "Wichtige Infos zum Profitraining."
   programm_more: "Informationen"
   holiday: "Ferien"
+  festival_programm: Bühne
+  festival_workshops: Workshop-Programm
 
   date:
     abbr_day_names:
@@ -169,7 +171,7 @@ de:
       format:
         delimiter: .
         format: ! '%n %u'
-        precision: 2
+        precision: 0
         separator: ! ','
         significant: false
         strip_insignificant_zeros: false
@@ -230,9 +232,13 @@ de:
       short_day: '%A, %d.%m.'     
       timetable: '%a, %d.%m.%Y'
       day: '%d.%m.%Y'
-      day_month: '%d.%m'
+      day_month: '%d.%m.'
     pm: nachmittags
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  
+  active_admin:
+    clone_model: "Kopie von %{model} bearbeiten"
+
   activemodel:
     errors:
       <<: *errors
@@ -329,5 +335,8 @@ de:
   formtastic:
     update: "%{model} speichern"
         
+  devise:
+    failure:
+      already_authenticated: "Sie sind bereits angemeldet"
 
 

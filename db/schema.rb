@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717120005) do
+ActiveRecord::Schema.define(version: 20140721144002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,8 @@ ActiveRecord::Schema.define(version: 20140717120005) do
     t.text     "info_de"
     t.text     "info_en"
     t.boolean  "feature_on_welcome_screen"
+    t.decimal  "price_regular",             precision: 4, scale: 0
+    t.decimal  "price_reduced",             precision: 4, scale: 0
   end
 
   create_table "festival_events", force: true do |t|

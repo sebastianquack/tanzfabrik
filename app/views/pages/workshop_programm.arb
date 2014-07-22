@@ -1,111 +1,31 @@
 header :id => "headlines", :class => "headlines-event" do
-  div :class => "before" 
   div :class => "main" do
     div :class => "line1" do
       h1 editable(page, :title), :class => "title"
-      a "> " + t(:online_registration), :class => "registration"
+      a "> " + t(:workshop_registration), :class => "registration"
     end
+    div :class => "line2 open-close" do
+      div :class => "open" do
+        div editable page, :content, :type => "wysihtml5"
+        div t(:close), :class => "close-trigger"
+      end
+      div :class => "closed open-trigger" do
+        div t :information
+      end
+    end    
+    div :class => "line3" do
+      ul do
+        page.downloads.each do |download|        
+          li do
+            a download.description, :href => download.attachment.url
+          end
+        end
+      end
+    end          
   end
 end
 
-# get festivals with workshops
-festivals_with_workshops = Festival.joins(:events).where(:events => { :type_id => 2 }).group('festivals.id')
+# get all workshops
+all_workshops = Event.where(:type_id => 2)
 
-festivals_with_workshops.each do |festival|
-  div do
-    div :class => "headlines-workshop" do
-      div :class => "line2 open-close" do
-        div :class => "basic" do
-          div :class => "inline-title" do
-            h2 festival.name, :class => "title"
-            span t(:more_information), :class => "open-trigger info-link"
-            a t(:more_festival), :href => festival_path(festival), :class => "festival-link"
-          end
-          para festival.description, :class => "description"
-          div t(:close), :class => "close-trigger"
-        end
-        div :class => "details" do
-          div :class => "time-duration" do
-            time l festival.startdate, :format => :day
-            text_node "-"
-            time l festival.enddate, :format => :day
-          end
-          if festival.images.length > 0
-            div :class => "image-container" do
-              img :src => festival.images.first.attachment.url, :title => festival.images.first.description, :alt => festival.images.first.description
-            end
-          end
-        end        
-      end    
-      div :class => "line3" do
-        ul do
-          page.downloads.each do |download|        
-            li do
-              a download.description, :href => download.attachment.url
-            end
-          end
-        end
-      end
-    end
-
-    ul :class => "workshops" do 
-      li :class => "week" do
-        div :class => "time-duration" do
-          time l(festival.startdate.to_date, :format => :short) + "-" + l(festival.enddate.to_date, :format => :short)
-        end
-        ul :class => "classes" do
-          festival.events.where(:type_id => 2).order('title_de ASC').each do |workshop| 
-            li :class => "class" do
-              a :href => "events/" + workshop.id.to_s do
-                h4 workshop.title, :href => event_path(workshop), :class => "title"
-                span workshop.people.map { |p| p.name }.join(', '), :class => "teacher" if workshop.people.length > 0
-                div :class => "class-data" do
-                  time l(workshop.event_details.first.starttime, :format => :hours_minutes), :class => "time-start"
-                  text_node "-"
-                  time l(workshop.event_details.first.endtime_clock, :format => :hours_minutes), :class => "time-end"
-                  span "200,-€", :class => "price price-normal"
-                  span "(130,-€)", :class => "price price-reduced"
-                end
-              end
-            end
-          end
-        end
-      end
-    end
-  end 
-end
-
-# get workshops with no festival
-workshops_not_in_festivals = Event.includes(:festival_events).where( :festival_events => { :event_id => nil } ).where(:type_id => 2)
-
-if workshops_not_in_festivals.length > 0
-  ul :class => "workshops" do 
-    li :class => "week" do
-      div :class => "time-duration" do
-        #text_node "START" #time festival.startdate
-        #text_node "-"
-        #text_node "END" #time festival.enddate
-      end
-      ul :class => "classes" do
-        workshops_not_in_festivals.each do |workshop| 
-          li :class => "class" do
-            a :href => "events/" + workshop.id.to_s do
-              h4 workshop.title, :href => event_path(workshop), :class => "title"
-              span workshop.people.map { |p| p.name }.join(', '), :class => "teacher" if workshop.people.length > 0
-              div :class => "class-data" do
-                time l(workshop.event_details.first.starttime, :format => :hours_minutes), :class => "time-start"
-                text_node "-"
-                time l(workshop.event_details.first.endtime_clock, :format => :hours_minutes), :class => "time-end"
-                span "200,-€", :class => "price price-normal"
-                span "(130,-€)", :class => "price price-reduced"
-              end
-            end
-          end
-        end
-      end
-    end
-  end
-end
-
-
-
+render :partial => "/events/workshop_list", :locals => {:workshops => all_workshops, :combinations => true}  

@@ -1,9 +1,113 @@
-render "/pages/editable_content"
+# get festivals now and in the future
+festivals = Festival.select { |f| f.enddate >= Date.today }
 
-ul do
-  Festival.all.each do |festival|
-    li do
-      a festival.name, :href => festival_path(festival)
+festivals.each do |festival|
+
+  header :class => "headlines" do
+    div :class => "main" do
+      div :class => "line1" do
+        h1 :class => "title" do
+            span festival.name
+            time l(festival.startdate, :format => :day_month) + "-" + l(festival.enddate, :format => :day)
+          end
+        a "> " + t(:tickets), :class => "registration"
+        a "> " + t(:workshop_registration), :class => "registration"
+      end
+      div :class => "line2 open-close" do
+        div :class => "open" do
+          if festival.images.length > 0
+            div :class => "row" do
+              div :class => "image-container" do
+                img :src => festival.images.first.attachment.url, :title => festival.images.first.description, :alt => festival.images.first.description
+              end      
+              div festival.description, :class => "description"
+            end
+          else
+            div festival.description, :class => "description"
+          end
+          if admin_user_signed_in?
+            div :class => "admin-only admin-nav" do
+              a "> Dieses Festival bearbeiten", :href => edit_admin_festival_path(festival)
+            end          
+          end
+          div t(:close), :class => "close-trigger"
+        end
+        div :class => "closed open-trigger" do
+          div t :information_programm
+        end
+      end    
+      div :class => "line3" do
+        ul do
+          page.downloads.each do |download|        
+            li do
+              a download.description, :href => download.attachment.url
+            end
+          end
+        end
+      end          
     end
   end
+
+
+
+
+
+  div do
+    div :class => "headlines-workshop" do
+      div :class => "line2 open-close" do
+        div :class => "basic" do
+          div :class => "inline-title" do
+            h2 festival.name, :class => "title"
+            span t(:more_information), :class => "open-trigger info-link"
+            a t(:more_festival), :href => festival_path(festival), :class => "festival-link"
+          end
+          para festival.description, :class => "description"
+          div t(:close), :class => "close-trigger"
+        end
+        div :class => "details" do
+          div :class => "time-duration" do
+            time l festival.startdate, :format => :day
+            text_node "-"
+            time l festival.enddate, :format => :day
+          end
+          if festival.images.length > 0
+            div :class => "image-container" do
+              img :src => festival.images.first.attachment.url, :title => festival.images.first.description, :alt => festival.images.first.description
+            end
+          end
+        end        
+      end    
+      div :class => "line3" do
+        ul do
+          page.downloads.each do |download|        
+            li do
+              a download.description, :href => download.attachment.url
+            end
+          end
+        end
+      end
+    end
+
+
+    h2 :class => "headlines" do
+      div :class => "main" do
+        div :class => "line1" do
+          div t(:festival_workshops), :class => "title"
+        end
+      end
+    end
+    festival_workshops = festival.events.where(:type_id => 2)
+    render :partial => "/events/workshop_list", :locals => {:workshops => festival_workshops, :combinations => false}  
+
+    h2 :class => "headlines" do
+      div :class => "main" do
+        div :class => "line1" do
+          div t(:festival_programm), :class => "title"
+        end
+      end
+    end
+    events = festival.events.where.not(:type_id => 2)
+    render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.startdate }
+
+  end 
 end

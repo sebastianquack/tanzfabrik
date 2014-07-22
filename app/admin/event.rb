@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   menu :priority => 1
 
-  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :feature_on_welcome_screen,
+  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :feature_on_welcome_screen, :price_regular, :price_reduced,
     :festival_ids => [], :person_ids => [], 
     :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :repeat_mode_id, :_destroy],
     :people_attributes => [:id, :name, :_destroy],
@@ -12,6 +12,19 @@ ActiveAdmin.register Event do
     :images_attributes => [:id, :description, :license, :attachment, :_destroy]
 
   config.per_page = 100
+
+  member_action :clone, method: :get do
+    @resource = resource.dup
+    @resource.people = resource.people.dup
+    #@resource.event_details = resource.event_details.dup
+    #@resource.images << resource.images
+    #@resource.festivals << resource.festivals.dup
+    render :new, layout: false
+  end
+
+  action_item :only => :show do
+    link_to(Event.model_name.human + " duplizieren", clone_admin_event_path(id: event.id))
+  end
 
   index do 
     selectable_column
@@ -69,6 +82,12 @@ ActiveAdmin.register Event do
       row :info_en do |event|
         event.info_en.html_safe if event.info_en
       end
+      row :price_regular do |price|
+        number_to_currency price.price_regular
+      end
+      row :price_reduced do |price|
+        number_to_currency price.price_reduced
+      end       
       row :type
       row Tag.model_name.human do |event|
         event.tags.map { |t| (link_to t.name, admin_tag_path(t)) }.join(', ').html_safe
@@ -109,6 +128,10 @@ ActiveAdmin.register Event do
       f.input :info_en, :input_html => { :class => 'wysihtml5 wysihtml5-notoolbar' }
       f.input :warning_de
       f.input :warning_en
+      f.inputs :prices, :title => "Preise (für Workshops)" do
+        f.input :price_regular
+        f.input :price_reduced   
+      end
       f.input :tags, :as => :check_boxes, :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)
     end
 
