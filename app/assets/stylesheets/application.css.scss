@@ -557,8 +557,8 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 
 	.line3 {
 		font-size:0.8em;
-		line-height:2em;
-		padding-bottom:3 * $line-height;
+		line-height: (2em / 0.8em);
+		padding-bottom: 3 * $line-height;
 
 		ul {
 			list-style-type: none;
@@ -778,6 +778,12 @@ dl.tags {
 	dd {
 		padding-right:1em;
 	}
+}
+
+/* style for schedule demo */
+.schedule th, .schedule td {
+	border: solid 1px black;
+	padding:1em;
 }
 
 /**** general pages ****/

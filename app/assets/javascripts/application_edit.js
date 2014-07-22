@@ -30,7 +30,9 @@ $(document).ready(function() {
       "image": false, 
       "lists":false, 
       "font-styles":false,
+      "lists": false,
       "blockquote":false,
+      "html": true,
     },
     "locale": "de-DE"
   };
