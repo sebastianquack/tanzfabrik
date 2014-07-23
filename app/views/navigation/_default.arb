@@ -62,7 +62,7 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
           end        
           li t(:section_dance_intensive) do
             ul do
-              li link_to_page("ueber_dance_intensive")
+              #li link_to_page("ueber_dance_intensive")
               li link_to_page("dance_intensive_programm")
               li link_to_page("dance_intensive_lehrer")
               li link_to_page("dance_intensive_bewerbung")

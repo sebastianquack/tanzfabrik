@@ -7,17 +7,17 @@ Tanzfabrik::Application.routes.draw do
   get 'admin' => 'admin/pages#index'
   ActiveAdmin.routes(self)
 
-  resources :pages, :only => [:update]
-  resources :events, :only => [:update]
-  resources :festivals, :only => [:update]
-
   scope "/:locale" do
-    resources :events, :only => [:show, :index]
-    resources :people, :only => [:show]
-    resources :festivals, :only => [:show]
-    resources :pages, :only => [:show], :path => ''
+    resources :events, :only => [:show, :index, :update]
+    resources :people, :only => [:show, :update]
+    resources :festivals, :only => [:show, :update]
+    resources :pages, :only => [:show, :update], :path => ''
   end
   get '/:locale' => 'pages#show'
+
+  #resources :pages, :only => [:update]
+  #resources :events, :only => [:update]
+  #resources :festivals, :only => [:update]
 
   # You can have the root of your site routed with "root"    
   root 'pages#show'
