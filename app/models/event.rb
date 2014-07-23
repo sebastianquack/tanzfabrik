@@ -55,4 +55,9 @@ class Event < ActiveRecord::Base
     return ft
   end
 
+  def tags
+    tags = self.event_details.collect_concat { |ed| ed.tags }
+    tags
+  end
+
 end
