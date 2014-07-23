@@ -147,7 +147,7 @@ ActiveAdmin.register Event do
       end
     end
     
-    f.inputs "Zeiten und Orte" do
+    f.inputs "Zeiten,Orte,Attribute" do
       f.has_many :event_details, heading: false, :new_record => true, :allow_destroy => true do |et_f|
         et_f.inputs do
           et_f.input :start_date, :include_blank => false, :start_year => 2014, :as => :datepicker

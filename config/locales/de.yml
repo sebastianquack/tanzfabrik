@@ -254,8 +254,8 @@ de:
         one: Ereignis
         other: Ereignisse
       event_detail:
-        one: Zeit und Ort
-        other: Zeiten und Orte
+        one: Zeit/Ort/Attribute
+        other: Zeiten/Orte/Attribute
       event_tag:
         one: Attribut
         other: Attributes
