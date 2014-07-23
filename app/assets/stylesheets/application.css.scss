@@ -473,7 +473,11 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 
 		a.registration {
 			font-size: 90%;
-		}		
+		}
+
+		a.registration + a.registration {
+			padding-right: 1em;
+		}
 	}
 
 	.title {
@@ -1177,4 +1181,14 @@ ul.workshops {
 	}	
 }
 
+/**** festivals ****/
+.festivals {
+	.festival {
+		margin-bottom: 3.5em;
 
+		.festival-headlines .line3 {
+			padding-bottom: $vertical-box-padding;
+		}
+
+	}
+}
