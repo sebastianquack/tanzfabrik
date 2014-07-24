@@ -17,7 +17,7 @@ end
 details = []
 events.each do |e|
   logger.debug e.id
-  details += e.event_details
+  details += e.event_details if e.event_details.all? { |ed| ed.valid? }
 end
 
 # do all the calculations
