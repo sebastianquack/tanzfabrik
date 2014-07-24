@@ -48,6 +48,16 @@ textarea.wysihtml5 {
   float: right !important;
 }
 
+form input[type=text], 
+form input[type=password], 
+form input[type=email], 
+form input[type=number], 
+form input[type=url], 
+form input[type=tel], 
+form textarea {
+  width:80%; /* fix for safari 5 */
+}
+
 .formtastic .inputs li {
   clear:right;
 }
