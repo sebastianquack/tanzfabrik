@@ -26,8 +26,12 @@ de:
   profitraining_more: "Wichtige Infos zum Profitraining."
   programm_more: "Informationen"
   holiday: "Ferien"
+  programm_event_headline: Bühne
   festival_programm: Bühne
   festival_workshops: Workshop-Programm
+  price_workshop: Kosten
+  price_event: Eintritt
+  price_reduced_limit: "Frühbucherrabatt: Gilt bei Eingang der Gesamtzahlung bis"
 
   date:
     abbr_day_names:

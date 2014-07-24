@@ -43,7 +43,7 @@ class Event < ActiveRecord::Base
     return studios.uniq
   end
 
-  def firsttime studio
+  def firsttime_in_studio studio
     ft = new Time()
     self.event_details.each do |ed|
       if ed.studio == studio
@@ -53,6 +53,10 @@ class Event < ActiveRecord::Base
       end
     end
     return ft
+  end
+
+  def firsttime
+    self.event_details.min_by { |ed| ed.starttime} .starttime
   end
 
   def tags

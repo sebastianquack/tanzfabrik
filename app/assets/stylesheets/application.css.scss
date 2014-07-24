@@ -846,32 +846,72 @@ dl.tags {
 
 /**** events ****/
 
-.event .details .time-place {
-	list-style-type: none;
-	margin:0;
-	padding:0 0 $vertical-box-padding 0;
-	@include menu-font(90%);
+.event .details {
+	.times-places {
+		list-style-type: none;
+		margin:0;
+		padding:0 0 $vertical-box-padding 0;
+		@include menu-font(90%);
 
-	li {
-		border: 0px solid red;
-		border-width: 0 0 1px 0;
-	}
+		li {
+			border: 0px solid red;
+			border-width: 0 0 1px 0;
+		}
 
-	time {
-		color:red;
-	}
+		li:not(:first-child) {
+			padding-top: $vertical-box-padding;
+		}
 
-	.place {
-		display:block;
-		padding-bottom: $vertical-box-padding ;
+		time {
+			color:red;
+		}
+
+		.place {
+			display:block;
+			padding-bottom: $vertical-box-padding ;
+		}
+
+		.moment {
+			overflow: hidden;
+			clear:both;
+
+			.time-moment {
+				float:left;
+			}
+			.place {
+				@include menu-font(100%);
+				text-transform: uppercase;
+				color:red;
+				float:left;
+			}
+			.place a {
+				color:red;
+			}
+			.place a:hover {
+				color:black;
+			}
+			.time-moment:after {
+				content: "\A"; /* width of 1 character */
+				white-space: pre;
+			}
+		}
 	}
 }
 
-.event .basic {
-	.teacher {
-		font-size: 0.85em;
+.event .basic .teacher,
+.single-event-page .basic .type {	
+		font-size: 0.9em;
 		font-weight: 900;
-	}
+}
+
+.single-event-page .basic .type,
+.single-event-page .basic .teacher {	
+	line-height: $line-height / 0.9em ;
+	margin-bottom: $line-height;
+}
+
+.single-event-page .basic .type + .teacher {	
+	margin-top: -$line-height;
 }
 
 .event.single-event .basic .title {
@@ -963,14 +1003,19 @@ dl.tags {
 		font-weight: bold;
 		padding-right: 1em;
 		float:left;
+		line-height: $line-height;
 	}
 	.type {
 		font-size:1em;
 		float:left;
 	}
-	.teacher {
+	.basic .teacher {
 		display:block;
 		clear:both;
+		font-size: 1em;
+		margin-bottom: 0;
+		font-weight: normal;
+		line-height: $line-height;
 	}
 	.time, .address {
 		@include menu-font(100%);

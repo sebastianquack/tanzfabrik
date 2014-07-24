@@ -1,9 +1,13 @@
-h3 person.name
+div :class => "row" do
+  div :class => "basic" do
+    h1 person.name
+    para person.bio if person.bio
+    div do
+      person.events.map { |e| (link_to e.type.name + " " + e.title, event_path(e)) }.join(', ').html_safe
+    end  
+  end
 
-img :src => person.image.url if person.image.exists?
-
-para person.bio
-
-div do
-  person.events.map { |e| (link_to e.type.name + " " + e.title, event_path(e)) }.join(', ').html_safe
+  div :class => "details" do
+    img :src => person.images.first.url if person.images.exists?
+  end
 end

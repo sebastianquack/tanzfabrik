@@ -1,22 +1,25 @@
 show_festival = nil if !defined? show_festival
 
-if show_festival 
-  header :id => "headlines", :class => "headlines-event" do
-    div :class => "before" do
-      a "<", :class => "previous" if event.type.name == "Performance-Projekt"
-    end
-    div :class => "main" do
-      div :class => "line1" do
+header :id => "headlines", :class => "headlines-event" do
+  div :class => "before" do
+    a "<", :class => "previous" if event.type.name == "Performance-Projekt"
+  end
+  div :class => "main" do
+    div :class => "line1" do
+      if event.type.name == "Workshop"
         h1 event.type.name, :class => "title"
-        if event.type.name == "Workshop"
-          a "> Online-Anmeldung", :class => "registration"
-        else
-          a ">", :class => "next"
-        end
+        a ">" + t(:workshop_registration), :class => "registration"
+      elsif event.type.name == "Performance-Projekt"
+        h1 event.type.name, :class => "title"
+        a ">", :class => "next"
+      else
+        h1 t(:programm_event_headline), :class => "title"
+        a ">" + t(:tickets), :class => "registration"
       end
     end
   end
 end
+
 
 div :class => "row event single-event" do
   div :class => "basic" do 

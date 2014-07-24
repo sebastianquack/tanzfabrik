@@ -129,7 +129,7 @@ ActiveAdmin.register Event do
       f.input :info_en, :input_html => { :class => 'wysihtml5 wysihtml5-notoolbar' }
       f.input :warning_de
       f.input :warning_en
-      f.inputs :prices, :title => "Preise (für Workshops)" do
+      f.inputs :prices, :title => "Preise" do
         f.input :price_regular, :required => false
         f.input :price_reduced, :required => false 
       end
