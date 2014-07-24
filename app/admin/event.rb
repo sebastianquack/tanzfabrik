@@ -28,7 +28,7 @@ ActiveAdmin.register Event do
   index do 
     selectable_column
     column EventDetail.model_name.human do |event|
-      event.event_details.map { |t| t.datetime_l(:default) }.join('<br>').html_safe
+      event.event_details.map { |t| t.datetime_l(:default) }.join('<br>').html_safe if event.event_details.all? { |ed| ed.valid? }
     end
     column Image.model_name.human do |event|
       event.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
@@ -58,11 +58,13 @@ ActiveAdmin.register Event do
     attributes_table do
       row EventDetail.model_name.human do |event|
         event.event_details.each do |ed|
-          a (ed.studio.location.name + " " + ed.studio.name), :href => admin_studio_path(ed.studio)
-          ul do
-            ed.occurrences.each do |oc|
-              li span(l oc, :format => :default)
-            end  
+          if (ed.valid?)
+            a (ed.studio.location.name + " " + ed.studio.name), :href => admin_studio_path(ed.studio)
+            ul do
+              ed.occurrences.each do |oc|
+                li span(l oc, :format => :default)
+              end  
+            end
           end
         end    
       end

@@ -13,6 +13,9 @@ class EventDetail < ActiveRecord::Base
 
   delegate :type, :to => :event, :allow_nil => true
 
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+
   after_initialize :init
 
   def init
