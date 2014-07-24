@@ -844,6 +844,21 @@ dl.tags {
 	}	
 }
 
+.details.empty:after {
+	content: " ";
+	min-height:330px;
+	width:100%;
+	display: block;
+	background-image: url(asset_path("rotT.png", image));
+	background-repeat: no-repeat;
+	background-size: 100%;
+	padding-right: 8px;
+}
+
+.details.empty[data-variant="1"]:after {
+	background-image: url(asset_path("schwarzT.png", image));
+}
+
 /**** events ****/
 
 .event .details {
