@@ -20,6 +20,7 @@ people.each do |person|
           para :class => "classes" do
             person.events. map { |e| (link_to e.title, event_path(e)) }.join('<br>').html_safe
           end
+          #div kurs_link(person.events.first)
         end
       end
     end

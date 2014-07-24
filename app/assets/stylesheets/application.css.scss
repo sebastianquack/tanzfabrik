@@ -37,7 +37,7 @@ $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 */
 
-$link-color:            black;
+$link-color:            inherit;
 $link-hover-color:      $brand-primary;
 
 /*
@@ -852,7 +852,7 @@ dl.tags {
 	background-image: url(asset_path("rotT.png", image));
 	background-repeat: no-repeat;
 	background-size: 100%;
-	padding-right: 8px;
+	margin-top: $vertical-box-padding * 2;
 }
 
 .details.empty[data-variant="1"]:after {

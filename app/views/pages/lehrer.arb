@@ -9,5 +9,5 @@ header :id => "headlines", :class => "headlines-teachers" do
   end
 end
 
-teachers = Person.order(:name).by_event_types([3, 5, 6])
+teachers = Person.order(:name).select { |p| p.kurslehrer? }
 render :partial => "/people/list", :locals => {:people => teachers}

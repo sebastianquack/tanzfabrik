@@ -113,10 +113,10 @@ div :class => "timetable-container" do
                       end
                     end
                     div :class => "teacher" do
-                      text_node detail.event.people[0].name.html_safe if detail.event.people[0]
+                      link_to detail.event.people[0].name.html_safe, person_url(detail.event.people[0]) if detail.event.people[0]
                     end
                     div :class => "teacher" do
-                      text_node detail.event.people[1].name.html_safe if detail.event.people[1]
+                      link_to detail.event.people[1].name.html_safe, person_url(detail.event.people[1]) if detail.event.people[1]
                     end
                     div :class => "warning" do
                       text_node detail.event.warning.html_safe if detail.event.warning

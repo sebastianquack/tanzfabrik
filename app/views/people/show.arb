@@ -8,6 +8,6 @@ div :class => "row" do
   end
 
   div :class => "details" do
-    img :src => person.images.first.url if person.images.exists?
+    img :src => person.images.first.attachment.url(:thumb) if person.images.length > 0 
   end
 end

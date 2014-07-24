@@ -28,4 +28,12 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def kurslehrer?
+    self.events.any? { |e| [3, 5, 6].include?(e.type.id) }
+  end
+
+  def artist?
+    self.events.any? { |e| [1, 7, 8, 10].include?(e.type.id) }
+  end
+
 end
