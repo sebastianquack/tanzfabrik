@@ -25,14 +25,15 @@ $(document).ready(function() {
 
   // open
   $(".open-trigger").click( function() {
-    $(this).parents('.open-close').addClass("opened")
-    $(this).parents('.open-close-shade').addClass("shaded")
+    $(this).closest('.open-close').addClass("opened")
+    $(this).closest('.open-close-shade').addClass("shaded")
   });
 
   // close
-  $(".close-trigger").click(function () {
-    $(this).parents('.open-close').removeClass("opened")
-    $(this).parents('.open-close-shade').removeClass("shaded")
+  $(".close-trigger").click(function (event) {
+    event.stopPropagation();
+    $(this).closest('.open-close').removeClass("opened")
+    $(this).closest('.open-close-shade').removeClass("shaded")
   });
 
   initMenuContentHide()

@@ -3,9 +3,9 @@
 people.each do |person|
   div :class => "row teachers" do
     div :class => "basic" do
-      div :class => "description open-close" do
-        div person.bio.html_safe if person.bio
-        div t(:more), :class => "open-trigger"
+      div :class => "description open-close open-trigger" do
+        div person.bio.html_safe, :class => "bio" if person.bio
+        div t(:more) + " >", :class => "more"
         div t(:close), :class => "close-trigger"
       end
     end

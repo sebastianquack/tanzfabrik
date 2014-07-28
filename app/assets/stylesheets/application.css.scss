@@ -980,20 +980,54 @@ dl.tags {
 
 /**** teachers ****/
 
-.teachers .basic .description {
-	position:relative;
-	padding-top:$vertical-box-padding;
+.teachers {
 
-	p {
-		height:10 * $line-height;
-		min-height:10 * $line-height;
-		overflow-y: hidden;
+	.basic {
+
+		.open-trigger, .close-trigger {
+			cursor: pointer;
+		}
+
+		.open-trigger:hover, .close-trigger:hover {
+			color:red;
+		}
+
+
+
+		.description {
+			position:relative;
+			padding-top:$vertical-box-padding;
+
+			.bio {
+				height:10 * $line-height * 0.9714;
+				min-height:10 * $line-height * 0.9714;
+				overflow-y: hidden;
+			}
+
+			.close-trigger {
+				text-align: right;
+				display: none;
+			}
+		}
+
+		.description.opened {
+
+			.bio {
+				height: auto;
+			}
+
+			.more {
+				display:none;
+			}
+			.close-trigger {
+				display: block;
+			}
+
+		}
 	}
+
 }
 
-.teachers .basic .description.opened p {
-	height:auto;
-}
 
 .teachers .image-container, .teachers .info {
 	@include make-xs-column(3);
