@@ -61,7 +61,7 @@ en:
       
   time:
     formats:
-      hours_minutes: "%l:%M %p"
+      hours_minutes: "%H:%M"
       short_day: '%A, %m/%d'
       timetable: '%a, %m/%d/%Y'
       day: '%m/%d/%Y'

@@ -127,6 +127,10 @@ a abbr[title] {
 	position: relative;
 }
 
+.editable-empty, .editable-empty:hover {
+  color: $admin-link-color;
+}
+
 .translation_missing:hover {
 	outline: none;
 }
