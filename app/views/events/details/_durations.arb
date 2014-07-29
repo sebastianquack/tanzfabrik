@@ -6,9 +6,9 @@ ul :class => "times-places" do
       #time l occurrence, :format => :day
       #time l event.firsttime(studio)
       div :class => "time-duration" do
-        time l event.event_details.first.starttime, :format => :day
+        time l event.start_date
         span " - "
-        time l event.event_details.last.endtime, :format => :day
+        time l event.end_date
       end
       span :class => "place" do
         a (studio.location.name + " " + studio.name), :href => url_for(:controller => 'pages', :action => 'show', :id => 'studios')

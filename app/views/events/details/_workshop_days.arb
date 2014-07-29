@@ -1,0 +1,19 @@
+# prints something like Fr-Do 12:00 -13:00 Sa-So 12:00 -13:00
+# local variable event
+
+event.event_details.sort_by{ |ed| ed.start_date }.each do |ed|
+  if event.event_details.length > 1
+    if ed.start_date == ed.end_date
+      span t("date.abbr_day_names")[ed.start_date.wday], :class => "daynames"
+    else
+      span :class => "daynames" do
+        text_node t("date.abbr_day_names")[ed.start_date.wday]
+        text_node "-"
+        text_node t("date.abbr_day_names")[ed.end_date.wday]
+      end
+    end
+  end
+  time l(ed.starttime, :format => :hours_minutes), :class => "time-start"
+  text_node "-"
+  time l(ed.endtime_clock, :format => :hours_minutes), :class => "time-end"
+end

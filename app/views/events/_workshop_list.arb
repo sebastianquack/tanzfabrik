@@ -3,42 +3,37 @@
 
 if workshops.length > 0
 
-  # get details ordered grouped by week, and ordered by title
-  details_by_week = workshops
+  # get details ordered grouped by beginning/end, and ordered by title
+  events_by_dates = workshops
     .order('title_de DESC')
-    .collect_concat { |w| w.event_details }
-    .group_by { |ed| ed.start_date.beginning_of_week }
+    .group_by { |e| [e.start_date, e.end_date] }
     .sort
 
-  # output
   ul :class => "workshops" do
-    details_by_week.each do |week, details|
-      li :class => "week" do
+    events_by_dates.each do |dates, events|
+      # FOLLOWING CODE COMING IN VERSION 2
+      # li :class => "controls" do
+      #   h3 :class => "header" do 
+      #     span t :workshops_name
+      #     if combinations
+      #       text_node "/"
+      #       span t(:workshops_combinations)
+      #     end
+      #   end
+      # end        
+      li :class => "group" do
         div :class => "time-duration" do
-          time l(week, :format => :short) + "-" + l(week + 4.day, :format => :short)
-        end
+          time l(dates[0], :format => :short) + "-" + l(dates[1], :format => :short)
+        end        
         ul :class => "classes" do
-          details.each do |detail| 
-            workshop = detail.event
+          events.each do |workshop| 
             li :class => "class" do
-              a :href => "events/" + workshop.id.to_s do
+              a :href => event_path(workshop) do
 
                 h4 workshop.title, :href => event_path(workshop), :class => "title"
                 span workshop.people.map { |p| p.name }.join(', '), :class => "teacher" if workshop.people.length > 0
                 div :class => "class-data" do
-                  time l(workshop.event_details.first.starttime, :format => :hours_minutes), :class => "time-start"
-                  text_node "-"
-                  time l(workshop.event_details.first.endtime_clock, :format => :hours_minutes), :class => "time-end"
-                  if workshop.price_regular.nil?
-                    span :class => "price price-blank"
-                  else
-                    span number_to_currency(workshop.price_regular, :format => "%n,- %u"), :class => "price price-normal"
-                  end
-                  if workshop.price_reduced.nil?
-                    span :class => "price price-blank"
-                  else                  
-                    span "(" + number_to_currency(workshop.price_reduced, :format => "%n,- %u") + ")", :class => "price price-reduced"
-                  end
+                  render :partial => "/events/details/workshop_days", :locals => {:event => workshop}
                 end
               end
             end

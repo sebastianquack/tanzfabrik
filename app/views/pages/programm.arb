@@ -4,7 +4,7 @@ header :id => "headlines", :class => "headlines-event" do
       h1 editable(page, :title), :class => "title"
       a "> " + t(:tickets), :class => "registration"
     end
-    div :class => "line2 open-close" do
+    div :class => "line2 open-close opened" do
       div :class => "open" do
         div editable page, :content, :type => "wysihtml5"
         div t(:close), :class => "close-trigger"

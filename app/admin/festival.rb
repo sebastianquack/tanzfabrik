@@ -58,7 +58,7 @@ ActiveAdmin.register Festival do
       f.input :name_en
       f.input :description_de, :input_html => { :class => 'wysihtml5' }
       f.input :description_en, :input_html => { :class => 'wysihtml5' }
-      f.input :events, :as => :check_boxes
+      #f.input :events, :as => :check_boxes
     end
 
     f.inputs "Images" do

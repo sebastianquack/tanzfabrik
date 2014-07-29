@@ -10,6 +10,12 @@ else
   render :partial => "/events/details/moments", :locals => {:event => event}
 end
 
+if event.type.name == "Workshop" && event.event_details.length > 1
+  small do
+    render :partial => "/events/details/workshop_days", :locals => {:event => event}
+  end
+end
+
 if event.price_regular
   small do
     if event.type.name == "Workshop"

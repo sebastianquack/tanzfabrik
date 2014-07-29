@@ -48,6 +48,9 @@ en:
   workshop_program_more: "Informationen"
   more_festival: "Zum Festival"
 
+  workshops_combinations: "Workshop-Kombinationen"
+  workshops_name: "Name"
+
   holiday: "Ferien"
   programm_event_headline: Stage
   festival_programm: Stage
@@ -64,6 +67,14 @@ en:
       day: '%m/%d/%Y'
       day_month: '%m/%d'
   date:
+    abbr_day_names:
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat 
     formats:
       weekday: "%A"
       short: '%m/%d'

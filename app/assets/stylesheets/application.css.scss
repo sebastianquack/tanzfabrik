@@ -73,6 +73,11 @@ h1,h2,h3,h4,ol {
 	padding:0;
 }
 
+h1,h2,h3,h4 {
+	font-size: 1em;
+}
+
+
 p {
 	margin-bottom: 1em;
 }
@@ -116,6 +121,24 @@ a abbr[title] {
 .open-close-shade.shaded {
 	/*opacity:0.4;*/
 }
+
+.translation_missing {
+	outline: solid $admin-link-color 1px;
+	position: relative;
+}
+
+.translation_missing:hover {
+	outline: none;
+}
+
+.translation_missing:hover:before {
+	content: "Übersetzung fehlt";
+	background-color: $admin-link-color;
+	padding:0.3em 1em;
+	color:white;
+	position: absolute;
+}
+
 
 /* fades table behind opened description popup */
 .shaded td > * > *:not(.opened), 
@@ -911,6 +934,11 @@ dl.tags {
 			}
 		}
 	}
+
+	.time-end + .daynames:before {
+		content: "\A";
+		white-space: pre-wrap;
+	}
 }
 
 .event .basic .teacher,
@@ -1189,9 +1217,23 @@ dl.tags {
 
 ul.workshops {
 
-	margin-bottom: 4em;
+	margin-bottom: 3em;
 
-	.week {
+	.controls {
+		@include make-row();
+
+		.header {
+			@include make-xs-column(5);
+			@include make-xs-column-offset(1);
+			padding-bottom: $vertical-box-padding;
+			line-height: $line-height;
+			text-transform: uppercase;
+			font-size: 0.8em;
+			color:red;
+		}
+	}
+
+	.group {
 		@include make-row();
 
 		.time-duration {
@@ -1237,8 +1279,9 @@ ul.workshops {
 			}
 			.class-data {
 				float:right;
+				font-weight: bold;
 
-				> *:not(.time-end) {
+				.daynames {
 					padding-left:1ex;
 				}
 			}

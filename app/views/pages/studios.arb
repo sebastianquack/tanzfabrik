@@ -10,7 +10,7 @@ header :id => "headlines", :class => "headlines-teachers" do
 end
 
 ul :class => "studios" do
-  Studio.order('location_id').load.each do |studio|
+  Studio.all.sort_by{ |s| s.name }.sort_by{ |s| s.location.name }.each do |studio|
     li :class => "row studio" do
       div :class => "basic" do   
         div :class => "content" do

@@ -6,7 +6,7 @@ header :id => "headlines", :class => "headlines-performance-projecte" do
         span editable page, :title
       end
     end
-    div :class => "line2 open-close" do
+    div :class => "line2 open-close opened" do
       div :class => "open" do
         div editable page, :content, :type => "wysihtml5"
         div t(:close), :class => "close-trigger"
