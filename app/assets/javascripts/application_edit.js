@@ -38,6 +38,7 @@ $(document).ready(function() {
   };
 
   $.fn.editable.defaults.mode = 'inline';
+  $.fn.editable.defaults.emptytext = '(Klicken, um Text einzufügen)';
 
   $(".editable").editable();
 
