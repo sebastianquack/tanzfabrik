@@ -16,8 +16,7 @@ end
 # create a big array of all the events details TODO: optimize
 details = []
 events.each do |e|
-  logger.debug e.id
-  details += e.event_details if e.event_details.all? { |ed| ed.valid? }
+    details += e.event_details if e.event_details.all? { |ed| ed.valid? }
 end
 
 # do all the calculations
@@ -38,16 +37,9 @@ details_by_studio = details.group_by {|detail| detail.studio}
 
 details_by_studio.each do |studio, details|
   
-  logger.debug "studio"
-  logger.debug studio
-  
-  logger.debug "details"
-  logger.debug details
   
   # go through dates = columns
   dates.each_with_index do |date, column_index|
-    
-    logger.debug "checking date..." + date.to_s
     
     unless table_data[row_index]
       table_data[row_index] = [] # initialize row if that hasen't happened yet
