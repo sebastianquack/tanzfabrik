@@ -346,6 +346,9 @@ de:
       download:
         description: Titel
         attachment: Datei
+      tag:
+        abbr: Kürzel
+        name: Name
 
   formtastic:
     update: "%{model} speichern"

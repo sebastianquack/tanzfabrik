@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722181953) do
+ActiveRecord::Schema.define(version: 20140729124237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,14 @@ ActiveRecord::Schema.define(version: 20140722181953) do
     t.date     "end_date"
     t.time     "time"
     t.integer  "repeat_mode_id"
+  end
+
+  create_table "event_tags", id: false, force: true do |t|
+    t.integer  "id",         default: "nextval('event_tags_id_seq'::regclass)", null: false
+    t.integer  "event_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "event_types", force: true do |t|
@@ -251,6 +259,8 @@ ActiveRecord::Schema.define(version: 20140722181953) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name_en"
+    t.string   "abbr_de"
+    t.string   "abbr_en"
   end
 
 end

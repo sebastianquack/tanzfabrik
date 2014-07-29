@@ -125,7 +125,7 @@ div :class => "timetable-container" do
                       time l(detail.starttime, :format => :hours_minutes), :class => "course-time"
                       text_node "-"
                       time l(detail.endtime_clock, :format => :hours_minutes), :class => "course-time"
-                      span "(" + detail.tags.map { |t| t.id }.join('/') + ")" if detail.tags.length > 0
+                      span "(" + detail.tags.map { |t| t.short }.join('/') + ")" if detail.tags.length > 0
                     end
                   end
                 end
@@ -140,7 +140,7 @@ div :class => "timetable-container" do
   end
   dl :class => "tags" do
     tags.uniq.each do |tag|
-      dt "(" + tag.id.to_s + ")"
+      dt "(" + tag.short + ")"
       dd tag.name
     end
   end
