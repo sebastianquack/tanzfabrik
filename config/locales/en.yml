@@ -38,8 +38,6 @@ en:
   starting_from: "from"
   more: "more"
   dates: "Dates"
-  more_information: "Information"
-  more_festival: "Zum Festival"
   workshop_registration: "Online-Anmeldung"
   tickets: "Tickets"
 
@@ -47,7 +45,9 @@ en:
   profitraining_more: "Wichtige Infos zum Profitraining."
   performance_projekte_more: "Informationen"
   programm_more: "Informationen"
-  
+  workshop_program_more: "Informationen"
+  more_festival: "Zum Festival"
+
   holiday: "Ferien"
   programm_event_headline: Stage
   festival_programm: Stage

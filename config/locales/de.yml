@@ -18,8 +18,6 @@ de:
   more: "mehr"
   dates: "Termine"
   close: "schließen"
-  more_information: "Informationen"
-  more_festival: "Zum Festival"
   workshop_registration: "Workshop-Anmeldung"
   tickets: "Tickets"
 
@@ -27,7 +25,9 @@ de:
   profitraining_more: "Wichtige Infos zum Profitraining."
   performance_projekte_more: "Informationen"
   programm_more: "Informationen"
-  
+  workshop_program_more: "Informationen"
+  more_festival: "Zum Festival"
+
   holiday: "Ferien"
   programm_event_headline: Bühne
   festival_programm: Bühne
