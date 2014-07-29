@@ -4,7 +4,7 @@ if page
 	  div :class => "main" do
 	    div :class => "line1" do
 	      h1 editable(page, :title), :class => "title"
-        a "> " + page.downloads.first.description, :href => page.downloads.first.attachment.url, :class => "registration" if page.downloads
+        a "> " + page.downloads.first.description, :href => page.downloads.first.attachment.url, :class => "registration" if page.downloads.first
 	    end
 	  end
 	end
