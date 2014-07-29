@@ -992,8 +992,6 @@ dl.tags {
 			color:red;
 		}
 
-
-
 		.description {
 			position:relative;
 			padding-top:$vertical-box-padding;
@@ -1022,7 +1020,11 @@ dl.tags {
 			.close-trigger {
 				display: block;
 			}
+		}
 
+		.open-trigger.opened {
+			cursor:normal;
+			color:inherit;
 		}
 	}
 

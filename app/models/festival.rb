@@ -14,18 +14,13 @@ class Festival < ActiveRecord::Base
   has_many :downloads
   accepts_nested_attributes_for :downloads, :allow_destroy => true
 
-  def startdate
-    # TODO
-    return self.events.first.event_details.first.starttime
+
+  def start_date
+    return self.events.min_by { |e| e.start_date} .start_date
   end
 
-  def firsttime
-    # TODO: find first 
-  end
-
-  def enddate
-    # TODO
-    return self.events.last.event_details.last.endtime
+  def end_date
+    return self.events.max_by { |e| e.end_date} .end_date
   end
   
 end

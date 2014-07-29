@@ -83,7 +83,12 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
       li do
         span t(:section_berlin)
         ul do    
-          li link_to_page("profil_partner")
+          li t(:section_about) do
+            ul do
+              li link_to_page("profil_partner")
+              li link_to_page("team")
+            end
+          end
           li link_to_page("tickets")
           li t(:section_rental) do
             ul do

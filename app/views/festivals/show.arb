@@ -5,7 +5,7 @@ div :class => "festival" do
       div :class => "line1" do
         h1 :class => "title" do
             span festival.name
-            time l(festival.startdate, :format => :day_month) + "-" + l(festival.enddate, :format => :day)
+            time l(festival.start_date, :format => :short) + "-" + l(festival.end_date) if festival.events.exists?
           end
         a "> " + t(:tickets), :class => "registration"
         a "> " + t(:workshop_registration), :class => "registration"
@@ -68,7 +68,7 @@ div :class => "festival" do
         end
       end
     end  
-    render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.startdate }
+    render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.start_date }
   end
 
 end

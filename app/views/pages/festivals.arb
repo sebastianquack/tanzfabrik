@@ -1,7 +1,7 @@
 render "/pages/editable_content"
 
 # get festivals now and in the future
-festivals = Festival.select { |f| f.enddate >= Date.today - 2.week }
+festivals = Festival.select { |f| f.events.length > 0 && f.end_date >= Date.today - 2.week }
 
 ul :class => "festivals" do
 

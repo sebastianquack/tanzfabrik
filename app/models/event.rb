@@ -59,6 +59,14 @@ class Event < ActiveRecord::Base
     self.event_details.min_by { |ed| ed.starttime} .starttime
   end
 
+  def start_date
+    self.event_details.min_by { |ed| ed.start_date} .start_date
+  end
+
+  def end_date
+    self.event_details.max_by { |ed| ed.end_date} .end_date
+  end
+
   def tags
     tags = self.event_details.collect_concat { |ed| ed.tags }
     tags
