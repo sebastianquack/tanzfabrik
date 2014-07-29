@@ -3,9 +3,8 @@ if page
 	  div :class => "before"
 	  div :class => "main" do
 	    div :class => "line1" do
-	      h1 :class => "title" do
-	        text_node editable page, :title
-	      end
+	      h1 editable(page, :title), :class => "title"
+        a "> " + page.downloads.first.description, :href => page.downloads.first.attachment.url, :class => "registration" if page.downloads
 	    end
 	  end
 	end

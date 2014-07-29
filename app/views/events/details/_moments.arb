@@ -1,15 +1,20 @@
 # local variable event
 
 #make a list of occurrences
-occurrences = event.event_details.all.collect { |ed| [ed.studio, ed.occurrences] }
+occurrences = []
+event.event_details.each do |ed|
+  ed.occurrences.each do |oc|
+    occurrences << [ oc, ed.studio]
+  end
+end
 
 ul :class => "times-places moments" do
-  occurrences.each do |studio, occurrence|
+  occurrences.sort_by{ |oc| oc[0] }.each do |occurrence, studio|
     li :class => "time-place moment" do
       div :class => "time-moment" do
         time do 
-          span l event.event_details.first.starttime, :format => :day
-          span l event.event_details.first.starttime, :format => :hours_minutes
+          span l occurrence, :format => :day
+          span l occurrence, :format => :hours_minutes
         end
       end
       span :class => "place" do

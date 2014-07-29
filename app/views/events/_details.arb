@@ -41,6 +41,10 @@ end
 
 small editable event, :info, :type => "wysihtml5"
 
+if event.event_details.first.studio
+  small event.event_details.first.studio.location.address
+end
+
 if event.images.length > 0 && !event.images.first.license.empty?
   small event.images.first.license
 end
