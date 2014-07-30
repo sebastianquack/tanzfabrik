@@ -38,6 +38,9 @@ ActiveAdmin.register Image do
       row :image do
         image_tag(image.attachment(:medium))
       end
+      row "Datei" do
+        link_to image.attachment.url, image.attachment.url
+      end
     end
     active_admin_comments
   end
