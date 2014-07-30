@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   def set_locale
     if params[:locale]
       I18n.locale = params[:locale] 
-    elsif request.location.country_code == "DE" || request.location.country_code == "AT" || request.location.country_code == "CH"
+    elsif request.location && (request.location.country_code == "DE" || request.location.country_code == "AT" || request.location.country_code == "CH")
       I18n.locale = :de
     else
       I18n.locale = I18n.default_locale

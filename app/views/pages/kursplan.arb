@@ -5,9 +5,9 @@ header :id => "headlines", :class => "headlines-kursplan" do
         span editable page, :title
       end
     end
-    div :class => "line2 open-close" do
+    div :class => "line2 open-close opened" do
       div :class => "open" do
-        div editable page, :content, :type => "wysihtml5"
+        form editable page, :content, :type => "wysihtml5"
         div t(:close), :class => "close-trigger"
       end
       div :class => "closed open-trigger" do
@@ -41,7 +41,9 @@ div :class => "open-close-shade" do
   # end
 
   events = Event.of_types([3, 4, 5, 6])    
-  render :partial => "/events/timetable", :locals => {:events => events, :start_date => start_date}
-  #render :partial => "/events/schedule", :locals => {:events => events, :start_date => start_date}
+  cache_arbre(self, cache_key_for_kursplan(events)) do
+    render :partial => "/events/timetable", :locals => {:events => events, :start_date => start_date}
+    #render :partial => "/events/schedule", :locals => {:events => events, :start_date => start_date}
+  end
 
 end

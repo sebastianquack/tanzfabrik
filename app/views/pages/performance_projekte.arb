@@ -35,7 +35,7 @@ Event.of_types([5]).sort_by{ |e| e.start_date }.each do |project|
         a :href => event_path(project) do 
           h2 project.title, :class => "title"
           para project.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
-          para project.description.html_safe, :class => "description" #unless event.description.empty?
+          div project.description.html_safe, :class => "description" #unless event.description.empty?
           div t(:more), :class => "more"
         end
       end
