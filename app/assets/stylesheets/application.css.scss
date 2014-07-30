@@ -683,7 +683,7 @@ table.timetable {
 		@include border-line(bottom, red);
 	}
 
-	.studio {
+	th .studio {
 
 		@include border-line(top, red);
 		position:relative;
@@ -715,7 +715,7 @@ table.timetable {
 	}
 
 	.event {
-		height: 6 * $line-height + 2 * $vertical-box-padding;
+		height: 7 * $line-height + 2 * $vertical-box-padding;
 		padding: $vertical-box-padding 0;
 		
 		@include border-line(bottom, black);

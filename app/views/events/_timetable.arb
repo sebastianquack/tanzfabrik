@@ -1,8 +1,8 @@
-# festival timetable: show all weeks that have occurrences of events
-# kursplan: show for specific week
-
 # pass week into timetable as local
 # if variable not present, use start of current week
+# pass events
+# pass location
+
 unless defined? start_date
   start_date = Date.today.beginning_of_week # gets current monday
 end
@@ -16,8 +16,10 @@ end
 # create a big array of all the events details TODO: optimize
 details = []
 events.each do |e|
-    details += e.event_details if e.event_details.all? { |ed| ed.valid? }
+    details += e.event_details.select{ |ed| ed.valid? && ed.studio.location == location }
 end
+
+#details.each { |detail| pre detail.time.strftime('1%H%M').to_i }
 
 # do all the calculations
 table_data = []
@@ -32,12 +34,17 @@ end
 
 row_index = 1
 
-# go through event details per studio
-details_by_studio = details.group_by {|detail| detail.studio}
+# go through event details per hour
+details_by_hour = details
+  .sort_by { |detail| detail.studio.name } #.sort_by { |detail| detail.event.title }
+  .sort_by { |detail| detail.time.strftime('1%H%M').to_i }
+  .group_by { |detail| detail.time.hour }
+  #.group_by {|detail| detail.studio.location}
 
-details_by_studio.each do |studio, details|
-  
-  
+#pre details_by_location.to_yaml
+
+details_by_hour.each do |hour, details|
+
   # go through dates = columns
   dates.each_with_index do |date, column_index|
     
@@ -62,11 +69,17 @@ details_by_studio.each do |studio, details|
 
   # only if there was an occurrence in this row, add time to first column
   if table_data[row_index]
-    table_data[row_index][0]  = div details.first.studio.location.name, :class => "location-name"
-    table_data[row_index][0] += div details.first.studio.name, :class => "studio-name"
+    #table_data[row_index][0]  = div details.first.studio.location.name, :class => "location-name"
+    #table_data[row_index][0] += div details.first.studio.name, :class => "studio-name"
+    table_data[row_index][0]  = div hour.to_s + ":00"
     row_index += 1
   end
-end  
+end
+
+table_data[1][0] = div(location.name, :class => "location-name") + br + table_data[1][0]
+
+
+#pre table_data.to_yaml
 
 # display the table
 div :class => "timetable-container" do
@@ -81,18 +94,27 @@ div :class => "timetable-container" do
       end
     end
     table_data.shift
-    table_data.sort! { |a,b| a[0].to_s <=> b[0].to_s }
+    #table_data.sort! { |a,b| a[0].to_s <=> b[0].to_s }
     table_data.each do |row|
       tr do
+
+        largest = 0
         row.each_with_index do |data, index|
+          largest = data.length if index > 0 && data.length > largest
+        end
+        
+        row.each_with_index do |data,index|
           if index == 0 
             th do
               div data, :class => (data == "" ? "" : "studio")
             end
           else
             td do
-              if data != []
-                data.each do |detail|
+              largest.times do |detail_index|
+                if !data[detail_index]
+                  article :class => "event empty-event"
+                else
+                  detail = data[detail_index]
                   article :class => "event" do              
                     div :class => "title-description open-close" do
                       h4 :class => "title open-trigger" do
@@ -119,10 +141,11 @@ div :class => "timetable-container" do
                       time l(detail.endtime_clock, :format => :hours_minutes), :class => "course-time"
                       span "(" + detail.tags.map { |t| t.short }.join('/') + ")" if detail.tags.length > 0
                     end
-                  end
+                    div :class => "studio" do
+                      text_node detail.studio.location.name + " " + detail.studio.name if detail.studio
+                    end          
+                  end          
                 end
-              else
-                article :class => "event empty-event"
               end
             end          
           end
