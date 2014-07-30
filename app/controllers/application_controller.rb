@@ -3,9 +3,16 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :tanzfabrik_redirects
   before_action :set_locale
   before_action :set_background_image
  
+  def tanzfabrik_redirects # TODO: improve and add content
+    if request.fullpath == "kurse.php"
+      redirect_to page_url('tanzklassen'), status: :moved_permanently
+    end
+  end
+
   def set_locale
     if params[:locale]
       I18n.locale = params[:locale] 

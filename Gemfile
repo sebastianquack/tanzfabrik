@@ -75,6 +75,8 @@ gem "autoprefixer-rails"
 
 gem 'bourbon'
 
+gem 'meta-tags'
+
 # gem 'sprockets_better_errors'
 
 group :production do

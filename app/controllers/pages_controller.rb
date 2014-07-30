@@ -7,6 +7,7 @@ class PagesController < ApplicationController
       #use regular query because friendly throws error if not found
       @page = Page.where(:slug => params[:id]).first 
       if @page
+        set_meta_tags :title => @page.title
         # try to show special template with page slug name if exists      
         if !Dir.glob(Rails.root.join("app", "views", "pages", "#{@page.slug}.*")).empty?
           render "#{@page.slug}" and return
@@ -26,6 +27,7 @@ class PagesController < ApplicationController
       @page = Page.friendly.find('start')
       render "start" and return # this works even if page start is not in db and exists only as template
     end
+
   end
 
   def update

@@ -2,7 +2,7 @@
 <html lang="<%= I18n.locale %>">
 <head>
   <meta charset="utf-8"> 
-  <title>Tanzfabrik</title>
+  <%= display_meta_tags :site => 'Tanzfabrik', :reverse => true %>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>  
   <%= stylesheet_link_tag "application_edit", media: "all", "data-turbolinks-track" => true if admin_user_signed_in? %> 
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>

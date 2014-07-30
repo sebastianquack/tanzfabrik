@@ -2,6 +2,7 @@ class FestivalsController < ApplicationController
 
   def show
     @festival = Festival.find(params[:id])
+    set_meta_tags :title => (@festival.name)
   end
 
   def update

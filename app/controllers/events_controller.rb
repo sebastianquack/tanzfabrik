@@ -2,6 +2,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    set_meta_tags :title => (@event.title + " | " + @event.type.name)
   end
 
   def index

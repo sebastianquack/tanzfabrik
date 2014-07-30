@@ -4,8 +4,14 @@ Tanzfabrik::Application.routes.draw do
     
   devise_for :admin_users, ActiveAdmin::Devise.config
   
+  #get "/kalenderarchiv2" => redirect('http://archiv.tanzfabrik-berlin.de/kalenderarchiv2-kalender2%5Bshow%5D=archiv&kalender2%5Bvktg_code%5D%3D99&kalenderarchiv%5Byear%5D=2014&date=2587.php')
+
   get 'admin' => 'admin/pages#index'
   ActiveAdmin.routes(self)
+
+  #get '*path' => redirect('http://archiv.tanzfabrik-berlin.de:path') # TODO: make this work - all unknown paths redirect to old site
+
+  #get '/kurse.php' => redirect('/de/kursplan') # --> see application_controller
 
   scope "/:locale" do
     resources :events, :only => [:show, :index, :update]

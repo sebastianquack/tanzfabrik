@@ -24,6 +24,6 @@ module Tanzfabrik
 
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     config.assets.precompile += ['application_edit.js', 'application_edit.css']
-    
+
   end
 end
