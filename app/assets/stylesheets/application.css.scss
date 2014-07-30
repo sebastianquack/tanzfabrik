@@ -82,7 +82,7 @@ p {
 	margin-bottom: 1em;
 }
 
-p:last-of-type {
+p:last-of-type, p:empty {
 	margin-bottom: 0; /* for editables */
 }
 
