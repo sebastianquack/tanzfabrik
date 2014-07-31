@@ -25,7 +25,6 @@ $(document).ready(function() {
   $("head").append("<style>.site-background:after {background-image: url("+background_image+")}</style>")
 
   // hide .if-overflown elements when parent .open-close is not overflown
-
   $(".if-overflown").each ( function (i,elem) {
     base = $(elem).closest('.overflown-base').add($(elem).siblings('.overflown-base'))
     trigger = $(elem).closest('.is-overflown').add($(elem).siblings('.is-overflown'))
@@ -53,22 +52,32 @@ $(document).ready(function() {
     $(this).closest('.open-close-shade').removeClass("shaded")
   });
 
-  initMenuContentHide()
-
   // scroll to anchor
-  setTimeout(function() {
   if (location.hash.length > 1) {
-    if ($("#_"+location.hash.substr(1)).length == 1) {
-      elem = $("#_"+location.hash.substr(1))
-    }
-    else if ($(location.hash).length == 1) {
-      elem = $(location.hash)
-    }
-    else return;
-    elem.find(".open-close").addClass("opened")
-    scrollScreenTo(elem, 1500)
-  }},100)
+    last_w = 0
+    check_render_status = setInterval(function() {
+      var w=$(window).height()
+      if (last_w == w) {
+        window.clearInterval(check_render_status)
+        if ($("#_"+location.hash.substr(1)).length == 1) {
+          elem = $("#_"+location.hash.substr(1))
+        }
+        else if ($(location.hash).length == 1) {
+          elem = $(location.hash)
+        }
+        else return;
+        elem.find(".open-close").addClass("opened")
+        scrollScreenTo(elem, 1500)
+      }      
+      last_w = w
+    }, 20)
+  }
 
+  setTimeout(function() {
+
+  },100)
+
+  initMenuContentHide()
 
 });
 
