@@ -61,8 +61,6 @@ GEM
     arbre (1.0.1)
       activesupport (>= 3.0.0)
     arel (4.0.2)
-    autoprefixer-rails (1.2.0.20140609)
-      execjs
     aws-sdk (1.8.5)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
@@ -223,7 +221,6 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   arbre
-  autoprefixer-rails
   aws-sdk
   bootstrap-sass (~> 3.1.1)
   bootstrap-wysihtml5-rails
