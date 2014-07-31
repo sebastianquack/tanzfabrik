@@ -98,11 +98,13 @@ div :class => "timetable-container" do
     table_data.each do |row|
       tr do
 
+        # find maximum number of entries for a table cell in this row
         largest = 0
         row.each_with_index do |data, index|
           largest = data.length if index > 0 && data.length > largest
         end
         
+        # output cells
         row.each_with_index do |data,index|
           if index == 0 
             th do
@@ -154,7 +156,7 @@ div :class => "timetable-container" do
     end
   end
   dl :class => "tags" do
-    tags.uniq.each do |tag|
+    tags.uniq.sort_by { |t| t.abbr } .each do |tag|
       dt "(" + tag.short + ")"
       dd tag.name
     end

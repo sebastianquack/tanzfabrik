@@ -147,6 +147,9 @@ a abbr[title] {
 	position: absolute;
 }
 
+.not-overflown .if-overflown {
+	display:none;
+}
 
 /* fades table behind opened description popup */
 .shaded td > * > *:not(.opened), 
@@ -1020,11 +1023,11 @@ dl.tags {
 
 	.basic {
 
-		.open-trigger, .close-trigger {
+		.open-trigger.overflown:not(.opened), .close-trigger {
 			cursor: pointer;
 		}
 
-		.open-trigger:hover, .close-trigger:hover {
+		.open-trigger.overflown:not(.opened):hover, .close-trigger:hover {
 			color:red;
 		}
 

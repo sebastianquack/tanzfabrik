@@ -3,10 +3,18 @@
 people.each do |person|
   div :class => "row teachers" do
     div :class => "basic" do
-      div :class => "description open-close open-trigger" do
-        div person.bio.html_safe, :class => "bio" if person.bio
-        div t(:more) + " >", :class => "more"
-        div t(:close), :class => "close-trigger"
+      if person.bio
+        div :class => "description open-close open-trigger overflown-base" do
+          div person.bio.html_safe, :class => "bio is-overflown"
+          div :class => "if-overflown" do
+            div t(:more) + " >", :class => "more"
+            div t(:close), :class => "close-trigger"
+          end
+        end
+      else
+        div :class => "description empty-description" do
+          div :class => "bio"
+        end
       end
     end
     div :class => "details" do

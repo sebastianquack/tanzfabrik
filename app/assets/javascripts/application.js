@@ -23,13 +23,35 @@ $(document).ready(function() {
   $(".site-background:after").css("background-image",background_image)
   $("head").append("<style>.site-background:after {background-image: url("+background_image+")}</style>")
 
-  // open
+  // hide .if-overflown elements when parent .open-close is not overflown
+
+/*
+  $(".open-close").has(".if-overflown").each ( function (i,elem) {
+    console.log(elem)
+    if (!elem.overflown) {
+      console.log("not over")
+      $(elem).find(".if-overflown").hide()
+    }
+  })*/
+
+  $(".if-overflown").each ( function (i,elem) {
+    base = $(elem).closest('.overflown-base').add($(elem).siblings('.overflown-base'))
+    trigger = $(elem).closest('.is-overflown').add($(elem).siblings('.is-overflown'))
+    if ($(trigger).overflown_y()) {
+      $(base).addClass("overflown")
+    }
+    else {
+      $(base).addClass("not-overflown")
+    }
+  })
+
+  // set open event
   $(".open-trigger").click( function() {
     $(this).closest('.open-close').addClass("opened")
     $(this).closest('.open-close-shade').addClass("shaded")
   });
 
-  // close
+  // set close event
   $(".close-trigger").click(function (event) {
     event.stopPropagation();
     $(this).closest('.open-close').removeClass("opened")
@@ -78,3 +100,10 @@ var setMaxHeight = function(elem) {
     elem.css("max-height", maxHeight)
 }
 
+// detect overflow
+$.fn.overflown_y=function(){
+  var e=this[0];
+  console.log(e.scrollHeight)
+  console.log(e.clientHeight)
+  return e.scrollHeight>e.clientHeight;
+}
