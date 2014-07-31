@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+
   translates :title, :description, :warning, :info, fallback: :any
 
   belongs_to :type, :class_name => "EventType"

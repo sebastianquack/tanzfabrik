@@ -3,7 +3,7 @@ header :id => "headlines", :class => "headlines-event" do
     div :class => "line1" do
       h1 editable(page, :title), :class => "title"
       a "> " + t(:workshop_registration), :class => "registration"
-      a "> " + page.downloads.first.description, :href => page.downloads.first.attachment.url, :class => "registration" if !page.content && page.downloads
+      a "> " + page.downloads.first.description, :href => page.downloads.first.attachment.url, :class => "registration" if !page.content && page.downloads && page.downloads.first && page.downloads
     end
     if page.content
       div :class => "line2 open-close opened" do

@@ -9,7 +9,15 @@ module PagesHelper
   end
 
   def person_link(person)
-    #url_for :controller => 'pages', :action => 'show', :id => "kursplan", :anchor => "#{kurs.id}"
+    if person.kurslehrer?
+      page = "lehrer" 
+    elsif person.artist?
+      page = "kuenstler"
+    else
+      return nil
+    end
+
+    url_for :controller => 'pages', :action => 'show', :id => page, :anchor => "#{person.id}"
   end  
 
 end

@@ -3,6 +3,7 @@ header :id => "headlines", :class => "headlines-kursplan" do
     div :class => "line1" do
       h1 :class => "title" do
         span editable page, :title
+        span t(:kursplan_address), :class => "neutral"
       end
     end
     div :class => "line2 open-close opened" do

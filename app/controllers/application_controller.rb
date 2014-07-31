@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :set_background_image
  
-  def tanzfabrik_redirects # TODO: improve and add content
+  def tanzfabrik_redirects # TODO: improve (yaml?) and add content
     if request.fullpath == "kurse.php"
       redirect_to page_url('tanzklassen'), status: :moved_permanently
     end

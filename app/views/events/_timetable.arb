@@ -119,20 +119,20 @@ div :class => "timetable-container" do
                   detail = data[detail_index]
                   article :class => "event" do              
                     div :class => "title-description open-close" do
-                      h4 :class => "title open-trigger" do
+                      h4 :class => "title open-trigger close-others" do
                         text_node detail.event.title.html_safe if detail.event.title
                       end
                       div :class => "description" do
                         span t(:close), :class => "close-trigger"
-                        div detail.event.description.html_safe if detail.event.description
+                        div detail.event.description.html_safe, :class => "description-content" if detail.event.description
                         a "> Dieses Ereignis bearbeiten", :href => edit_admin_event_path(detail.event), :class => "admin-only admin-nav" if admin_user_signed_in?
                       end
                     end
                     div :class => "teacher" do
-                      link_to detail.event.people[0].name.html_safe, person_url(detail.event.people[0]) if detail.event.people[0]
+                      link_to detail.event.people[0].name.html_safe, person_link(detail.event.people[0]) if detail.event.people[0]
                     end
                     div :class => "teacher" do
-                      link_to detail.event.people[1].name.html_safe, person_url(detail.event.people[1]) if detail.event.people[1]
+                      link_to detail.event.people[1].name.html_safe, person_link(detail.event.people[1]) if detail.event.people[1]
                     end
                     div :class => "warning" do
                       text_node detail.event.warning.html_safe if detail.event.warning

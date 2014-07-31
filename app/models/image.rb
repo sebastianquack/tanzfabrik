@@ -7,7 +7,9 @@ class Image < ActiveRecord::Base
       :medium => ["300x300>", :jpg], 
       :thumb => ["100x100>", :jpg]
       },
-    :convert_options => { :background => "-quality 92" },
+    :convert_options => { 
+      :background => "-quality 92" 
+      },
     :storage => :s3,
     :bucket         => ENV['S3_TANZFABRIK_BUCKET'],
     :s3_credentials => { :access_key_id     => ENV['S3_KEY'], 

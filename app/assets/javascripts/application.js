@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery.turbolinks 
+//= require jquery.scrollTo
 //= require turbolinks
 //= require bootstrap
 
@@ -24,15 +25,6 @@ $(document).ready(function() {
   $("head").append("<style>.site-background:after {background-image: url("+background_image+")}</style>")
 
   // hide .if-overflown elements when parent .open-close is not overflown
-
-/*
-  $(".open-close").has(".if-overflown").each ( function (i,elem) {
-    console.log(elem)
-    if (!elem.overflown) {
-      console.log("not over")
-      $(elem).find(".if-overflown").hide()
-    }
-  })*/
 
   $(".if-overflown").each ( function (i,elem) {
     base = $(elem).closest('.overflown-base').add($(elem).siblings('.overflown-base'))
@@ -47,6 +39,9 @@ $(document).ready(function() {
 
   // set open event
   $(".open-trigger").click( function() {
+    if ($(this).hasClass("close-others")) {
+      $(".open-close.opened").removeClass("opened")
+    }
     $(this).closest('.open-close').addClass("opened")
     $(this).closest('.open-close-shade').addClass("shaded")
   });
@@ -59,6 +54,21 @@ $(document).ready(function() {
   });
 
   initMenuContentHide()
+
+  // scroll to anchor
+  setTimeout(function() {
+  if (location.hash.length > 1) {
+    if ($("#_"+location.hash.substr(1)).length == 1) {
+      elem = $("#_"+location.hash.substr(1))
+    }
+    else if ($(location.hash).length == 1) {
+      elem = $(location.hash)
+    }
+    else return;
+    elem.find(".open-close").addClass("opened")
+    scrollScreenTo(elem, 1500)
+  }},100)
+
 
 });
 
@@ -103,7 +113,32 @@ var setMaxHeight = function(elem) {
 // detect overflow
 $.fn.overflown_y=function(){
   var e=this[0];
-  console.log(e.scrollHeight)
-  console.log(e.clientHeight)
   return e.scrollHeight>e.clientHeight;
 }
+
+//borrowed from jQuery easing plugin
+//http://gsgd.co.uk/sandbox/jquery.easing.php
+$.easing.elasout = function(x, t, b, c, d) {
+  var s=1.70158;var p=0;var a=c;
+  if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
+  if (a < Math.abs(c)) { a=c; var s=p/4; }
+  else var s = p/(2*Math.PI) * Math.asin (c/a);
+  return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
+};
+
+// scroll whole screen
+var scrollScreenTo = function (el, duration) {
+    var elOffset = el.offset().top;
+    var elHeight = el.height();
+    var windowHeight = $(window).height();
+    var offset;
+
+    if (elHeight < windowHeight) {
+      offset = elOffset - ((windowHeight / 2) - (elHeight / 2));
+    }
+    else {
+      offset = elOffset;
+    }
+
+    $.scrollTo( offset, duration, { easing:'elasout' } );
+  }

@@ -29,6 +29,8 @@ $font-family-base: "Roboto";
 $grid-columns: 6; /* column width: 144px */
 $grid-gutter-width: 16px;
 
+$text-color:						#333333;
+
 $brand-primary:         #F50015;
 /*
 $brand-success:         #5cb85c !default;
@@ -157,6 +159,7 @@ a abbr[title] {
 .shaded dl, 
 .shaded :empty {
   opacity:0.3;
+  @include transition(opacity 0.3s 0.1s);
 }
 
 ul, li {
@@ -499,6 +502,12 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 
 		h1 {
 			line-height:2em;
+
+			.neutral {
+				padding-left:1em;
+				color: $text-color;
+				text-transform: none;
+			}
 		}
 
 		a.next, a.registration {
@@ -512,6 +521,7 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 		a.registration + a.registration {
 			padding-right: 1em;
 		}
+
 	}
 
 	.title {
@@ -637,13 +647,17 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 			position:absolute;
 			top:-$vertical-box-padding;
 			left:-$grid-gutter-width;
-			opacity: 0;
 			background-color:#18BEE8;
 			width:233%;
 			padding: (2 * $line-height + 1em) $grid-gutter-width 0.5em $grid-gutter-width;
 			z-index:5;
 			font-size:90%;
 			display:none;
+			
+			.description-content {
+				opacity: 0;
+				@include transition(opacity 0.5s);
+			}
 
 			.close-trigger {
 				font-size: 90%;
@@ -670,8 +684,12 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 		}
 
 		.description {
-			opacity:1;
 			display:block;
+
+
+			.description-content {
+				opacity:1;
+			}			
 		}
 	}
 
@@ -1215,7 +1233,7 @@ dl.tags {
 	.image-container, .description, .close-trigger {
 		display:none;
 		opacity:0;
-		@include transition(opacity 0.2s);
+		@include transition(opacity 0.5s);
 	}
 
 	.opened .image-container, .opened .description, .opened .close-trigger {

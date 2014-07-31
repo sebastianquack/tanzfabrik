@@ -21,6 +21,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~>3.1.0'
+gem "jquery-scrollto-rails"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -71,7 +72,7 @@ gem 'bootstrap-wysihtml5-rails'
 
 gem 'google-webfonts'
 gem 'html5shiv-rails'
-gem "autoprefixer-rails"
+#gem "autoprefixer-rails"
 
 gem 'bourbon'
 
