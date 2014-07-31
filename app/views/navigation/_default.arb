@@ -18,12 +18,12 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
 
     ul :id => "language-select" do
       li :class => (I18n.locale == :en ? ("selected") : ("unselected")) do
-        a :href => url_for(:locale => "en"), :hreflang => "en" do
+        a :href => url_for(:locale => "en"), :rel => "alternate",  :hreflang => "en" do
           abbr "en", :lang => "en", :title => "English"
         end
       end      
       li :class => (I18n.locale == :de ? ("selected") : ("unselected")) do
-        a :href => url_for(:locale => "de"), :hreflang => "de" do
+        a :href => url_for(:locale => "de"), :rel => "alternate", :hreflang => "de" do
           abbr "de", :lang => "de", :title => "Deutsch"
         end
       end

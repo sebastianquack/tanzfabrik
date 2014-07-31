@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  include SeoHelper
 
   # GET /pages/:id
   def show
@@ -8,6 +9,7 @@ class PagesController < ApplicationController
       @page = Page.where(:slug => params[:id]).first 
       if @page
         set_meta_tags :title => @page.title
+        set_meta_tags :description => choose_page_description(@page)
         # try to show special template with page slug name if exists      
         if !Dir.glob(Rails.root.join("app", "views", "pages", "#{@page.slug}.*")).empty?
           render "#{@page.slug}" and return

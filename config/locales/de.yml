@@ -306,6 +306,7 @@ de:
       page: 
         title: Seitentitel
         content: Text
+        description: Zusammenfassung
       event:
         type: Art
         title: Titel

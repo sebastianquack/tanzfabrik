@@ -6,7 +6,7 @@ ActiveAdmin.register Page do
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # permit_params :list, :of, :attributes, :on, :model
-  permit_params :title_de, :content_de, :title_en, :content_en, 
+  permit_params :title_de, :content_de, :title_en, :content_en, :description_de, :description_en,
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
 
@@ -53,6 +53,8 @@ ActiveAdmin.register Page do
       row :content_en do |page|
         page.content_en.html_safe if page.content_en
       end
+      row :description_de
+      row :description_en
       row Image.model_name.human do |page|
         page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
@@ -72,6 +74,10 @@ ActiveAdmin.register Page do
       f.input :content_de, :input_html => { :class => 'wysihtml5' }
       f.input :content_en, :input_html => { :class => 'wysihtml5' }
     end
+    f.inputs :description do
+      f.input :description_de, :input_html => { :maxlength => 156, :placeholder => auto_generate_description(f.object.content_de.to_s), :class => '' }
+      f.input :description_en, :input_html => { :maxlength => 156, :placeholder => auto_generate_description(f.object.content_de.to_s), :class => '' }
+    end 
     f.inputs "Images" do
       f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
         f_f.inputs do

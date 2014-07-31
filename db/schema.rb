@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729124237) do
+ActiveRecord::Schema.define(version: 20140731103009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,6 +208,8 @@ ActiveRecord::Schema.define(version: 20140729124237) do
     t.string   "slug"
     t.string   "title_en"
     t.text     "content_en"
+    t.string   "description_de"
+    t.string   "description_en"
   end
 
   add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
