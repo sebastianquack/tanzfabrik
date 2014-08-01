@@ -516,6 +516,7 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 
 		a.registration {
 			font-size: 90%;
+			font-weight: bold;
 		}
 
 		a.registration + a.registration {
@@ -647,7 +648,7 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 			position:absolute;
 			top:-$vertical-box-padding;
 			left:-$grid-gutter-width;
-			background-color:#18BEE8;
+			background-color: rgba(24, 190, 232, 0.75);
 			width:233%;
 			padding: (2 * $line-height + 1em) $grid-gutter-width 0.5em $grid-gutter-width;
 			z-index:5;
@@ -821,9 +822,10 @@ ul.timetable {
 
 
 dl.tags {
-	font-size: 90%;
 	margin: 2 * $vertical-box-padding 0 0 0;
 	dt, dd {
+		font-size: 76%;
+		line-height: ($line-height / 0.76);
 		float:left;
 		font-weight: normal;
 	}
@@ -1054,8 +1056,8 @@ dl.tags {
 			padding-top:$vertical-box-padding;
 
 			.bio {
-				height:10 * $line-height * 0.9714;
-				min-height:10 * $line-height * 0.9714;
+				height:7 * $line-height * 0.9714;
+				min-height:7 * $line-height * 0.9714;
 				overflow-y: hidden;
 			}
 
@@ -1468,8 +1470,10 @@ ul.workshops {
 			left:3px;
 			border-radius: 100%;
 		}
-		input[type=checkbox] + .input-style-helper:hover:after,
-		input[type=radio] + .input-style-helper:hover:after  {
+		input[type=checkbox]:not(.checked) + .input-style-helper:hover:after,
+		input[type=radio]:not(.checked) + .input-style-helper:hover:after,
+		input[type=checkbox]:not(:checked) + .input-style-helper:hover:after,
+		input[type=radio]:not(:checked) + .input-style-helper:hover:after {
 			content: " ";
 			background-color: #888;
 			width: 14px;

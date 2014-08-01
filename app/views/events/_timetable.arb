@@ -76,7 +76,9 @@ details_by_hour.each do |hour, details|
   end
 end
 
-table_data[1][0] = div(location.name, :class => "location-name") + br + table_data[1][0]
+if table_data[1]
+  table_data[1][0] = div(location.name, :class => "location-name") + br + table_data[1][0]
+end
 
 
 #pre table_data.to_yaml
