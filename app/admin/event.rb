@@ -169,15 +169,11 @@ ActiveAdmin.register Event do
           
           et_f.input :studio, :include_blank => false, :collection => Studio.order(:location_id).load.map {|s| [ s.location.name + " " + s.name, s.id] }
           
-<<<<<<< HEAD
-          et_f.inputs :class => 'no-legend' do
-            et_f.input :tags, :as => :check_boxes, :collection => Tag.order("lower(name_de) ASC"), :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)
-=======
+
           et_f.input :custom_place, :input_html => { :maxlength => 15, :size => 15 }
 
           et_f.inputs :tags, :class => 'no-legend' do
             et_f.input :tags, :as => :check_boxes, :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)
->>>>>>> 9e40c49d0e78848f0308e421e1caa8d234435fb5
           end
 
         end
