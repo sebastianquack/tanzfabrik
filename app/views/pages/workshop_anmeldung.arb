@@ -22,28 +22,32 @@ else
   workshops = workshops.sort_by { |w| w.start_date }
 
   div :class => "registration-form" do
+    
+    
     form_for registration do |f|
       
       div :class => "form-workshops label-columns" do
 
+        para t(:workshop_registration_intro)
+        
         div :class => "row" do
           f.label :workshop_id_1, "Workshop 1"
-          f.collection_select :workshop_id_1, workshops, :id, :workshop_select, :prompt => "Bitte auswählen"
+          f.collection_select :workshop_id_1, workshops, :id, :workshop_select, :prompt => t(:workshop_registration_choose)
         end
 
         div :class => "row" do
           f.label :workshop_id_2, "Workshop 2"
-          f.collection_select :workshop_id_2, workshops, :id, :workshop_select, :prompt => "Bitte auswählen"
+          f.collection_select :workshop_id_2, workshops, :id, :workshop_select, :prompt => t(:workshop_registration_choose)
         end
 
         div :class => "row" do
           f.label :workshop_id_3, "Workshop 3"
-          f.collection_select :workshop_id_3, workshops, :id, :workshop_select, :prompt => "Bitte auswählen"
+          f.collection_select :workshop_id_3, workshops, :id, :workshop_select, :prompt => t(:workshop_registration_choose)
         end
 
         div :class => "row" do  
           f.label :workshop_id_4, "Workshop 4"
-          f.collection_select :workshop_id_4, workshops, :id, :workshop_select, :prompt => "Bitte auswählen"
+          f.collection_select :workshop_id_4, workshops, :id, :workshop_select, :prompt => t(:workshop_registration_choose)
         end
 
       end
@@ -51,72 +55,91 @@ else
       div :class => "form-personal label-columns" do
       
         div :class => "row" do
-          f.label :prename
+          f.label :prename, t(:workshop_registration_prename)
           f.text_field :prename, :required => true
         end
 
         div :class => "row" do
-          f.label :surname
+          f.label :surname, t(:workshop_registration_surname)
           f.text_field :surname, :required => true
         end
 
         div :class => "row" do
-          f.label :street
+          f.label :street, t(:workshop_registration_street)
           f.text_field :street, :required => true
         end
 
         div :class => "row" do
-          f.label :city
+          f.label :city, t(:workshop_registration_city)
           f.text_field :city, :required => true
         end
 
         div :class => "row" do
-          f.label :zip
+          f.label :zip, t(:workshop_registration_zip)
           f.text_field :zip, :required => true
         end
 
         div :class => "row" do
-          f.label :phone
+          f.label :phone, t(:workshop_registration_phone)
           f.text_field :phone
         end
 
         div :class => "row" do
-          f.label :email
+          f.label :email, t(:workshop_registration_email)
           f.text_field :email, :type => "email", :required => true
         end
 
       end
 
       div :class => "row" do
-
-        div t(:form_section_professional), :class => "title"
-
-        div :class => "form-checkbox" do
-          f.check_box :professional
-          div :class => "input-style-helper"
-          f.label :professional
-        end
-
+        div t(:form_section_payment), :class => "title"
+        para t(:form_section_payment_explanation_html)
       end
+
+      div :class => "row" do
+        div t(:form_section_conditions), :class => "title"
+        para t(:form_section_conditions_explanation)
+      end
+
+
+      #div :class => "row" do
+
+        #div t(:form_section_professional), :class => "title"
+
+        #div :class => "form-checkbox" do
+          #f.check_box :professional
+          #div :class => "input-style-helper"
+          #f.label :professional
+          #end
+
+      #end
     
       div :class => "row" do
 
         div t(:form_section_membership_status), :class => "title"
+        para t(:form_section_membership_status_explanation)
 
         div :class => "form-radio" do
 
-          f.label :membership_status
-
           f.radio_button :membership_status, 0, :checked => true
           div :class => "input-style-helper"
-          f.label :membership_status, 'kein Mitglied'
+          f.label :membership_status, t(:form_section_membership_status_0)
 
           f.radio_button :membership_status, 1
           div :class => "input-style-helper"
-          f.label :membership_status, 'Mitglied'
+          f.label :membership_status, t(:form_section_membership_status_1)
         end
 
       end
+      
+      div :class => "row" do
+        div t(:form_section_concessions), :class => "title"
+        div do 
+          Page.find("ermassigungen") ? Page.find("ermassigungen").content.html_safe : ""
+        end
+      end
+      
+      
       
       div :class => "row" do
 
@@ -124,19 +147,17 @@ else
 
         div :class => "form-radio" do
     
-          f.label :workshop_info
-          
           f.radio_button :workshop_info, 1
           div :class => "input-style-helper"
-          f.label :workshop_info, 'post'
+          f.label :workshop_info, t(:form_news_mail)
 
           f.radio_button :workshop_info, 2
           div :class => "input-style-helper"
-          f.label :workshop_info, 'email'
+          f.label :workshop_info, t(:form_news_email)
 
           f.radio_button :workshop_info, 0, :checked => true
           div :class => "input-style-helper"
-          f.label :workshop_info, 'none'
+          f.label :workshop_info, t(:form_news_no)
 
         end
       end
@@ -147,19 +168,17 @@ else
 
         div :class => "form-radio" do
 
-          f.label :course_program
-
           f.radio_button :course_program, 1
           div :class => "input-style-helper"
-          f.label :course_program, 'post'
+          f.label :course_program, t(:form_news_mail)
 
           f.radio_button :course_program, 2
           div :class => "input-style-helper"
-          f.label :course_program, 'email'
+          f.label :course_program, t(:form_news_email)
 
           f.radio_button :course_program, 0, :checked => true
           div :class => "input-style-helper"
-          f.label :course_program, 'none'
+          f.label :course_program, t(:form_news_no)
         end
       end
 
@@ -169,19 +188,17 @@ else
 
         div :class => "form-radio" do
 
-          f.label :event_program
-
           f.radio_button :event_program, 1
           div :class => "input-style-helper"
-          f.label :event_program, 'post'
+          f.label :event_program, t(:form_news_mail)
 
           f.radio_button :event_program, 2
           div :class => "input-style-helper"
-          f.label :event_program, 'email'
+          f.label :event_program, t(:form_news_email)
 
           f.radio_button :event_program, 0, :checked => true
           div :class => "input-style-helper"
-          f.label :event_program, 'none'
+          f.label :event_program, t(:form_news_no)
         end
       end
       
@@ -193,18 +210,17 @@ else
         div :class => "form-checkbox" do
           f.check_box :accept_terms, :required => true
           div :class => "input-style-helper"
-          f.label :accept_terms
+          f.label :accept_terms, t(:form_section_accept_terms_label) 
         end
       end
       
       div :class => "row form-note label-columns" do
-        f.label :note
+        f.label :note, t(:form_section_note)
         f.text_area :note
       end
 
       div :class => "row" do
-        f.submit "Anmelden"
-        #todo javascript verification
+        f.submit t(:form_submit)
       end
 
     end
