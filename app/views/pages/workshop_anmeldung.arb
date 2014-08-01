@@ -1,4 +1,13 @@
-render "/pages/editable_content"
+header :id => "headlines", :class => "headlines-teachers" do
+  div :class => "before"
+  div :class => "main" do
+    div :class => "line1" do
+      h1 :class => "title" do
+        text_node editable page, :title
+      end
+    end
+  end
+end
 
 if notice == "ok"
   para "Vielen Dank für Ihre Anmeldung."
@@ -12,107 +21,192 @@ else
   workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ?', Date.today)
   workshops = workshops.sort_by { |w| w.start_date }
 
-  form_for registration do |f|
-  
-    f.label :workshop_id_1, "Workshop 1"
-    f.collection_select :workshop_id_1, workshops, :id, :workshop_select, :prompt => "Bitte auswählen"
-    br
+  div :class => "registration-form" do
+    form_for registration do |f|
+      
+      div :class => "form-workshops label-columns" do
+
+        div :class => "row" do
+          f.label :workshop_id_1, "Workshop 1"
+          f.collection_select :workshop_id_1, workshops, :id, :workshop_select, :prompt => "Bitte auswählen"
+        end
+
+        div :class => "row" do
+          f.label :workshop_id_2, "Workshop 2"
+          f.collection_select :workshop_id_2, workshops, :id, :workshop_select, :prompt => "Bitte auswählen"
+        end
+
+        div :class => "row" do
+          f.label :workshop_id_3, "Workshop 3"
+          f.collection_select :workshop_id_3, workshops, :id, :workshop_select, :prompt => "Bitte auswählen"
+        end
+
+        div :class => "row" do  
+          f.label :workshop_id_4, "Workshop 4"
+          f.collection_select :workshop_id_4, workshops, :id, :workshop_select, :prompt => "Bitte auswählen"
+        end
+
+      end
+
+      div :class => "form-personal label-columns" do
+      
+        div :class => "row" do
+          f.label :prename
+          f.text_field :prename, :required => true
+        end
+
+        div :class => "row" do
+          f.label :surname
+          f.text_field :surname, :required => true
+        end
+
+        div :class => "row" do
+          f.label :street
+          f.text_field :street, :required => true
+        end
+
+        div :class => "row" do
+          f.label :city
+          f.text_field :city, :required => true
+        end
+
+        div :class => "row" do
+          f.label :zip
+          f.text_field :zip, :required => true
+        end
+
+        div :class => "row" do
+          f.label :phone
+          f.text_field :phone
+        end
+
+        div :class => "row" do
+          f.label :email
+          f.text_field :email, :type => "email", :required => true
+        end
+
+      end
+
+      div :class => "row" do
+
+        div t(:form_section_professional), :class => "title"
+
+        div :class => "form-checkbox" do
+          f.check_box :professional
+          div :class => "input-style-helper"
+          f.label :professional
+        end
+
+      end
     
-    f.label :workshop_id_2, "Workshop 2"
-    f.collection_select :workshop_id_2, workshops, :id, :workshop_select, :prompt => "Bitte auswählen"
-    br
+      div :class => "row" do
+
+        div t(:form_section_membership_status), :class => "title"
+
+        div :class => "form-radio" do
+
+          f.label :membership_status
+
+          f.radio_button :membership_status, 0, :checked => true
+          div :class => "input-style-helper"
+          f.label :membership_status, 'kein Mitglied'
+
+          f.radio_button :membership_status, 1
+          div :class => "input-style-helper"
+          f.label :membership_status, 'Mitglied'
+        end
+
+      end
+      
+      div :class => "row" do
+
+        div t(:form_section_workshop_info), :class => "title"
+
+        div :class => "form-radio" do
     
-    f.label :workshop_id_3, "Workshop 3"
-    f.collection_select :workshop_id_3, workshops, :id, :workshop_select, :prompt => "Bitte auswählen"
-    br
-    
-    f.label :workshop_id_4, "Workshop 4"
-    f.collection_select :workshop_id_4, workshops, :id, :workshop_select, :prompt => "Bitte auswählen"
-  
-    br
-  
-    f.label :prename
-    f.text_field :prename, :required => true
+          f.label :workshop_info
+          
+          f.radio_button :workshop_info, 1
+          div :class => "input-style-helper"
+          f.label :workshop_info, 'post'
 
-    f.label :surname
-    f.text_field :surname, :required => true
+          f.radio_button :workshop_info, 2
+          div :class => "input-style-helper"
+          f.label :workshop_info, 'email'
 
-    f.label :street
-    f.text_field :street, :required => true
-  
-    f.label :city
-    f.text_field :city, :required => true
-  
-    f.label :zip
-    f.text_field :zip, :required => true
-  
-    f.label :phone
-    f.text_field :phone
-  
-    f.label :email
-    f.text_field :email, :type => "email", :required => true
-  
-    f.check_box :professional
-    f.label :professional
-  
-    br
-  
-    f.radio_button :membership_status, 0, :checked => true
-    f.label :membership_status, 'kein Mitglied'
+          f.radio_button :workshop_info, 0, :checked => true
+          div :class => "input-style-helper"
+          f.label :workshop_info, 'none'
 
-    f.radio_button :membership_status, 1
-    f.label :membership_status, 'Mitglied'
-    
-    br
-  
-    f.label :workshop_info
-    f.radio_button :workshop_info, 1
-    f.label :workshop_info, 'post'
+        end
+      end
+      
+      div :class => "row" do
 
-    f.radio_button :workshop_info, 2
-    f.label :workshop_info, 'email'
+        div  t(:form_section_course_program), :class => "title"
 
-    f.radio_button :workshop_info, 0, :checked => true
-    f.label :workshop_info, 'none'
-    
-    br
+        div :class => "form-radio" do
 
-    f.label :course_program
-    f.radio_button :course_program, 1
-    f.label :course_program, 'post'
+          f.label :course_program
 
-    f.radio_button :course_program, 2
-    f.label :course_program, 'email'
+          f.radio_button :course_program, 1
+          div :class => "input-style-helper"
+          f.label :course_program, 'post'
 
-    f.radio_button :course_program, 0, :checked => true
-    f.label :course_program, 'none'
-    
-    br
+          f.radio_button :course_program, 2
+          div :class => "input-style-helper"
+          f.label :course_program, 'email'
 
-    f.label :event_program
-    f.radio_button :event_program, 1
-    f.label :event_program, 'post'
+          f.radio_button :course_program, 0, :checked => true
+          div :class => "input-style-helper"
+          f.label :course_program, 'none'
+        end
+      end
 
-    f.radio_button :event_program, 2
-    f.label :event_program, 'email'
+      div :class => "row" do
 
-    f.radio_button :event_program, 0, :checked => true
-    f.label :event_program, 'none'
-    
-    br
-  
-    f.check_box :accept_terms, :required => true
-    f.label :accept_terms
+        div t(:form_section_event_program), :class => "title"
 
-    br
-   
-    f.label :note
-    br
-    f.text_area :note, size: "60x12"
-    br
+        div :class => "form-radio" do
 
-    f.submit "Anmelden"
-    #todo javascript verification
+          f.label :event_program
+
+          f.radio_button :event_program, 1
+          div :class => "input-style-helper"
+          f.label :event_program, 'post'
+
+          f.radio_button :event_program, 2
+          div :class => "input-style-helper"
+          f.label :event_program, 'email'
+
+          f.radio_button :event_program, 0, :checked => true
+          div :class => "input-style-helper"
+          f.label :event_program, 'none'
+        end
+      end
+      
+
+      div :class => "row" do
+
+        div t(:form_section_accept_terms), :class => "title"
+
+        div :class => "form-checkbox" do
+          f.check_box :accept_terms, :required => true
+          div :class => "input-style-helper"
+          f.label :accept_terms
+        end
+      end
+      
+      div :class => "row form-note label-columns" do
+        f.label :note
+        f.text_area :note
+      end
+
+      div :class => "row" do
+        f.submit "Anmelden"
+        #todo javascript verification
+      end
+
+    end
   end
-
 end

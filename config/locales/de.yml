@@ -40,6 +40,13 @@ de:
   price_event: Eintritt
   price_reduced_limit: "Frühbucherrabatt: Gilt bei Eingang der Gesamtzahlung bis"
 
+  form_section_professional: ""
+  form_section_membership_status: "Fördermitgliedschaft"
+  form_section_workshop_info: "Workshopinformationen"
+  form_section_course_program: "Kursprogramm"
+  form_section_event_program: "Veranstaltungsprogramm"
+  form_section_accept_terms: "AGB's"
+
   ticket_link: "http://www.reservix.de/off/login_check.php?id=c6ec16e8cf3cd5077514ebef590a1f763d4616b372ef8900411779bf6bedf213&vID=9246"
 
   date:

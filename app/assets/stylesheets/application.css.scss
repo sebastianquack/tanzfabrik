@@ -1360,3 +1360,138 @@ ul.workshops {
 
 	}
 }
+
+/**** registration form ****/
+
+.registration-form {
+
+	.row {
+		padding:$vertical-box-padding ($grid-gutter-width);
+	}
+
+	input[type=text], 
+	input[type=email], 
+	textarea,
+	select {
+		width:100%;
+		border:solid 1px $text-color;
+		background-color: white;
+		border-radius: 0;
+	}
+
+	textarea {
+		height:7em;
+	}
+
+	#registration_prename,
+	#registration_surname,
+	#registration_street,
+	#registration_city,
+	#registration_phone,
+	#registration_email
+	 {
+		width:35%;
+	}
+
+	#registration_zip
+	 {
+		width:15%;
+	}
+
+	label {
+		font-weight: normal;
+	}
+
+	.label-columns {
+
+		label, input {
+			/*margin-top:$vertical-box-padding * 2;*/
+		}
+
+
+		label {
+			clear:both;
+			@include make-xs-column(2);
+			text-align:right;
+		}
+		label + input,
+		label + select,
+		label + textarea {
+			@include make-xs-column(4);
+		}
+
+	}
+
+	.title {
+		@include make-xs-column(2);
+		text-align: right;
+	}
+
+	.form-checkbox, .form-radio {
+		@include make-xs-column(4);
+
+		padding-left: 3px;
+
+		input[type=checkbox], input[type=radio] {
+			display: none;
+			clear:left;
+		}
+
+		label {
+			float:left;
+		}
+
+		input[type=checkbox] + .input-style-helper,
+		input[type=radio] + .input-style-helper {
+			visibility: visible;
+			display:block;
+			border: 1px solid $text-color;
+			border-radius: 100%;
+			background-color: white;
+			float:left;
+			width:22px;
+			height:22px;
+			position:relative;
+			margin-right:$grid-gutter-width;
+			clear:left;
+		}
+		input[type=checkbox].checked + .input-style-helper:after,
+		input[type=radio].checked + .input-style-helper:after,
+		input[type=checkbox]:checked + .input-style-helper:after,
+		input[type=radio]:checked + .input-style-helper:after{
+			content: " ";
+			background-color: black;
+			width: 14px;
+			height: 14px;
+			position:absolute;
+			top:3px;
+			left:3px;
+			border-radius: 100%;
+		}
+		input[type=checkbox] + .input-style-helper:hover:after,
+		input[type=radio] + .input-style-helper:hover:after  {
+			content: " ";
+			background-color: #888;
+			width: 14px;
+			height: 14px;
+			position:absolute;
+			top:3px;
+			left:3px;
+			border-radius: 100%;
+		}		
+	}
+
+	input[type=submit] {
+		@include make-xs-column(4);
+		@include make-xs-column-offset(2);
+		border: 1px solid $text-color;		
+		background-color: white;
+		padding: $vertical-box-padding;
+	}
+
+	input[type=submit]:hover {
+		background-color: black;
+		color:white;
+	}
+
+}

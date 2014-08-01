@@ -73,9 +73,29 @@ $(document).ready(function() {
     }, 20)
   }
 
-  setTimeout(function() {
+  // form events
+  $(".form-radio input[type=radio] + .input-style-helper").click(function () {
+    radio = $(this).prev('input[type=radio]')
+    radios = $(this).parents(".form-radio").find("input[type=radio]")
+    radios.each(function(i,elem) {
+      $(this).removeAttr("checked")
+      $(this).removeClass("checked")
+    })
+    radio.attr("checked", true)
+    radio.addClass("checked")
+  })
 
-  },100)
+  $(".form-checkbox input[type=checkbox] + .input-style-helper").click(function () {
+    checkbox = $(this).prev('input[type=checkbox]')
+    if (checkbox.attr("checked") == "checked") {
+      checkbox.removeAttr("checked")
+      checkbox.removeClass("checked")
+    }
+    else {
+      checkbox.attr("checked", true)
+      checkbox.addClass("checked")
+    }
+  })
 
   initMenuContentHide()
 
