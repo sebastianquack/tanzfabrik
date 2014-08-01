@@ -47,7 +47,7 @@ end
 
 small editable event, :info, :type => "wysihtml5"
 
-if event.event_details.first.studio
+if event.event_details.first.studio && event.event_details.none? { |ed| ed.custom_place }
   small event.event_details.first.studio.location.address
 end
 

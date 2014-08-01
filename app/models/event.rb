@@ -36,7 +36,7 @@ class Event < ActiveRecord::Base
 
   # event_type to display
   def display_type
-    if self.custom_type
+    if self.custom_type && !self.custom_type.empty?
       return self.custom_type
     else
       self.type.name
