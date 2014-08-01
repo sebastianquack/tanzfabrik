@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  
+  <h1>Neue Workshop-Anmeldung</h1>
+  
+  <p>
+  Vorname: <%= @registration.prename %><br>
+  Nachname: <%= @registration.surname %><br>
+  Straße: <%= @registration.street %><br>
+  PLZ: <%= @registration.zip %><br>
+  Stadt: <%= @registration.city %><br>
+  Telefon: <%= @registration.phone %><br>
+  Email: <%= @registration.email %><br>
+  Profi: <%= (@registration.professional ? "Ja" : "Nein") %><br>
+  Mitglied: <%= (@registration.membership_status == 1 ? "Ja" : "Nein") %>
+  </p>
+
+  <p>Notiz: <%= @registration.note %></p>
+
+  <p>
+  Workshop1: <%= @registration.workshop_1.workshop_select %><br>
+  Workshop2: <%= @registration.workshop_2.workshop_select if @registration.workshop_2 %><br>
+  Workshop3: <%= @registration.workshop_3.workshop_select if @registration.workshop_3 %><br>
+  Workshop4: <%= @registration.workshop_4.workshop_select if @registration.workshop_4 %><br>
+  </p>
+
+  <% verteiler = ["Nein", "Post", "Email"] %>
+  <p>
+  Verteiler Workshops: <%= verteiler[@registration.workshop_info] %><br>
+  Verteiler Kursprogramm: <%= verteiler[@registration.course_program] %><br>
+  Verteiler Eventprogramm: <%= verteiler[@registration.event_program] %>
+  </p>
+  
+</body>
+</html>
