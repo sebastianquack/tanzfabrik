@@ -14,12 +14,11 @@ header :id => "headlines", :class => "headlines-event" do
         a ">", :class => "next"
       else
         h1 t(:programm_event_headline), :class => "title"
-        a ">" + t(:tickets), :class => "registration"
+        a ">" + t(:tickets), :href => t(:ticket_link), :class => "registration"
       end
     end
   end
 end
-
 
 div :class => "row event single-event" do
   div :class => "basic" do 

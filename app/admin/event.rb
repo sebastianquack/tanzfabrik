@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   menu :priority => 1
 
-  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :feature_on_welcome_screen, :price_regular, :price_reduced,
+  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced,
     :festival_ids => [], :person_ids => [],
     :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :repeat_mode_id, :_destroy, tag_ids: []],
     :people_attributes => [:id, :name, :_destroy],
@@ -36,7 +36,9 @@ ActiveAdmin.register Event do
     column Festival.model_name.human do |event|
       event.festivals.map { |f| (link_to f.name, admin_festival_path(f)) }.join(', ').html_safe
     end
-    column :type
+    column :type do |event|
+      event.display_type
+    end
     #column Tag.model_name.human do |event|
     #  event.tags.map { |t| (link_to t.name, admin_tag_path(t)) }.join(', ').html_safe
     #end
@@ -90,6 +92,7 @@ ActiveAdmin.register Event do
         number_to_currency price.price_reduced
       end       
       row :type
+      row :custom_type
       #row Tag.model_name.human do |event|
       #  event.tags.map { |t| (link_to t.name, admin_tag_path(t)) }.join(', ').html_safe
       #end
@@ -108,8 +111,9 @@ ActiveAdmin.register Event do
   end
 
   form do |f|
-    f.inputs "Typ" do
-      f.input :type, :include_blank => false, :hint => (link_to "Verwalten", admin_event_types_path)
+    f.inputs :type do
+      f.input :type, :include_blank => false#, :hint => (link_to "Verwalten", admin_event_types_path)
+      f.input :custom_type
     end
 
     f.inputs "Personen auswählen" do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731103009) do
+ActiveRecord::Schema.define(version: 20140801112115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20140731103009) do
     t.boolean  "feature_on_welcome_screen"
     t.decimal  "price_regular",             precision: 4, scale: 0
     t.decimal  "price_reduced",             precision: 4, scale: 0
+    t.string   "custom_type"
   end
 
   create_table "festival_events", force: true do |t|
@@ -225,6 +226,7 @@ ActiveRecord::Schema.define(version: 20140731103009) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.text     "bio_en"
+    t.boolean  "dance_intensive"
   end
 
   create_table "person_events", force: true do |t|

@@ -34,7 +34,7 @@ ol :class => "event-calendar" do
         div :class => "content" do
           a :href => event_path(event) do 
             h2 event.title, :class => "title"
-            h3 event.type.name, :class =>"type"
+            h3 event.display_type, :class =>"type"
             para event.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
           end
         end

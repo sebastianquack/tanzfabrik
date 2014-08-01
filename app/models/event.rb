@@ -32,6 +32,17 @@ class Event < ActiveRecord::Base
       :allow_nil => true,
       :greater_than_or_equal_to => 0
   
+  validates_presence_of :type_id
+
+  # event_type to display
+  def display_type
+    if self.custom_type
+      return self.custom_type
+    else
+      self.type.name
+    end
+  end
+
   def self.of_types type_ids
     where_clause = type_ids.map {|type_id| "event_types.id = " + type_id.to_s + " " }.join(" OR ")
     events = Event.joins(:type, :event_details).group('events.id').where(where_clause)

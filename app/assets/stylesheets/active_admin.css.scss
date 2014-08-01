@@ -62,6 +62,11 @@ form textarea {
   clear:right;
 }
 
+.formtastic .inputs li.boolean {
+  padding-top:0;
+  padding-bottom: 2em;
+}
+
 .ui-datepicker-header {
   height: auto !important;
 }

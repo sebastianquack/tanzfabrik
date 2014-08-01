@@ -3,7 +3,7 @@ show_festival = nil if !defined? show_festival
 h2 event.title, :class => "title"
 
 if event.type.name != "Performance-Projekt" && event.type.name != "Workshop"
-  para event.type.name, :class => "type"
+  para event.display_type, :class => "type"
 end
 
 para :class => "teacher" do
