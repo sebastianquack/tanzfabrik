@@ -1,0 +1,74 @@
+div :class => "festival" do
+
+  header :class => "headlines festival-headlines" do
+    div :class => "main" do
+      div :class => "line1" do
+        h1 :class => "title" do
+            span festival.name
+            time l(festival.start_date, :format => :short) + "-" + l(festival.end_date) if festival.events.exists?
+          end
+        a "> " + t(:tickets), :class => "registration"
+        a "> " + t(:workshop_registration), :class => "registration"
+      end
+      div :class => "line2 open-close" do
+        div :class => "open" do
+          if festival.images.length > 0
+            div :class => "row" do
+              div :class => "image-container" do
+                img :src => festival.images.first.attachment.url, :title => festival.images.first.description, :alt => festival.images.first.description
+              end      
+              div festival.description, :class => "description"
+            end
+          else
+            div festival.description, :class => "description"
+          end
+          if admin_user_signed_in?
+            div :class => "admin-only admin-nav" do
+              a "> Dieses Festival bearbeiten", :href => edit_admin_festival_path(festival)
+            end          
+          end
+          div t(:close), :class => "close-trigger"
+        end
+        div :class => "closed open-trigger" do
+          div t :information_programm
+        end
+      end    
+      div :class => "line3" do
+        ul do
+          festival.downloads.each do |download|        
+            li do
+              a download.description, :href => download.attachment.url
+            end
+          end
+        end
+      end          
+    end
+  end
+
+  # festival workshops
+  festival_workshops = festival.events.where(:type_id => 2)
+  if festival_workshops.length > 0
+    h2 :class => "headlines" do
+      div :class => "main" do
+        div :class => "line1" do
+          div t(:festival_workshops), :class => "title"
+        end
+      end
+    end
+    render :partial => "/events/workshop_list", :locals => {:workshops => festival_workshops, :combinations => false}  
+  end
+
+  # festival events
+  events = festival.events.where.not(:type_id => 2)
+  if events.length > 0
+    h2 :class => "headlines" do
+      div :class => "main" do
+        div :class => "line1" do
+          div t(:festival_programm), :class => "title"
+        end
+      end
+    end  
+    render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.start_date }
+  end
+
+end

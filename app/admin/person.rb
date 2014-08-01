@@ -2,12 +2,12 @@ ActiveAdmin.register Person do
 
   menu :priority => 3  
 
-  permit_params :id, :name, :bio_de, :bio_en, :role, :event_ids => [], :images_attributes => [:id, :description, :license, :attachment, :_destroy]
+  permit_params :id, :name, :bio_de, :bio_en, :role, :dance_intensive, :event_ids => [], :images_attributes => [:id, :description, :license, :attachment, :_destroy]
 
   index do
     selectable_column
     column :name
-    column :role
+    #column :role
     column :events do |person|
         person.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
     end
@@ -26,7 +26,8 @@ ActiveAdmin.register Person do
   show do
     attributes_table do
       row :name
-      row :role
+      #row :role
+      row :dance_intensive
       row :events do |person|
         person.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
       end      
@@ -45,7 +46,8 @@ ActiveAdmin.register Person do
   form :html => { :enctype => "multipart/form-data" } do |f|
       f.inputs "Details" do
         f.input :name
-        f.input :role
+        f.input :dance_intensive        
+        #f.input :role
         f.input :bio_de, :input_html => { :class => 'wysihtml5' }
         f.input :bio_en, :input_html => { :class => 'wysihtml5' }
         #f.input :events, :as => :check_boxes

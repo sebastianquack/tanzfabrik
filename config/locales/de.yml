@@ -40,6 +40,8 @@ de:
   price_event: Eintritt
   price_reduced_limit: "Frühbucherrabatt: Gilt bei Eingang der Gesamtzahlung bis"
 
+  ticket_link: "http://www.reservix.de/off/login_check.php?id=c6ec16e8cf3cd5077514ebef590a1f763d4616b372ef8900411779bf6bedf213&vID=9246"
+
   date:
     abbr_day_names:
     - So
@@ -272,8 +274,8 @@ de:
         one: Attribut
         other: Attributes
       event_type:
-        one: Art
-        other: Arten        
+        one: Typ
+        other: Typen        
       festival:
         one: Festival
         other: Festivals
@@ -310,7 +312,8 @@ de:
         content: Text
         description: Zusammenfassung
       event:
-        type: Art
+        type: Typ
+        custom_type: "Typ: Eigener Text"
         title: Titel
         description: Text
         info: Zusatzinformation
@@ -334,6 +337,7 @@ de:
         repeat_mode: Wiederholung
         duration: Dauer
         studio: Studio
+        custom_place: Anderer Ort
       festival:
         name: Titel
         description: Text
@@ -345,6 +349,7 @@ de:
         events: Ereignisse
         image: Bild
         images: Bilder
+        dance_intensive: Dance-Intensive-LehrerIn
       studio:
         location: Adresse
         name: Name

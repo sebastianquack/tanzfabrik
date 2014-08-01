@@ -1,12 +1,13 @@
-render "/pages/editable_content"
-
-Person.where(:role => 'Dance Intensive Lehrer').each do |person|
-  div do
-    h2 person.name
-    para img :src => person.image.url if person.image.exists?
-    a "Biographie", :href => person_path(person)
-    para do
-      person.events.map { |e| (link_to e.type.name + " " + e.title, event_path(e)) }.join(', ').html_safe
+header :id => "headlines", :class => "headlines-teachers" do
+  div :class => "before"
+  div :class => "main" do
+    div :class => "line1" do
+      h1 :class => "title" do
+        text_node editable page, :title
+      end
     end
   end
 end
+
+dance_intensivists = Person.where(:dance_intensive => true).order(:name)
+render :partial => "/people/list", :locals => {:people => dance_intensivists}

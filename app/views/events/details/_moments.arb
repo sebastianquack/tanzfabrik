@@ -4,12 +4,12 @@
 occurrences = []
 event.event_details.each do |ed|
   ed.occurrences.each do |oc|
-    occurrences << [ oc, ed.studio]
+    occurrences << [ oc, ed]
   end
 end
 
 ul :class => "times-places moments" do
-  occurrences.sort_by{ |oc| oc[0] }.each do |occurrence, studio|
+  occurrences.sort_by{ |oc| oc[0] }.each do |occurrence, ed|
     li :class => "time-place moment" do
       div :class => "time-moment" do
         time do 
@@ -18,7 +18,11 @@ ul :class => "times-places moments" do
         end
       end
       span :class => "place" do
-        a (studio.location.name + " " + studio.name), :href => url_for(:controller => 'pages', :action => 'show', :id => 'studios')
+        if ed.custom_place?
+          span ed.custom_place
+        else
+          span (ed.studio.location.name + " " + ed.studio.name)
+        end
       end
     end
   end  
