@@ -4,6 +4,35 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-  <%= @registration.surname %>
+  
+  <h1>Neue Anmeldung</h1>
+  
+  <p>
+  Vorname: <%= @registration.prename %><br>
+  Nachname: <%= @registration.surname %><br>
+  Straße: <%= @registration.street %><br>
+  PLZ: <%= @registration.zip %><br>
+  Stadt: <%= @registration.city %><br>
+  Telefon: <%= @registration.phone %><br>
+  Email: <%= @registration.email %><br>
+  Profi: <%= @registration.professional %><br>
+  Mitglied: <%= @registration.membership_status %>
+  </p>
+
+  <p>Notiz: <%= @registration.note %></p>
+
+  <p>
+  Workshop1: <%= @registration.workshop_1.title %><br>
+  Workshop2: <%= @registration.workshop_2.title if @registration.workshop_2 %><br>
+  Workshop3: <%= @registration.workshop_3.title if @registration.workshop_3 %><br>
+  Workshop4: <%= @registration.workshop_4.title if @registration.workshop_4 %><br>
+  </p>
+
+  <p>
+  Verteiler Workshops: <%= @registration.workshop_info %><br>
+  Verteiler Kursprogramm: <%= @registration.course_program %><br>
+  Verteiler Eventprogramm:<%= @registration.event_program %>
+  </p>
+  
 </body>
 </html>

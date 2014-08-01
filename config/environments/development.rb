@@ -40,4 +40,6 @@ Tanzfabrik::Application.configure do
     password: ENV['GMAIL_PASSWORD_DEV']
   }
   
+  config.action_mailer.raise_delivery_errors = true
+  
 end

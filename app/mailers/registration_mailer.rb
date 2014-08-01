@@ -1,8 +1,8 @@
 class RegistrationMailer < ActionMailer::Base
-  default from: "sebastianquack@gmail.com"
+  default from: "admin@tanzfabrik.de"
   
   def registration_mail(registration)
     @registration = registration
-    mail(to: "sebastianquack@gmail.com", subject: "test")
+    mail(to: "sebastianquack@gmail.com, holgheiss@gmail.com", subject: "Workshop-Anmeldung")
   end
 end
