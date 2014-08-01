@@ -49,8 +49,12 @@ ol :class => "event-calendar" do
           end
 
           div :class => "address" do
-            div detail.studio.location.name, :class => "location"
-            div detail.studio.name, :class => "studio"
+            if detail.custom_place?
+              div detail.custom_place, :class => "location"
+            else
+              div detail.studio.location.name, :class => "location"
+              div detail.studio.name, :class => "studio"
+            end
           end
         end    
       end

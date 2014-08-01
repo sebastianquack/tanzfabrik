@@ -4,7 +4,7 @@ ActiveAdmin.register Event do
 
   permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced,
     :festival_ids => [], :person_ids => [],
-    :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :repeat_mode_id, :_destroy, tag_ids: []],
+    :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :custom_place, :repeat_mode_id, :_destroy, tag_ids: []],
     :people_attributes => [:id, :name, :_destroy],
     :person_events_attributes => [:id, :person_id, :event_id, :_destroy],
     :festival_events_attributes => [:id, :event_id, :festival_id, :_destroy],
@@ -61,7 +61,11 @@ ActiveAdmin.register Event do
       row EventDetail.model_name.human do |event|
         event.event_details.each do |ed|
           if (ed.valid?)
-            a (ed.studio.location.name + " " + ed.studio.name), :href => admin_studio_path(ed.studio)
+            if ed.custom_place?
+              span ed.custom_place
+            else
+              a (ed.studio.location.name + " " + ed.studio.name), :href => admin_studio_path(ed.studio)
+            end
             ul do
               ed.occurrences.each do |oc|
                 li span(l oc, :format => :default)
@@ -165,7 +169,9 @@ ActiveAdmin.register Event do
           
           et_f.input :studio, :include_blank => false, :collection => Studio.order(:location_id).load.map {|s| [ s.location.name + " " + s.name, s.id] }
           
-          et_f.inputs :class => 'no-legend' do
+          et_f.input :custom_place
+
+          et_f.inputs :tags, :class => 'no-legend' do
             et_f.input :tags, :as => :check_boxes, :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)
           end
 

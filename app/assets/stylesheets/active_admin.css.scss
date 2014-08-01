@@ -38,8 +38,10 @@ form select {
   color:#5e6469;
   text-align:left;
   padding-top: 1em;
+  padding-left: 0;
   white-space: normal;
   border-radius: none;
+  clear:both;
 }
 
 .formtastic .wysihtml5-sandbox,
@@ -86,6 +88,15 @@ li.file.input {
   box-shadow: none !important;
   -moz-box-shadow: none !important;
   -webkit-box-shadow: none !important;
+}
+
+.no-legend {
+  width:80%;
+  float:right;
+}
+
+.no-legend .inline-hints {
+  margin-left: 0;
 }
 
 .no-legend legend {

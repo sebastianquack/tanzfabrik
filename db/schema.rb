@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140801112115) do
+ActiveRecord::Schema.define(version: 20140801115723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20140801112115) do
     t.date     "end_date"
     t.time     "time"
     t.integer  "repeat_mode_id"
+    t.string   "custom_place"
   end
 
   create_table "event_tags", id: false, force: true do |t|

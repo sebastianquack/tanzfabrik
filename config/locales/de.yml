@@ -336,6 +336,7 @@ de:
         repeat_mode: Wiederholung
         duration: Dauer
         studio: Studio
+        custom_place: Anderer Ort
       festival:
         name: Titel
         description: Text
