@@ -1,5 +1,3 @@
-require 'mail'
-
 class RegistrationsController < ApplicationController
 
   def create
@@ -9,25 +7,7 @@ class RegistrationsController < ApplicationController
 
     if @registration.save
       
-      # send mail
-      Mail.defaults do
-        delivery_method :smtp, {
-          :address => 'smtp.sendgrid.net',
-          :port => '587',
-          :domain => 'heroku.com',
-          :user_name => ENV['SENDGRID_USERNAME'],
-          :password => ENV['SENDGRID_PASSWORD'],
-          :authentication => :plain,
-          :enable_starttls_auto => true
-        }
-      end
-      
-      Mail.deliver do
-        to 'example@example.com'
-        from 'sender@example.comt'
-        subject 'testing send mail'
-        body 'Sending email with Ruby through SendGrid!'
-      end
+      RegistrationMailer.registration_mail(@registration).deliver
       
       logger.debug @registration.workshop_1.workshop_select if @registration.workshop_1     
       logger.debug @registration.workshop_2.workshop_select if @registration.workshop_2             
