@@ -72,5 +72,14 @@ class Event < ActiveRecord::Base
     tags = self.event_details.collect_concat { |ed| ed.tags }
     tags
   end
+  
+  def early_bird_date
+    self.start_date - 2.weeks
+  end
+  
+  def workshop_select
+    I18n.l(self.start_date, :format => :short) + "-" + I18n.l(self.end_date, :format => :short) + " | " +
+    "#{title} | " + self.festivals.map { |f| f.name }.join(", ") + (self.festivals.length > 0 ? " | " : "") + self.tags.map { |t| t.name }.join(", ") + " | #{price_regular},-€ / #{price_reduced},-€*"
+  end
 
 end

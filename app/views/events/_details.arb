@@ -22,7 +22,7 @@ if event.price_regular
       text_node t(:price_workshop) + " "
       text_node number_to_currency event.price_regular
       if event.price_reduced
-        frühbuchertext = t(:price_reduced_limit) + " " + l(event.firsttime - 2.week, :format => :day)
+        frühbuchertext = t(:price_reduced_limit) + " " + l(event.early_bird_date, :format => :day)
         span " ("
         abbr number_to_currency(event.price_reduced), :title => frühbuchertext
         sup "*"

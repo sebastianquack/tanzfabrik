@@ -73,6 +73,8 @@ ul :class => "timetable" do
             end
           end
         end
+      else
+        text_node ""
       end
     end
   end

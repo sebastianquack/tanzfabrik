@@ -9,15 +9,17 @@ ActiveAdmin.register Festival do
   
   index do
     selectable_column
-    column :name
-    column :description
-    column "Events" do |festival|
+    column :name_de
+    column :description do |festival|
+      festival.description_de.html_safe
+    end
+    column :events do |festival|
       festival.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
     end
-    column "images" do |festival|
+    column :images do |festival|
       festival.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
-    column "feature", :feature_on_welcome_screen
+    column :feature_on_welcome_screen
     default_actions
   end
   

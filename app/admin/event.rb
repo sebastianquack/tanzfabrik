@@ -43,7 +43,7 @@ ActiveAdmin.register Event do
     column Person.model_name.human do |event|
       event.people.map { |p| (link_to p.name, admin_person_path(p)) }.join(', ').html_safe
     end
-    column :title
+    column :title_de
     column t('activerecord.attributes.event.feature_on_welcome_screen_short'), :feature_on_welcome_screen
     actions
   end
@@ -109,13 +109,13 @@ ActiveAdmin.register Event do
 
   form do |f|
     f.inputs "Typ" do
-      f.input :type, :include_blank => false, :hint => (link_to "Verwalten", admin_event_types_path)
+      f.input :type, :include_blank => false, :collection => EventType.order(:name_de), :hint => (link_to "Verwalten", admin_event_types_path)
     end
 
     f.inputs "Personen auswählen" do
       f.has_many :person_events, heading: false, :new_record => true, :allow_destroy => true do |p_f|
         p_f.inputs do
-          p_f.input :person, :include_blank => false
+          p_f.input :person, :collection => Person.order("lower(name) ASC"), :include_blank => false
         end
       end
     end
@@ -162,7 +162,7 @@ ActiveAdmin.register Event do
           et_f.input :studio, :include_blank => false, :collection => Studio.order(:location_id).load.map {|s| [ s.location.name + " " + s.name, s.id] }
           
           et_f.inputs :class => 'no-legend' do
-            et_f.input :tags, :as => :check_boxes, :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)
+            et_f.input :tags, :as => :check_boxes, :collection => Tag.order("lower(name_de) ASC"), :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)
           end
 
         end
@@ -172,7 +172,7 @@ ActiveAdmin.register Event do
     f.inputs "Festivals auswählen" do
       f.has_many :festival_events, heading: false, :new_record => true, :allow_destroy => true do |f_f|
         f_f.inputs do
-          f_f.input :festival, :include_blank => false
+          f_f.input :festival, :collection => Festival.order("lower(name_de) ASC"), :include_blank => false
         end
       end
     end

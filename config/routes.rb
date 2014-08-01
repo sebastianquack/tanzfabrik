@@ -18,6 +18,7 @@ Tanzfabrik::Application.routes.draw do
     resources :people, :only => [:show, :update]
     resources :festivals, :only => [:show, :update]
     resources :pages, :only => [:show, :update], :path => ''
+    resources :registrations, :only => [:create]
   end
   get '/:locale' => 'pages#show'
 

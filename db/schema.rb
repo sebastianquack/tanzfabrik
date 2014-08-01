@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731103009) do
+ActiveRecord::Schema.define(version: 20140801133516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,20 +49,6 @@ ActiveRecord::Schema.define(version: 20140731103009) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "assets", force: true do |t|
-    t.string   "storage_uid"
-    t.string   "storage_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "storage_width"
-    t.integer  "storage_height"
-    t.float    "storage_aspect_ratio"
-    t.integer  "storage_depth"
-    t.string   "storage_format"
-    t.string   "storage_mime_type"
-    t.string   "storage_size"
-  end
-
   create_table "downloads", force: true do |t|
     t.string   "description_de"
     t.string   "description_en"
@@ -97,14 +83,6 @@ ActiveRecord::Schema.define(version: 20140731103009) do
     t.date     "end_date"
     t.time     "time"
     t.integer  "repeat_mode_id"
-  end
-
-  create_table "event_tags", id: false, force: true do |t|
-    t.integer  "id",         default: "nextval('event_tags_id_seq'::regclass)", null: false
-    t.integer  "event_id"
-    t.integer  "tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "event_types", force: true do |t|
@@ -232,6 +210,29 @@ ActiveRecord::Schema.define(version: 20140731103009) do
     t.integer  "person_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "registrations", force: true do |t|
+    t.string   "surname"
+    t.string   "prename"
+    t.string   "street"
+    t.string   "city"
+    t.string   "zip"
+    t.string   "phone"
+    t.string   "email"
+    t.integer  "workshop_info"
+    t.integer  "course_program"
+    t.integer  "event_program"
+    t.boolean  "accept_terms"
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "workshop_id_1"
+    t.integer  "workshop_id_2"
+    t.integer  "workshop_id_3"
+    t.integer  "workshop_id_4"
+    t.boolean  "professional",      default: false
+    t.integer  "membership_status", default: 0
   end
 
   create_table "repeat_modes", force: true do |t|

@@ -24,7 +24,7 @@ ActiveAdmin.register Page do
     column "URL" do |page|
       link_to page.slug, page_path(page)
     end
-    column :title
+    column :title_de
     column :content do |page|
       page.content.html_safe if page.content
     end

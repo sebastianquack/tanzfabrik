@@ -74,6 +74,7 @@ de:
     formats:
       weekday: "%A"
       month: "%B"
+      day: '%d.%m.%Y'
       default: ! '%d.%m.%Y'
       long: '%d. %B %Y'
       short: '%d.%m.'
