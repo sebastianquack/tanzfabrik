@@ -1,5 +1,3 @@
-render "/pages/editable_content"
-
 # get festivals now and in the future
 festivals = Festival.select { |f| f.events.length > 0 && f.end_date >= Date.today - 2.week }
 
@@ -8,7 +6,7 @@ ul :class => "festivals" do
   festivals.each do |festival|
 
     li do
-      a festival.name, :href => festival_path(festival)
+      render :partial => "festivals/show", :locals => {:festival => festival}
     end
   end
 end
