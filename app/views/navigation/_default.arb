@@ -1,3 +1,6 @@
+require 'fuzzystringmatch'
+@jarow = FuzzyStringMatch::JaroWinkler.create( :pure )
+
 div :id => "header", :class =>"site-background", :data => @bg_image_url do
   def page_url(id)
     url_for :controller => 'pages', :action => 'show', :id => id
@@ -10,6 +13,23 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
     else
       link_to page.title, page_url(id)
     end
+  end
+
+  def menu_header text, page_ids
+    selected_page_id = page_ids.select { |pid| current_page? Page.find(pid) }.first.to_s
+    if !selected_page_id.empty?
+      selected_page_text = Page.find(selected_page_id).title
+      # check if menu header text appears in page title at the beginning and cut it off
+      dist = @jarow.getDistance( text, selected_page_text[0..text.length-1] )
+      if dist > 0.85
+        matches = /[s]?[+&\s\/\\](.*)$/.match(selected_page_text[text.length-1..selected_page_text.length-1])
+        extension = matches[1].to_s
+      else
+        extension = selected_page_text
+      end
+      return span (text.upcase + "/" + extension), :class => "selected"
+    end
+    text
   end
 
   ul :id => "secondary-menu" do
@@ -47,7 +67,7 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
       li do
         span t(:section_school)
         ul do
-          li t(:section_classes) do
+          li menu_header(t(:section_classes), ["kursplan", "profitraining", "kindertanz", "contact_jam", "lehrer", "performance_projekte", "oeffnungszeiten"]) do
             ul do
               li link_to_page("kursplan")
               li link_to_page("performance_projekte")
@@ -58,13 +78,13 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
               li link_to_page("oeffnungszeiten")
             end
           end
-          li t(:section_workshops) do
+          li menu_header(t(:section_workshops), ["workshop_programm", "workshop_anmeldung"]) do
             ul do
               li link_to_page("workshop_programm")
               li link_to_page("workshop_anmeldung")
             end
           end        
-          li t(:section_dance_intensive) do
+          li menu_header(t(:section_dance_intensive), ["dance_intensive_programm", "dance_intensive_lehrer", "dance_intensive_bewerbung"]) do
             ul do
               #li link_to_page("ueber_dance_intensive")
               li link_to_page("dance_intensive_programm")
@@ -87,14 +107,14 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
       li do
         span t(:section_berlin)
         ul do    
-          li t(:section_about) do
+          li menu_header(t(:section_about), ["profil_partner", "team"]) do
             ul do
               li link_to_page("profil_partner")
               li link_to_page("team")
             end
           end
           li link_to_page("tickets")
-          li t(:section_rental) do
+          li menu_header(t(:section_rental), ["studios", "vermietungsinfo"]) do
             ul do
               li link_to_page("studios")
               li link_to_page("vermietungsinfo")

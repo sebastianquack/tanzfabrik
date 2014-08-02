@@ -87,4 +87,6 @@ end
 
 gem "geocoder"
 
+gem "fuzzy-string-match"
+
 

@@ -287,8 +287,8 @@ body {
 
 /**** Top Menu: Language Select ****/
 
-.selected {
-	color:red;
+.no-text-transform {
+	text-transform: none;
 }
 
 #language-select {
@@ -377,9 +377,15 @@ ul.navigation > li {
   clear:both;
 }
 
-ul.navigation > li span {
-  min-width:70px;
-  display: inline-block;
+ul.navigation > li {
+	span {
+	  min-width:70px;
+	  display: inline-block;
+	}
+
+  li span {
+		min-width: 0; /* reset the above */
+	}
 }
 
 /* level 2 */
@@ -466,6 +472,17 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 #secondary-menu li {
 	display:inline-block;
 	padding-left:0.2em;
+}
+
+/**** menu selection ****/
+
+.selected, 
+.selected a,
+ul.navigation > li > ul > li span.selected a {
+	color:red;
+}
+ul.navigation > li > ul > li > ul > li span.selected a {
+	color:black;
 }
 
 /**** main ****/
