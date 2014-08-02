@@ -10,8 +10,12 @@ header :id => "headlines", :class => "headlines-teachers" do
 end
 
 if notice == "ok"
-  para t(:registration_success)
-else
+  div :class => "row page" do
+    div :class => "basic" do
+      para t(:registration_success)
+    end
+  end
+  else
 
   unless defined? registration 
     registration = Registration.new
@@ -27,7 +31,9 @@ else
       
       div :class => "form-workshops label-columns" do
 
-        para t(:workshop_registration_intro), :class => "description"
+        div :class => "basic" do
+          para t(:workshop_registration_intro), :class => "intro"
+        end
         
         div :class => "row" do
           f.label :workshop_id_1, "Workshop 1"

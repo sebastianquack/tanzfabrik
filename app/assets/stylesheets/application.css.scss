@@ -1376,8 +1376,14 @@ ul.workshops {
 
 .registration-form {
 
+	$gutter-division-factor: 3;
+
 	.row {
 		padding:$vertical-box-padding $grid-gutter-width (2 * $vertical-box-padding) $grid-gutter-width;
+	}
+
+	.intro {
+		padding-top: $vertical-box-padding;
 	}
 
 	input[type=text], 
@@ -1430,6 +1436,7 @@ ul.workshops {
 		label + select,
 		label + textarea {
 			@include make-xs-column(4);
+			left:$grid-gutter-width / $gutter-division-factor;
 		}
 
 	}
@@ -1443,6 +1450,7 @@ ul.workshops {
 	.description {
 		@include make-xs-column(4);
 		padding-left: 0;
+		left:$grid-gutter-width / $gutter-division-factor;
 	}
 
 	p {
@@ -1455,6 +1463,7 @@ ul.workshops {
 
 	.form-checkbox, .form-radio {
 		@include make-xs-column(4);
+		left:$grid-gutter-width / $gutter-division-factor;
 
 		padding-left: 3px;
 
@@ -1523,6 +1532,7 @@ ul.workshops {
 		border: 1px solid $text-color;		
 		background-color: white;
 		padding: $vertical-box-padding;
+		left:$grid-gutter-width / $gutter-division-factor;
 	}
 
 	input[type=submit]:hover {
