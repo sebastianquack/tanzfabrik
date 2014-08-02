@@ -390,6 +390,7 @@ de:
       tag:
         abbr: Kürzel
         name: Name
+        priority: Sortierreihenfolge
 
   formtastic:
     update: "%{model} speichern"

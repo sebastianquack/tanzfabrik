@@ -76,9 +76,9 @@ details_by_hour.each do |hour, details|
   end
 end
 
-if table_data[1]
-  table_data[1][0] = div(location.name, :class => "location-name") + br + table_data[1][0]
-end
+
+table_data[0][0] = div(location.name, :class => "location-name") + br + table_data[1][0]
+
 
 
 #pre table_data.to_yaml
@@ -158,7 +158,7 @@ div :class => "timetable-container" do
     end
   end
   dl :class => "tags" do
-    tags.uniq.sort_by { |t| t.abbr } .each do |tag|
+    tags.uniq.sort_by { |t| [t.priority, t.abbr] } .each do |tag|
       dt "(" + tag.short + ")"
       dd tag.name
     end

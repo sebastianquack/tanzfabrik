@@ -4,15 +4,15 @@ ActiveAdmin.register Tag do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :name_de, :name_en, :abbr_de, :abbr_en
+  permit_params :name_de, :name_en, :abbr_de, :abbr_en, :priority
   
   index do 
     selectable_column
-      column :id
       column :name_de
       column :name_en
       column :abbr_de
-      column :abbr_en      
+      column :abbr_en
+      column :priority      
       column "Events" do |e|
         e.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
       end
@@ -27,7 +27,8 @@ ActiveAdmin.register Tag do
       row :name_de
       row :name_en
       row :abbr_de
-      row :abbr_en      
+      row :abbr_en
+      row :priority
       row "Events" do |e|
         e.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
       end      
@@ -39,7 +40,8 @@ ActiveAdmin.register Tag do
         f.input :name_de
         f.input :name_en
         f.input :abbr_de
-        f.input :abbr_en        
+        f.input :abbr_en   
+        f.input :priority     
       end
       f.actions
   end
