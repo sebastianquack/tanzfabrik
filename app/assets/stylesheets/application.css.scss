@@ -1382,7 +1382,7 @@ ul.workshops {
 		padding:$vertical-box-padding $grid-gutter-width (2 * $vertical-box-padding) $grid-gutter-width;
 	}
 
-	.intro {
+	.intro, .basic p:first-child {
 		padding-top: $vertical-box-padding;
 	}
 
