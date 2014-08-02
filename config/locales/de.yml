@@ -69,6 +69,7 @@ de:
   form_section_accept_terms_label: "Ich erkenne die AGB's an und bestätige, dass ich mich verbindlich anmelde."
   form_section_note: "Notiz"
   form_submit: "Senden"
+  registration_success: "Vielen Dank für Ihre Anmeldung."
 
   ticket_link: "http://www.reservix.de/off/login_check.php?id=c6ec16e8cf3cd5077514ebef590a1f763d4616b372ef8900411779bf6bedf213&vID=9246"
 

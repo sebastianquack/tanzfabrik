@@ -5,8 +5,11 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
 
   def link_to_page(id)
     page = Page.find(id)
-    #span "c" if current_page? page
-    link_to page.title, page_url(id)
+    if current_page? page
+      span link_to(page.title, page_url(id)), :class => "selected"
+    else
+      link_to page.title, page_url(id)
+    end
   end
 
   ul :id => "secondary-menu" do

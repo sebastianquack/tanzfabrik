@@ -77,7 +77,7 @@ details_by_hour.each do |hour, details|
 end
 
 
-table_data[0][0] = div(location.name, :class => "location-name") + br + table_data[1][0]
+table_data[0][0] = div(location.name, :class => "location-name")
 
 
 
@@ -86,72 +86,79 @@ table_data[0][0] = div(location.name, :class => "location-name") + br + table_da
 # display the table
 div :class => "timetable-container" do
   table :class => "timetable" do
+    
+    # table head
     thead do  
       tr do
-        table_data[0].each do |header|
+        table_data[0].each_with_index do |header, i|
           th do
-            div header, :class => (header == "" ? "" : "day")
+            div header, :class => (i == 0 ? "studio" : "day")
           end
         end
       end
     end
-    table_data.shift
-    #table_data.sort! { |a,b| a[0].to_s <=> b[0].to_s }
-    table_data.each do |row|
-      tr do
 
-        # find maximum number of entries for a table cell in this row
-        largest = 0
-        row.each_with_index do |data, index|
-          largest = data.length if index > 0 && data.length > largest
-        end
-        
-        # output cells
-        row.each_with_index do |data,index|
-          if index == 0 
-            th do
-              div data, :class => (data == "" ? "" : "studio")
-            end
-          else
-            td do
-              largest.times do |detail_index|
-                if !data[detail_index]
-                  article :class => "event empty-event"
-                else
-                  detail = data[detail_index]
-                  article :class => "event" do              
-                    div :class => "title-description open-close" do
-                      h4 :class => "title open-trigger close-others" do
-                        text_node detail.event.title.html_safe if detail.event.title
-                      end
-                      div :class => "description" do
-                        span t(:close), :class => "close-trigger"
-                        div detail.event.description.html_safe, :class => "description-content" if detail.event.description
-                        a "> Dieses Ereignis bearbeiten", :href => edit_admin_event_path(detail.event), :class => "admin-only admin-nav" if admin_user_signed_in?
-                      end
-                    end
-                    div :class => "teacher" do
-                      link_to detail.event.people[0].name.html_safe, person_link(detail.event.people[0]) if detail.event.people[0]
-                    end
-                    div :class => "teacher" do
-                      link_to detail.event.people[1].name.html_safe, person_link(detail.event.people[1]) if detail.event.people[1]
-                    end
-                    div :class => "warning" do
-                      text_node detail.event.warning.html_safe if detail.event.warning
-                    end
-                    div :class => "time-footnotes" do
-                      time l(detail.starttime, :format => :hours_minutes), :class => "course-time"
-                      text_node "-"
-                      time l(detail.endtime_clock, :format => :hours_minutes), :class => "course-time"
-                      span "(" + detail.tags.map { |t| t.short }.join('/') + ")" if detail.tags.length > 0
-                    end
-                    div :class => "studio" do
-                      text_node detail.studio.location.name + " " + detail.studio.name if detail.studio
-                    end          
-                  end          
-                end
+    # table body
+    tbody do  
+      table_data.shift
+      #table_data.sort! { |a,b| a[0].to_s <=> b[0].to_s }
+      table_data.each do |row|
+        tr do
+
+          # find maximum number of entries for a table cell in this row
+          largest = 0
+          row.each_with_index do |data, index|
+            largest = data.length if index > 0 && data.length > largest
+          end
+          
+          # output cells
+          
+          row.each_with_index do |data,index|
+            if index == 0 
+              th do
+                div data, :class => (data == "" ? "" : "time")
               end
-            end          
+            else
+              td do
+                largest.times do |detail_index|
+                  if !data[detail_index]
+                    article :class => "event empty-event"
+                  else
+                    detail = data[detail_index]
+                    article :class => "event" do              
+                      div :class => "title-description open-close" do
+                        h4 :class => "title open-trigger close-others" do
+                          text_node detail.event.title.html_safe if detail.event.title
+                        end
+                        div :class => "description" do
+                          span t(:close), :class => "close-trigger"
+                          div detail.event.description.html_safe, :class => "description-content" if detail.event.description
+                          a "> Dieses Ereignis bearbeiten", :href => edit_admin_event_path(detail.event), :class => "admin-only admin-nav" if admin_user_signed_in?
+                        end
+                      end
+                      div :class => "teacher" do
+                        link_to detail.event.people[0].name.html_safe, person_link(detail.event.people[0]) if detail.event.people[0]
+                      end
+                      div :class => "teacher" do
+                        link_to detail.event.people[1].name.html_safe, person_link(detail.event.people[1]) if detail.event.people[1]
+                      end
+                      div :class => "warning" do
+                        text_node detail.event.warning.html_safe if detail.event.warning
+                      end
+                      div :class => "time-footnotes" do
+                        time l(detail.starttime, :format => :hours_minutes), :class => "course-time"
+                        text_node "-"
+                        time l(detail.endtime_clock, :format => :hours_minutes), :class => "course-time"
+                        span "(" + detail.tags.map { |t| t.short }.join('/') + ")" if detail.tags.length > 0
+                      end
+                      div :class => "studio" do
+                        text_node detail.studio.location.name + " " + detail.studio.name if detail.studio
+                      end          
+                    end          
+                  end
+                end
+              end      
+            end    
           end
         end
       end
