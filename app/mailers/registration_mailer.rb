@@ -1,5 +1,5 @@
 class RegistrationMailer < ActionMailer::Base
-  default from: "admin@tanzfabrik.de"
+  default from: "admin@tanzfabrik-berlin.de"
   
   def registration_mail(registration)
     @registration = registration
