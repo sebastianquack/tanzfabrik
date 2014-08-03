@@ -20,11 +20,10 @@ people.each do |person|
     div :class => "details" do
       div :class => "row" do
         div :class => "image-container" do
-          img :src => person.images.first.attachment.url(:medium) if person.images.exists?
+          img :src => person.images.first.attachment.url(:person) if person.images.exists?
         end
         div :class => "info" do
           h3 person.name
-          #a "Biographie", :href => person_path(person)
           para :class => "classes" do # TODO: account for ppl both teachers and artists
             if person.events.none? { |e| [3, 4, 5, 6].include?e.type.id }
               person.events.map { |e| link_to(e.title, event_path(e)) }.join('<br>').html_safe
@@ -32,7 +31,7 @@ people.each do |person|
               person.events.uniq_by {|e| e.title}. map { |e| e.title }.join('<br>').html_safe
             end
           end
-          #div kurs_link(person.events.first)
+          a "Person bearbeiten", :href => edit_admin_person_path(person), :class => "admin-only classes"
         end
       end
     end
