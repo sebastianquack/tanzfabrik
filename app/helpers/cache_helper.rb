@@ -12,6 +12,18 @@ module CacheHelper
     return "kursplan/" + Digest::MD5.digest("#{locale}-#{day}-#{location_name}-#{events_count}-#{events_max_updated_at}-#{other_models}")
   end
 
+  def cache_key_for_programm events, start_date
+    month                 = Date.today.month
+    locale                = I18n.locale.to_s
+    start_date_string     = start_date.to_s
+    events_count          = events.count
+    events_max_updated_at = events.maximum(:updated_at).to_s
+    other_models          = cache_key_from_models([EventDetail,EventType,Location,Person,PersonEvent,Studio])
+    #Time.now.to_s # TODO: add ", :touch => true" to models associated with event and activate key generation here
+    return "kursplan/" + Digest::MD5.digest("#{locale}-#{month}-#{start_date_string}-#{events_count}-#{events_max_updated_at}-#{other_models}")
+  end
+
+
   def cache_key_from_models models
     plain_key = ""
     models.each do |m|
