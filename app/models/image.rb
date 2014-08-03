@@ -10,7 +10,10 @@ class Image < ActiveRecord::Base
       :thumb => ["100x100>", :jpg]
       },
     :convert_options => { 
-      :background => "-quality 92" 
+      :background => "-quality 92 -strip",
+      :medium_detail_column => "-quality 72",
+      :people => "-quality 70", 
+      :people_hires => "-quality 70"
       },
     :storage => :s3,
     :bucket         => ENV['S3_TANZFABRIK_BUCKET'],
