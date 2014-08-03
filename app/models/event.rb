@@ -44,8 +44,8 @@ class Event < ActiveRecord::Base
   end
 
   def self.of_types type_ids
-    #where_clause = type_ids.map {|type_id| "event_types.id = " + type_id.to_s + " " }.join(" OR ")
-    events = Event.joins(:type).where('type_id' => type_ids)
+    where_clause = type_ids.map {|type_id| "event_types.id = " + type_id.to_s + " " }.join(" OR ")
+    events = Event.joins(:type, :event_details).group('events.id').where(where_clause)
     return events
   end
 
