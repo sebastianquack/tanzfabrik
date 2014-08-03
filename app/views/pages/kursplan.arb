@@ -6,15 +6,17 @@ header :id => "headlines", :class => "headlines-kursplan" do
         span t(:kursplan_address), :class => "neutral"
       end
     end
-    div :class => "line2 open-close opened" do
-      div :class => "open" do
-        form editable page, :content, :type => "wysihtml5"
-        div t(:close), :class => "close-trigger"
-      end
-      div :class => "closed open-trigger" do
-        div t :kursplan_more
-      end
-    end    
+    if page.content
+      div :class => "line2 open-close opened" do
+        div :class => "open" do
+          form editable page, :content, :type => "wysihtml5"
+          div t(:close), :class => "close-trigger"
+        end
+        div :class => "closed open-trigger" do
+          div t :kursplan_more
+        end
+      end    
+    end
     div :class => "line3" do
       ul do
         page.downloads.each do |download|        

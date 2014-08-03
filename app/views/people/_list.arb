@@ -5,7 +5,7 @@ people.each do |person|
     div :class => "basic" do
       if person.bio
         div :class => "description open-close open-trigger overflown-base" do
-          div person.bio.html_safe, :class => "bio is-overflown"
+          div person.bio.html_safe, :class => "bio is-overflown open-toggle-height"
           div :class => "if-overflown" do
             div t(:more) + " >", :class => "more"
             div t(:close), :class => "close-trigger"

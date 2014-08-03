@@ -5,15 +5,17 @@ header :id => "headlines", :class => "headlines-kursplan" do
         span editable page, :title
       end
     end
-    div :class => "line2 open-close opened" do
-      div :class => "open" do
-        div editable page, :content, :type => "wysihtml5"
-        div t(:close), :class => "close-trigger"
-      end
-      div :class => "closed open-trigger" do
-        div t :profitraining_more
-      end
-    end    
+    if page.content
+      div :class => "line2 open-close opened" do
+        div :class => "open" do
+          div editable page, :content, :type => "wysihtml5"
+          div t(:close), :class => "close-trigger"
+        end
+        div :class => "closed open-trigger" do
+          div t :profitraining_more
+        end
+      end    
+    end
     div :class => "line3" do
      ul do
         page.downloads.each do |download|        

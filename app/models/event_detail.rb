@@ -148,5 +148,9 @@ class EventDetail < ActiveRecord::Base
     end
     return self
   end
+
+  def single_occurrence?
+    self.repeat_mode.rule.empty?
+  end
         
 end

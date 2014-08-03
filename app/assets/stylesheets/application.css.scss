@@ -241,6 +241,7 @@ body {
 	overflow:hidden;
 	width:100%;
 	position:relative;
+	top:-18px;
 }
 
 /**** background ****/
@@ -404,7 +405,7 @@ ul.navigation > li > ul > li {
 ul.navigation > li > ul > li > ul {
   float:left;
   position: absolute;
-  padding-bottom: 1em;
+  padding-bottom: 0.5em;
 }
 
 ul.navigation > li > ul > li > ul > li {
@@ -626,7 +627,7 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 	.line3 {
 		font-size:0.8em;
 		line-height: (2em / 0.8em);
-		padding-bottom: 3 * $line-height;
+		padding-bottom: 4.2 * $line-height;
 
 		ul {
 			list-style-type: none;
@@ -1086,6 +1087,7 @@ dl.tags {
 				height:7 * $line-height * 0.98;
 				min-height:7 * $line-height * 0.98;
 				overflow-y: hidden;
+				@include transition(height 0.5s)
 			}
 
 			.close-trigger {
@@ -1097,7 +1099,7 @@ dl.tags {
 		.description.opened {
 
 			.bio {
-				height: auto;
+				/*height: auto;*/
 			}
 
 			.more {
@@ -1145,6 +1147,7 @@ dl.tags {
 	.type {
 		font-size:1em;
 		float:left;
+		line-height: $line-height;
 	}
 	.basic .teacher {
 		display:block;
@@ -1153,6 +1156,10 @@ dl.tags {
 		margin-bottom: 0;
 		font-weight: normal;
 		line-height: $line-height;
+	}
+	.in-festival {
+		float:right;
+		margin:0;
 	}
 	.time, .address {
 		@include menu-font(100%);
@@ -1243,7 +1250,7 @@ dl.tags {
 
 		font-size:0.8em;
 		line-height:2em;
-		padding-bottom: $line-height;
+		/*padding-bottom: $line-height;*/
 
 		ul {
 			list-style-type: none;
@@ -1330,6 +1337,7 @@ ul.workshops {
 				font-size: 1em;
 				font-weight: bold;
 				float:left;
+				line-height: $line-height;
 			}
 			.teacher {
 				float:left;
@@ -1379,13 +1387,8 @@ ul.workshops {
 
 /**** festivals ****/
 .festivals {
-	.festival {
-		margin-bottom: 3.5em;
-
-		.festival-headlines .line3 {
-			padding-bottom: 1.5em;
-		}
-
+	li + li .festival {
+		margin-top: 4.2 * $line-height;
 	}
 }
 

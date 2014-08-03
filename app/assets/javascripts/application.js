@@ -41,15 +41,34 @@ $(document).ready(function() {
     if ($(this).hasClass("close-others")) {
       $(".open-close.opened").removeClass("opened")
     }
-    $(this).closest('.open-close').addClass("opened")
-    $(this).closest('.open-close-shade').addClass("shaded")
+    base = $(this).closest('.open-close')
+    if (!base.hasClass("opened")) {
+      toggleHeightElems = base.parent().find(".open-toggle-height")
+      if (toggleHeightElems.length > 0) {
+        toggleHeightElem = $(toggleHeightElems.get(0))
+        toggleHeightElem.data("closed-height", toggleHeightElem.css("height"))
+        toggleHeightElem.css("height", toggleHeightElem.prop("scrollHeight"))
+        console.log(toggleHeightElem.prop("scrollHeight"))
+      }
+      base.addClass("opened")
+      $(this).closest('.open-close-shade').addClass("shaded")
+    }
   });
 
   // set close event
   $(".close-trigger").click(function (event) {
     event.stopPropagation();
-    $(this).closest('.open-close').removeClass("opened")
-    $(this).closest('.open-close-shade').removeClass("shaded")
+    base = $(this).closest('.open-close')
+    if (base.hasClass("opened")) {
+      toggleHeightElems = base.parent().find(".open-toggle-height")
+      if (toggleHeightElems.length > 0) {
+        console.log(toggleHeightElems)
+        toggleHeightElem = $(toggleHeightElems.get(0))
+        toggleHeightElem.css("height", toggleHeightElem.data("closed-height"))
+      }    
+      base.removeClass("opened")
+      $(this).closest('.open-close-shade').removeClass("shaded")
+    }
   });
 
   // scroll to anchor
@@ -66,7 +85,7 @@ $(document).ready(function() {
           elem = $(location.hash)
         }
         else return;
-        elem.find(".open-close").addClass("opened")
+        /*elem.find(".open-close").addClass("opened")*/
         scrollScreenTo(elem, 1500)
       }      
       last_w = w
@@ -103,6 +122,8 @@ $(document).ready(function() {
 
 // clip #content on top where it is behind an opened 3rd level menu
 var initMenuContentHide = function () {
+  topInit = parseInt($("#content-container").css("top"))
+  $("#content-container").data("defaultTop", topInit)  
   last_menu3Height = null
   $("#top-menu ul ul li").on("mouseenter mouseleave", function () { 
     menu3 = $("#top-menu ul ul ul:visible")
@@ -117,18 +138,20 @@ var initMenuContentHide = function () {
         contentOffset = $("#content-container").offset().top
         delta = menu3Offset + menu3Height - contentOffset
       }
+      topPlus = $("#content-container").data("defaultTop")
       if (delta > 0) {
         $("#content").css("margin-top", -delta + "px")
-        $("#content-container").css("top", delta + "px")
+        $("#content-container").css("top", (delta+topPlus) + "px")
       }
       else {
         $("#content").css("margin-top", "0px")
-        $("#content-container").css("top", "0px")
+        $("#content-container").css("top", topPlus + "px")
       }
     }
   })
 }
 
+// determine element height for css transition
 var setMaxHeight = function(elem) {
     var oldMaxHeight = elem.css("max-height")
     elem.css("visibility", "hidden")

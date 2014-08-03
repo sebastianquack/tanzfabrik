@@ -56,7 +56,7 @@ details_by_hour.each do |hour, details|
       table_data[row_index][column_index + 1] = [] # initialize a column if that hasen't happened yet
     end    
 
-    # check if a detail has an occurrence during the upcoming weeks
+    #check if a detail has an occurrence during the upcoming weeks
     details.each do |detail|
       9.times do |i|
         if detail.extend_empty_end_date.occurs_on?(date + i.week)
