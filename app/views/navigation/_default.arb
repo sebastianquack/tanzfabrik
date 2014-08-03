@@ -7,7 +7,7 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
   end
 
   def link_to_page(id)
-    page = Page.find(id)
+    page = find_page(id)
     if current_page? page
       span link_to(page.title, page_url(id)), :class => "selected"
     else
@@ -16,9 +16,9 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
   end
 
   def menu_header text, page_ids
-    selected_page_id = page_ids.select { |pid| current_page? Page.find(pid) }.first.to_s
+    selected_page_id = page_ids.select { |pid| current_page? find_page(pid) }.first.to_s
     if !selected_page_id.empty?
-      selected_page_text = Page.find(selected_page_id).title
+      selected_page_text = find_page(selected_page_id).title
       # check if menu header text appears in page title at the beginning and cut it off
       dist = @jarow.getDistance( text, selected_page_text[0..text.length-1] )
       if dist > 0.85
@@ -30,6 +30,10 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
       return span (text.upcase + "/" + extension), :class => "selected"
     end
     text
+  end
+
+  def find_page id
+    Page.all.select{ |p| p.slug == id}.first # use query cache
   end
 
   ul :id => "secondary-menu" do
