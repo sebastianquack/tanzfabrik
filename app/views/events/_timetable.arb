@@ -14,12 +14,10 @@ dates = [start_date]
 end
 
 # create a big array of all the events details TODO: optimize
-details = []
-events.each do |e|
-    details += e.event_details.select{ |ed| ed.valid? && ed.studio.location == location }
-end
-
-#details.each { |detail| pre detail.time.strftime('1%H%M').to_i }
+#details = []
+#events.each do |e|
+#    details += e.event_details.select{ |ed| ed.valid? && ed.studio.location == location }
+#end
 
 # do all the calculations
 table_data = []
@@ -35,11 +33,14 @@ end
 row_index = 1
 
 # go through event details per hour
-details_by_hour = details
-  .sort_by { |detail| detail.studio.name } #.sort_by { |detail| detail.event.title }
-  .sort_by { |detail| detail.time.strftime('1%H%M').to_i }
+details_by_hour = 
+  EventDetail.includes( :event, {:event => [:people, :type, :person_events]}, :repeat_mode, :tags, {:studio => :location} )
+  .all(:include => :event, :conditions => {:events => {:type_id => type_ids }} )
+  .select{ |ed| ed.valid? && ed.studio.location == location }
+  .sort_by { |detail| [detail.time.strftime('1%H%M').to_i, detail.event.title] }
   .group_by { |detail| detail.time.hour }
-  #.group_by {|detail| detail.studio.location}
+  .sort_by { |hour,detail| hour}
+
 
 #pre details_by_location.to_yaml
 

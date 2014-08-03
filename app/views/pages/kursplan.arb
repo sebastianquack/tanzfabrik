@@ -41,11 +41,13 @@ div :class => "open-close-shade" do
   #   end
   # end
 
-  events = Event.of_types([3, 4, 5, 6])
-  Location.all.each do |location|
-    cache_arbre(self, cache_key_for_kursplan(events)) do
-      render :partial => "/events/timetable", :locals => {:events => events, :start_date => start_date, :location => location}
-      #render :partial => "/events/schedule", :locals => {:events => events, :start_date => start_date}
+  #events = Event.of_types([3, 4, 5, 6])
+  #.includes(:people, :event_details => [{:studio => :location}, {:event_detail_tags => :tag}, :repeat_mode])
+
+  type_ids = [3,4,5,6]
+  Location.where(:name => ["Wedding", "Kreuzberg"]).each do |location|
+    cache_arbre(self, cache_key_for_kursplan(Event.of_types(type_ids), location)) do      
+      render :partial => "/events/timetable", :locals => {:type_ids => type_ids, :start_date => start_date, :location => location}
     end
   end
 
