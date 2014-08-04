@@ -23,15 +23,12 @@ module CacheHelper
     return "programm/" + Digest::MD5.digest("#{locale}-#{month}-#{start_date_string}-#{events_count}-#{events_max_updated_at}-#{other_models}")
   end
 
-  def cache_key_for_profitraining events
+  def cache_key_for_profitraining
     week                  = Date.today.beginning_of_week
     locale                = I18n.locale.to_s
-    start_date_string     = start_date.to_s
-    events_count          = events.count
-    events_max_updated_at = events.maximum(:updated_at).to_s
     other_models          = cache_key_from_models([EventDetail,EventType,Location,Person,PersonEvent,Studio])
     #Time.now.to_s # TODO: add ", :touch => true" to models associated with event and activate key generation here
-    return "profitraining/" + Digest::MD5.digest("#{locale}-#{week}-#{start_date_string}-#{events_count}-#{events_max_updated_at}-#{other_models}")
+    return "profitraining/" + Digest::MD5.digest("#{locale}-#{week}-#{other_models}")
   end
 
   def cache_key_from_models models

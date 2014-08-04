@@ -31,7 +31,7 @@ end
 #trainings = Event.of_types([4]).sort_by { |t| t.event_details.first.start_date }
 #sorted_trainings = trainings.sort_by { |t| t.event_details.first.start_date }
 
-cache_arbre(self, cache_key_for_profitraining(trainings)) do
+cache_arbre(self, cache_key_for_profitraining) do
 
   trainings_details = EventDetail.includes( :event, {:event => [:people, :type, :person_events]}, :repeat_mode, {:studio => :location} )
     .where("start_date >= ?", (Date.today - 2.week).beginning_of_week)
