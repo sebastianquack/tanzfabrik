@@ -45,7 +45,7 @@ module CacheHelper
   # Returns yielded Arbre on cache miss OR an HTML string wrapped in
   # an Arbre div on cache hit.
   def cache_arbre(context, *args)
-    if controller.perform_caching && !admin_user_signed_in
+    if controller.perform_caching && !admin_user_signed_in?
       if Rails.cache.exist?(*args)
         context.instance_eval do
           div(Rails.cache.read(*args))
