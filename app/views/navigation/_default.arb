@@ -37,6 +37,9 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
   end
 
   ul :id => "secondary-menu" do
+    li do
+      a t(:archive), :href => "http://archiv.tanzfabrik-berlin.de"
+    end
     li link_to_page("kontakt")
     li link_to_page("agbs")
     li link_to_page("impressum")
