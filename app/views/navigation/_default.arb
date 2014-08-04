@@ -23,7 +23,11 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
       dist = @jarow.getDistance( text, selected_page_text[0..text.length-1] )
       if dist > 0.85
         matches = /[s]?[+&\s\/\\](.*)$/.match(selected_page_text[text.length-1..selected_page_text.length-1])
-        extension = matches[1].to_s
+        if matches
+          extension = matches[1].to_s
+        else
+          extension = selected_page_text
+        end
       else
         extension = selected_page_text
       end
