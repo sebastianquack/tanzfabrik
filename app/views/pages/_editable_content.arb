@@ -16,8 +16,12 @@ if page
     if page.images.length > 0 
       div :class => "details" do
         div :class => "image-container" do
-          img :src => page.images.first.attachment.url(:medium_detail_column), :title => page.images.first.description, :alt => page.images.first.description
-          small page.images.first.license, :class => "image-license"
+          page.images.each do |image|
+            img :src => image.attachment.url(:medium_detail_column), :title => image.description, :alt => image.description
+          end
+          page.images.each do |image|
+            small image.license, :class => "image-license" if image.license
+          end
         end
       end
     else

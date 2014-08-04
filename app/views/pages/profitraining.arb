@@ -31,52 +31,55 @@ end
 trainings = Event.of_types([4]).sort_by { |t| t.event_details.first.start_date }
 #sorted_trainings = trainings.sort_by { |t| t.event_details.first.start_date }
 
+trainings_details = EventDetail.includes( :event, {:event => [:people, :type, :person_events]}, :repeat_mode, {:studio => :location} )
+  .where("start_date >= ?", (Date.today - 2.week).beginning_of_week)
+  .order("Date(start_date)")
+  .all(:include => :event, :conditions => {:events => {:type_id => 4 }} )
+  .select{ |d| d.valid? }
+
+details_by_week = trainings_details.group_by { |d| d.start_date.beginning_of_week }
+
 ul :class => "timetable" do
-  trainings.each do |training| 
-    #a "Mehr Infos", :href => event_path(training) 
-    training.event_details.each do |ed|
-      # para a (ed.studio.location.name + " " + ed.studio.name), :href => url_for(:controller => 'pages', :action => 'show', :id => 'studios')
-      if ed.occurs_between? Date.today.beginning_of_week - 1.week, Date.today.beginning_of_week + 3.week
-        beginning_of_week = ed.occurrences.first.beginning_of_week
-        ul :class => "week" do
-          li do
-            div :class => "header" do
-              time (l training.event_details.first.start_date, :format => :short) + '-' + (l training.event_details.first.end_date, :format => :short), :class => "time-week"
-            end
-            ul do
-              5.times do |wday|
-                oc = ed.occurrences.select { |oc| oc.wday ==  wday+1 }.first
-                li do 
-                  time (l (beginning_of_week+wday.days), :format => :timetable), :class => ( oc ? "day" : "day holiday")
-                  if oc
-                    div :class => "event"do
-                      h4 :class => "title" do 
-                        text_node training.title if training.title
-                      end
-                      div :class => "teacher" do
-                        training.people.map { |p| (link_to p.name, person_path(p)) }.join(', ').html_safe
-                      end            
-                      div :class => "time" do
-                        time (l oc, :format => :hours_minutes), :class => "course-time"
-                        span "-"
-                        time (l ed.endtime_clock, :format => :hours_minutes), :class => "course-time"
-                      end
-                      div :class => "description" do
-                        para training.description.html_safe if training.description
-                      end
-                    end
-                  else 
-                    div :class => "event empty-event" do
-                      div t :holiday, :class => "holiday"
-                    end
+  details_by_week.each do |beginning_of_week, details|
+    ul :class => "week" do
+      li do
+        div :class => "header" do
+          time (l beginning_of_week, :format => :short) + '-' + (l beginning_of_week + 4.day, :format => :short), :class => "time-week"
+        end
+        ul do
+          occurrences = details.collect_concat { |d| d.occurrences }
+          5.times do |wday|
+            oc = occurrences.select { |oc| oc.wday == wday+1 }.first
+            li do 
+              time (l (beginning_of_week+wday.days), :format => :short), :class => ( oc ? "day" : "day holiday")
+              if oc
+                training = details.first.event
+                detail = details.first
+                div :class => "event"do
+                  h4 :class => "title" do 
+                    a training.title, :href => event_path(training) if training.title
                   end
-                end    
+                  div :class => "teacher" do
+                    a training.people.first.name, :href => person_link(training.people.first)
+                  end            
+                  div :class => "time" do
+                    # assuming all occurrences within one week have same start time and duration
+                    time (l detail.starttime, :format => :hours_minutes), :class => "course-time"
+                    span "-"
+                    time (l detail.endtime_clock, :format => :hours_minutes), :class => "course-time"
+                  end
+                  #div :class => "description" do
+                  #  para training.description.html_safe if training.description
+                  #end
+                end
+              else 
+                div :class => "event empty-event" do
+                  div t :holiday, :class => "holiday"
+                end
               end
-            end
+            end    
           end
         end
-      else
-        text_node ""
       end
     end
   end

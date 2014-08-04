@@ -28,6 +28,8 @@ class Image < ActiveRecord::Base
   :content_type => ['image/jpeg', 'image/pjpeg',
     'image/jpg', 'image/png', 'image/gif'], :message => "Erlaubte Bildformate: JPG, GIF, PNG."
 
+  validates_presence_of :description
+
   belongs_to :studio
   belongs_to :person
   belongs_to :event

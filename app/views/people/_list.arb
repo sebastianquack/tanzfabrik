@@ -31,7 +31,7 @@ people.each do |person|
               person.events.uniq_by {|e| e.title}. map { |e| e.title }.join('<br>').html_safe
             end
           end
-          a "Person bearbeiten", :href => edit_admin_person_path(person), :class => "admin-only classes" if admin_user_signed_in
+          a "Person bearbeiten", :href => edit_admin_person_path(person), :class => "admin-only classes" if admin_user_signed_in?
         end
       end
     end
