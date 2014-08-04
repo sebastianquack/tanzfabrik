@@ -17,10 +17,10 @@ div :class => "festival" do
               div :class => "image-container" do
                 img :src => festival.images.first.attachment.url, :title => festival.images.first.description, :alt => festival.images.first.description
               end      
-              div festival.description, :class => "description"
+              div festival.description.html_safe, :class => "description"
             end
           else
-            div festival.description, :class => "description"
+            div festival.description.html_safe, :class => "description"
           end
           if admin_user_signed_in?
             div :class => "admin-only admin-nav" do
@@ -30,7 +30,7 @@ div :class => "festival" do
           div t(:close), :class => "close-trigger"
         end
         div :class => "closed open-trigger" do
-          div t :information_programm
+          div t :festival_more
         end
       end    
       div :class => "line3" do

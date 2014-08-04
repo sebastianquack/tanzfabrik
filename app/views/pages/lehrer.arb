@@ -9,5 +9,7 @@ header :id => "headlines", :class => "headlines-teachers" do
   end
 end
 
-teachers = Person.order(:name).select { |p| p.kurslehrer? }
-render :partial => "/people/list", :locals => {:people => teachers}
+cache_arbre(self, cache_key_for_lehrer) do  
+  teachers = Person.order(:name).select { |p| p.kurslehrer? }
+  render :partial => "/people/list", :locals => {:people => teachers}
+end

@@ -31,6 +31,18 @@ module CacheHelper
     return "profitraining/" + Digest::MD5.digest("#{locale}-#{week}-#{other_models}")
   end
 
+  def cache_key_for_lehrer
+    locale                = I18n.locale.to_s
+    other_models          = cache_key_from_models([Event,EventType,Person,PersonEvent])
+    return "lehrer/" + Digest::MD5.digest("#{locale}-#{other_models}")
+  end
+
+  def cache_key_for_kuenstler
+    locale                = I18n.locale.to_s
+    other_models          = cache_key_from_models([Event,EventType,Person,PersonEvent])
+    return "kuenstler/" + Digest::MD5.digest("#{locale}-#{other_models}")
+  end
+
   def cache_key_from_models models
     plain_key = ""
     models.each do |m|
