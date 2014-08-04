@@ -11,7 +11,7 @@ header :id => "headlines", :class => "headlines-event" do
           div t(:close), :class => "close-trigger"
         end
         div :class => "closed open-trigger" do
-          div t :information_programm
+          div t :programm_more
         end
       end
     end    
