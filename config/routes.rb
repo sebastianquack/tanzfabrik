@@ -27,9 +27,8 @@ Tanzfabrik::Application.routes.draw do
   #resources :festivals, :only => [:update]
 
   # You can have the root of your site routed with "root"    
+  
   root 'pages#show'
-
-
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

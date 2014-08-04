@@ -2,12 +2,12 @@ class Image < ActiveRecord::Base
   has_attached_file :attachment,
     :styles => { 
       :background => "1000x1000>", 
-      :large => ["600x600>", :jpg],
-      :medium_detail_column => ["330>", :jpg], 
+      :large => ["600x600>"],
+      :medium_detail_column => ["330>"], 
       :people => ['144x150#'],
-      :people_hires => ['288x300#', :jpg],
-      :medium => ["300x300>", :jpg], 
-      :thumb => ["100x100>", :jpg]
+      :people_hires => ['288x300#'],
+      :medium => ["300x300>"], 
+      :thumb => ["100x100>"]
       },
     :convert_options => { 
       :background => "-quality 92 -strip",
@@ -24,8 +24,10 @@ class Image < ActiveRecord::Base
   
   
   # needs to be declared after has_attached_file !!
-  validates_attachment_content_type :attachment, :content_type => /\Aimage\/.*\Z/ 
-  
+  validates_attachment_content_type :attachment,
+  :content_type => ['image/jpeg', 'image/pjpeg',
+    'image/jpg', 'image/png', 'image/gif'], :message => "Erlaubte Bildformate: JPG, GIF, PNG."
+
   belongs_to :studio
   belongs_to :person
   belongs_to :event

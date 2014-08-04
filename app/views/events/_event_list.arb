@@ -36,7 +36,6 @@ ol :class => "event-calendar" do
           a :href => event_path(event) do 
             h2 event.title, :class => "title"
             h3 event.display_type, :class =>"type"
-            para t(:in_frame_of) + " " + event.festivals.first.name, :class => "in-festival" if show_festival && event.festivals.length > 0
             para event.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
           end
         end

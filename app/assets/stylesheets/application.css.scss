@@ -29,7 +29,7 @@ $font-family-base: "Roboto";
 $grid-columns: 6; /* column width: 144px */
 $grid-gutter-width: 16px;
 
-$text-color:						#333333;
+$text-color:						black;
 
 $brand-primary:         #F50015;
 /*
@@ -65,8 +65,9 @@ $container-large-desktop:      ((960px + $grid-gutter-width));
 $vertical-menu-width: 500px;
 $overall-container-margin: 32px; /* margin for vertical secondary menu */
 $admin-link-color: #0088cc;
-$line-height: 1.4em;
+$line-height: 1.45em;
 $vertical-box-padding: 0.3em;
+$klappfenster-bottom-distance: 4.2 * $line-height;
 
 /**** General Styles ****/
 
@@ -154,12 +155,15 @@ a abbr[title] {
 }
 
 /* fades table behind opened description popup */
-.shaded td > * > *:not(.opened), 
+.shaded td > .event > *:not(.opened), 
 .shaded th, 
 .shaded dl, 
 .shaded :empty {
   opacity:0.3;
-  @include transition(opacity 0.3s 0.1s);
+  @include transition(opacity 0.3s 0);
+}
+.shaded td .event {
+	border-color: rgba(0,0,0,0.2) !important;
 }
 
 ul, li {
@@ -355,6 +359,11 @@ body {
 
 
 /**** Top Menu: Navigation ****/
+
+#top-menu {
+	top:-4px;
+}
+
 
 ul.navigation {
   @include menu-font(100%);
@@ -627,7 +636,7 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 	.line3 {
 		font-size:0.8em;
 		line-height: (2em / 0.8em);
-		padding-bottom: 4.2 * $line-height;
+		padding-bottom: $klappfenster-bottom-distance;
 
 		ul {
 			list-style-type: none;
@@ -647,7 +656,7 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 .timetable-container {
 	@include make-row();
 
-	margin-bottom:2.5em;
+	margin-bottom: $klappfenster-bottom-distance;
 
 	.tags {
 		@include make-xs-column(5);
@@ -713,7 +722,14 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 			}			
 		}
 	}
+}
 
+table.timetable td:last-child .title-description.opened .description {
+	left: -176px;
+
+	.close-trigger {
+		left: -258px;
+	}
 }
 
 table.timetable {
@@ -850,7 +866,7 @@ ul.timetable {
 
 
 dl.tags {
-	margin: 2 * $vertical-box-padding 0 0 0;
+	margin: $line-height;
 	dt, dd {
 		font-size: 76%;
 		line-height: ($line-height / 0.76);
@@ -889,6 +905,12 @@ dl.tags {
 .basic {
 	.description {
 		margin: $vertical-box-padding 0;
+
+		a:before, a:after {
+			content: "/";
+			color:red;
+		}
+
 	}
 }
 
@@ -1099,7 +1121,7 @@ dl.tags {
 		.description.opened {
 
 			.bio {
-				/*height: auto;*/
+				height: auto;
 			}
 
 			.more {
@@ -1282,7 +1304,7 @@ dl.tags {
 
 ul.workshops {
 
-	margin-bottom: 3em;
+	margin-bottom: 1.5em;
 
 	.controls {
 		@include make-row();
@@ -1300,6 +1322,10 @@ ul.workshops {
 
 	.group {
 		@include make-row();
+
+		+ .group {
+			padding-top: 2em;
+		}
 
 		.time-duration {
 			@include make-xs-column(1);
@@ -1388,7 +1414,7 @@ ul.workshops {
 /**** festivals ****/
 .festivals {
 	li + li .festival {
-		margin-top: 4.2 * $line-height;
+		margin-top: $klappfenster-bottom-distance;
 	}
 }
 
@@ -1473,8 +1499,8 @@ ul.workshops {
 		left:$grid-gutter-width / $gutter-division-factor;
 	}
 
-	p {
-		margin-bottom: 0.5em;
+	p:not(:last-child) {
+		margin-bottom: 1em;
 	}
 
 	.label-columns .description {
