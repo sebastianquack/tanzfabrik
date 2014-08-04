@@ -30,8 +30,10 @@ end
 
 if params[:start_date]
   start_date = Date.parse(params[:start_date])
+  final_date = start_date.end_of_month
 else 
   start_date = Date.today.beginning_of_month
+  final_date = Date.today + 6.month
 end
 
 para :class => "admin-only admin-nav" do
@@ -40,7 +42,8 @@ para :class => "admin-only admin-nav" do
 end
 
 # load events of types 1, 7, 8 or 9 that have a start_date earlier than the end of this month and an end_date later than the start of this month
-events = Event.joins(:type, :event_details).where('(event_types.id = 1 OR event_types.id = 7 OR event_types.id = 8 OR event_types.id = 9) AND event_details.start_date <= ? AND event_details.end_date >= ?', start_date.end_of_month, start_date)
+events = Event.joins(:type, :event_details).where('(event_types.id = 1 OR event_types.id = 7 OR event_types.id = 8 OR event_types.id = 9) AND event_details.start_date <= ? AND event_details.end_date >= ?', final_date, start_date)
 cache_arbre(self, cache_key_for_programm(events, start_date)) do
   render :partial => "/events/event_list", :locals => {:events => events, :start_date => start_date, :show_festival => true }  
 end
+

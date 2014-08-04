@@ -7,7 +7,7 @@
 
 # make a list of all occurences
 all_occurences = []
-events.each do |event|
+events.includes(:people, :event_details => [:repeat_mode, :studio]).each do |event|
   event.event_details.each do |detail|
       
     # get occurrences

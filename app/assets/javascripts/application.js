@@ -71,6 +71,20 @@ $(document).ready(function() {
     }
   });
 
+  // adjust content container height for popups
+  adjust_cc_height_elems = $(".adjust-content-container-height")
+    if (adjust_cc_height_elems.length > 0) {
+    cc_height = $("#content-container").height()
+    max = cc_height
+    adjust_cc_height_elems.each (function () {
+      bottom_y = $(this).prop("scrollHeight") + $(this).offset().top
+      if (bottom_y > max) max = bottom_y
+      console.log(max)
+    })
+    $("#content-container").css("padding-bottom", (max-cc_height) + "px")
+  }
+
+
   // scroll to anchor
   if (location.hash.length > 1) {
     last_w = 0
