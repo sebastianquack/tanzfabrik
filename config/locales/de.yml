@@ -113,6 +113,7 @@ de:
       long: '%d. %B %Y'
       short: '%d.%m.'
       short_day: '%A, %d.%m.'
+      long_day: '%a, %d.%m.%Y'
       short_end: '-%d.%m.'
       month_day: '%e. %B.'
     month_names: 

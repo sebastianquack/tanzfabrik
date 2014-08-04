@@ -51,7 +51,7 @@ ul :class => "timetable" do
           5.times do |wday|
             oc = occurrences.select { |oc| oc.wday == wday+1 }.first
             li do 
-              time (l (beginning_of_week+wday.days), :format => :short), :class => ( oc ? "day" : "day holiday")
+              time (l (beginning_of_week+wday.days), :format => :long_day), :class => ( oc ? "day" : "day holiday")
               if oc
                 training = details.first.event
                 detail = details.first
