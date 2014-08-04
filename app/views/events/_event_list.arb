@@ -53,8 +53,9 @@ ol :class => "event-calendar" do
             if detail.custom_place?
               div detail.custom_place, :class => "location"
             else
+              too_long = (detail.studio.location.name.length + detail.studio.name.length) > 14
               div detail.studio.location.name, :class => "location"
-              div detail.studio.name, :class => "studio"
+              div detail.studio.name, :class => (too_long ? "location" : "studio")
             end
           end
         end    

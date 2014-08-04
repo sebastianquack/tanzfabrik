@@ -22,14 +22,14 @@
 en:
   section_start: "Start"
   section_school: "Tanz"
-  section_classes: "Classes"
+  section_classes: "Dance Classes"
   section_dance_intensive: "Dance Intensive"
   section_workshops: "Workshops"
   section_production: "Fabrik"
   section_berlin: "Berlin"
-  section_rental: "Spaces"
+  section_rental: "Studio Bookings"
   section_service: "Service"
-  section_about: "Über Uns"
+  section_about: "About Us"
 
   next_week: "Next Week"
   previous_week: "Previous Week"
@@ -43,23 +43,23 @@ en:
   tickets: "Tickets"
   in_frame_of: "In the frame of"
 
-  kursplan_more: "Wichtige Infos zu den Tanzklassen. Änderungen im Stundenplan vorbehalten."
-  profitraining_more: "Wichtige Infos zum Profitraining."
-  performance_projekte_more: "Informationen"
-  programm_more: "Informationen"
-  workshop_program_more: "Informationen"
+  kursplan_more: "Important info about the dance classes. The class schedule is subject to change."
+  profitraining_more: "important info about the professional classes."
+  performance_projekte_more: "Information"
+  programm_more: "Information"
+  workshop_program_more: "Information"
   more_festival: "Zum Festival"
 
   workshops_combinations: "Workshop-Kombinationen"
   workshops_name: "Name"
 
-  holiday: "Ferien"
+  holiday: "Holidays"
   programm_event_headline: Stage
   festival_programm: Stage
-  festival_workshops: Workshop-Programm
-  price_workshop: Kosten
-  price_event: Preis
-  price_reduced_limit: "Frühbucherrabatt: Gilt bei Eingang der Gesamtzahlung bis"
+  festival_workshops: Workshop Programme
+  price_workshop: Prices
+  price_event: Entry Fee / Ticket Prices
+  price_reduced_limit: "Early Bird Price: Applies on arrival of the full workshop fee on or account by"
 
   workshop_registration_intro: "Application for the following workshop(s):"
   workshop_registration_choose: "choose workshop"
