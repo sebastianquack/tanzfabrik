@@ -18,7 +18,7 @@ end
 
 div editable event, :description, :type => "wysihtml5"
 
-if event.type.id == 2 #workshop
+if [2,4].include? event.type.id #workshop or profitraining
   event.people.each do |person|
     div person.bio.html_safe
   end

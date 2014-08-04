@@ -28,6 +28,5 @@ if page
       div :class => "details empty", "data-variant" => page.title.length % 2
     end
   end
-
 end	
 

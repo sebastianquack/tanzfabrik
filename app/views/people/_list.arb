@@ -20,7 +20,11 @@ people.each do |person|
     div :class => "details" do
       div :class => "row" do
         div :class => "image-container" do
-          img :src => person.images.first.attachment.url(:people_hires) if person.images.exists?
+          if person.images.exists?
+            img :src => person.images.first.attachment.url(:people_hires)
+          else
+            img :src => asset_path("schwarzT.png", type: :image)
+          end
         end
         div :class => "info" do
           h3 person.name

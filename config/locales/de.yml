@@ -60,6 +60,8 @@ de:
   form_section_membership_status_0: "Ich bin bereits Fördermitglied (Bitte achten Sie darauf, dass Ihre Mitgliedschaft zum Zeitpunkt des Workshops noch gültig ist)"
   form_section_membership_status_1: "Ich überweise 5,-€ zusätzlich zum Workshopbetrag"
   form_section_concessions: "Ermäßigungen"
+  form_section_concessions_early_bird: "Frühbucherrabatt (mit * gekennzeichneter Preis):"
+  form_section_concessions_early_bird_until: "bei Eingang der Gesamtzahlung auf unser Konto bis zum"
   form_section_workshop_info: "Workshopinformationen"
   form_section_course_program: "Kursprogramm"
   form_section_event_program: "Veranstaltungsprogramm"

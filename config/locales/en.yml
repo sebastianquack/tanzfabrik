@@ -80,6 +80,8 @@ en:
   form_section_membership_status_0: "I’m already a member (Please make sure your membership is still valid at the time of the workshop)."
   form_section_membership_status_1: " I’m adding 5,-€ to the payment of the workshop fee via bank transfer"
   form_section_concessions: "Concession"
+  form_section_concessions_early_bird: "Early booking rate (marked with *):"
+  form_section_concessions_early_bird_until: "on transfer of the full workshop fee onto our account until"  
   form_section_workshop_info: "Workshop Information"
   form_section_course_program: "Course Program"
   form_section_event_program: "Event Program"

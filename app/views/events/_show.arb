@@ -26,8 +26,10 @@ div :class => "row event single-event" do
       
       render :partial => "events/basic_info", :locals => {:event => event, :show_festival => show_festival}
       
-      div :class => "admin-only admin-nav" do
-        a "> Dieses Ereignis bearbeiten", :href => edit_admin_event_path(event) if admin_user_signed_in?
+      if admin_user_signed_in?
+        div :class => "admin-only admin-nav" do
+          a "> Dieses Ereignis bearbeiten", :href => edit_admin_event_path(event)
+        end
       end
 
     end

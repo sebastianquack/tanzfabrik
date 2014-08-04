@@ -1,6 +1,10 @@
-if event.images.length > 0
+if event.images.length > 0 || event.type.name == "Profitraining" && event.people.first.images.length > 0
   div :class => "image-container" do
-    img :src => event.images.first.attachment.url(:medium_detail_column)
+    if event.type.name == "Profitraining"
+      img :src => event.people.first.images.first.attachment.url(:medium_detail_column)
+    else
+      img :src => event.images.first.attachment.url(:medium_detail_column)
+    end
   end
 end
 

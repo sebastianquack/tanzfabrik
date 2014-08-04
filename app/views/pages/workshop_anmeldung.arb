@@ -22,8 +22,11 @@ if notice == "ok"
   end
 
   # retrieve events of type workshop that start today or in the future
-  workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ?', Date.today)
-  workshops = workshops.sort_by { |w| w.start_date }
+  workshops = Event
+    .joins(:type, :event_details)
+    .where('event_types.id = 2 AND event_details.start_date >= ?', Date.today)
+    .uniq
+    .sort_by { |w| w.start_date }
 
   div :class => "registration-form" do
     
@@ -145,10 +148,19 @@ if notice == "ok"
       div :class => "row" do
         div t(:form_section_concessions), :class => "title"
         div :class => "description" do 
+          para t(:form_section_concessions_early_bird)
+          workshops.group_by { |w| w.early_bird_date } .each do |early_bird_date, early_bird_workshops|
+            para :class => "early_bird_list" do
+              early_bird_workshops.each do |workshop|
+                b workshop.title
+              end
+              span t(:form_section_concessions_early_bird_until) + " " + l(early_bird_date)
+            end
+          end
           ermassigungen = Page.find("ermassigungen")
           if ermassigungen
             div editable ermassigungen, :content, :type => "wysihtml5"
-          end
+          end          
         end
       end
       

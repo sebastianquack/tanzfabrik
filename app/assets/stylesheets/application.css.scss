@@ -1146,6 +1146,12 @@ dl.tags {
 	padding-top: 0.9em;
 }
 
+.teachers .image-container.empty {
+	width:146px;
+	height:152px;
+	background-image: url(asset_path("schwarzT.png", image));
+}
+
 .teachers h3 {
 	font-size: 1em;
 	font-weight: 700;
@@ -1501,6 +1507,12 @@ ul.workshops {
 
 	p:not(:last-child) {
 		margin-bottom: 1em;
+	}
+
+	.early_bird_list {
+		b, span {
+			display: block;
+		}
 	}
 
 	.label-columns .description {
