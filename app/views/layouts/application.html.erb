@@ -20,7 +20,7 @@
     </style>
 	<![endif]-->  
 </head>
-<body<%= " data-no-turbolink" %> <%= 'class=start' if @page && @page.title == "Start" %>>
+<body<%= " data-no-turbolink" if admin_user_signed_in? %> <%= 'class=start' if @page && @page.title == "Start" %>>
 
 <div id="overall-container">
 	<div class="container">

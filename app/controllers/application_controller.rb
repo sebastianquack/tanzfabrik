@@ -44,8 +44,9 @@ class ApplicationController < ActionController::Base
         
     images = Image.where(:show_on_welcome_screen => true)
     if images.length > 0
-      # hier müsste man noch täglich wechseln mit pseudorandom
-      @bg_image_url = images.sample.attachment.url(:background)
+      # pseudorandom
+      bgrand = Random.new(request.user_agent.length + Time.now.round_to_fifteen.to_i)
+      @bg_image_url = images[bgrand.rand(images.length-1)].attachment.url(:background)
       return
     end
     
