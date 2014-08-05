@@ -413,7 +413,7 @@ ul.navigation > li > ul > li {
 ul.navigation > li > ul > li > ul {
   float:left;
   position: absolute;
-  padding-bottom: 0.5em;
+  padding-bottom: 0.6em;
 }
 
 ul.navigation > li > ul > li > ul > li {
@@ -907,9 +907,8 @@ dl.tags {
 	.description {
 		margin: $vertical-box-padding 0;
 
-		a:before, a:after {
-			content: "/";
-			color:red;
+		a {
+			font-weight: bold;
 		}
 
 	}
@@ -1104,7 +1103,7 @@ dl.tags {
 
 		.description {
 			position:relative;
-			padding-top:$vertical-box-padding;
+			margin-top:$vertical-box-padding;
 
 			.bio {
 				height:7 * $line-height * 0.98;
@@ -1142,9 +1141,16 @@ dl.tags {
 }
 
 
-.teachers .image-container, .teachers .info {
+.teachers .image-container, {
 	@include make-xs-column(3);
-	padding-top: 0.9em;
+
+	img {
+		padding-bottom: 2 * $vertical-box-padding;
+	}
+}
+
+.teachers .info {
+	padding-top: $vertical-box-padding;
 }
 
 .teachers .image-container.empty {

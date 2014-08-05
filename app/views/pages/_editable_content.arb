@@ -16,7 +16,7 @@ if page
     if page.images.length > 0 
       div :class => "details" do
         div :class => "image-container" do
-          page.images.each do |image|
+          page.images.order(:updated_at).each do |image|
             img :src => image.attachment.url(:medium_detail_column), :title => image.description, :alt => image.description
           end
           page.images.each do |image|
