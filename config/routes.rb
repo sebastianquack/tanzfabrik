@@ -9,8 +9,6 @@ Tanzfabrik::Application.routes.draw do
   get 'admin' => 'admin/pages#index'
   ActiveAdmin.routes(self)
 
-  #get '*path' => redirect('http://archiv.tanzfabrik-berlin.de:path') # TODO: make this work - all unknown paths redirect to old site
-
   #get '/kurse.php' => redirect('/de/kursplan') # --> see application_controller
 
   scope "/:locale" do
@@ -20,7 +18,9 @@ Tanzfabrik::Application.routes.draw do
     resources :pages, :only => [:show, :update], :path => ''
     resources :registrations, :only => [:create]
   end
-  get '/:locale' => 'pages#show'
+  get '/:locale' => 'pages#show', :locale => /en/
+
+  get '*path' => "redirect#oldsite"
 
   #resources :pages, :only => [:update]
   #resources :events, :only => [:update]

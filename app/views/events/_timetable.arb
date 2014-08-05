@@ -34,7 +34,7 @@ row_index = 1
 
 # go through event details per hour
 details_by_hour = 
-  EventDetail.includes( :event, {:event => [:people, :type, :person_events]}, :repeat_mode, :tags, {:studio => :location} )
+  EventDetail.includes( :event, {:event => [{:people => :events }, :type, :person_events]}, :repeat_mode, :tags, {:studio => :location} )
   .all(:include => :event, :conditions => {:events => {:type_id => type_ids }} )
   .select{ |ed| ed.valid? && ed.studio.location == location }
   .sort_by { |detail| [detail.time.strftime('1%H%M').to_i, detail.event.title] }

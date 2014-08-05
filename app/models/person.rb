@@ -6,6 +6,11 @@ class Person < ActiveRecord::Base
 
   has_many :images
   accepts_nested_attributes_for :images, :allow_destroy => true
+
+  scope :kurslehrer,
+    joins("events")
+    .where => "event.type_id = 3"#,4,5,6
+  
   
   def self.by_event_types types
     r = []
@@ -29,11 +34,11 @@ class Person < ActiveRecord::Base
   end
 
   def kurslehrer?
-    self.events.any? { |e| [3, 4, 5, 6].include?(e.type.id) }
+    self.events.any? { |e| [3, 4, 5, 6].include?(e.type_id) }
   end
 
   def artist?
-    self.events.any? { |e| [1, 7, 8, 10].include?(e.type.id) }
+    self.events.any? { |e| [1, 7, 8, 10].include?(e.type_id) }
   end
 
 end

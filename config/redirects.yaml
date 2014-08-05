@@ -1,0 +1,20 @@
+kursplan: kurse.php
+programm: kalender.php
+tickets: tickets.php
+lehrer: 
+  - lehrer-krs.php
+  - lehrer-pro.php
+agbs: agb.php
+workshop_programm: workshops.php
+workshop_anmeldung: ws-anmeldung.php
+dance_intensive_programm: 'ausbildung.php?vwbdid=1&l=1'
+profitraining: profitraining.php
+contact_jam: contact_jam.php
+studios: raeume.php
+vermietungsinfo: vermietung.php
+profil_partner: 
+  - profil.php
+  - partner.php
+root: news.php
+apap_netzwerk: apap.php
+kontakt: kontakt.php
