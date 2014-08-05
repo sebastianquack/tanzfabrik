@@ -154,7 +154,7 @@ if notice == "ok"
               early_bird_workshops.each do |workshop|
                 b workshop.title
               end
-              span t(:form_section_concessions_early_bird_until) + " " + l(early_bird_date)
+              span t(:form_section_concessions_early_bird_until) + " " + l(early_bird_date, :format => :day)
             end
           end
           ermassigungen = Page.find("ermassigungen")

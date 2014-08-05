@@ -122,6 +122,7 @@ en:
       long_day: '%a, %m/%d/%Y'
       month: "%B" 
       month_day: '%m/%d'
+      day: '%m/%d/%Y'
   number:
     currency:
       format:

@@ -99,7 +99,7 @@ $(document).ready(function() {
           elem = $(location.hash)
         }
         else return;
-        elem.find(".open-close").addClass("opened")
+        /*elem.find(".open-close").addClass("opened")*/
         setTimeout( function() {scrollScreenTo(elem, 1500)}, 20)
       }      
       last_w = w
