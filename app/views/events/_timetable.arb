@@ -2,6 +2,7 @@
 # if variable not present, use start of current week
 # pass events
 # pass location
+require 'benchmark'
 
 unless defined? start_date
   start_date = Date.today.beginning_of_week # gets current monday
@@ -41,42 +42,55 @@ details_by_hour =
   .group_by { |detail| detail.time.hour }
   .sort_by { |hour,detail| hour}
 
+#bench = Benchmark.measure do
 
-#pre details_by_location.to_yaml
+  details_by_hour.each do |hour, details|
 
-details_by_hour.each do |hour, details|
+    # go through dates = columns
+    dates.each_with_index do |date, column_index|
+      
+      unless table_data[row_index]
+        table_data[row_index] = [] # initialize row if that hasen't happened yet
+      end          
+      unless table_data[row_index][column_index + 1]
+        table_data[row_index][column_index + 1] = [] # initialize a column if that hasen't happened yet
+      end    
 
-  # go through dates = columns
-  dates.each_with_index do |date, column_index|
-    
-    unless table_data[row_index]
-      table_data[row_index] = [] # initialize row if that hasen't happened yet
-    end          
-    unless table_data[row_index][column_index + 1]
-      table_data[row_index][column_index + 1] = [] # initialize a column if that hasen't happened yet
-    end    
-
-    #check if a detail has an occurrence during the upcoming weeks
-    details.each do |detail|
-      9.times do |i|
-        if detail.extend_empty_end_date.occurs_on?(date + i.week)
-          table_data[row_index][column_index + 1].push(detail)
-          tags += detail.tags
-          break
+      #check if a detail has an occurrence during the upcoming weeks
+      upcoming_weeks = 9
+      details.each do |detail|
+        if detail.start_date.wday == date.wday
+          # fast code
+          if detail.extend_empty_end_date.end_date >= Date.today && detail.start_date <= (Date.today + upcoming_weeks.week)
+            table_data[row_index][column_index + 1].push(detail)
+            tags += detail.tags
+          # slow code for events that happen between now and upcoming_weeks
+          elsif detail.start_date >= Date.today
+            logger.debug("UPCOMING " + detail.event.title + detail.event.type_id.to_s)
+            upcoming_weeks.times do |i|
+              if detail.extend_empty_end_date.occurs_on?(date + i.week)
+                table_data[row_index][column_index + 1].push(detail)
+                tags += detail.tags
+                break
+              end
+            end
+          end
         end
-      end
-    end  
+      end  
+
+    end
+
+    # only if there was an occurrence in this row, add time to first column
+    if table_data[row_index]
+      #table_data[row_index][0]  = div details.first.studio.location.name, :class => "location-name"
+      #table_data[row_index][0] += div details.first.studio.name, :class => "studio-name"
+      table_data[row_index][0]  = div hour.to_s + ":00"
+      row_index += 1
+    end
   end
 
-  # only if there was an occurrence in this row, add time to first column
-  if table_data[row_index]
-    #table_data[row_index][0]  = div details.first.studio.location.name, :class => "location-name"
-    #table_data[row_index][0] += div details.first.studio.name, :class => "studio-name"
-    table_data[row_index][0]  = div hour.to_s + ":00"
-    row_index += 1
-  end
-end
-
+#end
+#logger.debug bench
 
 table_data[0][0] = div(location.name, :class => "location-name")
 

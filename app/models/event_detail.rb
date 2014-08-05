@@ -144,7 +144,7 @@ class EventDetail < ActiveRecord::Base
   # when start_date==end_date and empty repeat rule, extend the end_date to 1 year in the future
   def extend_empty_end_date
     if self.end_date == self.start_date && !self.repeat_mode.rule.empty?
-      self.end_date = Date.today + 1.year
+      self.end_date = Date.today + 10.year
     end
     return self
   end
