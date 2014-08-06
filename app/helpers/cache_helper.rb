@@ -43,6 +43,13 @@ module CacheHelper
     return "kuenstler/" + Digest::MD5.digest("#{locale}-#{other_models}")
   end
 
+  def cache_for_navigation 
+    uri                    = request.fullpath.to_s
+    locale                 = I18n.locale.to_s
+    other_models           = cache_key_from_models([Page])
+    return "navigation/" + Digest::MD5.digest("#{locale}-#{uri}-#{other_models}")
+  end
+
   def cache_key_from_models models
     plain_key = ""
     models.each do |m|
@@ -67,7 +74,7 @@ module CacheHelper
     if controller.perform_caching && !admin_user_signed_in?
       if Rails.cache.exist?(*args)
         context.instance_eval do
-          div(Rails.cache.read(*args))
+          text_node Rails.cache.read(*args)
         end
       else
         Rails.cache.write(*args, yield.to_s)

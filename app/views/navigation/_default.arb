@@ -1,140 +1,143 @@
-require 'fuzzystringmatch'
-@jarow = FuzzyStringMatch::JaroWinkler.create( :pure )
+cache_arbre(self, cache_for_navigation) do
+  
+  require 'fuzzystringmatch'
+  @jarow = FuzzyStringMatch::JaroWinkler.create( :pure )
 
-div :id => "header", :class =>"site-background", :data => @bg_image_url do
-  def page_url(id)
-    url_for :controller => 'pages', :action => 'show', :id => id
-  end
-
-  def link_to_page(id)
-    page = find_page(id)
-    if current_page? page
-      span link_to(page.title, page_url(id)), :class => "selected"
-    else
-      link_to page.title, page_url(id)
+  div :id => "header", :class =>"site-background", :data => @bg_image_url do
+    def page_url(id)
+      url_for :controller => 'pages', :action => 'show', :id => id
     end
-  end
 
-  def menu_header text, page_ids
-    selected_page_id = page_ids.select { |pid| current_page? find_page(pid) }.first.to_s
-    if !selected_page_id.empty?
-      selected_page_text = find_page(selected_page_id).title
-      # check if menu header text appears in page title at the beginning and cut it off
-      dist = @jarow.getDistance( text, selected_page_text[0..text.length-1] )
-      if dist > 0.85
-        matches = /[s]?[+&\s\/\\](.*)$/.match(selected_page_text[text.length-1..selected_page_text.length-1])
-        if matches
-          extension = matches[1].to_s
+    def link_to_page(id)
+      page = find_page(id)
+      if current_page? page
+        span link_to(page.title, page_url(id)), :class => "selected"
+      else
+        link_to page.title, page_url(id)
+      end
+    end
+
+    def menu_header text, page_ids
+      selected_page_id = page_ids.select { |pid| current_page? find_page(pid) }.first.to_s
+      if !selected_page_id.empty?
+        selected_page_text = find_page(selected_page_id).title
+        # check if menu header text appears in page title at the beginning and cut it off
+        dist = @jarow.getDistance( text, selected_page_text[0..text.length-1] )
+        if dist > 0.85
+          matches = /[s]?[+&\s\/\\](.*)$/.match(selected_page_text[text.length-1..selected_page_text.length-1])
+          if matches
+            extension = matches[1].to_s
+          else
+            extension = selected_page_text
+          end
         else
           extension = selected_page_text
         end
-      else
-        extension = selected_page_text
+        return span (text.upcase + "/" + extension), :class => "selected"
       end
-      return span (text.upcase + "/" + extension), :class => "selected"
+      text
     end
-    text
-  end
 
-  def find_page id
-    Page.all.select{ |p| p.slug == id}.first # use query cache
-  end
-
-  #if admin_user_signed_in?
-  #  div :class=>"admin-menu admin-only admin-top-menu" do
-  #    a "Admin", :href => admin_path
-  #  end
-  #end
-
-  ul :id => "secondary-menu" do
-    li do
-      a t(:archive), :href => "http://archiv.tanzfabrik-berlin.de"
+    def find_page id
+      Page.all.select{ |p| p.slug == id}.first # use query cache
     end
-    li link_to_page("kontakt")
-    li link_to_page("agbs")
-    li link_to_page("impressum")
-  end
 
-  div :id => "language-logo" do 
+    #if admin_user_signed_in?
+    #  div :class=>"admin-menu admin-only admin-top-menu" do
+    #    a "Admin", :href => admin_path
+    #  end
+    #end
 
-    ul :id => "language-select" do
-      li :class => (I18n.locale == :en ? ("selected") : ("unselected")) do
-        a :href => url_for(:locale => "en"), :rel => "alternate",  :hreflang => "en" do
-          abbr "en", :lang => "en", :title => "English"
-        end
-      end      
-      li :class => (I18n.locale == :de ? ("selected") : ("unselected")) do
-        a :href => url_for(:locale => "de"), :rel => "alternate", :hreflang => "de" do
-          abbr "de", :lang => "de", :title => "Deutsch"
+    ul :id => "secondary-menu" do
+      li do
+        a t(:archive), :href => "http://archiv.tanzfabrik-berlin.de"
+      end
+      li link_to_page("kontakt")
+      li link_to_page("agbs")
+      li link_to_page("impressum")
+    end
+
+    div :id => "language-logo" do 
+
+      ul :id => "language-select" do
+        li :class => (I18n.locale == :en ? ("selected") : ("unselected")) do
+          a :href => url_for(:locale => "en"), :rel => "alternate",  :hreflang => "en" do
+            abbr "en", :lang => "en", :title => "English"
+          end
+        end      
+        li :class => (I18n.locale == :de ? ("selected") : ("unselected")) do
+          a :href => url_for(:locale => "de"), :rel => "alternate", :hreflang => "de" do
+            abbr "de", :lang => "de", :title => "Deutsch"
+          end
         end
       end
-    end
 
-    div :id => "logo" do
-      a :href => root_path do
-        img :src => asset_path("tanzfabrik-logo.gif")
-        img :src => asset_path("tanzfabrik-logo-hover.gif")
-      end
-    end
-
-  end
-
-  nav :id => "top-menu" do
-    ul :class => "navigation" do
-      li do
-        span t(:section_school)
-        ul do
-          li menu_header(t(:section_classes), ["kursplan", "profitraining", "kindertanz", "contact_jam", "lehrer", "performance_projekte", "oeffnungszeiten"]) do
-            ul do
-              li link_to_page("kursplan")
-              li link_to_page("performance_projekte")
-              li link_to_page("profitraining")
-              li link_to_page("kindertanz")
-              li link_to_page("contact_jam")
-              li link_to_page("lehrer")
-              li link_to_page("oeffnungszeiten")
-            end
-          end
-          li menu_header(t(:section_workshops), ["workshop_programm", "workshop_anmeldung"]) do
-            ul do
-              li link_to_page("workshop_programm")
-              li link_to_page("workshop_anmeldung")
-            end
-          end        
-          li menu_header(t(:section_dance_intensive), ["dance_intensive_programm", "dance_intensive_lehrer", "dance_intensive_bewerbung"]) do
-            ul do
-              #li link_to_page("ueber_dance_intensive")
-              li link_to_page("dance_intensive_programm")
-              li link_to_page("dance_intensive_lehrer")
-              li link_to_page("dance_intensive_bewerbung")
-            end
-          end
-        end 
-      end
-      li do
-        span t(:section_production)
-        ul do
-          li link_to_page("programm")
-          li link_to_page("festivals")
-          li link_to_page("kuenstler")
-          li link_to_page("residenzen")
-          li link_to_page("apap_netzwerk")
+      div :id => "logo" do
+        a :href => root_path do
+          img :src => asset_path("tanzfabrik-logo.gif")
+          img :src => asset_path("tanzfabrik-logo-hover.gif")
         end
       end
-      li do
-        span t(:section_berlin)
-        ul do    
-          li menu_header(t(:section_about), ["profil_partner", "team"]) do
-            ul do
-              li link_to_page("profil_partner")
-              li link_to_page("team")
+
+    end
+
+    nav :id => "top-menu" do
+      ul :class => "navigation" do
+        li do
+          span t(:section_school)
+          ul do
+            li menu_header(t(:section_classes), ["kursplan", "profitraining", "kindertanz", "contact_jam", "lehrer", "performance_projekte", "oeffnungszeiten"]) do
+              ul do
+                li link_to_page("kursplan")
+                li link_to_page("performance_projekte")
+                li link_to_page("profitraining")
+                li link_to_page("kindertanz")
+                li link_to_page("contact_jam")
+                li link_to_page("lehrer")
+                li link_to_page("oeffnungszeiten")
+              end
             end
+            li menu_header(t(:section_workshops), ["workshop_programm", "workshop_anmeldung"]) do
+              ul do
+                li link_to_page("workshop_programm")
+                li link_to_page("workshop_anmeldung")
+              end
+            end        
+            li menu_header(t(:section_dance_intensive), ["dance_intensive_programm", "dance_intensive_lehrer", "dance_intensive_bewerbung"]) do
+              ul do
+                #li link_to_page("ueber_dance_intensive")
+                li link_to_page("dance_intensive_programm")
+                li link_to_page("dance_intensive_lehrer")
+                li link_to_page("dance_intensive_bewerbung")
+              end
+            end
+          end 
+        end
+        li do
+          span t(:section_production)
+          ul do
+            li link_to_page("programm")
+            li link_to_page("festivals")
+            li link_to_page("kuenstler")
+            li link_to_page("residenzen")
+            li link_to_page("apap_netzwerk")
           end
-          li link_to_page("tickets")
-          li menu_header(t(:section_rental), ["studios", "vermietungsinfo"]) do
-            ul do
-              li link_to_page("studios")
-              li link_to_page("vermietungsinfo")
+        end
+        li do
+          span t(:section_berlin)
+          ul do    
+            li menu_header(t(:section_about), ["profil_partner", "team"]) do
+              ul do
+                li link_to_page("profil_partner")
+                li link_to_page("team")
+              end
+            end
+            li link_to_page("tickets")
+            li menu_header(t(:section_rental), ["studios", "vermietungsinfo"]) do
+              ul do
+                li link_to_page("studios")
+                li link_to_page("vermietungsinfo")
+              end
             end
           end
         end
