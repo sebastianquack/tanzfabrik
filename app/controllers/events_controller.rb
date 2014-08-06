@@ -5,6 +5,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     set_meta_tags :title => (@event.title + " | " + @event.type.name)
     set_meta_tags :description => auto_generate_description(@event.description) if @event.description
+    set_meta_tags :keywords => (@event.keywords)
   end
 
   def index

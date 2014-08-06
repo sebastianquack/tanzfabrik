@@ -93,4 +93,13 @@ class Event < ActiveRecord::Base
     "#{title} | " + self.festivals.map { |f| f.name }.join(", ") + (self.festivals.length > 0 ? " | " : "") + self.tags.uniq.map { |t| t.name }.join(", ") + " | #{price_regular},-€ / #{price_reduced},-€*"
   end
 
+  def keywords # TODO: add keywords model with priorities to combine keywords from different sources
+    k = []
+    k << self.display_type
+    k += self.people.collect_concat {|p| p.name}
+    k << self.title
+    k << "Berlin"
+    k << "Tanzfabrik"
+  end
+
 end

@@ -1,11 +1,18 @@
-events = Event.joins(:type, :event_details).where('event_details.end_date >= ? AND event_details.end_date <= ?', Time.now, Time.now + 30.days).order('event_details.start_date ASC')
+if I18n.locale == :de
+  page_title = "Zentrum für zeitgenössischen Tanz in Berlin"
+else
+  page_title = "Center for contemporary dance in Berlin"
+end
+set_meta_tags :title => page_title, :reverse => false
+
+events = Event.joins(:type, :event_details).where('event_details.end_date >= ? AND event_details.end_date <= ?', Time.now, Time.now + 10.days).order('event_details.start_date ASC')
 
 events.each do |event|
 
   event.event_details.each do |detail|
       
     # check if there is an occurrence this month
-    occurrences = detail.occurrences_between Time.now, Time.now + 30.days
+    occurrences = detail.occurrences_between Time.now, Time.now + 10.days
           
     if occurrences.length > 0
       div do      

@@ -153,6 +153,10 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     pg (0.17.1)
+    piwik_analytics (1.0.2)
+      actionpack
+      activesupport
+      rails (>= 3.0.0)
     polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.4)
@@ -247,6 +251,7 @@ DEPENDENCIES
   meta-tags
   paperclip (= 4.1.1)
   pg
+  piwik_analytics (~> 1.0.1)
   rails (= 4.0.3)
   rails_12factor
   sass-rails (~> 4.0.0)

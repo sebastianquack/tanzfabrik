@@ -6,9 +6,9 @@ module SeoHelper
   def auto_generate_description html
     html = html.gsub(/<\/b>|<br>|<\/p>/, " ")
     text = ActionController::Base.helpers.strip_tags(html)
-    text = ActionController::Base.helpers.truncate(text, length: 150, separator: ' ')
     text = HTMLEntities.new.decode(text)
     text = text.gsub(/  /, " ").strip
+    text = ActionController::Base.helpers.truncate(text, length: 150, separator: ' ')
     text = text.gsub(/"/, " ").strip
     text
   end  
