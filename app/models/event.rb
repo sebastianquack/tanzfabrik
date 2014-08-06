@@ -90,7 +90,7 @@ class Event < ActiveRecord::Base
   
   def workshop_select
     I18n.l(self.start_date, :format => :short) + "-" + I18n.l(self.end_date, :format => :short) + " | " +
-    "#{title} | " + self.festivals.map { |f| f.name }.join(", ") + (self.festivals.length > 0 ? " | " : "") + self.tags.map { |t| t.name }.join(", ") + " | #{price_regular},-€ / #{price_reduced},-€*"
+    "#{title} | " + self.festivals.map { |f| f.name }.join(", ") + (self.festivals.length > 0 ? " | " : "") + self.tags.uniq.map { |t| t.name }.join(", ") + " | #{price_regular},-€ / #{price_reduced},-€*"
   end
 
 end

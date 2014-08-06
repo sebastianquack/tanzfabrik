@@ -1,8 +1,18 @@
 show_festival = nil if !defined? show_festival
 
+# TODO: generalize this and put it into the event model
+if (event.type_id == 5)
+  events_of_types = Event.of_types([5]).sort_by{ |e| e.start_date }.select { |e| e.start_date > (Date.today.beginning_of_week - 2.week) }
+  event_pos = events_of_types.index(event)
+  next_event = events_of_types[event_pos+1] if event_pos < events_of_types.length
+  prev_event = events_of_types[event_pos-1] if event_pos > 0
+end
+
 header :id => "headlines", :class => "headlines-event" do
   div :class => "before" do
-    a "<", :class => "previous" if event.type.name == "Performance-Projekt"
+    if event.type.name == "Performance-Projekt"
+      a "<", :class => "previous", :href => event_path(prev_event) if prev_event
+    end
   end
   div :class => "main" do
     div :class => "line1" do
@@ -11,7 +21,7 @@ header :id => "headlines", :class => "headlines-event" do
         a ">" + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
       elsif event.type.name == "Performance-Projekt"
         h1 event.type.name, :class => "title"
-        a ">", :class => "next"
+        a ">", :class => "next", :href => event_path(next_event) if next_event
       elsif event.type.name == "Profitraining"
         h1 event.type.name, :class => "title"        
       else

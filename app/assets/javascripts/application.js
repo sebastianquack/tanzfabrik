@@ -179,7 +179,7 @@ var setMaxHeight = function(elem) {
 // detect overflow
 $.fn.overflown_y=function(){
   var e=this[0];
-  return e.scrollHeight>e.clientHeight;
+  return (e.scrollHeight-1)>e.clientHeight;
 }
 
 //borrowed from jQuery easing plugin

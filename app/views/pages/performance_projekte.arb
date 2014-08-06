@@ -29,7 +29,8 @@ header :id => "headlines", :class => "headlines-performance-projecte" do
   end
 end
 
-Event.of_types([5]).sort_by{ |e| e.start_date }.each do |project| 
+performance_projekte = Event.of_types([5]).sort_by{ |e| e.start_date }.select { |e| e.start_date > (Date.today.beginning_of_week - 2.week) } # TODO: named scope in model, to reuse in event view
+performance_projekte.each do |project| 
 
   div :class => "row event event-performanceprojekt" do
     div :class => "basic" do   

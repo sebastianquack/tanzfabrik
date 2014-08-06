@@ -12,6 +12,8 @@
  *= require bootstrap-wysihtml5
  */
 
+$admin-link-color: #0088cc;
+
  [data-type=wysihtml5] + .editable-container .editable-buttons {
   position:relative;
   right:82px;
@@ -23,4 +25,52 @@ textarea.editable-wysihtml5 {
 
 .wysihtml5-toolbar a {
   color:black;
+  border:1px black solid;
+}
+
+.admin-nav {
+  float:right;
+  padding: 1em 0 1em 1em;
+
+  a {
+    padding-right: 1em;
+  }
+
+  a:last-child {
+    padding-right:0;
+  }
+}
+
+.admin-only a, a.admin-only {
+  color:$admin-link-color !important;
+  text-decoration: none !important;
+  border-style:none !important;  
+}
+
+.admin-top-menu {
+  position: absolute;
+  float: right;
+  right:0;
+  z-index: 6;
+}
+
+.translation_missing {
+  outline: solid $admin-link-color 1px;
+  position: relative;
+}
+
+.editable-empty, .editable-empty:hover {
+  color: $admin-link-color;
+}
+
+.translation_missing:hover {
+  outline: none;
+}
+
+.translation_missing:hover:before {
+  content: "Übersetzung fehlt";
+  background-color: $admin-link-color;
+  padding:0.3em 1em;
+  color:white;
+  position: absolute;
 }
