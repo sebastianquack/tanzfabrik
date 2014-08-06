@@ -50,9 +50,9 @@ div :class => "open-close-shade" do
   type_ids = [3,5,6]
   cache_arbre(self, cache_key_for_kursplan(Event.of_types(type_ids))) do
     div :class => "cache" do
-    Location.where(:name => ["Wedding", "Kreuzberg"]).each do |location|   
-      render :partial => "/events/timetable", :locals => {:type_ids => type_ids, :start_date => start_date, :location => location}
-    end
+      Location.where(:name => ["Wedding", "Kreuzberg"]).each do |location|   
+        render :partial => "/events/timetable", :locals => {:type_ids => type_ids, :start_date => start_date, :location => location}
+      end
     end
   end
 
