@@ -49,7 +49,6 @@ $(document).ready(function() {
         toggleHeightElem = $(toggleHeightElems.get(0))
         toggleHeightElem.data("closed-height", toggleHeightElem.css("height"))
         toggleHeightElem.css("height", toggleHeightElem.prop("scrollHeight"))
-        console.log(toggleHeightElem.prop("scrollHeight"))
       }
       base.addClass("opened")
       $(this).closest('.open-close-shade').addClass("shaded")
@@ -63,7 +62,6 @@ $(document).ready(function() {
     if (base.hasClass("opened")) {
       toggleHeightElems = base.parent().find(".open-toggle-height")
       if (toggleHeightElems.length > 0) {
-        console.log(toggleHeightElems)
         toggleHeightElem = $(toggleHeightElems.get(0))
         toggleHeightElem.css("height", toggleHeightElem.data("closed-height"))
       }    
@@ -80,7 +78,6 @@ $(document).ready(function() {
     adjust_cc_height_elems.each (function () {
       bottom_y = $(this).prop("scrollHeight") + $(this).offset().top
       if (bottom_y > max) max = bottom_y
-      console.log(max)
     })
     $("#content-container").css("padding-bottom", (max-cc_height) + "px")
   }
