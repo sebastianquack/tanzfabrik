@@ -8,10 +8,12 @@ header :id => "headlines", :class => "headlines-event" do
     div :class => "line1" do
       if event.type.name == "Workshop"
         h1 event.type.name, :class => "title"
-        a ">" + t(:workshop_registration), :class => "registration"
+        a ">" + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
       elsif event.type.name == "Performance-Projekt"
         h1 event.type.name, :class => "title"
         a ">", :class => "next"
+      elsif event.type.name == "Profitraining"
+        h1 event.type.name, :class => "title"        
       else
         h1 t(:programm_event_headline), :class => "title"
         a ">" + t(:tickets), :href => page_path("tickets"), :class => "registration"

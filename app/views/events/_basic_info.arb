@@ -2,7 +2,7 @@ show_festival = nil if !defined? show_festival
 
 h2 event.title, :class => "title"
 
-if event.type.name != "Performance-Projekt" && event.type.name != "Workshop"
+if event.type.name != "Performance-Projekt" && event.type.name != "Workshop" && event.type.name != "Profitraining"
   para event.display_type, :class => "type"
 end
 
@@ -20,7 +20,7 @@ div editable event, :description, :type => "wysihtml5"
 
 if [2,4].include? event.type.id #workshop or profitraining
   event.people.each do |person|
-    div person.bio.html_safe
+    div person.bio.html_safe, :class => "event-bio"
   end
 end
 

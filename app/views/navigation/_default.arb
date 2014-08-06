@@ -40,6 +40,12 @@ div :id => "header", :class =>"site-background", :data => @bg_image_url do
     Page.all.select{ |p| p.slug == id}.first # use query cache
   end
 
+  #if admin_user_signed_in?
+  #  div :class=>"admin-menu admin-only admin-top-menu" do
+  #    a "Admin", :href => admin_path
+  #  end
+  #end
+
   ul :id => "secondary-menu" do
     li do
       a t(:archive), :href => "http://archiv.tanzfabrik-berlin.de"

@@ -30,8 +30,9 @@ $grid-columns: 6; /* column width: 144px */
 $grid-gutter-width: 16px;
 
 $text-color:						black;
-
 $brand-primary:         #F50015;
+$special-color:					#19CBFA;
+$special-background-color: rgba(24, 190, 232, 0.75);
 /*
 $brand-success:         #5cb85c !default;
 $brand-info:            #5bc0de !default;
@@ -116,8 +117,18 @@ a:hover, a:focus {
 	color:$admin-link-color;
 }
 
+.admin-top-menu {
+	position: absolute;
+	float: right;
+	right:0;
+	z-index: 6;
+}
+
 a abbr[title] {
 	cursor:pointer;
+}
+
+abbr[title] {
 	border:none;
 }
 
@@ -676,7 +687,7 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 			position:absolute;
 			top:-5px; /* should be: -$vertical-box-padding;*/
 			left:-$grid-gutter-width;
-			background-color: rgba(24, 190, 232, 0.75);
+			background-color: $special-background-color;
 			width:233%;
 			padding: (2 * $line-height + 2 * $vertical-box-padding) $grid-gutter-width 0.5em $grid-gutter-width;
 			z-index:-5;
@@ -701,7 +712,7 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 
 		.title.open-trigger:hover {
 			cursor: pointer;
-			color:#19CBFA;
+			color:$special-color;
 		}
 	}
 
@@ -908,7 +919,11 @@ dl.tags {
 		margin: $vertical-box-padding 0;
 
 		a {
-			font-weight: bold;
+			color: $special-color;
+		}
+
+		a:hover {
+			color:red;
 		}
 
 	}
@@ -1049,6 +1064,12 @@ dl.tags {
 
 .event p {
 	margin-bottom: 1em;
+}
+
+.single-event-page {
+	.event-bio {
+		margin-top: 1em;
+	}
 }
 
 .event-performanceprojekt {
