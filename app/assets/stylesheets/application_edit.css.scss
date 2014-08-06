@@ -31,6 +31,7 @@ textarea.editable-wysihtml5 {
 .admin-nav {
   float:right;
   padding: 1em 0 1em 1em;
+  white-space: nowrap;
 
   a {
     padding-right: 1em;
@@ -45,6 +46,10 @@ textarea.editable-wysihtml5 {
   color:$admin-link-color !important;
   text-decoration: none !important;
   border-style:none !important;  
+}
+
+.admin-only a:after, a.admin-only:after {
+  content: "" !important;
 }
 
 .admin-top-menu {

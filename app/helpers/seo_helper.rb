@@ -1,9 +1,16 @@
 module SeoHelper 
   require 'htmlentities'
   include ActionView::Helpers::SanitizeHelper
+  include ActionView::Helpers::TextHelper
 
   def auto_generate_description html
-    HTMLEntities.new.decode(ActionController::Base.helpers.strip_tags(html)[0..150])+"…"
+    html = html.gsub(/<\/b>|<br>|<\/p>/, " ")
+    text = ActionController::Base.helpers.strip_tags(html)
+    text = ActionController::Base.helpers.truncate(text, length: 150, separator: ' ')
+    text = HTMLEntities.new.decode(text)
+    text = text.gsub(/  /, " ").strip
+    text = text.gsub(/"/, " ").strip
+    text
   end  
 
   def choose_page_description page
