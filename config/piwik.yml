@@ -13,7 +13,7 @@ production:
   piwik:
     id_site: 1
     url: piwik.tanzfabrik-berlin.de
-    use_async: false
+    use_async: true
     disabled: false
 
 development:
@@ -21,13 +21,13 @@ development:
     id_site: 1
     url: piwik.tanzfabrik-berlin.de
     disabled: true
-    use_async: false
+    use_async: true
     hostname: www.tanzfabrik-berlin.de
 
 test:
   piwik:
     id_site: 1
     url: localhost
-    disabled: true
-    use_async: false
+    disabled: false
+    use_async: true
     hostname: localhost
