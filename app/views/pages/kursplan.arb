@@ -1,31 +1,33 @@
-header :id => "headlines", :class => "headlines-kursplan" do
-  div :class => "main" do
-    div :class => "line1" do
-      h1 :class => "title" do
-        span editable page, :title
-        span t(:kursplan_address), :class => "neutral"
+cache_arbre(self, cache_key_for_page_headlines(page)) do      
+  header :id => "headlines", :class => "headlines-kursplan" do
+    div :class => "main" do
+      div :class => "line1" do
+        h1 :class => "title" do
+          span editable page, :title
+          span t(:kursplan_address), :class => "neutral"
+        end
       end
-    end
-    if page.content
-      div :class => "line2 open-close opened" do
-        div :class => "open" do
-          form editable page, :content, :type => "wysihtml5"
-          div t(:close), :class => "close-trigger"
-        end
-        div :class => "closed open-trigger" do
-          div t :kursplan_more
-        end
-      end    
-    end
-    div :class => "line3" do
-      ul do
-        page.downloads.each do |download|        
-          li do
-            a download.description, :href => download.attachment.url
+      if page.content
+        div :class => "line2 open-close opened" do
+          div :class => "open" do
+            form editable page, :content, :type => "wysihtml5"
+            div t(:close), :class => "close-trigger"
+          end
+          div :class => "closed open-trigger" do
+            div t :kursplan_more
+          end
+        end    
+      end
+      div :class => "line3" do
+        ul do
+          page.downloads.each do |download|        
+            li do
+              a download.description, :href => download.attachment.url
+            end
           end
         end
-      end
-    end      
+      end      
+    end
   end
 end
 
@@ -46,13 +48,10 @@ div :class => "open-close-shade" do
   #events = Event.of_types([3, 4, 5, 6])
   #.includes(:people, :event_details => [{:studio => :location}, {:event_detail_tags => :tag}, :repeat_mode])
 
-
   type_ids = [3,5,6]
-  cache_arbre(self, cache_key_for_kursplan(Event.of_types(type_ids))) do
-    div :class => "cache" do
-      Location.where(:name => ["Wedding", "Kreuzberg"]).each do |location|   
-        render :partial => "/events/timetable", :locals => {:type_ids => type_ids, :start_date => start_date, :location => location}
-      end
+  Location.where(:name => ["Wedding", "Kreuzberg"]).each do |location|
+    cache_arbre(self, cache_key_for_kursplan(Event.of_types(type_ids), location)) do      
+      render :partial => "/events/timetable", :locals => {:type_ids => type_ids, :start_date => start_date, :location => location}
     end
   end
 
