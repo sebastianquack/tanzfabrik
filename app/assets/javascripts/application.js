@@ -15,6 +15,7 @@
 //= require jquery.scrollTo
 //= require turbolinks
 //= require bootstrap
+//= require piwik_turbolinks
 
 
 $(document).ready(function() {

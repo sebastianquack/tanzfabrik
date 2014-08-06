@@ -89,5 +89,5 @@ gem "geocoder"
 
 gem "fuzzy-string-match"
 
-gem 'piwik_analytics', '~> 1.0.1'
+gem 'piwik_analytics', '~> 1.0.2'
 
