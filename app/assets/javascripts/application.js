@@ -17,6 +17,8 @@
 //= require bootstrap
 //= require piwik_turbolinks
 
+$(document).on("page:fetch", function() {$("body").css("cursor","wait")})
+$(document).on("page:load", function() {$("body").css("cursor","auto")})
 
 $(document).ready(function() {
 
@@ -129,6 +131,8 @@ $(document).ready(function() {
   })
 
   initMenuContentHide()
+
+  $("body").css("cursor","auto")
 
 });
 
