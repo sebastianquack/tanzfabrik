@@ -91,3 +91,5 @@ gem "fuzzy-string-match"
 
 gem 'piwik_analytics', '~> 1.0.2'
 
+gem 'newrelic_rpm'
+
