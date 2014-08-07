@@ -8,19 +8,21 @@ class RedirectController < ActionController::Base
 
   def oldsite
     # defined redirects
-    redirects = YAML.load_file(FILENAME)
-    redirects.each do |page_id,urls|
-      urls = [urls] if !urls.kind_of?(Array)
-      urls.each do |url|
-        logger.debug "/"+url + " == " + request.fullpath.to_s
-        if "/"+url == request.fullpath.to_s
-          if page_id == "root"
-            dest = root_url(:locale => "de")
-          else
-            dest = page_url(page_id, :locale => "de")
+    definitions = YAML.load_file(FILENAME)
+    definitions.each do |locale, redirects|
+      redirects.each do |page_id,urls|
+        urls = [urls] if !urls.kind_of?(Array)
+        urls.each do |url|
+          if "/"+url == request.fullpath.to_s
+            if page_id == "root"
+              dest = root_url(:locale => locale)
+            else
+              dest = page_url(page_id, :locale => locale)
+            end
+            logger.info "redirected " + request.fullpath.to_s + " to " + dest
+            redirect_to dest, status: :moved_permanently
+            return
           end
-          redirect_to dest, status: :moved_permanently
-          return
         end
       end
     end
