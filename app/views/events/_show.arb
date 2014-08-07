@@ -11,7 +11,7 @@ end
 header :id => "headlines", :class => "headlines-event" do
   div :class => "before" do
     if event.type.name == "Performance-Projekt"
-      a "<", :class => "previous", :href => event_path(prev_event) if prev_event
+      a "<", :class => "previous", :rel => "prev", :href => event_path(prev_event) if prev_event
     end
   end
   div :class => "main" do
@@ -21,7 +21,7 @@ header :id => "headlines", :class => "headlines-event" do
         a ">" + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
       elsif event.type.name == "Performance-Projekt"
         h1 event.type.name, :class => "title"
-        a ">", :class => "next", :href => event_path(next_event) if next_event
+        a ">", :class => "next", :rel => "next", :href => event_path(next_event) if next_event
       elsif event.type.name == "Profitraining"
         h1 event.type.name, :class => "title"        
       else

@@ -17,6 +17,21 @@ cache_arbre(self, cache_for_navigation) do
       end
     end
 
+    def li_language_link_for target_locale, target_name
+      if I18n.locale == target_locale
+        li :class => "selected" do
+          abbr target_locale, :lang => target_locale, :title => target_name
+        end
+      else
+        li :class => "unselected" do
+          a :href => url_for(:locale => target_locale), :rel => "alternate",  :hreflang => target_locale do
+            abbr target_locale, :lang => target_locale, :title => target_name
+          end          
+        end
+      end
+    end
+
+
     def menu_header text, page_ids
       selected_page_id = page_ids.select { |pid| current_page? find_page(pid) }.first.to_s
       if !selected_page_id.empty?
@@ -60,16 +75,8 @@ cache_arbre(self, cache_for_navigation) do
     div :id => "language-logo" do 
 
       ul :id => "language-select" do
-        li :class => (I18n.locale == :en ? ("selected") : ("unselected")) do
-          a :href => url_for(:locale => "en"), :rel => "alternate",  :hreflang => "en" do
-            abbr "en", :lang => "en", :title => "English"
-          end
-        end      
-        li :class => (I18n.locale == :de ? ("selected") : ("unselected")) do
-          a :href => url_for(:locale => "de"), :rel => "alternate", :hreflang => "de" do
-            abbr "de", :lang => "de", :title => "Deutsch"
-          end
-        end
+        li_language_link_for :en, "English"
+        li_language_link_for :de, "Deutsch"
       end
 
       div :id => "logo" do
