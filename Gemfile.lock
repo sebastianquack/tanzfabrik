@@ -96,6 +96,7 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise-i18n (0.10.4)
     erubis (2.7.0)
     execjs (2.0.2)
     friendly_id (5.0.3)
@@ -109,6 +110,10 @@ GEM
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
+    heroku_rails_deflate (1.0.3)
+      actionpack (>= 3.2.13)
+      activesupport (>= 3.2.13)
+      rack (>= 1.4.5)
     hike (1.2.3)
     html5shiv-rails (0.0.2)
       railties (>= 3.2.0, < 5.0)
@@ -237,11 +242,13 @@ DEPENDENCIES
   bootstrap-wysihtml5-rails
   bourbon
   coffee-rails (~> 4.0.0)
+  devise-i18n
   formtastic!
   friendly_id (~> 5.0.0)
   fuzzy-string-match
   geocoder
   google-webfonts
+  heroku_rails_deflate
   html5shiv-rails
   htmlentities
   ice_cube

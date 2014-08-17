@@ -88,8 +88,11 @@ end
 gem "geocoder"
 
 gem "fuzzy-string-match"
+gem "devise-i18n"
 
 gem 'piwik_analytics', '~> 1.0.2'
 
 gem 'newrelic_rpm'
+
+gem 'heroku_rails_deflate', :group => :production # enables gzip compression, need to be tested
 

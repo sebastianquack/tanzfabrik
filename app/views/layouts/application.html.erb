@@ -5,9 +5,9 @@
   <%= display_meta_tags :site => 'Tanzfabrik', :reverse => true %>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>  
   <%= stylesheet_link_tag "application_edit", media: "all", "data-turbolinks-track" => true if admin_user_signed_in? %> 
+  <%= google_webfonts_link_tag :roboto => [400, 700] %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application_edit", "data-turbolinks-track" => true if admin_user_signed_in? %>
-  <%= google_webfonts_link_tag :roboto => [400, 700] %>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
   <link rel="apple-touch-icon-precomposed" href="<%= asset_path("favicon-152.png")%>">
