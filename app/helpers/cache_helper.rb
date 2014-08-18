@@ -53,7 +53,8 @@ module CacheHelper
     uri                    = request.fullpath.to_s
     locale                 = I18n.locale.to_s
     other_models           = cache_key_from_models([Page])
-    return "navigation/" + Digest::MD5.digest("#{locale}-#{uri}-#{other_models}")
+    festival_status        = Festival.in_menu.map{ |f| f.name }
+    return "navigation/" + Digest::MD5.digest("#{locale}-#{uri}-#{other_models}#{festival_status}")
   end
 
   def cache_key_from_models models

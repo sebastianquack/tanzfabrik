@@ -20,7 +20,16 @@ class Festival < ActiveRecord::Base
   end
 
   def end_date
-    return self.events.max_by { |e| e.end_date} .end_date
+    return self.events.max_by { |e| e.end_date } .end_date
   end
   
+  def in_menu? date=Date.today
+    return false if self.events.empty?
+    return self.end_date > date
+  end
+
+  def self.in_menu date=Date.today
+    return self.select{ |f| f.in_menu? date }
+  end
+
 end
