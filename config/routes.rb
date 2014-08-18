@@ -22,16 +22,18 @@ Tanzfabrik::Application.routes.draw do
     resources :pages, :only => [:show, :update], :path => ''
     resources :registrations, :only => [:create]
   end
-  get '/:locale' => 'pages#show', :locale => /en/
-
-  get '*path' => "redirect#oldsite"
-
+  
   #resources :pages, :only => [:update]
   #resources :events, :only => [:update]
   #resources :festivals, :only => [:update]
 
   # You can have the root of your site routed with "root"    
-  
+
+  get '/de' => redirect('/')
+  get '/:locale' => "pages#show", :as => :local_root
+
+  get '*path' => "redirect#oldsite"
+    
   root 'pages#show'
 
   # Example of regular route:
