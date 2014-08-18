@@ -96,3 +96,4 @@ gem 'newrelic_rpm'
 
 gem 'heroku_rails_deflate', :group => :production # enables gzip compression, need to be tested
 
+gem 'groupdate', '~> 2.2.1'
