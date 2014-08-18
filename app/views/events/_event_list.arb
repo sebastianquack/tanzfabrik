@@ -69,7 +69,7 @@ ol :class => "event-calendar" do
   # show links for these years
   years.keys.each do |y|
     li do
-      a t("event_list_all_in") + " " + y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :year => y.year.to_s)
+      a "> " + t("event_list_all_in") + " " + y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :year => y.year.to_s)
     end
   end
   
