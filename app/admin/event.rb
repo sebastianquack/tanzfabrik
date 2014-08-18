@@ -28,7 +28,10 @@ ActiveAdmin.register Event do
   index do 
     selectable_column
     column EventDetail.model_name.human do |event|
-      event.event_details.map { |t| t.datetime_l(:default) }.join('<br>').html_safe if event.event_details.all? { |ed| ed.valid? }
+      event.event_details.select { |ed| ed.valid? }. each do |ed|
+        div b ed.repeat_mode.description
+        span ed.datetime_l(:default)
+      end
     end
     column Image.model_name.human do |event|
       event.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
@@ -66,6 +69,7 @@ ActiveAdmin.register Event do
             else
               a (ed.studio.location.name + " " + ed.studio.name), :href => admin_studio_path(ed.studio)
             end
+            span " (" + ed.repeat_mode.description + ")"
             ul do
               ed.occurrences.each do |oc|
                 li span(l oc, :format => :default)
@@ -161,7 +165,7 @@ ActiveAdmin.register Event do
       f.has_many :event_details, heading: false, :new_record => true, :allow_destroy => true do |et_f|
         et_f.inputs do
           et_f.input :start_date, :include_blank => false, :start_year => 2014, :as => :datepicker
-          et_f.input :repeat_mode, :include_blank => false, :collection => RepeatMode.order('id DESC').load.map {|r| [ r.description, r.id] }, :hint => (link_to "Manage Repeat Modes", admin_repeat_modes_path)
+          et_f.input :repeat_mode, :include_blank => false, :collection => RepeatMode.order('id DESC').load.map {|r| [ r.description, r.id] }
           et_f.input :end_date, :include_blank => false, :start_year => 2014, :as => :datepicker
 
           et_f.input :time, :label => false, :include_blank => false, :as => :time_select

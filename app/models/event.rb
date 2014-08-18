@@ -34,6 +34,16 @@ class Event < ActiveRecord::Base
   
   validates_presence_of :type_id
 
+  class CourseWeeklyValidator < ActiveModel::Validator
+    def validate(record)
+      if record.type.id == 3 && record.event_details.any? { |ed| ed.repeat_mode.internal_name != "weekly" }
+        record.errors[:name] << 'Kurs muss "wöchentliche" Zeiten haben'
+      end
+    end
+  end
+
+  validates_with CourseWeeklyValidator
+
   # event_type to display
   def display_type
     if self.custom_type && !self.custom_type.empty?
