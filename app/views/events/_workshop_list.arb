@@ -10,6 +10,7 @@ if workshops.length > 0
     .sort
 
   ul :class => "workshops" do
+    
     events_by_dates.each do |dates, events|
       # FOLLOWING CODE COMING IN VERSION 2
       # li :class => "controls" do

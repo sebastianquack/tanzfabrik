@@ -53,6 +53,9 @@ en:
   festival_more: "Information"
 
   event_list_all_in: "all Events for"
+  workshop_list_all_in: "all Workshops for"
+  festivals_list_all_in: "all Festivals & Projects for"
+  performanceproject_list_all_in: "all Performance Projects for"
 
   workshops_combinations: "Workshop-Kombinationen"
   workshops_name: "Name"

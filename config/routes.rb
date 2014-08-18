@@ -13,6 +13,9 @@ Tanzfabrik::Application.routes.draw do
 
   scope "/:locale" do
     get 'programm/:year' => 'pages#show', :id => 'programm', :year => '%{year}' 
+    get 'workshop_programm/:year' => 'pages#show', :id => 'workshop_programm', :year => '%{year}' 
+    get 'performance_projekte/:year' => 'pages#show', :id => 'performance_projekte', :year => '%{year}' 
+
     resources :events, :only => [:show, :index, :update]
     resources :people, :only => [:show, :update]
     resources :festivals, :only => [:show, :update]

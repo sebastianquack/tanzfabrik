@@ -40,3 +40,14 @@ cache_arbre(self, cache_key_for_programm(events, start_date)) do
   render :partial => "/events/event_list", :locals => {:events => events, :start_date => start_date, :show_festival => true }
 end
 
+# figure out in which years event_details exist
+years = Event.joins(:type, :event_details).where('event_types.id = 1 OR event_types.id = 7 OR event_types.id = 8 OR event_types.id = 9').group_by_year(:start_date).count
+
+# show links for these years
+years.keys.each do |y|
+  li do
+    a "> " + t("event_list_all_in") + " " + y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :year => y.year.to_s)
+  end
+end
+
+

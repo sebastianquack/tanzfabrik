@@ -27,7 +27,26 @@ header :id => "headlines", :class => "headlines-event" do
   end
 end
 
-# get all workshops
-all_workshops = Event.where(:type_id => 2)
+if params[:year]
+  start_date = Date.parse('01-01-' + params[:year])
+  end_date = start_date.end_of_year
+  workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date)
+else 
+  start_date = Date.today.beginning_of_month
+  workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ?', start_date)
+end
 
-render :partial => "/events/workshop_list", :locals => {:workshops => all_workshops, :combinations => true}  
+# get all workshops
+#all_workshops = Event.where(:type_id => 2)
+
+render :partial => "/events/workshop_list", :locals => {:workshops => workshops, :combinations => true}  
+
+# figure out in which years event_details exist
+years = Event.joins(:type, :event_details).where('event_types.id = 2').group_by_year(:start_date).count
+
+# show links for these years
+years.keys.each do |y|
+  li do
+    a "> " + t("workshop_list_all_in") + " " + y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'workshop_programm', :year => y.year.to_s)
+  end
+end
