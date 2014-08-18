@@ -32,6 +32,9 @@ if notice == "ok"
     
     form_for registration do |f|
       
+      f.hidden_field :timestamp, :value => Time.now.to_i
+      f.hidden_field :country, :value => ""
+      
       div :class => "form-workshops label-columns" do
 
         div :class => "basic" do
