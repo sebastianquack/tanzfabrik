@@ -30,10 +30,10 @@ end
 if params[:year]
   start_date = Date.parse('01-01-' + params[:year])
   end_date = start_date.end_of_year
-  workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date)
+  workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq
 else 
   start_date = Date.today.beginning_of_month
-  workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ?', start_date)
+  workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ?', start_date).uniq
 end
 
 # get all workshops
