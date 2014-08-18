@@ -56,7 +56,7 @@ ActiveAdmin.register Event do
   filter :title_de
   filter :type
   filter :festivals
-  filter :people
+  filter :people, :collection => Person.ordered
   filter :feature_on_welcome_screen
 
   show do 
