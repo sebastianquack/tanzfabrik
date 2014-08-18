@@ -1,13 +1,16 @@
-# get festivals now and in the future
-festivals = Festival.select { |f| f.events.length > 0 && f.end_date >= Date.today - 2.week }
+render "/pages/editable_content"
 
-ul :class => "festivals" do
+# get festivals in the past
+past_festivals = Festival.select { |f| f.events.length > 0 && f.end_date <= Date.today }
 
-  festivals.each do |festival|
-
-    li do
-      render :partial => "festivals/show", :locals => {:festival => festival}
+div :class => "row" do
+  div "Festivals in der Vergangenheit:", :class => "basic" do
+    ul :class => "archive_links" do
+      past_festivals.each do |festival|
+        li do
+          a festival.name, :href => festival_path(festival)
+        end
+      end
     end
   end
 end
-

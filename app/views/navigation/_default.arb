@@ -17,6 +17,14 @@ cache_arbre(self, cache_for_navigation) do
       end
     end
 
+    def link_to_festival(festival)
+      if current_page? festival
+        span link_to(festival.name, festival_path(festival)), :class => "selected"
+      else
+        link_to festival.name, festival_path(festival)
+      end
+    end
+
     def li_language_link_for target_locale, target_name
       if I18n.locale == target_locale
         li :class => "selected" do
@@ -124,7 +132,18 @@ cache_arbre(self, cache_for_navigation) do
           span t(:section_production)
           ul do
             li link_to_page("programm")
-            li link_to_page("festivals")
+            if (Festival.in_menu.length > 0)
+              li t(:section_festivals) do
+                ul do
+                  Festival.in_menu.each do |festival|
+                    li link_to_festival(festival)
+                    li link_to_page("festivals")
+                  end
+                end
+              end              
+            else
+              li link_to_page("festivals")
+            end
             li link_to_page("kuenstler")
             li link_to_page("residenzen")
             li link_to_page("apap_netzwerk")
