@@ -12,6 +12,7 @@ Tanzfabrik::Application.routes.draw do
   #get '/kurse.php' => redirect('/de/kursplan') # --> see application_controller
 
   scope "/:locale" do
+    get 'programm/:year' => 'pages#show', :id => 'programm', :year => '%{year}' 
     resources :events, :only => [:show, :index, :update]
     resources :people, :only => [:show, :update]
     resources :festivals, :only => [:show, :update]

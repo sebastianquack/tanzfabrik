@@ -27,25 +27,16 @@ header :id => "headlines", :class => "headlines-event" do
   end
 end
 
-
-if params[:start_date]
-  start_date = Date.parse(params[:start_date])
-  final_date = start_date.end_of_month
+if params[:year]
+  start_date = Date.parse('01-01-' + params[:year])
+  end_date = start_date.end_of_year
+  events = Event.joins(:type, :event_details).where('(event_types.id = 1 OR event_types.id = 7 OR event_types.id = 8 OR event_types.id = 9) AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date)
 else 
   start_date = Date.today.beginning_of_month
-  final_date = Date.today + 6.month
+  events = Event.joins(:type, :event_details).where('(event_types.id = 1 OR event_types.id = 7 OR event_types.id = 8 OR event_types.id = 9) AND event_details.start_date >= ?', start_date)
 end
 
-if admin_user_signed_in?
-  para :class => "admin-only admin-nav" do
-    a "<" + t(:previous_month), :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date - 1.month).to_s)
-    a t(:next_month) + ">", :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :start_date => (start_date + 1.month).to_s)
-  end
-end
-
-# load events of types 1, 7, 8 or 9 that have a start_date earlier than the end of this month and an end_date later than the start of this month
-events = Event.joins(:type, :event_details).where('(event_types.id = 1 OR event_types.id = 7 OR event_types.id = 8 OR event_types.id = 9) AND event_details.start_date <= ? AND event_details.end_date >= ?', final_date, start_date)
 cache_arbre(self, cache_key_for_programm(events, start_date)) do
-  render :partial => "/events/event_list", :locals => {:events => events, :start_date => start_date, :show_festival => true }  
+  render :partial => "/events/event_list", :locals => {:events => events, :start_date => start_date, :show_festival => true }
 end
 
