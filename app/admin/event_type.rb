@@ -19,9 +19,9 @@ ActiveAdmin.register EventType do
     selectable_column
       column :id
       column :name
-      column "Events" do |e|
-        e.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
-      end
+      #column "Events" do |e|
+      #  e.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
+      #end
   
     actions
   end
