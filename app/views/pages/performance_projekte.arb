@@ -29,7 +29,17 @@ header :id => "headlines", :class => "headlines-performance-projecte" do
   end
 end
 
-performance_projekte = Event.of_types([5]).sort_by{ |e| e.start_date }.select { |e| e.start_date > (Date.today.beginning_of_week - 2.week) } # TODO: named scope in model, to reuse in event view
+if params[:year]
+  start_date = Date.parse('01-01-' + params[:year])
+  end_date = start_date.end_of_year
+  performance_projekte = Event.joins(:type, :event_details).where('event_types.id = 5 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date)
+else 
+  start_date = Date.today.beginning_of_month
+  performance_projekte = Event.joins(:type, :event_details).where('event_types.id = 5 AND event_details.start_date >= ?', start_date)
+end
+
+#performance_projekte = Event.of_types([5]).sort_by{ |e| e.start_date }.select { |e| e.start_date > (Date.today.beginning_of_week - 2.week) } # TODO: named scope in model, to reuse in event view
+
 performance_projekte.each do |project| 
 
   div :class => "row event event-performanceprojekt" do
@@ -38,7 +48,7 @@ performance_projekte.each do |project|
         a :href => event_path(project) do 
           h2 project.title, :class => "title"
           para project.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
-          div project.description.html_safe, :class => "description" #unless event.description.empty?
+          div project.description.html_safe, :class => "description" if project.description
           div t(:more), :class => "more"
         end
       end
@@ -53,9 +63,20 @@ performance_projekte.each do |project|
           time l project.event_details.last.endtime, :format => :day
         end
 
-        small project.info.html_safe, :class => "info"
+        small project.info.html_safe, :class => "info" if project.info
 
       end    
     end
   end  
 end
+
+# figure out in which years event_details exist
+years = Event.joins(:type, :event_details).where('event_types.id = 5').group_by_year(:start_date).count
+
+# show links for these years
+years.keys.each do |y|
+  li do
+    a "> " + t("performanceproject_list_all_in") + " " + y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'performance_projekte', :year => y.year.to_s)
+  end
+end
+

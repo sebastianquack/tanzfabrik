@@ -33,8 +33,8 @@ de:
 
   event_list_all_in: "alle Ereignisse für"
   workshop_list_all_in: "alle Workshops für"
-  festivals_list_all_in: "all Festivals & Projekte für"
   performanceproject_list_all_in: "alle Performance-Projekte für"
+  festival_list_all_in: "all Festivals & Projekte für"
 
   workshops_combinations: "Workshop-Kombinationen"
   workshops_name: "Name"
