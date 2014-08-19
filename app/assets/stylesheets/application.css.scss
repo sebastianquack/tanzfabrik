@@ -32,7 +32,7 @@ $grid-gutter-width: 16px;
 $text-color:						black;
 $brand-primary:         #F50015;
 $special-color:					#19CBFA;
-$special-background-color: rgba(24, 190, 232, 0.75);
+$special-background-color: rgba(24, 190, 232, 0.80);
 /*
 $brand-success:         #5cb85c !default;
 $brand-info:            #5bc0de !default;
@@ -118,17 +118,6 @@ abbr[title] {
 
 .not-overflown .if-overflown {
 	display:none;
-}
-
-/* fades table behind opened description popup */
-.shaded td > .event > *:not(.opened), 
-.shaded th, 
-.shaded dl, {
-  opacity:0.3;
-  /*@include transition(opacity 0.6s 0.1s);*/
-}
-.shaded td .event {
-	border-color: rgba(0,0,0,0.2) !important;
 }
 
 ul, li {
@@ -652,6 +641,28 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 
 /**** timetables ****/
 
+/* fades table behind opened description popup */
+.shaded .timetable td > .event > *:not(.opened):not(a), 
+.shaded .timetable th, 
+.shaded .timetable + dl {
+  opacity:0.3;
+  @include transition(opacity 0.8s 0 linear);
+}
+.shaded .timetable td .event {
+	border-color: rgba(0,0,0,0.2) !important;
+	@include transition(border-color 0.8s 0 linear);
+}
+
+.timetable td > .event > *:not(.opened):not(a), 
+.timetable th, 
+.timetable + dl {
+  @include transition(opacity 0.3s 0 linear);
+}
+.timetable td .event {
+	@include transition(border-color 0.3s 0 linear);
+}
+
+
 .timetable-container {
 	@include make-row();
 
@@ -679,13 +690,14 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 			left:-$grid-gutter-width;
 			background-color: $special-background-color;
 			width:233%;
-			padding: (2 * $line-height + 2 * $vertical-box-padding) $grid-gutter-width 0.5em $grid-gutter-width;
-			z-index:-5;
-			visibility: hidden;
+			padding: (2 * $line-height + 2 * $vertical-box-padding) $grid-gutter-width 1em $grid-gutter-width;
+			z-index:-1;
+			visibility: visible;
 			font-size:90%;
 			height:0;
+			opacity:0;
 			overflow:hidden;
-			@include transition(height 0.8s);
+			@include transition(height 0.8s, opacity 0.4s);
 			
 			.description-content {
 				opacity: 0;
@@ -719,9 +731,9 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 
 		.description {
 			display:block;
-			overflow:auto;
 			visibility: visible;
 			z-index:5;
+			opacity:1;
 
 			.description-content {
 				opacity:1;
