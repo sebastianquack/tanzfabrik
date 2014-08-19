@@ -145,7 +145,7 @@ div :class => "timetable-container" do
                         h4 :class => "title close-others" + (detail.event.description ? " open-trigger" : "") do
                           text_node detail.event.title.html_safe if detail.event.title
                         end
-                        div :class => "description open-toggle-height adjust-content" do
+                        div :class => "description open-toggle-height adjust-content-container-height" do
                           span t(:close), :class => "close-trigger"
                           div detail.event.description.html_safe, :class => "description-content" if detail.event.description
                           a "> Dieses Ereignis bearbeiten", :href => edit_admin_event_path(detail.event), :class => "admin-only admin-nav" if admin_user_signed_in?

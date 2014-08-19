@@ -214,7 +214,7 @@ body {
 }
 
 .start #content-container {
-	top:$line-height;
+	top: 20px; /* would be $line-height, but it doesnt round to integer, causing a jump by one pixel when js executes */
 }
 
 .cache {
@@ -673,7 +673,7 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 			z-index:-5;
 			visibility: hidden;
 			font-size:90%;
-			height:100px;
+			height:0;
 			overflow:hidden;
 			@include transition(height 0.8s);
 			
@@ -1169,7 +1169,7 @@ dl.tags {
 .teachers h3 {
 	font-size: 1em;
 	font-weight: 700;
-	margin:0 0 $line-height 0;
+	margin:$vertical-box-padding 0 $line-height 0;
 }
 
 .teachers .classes {

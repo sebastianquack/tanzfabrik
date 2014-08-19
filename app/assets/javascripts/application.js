@@ -75,10 +75,13 @@ $(document).ready(function() {
     }
   });
 
-  // init opened elements (set auto height to explicit height)
+  // init opened elements method 1
   setTimeout(function () {
-    $(".open-close.init-opened .open-trigger").removeClass("init-opened").trigger("click")
+    $(".open-close.init-opened").removeClass("init-opened").find(".open-trigger").trigger("click")
   }, 200)
+
+  // init opened elements method 2
+  $(".open-close.opened .open.open-toggle-height").css("height",$(".open-close.opened .open.open-toggle-height").height()+"px")
 
   // adjust content container height for popups
   adjust_cc_height_elems = $(".adjust-content-container-height")

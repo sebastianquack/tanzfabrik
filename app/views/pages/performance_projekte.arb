@@ -7,7 +7,7 @@ header :id => "headlines", :class => "headlines-performance-projecte" do
       end
     end
     if page.content
-      div :class => "line2 open-close init-opened" do
+      div :class => "line2 open-close opened" do
         div :class => "open open-toggle-height" do
           div editable page, :content, :type => "wysihtml5"
           div t(:close), :class => "close-trigger"
