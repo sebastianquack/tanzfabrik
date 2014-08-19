@@ -1,6 +1,9 @@
 class Festival < ActiveRecord::Base
   translates :name, :description
 
+  extend FriendlyId
+  friendly_id :name_de, use: [:slugged, :finders]
+
   has_many :festival_events
   has_many :events, :through => :festival_events
   has_many :event_details, :through => :events
