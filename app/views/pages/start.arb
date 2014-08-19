@@ -15,7 +15,8 @@ set_meta_tags :title => page_title, :reverse => false
 # get stage events that are not in a festival
 events = Event.not_in_festival.stage_event
 
-ul do
+
+ul :class => "start_events_listing" do
 
   # pick the events that have an occurrence today
   events_today = events.select {|e| e.occurs_on? Date.today }
@@ -29,8 +30,10 @@ ul do
 
   occurrences_today[0..2].each do |o|
     li do
-      span l(o[0], :format => :hours_minutes), :class => "clock"
-      span o[1].event.title
+      span l(o[0], :format => :hours_minutes), :class => "time"
+      span :class => "event" do
+        a o[1].event.title, :href => event_path(o[1].event)
+      end
     end
   end
 
@@ -45,7 +48,10 @@ ul do
 
   festivals_today.each do |f|
     li do
-      span "Heute: " + f.name + " (" + f.start_date.to_s + " - " + f.end_date.to_s + ")"
+      span t(:today), :class => "time"
+      span :class => "event" do
+        a f.name, :href => festival_path(f)
+      end
     end
   end
 
@@ -61,9 +67,11 @@ ul do
 
   occurrences_tomorrow[0 .. (max_tomorrow - 1)].each do |o|
     li do
-      span "Morgen: "
+      span t(:tomorrow), :class => "time"
       #span o[0] # soll nicht erscheinen
-      span o[1].event.title
+      span :class => "event" do
+        a o[1].event.title, :href => event_path(o[1].event)
+      end
     end
   end
 
@@ -72,7 +80,10 @@ ul do
 
   festivals_tomorrow.each do |f|
     li do
-      span "Morgen: " + f.name + " (" + f.start_date.to_s + " - " + f.end_date.to_s + ")"
+      span t(:tomorrow), :class => "time"
+      span :class => "event" do
+        a f.name, :href => festival_path(f)
+      end
     end
   end
 
@@ -81,7 +92,10 @@ ul do
 
   festivals_after_tomorrow[0 .. 1].each do |f|
     li do
-      span f.start_date.to_s + " " + f.name + " (" + f.start_date.to_s + " - " + f.end_date.to_s + ")"
+      span f.start_date.to_s, :class => "time"
+      span :class => "event" do
+        a f.name, :href => festival_path(f)
+      end
     end
   end
 

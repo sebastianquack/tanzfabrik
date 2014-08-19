@@ -49,6 +49,20 @@ ActiveRecord::Schema.define(version: 20140819155907) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "assets", force: true do |t|
+    t.string   "storage_uid"
+    t.string   "storage_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "storage_width"
+    t.integer  "storage_height"
+    t.float    "storage_aspect_ratio"
+    t.integer  "storage_depth"
+    t.string   "storage_format"
+    t.string   "storage_mime_type"
+    t.string   "storage_size"
+  end
+
   create_table "downloads", force: true do |t|
     t.string   "description_de"
     t.string   "description_en"
@@ -84,6 +98,14 @@ ActiveRecord::Schema.define(version: 20140819155907) do
     t.time     "time"
     t.integer  "repeat_mode_id"
     t.string   "custom_place"
+  end
+
+  create_table "event_tags", id: false, force: true do |t|
+    t.integer  "id",         default: "nextval('event_tags_id_seq'::regclass)", null: false
+    t.integer  "event_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "event_types", force: true do |t|

@@ -1645,4 +1645,47 @@ ul.workshops {
 
 }
 
+/**** start page listing ****/
 
+.start_events_listing {
+	li {
+		@include make-row();
+		@include make-xs-column(5);
+		@include make-xs-column-offset(1);
+
+		text-transform: uppercase;
+		@include menu-font(100%);
+
+		.time, .event {
+			float:left;
+		}
+
+		.time {
+			width: 10%; /* half a grid-width on 5 cells */
+			color:red;
+		}
+
+		.event {
+			letter-spacing: 0.5em;
+		}
+
+		.time:before, .event:before {
+			content : "///\A\A";
+			white-space: pre;
+			color:red;
+		}
+		.time:before {
+			color:transparent;
+		}
+
+		.time:after {
+			content : "\A\A";
+			white-space: pre;
+		}
+
+		.event a:after {
+			content: " >>>";
+		}
+
+	}
+}

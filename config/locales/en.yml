@@ -45,6 +45,8 @@ en:
   tickets: "Tickets"
   in_frame_of: "In the frame of"
   dance_intensive: "Dance Intensive"
+  today: "Today"
+  tomorrow: "Tomorrow"  
 
   kursplan_more: "Important info about the dance classes. The class schedule is subject to change."
   profitraining_more: "important info about the professional classes."
