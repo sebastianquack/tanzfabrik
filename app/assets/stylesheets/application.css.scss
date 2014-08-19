@@ -210,7 +210,11 @@ body {
 	overflow:hidden;
 	width:100%;
 	position:relative;
-	top:-18px;
+	top:3.6em;
+}
+
+.start #content-container {
+	top:$line-height;
 }
 
 .cache {
@@ -299,7 +303,8 @@ body {
 	float:right;
 	position:relative;
 	width: 120px;
-	height: 130px;
+	/*height: 130px;*/
+	z-index: 5;
 	}
 
 #logo img {
@@ -338,6 +343,7 @@ ul.navigation {
   @include menu-font(100%);
   list-style-type:none;
   text-transform:uppercase;  
+  line-height: $line-height;
 }
 
 ul.navigation, ul.navigation ul, ul.navigation li {
@@ -358,7 +364,7 @@ ul.navigation > li {
 
 ul.navigation > li {
 	span {
-	  min-width:70px;
+	  min-width: 73px; /* should be 10% if parent ul/li elements were 100%. But because of inline-block there is a gap of 1 space character... solution: stop using inline-block here; */
 	  display: inline-block;
 	}
 
@@ -1035,6 +1041,7 @@ dl.tags {
 .event.single-event .basic .title {
 	@include menu-font(100%);
 	text-transform: uppercase;
+	line-height: $line-height;
 }
 
 .event .content {
@@ -1666,6 +1673,7 @@ ul.workshops {
 		}
 
 		.event {
+			max-width:90%;
 			letter-spacing: 0.5em;
 		}
 
@@ -1684,7 +1692,8 @@ ul.workshops {
 		}
 
 		.event a:after {
-			content: " >>>";
+			content: " >>>\A\A";
+			white-space: pre;
 		}
 
 	}
