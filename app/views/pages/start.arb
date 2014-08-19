@@ -92,7 +92,7 @@ ul :class => "start_events_listing" do
 
   festivals_after_tomorrow[0 .. 1].each do |f|
     li do
-      span f.start_date.to_s, :class => "time"
+      span l(f.start_date, :format => :short), :class => "time"
       span :class => "event" do
         a f.name, :href => festival_path(f)
       end
@@ -104,8 +104,8 @@ ul :class => "start_events_listing" do
   custom_notice = TextItem.where(:name => "start_inhalt").first
   if custom_date || custom_notice
     li do
-      span custom_date.content[0..5]
-      span custom_notice.content[0..51]
+      span custom_date.content[0..5], :class => "time"
+      span custom_notice.content[0..51], :class => "event"
     end
   end
   
