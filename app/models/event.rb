@@ -111,5 +111,30 @@ class Event < ActiveRecord::Base
     k << "Berlin"
     k << "Tanzfabrik"
   end
+  
+  scope :stage_event, -> { where('type_id = 1 OR type_id = 7 OR type_id = 8 OR type_id = 9') }
 
+  scope :not_in_festival, -> { includes(:festival_events).where(:festival_events => { :event_id => nil }) }
+  
+  def occurs_on? date 
+    self.event_details.each do |detail|
+      if detail.occurs_on? date 
+        return true
+      end
+    end
+    return false
+  end
+  
+  def occurrences_between(start_date, end_date)
+    occurrences = []
+    self.event_details.each do |detail|
+      occurrences += detail.occurrences_with_detail_reference_between(start_date, end_date)
+    end
+    return occurrences
+  end
+  
+  def occurrences_on date 
+    return (self.occurrences_between date, date)
+  end
+  
 end

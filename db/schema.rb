@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140819110226) do
+ActiveRecord::Schema.define(version: 20140819155907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -273,5 +273,15 @@ ActiveRecord::Schema.define(version: 20140819110226) do
     t.string   "abbr_en"
     t.integer  "priority",   default: 0
   end
+
+  create_table "text_items", force: true do |t|
+    t.string   "name"
+    t.string   "content_de"
+    t.string   "content_en"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "text_items", ["name"], name: "index_text_items_on_name", unique: true, using: :btree
 
 end

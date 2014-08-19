@@ -78,7 +78,16 @@ class EventDetail < ActiveRecord::Base
       return [self.starttime]
     end
   end
-    
+  
+  def occurrences_with_detail_reference_between start_date, end_date 
+    occurrences = self.occurrences_between start_date, end_date
+    occurrences_with_event_reference = []
+    occurrences.each do |oc| 
+      occurrences_with_event_reference.push [oc, self] #create list with [[occurrence, event_detail][occurrence, event_detail]]
+    end
+    return occurrences_with_event_reference
+  end
+      
   def occurrences_between start_date, end_date
     schedule = self.schedule    
     end_time = Time.new(end_date.year, end_date.month, end_date.day, 23, 59, 59, 0)

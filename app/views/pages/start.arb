@@ -5,23 +5,89 @@ else
 end
 set_meta_tags :title => page_title, :reverse => false
 
-events = Event.joins(:type, :event_details).where('event_details.end_date >= ? AND event_details.end_date <= ?', Time.now, Time.now + 10.days).order('event_details.start_date ASC')
+# get all stage events starting now
+#events = Event.joins(:type, :event_details).where(
+#  '(event_types.id = 1 OR event_types.id = 7 OR event_types.id = 8 OR event_types.id = 9) 
+#  AND event_details.start_date >= ? AND event_details.end_date <= ?', 
+#    Time.now).order('event_details.start_date ASC')
 
-events.each do |event|
 
-  event.event_details.each do |detail|
-      
-    # check if there is an occurrence this month
-    occurrences = detail.occurrences_between Time.now, Time.now + 10.days
-          
-    if occurrences.length > 0
-      div do      
-        #text_node occurrences.map {|o| l o, :format => :short_day }.join(', ')
-        #render :partial => "events/basic_info", :locals => {:event => detail.event, :show_festival => true}
-        #a detail.event.type.name + " " + detail.event.title, :href => event_path(detail.event)
-      end
+# get stage events that are not in a festival
+events = Event.not_in_festival.stage_event
+
+ul do
+
+  # pick the events that have an occurrence today
+  events_today = events.select {|e| e.occurs_on? Date.today }
+
+  # collect all the occurrences for these events and sort by time
+  occurrences_today = []
+  events_today.each do |e| 
+    occurrences_today += (e.occurrences_on Date.today)
+  end
+  occurrences_today.sort_by! { |x| x[0] }
+
+  occurrences_today.each do |o|
+    li do
+      span o[0]
+      span o[1].event.title
     end
-      
+  end
+
+  # get festivals that started before today and have not ended
+  festivals_today = Festival.select {|f| f.start_date ? (f.start_date <= Date.today && f.end_date >= Date.today) : false }
+
+  festivals_today.each do |f|
+    li do
+      span "Heute: " + f.name + " (" + f.start_date.to_s + " - " + f.end_date.to_s + ")"
+    end
+  end
+
+  # pick the events that have an occurrence tomorrow
+  events_tomorrow = events.select {|e| e.occurs_on? Date.tomorrow }
+
+  # collect all the occurrences for these events and sort by time
+  occurrences_tomorrow = []
+  events_today.each do |e| 
+    occurrences_tomorrow += (e.occurrences_on Date.tomorrow)
+  end
+  occurrences_tomorrow.sort_by! { |x| x[0] }
+
+  occurrences_tomorrow.each do |o|
+    li do
+      span "Morgen: "
+      span o[0] # soll nicht erscheinen
+      span o[1].event.title
+    end
+  end
+
+  # get festivals that will start tomorrow
+  festivals_tomorrow = Festival.select {|f| f.start_date ? (f.start_date == Date.tomorrow) : false }
+
+  festivals_tomorrow.each do |f|
+    li do
+      span "Morgen: " + f.name + " (" + f.start_date.to_s + " - " + f.end_date.to_s + ")"
+    end
+  end
+
+  # get festivals that will start after tomorrow (maximum 2)
+  festivals_after_tomorrow = Festival.select {|f| f.start_date ? (f.start_date > Date.tomorrow) : false }
+
+  festivals_after_tomorrow.each do |f|
+    li do
+      span f.start_date.to_s + " " + f.name + " (" + f.start_date.to_s + " - " + f.end_date.to_s + ")"
+    end
+  end
+
+  # todo: get custom notice
+  custom_date = TextItem.where(:name => "start_datum").first
+  custom_notice = TextItem.where(:name => "start_inhalt").first
+  if custom_date || custom_notice
+    li do
+      span custom_date.content
+      span custom_notice.content
+    end
   end
   
 end
+
