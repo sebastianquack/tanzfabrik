@@ -1,29 +1,31 @@
-header :id => "headlines", :class => "headlines-event" do
-  div :class => "main" do
-    div :class => "line1" do
-      h1 editable(page, :title), :class => "title"
-      a "> " + t(:tickets), :href => page_path("tickets"), :class => "registration"
-    end
-    if page.content
-      div :class => "line2 open-close opened" do
-        div :class => "open open-toggle-height" do
-          div editable page, :content, :type => "wysihtml5"
-          div t(:close), :class => "close-trigger"
-        end
-        div :class => "closed open-trigger" do
-          div t :programm_more
-        end
+cache_arbre(self, cache_key_for_page_headlines(page)) do      
+  header :id => "headlines", :class => "headlines-event" do
+    div :class => "main" do
+      div :class => "line1" do
+        h1 editable(page, :title), :class => "title"
+        a "> " + t(:tickets), :href => page_path("tickets"), :class => "registration"
       end
-    end    
-    div :class => "line3" do
-      ul do
-        page.downloads.each do |download|        
-          li do
-            a download.description, :href => download.attachment.url
+      if page.content
+        div :class => "line2 open-close opened" do
+          div :class => "open open-toggle-height" do
+            div editable page, :content, :type => "wysihtml5"
+            div t(:close), :class => "close-trigger"
+          end
+          div :class => "closed open-trigger" do
+            div t :programm_more
           end
         end
-      end
-    end          
+      end    
+      div :class => "line3" do
+        ul do
+          page.downloads.each do |download|        
+            li do
+              a download.description, :href => download.attachment.url
+            end
+          end
+        end
+      end          
+    end
   end
 end
 
