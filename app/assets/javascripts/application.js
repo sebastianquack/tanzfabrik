@@ -156,15 +156,14 @@ $(document).ready(function() {
 
 $(document).on('page:load', function () {
   new_background_status = $("body.start").length == 1 ? "strong" : "weak"
-  $(".site-background").addClass("no-transition")
   $(".site-background").addClass(last_background_status)
-  $(".site-background")[0].offsetHeight;
-  $(".site-background").removeClass("no-transition")
   setTimeout(function() {
-    $(".site-background").removeClass(last_background_status).addClass(new_background_status)
+    $(".site-background").removeClass(last_background_status)
+    $(".site-background").addClass("with-transition")
+    $(".site-background").addClass(new_background_status)
     console.log($(".site-background").attr("class"))
     last_background_status = new_background_status
-  }, 100)
+  }, 10)
   
   console.log($(".site-background").attr("class"))
 })
