@@ -143,7 +143,36 @@ $(document).ready(function() {
 
   initMenuContentHide()
 
+  if (typeof last_background_status == "undefined") {
+  last_background_status = $("body.start").length == 1 ? "strong" : "weak"
+  if (last_background_status == "strong") {
+    $(".site-background").addClass(last_background_status)
+    console.log("init "+ last_background_status)
+  }
+}
+
+
 });
+
+$(document).on('page:load', function () {
+  new_background_status = $("body.start").length == 1 ? "strong" : "weak"
+  $(".site-background").addClass("no-transition")
+  $(".site-background").addClass(last_background_status)
+  $(".site-background")[0].offsetHeight;
+  $(".site-background").removeClass("no-transition")
+  setTimeout(function() {
+    $(".site-background").removeClass(last_background_status).addClass(new_background_status)
+    console.log($(".site-background").attr("class"))
+    last_background_status = new_background_status
+  }, 100)
+  
+  console.log($(".site-background").attr("class"))
+})
+
+/*  // set page info for background image fade
+  if ($("body.start").length == 1)
+    $(".site-background")
+*/
 
 // clip #content on top where it is behind an opened 3rd level menu
 var initMenuContentHide = function () {
@@ -151,28 +180,30 @@ var initMenuContentHide = function () {
   $("#content-container").data("defaultTop", topInit)  
   last_menu3Height = null
   $("#top-menu ul ul li").on("mouseenter mouseleave", function () { 
-    menu3 = $("#top-menu ul ul ul:visible")
-    menu3Height = menu3.outerHeight()
-    if (last_menu3Height != menu3Height) {
-      last_menu3Height = menu3Height
-      if (menu3Height == null) {
-        delta = 0
+    setTimeout(function () { /* firefox needs some time */
+      menu3 = $("#top-menu ul ul ul:visible")
+      menu3Height = menu3.outerHeight()
+      if (last_menu3Height != menu3Height) {
+        last_menu3Height = menu3Height
+        if (menu3Height == null) {
+          delta = 0
+        }
+        else {
+          menu3Offset = menu3.offset().top
+          contentOffset = $("#content-container").offset().top
+          delta = menu3Offset + menu3Height - contentOffset
+        }
+        topPlus = $("#content-container").data("defaultTop")
+        if (delta > 0) {
+          $("#content").css("margin-top", -delta + "px")
+          $("#content-container").css("top", (delta+topPlus) + "px")
+        }
+        else {
+          $("#content").css("margin-top", "0px")
+          $("#content-container").css("top", topPlus + "px")
+        }
       }
-      else {
-        menu3Offset = menu3.offset().top
-        contentOffset = $("#content-container").offset().top
-        delta = menu3Offset + menu3Height - contentOffset
-      }
-      topPlus = $("#content-container").data("defaultTop")
-      if (delta > 0) {
-        $("#content").css("margin-top", -delta + "px")
-        $("#content-container").css("top", (delta+topPlus) + "px")
-      }
-      else {
-        $("#content").css("margin-top", "0px")
-        $("#content-container").css("top", topPlus + "px")
-      }
-    }
+    },10)
   })
 }
 
