@@ -38,9 +38,10 @@ module CacheHelper
   end
 
   def cache_key_for_page_headlines page
+    page_id               = page.id
     locale                = I18n.locale.to_s
     other_models          = cache_key_from_models([Page,Download,Image])
-    return "lehrer/" + Digest::MD5.digest("#{locale}-#{other_models}")
+    return "lehrer/" + Digest::MD5.digest("#{locale}-#{other_models}-#{page_id}")
   end
 
   def cache_key_for_kuenstler
