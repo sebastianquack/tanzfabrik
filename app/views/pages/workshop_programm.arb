@@ -5,8 +5,8 @@ header :id => "headlines", :class => "headlines-event" do
       a "> " + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
     end
     if page.content
-      div :class => "line2 open-close opened" do
-        div :class => "open" do
+      div :class => "line2 open-close init-opened" do
+        div :class => "open open-toggle-height" do
           div editable page, :content, :type => "wysihtml5"
           div t(:close), :class => "close-trigger"
         end
@@ -45,8 +45,14 @@ render :partial => "/events/workshop_list", :locals => {:workshops => workshops,
 years = Event.joins(:type, :event_details).where('event_types.id = 2').group_by_year(:start_date).count
 
 # show links for these years
-years.keys.each do |y|
-  li do
-    a "> " + t("workshop_list_all_in") + " " + y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'workshop_programm', :year => y.year.to_s)
+section :class => "archive-section" do
+  h5 t(:past_workshops), :class => "archive-headline"
+  ul :class => "archive-links" do
+    years.keys.each do |y|
+      li do
+        a y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'workshop_programm', :year => y.year.to_s)
+      end
+    end
   end
 end
+

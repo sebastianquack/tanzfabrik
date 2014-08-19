@@ -38,12 +38,17 @@ $(document).ready(function() {
 
   // set open event
   $(".open-trigger").click( function() {
-    if ($(this).hasClass("close-others")) {
-      $(".open-close.opened").removeClass("opened")
-    }
     base = $(this).closest('.open-close')
+    if ($(this).hasClass("close-others")) {
+      var group = base.data("open-close-group")
+      console.log(group)
+      $(".open-close.opened[data-open-close-group="+group+"]").removeClass("opened")
+    }
     if (!base.hasClass("opened")) {
-      toggleHeightElems = base.parent().find(".open-toggle-height")
+      if (base.hasClass("open-toggle-height"))
+        toggleHeightElems = base  
+      else
+        toggleHeightElems = base.find(".open-toggle-height")
       if (toggleHeightElems.length > 0) {
         toggleHeightElem = $(toggleHeightElems.get(0))
         toggleHeightElem.data("closed-height", toggleHeightElem.css("height"))
@@ -62,12 +67,18 @@ $(document).ready(function() {
       toggleHeightElems = base.parent().find(".open-toggle-height")
       if (toggleHeightElems.length > 0) {
         toggleHeightElem = $(toggleHeightElems.get(0))
-        toggleHeightElem.css("height", toggleHeightElem.data("closed-height"))
+        var closed_height = toggleHeightElem.data("closed-height") || 0
+        toggleHeightElem.css("height", closed_height)
       }    
       base.removeClass("opened")
       $(this).closest('.open-close-shade').removeClass("shaded")
     }
   });
+
+  // init opened elements (set auto height to explicit height)
+  setTimeout(function () {
+    $(".open-close.init-opened .open-trigger").removeClass("init-opened").trigger("click")
+  }, 200)
 
   // adjust content container height for popups
   adjust_cc_height_elems = $(".adjust-content-container-height")

@@ -3,13 +3,12 @@ render "/pages/editable_content"
 # get festivals in the past
 past_festivals = Festival.select { |f| f.events.length > 0 && f.end_date <= Date.today }
 
-div :class => "row" do
-  div "Festivals in der Vergangenheit:", :class => "basic" do
-    ul :class => "archive_links" do
-      past_festivals.each do |festival|
-        li do
-          a festival.name, :href => festival_path(festival)
-        end
+section :class => "archive-section" do
+  h5 t(:past_festivals), :class => "archive-headline"
+  ul :class => "archive-links" do
+    past_festivals.each do |festival|
+      li do
+        a festival.name, :href => festival_path(festival)
       end
     end
   end

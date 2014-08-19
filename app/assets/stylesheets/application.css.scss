@@ -71,7 +71,7 @@ $klappfenster-bottom-distance: 4.2 * $line-height;
 
 /**** General Styles ****/
 
-h1,h2,h3,h4,ol {
+h1,h2,h3,h4,h5,ol {
 	margin:0;
 	padding:0;
 }
@@ -125,7 +125,7 @@ abbr[title] {
 .shaded th, 
 .shaded dl, {
   opacity:0.3;
-  @include transition(opacity 0.3s 0);
+  /*@include transition(opacity 0.6s 0.1s);*/
 }
 .shaded td .event {
 	border-color: rgba(0,0,0,0.2) !important;
@@ -539,15 +539,19 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 	}
 
 	.line2 {
-		line-height:2em;
 
 		.open {
 			padding-bottom: 0em;
 			position:relative;
 			overflow: hidden;
+			padding-top: 0;
 			height:0;
 			opacity:0;
-			@include transition (opacity 0.3s);
+			padding-bottom: 2em;
+			margin-bottom: -2em;
+			z-index:-1;
+			box-sizing: content-box;
+			@include transition (opacity 0.7s 0.3s, height 1s, padding-bottom 0.3s, padding-top 0.3s 0.6s);
 
 			.close-trigger {
 				position:absolute;
@@ -576,6 +580,9 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 
 		.closed {
 
+			@include transition (opacity 0.4s 0.6s);
+			line-height:2em;
+			height:2em;
 
 			:hover {
 					color:red;
@@ -592,17 +599,19 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 
 	.line2.opened {
 		.open {
+			position: relative;
 			padding-bottom: 2em;
 			height:auto;
 			opacity:1;
+			z-index:1;
 			padding-top: $vertical-box-padding;
 			line-height: $line-height;			
+			@include transition (opacity 0.7s 0.3s, height 1s, padding-bottom 0.3s, padding-top 0.3s);
 		}
 
 		.closed {
-			height:0;
 			opacity:0;
-			display:none;
+			@include transition (opacity 0.3s);
 		}
 
 	}
@@ -647,6 +656,7 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 	.title-description {
 		position:relative;
 
+
 		.description {
 			position:absolute;
 			top:-5px; /* should be: -$vertical-box-padding;*/
@@ -657,10 +667,13 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 			z-index:-5;
 			visibility: hidden;
 			font-size:90%;
+			height:100px;
+			overflow:hidden;
+			@include transition(height 0.8s);
 			
 			.description-content {
 				opacity: 0;
-				@include transition(opacity 0.5s);
+				/*@include transition(opacity 0.5s 0.1s);*/
 			}
 
 			.close-trigger {
@@ -690,6 +703,7 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 
 		.description {
 			display:block;
+			overflow:auto;
 			visibility: visible;
 			z-index:5;
 
@@ -1592,3 +1606,43 @@ ul.workshops {
 	}
 
 }
+
+/**** archive links section ****/
+
+.archive-section {
+	@include make-row();
+	@include make-xs-column(6);
+
+	margin-top: (3 * $line-height) / 0.85;
+	padding-top: ($vertical-box-padding / 0.85);
+	border: 0 solid #bebebe;
+	border-width: 1px 0 0 0;
+	color:#bebebe;
+	display:inline;
+	font-size: 85%;
+	line-height: $line-height;	
+
+	.archive-headline {
+		line-height: $line-height;	
+	}
+
+	.archive-headline:after {
+		content: ": ";	
+		white-space: pre;
+	}	
+
+	.archive-headline, .archive-links, .archive-links li {
+		display:inline;
+		font-size: inherit;
+	}
+
+	.archive-links {
+		li:not(:last-child):after {
+			content: "/ ";
+			white-space: pre;
+		}
+	} 
+
+}
+
+

@@ -2,7 +2,7 @@
 # if variable not present, use start of current week
 # pass events
 # pass location
-require 'benchmark'
+## require 'benchmark'
 
 unless defined? start_date
   start_date = Date.today.beginning_of_week # gets current monday
@@ -141,11 +141,11 @@ div :class => "timetable-container" do
                   else
                     detail = data[detail_index]
                     article :class => "event" do              
-                      div :class => "title-description open-close" do
+                      div :class => "title-description open-close", "data-open-close-group" => "timetable" do
                         h4 :class => "title close-others" + (detail.event.description ? " open-trigger" : "") do
                           text_node detail.event.title.html_safe if detail.event.title
                         end
-                        div :class => "description adjust-content-container-height" do
+                        div :class => "description open-toggle-height adjust-content" do
                           span t(:close), :class => "close-trigger"
                           div detail.event.description.html_safe, :class => "description-content" if detail.event.description
                           a "> Dieses Ereignis bearbeiten", :href => edit_admin_event_path(detail.event), :class => "admin-only admin-nav" if admin_user_signed_in?
