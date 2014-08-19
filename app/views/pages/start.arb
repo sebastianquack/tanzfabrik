@@ -27,11 +27,17 @@ ul do
   end
   occurrences_today.sort_by! { |x| x[0] }
 
-  occurrences_today.each do |o|
+  occurrences_today[0..2].each do |o|
     li do
-      span o[0]
+      span l(o[0], :format => :hours_minutes), :class => "clock"
       span o[1].event.title
     end
+  end
+
+  if occurrences_today.length >= 3 
+    max_tomorrow = 1
+  else
+    max_tomorrow = 4 - occurrences_today.length
   end
 
   # get festivals that started before today and have not ended
@@ -53,10 +59,10 @@ ul do
   end
   occurrences_tomorrow.sort_by! { |x| x[0] }
 
-  occurrences_tomorrow.each do |o|
+  occurrences_tomorrow[0 .. (max_tomorrow - 1)].each do |o|
     li do
       span "Morgen: "
-      span o[0] # soll nicht erscheinen
+      #span o[0] # soll nicht erscheinen
       span o[1].event.title
     end
   end
@@ -73,7 +79,7 @@ ul do
   # get festivals that will start after tomorrow (maximum 2)
   festivals_after_tomorrow = Festival.select {|f| f.start_date ? (f.start_date > Date.tomorrow) : false }
 
-  festivals_after_tomorrow.each do |f|
+  festivals_after_tomorrow[0 .. 1].each do |f|
     li do
       span f.start_date.to_s + " " + f.name + " (" + f.start_date.to_s + " - " + f.end_date.to_s + ")"
     end
@@ -84,8 +90,8 @@ ul do
   custom_notice = TextItem.where(:name => "start_inhalt").first
   if custom_date || custom_notice
     li do
-      span custom_date.content
-      span custom_notice.content
+      span custom_date.content[0..5]
+      span custom_notice.content[0..51]
     end
   end
   
