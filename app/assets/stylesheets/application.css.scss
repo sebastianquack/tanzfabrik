@@ -642,7 +642,7 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 /**** timetables ****/
 
 /* fades table behind opened description popup */
-.shaded .timetable td > .event > *:not(.opened):not(a), 
+.shaded .timetable td > .event > *:not(.opened):not(a),
 .shaded .timetable th, 
 .shaded .timetable + dl {
   opacity:0.3;

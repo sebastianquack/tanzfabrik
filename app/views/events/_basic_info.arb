@@ -12,7 +12,7 @@ end
 para do
   if event.festivals.length > 0 && show_festival
     text_node t(:in_frame_of)
-    span event.festivals.map { |f| (link_to f.name, page_path("festivals")) }.join(' und ').html_safe
+    span event.festivals.map { |f| (link_to f.name, festival_path(f)) }.join(' und ').html_safe
   end
 end
 
