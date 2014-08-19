@@ -646,11 +646,11 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 .shaded .timetable th, 
 .shaded .timetable + dl {
   opacity:0.3;
-  @include transition(opacity 0.8s 0 linear);
+  @include transition(opacity 0.5s 0 linear);
 }
 .shaded .timetable td .event {
 	border-color: rgba(0,0,0,0.2) !important;
-	@include transition(border-color 0.8s 0 linear);
+	@include transition(border-color 0.5s 0 linear);
 }
 
 .timetable td > .event > *:not(.opened):not(a), 
@@ -734,6 +734,7 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 			visibility: visible;
 			z-index:5;
 			opacity:1;
+			@include transition(height 0.4s, opacity 0.8s);
 
 			.description-content {
 				opacity:1;
