@@ -1,6 +1,9 @@
 class Festival < ActiveRecord::Base
   translates :name, :description
 
+  extend FriendlyId
+  friendly_id :name_de, use: [:slugged, :finders]
+
   has_many :festival_events
   has_many :events, :through => :festival_events
   has_many :event_details, :through => :events
@@ -14,13 +17,20 @@ class Festival < ActiveRecord::Base
   has_many :downloads
   accepts_nested_attributes_for :downloads, :allow_destroy => true
 
-
   def start_date
-    return self.events.min_by { |e| e.start_date} .start_date
+    if self.events.length > 0
+      return self.events.min_by { |e| e.start_date} .start_date
+    else
+      return nil
+    end
   end
 
   def end_date
-    return self.events.max_by { |e| e.end_date } .end_date
+    if self.events.length > 0
+      return self.events.max_by { |e| e.end_date } .end_date
+    else
+      return nil
+    end
   end
   
   def in_menu? date=Date.today
