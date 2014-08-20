@@ -60,7 +60,7 @@ ul :class => "start_events_listing" do
 
   # collect all the occurrences for these events and sort by time
   occurrences_tomorrow = []
-  events_today.each do |e| 
+  events_tomorrow.each do |e| 
     occurrences_tomorrow += (e.occurrences_on Date.tomorrow)
   end
   occurrences_tomorrow.sort_by! { |x| x[0] }
