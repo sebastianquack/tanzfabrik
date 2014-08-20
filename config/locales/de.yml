@@ -351,6 +351,9 @@ de:
       download:
         one: Download
         other: Downloads
+      text_item:
+        one: Textblock
+        other: Textblöcke
     attributes:
       page: 
         title: Seitentitel
