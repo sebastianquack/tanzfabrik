@@ -186,6 +186,7 @@ body {
 }
 
 #overall-container {
+	overflow:hidden;
 	margin: 0 auto;
 	padding: (2 * $vertical-box-padding) $overall-container-margin (3 * $line-height) $overall-container-margin;
 }

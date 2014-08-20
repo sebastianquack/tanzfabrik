@@ -189,6 +189,7 @@ var initMenuContentHide = function () {
           delta = menu3Offset + menu3Height - contentOffset
         }
         topPlus = $("#content-container").data("defaultTop")
+        container_height = $("#content-container").height()
         if (delta > 0) {
           $("#content").css("margin-top", -delta + "px")
           $("#content-container").css("top", (delta+topPlus) + "px")
@@ -197,6 +198,7 @@ var initMenuContentHide = function () {
           $("#content").css("margin-top", "0px")
           $("#content-container").css("top", topPlus + "px")
         }
+        $("#content-container").height(container_height)
       }
     },10)
   })
