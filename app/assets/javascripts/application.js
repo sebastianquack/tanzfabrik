@@ -143,17 +143,18 @@ $(document).ready(function() {
 
   initMenuContentHide()
 
+  // background fading init (executed once with turbolinks)
   if (typeof last_background_status == "undefined") {
-  last_background_status = $("body.start").length == 1 ? "strong" : "weak"
-  if (last_background_status == "strong") {
-    $(".site-background").addClass(last_background_status)
-    console.log("init "+ last_background_status)
+    last_background_status = $("body.start").length == 1 ? "strong" : "weak"
+    if (last_background_status == "strong") {
+      $(".site-background").addClass(last_background_status)
+      console.log("init "+ last_background_status)
+    }
   }
-}
-
 
 });
 
+// background fading on turbolinks page load 
 $(document).on('page:load', function () {
   new_background_status = $("body.start").length == 1 ? "strong" : "weak"
   $(".site-background").addClass(last_background_status)
@@ -161,17 +162,12 @@ $(document).on('page:load', function () {
     $(".site-background").removeClass(last_background_status)
     $(".site-background").addClass("with-transition")
     $(".site-background").addClass(new_background_status)
-    console.log($(".site-background").attr("class"))
     last_background_status = new_background_status
   }, 10)
   
-  console.log($(".site-background").attr("class"))
 })
 
-/*  // set page info for background image fade
-  if ($("body.start").length == 1)
-    $(".site-background")
-*/
+/********* functions **********/
 
 // clip #content on top where it is behind an opened 3rd level menu
 var initMenuContentHide = function () {
