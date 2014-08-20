@@ -63,7 +63,7 @@ $container-large-desktop:      ((960px + $grid-gutter-width));
 
 /**** Variables ****/
 
-$vertical-menu-width: 500px;
+$vertical-menu-width: 300px;
 $overall-container-margin: 32px; /* margin for vertical secondary menu */
 $line-height: 1.45em;
 $vertical-box-padding: 0.3em;
@@ -187,6 +187,7 @@ body {
 
 #overall-container {
 	overflow:hidden;
+	min-height: $vertical-menu-width;
 	margin: 0 auto;
 	padding: (2 * $vertical-box-padding) $overall-container-margin (3 * $line-height) $overall-container-margin;
 }
@@ -232,7 +233,7 @@ body {
 }
 
 .site-background.with-transition:after {
-	@include transition(opacity 1s linear);
+	@include transition(opacity 0.5s linear);
 }
 
 .site-background.strong:after {

@@ -102,10 +102,12 @@ ul :class => "start_events_listing" do
   # todo: get custom notice
   custom_date = TextItem.where(:name => "start_datum").first
   custom_notice = TextItem.where(:name => "start_inhalt").first
-  if custom_date.content && custom_notice.content
-    li do
-      span custom_date.content[0..5], :class => "time"
-      span custom_notice.content[0..51], :class => "event"
+  unless custom_date.nil? || custom_notice.nil?
+    if custom_date.content && custom_notice.content
+      li do
+        span custom_date.content[0..5], :class => "time"
+        span custom_notice.content[0..51], :class => "event"
+      end
     end
   end
   
