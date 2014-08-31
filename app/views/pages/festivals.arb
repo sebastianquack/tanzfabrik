@@ -1,7 +1,7 @@
 render "/pages/editable_content"
 
 # get festivals in the past
-past_festivals = Festival.select { |f| f.events.length > 0 && f.end_date <= Date.today }
+past_festivals = Festival.select { |f| f.events.length > 0 && f.end_date < Date.today }
 
 section :class => "archive-section" do
   h5 t(:past_festivals), :class => "archive-headline"

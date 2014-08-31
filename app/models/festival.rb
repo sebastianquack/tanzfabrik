@@ -35,7 +35,7 @@ class Festival < ActiveRecord::Base
   
   def in_menu? date=Date.today
     return false if self.events.empty?
-    return self.end_date > date
+    return self.end_date >= date
   end
 
   def self.in_menu date=Date.today
