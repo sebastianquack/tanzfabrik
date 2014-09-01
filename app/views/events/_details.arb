@@ -44,7 +44,7 @@ if event.price_regular
         text_node number_to_currency event.price_reduced, :format => "%n"      
       end
       text_node " "
-      text_node number_to_currency event.price_reduced, :format => "%u"         
+      text_node number_to_currency event.price_regular, :format => "%u"         
     end
   end
 end
