@@ -10,29 +10,31 @@ div :class => "festival" do
         a "> " + t(:tickets), :href => page_path("tickets"), :class => "registration"
         a "> " + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
       end
-      div :class => "line2 open-close" do
-        div :class => "open open-toggle-height" do
-          if festival.images.length > 0
-            div :class => "row" do
-              div :class => "image-container" do
-                img :src => festival.images.first.attachment.url, :title => festival.images.first.description, :alt => festival.images.first.description
-              end      
+      if festival.description
+        div :class => "line2 open-close" do
+          div :class => "open open-toggle-height" do
+            if festival.images.length > 0
+              div :class => "row" do
+                div :class => "image-container" do
+                  img :src => festival.images.first.attachment.url, :title => festival.images.first.description, :alt => festival.images.first.description
+                end      
+                div festival.description.html_safe, :class => "description"
+              end
+            else
               div festival.description.html_safe, :class => "description"
             end
-          else
-            div festival.description.html_safe, :class => "description"
+            if admin_user_signed_in?
+              div :class => "admin-only admin-nav" do
+                a "> Dieses Festival bearbeiten", :href => edit_admin_festival_path(festival)
+              end          
+            end
+            div t(:close), :class => "close-trigger"
           end
-          if admin_user_signed_in?
-            div :class => "admin-only admin-nav" do
-              a "> Dieses Festival bearbeiten", :href => edit_admin_festival_path(festival)
-            end          
+          div :class => "closed open-trigger" do
+            div t :festival_more
           end
-          div t(:close), :class => "close-trigger"
-        end
-        div :class => "closed open-trigger" do
-          div t :festival_more
-        end
-      end    
+        end    
+      end
       div :class => "line3" do
         ul do
           festival.downloads.each do |download|        
