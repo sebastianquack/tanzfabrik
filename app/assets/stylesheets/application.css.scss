@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require non-responsive
+ *= require parsley
  */
 
 @import "bourbon";
@@ -1482,6 +1483,18 @@ ul.workshops {
 		padding-top: $vertical-box-padding;
 	}
 
+	.warning {
+		@include make-row;
+		@include make-xs-column(4);
+		@include make-xs-column-offset(2);
+		background-color: red;
+		color:white;
+		font-weight: bold;
+		padding:$grid-gutter-width;
+		border-radius: $grid-gutter-width / 2;
+		margin: 0 0 (2 * $vertical-box-padding) $grid-gutter-width;
+	}
+
 	input[type=text], 
 	input[type=email], 
 	textarea,
@@ -1535,6 +1548,34 @@ ul.workshops {
 			left:$grid-gutter-width / $gutter-division-factor;
 		}
 
+		.parsley-errors-list.filled:before {
+		content: "\A0";
+		padding-left: 1em;
+		float: left;
+		}
+
+		.parsley-errors-list.filled {
+		opacity: 1;
+		padding-top: 0.5em;
+		color:red;
+		}
+
+	}
+
+	.form-workshops {
+		.parsley-errors-list {
+			display:none;
+		}
+		select.parsley-error {
+			color:red;
+		}
+	}
+
+	#parsley-id-multiple-registrationaccept_terms {
+		@include make-xs-column-offset(2);
+		left: 8px;
+		position:relative;
+		color:red;
 	}
 
 	.title {

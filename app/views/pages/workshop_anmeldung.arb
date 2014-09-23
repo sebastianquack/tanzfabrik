@@ -30,11 +30,15 @@ if notice == "ok"
 
   div :class => "registration-form" do
     
-    form_for registration do |f|
+    form_for registration, :html => {'data-parsley-validate' => ''} do |f|
       
       f.hidden_field :timestamp, :value => Time.now.to_i
       f.hidden_field :country, :value => ""
       
+      if notice
+        div notice, :class => "warning"
+      end
+
       div :class => "form-workshops label-columns" do
 
         div :class => "basic" do
@@ -92,7 +96,7 @@ if notice == "ok"
 
         div :class => "row" do
           f.label :phone, t(:workshop_registration_phone)
-          f.text_field :phone
+          f.text_field :phone, :required => true
         end
 
         div :class => "row" do
@@ -254,7 +258,7 @@ if notice == "ok"
         div t(:form_section_accept_terms), :class => "title"
 
         div :class => "form-checkbox" do
-          f.check_box :accept_terms, :required => true
+          f.check_box :accept_terms, :required => true, "data-parsley-error-message" => t(:please_accept_terms)
           div :class => "input-style-helper"
           f.label :accept_terms, t(:form_section_accept_terms_label) 
         end

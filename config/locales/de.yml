@@ -80,9 +80,11 @@ de:
   form_news_no: "nein"  
   form_section_accept_terms: "AGB's"
   form_section_accept_terms_label: "Ich erkenne die AGB's an und bestätige, dass ich mich verbindlich anmelde."
+  please_accept_terms: "Bitte bestätigen die AGB's und Ihre verbindliche Anmeldung"
   form_section_note: "Notiz"
   form_submit: "Senden"
   registration_success: "Vielen Dank für Ihre Anmeldung."
+  registration_error: "Fehler bei der Anmeldung. Bitte versuche Sie es noch einmal. Füllen Sie alle Felder aus. Wählen Sie mindestens einen Workshop und stimmen Sie den AGB zu."
 
   ticket_link: "http://www.reservix.de/off/login_check.php?id=c6ec16e8cf3cd5077514ebef590a1f763d4616b372ef8900411779bf6bedf213&vID=9246"
 

@@ -79,6 +79,8 @@ gem 'bourbon'
 gem 'meta-tags'
 gem 'htmlentities'
 
+gem "parsley-rails"
+
 # gem 'sprockets_better_errors'
 
 group :production do

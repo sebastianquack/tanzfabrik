@@ -6,13 +6,13 @@ class RegistrationsController < ApplicationController
     # check for bot presence
     if (Time.now.to_i - params[:registration][:timestamp].to_i) < 2
       logger.debug "form submission too fast to be human, aborting"
-      redirect_to page_url('workshop_anmeldung'), :notice => 'Fehler bei der Anmneldung.'
+      redirect_to page_url('workshop_anmeldung'), :notice => t(:registration_error)
       return
     end
 
     if params[:registration][:country] != ""
       logger.debug "form submission includes hidden country field, aborting"
-      redirect_to page_url('workshop_anmeldung'), :notice => 'Fehler bei der Anmneldung.'
+      redirect_to page_url('workshop_anmeldung'), :notice => t(:registration_error)
       return      
     end
 
@@ -31,7 +31,7 @@ class RegistrationsController < ApplicationController
             
       redirect_to page_url('workshop_anmeldung'), :notice => 'ok'
     else
-      redirect_to page_url('workshop_anmeldung'), :notice => 'Fehler bei der Anmneldung.'
+      redirect_to page_url('workshop_anmeldung'), :notice => t(:registration_error)
     end
 
   end

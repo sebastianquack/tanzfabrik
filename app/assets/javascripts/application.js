@@ -15,7 +15,10 @@
 //= require jquery.scrollTo
 //= require turbolinks
 //= require bootstrap
+//= require parsley
+//= require parsley.i18n.de 
 //= require piwik_turbolinks
+
 
 $(document).ready(function() {
 
