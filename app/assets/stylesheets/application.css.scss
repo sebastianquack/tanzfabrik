@@ -1640,6 +1640,7 @@ ul.workshops {
 			margin-right:$grid-gutter-width;
 			margin-bottom: 0.5em;
 			clear:left;
+			z-index:10;
 		}
 		input[type=checkbox].checked + .input-style-helper:after,
 		input[type=radio].checked + .input-style-helper:after,
