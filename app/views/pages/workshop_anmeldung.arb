@@ -30,7 +30,7 @@ if notice == "ok"
 
   div :class => "registration-form" do
     
-    form_for registration, :html => {'data-parsley-validate-js' => ''} do |f|
+    form_for registration, :html => {'data-parsley-validate' => ''} do |f|
       
       f.hidden_field :timestamp, :value => Time.now.to_i
       f.hidden_field :country, :value => ""

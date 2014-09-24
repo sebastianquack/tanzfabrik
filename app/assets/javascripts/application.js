@@ -120,8 +120,6 @@ $(document).ready(function() {
     }, 20)
   }
 
-  parsley = $("form[data-parsley-validate-js]").parsley()
-
   // form events
   $(".form-radio input[type=radio] + .input-style-helper").click(function () {
     radio = $(this).prev('input[type=radio]')
@@ -145,11 +143,7 @@ $(document).ready(function() {
       checkbox.addClass("checked")
     }
     checkbox.trigger("change")
-    //parsley.validate()
   })
-
-  $.listen('parsley:field:validate', function() {console.log("field")})
-
 
   initMenuContentHide()
 
