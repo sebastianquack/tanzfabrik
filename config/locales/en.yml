@@ -113,10 +113,13 @@ en:
   time:
     formats:
       hours_minutes: "%H:%M"
-      short_day: '%A, %m/%d'
-      timetable: '%a, %m/%d/%Y'
-      day: '%m/%d/%Y'
-      day_month: '%m/%d'
+      default: ! '%A, %d. %B %Y, %H:%M Uhr'
+      long: ! '%A, %d. %B %Y, %H:%M Uhr'
+      short: ! '%d. %B, %H:%M Uhr'
+      short_day: '%A, %d.%m.'     
+      timetable: '%a, %d.%m.%Y'
+      day: '%d.%m.%Y'
+      day_month: '%d.%m.'
   date:
     abbr_day_names:
     - Sun
@@ -128,12 +131,15 @@ en:
     - Sat 
     formats:
       weekday: "%A"
-      short: '%m/%d'
-      short_day: '%A, %m/%d'
-      long_day: '%a, %m/%d/%Y'
-      month: "%B" 
-      month_day: '%m/%d'
-      day: '%m/%d/%Y'
+      month: "%B"
+      day: '%d.%m.%Y'
+      default: ! '%d.%m.%Y'
+      long: '%d. %B %Y'
+      short: '%d.%m.'
+      short_day: '%A, %d.%m.'
+      long_day: '%a, %d.%m.%Y'
+      short_end: '-%d.%m.'
+      month_day: '%e. %B.'
   number:
     currency:
       format:
