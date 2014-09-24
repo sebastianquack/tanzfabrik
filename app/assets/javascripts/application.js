@@ -120,29 +120,36 @@ $(document).ready(function() {
     }, 20)
   }
 
+  parsley = $("form[data-parsley-validate-js]").parsley()
+
   // form events
   $(".form-radio input[type=radio] + .input-style-helper").click(function () {
     radio = $(this).prev('input[type=radio]')
     radios = $(this).parents(".form-radio").find("input[type=radio]")
     radios.each(function(i,elem) {
-      $(this).removeAttr("checked")
+      $(this).prop("checked", false)
       $(this).removeClass("checked")
     })
-    radio.attr("checked", true)
+    radio.prop("checked", true)
     radio.addClass("checked")
   })
 
   $(".form-checkbox input[type=checkbox] + .input-style-helper").click(function () {
     checkbox = $(this).prev('input[type=checkbox]')
-    if (checkbox.attr("checked") == "checked") {
-      checkbox.removeAttr("checked")
+    if (checkbox.prop("checked")) {
+      checkbox.prop("checked",false)
       checkbox.removeClass("checked")
     }
     else {
-      checkbox.attr("checked", true)
+      checkbox.prop("checked", true)
       checkbox.addClass("checked")
     }
+    checkbox.trigger("change")
+    //parsley.validate()
   })
+
+  $.listen('parsley:field:validate', function() {console.log("field")})
+
 
   initMenuContentHide()
 
