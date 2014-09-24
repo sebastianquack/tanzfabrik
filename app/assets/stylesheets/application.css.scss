@@ -1677,6 +1677,7 @@ ul.workshops {
 		background-color: white;
 		padding: $vertical-box-padding;
 		left:$grid-gutter-width / $gutter-division-factor;
+		margin-bottom:2em; /* make space for error messages */
 	}
 
 	input[type=submit]:hover {
