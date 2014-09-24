@@ -44,7 +44,7 @@ end
 render :partial => "/events/workshop_list", :locals => {:workshops => workshops, :combinations => true}  
 
 # figure out in which years event_details exist
-years = Event.joins(:type, :event_details).where('event_types.id = 2').group_by_year(:start_date).count
+years = Event.joins(:type, :event_details).where('event_types.id = 2').where("start_date < '"+(Date.today.year+1).to_s+"-01-01'" ).group_by_year(:start_date).count
 
 # show links for these years
 section :class => "archive-section" do

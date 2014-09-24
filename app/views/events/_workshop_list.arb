@@ -5,7 +5,8 @@ if workshops.length > 0
 
   # get details ordered grouped by beginning/end, and ordered by title
   events_by_dates = workshops
-    .order('title_de DESC')
+    .sort_by { |e| e.firsttime }
+    .sort
     .group_by { |e| [e.start_date, e.end_date] }
     .sort
 

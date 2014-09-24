@@ -14,7 +14,7 @@ else
   render :partial => "/events/details/moments", :locals => {:event => event}
 end
 
-if event.type.name == "Workshop" && event.event_details.length > 1
+if event.type.name == "Workshop" 
   small do
     render :partial => "/events/details/workshop_days", :locals => {:event => event}
   end
