@@ -36,8 +36,7 @@ if params[:year]
   end_date = start_date.end_of_year
   performance_projekte = Event.joins(:type, :event_details).where('event_types.id = 5 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq
 else 
-  start_date = Date.today.beginning_of_month
-  performance_projekte = Event.joins(:type, :event_details).where('event_types.id = 5 AND event_details.start_date >= ?', start_date).uniq
+  performance_projekte = Event.currently_listed.joins(:type).where('event_types.id = 5').uniq
 end
 
 #performance_projekte = Event.of_types([5]).sort_by{ |e| e.start_date }.select { |e| e.start_date > (Date.today.beginning_of_week - 2.week) } # TODO: named scope in model, to reuse in event view

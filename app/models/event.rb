@@ -59,6 +59,14 @@ class Event < ActiveRecord::Base
     return events
   end
 
+  def self.in_same_listing_as(e)
+    if Rails.configuration.stage_event_types.include?(e.type.id)
+      where('type_id IN (?)', Rails.configuration.stage_event_types)
+    else
+      where('type_id = ?', e.type.id)
+    end
+  end
+
   def all_studios
     studios = []
     self.event_details.each { |ed| studios << ed.studio }
@@ -112,10 +120,16 @@ class Event < ActiveRecord::Base
     k << "Tanzfabrik"
   end
   
-  scope :stage_event, -> { where('type_id = 1 OR type_id = 7 OR type_id = 8 OR type_id = 9') }
+  scope :stage_event, -> { where('type_id = ?', Rails.configuration.stage_event_types) }
 
   scope :not_in_festival, -> { includes(:festival_events).where(:festival_events => { :event_id => nil }) }
-  
+
+  scope :currently_listed, -> { joins(:event_details).where('event_details.end_date >= ?', Date.today.beginning_of_month).uniq }
+
+  def currently_listed?
+    Event.currently_listed.where(id: self.id).count == 1
+  end
+
   def occurs_on? date 
     self.event_details.each do |detail|
       if detail.occurs_on? date 

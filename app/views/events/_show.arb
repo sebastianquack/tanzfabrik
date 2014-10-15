@@ -1,20 +1,20 @@
 show_festival = nil if !defined? show_festival
 
 # TODO: generalize this and put it into the event model
-if (event.type_id == 5)
-  events_of_types = Event.of_types([5]).sort_by{ |e| e.start_date }.select { |e| e.end_date > (Date.today.beginning_of_week - 2.week) }
-  event_pos = events_of_types.index(event)
+
+if (event.currently_listed?)
+  listing = Event.in_same_listing_as(event).currently_listed
+  event_pos = listing.index(event)
+  div event_pos.to_s + "/" + Event.in_same_listing_as(event).count.to_s
   unless event_pos.nil? # remove unless when queries are safe
-    next_event = events_of_types[event_pos+1] if event_pos < events_of_types.length
-    prev_event = events_of_types[event_pos-1] if event_pos > 0
+    next_event = listing[event_pos+1] if event_pos < listing.length
+    prev_event = listing[event_pos-1] if event_pos > 0
   end
 end
 
 header :id => "headlines", :class => "headlines-event" do
   div :class => "before" do
-    if event.type.name == "Performance-Projekt"
-      a "<", :class => "previous", :rel => "prev", :href => event_path(prev_event) if prev_event
-    end
+    a "<", :class => "previous", :rel => "prev", :href => event_path(prev_event) if prev_event
   end
   div :class => "main" do
     div :class => "line1" do
@@ -23,13 +23,13 @@ header :id => "headlines", :class => "headlines-event" do
         a ">" + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
       elsif event.type.name == "Performance-Projekt"
         h1 event.type.name, :class => "title"
-        a ">", :class => "next", :rel => "next", :href => event_path(next_event) if next_event
       elsif event.type.name == "Profitraining"
         h1 event.type.name, :class => "title"        
       else
         h1 t(:programm_event_headline), :class => "title"
         a ">" + t(:tickets), :href => page_path("tickets"), :class => "registration"
       end
+      a ">", :class => "next", :rel => "next", :href => event_path(next_event) if next_event      
     end
   end
 end

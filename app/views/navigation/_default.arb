@@ -137,8 +137,8 @@ cache_arbre(self, cache_for_navigation) do
                 ul do
                   Festival.in_menu.each do |festival|
                     li link_to_festival(festival)
-                    li link_to_page("festivals")
                   end
+                  li link_to_page("festivals")
                 end
               end              
             else
