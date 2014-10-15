@@ -10,6 +10,13 @@ if workshops.length > 0
     .group_by { |e| [e.start_date, e.end_date] }
     .sort
 
+  # reorder inside date blocks
+  events_by_dates.each do |dates, events|
+    if events.none? { |e| (/^\d/.match e.title).nil?} # if all titles start with a digit 
+      events.sort_by! { |e| e.title }                 # => reorder by title
+    end
+  end
+
   ul :class => "workshops" do
     
     events_by_dates.each do |dates, events|
@@ -28,6 +35,7 @@ if workshops.length > 0
           time l(dates[0], :format => :short) + "-" + l(dates[1], :format => :short)
         end        
         ul :class => "classes" do
+
           events.each do |workshop| 
             li :class => "class" do
               a :href => event_path(workshop) do

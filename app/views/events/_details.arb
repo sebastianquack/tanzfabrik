@@ -1,3 +1,4 @@
+# Image
 if event.images.length > 0 || event.type.name == "Profitraining" && event.people.first.images.length > 0
   div :class => "image-container" do
     if event.type.name == "Profitraining"
@@ -8,6 +9,7 @@ if event.images.length > 0 || event.type.name == "Profitraining" && event.people
   end
 end
 
+# details/ (List of occurrances)
 if event.type.name == "Performance-Projekt" || event.type.name == "Workshop"
   render :partial => "/events/details/durations", :locals => {:event => event}
 else
@@ -20,6 +22,15 @@ if event.type.name == "Workshop"
   end
 end
 
+# Address
+if event.event_details.first.studio && event.event_details.all? { |ed| ed.custom_place && ed.custom_place.empty? }
+  small event.event_details.first.studio.location.address
+end
+
+# Editable
+small editable event, :info, :type => "wysihtml5"
+
+# Price(s)
 if event.price_regular
   small do
     if event.type.name == "Workshop"
@@ -36,25 +47,27 @@ if event.price_regular
           span frühbuchertext
         end
       end
+      div a "> " + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
     else
       text_node t(:price_event) + " "
       text_node number_to_currency event.price_regular, :format => "%n"
       if event.price_reduced
         text_node " / "
-        text_node number_to_currency event.price_reduced, :format => "%n"      
+        text_node number_to_currency event.price_reduced, :format => "%n"
       end
       text_node " "
-      text_node number_to_currency event.price_regular, :format => "%u"         
+      text_node number_to_currency event.price_regular, :format => "%u"
+      div a "> " + t(:tickets), :href => page_path("tickets"), :class => "registration"
     end
   end
 end
 
-small editable event, :info, :type => "wysihtml5"
-
-if event.event_details.first.studio && event.event_details.all? { |ed| ed.custom_place && ed.custom_place.empty? }
-  small event.event_details.first.studio.location.address
-end
+# Copyright
 
 if event.images.length > 0 && !event.images.first.license.empty?
-  small event.images.first.license
+  small :class => "separated-1" do
+    event.images.first.license
+  end
 end
+
+

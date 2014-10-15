@@ -20,14 +20,14 @@ header :id => "headlines", :class => "headlines-event" do
     div :class => "line1" do
       if event.type.name == "Workshop"
         h1 event.type.name, :class => "title"
-        a ">" + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
+        #a ">" + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
       elsif event.type.name == "Performance-Projekt"
         h1 event.type.name, :class => "title"
       elsif event.type.name == "Profitraining"
         h1 event.type.name, :class => "title"        
       else
         h1 t(:programm_event_headline), :class => "title"
-        a ">" + t(:tickets), :href => page_path("tickets"), :class => "registration"
+        #a ">" + t(:tickets), :href => page_path("tickets"), :class => "registration"
       end
       a ">", :class => "next", :rel => "next", :href => event_path(next_event) if next_event      
     end
@@ -51,9 +51,7 @@ div :class => "row event single-event" do
 
   div :class => "details" do
     div :class => "content" do
-
       render :partial => "events/details", :locals => {:event => event, :show_festival => show_festival}
-
     end    
   end
 end

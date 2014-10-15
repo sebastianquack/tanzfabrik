@@ -120,7 +120,7 @@ class Event < ActiveRecord::Base
     k << "Tanzfabrik"
   end
   
-  scope :stage_event, -> { where('type_id = ?', Rails.configuration.stage_event_types) }
+  scope :stage_event, -> { where('type_id IN (?)', Rails.configuration.stage_event_types) }
 
   scope :not_in_festival, -> { includes(:festival_events).where(:festival_events => { :event_id => nil }) }
 
