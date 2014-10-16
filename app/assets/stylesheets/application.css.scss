@@ -885,6 +885,10 @@ ul.timetable {
 		overflow:hidden;
 	}
 
+	.title.one-line {
+		height: 1 * $line-height;
+	}
+
 	.teacher, .warning, .time {
 		height:$line-height;
 		overflow:hidden;

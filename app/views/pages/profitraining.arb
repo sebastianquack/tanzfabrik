@@ -59,13 +59,18 @@ cache_arbre(self, cache_key_for_profitraining) do
                 if oc
                   training = details.first.event
                   detail = details.first
-                  div :class => "event"do
-                    h4 :class => "title" do 
+                  div :class => "event" do
+                    h4 :class => "title" + (training.people.second ? " one-line" : "") do 
                       a training.title, :href => event_path(training) if training.title
                     end
                     div :class => "teacher" do
-                      a training.people.first.name, :href => person_link(training.people.first)
-                    end            
+                      a training.people.sort.first.name, :href => person_link(training.people.sort.first)
+                    end
+                    if training.people.second
+                      div :class => "teacher" do
+                        a training.people.sort.second.name, :href => person_link(training.people.sort.second)
+                      end                    
+                    end
                     div :class => "time" do
                       # assuming all occurrences within one week have same start time and duration
                       time (l detail.starttime, :format => :hours_minutes), :class => "course-time"
