@@ -2,8 +2,7 @@
 
 # local variable events
 # local variable start_date
-# local variable show_festival
-
+# local variable in_festival
 
 # make a list of all occurences
 all_occurences = []
@@ -29,11 +28,10 @@ ol :class => "event-calendar" do
     time = o[:time]
     detail = o[:detail]
 
-
     li :class => "row event event-programm" do
       div :class => "basic" do   
         div :class => "content" do
-          a :href => event_path(event) do 
+          a :href => occurrence_path(event, time, in_festival) do 
             h2 event.title, :class => "title"
             h3 event.display_type, :class =>"type"
             para event.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"

@@ -120,7 +120,7 @@ class Event < ActiveRecord::Base
     k << "Tanzfabrik"
   end
   
-  scope :stage_event, -> { where('type_id = ?', Rails.configuration.stage_event_types) }
+  scope :stage_event, -> { where('type_id IN (?)', Rails.configuration.stage_event_types) }
 
   scope :not_in_festival, -> { includes(:festival_events).where(:festival_events => { :event_id => nil }) }
 
@@ -128,6 +128,43 @@ class Event < ActiveRecord::Base
 
   def currently_listed?
     Event.currently_listed.where(id: self.id).count == 1
+  end
+
+  def process_time(time_url)
+    if time_url # time is supplied
+      time = Time.strptime(time_url, (I18n.t :url, scope: "time.formats"))
+      # the 0 offset is important to get the time zone right... not fully sure why
+      return Time.new(time.year, time.month, time.day, time.hour, time.min, time.sec, "+00:00") 
+    else # infer from first occurrence of self
+      return EventDetailOccurrence.where(:event_id => self.id).order("time ASC").first.time
+    end
+  end
+
+  def next(time_url = nil, event_types = [], festival_id = nil)
+    logger.debug("fooo")
+    logger.debug(time_url)
+    logger.debug(event_types)
+    time = process_time(time_url)
+    oc = EventDetailOccurrence.joins(:event)
+          .where("events.type_id IN (?)", event_types)
+          .where("event_detail_occurrences.time > ?", time)
+          .where_festival(festival_id)
+          .where("events.id != ?", self.id)
+          .order("event_detail_occurrences.time ASC")
+          .first
+    return oc
+  end  
+     
+  def prev(time_url = nil, event_types = [], festival_id = nil)
+    time = process_time(time_url)
+    oc = EventDetailOccurrence.joins(:event)
+          .where("events.type_id IN (?)", event_types)
+          .where("event_detail_occurrences.time < ?", time)
+          .where_festival(festival_id)
+          .where("events.id != ?", self.id)
+          .order("event_detail_occurrences.time DESC")
+          .first
+    return oc
   end
 
   def occurs_on? date 

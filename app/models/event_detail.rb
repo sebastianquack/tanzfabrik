@@ -71,6 +71,10 @@ class EventDetail < ActiveRecord::Base
     
   def occurrences    
     schedule = self.schedule
+    
+    unless self.start_date 
+      return []
+    end
           
     if self.end_date
       return schedule.occurrences(self.endtime)
@@ -160,6 +164,26 @@ class EventDetail < ActiveRecord::Base
 
   def single_occurrence?
     self.repeat_mode.rule.empty?
+  end
+
+  # deletes all EventDetailOccurrences associated with this EventDetail, recalculates and saves them
+  def reset_occurrences
+    logger.debug "resetting occurrences"
+    
+    EventDetailOccurrence.where(:event_detail_id => self.id).delete_all
+    
+    self.occurrences.each do |oc|
+      logger.debug(oc)
+      edo = EventDetailOccurrence.new
+      edo.event_id = self.event.id
+      edo.event_detail_id = self.id
+      logger.debug
+      edo.time = 
+      # get date from occurrence
+      # get time from event_detail
+        Time.new(oc.year, oc.month, oc.day, self.time.hour, self.time.min, self.time.sec, 0)
+      edo.save
+    end
   end
         
 end

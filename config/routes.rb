@@ -17,6 +17,10 @@ Tanzfabrik::Application.routes.draw do
     get 'performance_projekte/:year' => 'pages#show', :id => 'performance_projekte', :year => '%{year}' 
 
     resources :events, :only => [:show, :index, :update]
+    get "events/:id/:time" => 'events#show'
+    get "festivals/:festival_id/events/:id" => 'events#show'
+    get "festivals/:festival_id/events/:id/:time" => 'events#show'
+
     resources :people, :only => [:show, :update]
     resources :festivals, :only => [:show, :update]
     resources :pages, :only => [:show, :update], :path => ''

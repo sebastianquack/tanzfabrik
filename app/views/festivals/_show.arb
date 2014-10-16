@@ -57,7 +57,7 @@ div :class => "festival" do
         end
       end
     end
-    render :partial => "/events/workshop_list", :locals => {:workshops => festival_workshops, :combinations => false}  
+    render :partial => "/events/workshop_list", :locals => {:workshops => festival_workshops, :combinations => false, :in_festival => festival}  
   end
 
   # festival events
@@ -70,7 +70,7 @@ div :class => "festival" do
         end
       end
     end  
-    render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.start_date, :show_festival => false }
+    render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.start_date, :in_festival => festival }
   end
 
 end

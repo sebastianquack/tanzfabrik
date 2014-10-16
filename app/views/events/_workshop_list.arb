@@ -30,7 +30,7 @@ if workshops.length > 0
         ul :class => "classes" do
           events.each do |workshop| 
             li :class => "class" do
-              a :href => event_path(workshop) do
+              a :href => occurrence_path_no_time(workshop, in_festival) do
 
                 h4 workshop.title, :href => event_path(workshop), :class => "title"
                 span workshop.people.map { |p| p.name }.join(', '), :class => "teacher" if workshop.people.length > 0
