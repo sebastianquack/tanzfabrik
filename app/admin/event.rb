@@ -209,17 +209,23 @@ ActiveAdmin.register Event do
         festival.feature_on_welcome_screen = false
         festival.save
       end        
-    end
+    end    
     alias_method :create_event, :create
     def create
       reset_events if params[:event][:feature_on_welcome_screen] == "1"
       create_event
+      @event.event_details.each do |event_detail|
+        event_detail.reset_occurrences
+      end
     end
     alias_method :update_event, :update
     def update
       #logger.debug params
       reset_events if params[:event][:feature_on_welcome_screen] == "1"
       update_event
+      @event.event_details.each do |event_detail|
+        event_detail.reset_occurrences
+      end
     end
   end
   

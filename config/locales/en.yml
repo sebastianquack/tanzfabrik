@@ -112,6 +112,7 @@ en:
   
   time:
     formats:
+      url: "%Y-%m-%d-%H-%M"
       hours_minutes: "%H:%M"
       default: ! '%A, %d. %B %Y, %H:%M Uhr'
       long: ! '%A, %d. %B %Y, %H:%M Uhr'

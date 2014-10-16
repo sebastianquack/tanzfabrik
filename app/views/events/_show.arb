@@ -1,20 +1,38 @@
 show_festival = nil if !defined? show_festival
 
 # TODO: generalize this and put it into the event model
+#if (event.currently_listed?)
+#  listing = Event.in_same_listing_as(event).currently_listed # this should give us a list of events
+#  event_pos = listing.index(event)
+#  div event_pos.to_s + "/" + Event.in_same_listing_as(event).count.to_s
+#  unless event_pos.nil? # remove unless when queries are safe
+#    next_event = listing[event_pos+1] if event_pos < listing.length
+#    prev_event = listing[event_pos-1] if event_pos > 0
+#  end
+#end
 
-if (event.currently_listed?)
-  listing = Event.in_same_listing_as(event).currently_listed
-  event_pos = listing.index(event)
-  div event_pos.to_s + "/" + Event.in_same_listing_as(event).count.to_s
-  unless event_pos.nil? # remove unless when queries are safe
-    next_event = listing[event_pos+1] if event_pos < listing.length
-    prev_event = listing[event_pos-1] if event_pos > 0
-  end
+# we need next prev arrows in a few different occasions
+# - list of events in festival context
+
+# see if we are inside festival view
+if params[:festival_id] 
+  festival = Festival.find(params[:festival_id]).id
+else
+  festival = nil
 end
+
+if event.type_id == 2 || event.type_id == 4 || event.type_id == 5 #workshops or profi-training or performance projects
+  event_types = [event.type_id]
+else
+  event_types = Rails.configuration.stage_event_types
+end
+
+next_occurrence = event.next(params[:time], event_types, festival)
+prev_occurrence = event.prev(params[:time], event_types, festival)
 
 header :id => "headlines", :class => "headlines-event" do
   div :class => "before" do
-    a "<", :class => "previous", :rel => "prev", :href => event_path(prev_event) if prev_event
+    a "<", :class => "previous", :rel => "prev", :href => occurrence_path(prev_occurrence.event, prev_occurrence.time, festival) if prev_occurrence
   end
   div :class => "main" do
     div :class => "line1" do
@@ -29,7 +47,7 @@ header :id => "headlines", :class => "headlines-event" do
         h1 t(:programm_event_headline), :class => "title"
         #a ">" + t(:tickets), :href => page_path("tickets"), :class => "registration"
       end
-      a ">", :class => "next", :rel => "next", :href => event_path(next_event) if next_event      
+      a ">", :class => "next", :rel => "next", :href => occurrence_path(next_occurrence.event, next_occurrence.time, festival) if next_occurrence
     end
   end
 end

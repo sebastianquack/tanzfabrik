@@ -15,7 +15,6 @@ set_meta_tags :title => page_title, :reverse => false
 # get stage events that are not in a festival
 events = Event.not_in_festival.stage_event
 
-
 ul :class => "start_events_listing" do
 
   # pick the events that have an occurrence today
