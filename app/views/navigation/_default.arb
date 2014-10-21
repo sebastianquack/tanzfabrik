@@ -11,9 +11,9 @@ cache_arbre(self, cache_for_navigation) do
     def link_to_page(id)
       page = find_page(id)
       if current_page? page
-        span link_to(page.title, page_url(id)), :class => "selected"
+        span link_to(page.title, page_path(id)), :class => "selected"
       else
-        link_to page.title, page_url(id)
+        link_to page.title, page_path(id)
       end
     end
 
