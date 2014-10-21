@@ -1,5 +1,7 @@
 show_festival = nil if !defined? show_festival
 
+set_meta_tags :canonical => event_url(event)
+
 # TODO: generalize this and put it into the event model
 #if (event.currently_listed?)
 #  listing = Event.in_same_listing_as(event).currently_listed # this should give us a list of events

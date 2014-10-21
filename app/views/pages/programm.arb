@@ -54,6 +54,7 @@ section :class => "archive-section" do
         a y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :year => y.year.to_s)
       end
     end
+    li a t(:past_events_old_website), :href => "http://archiv.tanzfabrik-berlin.de/kalenderarchiv.php"
   end
 end
 

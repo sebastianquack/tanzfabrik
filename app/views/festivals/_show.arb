@@ -1,5 +1,8 @@
 div :class => "festival" do
 
+  festival_workshops = festival.events.where(:type_id => 2)
+  events = festival.events.where.not(:type_id => 2)
+
   header :class => "headlines festival-headlines" do
     div :class => "main" do
       div :class => "line1" do
@@ -8,7 +11,7 @@ div :class => "festival" do
             time l(festival.start_date, :format => :short) + "-" + l(festival.end_date) if festival.events.exists?
           end
         a "> " + t(:tickets), :href => page_path("tickets"), :class => "registration"
-        a "> " + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
+        a "> " + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration" if festival_workshops.length > 0
       end
       if festival.description
         div :class => "line2 open-close" do
@@ -48,7 +51,6 @@ div :class => "festival" do
   end
 
   # festival workshops
-  festival_workshops = festival.events.where(:type_id => 2)
   if festival_workshops.length > 0
     h2 :class => "headlines" do
       div :class => "main" do
@@ -61,7 +63,6 @@ div :class => "festival" do
   end
 
   # festival events
-  events = festival.events.where.not(:type_id => 2)
   if events.length > 0
     h2 :class => "headlines" do
       div :class => "main" do

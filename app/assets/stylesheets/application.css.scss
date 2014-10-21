@@ -1192,6 +1192,7 @@ dl.tags {
 
 	img {
 		padding-bottom: 2 * $vertical-box-padding;
+		min-height:152px; /* this values should better be replaced by width and height in HTML, retrieved from the image */
 	}
 }
 
@@ -1704,9 +1705,8 @@ ul.workshops {
 	margin-top: (3 * $line-height) / 0.85;
 	margin-bottom: (1 * $line-height) / 0.85;
 	padding-top: ($vertical-box-padding / 0.85);
-	border: 0 solid #bebebe;
+	border: 0 solid;
 	border-width: 1px 0 0 0;
-	color:#bebebe;
 	display:inline;
 	font-size: 85%;
 	line-height: $line-height;	
