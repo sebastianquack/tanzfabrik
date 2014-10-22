@@ -1,4 +1,4 @@
-cache_arbre(self, cache_key_for_page_headlines(page)) do      
+cache_arbre(self, cache_key_for_page_headlines(page, params[:year])) do      
   header :id => "headlines", :class => "headlines-event" do
     div :class => "main" do
       div :class => "line1" do
@@ -38,7 +38,7 @@ else
   events = Event.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ?', Rails.configuration.stage_event_types, start_date)
 end
 
-cache_arbre(self, cache_key_for_programm(events, start_date)) do
+cache_arbre(self, cache_key_for_programm(events, start_date, params[:year])) do
   render :partial => "/events/event_list", :locals => {:events => events, :start_date => start_date, :in_festival => nil }
 end
 
