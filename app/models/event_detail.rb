@@ -185,5 +185,17 @@ class EventDetail < ActiveRecord::Base
       edo.save
     end
   end
-        
+    
+  def first_event_detail_occurrence
+    return EventDetailOccurrence.where(:event_detail_id => self.id).order("time").first
+  end
+  
+  def self.where_festival(festival_id)
+    if festival_id
+      where("events.id IN (?)", Festival.find(festival_id).events.pluck(:id))      
+    else
+      where("")
+    end
+  end
+      
 end
