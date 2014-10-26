@@ -148,7 +148,7 @@ class Event < ActiveRecord::Base
     oc = EventDetailOccurrence.joins(:event)
           .where("events.type_id IN (?)", event_types)
           .where("event_detail_occurrences.time > ?", time)
-          .where_festival(festival_id)
+          .where_festival(festival_id) # defined in event_detail_occurrences model
           .where("events.id != ?", self.id)
           .order("event_detail_occurrences.time ASC")
           .first
@@ -160,7 +160,7 @@ class Event < ActiveRecord::Base
     oc = EventDetailOccurrence.joins(:event)
           .where("events.type_id IN (?)", event_types)
           .where("event_detail_occurrences.time < ?", time)
-          .where_festival(festival_id)
+          .where_festival(festival_id) # defined in event_detail_occurrences model
           .where("events.id != ?", self.id)
           .order("event_detail_occurrences.time DESC")
           .first
