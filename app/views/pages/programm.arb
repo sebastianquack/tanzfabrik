@@ -52,8 +52,10 @@ section :class => "archive-section" do
   h5 t(:past_events), :class => "archive-headline"
   ul :class => "archive-links" do
     years.keys.each do |y|
-      li do
-        a y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :year => y.year.to_s)
+      if y.year <= Time.now.year
+        li do
+          a y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :year => y.year.to_s)
+        end
       end
     end
     li a t(:past_events_old_website), :href => "http://archiv.tanzfabrik-berlin.de/kalenderarchiv.php"
