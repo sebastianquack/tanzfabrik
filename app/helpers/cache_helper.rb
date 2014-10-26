@@ -12,15 +12,16 @@ module CacheHelper
     return "kursplan/" + Digest::MD5.digest("#{locale}-#{day}-#{location_name}-#{events_count}-#{events_max_updated_at}-#{other_models}")
   end
 
-  def cache_key_for_programm events, start_date
+  def cache_key_for_programm events, start_date, parameter
     month                 = Date.today.month
     locale                = I18n.locale.to_s
     start_date_string     = start_date.to_s
     events_count          = events.count
+    parameter_string      = parameter.to_s
     events_max_updated_at = events.maximum(:updated_at).to_s
     other_models          = cache_key_from_models([EventDetail,EventType,Location,Person,PersonEvent,Studio])
     #Time.now.to_s # TODO: add ", :touch => true" to models associated with event and activate key generation here
-    return "programm/" + Digest::MD5.digest("#{locale}-#{month}-#{start_date_string}-#{events_count}-#{events_max_updated_at}-#{other_models}")
+    return "programm/" + Digest::MD5.digest("#{locale}-#{month}-#{start_date_string}-#{parameter_string}-#{events_count}-#{events_max_updated_at}-#{other_models}")
   end
 
   def cache_key_for_profitraining
@@ -37,11 +38,12 @@ module CacheHelper
     return "lehrer/" + Digest::MD5.digest("#{locale}-#{other_models}")
   end
 
-  def cache_key_for_page_headlines page
+  def cache_key_for_page_headlines page, parameter=nil
     page_id               = page.id
     locale                = I18n.locale.to_s
+    parameter_string      = parameter.to_s
     other_models          = cache_key_from_models([Page,Download,Image])
-    return "lehrer/" + Digest::MD5.digest("#{locale}-#{other_models}-#{page_id}")
+    return "lehrer/" + Digest::MD5.digest("#{locale}-#{other_models}-#{page_id}-#{parameter_string}")
   end
 
   def cache_key_for_kuenstler

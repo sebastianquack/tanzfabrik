@@ -1,9 +1,9 @@
-cache_arbre(self, cache_key_for_page_headlines(page)) do      
+cache_arbre(self, cache_key_for_page_headlines(page, params[:year])) do      
   header :id => "headlines", :class => "headlines-event" do
     div :class => "main" do
       div :class => "line1" do
-        h1 editable(page, :title), :class => "title"
-        a "> " + t(:tickets), :href => page_path("tickets"), :class => "registration"
+        h1 editable(page, :title) + " " + params[:year], :class => "title"
+        a "> " + t(:tickets), :href => page_path("tickets"), :class => "registration" if !params[:year]
       end
       if page.content
         div :class => "line2 open-close opened" do
@@ -15,12 +15,14 @@ cache_arbre(self, cache_key_for_page_headlines(page)) do
             div t :programm_more
           end
         end
-      end    
-      div :class => "line3" do
-        ul do
-          page.downloads.each do |download|        
-            li do
-              a download.description, :href => download.attachment.url
+      end
+      if !params[:year]
+        div :class => "line3" do
+          ul do
+            page.downloads.each do |download|        
+              li do
+                a download.description, :href => download.attachment.url
+              end
             end
           end
         end
@@ -38,7 +40,7 @@ else
   events = Event.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ?', Rails.configuration.stage_event_types, start_date)
 end
 
-cache_arbre(self, cache_key_for_programm(events, start_date)) do
+cache_arbre(self, cache_key_for_programm(events, start_date, params[:year])) do
   render :partial => "/events/event_list", :locals => {:events => events, :start_date => start_date, :in_festival => nil }
 end
 
@@ -54,6 +56,7 @@ section :class => "archive-section" do
         a y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :year => y.year.to_s)
       end
     end
+    li a t(:past_events_old_website), :href => "http://archiv.tanzfabrik-berlin.de/kalenderarchiv.php"
   end
 end
 

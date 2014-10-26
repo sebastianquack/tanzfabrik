@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
   has_many :person_events
   accepts_nested_attributes_for :person_events, :allow_destroy => true
   
-  has_many :people, :through => :person_events
+  has_many :people, :through => :person_events, :order => "name ASC"
   accepts_nested_attributes_for :people, :allow_destroy => true
 
   has_many :event_details, :dependent => :destroy
@@ -125,6 +125,10 @@ class Event < ActiveRecord::Base
   scope :not_in_festival, -> { includes(:festival_events).where(:festival_events => { :event_id => nil }) }
 
   scope :currently_listed, -> { joins(:event_details).where('event_details.end_date >= ?', Date.today.beginning_of_month).uniq }
+
+  def stage_event?
+    Rails.configuration.stage_event_types.include? self.type.id
+  end
 
   def currently_listed?
     Event.currently_listed.where(id: self.id).count == 1
