@@ -3,7 +3,7 @@ class RegistrationMailer < ActionMailer::Base
   
   def registration_mail(registration)
     @registration = registration
-    mail(to: "workshop@tanzfabrik-berlin.de, holgheiss@gmail.com", subject: "Workshop-Anmeldung")
+    mail(to: "workshop@tanzfabrik-berlin.de", subject: "Workshop-Anmeldung")
     #mail(to: "sebastianquack@gmail.com", subject: "Workshop-Anmeldung")
   end
 end
