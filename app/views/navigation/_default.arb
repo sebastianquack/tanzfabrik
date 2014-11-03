@@ -1,8 +1,6 @@
+
 cache_arbre(self, cache_for_navigation) do
   
-  require 'fuzzystringmatch'
-  @jarow = FuzzyStringMatch::JaroWinkler.create( :pure )
-
   div :id => "header", :class =>"site-background", :data => @bg_image_url do
     def page_url(id)
       url_for :controller => 'pages', :action => 'show', :id => id
@@ -118,6 +116,7 @@ cache_arbre(self, cache_for_navigation) do
 
     nav :id => "top-menu" do
       ul :class => "navigation" do
+
         li do
           span t(:section_school)
           ul do
@@ -150,6 +149,7 @@ cache_arbre(self, cache_for_navigation) do
             ]
           end 
         end
+
         li do
           span t(:section_production)
           ul do
@@ -171,6 +171,8 @@ cache_arbre(self, cache_for_navigation) do
             li link_to_page("apap_netzwerk")
           end
         end
+
+
         li do
           span t(:section_berlin)
           ul do    
@@ -184,8 +186,8 @@ cache_arbre(self, cache_for_navigation) do
               "vermietungsinfo"
             ]
           end
-        end
+        end    
       end
-    end
+    end    
   end
 end

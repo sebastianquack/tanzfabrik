@@ -38,9 +38,11 @@ class Festival < ActiveRecord::Base
     return self.end_date >= date
   end
 
-  def self.in_menu date=Date.today
-    return self.select{ |f| f.in_menu? date }
-  end
+  #def self.in_menu date=Date.today
+  #  self.select{ |f| f.in_menu? date }
+  #end
+
+  scope :in_menu, ->(date=Date.today) { joins(:event_details).where("event_details.end_date >= ?", date).distinct }
 
   def title_for_menu_extension header_text
     self.name

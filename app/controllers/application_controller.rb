@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def set_background_image
     @bg_image_url = ""
-    
+
     festivals = Festival.where(:feature_on_welcome_screen => true)
     if festivals.length > 0
       if festivals.first.images.length > 0
