@@ -143,7 +143,7 @@ class Event < ActiveRecord::Base
   end
 
   def process_time(time_url)
-    if time_url # time is supplied
+    if time_url # time is supplied through url
       time = Time.strptime(time_url, (I18n.t :url, scope: "time.formats"))
       # the 0 offset is important to get the time zone right... not fully sure why
       return Time.new(time.year, time.month, time.day, time.hour, time.min, time.sec, "+00:00") 
@@ -153,30 +153,70 @@ class Event < ActiveRecord::Base
   end
 
   def next(time_url = nil, event_types = [], festival_id = nil)
-    logger.debug("fooo")
-    logger.debug(time_url)
-    logger.debug(event_types)
     time = process_time(time_url)
-    oc = EventDetailOccurrence.joins(:event)
+
+    # alphanetical sorting inside blocks for workshops        
+    if event_types == [2]
+      
+      next_workshop_detail_in_block = EventDetail.joins(:event).where_festival(festival_id).where("events.id != ? AND events.type_id = 2 AND event_details.start_date = ? AND event_details.end_date = ?", self.id, self.start_date, self.end_date).where("events.title_de > ?", self.title).order("events.title_de").first
+
+      if next_workshop_detail_in_block
+        return next_workshop_detail_in_block.first_event_detail_occurrence
+      else         
+        first_workshop_detail_in_next_block = EventDetail.joins(:event).where_festival(festival_id).where("events.id != ? AND events.type_id = 2 AND  (event_details.start_date != ? OR event_details.end_date != ?) AND event_details.start_date >= ?", self.id, self.start_date, self.end_date, self.start_date).order("event_details.start_date ASC, events.title_de ASC").first
+        if first_workshop_detail_in_next_block
+          return first_workshop_detail_in_next_block.first_event_detail_occurrence
+        else 
+          return nil
+        end
+      end 
+
+    # chronological sorting for everything else
+    else
+    
+      oc = EventDetailOccurrence.joins(:event)
           .where("events.type_id IN (?)", event_types)
           .where("event_detail_occurrences.time > ?", time)
-          .where_festival(festival_id)
-          .where("events.id != ?", self.id)
+          .where_festival(festival_id) # defined in event_detail_occurrences model
+          .where("events.id != ?", self.id) # prevent event from showing all its occurrences
           .order("event_detail_occurrences.time ASC")
-          .first
-    return oc
+          .first    
+      return oc
+
+    end
   end  
      
   def prev(time_url = nil, event_types = [], festival_id = nil)
     time = process_time(time_url)
-    oc = EventDetailOccurrence.joins(:event)
+
+    # alphanetical sorting inside blocks for workshops        
+    if event_types == [2]
+      
+      prev_workshop_detail_in_block = EventDetail.joins(:event).where_festival(festival_id).where("events.id != ? AND events.type_id = 2 AND event_details.start_date = ? AND event_details.end_date = ?", self.id, self.start_date, self.end_date).where("events.title_de < ?", self.title).order("events.title_de DESC").first
+
+      if prev_workshop_detail_in_block
+        return prev_workshop_detail_in_block.first_event_detail_occurrence
+      else         
+        last_workshop_detail_in_prev_block = EventDetail.joins(:event).where_festival(festival_id).where("events.id != ? AND events.type_id = 2 AND  (event_details.start_date != ? OR event_details.end_date != ?) AND event_details.start_date <= ?", self.id, self.start_date, self.end_date, self.start_date).order("event_details.start_date DESC, events.title_de DESC").first
+        if last_workshop_detail_in_prev_block
+          return last_workshop_detail_in_prev_block.first_event_detail_occurrence
+        else 
+          return nil
+        end
+      end 
+
+    # chronological sorting for everything else
+    else
+
+      oc = EventDetailOccurrence.joins(:event)
           .where("events.type_id IN (?)", event_types)
           .where("event_detail_occurrences.time < ?", time)
-          .where_festival(festival_id)
+          .where_festival(festival_id) # defined in event_detail_occurrences model
           .where("events.id != ?", self.id)
           .order("event_detail_occurrences.time DESC")
           .first
-    return oc
+      return oc
+    end
   end
 
   def occurs_on? date 

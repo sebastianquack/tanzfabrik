@@ -12,9 +12,9 @@ if workshops.length > 0
 
   # reorder inside date blocks
   events_by_dates.each do |dates, events|
-    if events.none? { |e| (/^\d/.match e.title).nil?} # if all titles start with a digit 
+    #if events.none? { |e| (/^\d/.match e.title).nil?} # if all titles start with a digit 
       events.sort_by! { |e| e.title }                 # => reorder by title
-    end
+    #end
   end
 
   ul :class => "workshops" do
