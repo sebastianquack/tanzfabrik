@@ -130,6 +130,14 @@ class Event < ActiveRecord::Base
     Rails.configuration.stage_event_types.include? self.type.id
   end
 
+  def workshop_event?
+    self.type_id == 2
+  end
+
+  def performance_project_event?
+    self.type_id == 5
+  end
+
   def currently_listed?
     Event.currently_listed.where(id: self.id).count == 1
   end

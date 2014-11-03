@@ -8,17 +8,17 @@ cache_arbre(self, cache_for_navigation) do
       url_for :controller => 'pages', :action => 'show', :id => id
     end
 
-    def link_to_page(id)
-      page = find_page(id)
-      if current_page? page
-        span link_to(page.title, page_path(id)), :class => "selected"
+    def link_to_page(page, selected = false)
+      page = find_page(page) if page.kind_of?(String)
+      if current_page?(page) || selected
+        span link_to(page.title, page_path(page)), :class => "selected"
       else
-        link_to page.title, page_path(id)
+        link_to page.title, page_path(page)
       end
     end
 
-    def link_to_festival(festival)
-      if current_page? festival
+    def link_to_festival(festival, selected = false)
+      if current_page?(festival) || selected
         span link_to(festival.name, festival_path(festival)), :class => "selected"
       else
         link_to festival.name, festival_path(festival)
@@ -39,30 +39,53 @@ cache_arbre(self, cache_for_navigation) do
       end
     end
 
-
-    def menu_header text, page_ids
-      selected_page_id = page_ids.select { |pid| current_page? find_page(pid) }.first.to_s
-      if !selected_page_id.empty?
-        selected_page_text = find_page(selected_page_id).title
-        # check if menu header text appears in page title at the beginning and cut it off
-        dist = @jarow.getDistance( text, selected_page_text[0..text.length-1] )
-        if dist > 0.85
-          matches = /[s]?[+&\s\/\\](.*)$/.match(selected_page_text[text.length-1..selected_page_text.length-1])
-          if matches
-            extension = matches[1].to_s
-          else
-            extension = selected_page_text
-          end
+    def li_submenu header_text, entries
+      # entry may be String -> id of a page, Array -> [Object, condition], or Object -> Page or Festival
+      # prepare input
+      objects = Array.new
+      conditions = Array.new
+      entries.each do |e|
+        if e.kind_of?(Array)
+          object = e[0]
+          condition = e[1]
         else
-          extension = selected_page_text
+          object = e
+          condition = nil
         end
-        return span (text.upcase + "/" + extension), :class => "selected"
+        object = find_page(object) if object.kind_of?(String)
+        objects << object
+        conditions << condition
       end
-      text
+
+      # find extension (MENU/EXTENSION)
+      selected_object = objects.select { |o| current_page? o }.first
+      if selected_object.nil?
+        conditions.each_with_index do |r,i|
+          selected_object = objects[i] if r
+        end
+      end
+      extension = selected_object.title_for_menu_extension(header_text) unless selected_object.nil?
+
+      # output
+      li span (header_text.upcase + (extension.nil? ? "" : "/" + extension)), :class => (extension.nil? ? "" : "selected") do
+        ul do
+          objects.each do |o|
+            if o.class.name == "Page"
+              li link_to_page(o)
+            elsif o.class.name == "Festival"
+              li link_to_festival(o)
+            end
+          end
+        end
+      end
     end
 
     def find_page id
       Page.all.select{ |p| p.slug == id}.first # use query cache
+    end
+
+    def event_view
+      params[:controller] == 'events' && params[:action] == 'show'
     end
 
     #if admin_user_signed_in?
@@ -98,46 +121,45 @@ cache_arbre(self, cache_for_navigation) do
         li do
           span t(:section_school)
           ul do
-            li menu_header(t(:section_classes), ["kursplan", "profitraining", "kindertanz", "contact_jam", "lehrer", "performance_projekte", "oeffnungszeiten"]) do
-              ul do
-                li link_to_page("kursplan")
-                li link_to_page("performance_projekte")
-                li link_to_page("profitraining")
-                li link_to_page("kindertanz")
-                li link_to_page("contact_jam")
-                li link_to_page("lehrer")
-                li link_to_page("oeffnungszeiten")
-              end
-            end
-            li menu_header(t(:section_workshops), ["workshop_programm", "workshop_anmeldung"]) do
-              ul do
-                li link_to_page("workshop_programm")
-                li link_to_page("workshop_anmeldung")
-              end
-            end        
-            li menu_header(t(:section_dance_intensive), ["dance_intensive_programm", "dance_intensive_lehrer", "dance_intensive_bewerbung"]) do
-              ul do
-                #li link_to_page("ueber_dance_intensive")
-                li link_to_page("dance_intensive_programm")
-                li link_to_page("dance_intensive_lehrer")
-                li link_to_page("dance_intensive_bewerbung")
-              end
-            end
+            li_submenu(t(:section_classes), [
+              "kursplan", 
+              [
+                "performance_projekte", 
+                event_view && !params[:festival_id] && Event.find(params[:id]).type.id == 5
+              ],
+              [
+                "profitraining",
+                event_view && !params[:festival_id] && Event.find(params[:id]).type.id == 4
+              ],                
+              "kindertanz",
+              "contact_jam",
+              "lehrer",
+              "oeffnungszeiten",
+            ])
+            li_submenu t(:section_workshops), [
+              [
+                "workshop_programm", 
+                event_view && !params[:festival_id] && Event.find(params[:id]).workshop_event?
+              ],
+              "workshop_anmeldung"
+            ]
+            li_submenu t(:section_dance_intensive), [
+              "dance_intensive_programm", 
+              "dance_intensive_lehrer", 
+              "dance_intensive_bewerbung"
+            ]
           end 
         end
         li do
           span t(:section_production)
           ul do
-            li link_to_page("programm")
+            li link_to_page("programm", event_view && !params[:festival_id] && Event.find(params[:id]).stage_event?)
             if (Festival.in_menu.length > 0)
-              li t(:section_festivals) do
-                ul do
-                  Festival.in_menu.each do |festival|
-                    li link_to_festival(festival)
-                  end
-                  li link_to_page("festivals")
-                end
-              end              
+              festivals_submenu = []
+              Festival.in_menu.each do |f|
+                festivals_submenu << [f, event_view && params[:festival_id] && Festival.find(params[:festival_id]) == f]
+              end
+              li_submenu(t(:section_festivals), festivals_submenu + ["festivals"])           
             else
               li link_to_page("festivals")
             end
@@ -149,19 +171,15 @@ cache_arbre(self, cache_for_navigation) do
         li do
           span t(:section_berlin)
           ul do    
-            li menu_header(t(:section_about), ["profil_partner", "team"]) do
-              ul do
-                li link_to_page("profil_partner")
-                li link_to_page("team")
-              end
-            end
+            li_submenu t(:section_about), [
+              "profil_partner", 
+              "team"
+            ]
             li link_to_page("tickets")
-            li menu_header(t(:section_rental), ["studios", "vermietungsinfo"]) do
-              ul do
-                li link_to_page("studios")
-                li link_to_page("vermietungsinfo")
-              end
-            end
+            li_submenu t(:section_rental), [
+              "studios", 
+              "vermietungsinfo"
+            ]
           end
         end
       end

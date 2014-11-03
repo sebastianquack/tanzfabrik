@@ -42,4 +42,8 @@ class Festival < ActiveRecord::Base
     return self.select{ |f| f.in_menu? date }
   end
 
+  def title_for_menu_extension header_text
+    self.name
+  end
+
 end
