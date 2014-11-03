@@ -121,7 +121,7 @@ cache_arbre(self, cache_for_navigation) do
         li do
           span t(:section_school)
           ul do
-            li_submenu(t(:section_classes), [
+            li_submenu t(:section_classes), [
               "kursplan", 
               [
                 "performance_projekte", 
@@ -135,7 +135,7 @@ cache_arbre(self, cache_for_navigation) do
               "contact_jam",
               "lehrer",
               "oeffnungszeiten",
-            ])
+            ]
             li_submenu t(:section_workshops), [
               [
                 "workshop_programm", 
@@ -154,12 +154,15 @@ cache_arbre(self, cache_for_navigation) do
           span t(:section_production)
           ul do
             li link_to_page("programm", event_view && !params[:festival_id] && Event.find(params[:id]).stage_event?)
-            if (Festival.in_menu.length > 0)
+            festivals = Festival.in_menu
+            festivals |= [Festival.find(params[:id])] if params[:controller] == "festivals" # for archived festivals: add festival to menu
+            festivals |= [Festival.find(params[:festival_id])] if event_view && params[:festival_id]  # for archived festival events: add festival to menu
+            if (festivals.length > 0)
               festivals_submenu = []
-              Festival.in_menu.each do |f|
+              festivals.each do |f|
                 festivals_submenu << [f, event_view && params[:festival_id] && Festival.find(params[:festival_id]) == f]
               end
-              li_submenu(t(:section_festivals), festivals_submenu + ["festivals"])           
+              li_submenu(t(:section_festivals), festivals_submenu + ["festivals"])
             else
               li link_to_page("festivals")
             end
