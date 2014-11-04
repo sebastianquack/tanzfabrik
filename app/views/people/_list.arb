@@ -29,7 +29,7 @@ people.each do |person|
         div :class => "info" do
           h3 do
             text_node person.name
-            a "✎", :href => edit_admin_person_path(person), :class => "admin-only classes" 
+            a "✎", :href => edit_admin_person_path(person), :class => "admin-only classes" if admin_user_signed_in?
           end
           ul :class => "classes" do # TODO: account for ppl both teachers and artists
             if mode == "teachers"
