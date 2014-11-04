@@ -123,6 +123,7 @@ de:
     formats:
       weekday: "%A"
       month: "%B"
+      month_year: "%B %Y"
       day: '%d.%m.%Y'
       default: ! '%d.%m.%Y'
       long: '%d. %B %Y'

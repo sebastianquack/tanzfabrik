@@ -1246,6 +1246,14 @@ dl.tags {
 		font-weight: normal;
 		line-height: $line-height;
 	}
+	.month {
+		@include menu-font(100%);
+		text-transform: uppercase;
+		color:red;
+		padding-bottom: $vertical-box-padding;
+		line-height: $line-height;
+		padding-top: 1em;
+	}
 	.in-festival {
 		float:right;
 		margin:0;
@@ -1264,6 +1272,14 @@ dl.tags {
 	}
 	.details {
 		padding-bottom: $vertical-box-padding;
+	}
+}
+.event-programm-section:first-of-type {
+	.basic:before {
+		border-width: 0;
+	}
+	.month {
+		padding-top: 0;
 	}
 }
 

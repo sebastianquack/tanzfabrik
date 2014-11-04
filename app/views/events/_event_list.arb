@@ -23,43 +23,54 @@ end
 
 # display list of all occurences
 ol :class => "event-calendar" do
-  # TODO: find out why there are dublicate entries in all_occurences which need to be uniqed 
-  all_occurences.uniq.sort_by { |o| o[:time] }.each do |o|
-    event = o[:event]
-    time = o[:time]
-    detail = o[:detail]
-
-    li :class => "row event event-programm" do
-      div :class => "basic" do   
-        div :class => "content" do
-          a :href => occurrence_path(event, time, in_festival) do 
-            h2 event.title, :class => "title"
-            h3 event.display_type, :class => "type"
-            para event.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
-          end
+  all_occurences.uniq.group_by { |o| o[:time].to_date.beginning_of_month }.each do |month,o_per_month|
+    # TODO: find out why there are dublicate entries in all_occurences which need to be uniqed 
+    if in_festival.nil?
+      # NOTE: having a li that acts as a heading is probable semantically wrong. instead, there should be sub-lists for monthly sections.
+      li :class => "row event-programm event-programm-section" do
+        div :class => "basic" do
+          h2 l(month, :format => ( is_archive ? :month_year : :month )), :class => "month"
         end
       end
+    end
 
-      div :class => "details" do
-        div :class => "content" do
+    o_per_month.each do |o|
+      event = o[:event]
+      time = o[:time]
+      detail = o[:detail]
 
-          time(:class => "time") do
-            span l(time, :format => :day_month), :class => "day"
-            span l(time, :format => :hours_minutes), :class => "clock"
-          end
-
-          div :class => "address" do
-            if detail.custom_place?
-              div detail.custom_place, :class => "location"
-            else
-              too_long = (detail.studio.location.name.length + detail.studio.name.length) > 14
-              div detail.studio.location.name, :class => "location"
-              div detail.studio.name, :class => (too_long ? "location" : "studio")
+      li :class => "row event event-programm" do
+        div :class => "basic" do   
+          div :class => "content" do
+            a :href => occurrence_path(event, time, in_festival) do 
+              h3 event.title, :class => "title"
+              h4 event.display_type, :class => "type"
+              para event.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
             end
           end
-        end    
-      end
-    end  
+        end
+
+        div :class => "details" do
+          div :class => "content" do
+
+            time(:class => "time") do
+              span l(time, :format => :day_month), :class => "day"
+              span l(time, :format => :hours_minutes), :class => "clock"
+            end
+
+            div :class => "address" do
+              if detail.custom_place?
+                div detail.custom_place, :class => "location"
+              else
+                too_long = (detail.studio.location.name.length + detail.studio.name.length) > 14
+                div detail.studio.location.name, :class => "location"
+                div detail.studio.name, :class => (too_long ? "location" : "studio")
+              end
+            end
+          end    
+        end
+      end  
+    end
   end
   
 end

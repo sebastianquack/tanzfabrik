@@ -71,7 +71,7 @@ div :class => "festival" do
         end
       end
     end  
-    render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.start_date, :in_festival => festival }
+    render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.start_date, :in_festival => festival, :is_archive => false }
   end
 
 end

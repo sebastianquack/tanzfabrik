@@ -41,7 +41,7 @@ else
 end
 
 cache_arbre(self, cache_key_for_programm(events, start_date, params[:year])) do
-  render :partial => "/events/event_list", :locals => {:events => events, :start_date => start_date, :in_festival => nil }
+  render :partial => "/events/event_list", :locals => {:events => events, :start_date => start_date, :in_festival => nil, :is_archive => params[:year] != nil }
 end
 
 # figure out in which years event_details exist
