@@ -16,8 +16,8 @@ cache_arbre(self, cache_key_for_page_headlines(page, params[:year])) do
           end
         end
       end
-      if !params[:year]
-        div :class => "line3" do
+      div :class => "line3" do
+        if !params[:year]
           ul do
             page.downloads.each do |download|        
               li do
