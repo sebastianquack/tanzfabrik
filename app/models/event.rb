@@ -134,7 +134,7 @@ class Event < ActiveRecord::Base
     self.type_id == 2
   end
 
-  def performance_project_event?
+  def pp_event?
     self.type_id == 5
   end
 
