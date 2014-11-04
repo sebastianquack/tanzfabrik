@@ -23,7 +23,7 @@ end
 
 # display list of all occurences
 ol :class => "event-calendar" do
-  all_occurences.uniq.group_by { |o| o[:time].to_date.beginning_of_month }.each do |month,o_per_month|
+  all_occurences.uniq.sort_by{ |o| o[:time] }.group_by { |o| o[:time].to_date.beginning_of_month }.each do |month,o_per_month|
     # TODO: find out why there are dublicate entries in all_occurences which need to be uniqed 
     if in_festival.nil?
       # NOTE: having a li that acts as a heading is probable semantically wrong. instead, there should be sub-lists for monthly sections.
