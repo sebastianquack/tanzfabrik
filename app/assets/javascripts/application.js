@@ -159,7 +159,7 @@ $(document).ready(function() {
 });
 
 // background fading on turbolinks page load 
-$(document).on('page:load', function () {
+$(document).on('page:change', function () {
   new_background_status = $("body.start").length == 1 ? "strong" : "weak"
   $(".site-background").addClass(last_background_status)
   setTimeout(function() {
