@@ -43,7 +43,7 @@ ul :class => "start_events_listing" do
   end
 
   # get festivals that started before today and have not ended
-  festivals_today = Festival.select {|f| f.start_date ? (f.start_date <= Date.today && f.end_date >= Date.today) : false }
+  festivals_today = Festival.now_and_future.includes(:event_details).select {|f| f.start_date ? (f.start_date <= Date.today && f.end_date >= Date.today) : false }
 
   festivals_today.each do |f|
     li do
@@ -75,7 +75,7 @@ ul :class => "start_events_listing" do
   end
 
   # get festivals that will start tomorrow
-  festivals_tomorrow = Festival.select {|f| f.start_date ? (f.start_date == Date.tomorrow) : false }
+  festivals_tomorrow = Festival.now_and_future.includes(:event_details).select {|f| f.start_date ? (f.start_date == Date.tomorrow) : false }
 
   festivals_tomorrow.each do |f|
     li do
@@ -87,7 +87,7 @@ ul :class => "start_events_listing" do
   end
 
   # get festivals that will start after tomorrow (maximum 2)
-  festivals_after_tomorrow = Festival.select {|f| f.start_date ? (f.start_date > Date.tomorrow) : false }
+  festivals_after_tomorrow = Festival.now_and_future.includes(:event_details).select {|f| f.start_date ? (f.start_date > Date.tomorrow) : false }
 
   festivals_after_tomorrow[0 .. 1].each do |f|
     li do

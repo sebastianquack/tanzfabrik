@@ -44,6 +44,8 @@ class Festival < ActiveRecord::Base
 
   scope :in_menu, ->(date=Date.today) { joins(:event_details).where("event_details.end_date >= ?", date).distinct }
 
+  scope :now_and_future, ->(date=Date.today) { joins(:event_details).where("event_details.end_date >= ?", date).distinct }
+
   def title_for_menu_extension header_text
     self.name
   end
