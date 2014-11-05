@@ -31,6 +31,9 @@ ol :class => "event-calendar" do
         div :class => "basic" do
           h2 l(month, :format => ( is_archive ? :month_year : :month )), :class => "month"
         end
+        div :class => "details" do
+          div :class => "content"
+        end        
       end
     end
 

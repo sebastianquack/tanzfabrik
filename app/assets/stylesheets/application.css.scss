@@ -1276,7 +1276,7 @@ dl.tags {
 	}
 }
 .event-programm-section:first-of-type {
-	.basic:before {
+	.basic:before, .details:before {
 		border-width: 0;
 	}
 	.month {
