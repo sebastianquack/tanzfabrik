@@ -22,52 +22,55 @@ if event.type.name == "Workshop"
   end
 end
 
-# Address
-if event.event_details.first.studio && event.event_details.all? { |ed| ed.custom_place && ed.custom_place.empty? }
-  small event.event_details.first.studio.location.address
-end
+div :class => "info" do
 
-# Editable
-small editable event, :info, :type => "wysihtml5"
+  # Address
+  if event.event_details.first.studio && event.event_details.all? { |ed| ed.custom_place && ed.custom_place.empty? }
+    small event.event_details.first.studio.location.address
+  end
 
-# Price(s)
-if event.price_regular
-  small do
-    if event.type.name == "Workshop"
-      text_node t(:price_workshop) + " "
-      text_node number_to_currency event.price_regular
-      if event.price_reduced
-        frühbuchertext = t(:price_reduced_limit) + " " + l(event.early_bird_date, :format => :day)
-        span " ("
-        abbr number_to_currency(event.price_reduced), :title => frühbuchertext
-        sup "*"
-        span ")" 
-        div do 
+  # Editable
+  small editable event, :info, :type => "wysihtml5"
+
+  # Price(s)
+  if event.price_regular
+    small do
+      if event.type.name == "Workshop"
+        text_node t(:price_workshop) + " "
+        text_node number_to_currency event.price_regular
+        if event.price_reduced
+          frühbuchertext = t(:price_reduced_limit) + " " + l(event.early_bird_date, :format => :day)
+          span " ("
+          abbr number_to_currency(event.price_reduced), :title => frühbuchertext
           sup "*"
-          span frühbuchertext
+          span ")" 
+          div do 
+            sup "*"
+            span frühbuchertext
+          end
         end
+        div a t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
+      else
+        text_node t(:price_event) + " "
+        text_node number_to_currency event.price_regular, :format => "%n"
+        if event.price_reduced
+          text_node " / "
+          text_node number_to_currency event.price_reduced, :format => "%n"
+        end
+        text_node " "
+        text_node number_to_currency event.price_regular, :format => "%u"
+        div a t(:tickets), :href => page_path("tickets"), :class => "registration" if event.stage_event?
       end
-      div a "> " + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
-    else
-      text_node t(:price_event) + " "
-      text_node number_to_currency event.price_regular, :format => "%n"
-      if event.price_reduced
-        text_node " / "
-        text_node number_to_currency event.price_reduced, :format => "%n"
-      end
-      text_node " "
-      text_node number_to_currency event.price_regular, :format => "%u"
-      div a "> " + t(:tickets), :href => page_path("tickets"), :class => "registration" if event.stage_event?
     end
   end
-end
 
-# Copyright
+  # Copyright
 
-if event.images.length > 0 && !event.images.first.license.empty?
-  small :class => "separated-1" do
-    event.images.first.license
+  if event.images.length > 0 && !event.images.first.license.empty?
+    small :class => "separated-1" do
+      event.images.first.license
+    end
   end
-end
 
+end
 

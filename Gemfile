@@ -85,6 +85,7 @@ gem "parsley-rails"
 
 group :production do
 	gem 'rails_12factor'
+  gem 'heroku_rails_deflate' # enables gzip compression
 end
 
 gem "geocoder"
@@ -95,7 +96,5 @@ gem "devise-i18n"
 gem 'piwik_analytics', '~> 1.0.2'
 
 gem 'newrelic_rpm'
-
-gem 'heroku_rails_deflate', :group => :production # enables gzip compression, need to be tested
 
 gem 'groupdate', '~> 2.2.1'
