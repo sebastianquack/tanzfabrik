@@ -134,6 +134,7 @@ cache_arbre(self, cache_for_navigation) do
               "contact_jam",
               "lehrer",
               "oeffnungszeiten",
+              "preise-der-tanzklassen"
             ]
             li_submenu t(:section_workshops), [
               [
