@@ -16,7 +16,14 @@ $(document).ready(function() {
       "blockquote":false,
       "html": true,
     },
-    "locale": "de-DE"
+    "locale": "de-DE",
+    parserRules: {
+      tags: {
+        table: {remove: 0},
+        tr: {remove: 0},
+        td: {remove: 0}
+      }
+    }
   });
 })
 

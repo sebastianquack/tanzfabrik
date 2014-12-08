@@ -34,20 +34,25 @@ $(document).ready(function() {
       "blockquote":false,
       "html": true,
     },
-    "locale": "de-DE"
+    "locale": "de-DE",
+    parserRules: {
+      tags: {
+        table: {remove: 0},
+        tr: {remove: 0},
+        td: {remove: 0}
+      }
+    }
   };
 
   $.fn.editable.defaults.mode = 'inline';
   $.fn.editable.defaults.emptytext = '(Klicken, um Text einzufügen)';
 
   $(".editable").editable();
-
   
   $("a[rel~=popover], .has-popover").popover();
   $("a[rel~=tooltip], .has-tooltip").tooltip();
 
-  //$('.textarea').wysihtml5();
-
+  
 });
 
 // for wysihtml5
