@@ -149,6 +149,7 @@ cache_arbre(self, cache_for_navigation) do
               "dance_intensive_bewerbung"
             ]
             li_submenu t(:section_further_training), [
+              "i-tp",
               "contact-improvisation",
               "moving-on-center"
             ]
