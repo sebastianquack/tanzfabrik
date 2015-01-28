@@ -184,7 +184,8 @@ cache_arbre(self, cache_for_navigation) do
           ul do    
             li_submenu t(:section_about), [
               "profil_partner", 
-              "team"
+              "team",
+              "jobs"
             ]
             li link_to_page("tickets")
             li_submenu t(:section_rental), [
