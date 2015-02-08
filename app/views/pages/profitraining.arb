@@ -36,7 +36,7 @@ end
 cache_arbre(self, cache_key_for_profitraining) do
 
   trainings_details = EventDetail.includes([{:event => {:people => :events }}, :repeat_mode])
-    .where("start_date >= ?", (Date.today - 2.week).beginning_of_week)
+    .where("end_date >= ?", Date.today)
     .order("Date(start_date)")
     .all(:include => :event, :conditions => {:events => {:type_id => 4 }} )
     .select{ |d| d.valid? }
