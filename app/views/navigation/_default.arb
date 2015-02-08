@@ -146,7 +146,8 @@ cache_arbre(self, cache_for_navigation) do
             li_submenu t(:section_dance_intensive), [
               "dance_intensive_programm", 
               "dance_intensive_lehrer", 
-              "dance_intensive_bewerbung"
+              "dance_intensive_bewerbung",
+              "dance-intensive-collective"
             ]
             li_submenu t(:section_further_training), [
               "i-tp",
