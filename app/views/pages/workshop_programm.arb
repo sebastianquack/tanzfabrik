@@ -36,7 +36,7 @@ if params[:year]
 else 
   #start_date = Date.today.beginning_of_month
   start_date = Date.parse('01-01-' + Time.now.year.to_s) # get workshops from beginning of year
-  end_date = Time.now.to_s # get workshops until today
+  end_date = Time.now.to_s # don't show workshops that ended before today
   workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.end_date >= ?', start_date, end_date).uniq
 end
 
