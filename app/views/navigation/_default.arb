@@ -152,7 +152,8 @@ cache_arbre(self, cache_for_navigation) do
             li_submenu t(:section_further_training), [
               "i-tp",
               "contact-improvisation",
-              "moving-on-center"
+              "moving-on-center",
+              "bmc-performance"
             ]
           end 
         end
