@@ -88,6 +88,7 @@ ul :class => "start_events_listing" do
 
   # get festivals that will start after tomorrow (maximum 2)
   festivals_after_tomorrow = Festival.now_and_future.includes(:event_details).select {|f| f.start_date ? (f.start_date > Date.tomorrow) : false }
+  festivals_after_tomorrow.sort! { |a,b| a.start_date <=> b.start_date } # sort by start date
 
   festivals_after_tomorrow[0 .. 1].each do |f|
     li do
