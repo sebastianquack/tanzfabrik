@@ -46,10 +46,39 @@ ul :class => "start_events_listing" do
   festivals_today = Festival.now_and_future.includes(:event_details).select {|f| f.start_date ? (f.start_date <= Date.today && f.end_date >= Date.today) : false }
 
   festivals_today.each do |f|
+
+    # check if festival actually has an occurrence today or tomorrow
+    festival_event_today = false
+    festival_event_tomorrow = false
+    festival_event_date = nil
+    f.events.each do |e|
+      if e.occurs_on? Date.today
+        festival_event_today = true
+      elsif e.occurs_on? Date.tomorrow
+        festival_event_tomorrow = true
+      end
+    end
+    # if it doesn't, use next event start date
+    unless festival_event_today or festival_event_tomorrow
+      events_after_tomorrow = f.events.select {|e| e.start_date > Date.tomorrow }
+      if events_after_tomorrow.size > 0
+        events_after_tomorrow.sort_by! { |e| e.start_date }
+        festival_event_date = events_after_tomorrow[0].start_date
+      end
+    end
+
     li do
-      span t(:today), :class => "time"
-      span :class => "event" do
-        a f.name, :href => festival_path(f)
+      if festival_event_today 
+        span t(:today), :class => "time"
+      elsif festival_event_tomorrow  
+        span t(:tomorrow), :class => "time"
+      elsif festival_event_date 
+        span l(festival_event_date, :format => :short), :class => "time"
+      end
+      if festival_event_today or festival_event_tomorrow or festival_event_date
+        span :class => "event" do
+          a f.name, :href => festival_path(f)
+        end
       end
     end
   end
