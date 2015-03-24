@@ -22,7 +22,7 @@ SitemapGenerator::Sitemap.create do
       add festival_path(festival, :locale => language), :lastmod => festival.updated_at, :changefreq => changefreq
     end
 
-    Event.all.each do |event|
+    Event.all.have_own_page.each do |event|
       priority = (event.event_details.length > 0 && event.end_date >= Date.today) ? 0.5 : 0.3
       add event_path(event, :locale => language), :lastmod => event.updated_at, :changefreq => 'never', :priority => priority
     end
