@@ -15,5 +15,9 @@
 /log/*.log
 /tmp
 
+# Ignore generated sitemap
+/public/sitemap.xml*
+
+# Other
 .DS_Store
 /public/system/*

@@ -6,7 +6,7 @@ ActiveAdmin.register Page do
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # permit_params :list, :of, :attributes, :on, :model
-  permit_params :title_de, :content_de, :title_en, :content_en, :description_de, :description_en,
+  permit_params :title_de, :content_de, :title_en, :content_en, :description_de, :description_en, :priority, :changefreq,
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
 
@@ -74,10 +74,6 @@ ActiveAdmin.register Page do
       f.input :content_de, :input_html => { :class => 'wysihtml5' }
       f.input :content_en, :input_html => { :class => 'wysihtml5' }
     end
-    f.inputs :description do
-      f.input :description_de, :input_html => { :maxlength => 156, :placeholder => auto_generate_description(f.object.content_de.to_s), :class => '' }
-      f.input :description_en, :input_html => { :maxlength => 156, :placeholder => auto_generate_description(f.object.content_de.to_s), :class => '' }
-    end 
     f.inputs "Images" do
       f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
         f_f.inputs do
@@ -109,6 +105,28 @@ ActiveAdmin.register Page do
         end
       end
     end
+    f.inputs "SEO" do
+#      priority_hint = "Relative Wichtigkeit der Seite zwischen 0 (links, völlig unwichtig) und 1 (rechts, allerwichtigste Seite). Eingesteller Wert: "
+#      f.input :priority, :as => :range, :in => 0..1, :step => 0.1, :input_html => {:onmousemove => "h = document.querySelector('#page_priority_input .inline-hints').innerText = '" + priority_hint + "' + this.value"}, :hint => (priority_hint + params[:priority].to_s)
+      f.input :priority, :as => :select, :collection => [
+        ['100% (Allerwichtigste Seite)',1],
+        ['90% ',0.9],
+        ['80% ',0.8],
+        ['70% ',0.7],
+        ['60% ',0.6],
+        ['50%  (Durchschnittliche Wichtigkeit)',0.5],
+        ['40% ',0.4],
+        ['30% ',0.3],
+        ['20% ',0.2],
+        ['10% ',0.1],
+        ['0%   (Gänzlich unwichtige Seite)',0],        
+      ]
+      f.input :changefreq, :label => "Frequency", :as => :select, :collection => ['daily','weekly','monthly','never']
+      f.inputs :description do
+        f.input :description_de, :input_html => { :maxlength => 156, :placeholder => auto_generate_description(f.object.content_de.to_s), :class => '' }
+        f.input :description_en, :input_html => { :maxlength => 156, :placeholder => auto_generate_description(f.object.content_de.to_s), :class => '' }
+      end 
+    end    
     
     
     f.actions

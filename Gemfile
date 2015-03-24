@@ -98,3 +98,5 @@ gem 'piwik_analytics', '~> 1.0.2'
 gem 'newrelic_rpm'
 
 gem 'groupdate', '~> 2.2.1'
+
+gem 'sitemap_generator', '~> 5.0.5'
