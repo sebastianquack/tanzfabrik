@@ -100,3 +100,4 @@ gem 'newrelic_rpm'
 gem 'groupdate', '~> 2.2.1'
 
 gem 'sitemap_generator', '~> 5.0.5'
+gem 'fog' # for sitemap_generator, also part of paperclip
