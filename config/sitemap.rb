@@ -28,7 +28,7 @@ SitemapGenerator::Sitemap.create do
     language0 = languages[i]
     language1 = languages[i-1]
 
-    Page.all.each do |page|
+    Page.where.not(:slug => "start").each do |page|
       priority = page.priority ? page.priority : 0.5
       changefreq = page.changefreq ? page.changefreq : 'monthly'
       add page_path(page, :locale => language0 ), 
