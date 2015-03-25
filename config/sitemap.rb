@@ -7,24 +7,49 @@ SitemapGenerator::Sitemap.create do
 
   #I18n.locale = :en
 
+  languages = [:de, :en]
 
-  [:de, :en].each do |language|
+  languages.length.times do |i|
+
+    language0 = languages[i]
+    language1 = languages[i-1]
 
     Page.all.each do |page|
       priority = page.priority ? page.priority : 0.5
       changefreq = page.changefreq ? page.changefreq : 'monthly'
-      add page_path(page, :locale => language ), :lastmod => page.updated_at, :changefreq => changefreq, :priority => priority
+      add page_path(page, :locale => language0 ), 
+        :lastmod => page.updated_at, 
+        :changefreq => changefreq, 
+        :priority => priority,
+        :alternate => {
+          :href => page_path(page, :locale => language1 ),
+          :lang => language1
+        }
     end
 
     Festival.all.each do |festival|
       changefreq = (festival.start_date && festival.start_date >= Date.today) ? 'weekly' : 'never'
       priority = (festival.end_date && festival.end_date >= Date.today) ? 0.6 : 0.3
-      add festival_path(festival, :locale => language), :lastmod => festival.updated_at, :changefreq => changefreq
+      add festival_path(festival, :locale => language0), 
+        :lastmod => festival.updated_at, 
+        :changefreq => changefreq,
+        :priority => priority,
+        :alternate => {
+          :href => page_path(festival, :locale => language1 ),
+          :lang => language1
+        }        
     end
 
     Event.all.have_own_page.each do |event|
       priority = (event.event_details.length > 0 && event.end_date >= Date.today) ? 0.5 : 0.3
-      add event_path(event, :locale => language), :lastmod => event.updated_at, :changefreq => 'never', :priority => priority
+      add event_path(event, :locale => language0), 
+        :lastmod => event.updated_at, 
+        :changefreq => 'never', 
+        :priority => priority,
+        :alternate => {
+          :href => page_path(event, :locale => language1 ),
+          :lang => language1
+        }        
     end
 
   end
