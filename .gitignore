@@ -16,7 +16,7 @@
 /tmp
 
 # Ignore generated sitemap
-/public/sitemap.xml*
+#/public/sitemap.xml*
 
 # Other
 .DS_Store
