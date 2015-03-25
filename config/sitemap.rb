@@ -36,7 +36,7 @@ SitemapGenerator::Sitemap.create do
         :changefreq => changefreq, 
         :priority => priority,
         :alternate => {
-          :href => page_path(page, :locale => language1 ),
+          :href => page_url(page, :locale => language1, :host => SitemapGenerator::Sitemap.default_host ),
           :lang => language1
         }
     end
@@ -49,7 +49,7 @@ SitemapGenerator::Sitemap.create do
         :changefreq => changefreq,
         :priority => priority,
         :alternate => {
-          :href => page_path(festival, :locale => language1 ),
+          :href => festival_url(festival, :locale => language1, :host => SitemapGenerator::Sitemap.default_host ),
           :lang => language1
         }        
     end
@@ -61,7 +61,7 @@ SitemapGenerator::Sitemap.create do
         :changefreq => 'never', 
         :priority => priority,
         :alternate => {
-          :href => page_path(event, :locale => language1 ),
+          :href => event_url(event, :locale => language1, :host => SitemapGenerator::Sitemap.default_host ),
           :lang => language1
         }        
     end
