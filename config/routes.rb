@@ -36,6 +36,8 @@ Tanzfabrik::Application.routes.draw do
   get '/de' => redirect('/')
   get '/:locale' => "pages#show", :as => :local_root
 
+  get '/sitemap.xml', :to => redirect('/sitemap.xml')
+
   get '*path' => "redirect#oldsite"
     
   root 'pages#show'
