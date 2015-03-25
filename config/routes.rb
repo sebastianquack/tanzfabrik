@@ -6,8 +6,6 @@ Tanzfabrik::Application.routes.draw do
   
   #get "/kalenderarchiv2" => redirect('http://archiv.tanzfabrik-berlin.de/kalenderarchiv2-kalender2%5Bshow%5D=archiv&kalender2%5Bvktg_code%5D%3D99&kalenderarchiv%5Byear%5D=2014&date=2587.php')
 
-  get '/sitemap.xml', :to => redirect('/sitemap.xml')
-
   get 'admin' => 'admin/pages#index'
   ActiveAdmin.routes(self)
 
@@ -36,7 +34,7 @@ Tanzfabrik::Application.routes.draw do
   # You can have the root of your site routed with "root"    
 
   get '/de' => redirect('/')
-  get '/:locale' => "pages#show", :as => :local_root
+  get '/:locale' => "pages#show", :as => :local_root, locale: /[A-Za-z]{2}/
 
   get '*path' => "redirect#oldsite"
     
