@@ -1,8 +1,14 @@
 de:
-  kursplan: kurse.php
+  kursplan: 
+    - kurse.php
+    - kurse
   programm: 
     - kalender.php
+    - 'kalender2.php?date=1430'
+    - 'kalender2.php?date=1605'
+    - 'kalender2.php?date=1783'
     - zeichenerklaerung.php
+    - Dance
   tickets: tickets.php
   lehrer: 
     - lehrer-krs.php
@@ -10,12 +16,15 @@ de:
     - lehrer.php
   kuenstler: kuenstler.php
   agbs: agb.php
-  workshop_programm: workshops.php
+  workshop_programm: 
+    - workshops.php
+    - workshops.php/faq.php
   workshop_anmeldung: ws-anmeldung.php
   dance_intensive_programm: 
     - 'ausbildung.php?vwbdid=1&l=1'
     - ausbildung.php
     - ausbildung_index.php
+    - vorausbildung_de.php
   profitraining: profitraining.php
   contact_jam: contact_jam.php
   studios: raeume.php
