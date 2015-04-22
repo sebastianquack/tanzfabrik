@@ -81,6 +81,24 @@ li.file.input {
   clear:both;
 }
 
+.formtastic .inputs .inputs ol {
+  width:100%;
+  padding:5px;
+}
+
+ol.choices-group {
+  position:relative;
+  z-index:5;
+}
+
+li.radio .choices legend label {
+  font-weight: bold;
+}
+
+li.radio {
+  padding-left: 10px;
+}
+
 // other styles
 
 
@@ -105,6 +123,10 @@ li.file.input {
 
 p.inline-hints {
   padding-bottom: 0.5em;
+}
+
+fieldset > ol > li p.inline-hints {
+  margin-left: 0 !important;
 }
 
 textarea.editable-wysihtml5 {

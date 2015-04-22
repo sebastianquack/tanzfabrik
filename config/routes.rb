@@ -34,7 +34,7 @@ Tanzfabrik::Application.routes.draw do
   # You can have the root of your site routed with "root"    
 
   get '/de' => redirect('/')
-  get '/:locale' => "pages#show", :as => :local_root
+  get '/:locale' => "pages#show", :as => :local_root, locale: /[A-Za-z]{2}/
 
   get '*path' => "redirect#oldsite"
     
