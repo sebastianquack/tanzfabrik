@@ -122,6 +122,7 @@ cache_arbre(self, cache_for_navigation) do
           ul do
             li_submenu t(:section_classes), [
               "kursplan", 
+              "sommer-intensive", 
               [
                 "performance_projekte", 
                 event_view && !params[:festival_id] && Event.find(params[:id]).type.id == 5
