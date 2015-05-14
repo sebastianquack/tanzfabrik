@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
   has_many :person_events
   accepts_nested_attributes_for :person_events, :allow_destroy => true
   
-  has_many :people, :through => :person_events, :order => "name ASC"
+  has_many :people, :through => :person_events, :order => "last_name ASC"
   accepts_nested_attributes_for :people, :allow_destroy => true
 
   has_many :event_details, :dependent => :destroy
@@ -114,7 +114,7 @@ class Event < ActiveRecord::Base
   def keywords # TODO: add keywords model with priorities to combine keywords from different sources
     k = []
     k << self.display_type
-    k += self.people.collect_concat {|p| p.name}
+    k += self.people.collect_concat {|p| p.last_name}
     k << self.title
     k << "Berlin"
     k << "Tanzfabrik"

@@ -127,7 +127,7 @@ ActiveAdmin.register Event do
     f.inputs "Personen auswählen" do
       f.has_many :person_events, heading: false, :new_record => true, :allow_destroy => true do |p_f|
         p_f.inputs do
-          p_f.input :person, :collection => Person.order("lower(name) ASC"), :include_blank => false
+          p_f.input :person, :collection => Person.order("lower(last_name) ASC"), :include_blank => false
         end
       end
     end
