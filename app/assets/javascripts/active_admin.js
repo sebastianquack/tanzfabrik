@@ -21,7 +21,8 @@ $(document).ready(function() {
       tags: {
         table: {remove: 0},
         tr: {remove: 0},
-        td: {remove: 0}
+        td: {remove: 0},
+        iframe: {check_attributes: {"src": "url"}, set_attributes: {"allowfullscreen": "true"}}
       }
     }
   });
