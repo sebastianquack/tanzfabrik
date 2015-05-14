@@ -5,7 +5,15 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
   before_action :set_background_image
- 
+
+  if Rails.env.production?
+    rescue_from ActionController::RoutingError, :with => :raise_routing_404
+  end
+
+  def raise_routing_404
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
   def set_locale
     if params[:locale]
       I18n.locale = params[:locale] 
