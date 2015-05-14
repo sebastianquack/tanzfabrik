@@ -9,5 +9,5 @@ header :id => "headlines", :class => "headlines-teachers" do
   end
 end
 
-dance_intensivists = Person.where(:dance_intensive => true).order(:name)
+dance_intensivists = Person.where(:dance_intensive => true).order(:last_name)
 render :partial => "/people/list", :locals => {:people => dance_intensivists, :mode => "teachers"}

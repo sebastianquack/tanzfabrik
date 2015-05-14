@@ -11,7 +11,13 @@ class Person < ActiveRecord::Base
     joins("events")
     .where => "event.type_id = 3"#,4,5,6
   
-  scope :ordered, order("LOWER(name) ASC")
+  scope :ordered, order("LOWER(last_name) ASC")
+    
+  if Person.column_names.include? "old_name"
+    def name    
+      return self.first_name.to_s + " " + self.last_name.to_s
+    end
+  end
   
   def self.by_event_types types
     r = []

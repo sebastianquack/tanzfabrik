@@ -10,6 +10,6 @@ header :id => "headlines", :class => "headlines-teachers" do
 end
 
 cache_arbre(self, cache_key_for_kuenstler) do  
-  artists = Person.order(:name).select { |p| p.artist? }
+  artists = Person.order(:last_name).select { |p| p.artist? }
   render :partial => "/people/list", :locals => {:people => artists, :mode => "artists"}
 end
