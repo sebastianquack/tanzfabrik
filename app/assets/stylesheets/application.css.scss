@@ -403,6 +403,18 @@ ul.navigation > li > ul > li > ul > li {
   text-transform:none;
 }
 
+// fix halved line at certain number of lines (5,4 or 3 respectively)
+ul.navigation li:nth-child(1) > ul > li > ul  li:nth-child(5),
+ul.navigation li:nth-child(2) > ul > li > ul  li:nth-child(4),
+ul.navigation li:nth-child(3) > ul > li > ul  li:nth-child(3) {
+  	padding-bottom:0.8em;
+}
+ul.navigation li:nth-child(1) > ul > li > ul  li:nth-child(6),
+ul.navigation li:nth-child(2) > ul > li > ul  li:nth-child(5),
+ul.navigation li:nth-child(3) > ul > li > ul  li:nth-child(4) {
+  	margin-top:-0.8em;
+}
+
 /**** navigation interaction **/
 
 ul.navigation li {
@@ -414,14 +426,18 @@ ul.navigation a {
 }
 
 ul.navigation > li > ul a,
-ul.navigation:hover > li > span{
+ul.navigation:active > li > span,
+ul.navigation:hover > li > span {
   color:black; 
 }
 
 ul.navigation > li > span,
 ul.navigation > li:hover > span,
 ul.navigation > li:hover li:hover,
-ul.navigation > li:hover li:hover a:hover {
+ul.navigation > li:hover li:hover a:hover,
+ul.navigation > li:active > span,
+ul.navigation > li:active li:active,
+ul.navigation > li:active li:active a:active {
   color:red; 
 }
 
@@ -429,16 +445,19 @@ ul.navigation > li > ul > li > ul {
   display: none; 
 }
 
-ul.navigation > li > ul > li:hover > ul {
+ul.navigation > li > ul > li:hover > ul,
+ul.navigation > li > ul > li:active > ul {
 	  display: block;
 	  z-index: 100; 
 }
 
-ul.navigation:hover ul {
+ul.navigation:hover ul,
+ul.navigation:active ul {
   opacity: 0; 
  }
 
-ul.navigation:hover > li:hover * {
+ul.navigation:hover > li:hover *,
+ul.navigation:active > li:active * {
   opacity: 1; 
  }
 

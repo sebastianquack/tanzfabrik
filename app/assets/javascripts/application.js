@@ -22,6 +22,8 @@
 
 $(document).ready(function() {
 
+  document.addEventListener("touchstart", function() {},false);
+
   // set background picture
   var background_image = $("[data-site-background-url]").data("siteBackgroundUrl")
   $(".site-background:after").css("background-image",background_image)
