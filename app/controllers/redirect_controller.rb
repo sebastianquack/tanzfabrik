@@ -28,7 +28,7 @@ class RedirectController < ActionController::Base
     end
 
     # anything else
-    redirect_to "http://archiv.tanzfabrik-berlin.de" + request.fullpath
+    redirect_to "http://archiv.tanzfabrik-berlin.de" + request.fullpath, status: :moved_permanently
   end
 
 end
