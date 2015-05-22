@@ -171,7 +171,7 @@ cache_arbre(self, cache_for_navigation) do
               festivals.each do |f|
                 festivals_submenu << [f, event_view && params[:festival_id] && Festival.find(params[:festival_id]) == f]
               end
-              li_submenu(t(:section_festivals), festivals_submenu + ["festivals"])
+              li_submenu(t(:section_festivals), ["festivals"] + festivals_submenu)
             else
               li link_to_page("festivals")
             end
