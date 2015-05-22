@@ -8,6 +8,9 @@ class Festival < ActiveRecord::Base
   has_many :events, :through => :festival_events
   has_many :event_details, :through => :events
 
+  has_many :festival_festival_containers
+  has_many :festival_containers, :through => :festival_festival_containers
+
   #accepts_nested_attributes_for :festival_events, :allow_destroy => true
   #accepts_nested_attributes_for :events, :allow_destroy => true
 

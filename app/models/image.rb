@@ -35,5 +35,6 @@ class Image < ActiveRecord::Base
   belongs_to :event
   belongs_to :festival
   belongs_to :page
+  belongs_to :festival_container
 
 end

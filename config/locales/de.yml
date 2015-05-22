@@ -328,11 +328,14 @@ de:
         one: Typ
         other: Typen        
       festival:
-        one: Festival
-        other: Festivals
+        one: Projekt oder Festival
+        other: Projekte und Festivals
       festival_event:
         one: Festival
         other: Festivals
+      festival_container:
+        one: Festival- oder Projektreihe
+        other: Festival- und Projektreihen
       person:
         one: Person
         other: Personen   
@@ -396,6 +399,11 @@ de:
         name: Titel
         description: Text
         events: Ereignisse
+        festival_containers: Projekt- und Festivalreihen
+      festival_container:
+        name: Titel
+        description: Text
+        display: Anzeigen
       person:
         name: Name
         role: Rolle

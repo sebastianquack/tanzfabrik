@@ -1,3 +1,4 @@
+
 class Person < ActiveRecord::Base
   translates :bio, fallback: :any
 
