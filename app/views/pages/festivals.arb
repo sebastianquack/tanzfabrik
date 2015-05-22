@@ -1,4 +1,53 @@
-render "/pages/editable_content"
+#render "/pages/editable_content"
+
+header :id => "headlines", :class => "headlines-teachers" do
+  div :class => "before"
+  div :class => "main" do
+    div :class => "line1" do
+      h1 :class => "title" do
+        text_node editable page, :title
+      end
+    end
+  end
+end
+
+ul :class => "studios" do
+  FestivalContainer.all.sort_by{ |fc| [fc.name] }.each do |fc|
+    li :class => "row studio" do
+      div :class => "basic" do   
+        div :class => "description open-close open-trigger overflown-base" do
+          div fc.description.html_safe, :class => "is-overflown open-toggle-height"
+          div :class => "if-overflown" do
+            div t(:more) + " >", :class => "more"
+            div t(:close), :class => "close-trigger"
+          end
+        end
+      end
+
+      div :class => "details" do
+        div :class => "content" do
+          h2 fc.name, :class => "title"
+
+          if fc.images.length > 0 
+            if fc.images.length > 1
+              div :class=>"image-container image-grid" do
+                fc.images.each do |image|
+                  img :src => image.attachment.url(:medium)
+                end
+              end
+            else
+              div :class=>"image-container" do
+                img :src => fc.images.first.attachment.url(:medium_detail_column)
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+
 
 # get festivals in the past
 past_festivals = Festival.select { |f| f.events.length > 0 && f.end_date < Date.today }
