@@ -22,6 +22,13 @@ ul :class => "studios" do
             div t(:close), :class => "close-trigger"
           end
         end
+        
+        ul do
+          fc.festivals.each do |f|
+            li a f.name, :href => festival_path(f)
+          end
+        end
+        
       end
 
       div :class => "details" do
