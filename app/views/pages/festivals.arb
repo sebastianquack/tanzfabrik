@@ -12,7 +12,7 @@ header :id => "headlines", :class => "headlines-teachers" do
 end
 
 ul :class => "studios" do
-  FestivalContainer.all.sort_by{ |fc| [fc.name] }.each do |fc|
+  FestivalContainer.where(:display => true ).sort_by{ |fc| [fc.name] }.each do |fc|
     li :class => "row studio" do
       div :class => "basic" do   
         div :class => "description open-close open-trigger overflown-base" do
