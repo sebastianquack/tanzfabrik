@@ -19,7 +19,6 @@
 //= require parsley.i18n.de 
 //= require piwik_turbolinks
 
-
 $(document).ready(function() {
 
   document.addEventListener("touchstart", function() {},false);

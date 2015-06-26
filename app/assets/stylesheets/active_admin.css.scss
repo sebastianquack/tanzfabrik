@@ -9,7 +9,6 @@
 
 // require bootstrap for wysihtml5
 //= require bootstrap
-//= require bootstrap-wysihtml5
 
 // Active Admin's got SASS!
 @import "active_admin/mixins";
@@ -42,6 +41,10 @@ form select {
   white-space: normal;
   border-radius: none;
   clear:both;
+}
+
+li.input > div.cke_reset {
+	float: right;
 }
 
 .formtastic .wysihtml5-sandbox,

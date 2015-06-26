@@ -10,10 +10,11 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require bootstrap-wysihtml5
-//= require bootstrap-wysihtml5/locales/de-DE
+
+
+
+
 //= require editable/bootstrap-editable
-//= require editable/inputs-ext/wysihtml5-editable
 //= require editable/rails
 
 $(document).ready(function() {
