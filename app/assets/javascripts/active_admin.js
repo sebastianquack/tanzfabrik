@@ -10,18 +10,24 @@ $(document).ready(function() {
 
   //console.log(wysihtml5)
 
+CKEDITOR.stylesSet.add( 'my_styles', [
+    // Block-level styles
+    { name: 'Klein', element: 'small', }
+    ] );
+
 
   $('.wysihtml5').ckeditor({
     language: "de",
     width: '79%',
     toolbar: [
-      { name: 'format', items: ['Bold', 'Italic', 'Link', 'Unlink'] },
+      { name: 'format', items: ['Bold', 'Italic','Small', 'Link', 'Unlink', 'Styles'] },
       { name: 'undo', items: ['Undo', 'Redo'] },
       { name: 'copy', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'] },
       { name: 'document', items: [ 'Source' ] }
-    ]
-    
+    ],
+    stylesSet: 'my_styles'
   });  
+
 
 
 /*
