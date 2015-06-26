@@ -1521,6 +1521,73 @@ ul.workshops {
 	}
 }
 
+/**** festval containers ****/
+
+.festivalcontainers {
+
+	.title {
+		@include menu-font(100%);
+		text-transform: uppercase;
+		color: red;
+		padding-top: 2 * $vertical-box-padding;
+		padding-bottom: $vertical-box-padding;
+	}
+
+	.upcoming {
+		margin-top: $line-height;
+
+		li {
+		}
+	} 
+
+	.basic {
+
+		.open-trigger.overflown:not(.opened), .close-trigger {
+			cursor: pointer;
+		}
+
+		.open-trigger.overflown:not(.opened):hover, .close-trigger:hover {
+			color:red;
+		}
+
+		.description {
+			position:relative;
+			margin-top:$vertical-box-padding;
+
+			.may-overflow {
+				height:14 * $line-height * 0.98;
+				min-height:14 * $line-height * 0.98;
+				overflow-y: hidden;
+				@include transition(height 0.5s)
+			}
+
+			.close-trigger {
+				text-align: right;
+				display: none;
+			}
+		}
+
+		.description.opened {
+
+			.may-overflow {
+				height: auto;
+			}
+
+			.more {
+				display:none;
+			}
+			.close-trigger {
+				display: block;
+			}
+		}
+
+		.open-trigger.opened {
+			cursor:normal;
+			color:inherit;
+		}
+	}
+}
+
 /**** registration form ****/
 
 .registration-form {

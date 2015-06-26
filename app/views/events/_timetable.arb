@@ -57,7 +57,7 @@ details_by_hour =
       end    
 
       #check if a detail has an occurrence during the upcoming weeks
-      upcoming_weeks = 9
+      upcoming_weeks = 12
       details.each do |detail|
         if detail.start_date.wday == date.wday
           # fast code
@@ -140,15 +140,23 @@ div :class => "timetable-container" do
                     article :class => "event empty-event"
                   else
                     detail = data[detail_index]
-                    article :class => "event" do              
-                      div :class => "title-description open-close", "data-open-close-group" => "timetable" do
-                        h4 :class => "title close-others" + (detail.event.description ? " open-trigger" : "") do
-                          text_node detail.event.title.html_safe if detail.event.title
+                    article :class => "event" do
+                      if detail.event.type_id == 5 # performance-projekt -> link to event page
+                        div :class => "title-description" do
+                          h4 :class => "title" do
+                            a detail.event.title.html_safe, :href => event_path(detail.event) if detail.event.title
+                          end
                         end
-                        div :class => "description open-toggle-height adjust-content-container-height" do
-                          span t(:close), :class => "close-trigger"
-                          div detail.event.description.html_safe, :class => "description-content" if detail.event.description
-                          a "> Dieses Ereignis bearbeiten", :href => edit_admin_event_path(detail.event), :class => "admin-only admin-nav" if admin_user_signed_in?
+                      else # otherwise -> open popup with description
+                        div :class => "title-description open-close", "data-open-close-group" => "timetable" do
+                          h4 :class => "title close-others" + (detail.event.description ? " open-trigger" : "") do
+                            text_node detail.event.title.html_safe if detail.event.title
+                          end
+                          div :class => "description open-toggle-height adjust-content-container-height" do
+                            span t(:close), :class => "close-trigger"
+                            div detail.event.description.html_safe, :class => "description-content" if detail.event.description
+                            a "> Dieses Ereignis bearbeiten", :href => edit_admin_event_path(detail.event), :class => "admin-only admin-nav" if admin_user_signed_in?
+                          end
                         end
                       end
                       div :class => "teacher" do
