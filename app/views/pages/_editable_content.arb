@@ -4,6 +4,7 @@ if page
 	  div :class => "main" do
 	    div :class => "line1" do
 	      h1 editable(page, :title), :class => "title"
+        a "✎", :href => edit_admin_page_path(page), :class => "admin-only classes" if admin_user_signed_in?
         a "> " + page.downloads.first.description, :href => page.downloads.first.attachment.url, :class => "registration" if page.downloads.first
 	    end
 	  end
@@ -11,7 +12,7 @@ if page
 
   div :class => "row page" do
     div :class => "basic" do
-      div editable(page, :content, :type => "wysihtml5"), :class => "description"
+      div page.content.html_safe, :class => "description"
     end
     if page.images.length > 0 
       div :class => "details" do

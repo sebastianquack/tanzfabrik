@@ -166,7 +166,8 @@ if notice == "ok"
           end
           ermassigungen = Page.find("ermassigungen")
           if ermassigungen
-            div editable ermassigungen, :content, :type => "wysihtml5"
+            #div editable ermassigungen, :content, :type => "wysihtml5"
+            a "✎", :href => edit_admin_page_path("ermassigungen"), :class => "admin-only classes" if admin_user_signed_in?
           end          
         end
       end
