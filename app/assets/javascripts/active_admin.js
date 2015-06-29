@@ -19,6 +19,7 @@ CKEDITOR.stylesSet.add( 'my_styles', [
   $('.wysihtml5').ckeditor({
     language: "de",
     width: '79%',
+    height: '450px',
     toolbar: [
       { name: 'format', items: ['Bold', 'Italic','Small', 'Link', 'Unlink', 'Styles'] },
       { name: 'undo', items: ['Undo', 'Redo'] },
