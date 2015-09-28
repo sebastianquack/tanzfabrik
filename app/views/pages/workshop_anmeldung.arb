@@ -26,7 +26,7 @@ if notice == "ok"
     .joins(:type, :event_details)
     .where('event_types.id = 2 AND event_details.start_date >= ?', Date.today)
     .uniq
-    .sort_by { |w| w.start_date }
+    .sort_by { |w| [w.start_date, w.title.split("/")[0].to_i] } # assuming format: "NUMBER / TITLE"
 
   div :class => "registration-form" do
     
