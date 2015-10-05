@@ -1069,7 +1069,7 @@ dl.tags {
 				color:black;
 			}
 			.time-moment:after {
-				content: "\A"; /* width of 1 character */
+				content: " "; /* width of 1 character */
 				white-space: pre;
 			}
 		}
