@@ -103,7 +103,11 @@ class Event < ActiveRecord::Base
   end
   
   def early_bird_date
-    self.start_date.beginning_of_week.next_day(3) - (self.start_date.wday <= 4 ? 3 : 2).week
+    date = self.start_date.beginning_of_week.next_day(3) - (self.start_date.wday <= 4 ? 3 : 2).week
+    if (date.month == 12 && [24,31].include?(date.day)) 
+      date = date.prev_day(2)
+    end
+    date
   end
   
   def workshop_select

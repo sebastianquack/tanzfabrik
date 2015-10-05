@@ -16,7 +16,7 @@ para do
   end
 end
 
-div editable(event, :description, :type => "wysihtml5"), :class => "description"
+div event.description.html_safe, :class => "description"
 
 if [2,4].include? event.type.id #workshop or profitraining
   event.people.each do |person|

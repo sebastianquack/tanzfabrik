@@ -29,8 +29,7 @@ div :class => "info" do
     small event.event_details.first.studio.location.address
   end
 
-  # Editable
-  small editable event, :info, :type => "wysihtml5"
+  small event.info.html_safe if event.info
 
   # Price(s)
   if event.price_regular

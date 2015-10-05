@@ -4,13 +4,14 @@ cache_arbre(self, cache_key_for_page_headlines(page)) do
       div :class => "line1" do
         h1 :class => "title" do
           span editable page, :title
+          a "✎", :href => edit_admin_page_path(page), :class => "admin-only classes" if admin_user_signed_in?
           span t(:kursplan_address), :class => "neutral"
         end
       end
       if page.content
         div :class => "line2 open-close opened" do
           div :class => "open open-toggle-height" do
-            form editable page, :content, :type => "wysihtml5"
+            div page.content.html_safe
             div t(:close), :class => "close-trigger"
           end
           div :class => "closed open-trigger" do
