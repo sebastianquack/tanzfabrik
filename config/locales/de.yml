@@ -372,6 +372,7 @@ de:
         type: Typ
         custom_type: "Typ: Eigener Text"
         title: Titel
+        sequence: Sortier-Nummer (optional)
         description: Text
         info: Zusatzinformation
         warning: Warnhinweis

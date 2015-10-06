@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   menu :priority => 1
 
-  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced,
+  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence,
     :festival_ids => [], :person_ids => [],
     :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :custom_place, :repeat_mode_id, :_destroy, tag_ids: []],
     :people_attributes => [:id, :name, :_destroy],
@@ -135,6 +135,7 @@ ActiveAdmin.register Event do
     f.inputs "Basic info" do
       f.input :title_de, :as => :text, :input_html => { :class => 'autogrow', :rows => 2  }
       f.input :title_en, :as => :text, :input_html => { :class => 'autogrow', :rows => 2  }
+      #f.input :sequence
       f.input :description_de, :input_html => { :class => 'wysihtml5' }
       f.input :description_en, :input_html => { :class => 'wysihtml5' }
       f.input :info_de, :input_html => { :class => 'wysihtml5 wysihtml5-notoolbar' }
@@ -217,6 +218,9 @@ ActiveAdmin.register Event do
       @event.event_details.each do |event_detail|
         event_detail.reset_occurrences
       end
+      @event.start_date_cache = @event.start_date
+      @event.end_date_cache = @event.end_date
+      @event.save
     end
     alias_method :update_event, :update
     def update
@@ -226,6 +230,9 @@ ActiveAdmin.register Event do
       @event.event_details.each do |event_detail|
         event_detail.reset_occurrences
       end
+      @event.start_date_cache = @event.start_date
+      @event.end_date_cache = @event.end_date
+      @event.save
     end
   end
   
