@@ -180,7 +180,6 @@ class Event < ActiveRecord::Base
 
       workshops_in_block.sort_by! { |e| e.title.split("/")[0].to_i } 
       # assuming format: "NUMBER / TITLE"
-      workshops_in_block.each { |e| puts e.title }
       
       # find self and next element in block
       next_workshop_in_block = nil
@@ -198,7 +197,7 @@ class Event < ActiveRecord::Base
         workshops_in_next_block = Event.where_festival(festival_id).where("type_id = 2 AND  (start_date_cache != ? OR end_date_cache != ?) AND start_date_cache >= ?", self.start_date_cache, self.end_date_cache, self.start_date_cache)
         
         # sort first by start_date, then by title number
-        workshops_in_next_block.sort_by! { |e| e.start_date_cache || e.title.split("/")[0].to_i } 
+        workshops_in_next_block.sort_by! { |e| [e.title.split("/")[0].to_i, e.start_date_cache] } 
         
         if workshops_in_next_block[0]
           return workshops_in_next_block[0].first_event_occurrence
@@ -233,7 +232,6 @@ class Event < ActiveRecord::Base
 
       workshops_in_block.sort_by! { |e| e.title.split("/")[0].to_i } .reverse!
       # assuming format: "NUMBER / TITLE"
-      workshops_in_block.each { |e| puts e.title }
       
       # find self and next element in block
       prev_workshop_in_block = nil
@@ -252,7 +250,10 @@ class Event < ActiveRecord::Base
         workshops_in_prev_block = Event.where_festival(festival_id).where("type_id = 2 AND  (start_date_cache != ? OR end_date_cache != ?) AND start_date_cache <= ?", self.start_date_cache, self.end_date_cache, self.start_date_cache)
         
         # sort first by start_date, then by title number
-        workshops_in_prev_block.sort_by! { |e| e.start_date_cache || e.title.split("/")[0].to_i } .reverse! 
+        workshops_in_prev_block.sort_by! { |e| [e.start_date_cache, e.title.split("/")[0].to_i] }.reverse!
+        
+        puts "sorted"
+        workshops_in_prev_block.each { |e| puts e.title }
         
         if workshops_in_prev_block[0]
           return workshops_in_prev_block[0].first_event_occurrence
