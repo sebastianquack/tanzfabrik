@@ -11,12 +11,10 @@
 // about supported directives.
 //
 
-
-
-
 //= require editable/bootstrap-editable
 //= require editable/rails
-
+//= require ckeditor-jquery
+  
 $(document).ready(function() {
 
   $.ajaxSetup({
@@ -48,7 +46,7 @@ $(document).ready(function() {
   $.fn.editable.defaults.mode = 'inline';
   $.fn.editable.defaults.emptytext = '(Klicken, um Text einzufügen)';
 
-  $(".editable").editable();
+  //$(".editable").editable();
   
   $("a[rel~=popover], .has-popover").popover();
   $("a[rel~=tooltip], .has-tooltip").tooltip();

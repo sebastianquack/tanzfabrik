@@ -86,15 +86,27 @@ class Event < ActiveRecord::Base
   end
 
   def firsttime
-    self.event_details.min_by { |ed| ed.starttime} .starttime
+    if self.event_details.length > 0
+      self.event_details.min_by { |ed| ed.starttime} .starttime
+    else 
+      return nil
+    end
   end
 
   def start_date
-    self.event_details.min_by { |ed| ed.start_date} .start_date
+    if self.event_details.length > 0
+      return self.event_details.min_by { |ed| ed.start_date} .start_date
+    else 
+      return nil
+    end
   end
 
   def end_date
-    self.event_details.max_by { |ed| ed.end_date} .end_date
+    if self.event_details.length > 0
+      return self.event_details.max_by { |ed| ed.end_date} .end_date
+    else
+      return nil
+    end
   end
 
   def tags
@@ -161,17 +173,34 @@ class Event < ActiveRecord::Base
   def next(time_url = nil, event_types = [], festival_id = nil)
     time = process_time(time_url)
 
-    # alphanetical sorting inside blocks for workshops        
+    # special sorting inside blocks for workshops        
     if event_types == [2]
       
-      next_workshop_detail_in_block = EventDetail.joins(:event).where_festival(festival_id).where("events.id != ? AND events.type_id = 2 AND event_details.start_date = ? AND event_details.end_date = ?", self.id, self.start_date, self.end_date).where("events.title_de > ?", self.title).order("events.title_de").first
+      workshops_in_block = Event.where_festival(festival_id).where("type_id = 2 AND start_date_cache = ? AND end_date_cache = ?", self.start_date_cache, self.end_date_cache)
 
-      if next_workshop_detail_in_block
-        return next_workshop_detail_in_block.first_event_detail_occurrence
+      workshops_in_block.sort_by! { |e| e.title.split("/")[0].to_i } 
+      # assuming format: "NUMBER / TITLE"
+      
+      # find self and next element in block
+      next_workshop_in_block = nil
+      workshops_in_block.each_with_index do |e, index| 
+        if e.id == self.id
+          if index < workshops_in_block.length - 1
+            next_workshop_in_block = workshops_in_block[index + 1] 
+          end
+        end
+      end   
+
+      if next_workshop_in_block
+        return next_workshop_in_block.first_event_occurrence
       else         
-        first_workshop_detail_in_next_block = EventDetail.joins(:event).where_festival(festival_id).where("events.id != ? AND events.type_id = 2 AND  (event_details.start_date != ? OR event_details.end_date != ?) AND event_details.start_date >= ?", self.id, self.start_date, self.end_date, self.start_date).order("event_details.start_date ASC, events.title_de ASC").first
-        if first_workshop_detail_in_next_block
-          return first_workshop_detail_in_next_block.first_event_detail_occurrence
+        workshops_in_next_block = Event.where_festival(festival_id).where("type_id = 2 AND  (start_date_cache != ? OR end_date_cache != ?) AND start_date_cache >= ?", self.start_date_cache, self.end_date_cache, self.start_date_cache)
+        
+        # sort first by start_date, then by title number
+        workshops_in_next_block.sort_by! { |e| [e.title.split("/")[0].to_i, e.start_date_cache] } 
+        
+        if workshops_in_next_block[0]
+          return workshops_in_next_block[0].first_event_occurrence
         else 
           return nil
         end
@@ -182,10 +211,11 @@ class Event < ActiveRecord::Base
     
       oc = EventDetailOccurrence.joins(:event)
           .where("events.type_id IN (?)", event_types)
-          .where("event_detail_occurrences.time > ?", time)
+          .where("event_detail_occurrences.time >= ?", time)
+          .where("NOT (event_detail_occurrences.time = ? AND events.title_de < ?)", time, self.title_de)
           .where_festival(festival_id) # defined in event_detail_occurrences model
           .where("events.id != ?", self.id) # prevent event from showing all its occurrences
-          .order("event_detail_occurrences.time ASC")
+          .order("event_detail_occurrences.time ASC, events.title_de ASC")
           .first    
       return oc
 
@@ -197,15 +227,36 @@ class Event < ActiveRecord::Base
 
     # alphanetical sorting inside blocks for workshops        
     if event_types == [2]
-      
-      prev_workshop_detail_in_block = EventDetail.joins(:event).where_festival(festival_id).where("events.id != ? AND events.type_id = 2 AND event_details.start_date = ? AND event_details.end_date = ?", self.id, self.start_date, self.end_date).where("events.title_de < ?", self.title).order("events.title_de DESC").first
 
-      if prev_workshop_detail_in_block
-        return prev_workshop_detail_in_block.first_event_detail_occurrence
+      workshops_in_block = Event.where_festival(festival_id).where("type_id = 2 AND start_date_cache = ? AND end_date_cache = ?", self.start_date_cache, self.end_date_cache)
+
+      workshops_in_block.sort_by! { |e| e.title.split("/")[0].to_i } .reverse!
+      # assuming format: "NUMBER / TITLE"
+      
+      # find self and next element in block
+      prev_workshop_in_block = nil
+      workshops_in_block.each_with_index do |e, index| 
+        if e.id == self.id
+          if index < workshops_in_block.length - 1
+            prev_workshop_in_block = workshops_in_block[index + 1] 
+          end
+        end
+      end   
+      
+      if prev_workshop_in_block
+        return prev_workshop_in_block.first_event_occurrence
       else         
-        last_workshop_detail_in_prev_block = EventDetail.joins(:event).where_festival(festival_id).where("events.id != ? AND events.type_id = 2 AND  (event_details.start_date != ? OR event_details.end_date != ?) AND event_details.start_date <= ?", self.id, self.start_date, self.end_date, self.start_date).order("event_details.start_date DESC, events.title_de DESC").first
-        if last_workshop_detail_in_prev_block
-          return last_workshop_detail_in_prev_block.first_event_detail_occurrence
+        
+        workshops_in_prev_block = Event.where_festival(festival_id).where("type_id = 2 AND  (start_date_cache != ? OR end_date_cache != ?) AND start_date_cache <= ?", self.start_date_cache, self.end_date_cache, self.start_date_cache)
+        
+        # sort first by start_date, then by title number
+        workshops_in_prev_block.sort_by! { |e| [e.start_date_cache, e.title.split("/")[0].to_i] }.reverse!
+        
+        puts "sorted"
+        workshops_in_prev_block.each { |e| puts e.title }
+        
+        if workshops_in_prev_block[0]
+          return workshops_in_prev_block[0].first_event_occurrence
         else 
           return nil
         end
@@ -216,10 +267,11 @@ class Event < ActiveRecord::Base
 
       oc = EventDetailOccurrence.joins(:event)
           .where("events.type_id IN (?)", event_types)
-          .where("event_detail_occurrences.time < ?", time)
+          .where("event_detail_occurrences.time <= ?", time)
+          .where("NOT (event_detail_occurrences.time = ? AND events.title_de > ?)", time, self.title_de)
           .where_festival(festival_id) # defined in event_detail_occurrences model
           .where("events.id != ?", self.id)
-          .order("event_detail_occurrences.time DESC")
+          .order("event_detail_occurrences.time DESC, events.title_de DESC")
           .first
       return oc
     end
@@ -246,4 +298,17 @@ class Event < ActiveRecord::Base
     return (self.occurrences_between date, date)
   end
   
+  def first_event_occurrence
+    return EventDetailOccurrence.where(:event_id => self.id).order("time").first
+  end
+
+  def self.where_festival(festival_id)
+    if festival_id
+      where("id IN (?)", Festival.find(festival_id).events.pluck(:id))      
+    else
+      where("")
+    end
+  end
+
+    
 end
