@@ -807,7 +807,7 @@ table.timetable {
 		@include border-line(top, red);
 
 		@include menu-font(100%);
-		text-transform: uppercase;		
+		/* text-transform: uppercase;	*/
 
 		position:relative;
 		top:-1px;

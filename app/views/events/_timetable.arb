@@ -84,7 +84,7 @@ details_by_hour =
     if table_data[row_index]
       #table_data[row_index][0]  = div details.first.studio.location.name, :class => "location-name"
       #table_data[row_index][0] += div details.first.studio.name, :class => "studio-name"
-      table_data[row_index][0]  = div hour.to_s + ":00"
+      table_data[row_index][0]  = div t("time.from") + " " + hour.to_s + ":00"
       row_index += 1
     end
   end

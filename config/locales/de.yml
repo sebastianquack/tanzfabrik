@@ -287,6 +287,7 @@ de:
       two_words_connector: ! ' und '
       words_connector: ! ', '
   time:
+    from: "ab"
     am: vormittags
     formats:
       url: "%Y-%m-%d-%H-%M"
