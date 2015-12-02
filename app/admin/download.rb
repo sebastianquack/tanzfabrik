@@ -21,7 +21,7 @@ ActiveAdmin.register Download do
       link_to download.attachment_de.original_filename, download.attachment_de.url
       link_to download.attachment_en.original_filename, download.attachment_en.url
     end
-    default_actions
+    actions
   end
 
 

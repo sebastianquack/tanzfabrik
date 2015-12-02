@@ -15,7 +15,7 @@ ActiveAdmin.register Person do
     column :images do |person|
       person.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
-    default_actions
+    actions
   end
   
   filter :first_name

@@ -23,7 +23,7 @@ ActiveAdmin.register Studio do
     column "images" do |page|
       page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
-    default_actions
+    actions
   end
   
   filter :location

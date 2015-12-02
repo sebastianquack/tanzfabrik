@@ -20,7 +20,7 @@ ActiveAdmin.register Festival do
       festival.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
     column :feature_on_welcome_screen
-    default_actions
+    actions
   end
   
   filter :name_de

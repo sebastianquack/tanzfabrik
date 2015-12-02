@@ -15,7 +15,7 @@ ActiveAdmin.register FestivalContainer do
       festival_container.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
     column :display
-    default_actions
+    actions
   end
   
   filter :name_de

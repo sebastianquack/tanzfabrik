@@ -32,7 +32,7 @@ ActiveAdmin.register Page do
       page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
     
-    default_actions
+    actions
   end
 
   filter :title_de
