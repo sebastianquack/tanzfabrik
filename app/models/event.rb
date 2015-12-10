@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
   has_many :person_events
   accepts_nested_attributes_for :person_events, :allow_destroy => true
   
-  has_many :people, :through => :person_events, :order => "last_name ASC"
+  has_many :people, -> { order "last_name ASC" }, :through => :person_events
   accepts_nested_attributes_for :people, :allow_destroy => true
 
   has_many :event_details, :dependent => :destroy

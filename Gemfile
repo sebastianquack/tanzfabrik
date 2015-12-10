@@ -3,7 +3,7 @@ ruby "2.2.1"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.3'
+gem 'rails', '4.2.5'
 
 gem 'pg'
 
@@ -47,9 +47,10 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'activeadmin', github: 'activeadmin'
-#gem 'activeadmin' #, github: 'gregbell/active_admin'
-#gem 'formtastic', github: 'justinfrench/formtastic'
+#gem 'activeadmin', github: 'activeadmin'
+#gem 'activeadmin', github: 'gregbell/active_admin'
+#gem 'formtastic'#, github: 'justinfrench/formtastic'
+gem 'activeadmin', '~> 1.0.0.pre2'
 
 gem 'devise'
 

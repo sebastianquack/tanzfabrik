@@ -56,7 +56,7 @@ ActiveAdmin.register FestivalContainer do
 
     f.inputs "Images" do
       f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
-        f_f.inputs do
+        #f_f.inputs do
           f_f.input :description
           f_f.input :license
           if f_f.object.attachment.exists?
@@ -64,7 +64,7 @@ ActiveAdmin.register FestivalContainer do
           else
             f_f.input :attachment, :as => :file, :required => false
           end
-        end
+        #end
       end
     end
     
