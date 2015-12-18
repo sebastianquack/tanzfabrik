@@ -24,7 +24,8 @@ CKEDITOR.stylesSet.add( 'my_styles', [
       { name: 'format', items: ['Bold', 'Italic','Small', 'Link', 'Unlink', 'Styles'] },
       { name: 'undo', items: ['Undo', 'Redo'] },
       { name: 'copy', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'] },
-      { name: 'document', items: [ 'Source' ] },
+      { name: 'document', items: [ 'Source'] },
+      { name: 'table', items: [ 'Table'] },
       { name: 'image', items: [ 'Image' ] }
     ],
     stylesSet: 'my_styles'
