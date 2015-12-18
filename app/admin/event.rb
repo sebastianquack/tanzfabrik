@@ -177,9 +177,9 @@ ActiveAdmin.register Event do
 
           et_f.input :custom_place
 
-          et_f.inputs :tags, :class => 'no-legend' do
-            et_f.input :tags, :as => :check_boxes, :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)
-          end
+          #et_f.inputs :tags, :class => 'no-legend' do
+            et_f.input :tags, :label => false, :as => :check_boxes, :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)
+          #end
 
         #end
       end
