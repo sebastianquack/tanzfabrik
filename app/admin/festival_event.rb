@@ -18,7 +18,7 @@ ActiveAdmin.register FestivalEvent do
     selectable_column
     column :festival_id
     column :event_id
-    default_actions
+    actions
   end
   
   

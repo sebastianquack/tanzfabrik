@@ -39,7 +39,7 @@ people.each do |person|
               if person.dance_intensive
                 li t(:dance_intensive)
               end
-              person.events.select { |e| e.type.id == 3 }.uniq_by{|e| e.title}.each do |e| 
+              person.events.select { |e| e.type.id == 3 }.uniq{|e| e.title}.each do |e| 
                 li e.title.html_safe, :class => "one-line", :title => e.title.html_safe
               end              
             else # artist list

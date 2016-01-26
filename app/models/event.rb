@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
   has_many :person_events
   accepts_nested_attributes_for :person_events, :allow_destroy => true
   
-  has_many :people, :through => :person_events, :order => "last_name ASC"
+  has_many :people, -> { order "last_name ASC" }, :through => :person_events
   accepts_nested_attributes_for :people, :allow_destroy => true
 
   has_many :event_details, :dependent => :destroy
@@ -178,15 +178,15 @@ class Event < ActiveRecord::Base
       
       workshops_in_block = Event.where_festival(festival_id).where("type_id = 2 AND start_date_cache = ? AND end_date_cache = ?", self.start_date_cache, self.end_date_cache)
 
-      workshops_in_block.sort_by! { |e| e.title.split("/")[0].to_i } 
+      workshops_in_block_sorted = workshops_in_block.to_a.sort_by! { |e| e.title.split("/")[0].to_i } 
       # assuming format: "NUMBER / TITLE"
       
       # find self and next element in block
       next_workshop_in_block = nil
-      workshops_in_block.each_with_index do |e, index| 
+      workshops_in_block_sorted.each_with_index do |e, index| 
         if e.id == self.id
-          if index < workshops_in_block.length - 1
-            next_workshop_in_block = workshops_in_block[index + 1] 
+          if index < workshops_in_block_sorted.length - 1
+            next_workshop_in_block = workshops_in_block_sorted[index + 1] 
           end
         end
       end   
@@ -197,10 +197,10 @@ class Event < ActiveRecord::Base
         workshops_in_next_block = Event.where_festival(festival_id).where("type_id = 2 AND  (start_date_cache != ? OR end_date_cache != ?) AND start_date_cache >= ?", self.start_date_cache, self.end_date_cache, self.start_date_cache)
         
         # sort first by start_date, then by title number
-        workshops_in_next_block.sort_by! { |e| [e.title.split("/")[0].to_i, e.start_date_cache] } 
+        workshops_in_next_block_sorted = workshops_in_next_block.to_a.sort_by! { |e| [e.title.split("/")[0].to_i, e.start_date_cache] } 
         
-        if workshops_in_next_block[0]
-          return workshops_in_next_block[0].first_event_occurrence
+        if workshops_in_next_block_sorted[0]
+          return workshops_in_next_block_sorted[0].first_event_occurrence
         else 
           return nil
         end
@@ -230,15 +230,15 @@ class Event < ActiveRecord::Base
 
       workshops_in_block = Event.where_festival(festival_id).where("type_id = 2 AND start_date_cache = ? AND end_date_cache = ?", self.start_date_cache, self.end_date_cache)
 
-      workshops_in_block.sort_by! { |e| e.title.split("/")[0].to_i } .reverse!
+      workshops_in_block_sorted = workshops_in_block.to_a.sort_by! { |e| e.title.split("/")[0].to_i } .reverse!
       # assuming format: "NUMBER / TITLE"
       
       # find self and next element in block
       prev_workshop_in_block = nil
-      workshops_in_block.each_with_index do |e, index| 
+      workshops_in_block_sorted.each_with_index do |e, index| 
         if e.id == self.id
-          if index < workshops_in_block.length - 1
-            prev_workshop_in_block = workshops_in_block[index + 1] 
+          if index < workshops_in_block_sorted.length - 1
+            prev_workshop_in_block = workshops_in_block_sorted[index + 1] 
           end
         end
       end   
@@ -250,13 +250,13 @@ class Event < ActiveRecord::Base
         workshops_in_prev_block = Event.where_festival(festival_id).where("type_id = 2 AND  (start_date_cache != ? OR end_date_cache != ?) AND start_date_cache <= ?", self.start_date_cache, self.end_date_cache, self.start_date_cache)
         
         # sort first by start_date, then by title number
-        workshops_in_prev_block.sort_by! { |e| [e.start_date_cache, e.title.split("/")[0].to_i] }.reverse!
+        workshops_in_prev_block_sorted = workshops_in_prev_block.to_a.sort_by! { |e| [e.start_date_cache, e.title.split("/")[0].to_i] }.reverse!
         
         puts "sorted"
-        workshops_in_prev_block.each { |e| puts e.title }
+        workshops_in_prev_block_sorted.each { |e| puts e.title }
         
-        if workshops_in_prev_block[0]
-          return workshops_in_prev_block[0].first_event_occurrence
+        if workshops_in_prev_block_sorted[0]
+          return workshops_in_prev_block_sorted[0].first_event_occurrence
         else 
           return nil
         end

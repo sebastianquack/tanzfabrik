@@ -20,7 +20,7 @@ ActiveAdmin.register Location do
     column :name
     column :description
     column :address
-    default_actions
+    actions
   end
   
   show do

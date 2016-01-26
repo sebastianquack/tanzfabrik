@@ -22,7 +22,7 @@ ActiveAdmin.register Image do
     column :description
     column :license
     column :show_on_welcome_screen
-    default_actions
+    actions
   end
 
   filter :description

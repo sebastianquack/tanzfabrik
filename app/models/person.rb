@@ -8,11 +8,14 @@ class Person < ActiveRecord::Base
   has_many :images
   accepts_nested_attributes_for :images, :allow_destroy => true
 
-  scope :kurslehrer,
+  scope :kurslehrer, -> {
     joins("events")
-    .where => "event.type_id = 3"#,4,5,6
+    .where("event.type_id = 3")#,4,5,6
+  }
   
-  scope :ordered, order("LOWER(last_name) ASC")
+  scope :ordered, -> {
+    order("LOWER(last_name) ASC")
+  } 
     
   if Person.column_names.include? "old_name"
     def name    

@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
-ruby "2.1.0"
+ruby "2.2.1"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.3'
+gem 'rails', '4.2.5'
 
 gem 'pg'
 
@@ -47,8 +47,12 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'formtastic', github: 'justinfrench/formtastic'
+#gem 'activeadmin', github: 'activeadmin'
+#gem 'activeadmin', github: 'gregbell/active_admin'
+#gem 'formtastic'#, github: 'justinfrench/formtastic'
+gem 'activeadmin', '~> 1.0.0.pre2'
+
+gem 'devise'
 
 #gem 'activeadmin-dragonfly', github: 'stefanoverna/activeadmin-dragonfly'
 #gem 'activeadmin-wysihtml5', github: 'stefanoverna/activeadmin-wysihtml5'
@@ -56,8 +60,8 @@ gem 'formtastic', github: 'justinfrench/formtastic'
 gem 'friendly_id', '~> 5.0.0'
 
 #gem "paperclip", '~> 3.5' # newer paperclip does not play nicely with formtastic
-gem "paperclip", "4.1.1"
-gem 'aws-sdk'
+gem "paperclip" #, "4.1.1"
+gem 'aws-sdk', '< 2.0'
 
 gem "arbre"
 gem "ice_cube"

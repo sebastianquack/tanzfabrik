@@ -15,7 +15,7 @@ ActiveAdmin.register Person do
     column :images do |person|
       person.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
-    default_actions
+    actions
   end
   
   filter :first_name
@@ -58,7 +58,7 @@ ActiveAdmin.register Person do
       end
       f.inputs "Images" do
         f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
-          f_f.inputs do
+          #f_f.inputs do
             f_f.input :description
             f_f.input :license
             if f_f.object.attachment.exists?
@@ -66,7 +66,7 @@ ActiveAdmin.register Person do
             else
               f_f.input :attachment, :as => :file, :required => false
             end
-          end
+          #end
         end
       end
     

@@ -14,7 +14,7 @@ ul :class => "studios" do
     li :class => "row studio" do
       div :class => "basic" do   
         div :class => "content" do
-          para studio.description
+          div studio.description.html_safe if studio.description
           para studio.location.address
         end
       end

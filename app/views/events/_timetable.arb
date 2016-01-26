@@ -36,11 +36,14 @@ row_index = 1
 # go through event details per hour
 details_by_hour = 
   EventDetail.includes( :event, {:event => [{:people => :events }, :type, :person_events]}, :repeat_mode, :tags, {:studio => :location} )
-  .all(:include => :event, :conditions => {:events => {:type_id => type_ids }} )
-  .select{ |ed| ed.valid? && ed.studio.location == location }
+  .all.select { |ed| ed.valid? && ed.studio.location == location && type_ids.include?(ed.event.type_id)  }
   .sort_by { |detail| [detail.time.strftime('1%H%M').to_i, detail.start_date, detail.event.title] }
   .group_by { |detail| detail.time.hour }
   .sort_by { |hour,detail| hour}
+
+
+  #.all(:include => :event, :conditions => {:events => {:type_id => type_ids }} )
+
 
 #bench = Benchmark.measure do
 
@@ -84,8 +87,10 @@ details_by_hour =
     if table_data[row_index]
       #table_data[row_index][0]  = div details.first.studio.location.name, :class => "location-name"
       #table_data[row_index][0] += div details.first.studio.name, :class => "studio-name"
-      table_data[row_index][0]  = div hour.to_s + ":00"
-      row_index += 1
+      if !table_data[row_index].all? { |el| el == nil || el == [] }
+        table_data[row_index][0] = div t("time.from") + " " + hour.to_s + ":00"
+        row_index += 1
+      end
     end
   end
 
@@ -118,16 +123,18 @@ div :class => "timetable-container" do
       table_data.shift
       #table_data.sort! { |a,b| a[0].to_s <=> b[0].to_s }
       table_data.each do |row|
-        tr do
+        # find maximum number of entries for a table cell in this row
+        largest = 0
+        row.each_with_index do |data, index|
+          largest = data.length if index > 0 && data.length > largest
+        end
+        
+        if largest == 0 # catch weird error where empty row is in data
+          next 
+        end 
 
-          # find maximum number of entries for a table cell in this row
-          largest = 0
-          row.each_with_index do |data, index|
-            largest = data.length if index > 0 && data.length > largest
-          end
-          
-          # output cells
-          
+        tr do          
+          # output cells          
           row.each_with_index do |data,index|
             if index == 0 
               th do

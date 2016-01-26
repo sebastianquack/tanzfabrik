@@ -126,9 +126,9 @@ ActiveAdmin.register Event do
 
     f.inputs "Personen auswählen" do
       f.has_many :person_events, heading: false, :new_record => true, :allow_destroy => true do |p_f|
-        p_f.inputs do
+        #p_f.inputs do
           p_f.input :person, :collection => Person.order("lower(last_name) ASC"), :include_blank => false
-        end
+        #end
       end
     end
 
@@ -150,7 +150,7 @@ ActiveAdmin.register Event do
 
     f.inputs Image.model_name.human do
       f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
-        f_f.inputs do
+        #f_f.inputs do
           f_f.input :description
           f_f.input :license
           if f_f.object.attachment.exists?
@@ -158,13 +158,13 @@ ActiveAdmin.register Event do
           else
             f_f.input :attachment, :as => :file, :required => false
           end
-        end
+        #end
       end
     end
     
     f.inputs "Zeiten,Orte,Attribute" do
       f.has_many :event_details, heading: false, :new_record => true, :allow_destroy => true do |et_f|
-        et_f.inputs do
+        #et_f.inputs do
           et_f.input :start_date, :include_blank => false, :start_year => 2014, :as => :datepicker
           et_f.input :repeat_mode, :include_blank => false, :collection => RepeatMode.order('id DESC').load.map {|r| [ r.description, r.id] }
           et_f.input :end_date, :include_blank => false, :start_year => 2014, :as => :datepicker
@@ -177,19 +177,19 @@ ActiveAdmin.register Event do
 
           et_f.input :custom_place
 
-          et_f.inputs :tags, :class => 'no-legend' do
-            et_f.input :tags, :as => :check_boxes, :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)
-          end
+          #et_f.inputs :tags, :class => 'no-legend' do
+            et_f.input :tags, :label => false, :as => :check_boxes, :hint => (link_to Tag.model_name.human + "verwaltung", admin_tags_path)
+          #end
 
-        end
+        #end
       end
     end
         
     f.inputs "Festivals auswählen" do
       f.has_many :festival_events, heading: false, :new_record => true, :allow_destroy => true do |f_f|
-        f_f.inputs do
+        #f_f.inputs do
           f_f.input :festival, :collection => Festival.order("lower(name_de) ASC"), :include_blank => false
-        end
+        #end
       end
     end
     
