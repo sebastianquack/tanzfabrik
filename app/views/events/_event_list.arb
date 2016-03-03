@@ -4,6 +4,9 @@
 # local variable start_date
 # local variable in_festival
 # local variable is_archive
+# local variable display_year_in_past
+
+display_year_in_past = nil if !defined? display_year_in_past
 
 # make a list of all occurences
 all_occurences = []
@@ -57,8 +60,9 @@ ol :class => "event-calendar" do
           div :class => "content" do
 
             time(:class => "time") do
-              span l(time, :format => :day_month), :class => "day"
-              span l(time, :format => :hours_minutes), :class => "clock"
+              with_year = ( display_year_in_past && event.start_date.year < Date.today.year)
+              span l(time, :format => (with_year ? :day_month_year : :day_month) ), :class => "day"
+              span l(time, :format => :hours_minutes), :class => "clock" unless with_year
             end
 
             div :class => "address" do

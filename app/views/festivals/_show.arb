@@ -8,7 +8,8 @@ div :class => "festival" do
       div :class => "line1" do
         h1 :class => "title" do
             span festival.name
-            time l(festival.start_date, :format => :short) + "-" + l(festival.end_date) if festival.events.exists?
+            start_format = (festival.start_date.year < festival.end_date.year && (festival.end_date - festival.start_date) > 45 ? :default : :short)
+            time l(festival.start_date, :format => start_format ) + "-" + l(festival.end_date) if festival.events.exists?
           end
         a "> " + t(:tickets), :href => page_path("tickets"), :class => "registration" if events.length > 0
         a "> " + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration" if festival_workshops.length > 0
@@ -71,7 +72,7 @@ div :class => "festival" do
         end
       end
     end  
-    render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.start_date, :in_festival => festival, :is_archive => false }
+    render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.start_date, :in_festival => festival, :is_archive => false, :display_year_in_past => true }
   end
 
 end

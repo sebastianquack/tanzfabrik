@@ -1543,6 +1543,16 @@ ul.workshops {
 		}
 	} 
 
+	.downloads {
+		margin-top: $line-height;
+		li {
+			float:left;
+			&+li {
+				padding-left: 1em;
+			}
+		}
+	} 
+
 	.basic {
 
 		.open-trigger.overflown:not(.opened), .close-trigger {

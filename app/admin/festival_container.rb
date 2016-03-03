@@ -3,7 +3,8 @@ ActiveAdmin.register FestivalContainer do
   menu :priority => 3
 
   permit_params :name_de, :description_de, :name_en, :description_en, :display,
-    :images_attributes => [:id, :description, :license, :attachment, :_destroy]
+    :images_attributes => [:id, :description, :license, :attachment, :_destroy],
+    :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
       
   index do
     selectable_column
@@ -67,6 +68,25 @@ ActiveAdmin.register FestivalContainer do
         #end
       end
     end
+
+    f.inputs "Downloads" do
+      f.has_many :downloads, heading: false, :new_record => true, :allow_destroy => true do |f_f|
+        #f_f.inputs do
+          f_f.input :description_de
+          f_f.input :description_en
+          if f_f.object.attachment_de.exists?
+            f_f.input :attachment_de, :as => :file, :required => false, :hint => link_to(f_f.object.attachment_de.original_filename, f_f.object.attachment.url)
+          else
+            f_f.input :attachment_de, :as => :file, :required => false
+          end
+          if f_f.object.attachment_en.exists?
+            f_f.input :attachment_en, :as => :file, :required => false, :hint => link_to(f_f.object.attachment_en.original_filename, f_f.object.attachment_en.url)
+          else
+            f_f.input :attachment_en, :as => :file, :required => false
+          end          
+        #end
+      end
+    end    
     
     f.inputs "Special" do
       f.input :display

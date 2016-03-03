@@ -299,6 +299,7 @@ de:
       timetable: '%a, %d.%m.%Y'
       day: '%d.%m.%Y'
       day_month: '%d.%m.'
+      day_month_year: '%d.%m.%y'
     pm: nachmittags
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   

@@ -27,6 +27,13 @@ else
                 end
               end
               text_node fc.description.html_safe
+              ul :class => "downloads" do
+                fc.downloads.each do |download|        
+                  li do
+                    small a download.description, :href => download.attachment.url
+                  end
+                end
+              end              
             end
             div :class => "if-overflown" do
               div t(:more) + " >", :class => "more"
