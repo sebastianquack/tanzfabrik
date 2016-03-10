@@ -150,6 +150,17 @@ ul :class => "start_events_listing" do
       end
     end  
   end
+
+  # impossible forest
+  if true
+    li do
+      span t(:call), :class => "time"
+      span :class => "event" do
+        page = Page.all.select{ |p| p.slug == "impossible-forest-impossible-garden"}.first
+        link_to page.title[0..51], page_path(page)
+      end
+    end  
+  end
   
 end
 
