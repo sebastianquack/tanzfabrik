@@ -33,9 +33,9 @@ module EventsHelper
     #   XX = Number with leading zero, e.g. 01 or 10
     #   L = Letter. At the beginning typically "S" for summer, at the end typically A, B or C to name a series of workshops
     # Tricks:
-    #   e.title.split("/").length  ---------------- put entries without slash (not enumerated in the above way) at first
-    #   e.title.split("/")[0].to_i ---- case X ---- put 1 before 10
-    workshops.sort_by { |e| [e.title.split("/").length, e.title.split("/")[0].to_i, e.title] } 
+    #   e.title.split(" ").slice(1..2).count("/") ---------------- put entries without slash (not enumerated in the above way) at first
+    #   e.title.split("/")[0].to_i                ---- case X ---- put 1 before 10
+    workshops.sort_by { |e| [e.title.split(" ").slice(1..2).count("/"), e.title.split("/")[0].to_i, e.title] } 
   end
 
 end

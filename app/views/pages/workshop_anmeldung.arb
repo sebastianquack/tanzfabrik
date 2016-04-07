@@ -159,7 +159,7 @@ if notice == "ok"
         div :class => "description" do 
           para t(:form_section_concessions_early_bird)
           workshops.group_by { |w| w.early_bird_date } .each do |early_bird_date, early_bird_workshops|
-            workshops_sort! early_bird_workshops
+            early_bird_workshops = workshops_sort early_bird_workshops
             para :class => "early_bird_list" do
               early_bird_workshops.each do |workshop|
                 b workshop.title
