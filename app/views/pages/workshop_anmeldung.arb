@@ -26,7 +26,9 @@ if notice == "ok"
     .joins(:type, :event_details)
     .where('event_types.id = 2 AND event_details.start_date >= ?', Date.today)
     .uniq
-    .sort_by { |w| [w.start_date, w.title.split("/")[0].to_i] } # assuming format: "NUMBER / TITLE"
+    #.sort_by { |w| [w.start_date, w.title.split("/")[0].to_i] } # assuming format: "NUMBER / TITLE"
+
+  workshops = workshops_sort workshops
 
   div :class => "registration-form" do
     
@@ -157,6 +159,7 @@ if notice == "ok"
         div :class => "description" do 
           para t(:form_section_concessions_early_bird)
           workshops.group_by { |w| w.early_bird_date } .each do |early_bird_date, early_bird_workshops|
+            workshops_sort! early_bird_workshops
             para :class => "early_bird_list" do
               early_bird_workshops.each do |workshop|
                 b workshop.title
