@@ -177,7 +177,8 @@ class Event < ActiveRecord::Base
     if event_types == [2]
       
       # get flat list of workshops
-      workshop_list = ApplicationController.helpers.get_workshop_groups_sorted_flat(nil)
+      
+      workshop_list = ApplicationController.helpers.get_workshop_groups_sorted_flat(self.start_date_cache.year)
       #puts workshop_list
       
       # find self
@@ -300,7 +301,7 @@ class Event < ActiveRecord::Base
         
         
         # get flat list of workshops
-        workshop_list = ApplicationController.helpers.get_workshop_groups_sorted_flat(nil)
+        workshop_list = ApplicationController.helpers.get_workshop_groups_sorted_flat(self.start_date_cache.year)
         #puts workshop_list
       
         # find self

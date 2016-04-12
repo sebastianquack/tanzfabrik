@@ -34,7 +34,7 @@ module EventsHelper
   def get_workshop_groups_sorted(year)
 
     if year
-      start_date = Date.parse('01-01-' + params[:year])
+      start_date = Date.parse('01-01-' + year.to_s)
       end_date = start_date.end_of_year
       workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq
     else
