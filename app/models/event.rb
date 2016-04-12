@@ -176,35 +176,67 @@ class Event < ActiveRecord::Base
     # special sorting inside blocks for workshops        
     if event_types == [2]
       
-      workshops_in_block = Event.where_festival(festival_id).where("type_id = 2 AND start_date_cache = ? AND end_date_cache = ?", self.start_date_cache, self.end_date_cache)
-
-      workshops_in_block_sorted = workshops_in_block.to_a.sort_by! { |e| e.title.split("/")[0].to_i } 
+      # get flat list of workshops
+      workshop_list = ApplicationController.helpers.get_workshop_groups_sorted_flat(nil)
+      #puts workshop_list
+      
+      # find self
+      index = workshop_list.index{|workshop| workshop.id == self.id}
+      #puts index
+        
+      # give back next index or nil
+      if index < workshop_list.length - 1
+        return workshop_list[index + 1].first_event_occurrence
+      else 
+        return nil
+      end
+      
+      #workshops_in_block = Event.where_festival(festival_id).where("type_id = 2 AND start_date_cache = ? AND end_date_cache = ?", self.start_date_cache, self.end_date_cache)
+      
+      #puts "block"
+      #workshops_in_block.each { |e| puts e.title }
+      
+      #workshops_in_block_sorted = ApplicationController.helpers.workshops_sort(workshops_in_block)
+      #workshops_in_block_sorted = workshops_in_block.to_a.sort_by! { |e| e.title.split("/")[0].to_i } 
       # assuming format: "NUMBER / TITLE"
       
-      # find self and next element in block
-      next_workshop_in_block = nil
-      workshops_in_block_sorted.each_with_index do |e, index| 
-        if e.id == self.id
-          if index < workshops_in_block_sorted.length - 1
-            next_workshop_in_block = workshops_in_block_sorted[index + 1] 
-          end
-        end
-      end   
+      #puts "block_sorted"
+      #workshops_in_block_sorted.each { |e| puts e.title }
 
-      if next_workshop_in_block
-        return next_workshop_in_block.first_event_occurrence
-      else         
-        workshops_in_next_block = Event.where_festival(festival_id).where("type_id = 2 AND  (start_date_cache != ? OR end_date_cache != ?) AND start_date_cache >= ?", self.start_date_cache, self.end_date_cache, self.start_date_cache)
+      
+      # find self and next element in block
+      #next_workshop_in_block = nil
+      #workshops_in_block_sorted.each_with_index do |e, index| 
+      #  if e.id == self.id
+      #    if index < workshops_in_block_sorted.length - 1
+      #      next_workshop_in_block = workshops_in_block_sorted[index + 1] 
+      #    end
+      #  end
+      #end   
+
+      #if next_workshop_in_block
+      #  return next_workshop_in_block.first_event_occurrence
+      #else         
+      #  workshops_in_next_block = Event.where_festival(festival_id).where("type_id = 2 AND  (start_date_cache != ? OR end_date_cache != ?) AND (start_date_cache > ? OR (start_date_cache = ? AND title_de > ?))", self.start_date_cache, self.end_date_cache, self.start_date_cache, self.start_date_cache, self.title)
+        ## warning: doesn't get next block properly!!
         
+      #  puts "next_block"
+      #  workshops_in_next_block.each { |e| puts e.title }
+                
         # sort first by start_date, then by title number
-        workshops_in_next_block_sorted = workshops_in_next_block.to_a.sort_by! { |e| [e.title.split("/")[0].to_i, e.start_date_cache] } 
+        #workshops_in_next_block_sorted = workshops_in_next_block.to_a.sort_by! { |e| [e.title.split("/")[0].to_i, e.start_date_cache] } 
+       # workshops_in_next_block_sorted = ApplicationController.helpers.workshops_sort(workshops_in_next_block)
         
-        if workshops_in_next_block_sorted[0]
-          return workshops_in_next_block_sorted[0].first_event_occurrence
-        else 
-          return nil
-        end
-      end 
+        #puts "next_block_sorted"
+        #workshops_in_next_block_sorted.each { |e| puts e.title }
+        
+        
+        #if workshops_in_next_block_sorted[0]
+         # return workshops_in_next_block_sorted[0].first_event_occurrence
+        #else 
+         # return nil
+        #end
+        #end 
 
     # chronological sorting for everything else
     else
@@ -228,39 +260,59 @@ class Event < ActiveRecord::Base
     # alphanetical sorting inside blocks for workshops        
     if event_types == [2]
 
-      workshops_in_block = Event.where_festival(festival_id).where("type_id = 2 AND start_date_cache = ? AND end_date_cache = ?", self.start_date_cache, self.end_date_cache)
+      #workshops_in_block = Event.where_festival(festival_id).where("type_id = 2 AND start_date_cache = ? AND end_date_cache = ?", self.start_date_cache, self.end_date_cache)
 
-      workshops_in_block_sorted = workshops_in_block.to_a.sort_by! { |e| e.title.split("/")[0].to_i } .reverse!
+      #workshops_in_block_sorted = workshops_in_block.to_a.sort_by! { |e| e.title.split("/")[0].to_i } .reverse!
       # assuming format: "NUMBER / TITLE"
+      #workshops_in_block_sorted = ApplicationController.helpers.workshops_sort(workshops_in_block) .reverse!
+      
       
       # find self and next element in block
-      prev_workshop_in_block = nil
-      workshops_in_block_sorted.each_with_index do |e, index| 
-        if e.id == self.id
-          if index < workshops_in_block_sorted.length - 1
-            prev_workshop_in_block = workshops_in_block_sorted[index + 1] 
-          end
-        end
-      end   
+      #prev_workshop_in_block = nil
+      #workshops_in_block_sorted.each_with_index do |e, index| 
+      #  if e.id == self.id
+      #    if index < workshops_in_block_sorted.length - 1
+      #      prev_workshop_in_block = workshops_in_block_sorted[index + 1] 
+      #    end
+      #  end
+      #end   
       
-      if prev_workshop_in_block
-        return prev_workshop_in_block.first_event_occurrence
-      else         
+      #if prev_workshop_in_block
+      #  return prev_workshop_in_block.first_event_occurrence
+      #else         
         
-        workshops_in_prev_block = Event.where_festival(festival_id).where("type_id = 2 AND  (start_date_cache != ? OR end_date_cache != ?) AND start_date_cache <= ?", self.start_date_cache, self.end_date_cache, self.start_date_cache)
+        #workshops_in_prev_block = Event.where_festival(festival_id).where("type_id = 2 AND  (start_date_cache != ? OR end_date_cache != ?) AND start_date_cache <= ?", self.start_date_cache, self.end_date_cache, self.start_date_cache)
         
         # sort first by start_date, then by title number
-        workshops_in_prev_block_sorted = workshops_in_prev_block.to_a.sort_by! { |e| [e.start_date_cache, e.title.split("/")[0].to_i] }.reverse!
+        #workshops_in_prev_block_sorted = workshops_in_prev_block.to_a.sort_by! { |e| [e.start_date_cache, e.title.split("/")[0].to_i] }.reverse!
+        #workshops_in_prev_block_sorted = ApplicationController.helpers.workshops_sort(workshops_in_prev_block) .reverse!
+        #### FUNKTIONIERT NICHT
         
-        puts "sorted"
-        workshops_in_prev_block_sorted.each { |e| puts e.title }
+        #puts "sorted"
+        #workshops_in_prev_block_sorted.each { |e| puts e.title }
         
-        if workshops_in_prev_block_sorted[0]
-          return workshops_in_prev_block_sorted[0].first_event_occurrence
+        #if workshops_in_prev_block_sorted[0]
+        #  return workshops_in_prev_block_sorted[0].first_event_occurrence
+        #else 
+        #  return nil
+        #end
+        #end
+        
+        
+        # get flat list of workshops
+        workshop_list = ApplicationController.helpers.get_workshop_groups_sorted_flat(nil)
+        #puts workshop_list
+      
+        # find self
+        index = workshop_list.index{|workshop| workshop.id == self.id}
+        #puts index
+        
+        # give back next index or nil
+        if index > 0
+          return workshop_list[index - 1].first_event_occurrence
         else 
           return nil
         end
-      end 
 
     # chronological sorting for everything else
     else

@@ -30,21 +30,21 @@ cache_arbre(self, cache_key_for_page_headlines(page)) do
   end
 end
 
-if params[:year]
-  start_date = Date.parse('01-01-' + params[:year])
-  end_date = start_date.end_of_year
-  workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq
-else 
+#if params[:year]
+#  start_date = Date.parse('01-01-' + params[:year])
+#  end_date = start_date.end_of_year
+#  workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq
+#else 
   #start_date = Date.today.beginning_of_month
-  start_date = Date.parse('01-01-' + Time.now.year.to_s) # get workshops from beginning of year
-  end_date = Time.now.to_s # don't show workshops that ended before today
-  workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.end_date >= ?', start_date, end_date).uniq
-end
+#  start_date = Date.parse('01-01-' + Time.now.year.to_s) # get workshops from beginning of year
+#  end_date = Time.now.to_s # don't show workshops that ended before today
+#  workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.end_date >= ?', start_date, end_date).uniq
+#end
 
 # get all workshops
 #all_workshops = Event.where(:type_id => 2)
 
-render :partial => "/events/workshop_list", :locals => {:workshops => workshops, :combinations => true, :in_festival => nil}  
+render :partial => "/events/workshop_list", :locals => {:in_festival => nil}  
 
 # figure out in which years event_details exist
 years = Event.joins(:type, :event_details).where('event_types.id = 2').where("start_date < '"+(Date.today.year+1).to_s+"-01-01'" ).group_by_year(:start_date).count

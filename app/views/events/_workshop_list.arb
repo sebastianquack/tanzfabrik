@@ -1,24 +1,30 @@
 # local variable workshops: collection of workshop type events 
 # local variable combinations: enable "workshop-kombinationen"
 
-if workshops.length > 0
+workshop_groups = get_workshop_groups_sorted(params[:year])
+
+if workshop_groups.length > 0
 
   # get details ordered grouped by beginning/end, and ordered by title
-  events_by_dates = workshops
-    .sort_by { |e| e.firsttime }
-    .group_by { |e| [e.start_date, e.end_date] }
+  #events_by_dates = workshops
+  #  .sort_by { |e| [e.firsttime, e.title] }
+  #  .group_by { |e| [e.start_date, e.end_date] }
 
   # reorder inside date blocks
-  events_by_dates.each do |dates, events|
+  #events_by_dates.each do |dates, events|
     #if events.none? { |e| (/^\d/.match e.title).nil?} # if all titles start with a digit 
-      events.sort_by! { |e| e.title }                 # => reorder by title
+  #    events.sort_by! { |e| e.title }                 # => reorder by title
     #end
-  end
+  #end
+  
+  #puts "workshop list"
+  #puts events_by_dates
 
   ul :class => "workshops" do
     
-    events_by_dates.each do |dates, events|
-      events = workshops_sort events
+    workshop_groups.each do |dates, events|
+    #  events = workshops_sort events
+      
       # FOLLOWING CODE COMING IN VERSION 2
       # li :class => "controls" do
       #   h3 :class => "header" do 
