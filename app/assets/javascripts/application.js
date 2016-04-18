@@ -180,35 +180,47 @@ var initMenuContentHide = function () {
   topInit = parseInt($("#content-container").css("top"))
   $("#content-container").data("defaultTop", topInit)  
   last_menu3Height = null
-  $("#top-menu ul ul li").on("mouseenter mouseleave", function () { 
-    setTimeout(function () { /* firefox needs some time */
-      menu3 = $("#top-menu ul ul ul:visible")
-      menu3Height = menu3.outerHeight()
-      if (last_menu3Height != menu3Height) {
-        last_menu3Height = menu3Height
-        if (menu3Height == null) {
-          delta = 0
-        }
-        else {
-          menu3Offset = menu3.offset().top
-          contentOffset = $("#content-container").offset().top
-          delta = menu3Offset + menu3Height - contentOffset
-        }
-        topPlus = $("#content-container").data("defaultTop")
-        container_height = $("#content-container").height()
-        if (delta > 0) {
-          $("#content").css("margin-top", -delta + "px")
-          $("#content-container").css("top", (delta+topPlus) + "px")
-        }
-        else {
-          $("#content").css("margin-top", "0px")
-          $("#content-container").css("top", topPlus + "px")
-        }
-        $("#content-container").height(container_height)
-      }
-    },10)
-  })
+  $("#top-menu ul ul li").on("mouseenter mouseleave", contentHider)
 }
+
+contentHider = function () { 
+  setTimeout( function() { // firefox needs a delay to be able to restore
+    var contentContainer = $("#content-container")
+    menu3 = $("#top-menu ul ul ul:visible")
+    menu3Height = menu3.outerHeight()
+    if (last_menu3Height != menu3Height) {
+      last_menu3Height = menu3Height
+      if (menu3Height == null) {
+        delta = 0
+      }
+      else {
+        var menu3Offset = menu3.offset().top
+        var contentOffset = contentContainer.offset().top
+        var delta = menu3Offset + menu3Height - contentOffset
+      }
+      console.log(menu3Height, menu3Offset, contentOffset, delta)
+      var topPlus = contentContainer.data("defaultTop")
+      var container_height = contentContainer.height()
+      if (delta > 0) {
+        $("#content").css("margin-top", -delta + "px")
+        contentContainer.css("top", (delta+topPlus) + "px")
+      }
+      else {
+        $("#content").css("margin-top", "0px")
+        contentContainer.css("top", topPlus + "px")
+      }
+      contentContainer.height(container_height)
+    }
+  },1)
+}
+
+function reflow(elt){
+    console.log(elt.offsetHeight);
+}
+
+setInterval(function(){
+  console.log("<<<<<<< " + $("#content-container").offset().top)
+}, 1000)
 
 // determine element height for css transition
 var setMaxHeight = function(elem) {
