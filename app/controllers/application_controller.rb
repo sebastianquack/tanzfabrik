@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
   before_action :set_background_image
+  before_action :set_time
 
   if Rails.env.production?
     rescue_from ActionController::RoutingError, :with => :raise_routing_404
@@ -54,6 +55,14 @@ class ApplicationController < ActionController::Base
   def default_url_options(options={})
     logger.debug "default_url_options is passed options: #{options.inspect}\n"
     { locale: I18n.locale }
+  end
+
+  def set_time
+    if params[:t]
+      t = Time.parse(params[:t], Time.now)
+      logger.debug("time set by URL parameter to " + t.to_s)
+      Timecop.travel(t)
+    end
   end
   
 end

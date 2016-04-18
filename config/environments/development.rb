@@ -42,12 +42,5 @@ Tanzfabrik::Application.configure do
   }
   
   config.action_mailer.raise_delivery_errors = true
-
-  # test future dates!
-  # config.after_initialize do
-  #   t = Time.local(2016, 5, 31, 0, 0, 0)
-  #   Timecop.travel(t)
-  #   Timecop.scale(3600) # seconds will now seem like hours
-  # end  
   
 end
