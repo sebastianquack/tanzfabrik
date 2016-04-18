@@ -94,6 +94,10 @@ group :production do
   gem 'heroku_rails_deflate' # enables gzip compression
 end
 
+group :development do
+  gem 'timecop' # allows to modify time and date, to simulate future dates
+end
+
 gem "geocoder"
 
 gem "fuzzy-string-match"

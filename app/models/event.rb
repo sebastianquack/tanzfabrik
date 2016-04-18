@@ -350,6 +350,10 @@ class Event < ActiveRecord::Base
   def occurrences_on date 
     return (self.occurrences_between date, date)
   end
+
+  def next_occurrence
+    return EventDetailOccurrence.where(:event_id => self.id).order("time").select {|o| o.time > Time.now }.first
+  end
   
   def first_event_occurrence
     return EventDetailOccurrence.where(:event_id => self.id).order("time").first
