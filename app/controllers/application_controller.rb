@@ -59,9 +59,18 @@ class ApplicationController < ActionController::Base
 
   def set_time
     if params[:t]
-      t = Time.parse(params[:t], Time.now)
-      logger.debug("time set by URL parameter to " + t.to_s)
-      Timecop.travel(t)
+      if Rails.env.production?
+        logger.debug("denied setting of time by URL parameter because running in production environment")
+      else
+        if params[:t].empty? or params[:t] == "now"
+          Timecop.return
+          logger.debug("application time reset")
+        else
+          t = Time.parse(params[:t])
+          logger.debug("application time set by URL parameter to " + t.to_s)
+          Timecop.travel(t)
+        end
+      end
     end
   end
   
