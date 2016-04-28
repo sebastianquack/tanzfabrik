@@ -1694,6 +1694,25 @@ ul.workshops {
 
 	}
 
+	.form-radio {
+		.parsley-errors-list.filled {
+		  width:100%;
+		  text-align: center;
+	    position: absolute;
+	    top: calc(50% - 1em);
+	    color:red;
+
+	    &#parsley-id-multiple-registrationmembership_status {
+		    position: absolute;
+		    top: initial;
+		    color: red;
+		    width:auto;
+		    left: 0;
+		    transform: translateX(-60%) rotateZ(-90deg);
+	    }
+	  }
+	}
+
 	.form-workshops {
 		.parsley-errors-list {
 			display:none;

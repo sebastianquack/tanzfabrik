@@ -140,13 +140,13 @@ if notice == "ok"
           para t(:form_section_membership_status_explanation)
 
           div :class => "radio-elem" do
-            f.radio_button :membership_status, 0, :checked => true
+            f.radio_button :membership_status, 0, :required => true, :checked => false
             div :class => "input-style-helper"
             f.label :membership_status, t(:form_section_membership_status_0)
           end
 
           div :class => "radio-elem" do
-            f.radio_button :membership_status, 1
+            f.radio_button :membership_status, 1, :required => true
             div :class => "input-style-helper"
             f.label :membership_status, t(:form_section_membership_status_1)
           end
@@ -184,19 +184,19 @@ if notice == "ok"
         div :class => "form-radio" do
     
           div :class => "radio-elem" do
-            f.radio_button :workshop_info, 1
+            f.radio_button :workshop_info, 1, :required => true
             div :class => "input-style-helper"
             f.label :workshop_info, t(:form_news_mail)
           end
 
           div :class => "radio-elem" do
-            f.radio_button :workshop_info, 2
+            f.radio_button :workshop_info, 2, :required => true
             div :class => "input-style-helper"
             f.label :workshop_info, t(:form_news_email)
           end
 
           div :class => "radio-elem" do
-            f.radio_button :workshop_info, 0, :checked => true
+            f.radio_button :workshop_info, 0, :required => true
             div :class => "input-style-helper"
             f.label :workshop_info, t(:form_news_no)
           end
@@ -211,19 +211,19 @@ if notice == "ok"
         div :class => "form-radio" do
 
           div :class => "radio-elem" do
-            f.radio_button :course_program, 1
+            f.radio_button :course_program, 1, :required => true
             div :class => "input-style-helper"
             f.label :course_program, t(:form_news_mail)
           end
 
           div :class => "radio-elem" do
-            f.radio_button :course_program, 2
+            f.radio_button :course_program, 2, :required => true
             div :class => "input-style-helper"
             f.label :course_program, t(:form_news_email)
           end
 
           div :class => "radio-elem" do
-            f.radio_button :course_program, 0, :checked => true
+            f.radio_button :course_program, 0, :required => true
             div :class => "input-style-helper"
             f.label :course_program, t(:form_news_no)
           end
@@ -237,19 +237,19 @@ if notice == "ok"
         div :class => "form-radio" do
 
           div :class => "radio-elem" do
-            f.radio_button :event_program, 1
+            f.radio_button :event_program, 1, :required => true
             div :class => "input-style-helper"
             f.label :event_program, t(:form_news_mail)
           end
 
           div :class => "radio-elem" do
-            f.radio_button :event_program, 2
+            f.radio_button :event_program, 2, :required => true
             div :class => "input-style-helper"
             f.label :event_program, t(:form_news_email)
           end
 
           div :class => "radio-elem" do
-            f.radio_button :event_program, 0, :checked => true
+            f.radio_button :event_program, 0, :required => true
             div :class => "input-style-helper"
             f.label :event_program, t(:form_news_no)
           end
