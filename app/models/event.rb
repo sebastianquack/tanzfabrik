@@ -115,7 +115,8 @@ class Event < ActiveRecord::Base
   end
   
   def early_bird_date
-    date = self.start_date.beginning_of_week.next_day(3) - (self.start_date.wday <= 4 ? 3 : 2).week
+    early_bird_weeks = ( self.id == 421 ? 4 : 2) # mormal: 2 weeks. special: 4 weeks!
+    date = self.start_date.beginning_of_week.next_day(3) - (early_bird_weeks + (self.start_date.wday <= 4 ? 1 : 0)).week
     if (date.month == 12 && [24,31].include?(date.day)) 
       date = date.prev_day(2)
     end
