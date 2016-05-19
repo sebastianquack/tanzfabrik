@@ -113,9 +113,11 @@ if notice == "ok"
         para t(:form_section_payment_explanation_html), :class => "description"
       end
 
+      form_section_conditions_explanation = TextItem.where(:name => "Anmeldebedingung").first
+
       div :class => "row" do
         div t(:form_section_conditions), :class => "title"
-        para t(:form_section_conditions_explanation), :class => "description"
+        para form_section_conditions_explanation.content, :class => "description"
       end
 
 

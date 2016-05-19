@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303160212) do
+ActiveRecord::Schema.define(version: 20160519140354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -332,8 +332,8 @@ ActiveRecord::Schema.define(version: 20160303160212) do
 
   create_table "text_items", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.string   "content_de", limit: 255
-    t.string   "content_en", limit: 255
+    t.text     "content_de"
+    t.text     "content_en"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
