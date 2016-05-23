@@ -122,6 +122,7 @@ cache_arbre(self, cache_for_navigation) do
           ul do
             li_submenu t(:section_classes), [
               "kursplan", 
+              "sommer-spezial",
               "sommer-intensive", 
               [
                 "performance_projekte", 
