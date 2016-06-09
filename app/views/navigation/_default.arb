@@ -131,7 +131,8 @@ cache_arbre(self, cache_for_navigation) do
               [
                 "profitraining",
                 event_view && !params[:festival_id] && Event.find(params[:id]).type.id == 4
-              ],                
+              ],           
+              "tanzen-im-hof",
               "kindertanz",
               "contact_jam",
               "lehrer",
