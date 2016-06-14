@@ -115,8 +115,13 @@ $(document).ready(function() {
           elem = $(location.hash)
         }
         else return;
-        elem.find(".open-close").addClass("opened")
-        setTimeout( function() {scrollScreenTo(elem, 1500)}, 20)
+        var triggerElem = elem.find(":not(.opened) .open-trigger")
+        var scrollElem = elem.find(".open-toggle-height")
+        var parentElem = $(elem).find(".open-close")
+        parentElem.addClass("no-height-transition")
+        triggerElem.trigger("click")
+        setTimeout( function() {scrollScreenTo(scrollElem, 1500, function(){parentElem.removeClass("no-height-transition")} )}, 20)
+        //$(location.hash +"  
       }      
       last_w = w
     }, 20)
@@ -250,9 +255,10 @@ $.easing.elasout = function(x, t, b, c, d) {
 };
 
 // scroll whole screen
-var scrollScreenTo = function (el, duration) {
+var scrollScreenTo = function (el, duration, cb) {
     var elOffset = el.offset().top;
     var elHeight = el.height();
+    console.log(elHeight)
     var windowHeight = $(window).height();
     var offset;
 
@@ -263,5 +269,5 @@ var scrollScreenTo = function (el, duration) {
       offset = elOffset;
     }
 
-    $.scrollTo( offset, duration, { easing:'elasout' } );
+    $.scrollTo( offset, duration, { easing:'elasout' }, (typeof(cb)=="function"? cb() : null) );
   }

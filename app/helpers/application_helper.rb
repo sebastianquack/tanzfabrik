@@ -5,7 +5,7 @@ module ApplicationHelper
       return []
     end
 
-    words = query.split(/\W+/)
+    words = query.split(/[\s.-–—]+/)
     words.each do |word|
       word = "%#{word}%" # add wildcards to each word
     end

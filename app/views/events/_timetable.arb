@@ -147,7 +147,7 @@ div :class => "timetable-container" do
                     article :class => "event empty-event"
                   else
                     detail = data[detail_index]
-                    article :class => "event" do
+                    article :class => "event", :id => "_"+detail.event.id.to_s do
                       if detail.event.type_id == 5 # performance-projekt -> link to event page
                         div :class => "title-description" do
                           h4 :class => "title" do

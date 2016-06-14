@@ -767,6 +767,11 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 				opacity:1;
 			}			
 		}
+
+		&.no-height-transition .description {
+			@include transition (opacity 1.2s);
+		}
+
 	}
 }
 
@@ -1182,6 +1187,10 @@ dl.tags {
 				text-align: right;
 				display: none;
 			}
+		}
+
+		.description.no-height-transition .bio {
+			@include transition (height 0s);
 		}
 
 		.description.opened {
@@ -1926,4 +1935,26 @@ ul.workshops {
 		}
 
 	}
+}
+
+/**** search page ****/
+
+.search-form {
+	@include make-xs-column(5);
+	@include make-xs-column-push(1);
+	padding:0 0 1em 0;
+}
+
+.search {
+	.results {
+		@include make-xs-column(5);
+		@include make-xs-column-push(1);
+	}
+
+	b {
+		@include menu-font(inherit);
+		@include border-line(top, lightgrey);
+		text-transform: uppercase;
+	}
+
 }
