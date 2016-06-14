@@ -143,7 +143,11 @@ class Event < ActiveRecord::Base
 
   scope :currently_listed, -> { joins(:event_details).where('event_details.end_date >= ?', Date.today.beginning_of_month).uniq }
 
-  scope :have_own_page, -> { where('type_id IN (?)', (Rails.configuration.stage_event_types) + [2,4,5]) }
+  scope :have_own_page, -> { where('type_id IN (?)', Rails.configuration.event_types_with_page) }
+
+  def has_own_page?
+    Rails.configuration.event_types_with_page.include? self.type.id
+  end
 
   def stage_event?
     Rails.configuration.stage_event_types.include? self.type.id
@@ -157,6 +161,17 @@ class Event < ActiveRecord::Base
     self.type_id == 5
   end
 
+  def currently_listed_course?
+    if([3,5,6].include? self.type_id) # is this an event of type course?
+      # is there an occurrence coming up in the next 12 weeks?
+      if(EventDetailOccurrence.where("event_id = ? AND time > ? AND time < ?", self.id, Time.now, Time.now + 12.week).count > 0)
+        return true
+      end
+    end
+    return false
+  end
+
+  # maybe wrong??
   def currently_listed?
     Event.currently_listed.where(id: self.id).count == 1
   end

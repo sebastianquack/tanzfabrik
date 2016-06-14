@@ -26,6 +26,7 @@ module Tanzfabrik
     config.assets.precompile += ['application_edit.js', 'application_edit.css']
 
     config.stage_event_types = [1,7,8,9]
+    config.event_types_with_page = config.stage_event_types + [2,4,5]
 
   end
 end

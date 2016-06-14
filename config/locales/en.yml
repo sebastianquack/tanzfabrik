@@ -33,6 +33,8 @@ en:
   section_service: "Service"
   section_about: "About Us"
   archive: "Archive"
+  
+  search_results: "Search Results"
 
   next_week: "Next Week"
   previous_week: "Previous Week"

@@ -8,6 +8,17 @@ module PagesHelper
     url_for :controller => 'pages', :action => 'show', :id => "kursplan", :anchor => "#{kurs.id}"
   end
 
+  def event_link(event)
+    if(event.has_own_page?)
+      return event_path(event)
+    end    
+    if(event.currently_listed_course?)
+      return kurs_link(event)
+    end
+    return nil
+  end
+
+
   def person_link(person)
     if person.kurslehrer?
       page = "lehrer" 
@@ -19,5 +30,5 @@ module PagesHelper
 
     url_for :controller => 'pages', :action => 'show', :id => page, :anchor => "#{person.id}"
   end  
-
+    
 end
