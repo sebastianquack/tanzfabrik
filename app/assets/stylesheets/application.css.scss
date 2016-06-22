@@ -1945,16 +1945,26 @@ ul.workshops {
 	padding:0 0 1em 0;
 }
 
-.search {
-	.results {
-		@include make-xs-column(5);
-		@include make-xs-column-push(1);
+.search-results {
+
+	> li {
+		@include make-row();
+		margin-top: 1em;
 	}
 
-	b {
+	.search-category-title {
+		@include make-xs-column(1);
 		@include menu-font(inherit);
-		@include border-line(top, lightgrey);
 		text-transform: uppercase;
+		text-align:right;
+		color:red;
+		padding-top:2px;
 	}
+
+	.search-category-content {
+		@include make-xs-column(5);
+		//@include make-xs-column-push(1);
+	}
+
 
 }
