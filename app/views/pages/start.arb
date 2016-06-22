@@ -43,12 +43,12 @@ ul :class => "start_events_listing" do
   end
 
   # TEMPORARY solution for featured events. TODO: sort all dates on the start page, use "feature on start page", only query future events
-  featured_events = Event.where(:id => [397,398])
+  featured_events = Event.where(:id => [400])
   featured_events.select{ |e| e.next_occurrence && ![Date.today, Date.tomorrow].index(e.next_occurrence.time.to_date) }.each do |e|
     li do
       span l(e.next_occurrence.time.to_date, :format => :short), :class => "time"
       span :class => "event" do
-        a e.title, :href => event_path(e)
+        a e.title+" "+t(:with)+" "+e.people.first.name, :href => event_path(e)
       end
     end  
   end

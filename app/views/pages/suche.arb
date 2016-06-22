@@ -8,7 +8,7 @@ set_meta_tags :title => page_title, :reverse => false
 results = search(params[:q])
 
 form :class=>"search-form" do
-  input :type=>"text", :name=>"q"
+  input :type=>"text", :name=>"q", :value=>params[:q], :onclick => "this.select()"
   input :type=>"submit", :value=>"Suchen"
 end
 
@@ -18,7 +18,7 @@ if results.length > 0
     div :class => "main" do
       div :class => "line1" do
         h1 :class => "title" do
-          #t(:search_results)
+          #params[:q]
         end
       end
     end
