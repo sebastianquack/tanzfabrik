@@ -175,11 +175,11 @@ ul :class => "start_events_listing" do
   end  
 
   # impossible forest
-  if true
+  page = Page.all.select{ |p| p.slug == "impossible-forest-impossible-garden"}.first
+  if page
     li do
       span t(:call), :class => "time"
       span :class => "event" do
-        page = Page.all.select{ |p| p.slug == "impossible-forest-impossible-garden"}.first
         link_to page.title[0..51], page_path(page)
       end
     end  
