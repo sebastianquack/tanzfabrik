@@ -152,23 +152,23 @@ ul :class => "start_events_listing" do
   end
 
   # sommer spezial 2016
-  if Date.today >= Date.new(2016,6,14) && Date.today <= Date.new(2016,8,19)
+  page = Page.all.select{ |p| p.slug == "sommer-spezial"}.first
+  if page && Date.today >= Date.new(2016,6,14) && Date.today <= Date.new(2016,8,19)
     li do
       span "1-19.8.", :class => "time"
       span :class => "event" do
-        page = Page.all.select{ |p| p.slug == "sommer-spezial"}.first
         link_to page.title, page_path(page)
       end
     end  
   end
 
   # tanzen-im-hof
-  if Date.today >= Date.new(2016,6,8) && Date.today <= Date.new(2016,10,1)
+  page = Page.all.select{ |p| p.slug == "tanzen-im-hof"}.first
+  if page && Date.today >= Date.new(2016,6,8) && Date.today <= Date.new(2016,10,1)
     li do
       # span "01."+(Date.today.day > 1 ? Date.today.month+1 : Date.today.month).to_s.rjust(2, '0')+".", :class => "time"
       span t(:new), :class => "time"
       span :class => "event" do
-        page = Page.all.select{ |p| p.slug == "tanzen-im-hof"}.first
         link_to page.title, page_path(page)
       end
     end  
