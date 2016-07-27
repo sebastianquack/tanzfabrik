@@ -2,20 +2,6 @@ show_festival = nil if !defined? show_festival
 
 set_meta_tags :canonical => event_url(event)
 
-# TODO: generalize this and put it into the event model
-#if (event.currently_listed?)
-#  listing = Event.in_same_listing_as(event).currently_listed # this should give us a list of events
-#  event_pos = listing.index(event)
-#  div event_pos.to_s + "/" + Event.in_same_listing_as(event).count.to_s
-#  unless event_pos.nil? # remove unless when queries are safe
-#    next_event = listing[event_pos+1] if event_pos < listing.length
-#    prev_event = listing[event_pos-1] if event_pos > 0
-#  end
-#end
-
-# we need next prev arrows in a few different occasions
-# - list of events in festival context
-
 # see if we are inside festival view
 if params[:festival_id] 
   festival = Festival.find(params[:festival_id]).id

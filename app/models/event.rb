@@ -141,7 +141,7 @@ class Event < ActiveRecord::Base
 
   scope :not_in_festival, -> { includes(:festival_events).where(:festival_events => { :event_id => nil }) }
 
-  scope :currently_listed, -> { joins(:event_details).where('event_details.end_date >= ?', Date.today.beginning_of_month).uniq }
+  scope :currently_listed, -> { joins(:event_details).where('event_details.end_date >= ?', Date.today).uniq }
 
   scope :have_own_page, -> { where('type_id IN (?)', Rails.configuration.event_types_with_page) }
 
