@@ -94,6 +94,12 @@ cache_arbre(self, cache_for_navigation) do
 
     ul :id => "secondary-menu" do
       li link_to_page("kontakt")
+      li do
+        a "blog", :href => "https://timetomeettanzfabrik.wordpress.com/", :title => "https://timetomeettanzfabrik.wordpress.com/", :target => "_blank"
+      end
+      li do
+        a "facebook", :href => "https://www.facebook.com/tanzfabrikberlin.de", :title => "https://www.facebook.com/tanzfabrikberlin.de", :target => "_blank"
+      end      
       li link_to_page("agbs")
       li link_to_page("impressum")
     end
