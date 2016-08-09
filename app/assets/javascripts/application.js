@@ -127,6 +127,26 @@ $(document).ready(function() {
     }, 20)
   }
 
+  // alphabet menu events
+  $(".alphabet a").click(function(event) {
+    event.preventDefault()
+    var li = $(event.target).parent()
+    
+    if(li.hasClass("unavailable")) {
+      return
+    } 
+    $(li.toggleClass("selected"))      
+    
+    $(".alphabet li").each(function(index, elem) {
+      if($(elem).hasClass("selected") || $(".alphabet .selected").length == 0) {
+        $(".teacher[data-letter='"+$(elem).attr("data-letter")+"']").show()
+      } else {
+        $(".teacher[data-letter='"+$(elem).attr("data-letter")+"']").hide()
+      }
+    })
+    
+  })
+
   // form events
   $(".form-radio input[type=radio] + .input-style-helper").click(function () {
     radio = $(this).prev('input[type=radio]')
@@ -222,10 +242,6 @@ contentHider = function () {
 function reflow(elt){
     console.log(elt.offsetHeight);
 }
-
-setInterval(function(){
-  console.log("<<<<<<< " + $("#content-container").offset().top)
-}, 1000)
 
 // determine element height for css transition
 var setMaxHeight = function(elem) {

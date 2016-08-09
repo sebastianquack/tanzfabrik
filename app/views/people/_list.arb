@@ -1,7 +1,7 @@
 #local variable people
 
 people.each do |person|
-  div :class => "row teachers teacher", :id => ("_" + person.id.to_s) do
+  div :class => "row teachers teacher", :id => ("_" + person.id.to_s), "data-letter": person.last_name.first.upcase do
     div :class => "basic" do
       if person.bio
         div :class => "description open-close open-trigger overflown-base" do

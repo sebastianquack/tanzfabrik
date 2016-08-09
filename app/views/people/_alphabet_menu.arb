@@ -1,0 +1,21 @@
+all_letters = ("A".."Z").to_a
+available_letters = people.map { |a| a.last_name.first.upcase } .uniq
+available_letters.each do |letter|
+  unless all_letters.include?(letter)
+    all_letters.push(letter)
+  end
+end
+
+ul :class => "alphabet" do
+  all_letters.each do |letter|
+    li :class => (available_letters.include?(letter) ? "" : "unavailable"), "data-letter": letter do
+      if available_letters.include?(letter)
+        a do
+          letter
+        end
+      else
+        letter
+      end
+    end
+  end
+end

@@ -18,8 +18,8 @@
 /**** Load Fonts ****/
 
 @include font-face(LuxiMonoBold, 'luximb-webfont-westernlatin', bold, normal, $asset-pipeline: true);
-/*
 @include font-face(LuxiMonoRegular, 'luximr-webfont', normal, normal, $asset-pipeline: true);
+/*
 @include font-face(LuxiMonoOblique, 'luximri-webfont', normal, italic, $asset-pipeline: true);
 @include font-face(LuxiMonoBoldOblique, 'luximbi-webfont', bold, italic, $asset-pipeline: true);
 */
@@ -539,8 +539,33 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 
 			.neutral {
 				padding-left:1em;
-				color: $text-color;
 				text-transform: none;
+			}
+		}
+		
+		ul.alphabet {
+			float: right;
+			@include menu-font(100%);
+		}
+
+		ul.alphabet li, ul.alphabet li a {
+			color: red;
+			font-family: "LuxiMonoRegular";
+		}
+
+		ul.alphabet li {
+			float: left;
+			margin-left: 0.2em;			
+		  -ms-user-select: none;
+		  -moz-user-select: none;
+		  -webkit-user-select: none;
+				 			
+			&.unavailable a {
+				cursor: default;
+			}	
+			
+			&.selected a {
+				color: $text-color;
 			}
 		}
 
