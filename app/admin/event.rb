@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   menu :priority => 1
 
-  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence,
+  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook,
     :festival_ids => [], :person_ids => [],
     :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :custom_place, :repeat_mode_id, :_destroy, tag_ids: []],
     :people_attributes => [:id, :name, :_destroy],
@@ -60,7 +60,16 @@ ActiveAdmin.register Event do
   filter :feature_on_welcome_screen
 
   show do 
+
     attributes_table do
+
+      row "URL" do
+        [:de, :en].each do |l|
+          span link_to event_url(event, :locale => l), event_url(event, :locale => l), :target => "front"
+          br
+        end
+      end
+
       row EventDetail.model_name.human do |event|
         event.event_details.each do |ed|
           if (ed.valid?)
@@ -92,6 +101,11 @@ ActiveAdmin.register Event do
       end
       row :info_en do |event|
         event.info_en.html_safe if event.info_en
+      end
+      unless event.facebook.nil? || event.facebook.empty?
+        row "Facebook-Link" do
+          a event.facebook, :href=>event.facebook, :target=>"_blank"
+        end
       end
       row :price_regular do |price|
         number_to_currency price.price_regular
@@ -142,6 +156,9 @@ ActiveAdmin.register Event do
       f.input :info_en, :input_html => { :class => 'wysihtml5 wysihtml5-notoolbar' }
       f.input :warning_de
       f.input :warning_en
+      f.inputs "Externe Links" do
+        f.input :facebook, :required => false, :placeholder => "https://www.facebook.com/events/877048289058664/"
+      end      
       f.inputs :prices, :title => "Preise" do
         f.input :price_regular, :required => false
         f.input :price_reduced, :required => false 

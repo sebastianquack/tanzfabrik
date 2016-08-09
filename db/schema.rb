@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519140354) do
+ActiveRecord::Schema.define(version: 20160809135945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 20160519140354) do
     t.date     "start_date_cache"
     t.date     "end_date_cache"
     t.integer  "sequence",                                            default: 0
+    t.string   "facebook"
   end
 
   create_table "festival_containers", force: :cascade do |t|
@@ -191,6 +192,7 @@ ActiveRecord::Schema.define(version: 20160519140354) do
     t.text     "description_en"
     t.boolean  "feature_on_welcome_screen"
     t.string   "slug",                      limit: 255
+    t.string   "facebook"
   end
 
   add_index "festivals", ["slug"], name: "index_festivals_on_slug", unique: true, using: :btree

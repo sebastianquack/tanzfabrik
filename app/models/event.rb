@@ -22,6 +22,8 @@ class Event < ActiveRecord::Base
   has_many :images
   accepts_nested_attributes_for :images, :allow_destroy => true
 
+  # VALIDATIONS
+
   validates_numericality_of :price_regular,
       :only_integer => true,
       :allow_nil => true,
@@ -34,6 +36,8 @@ class Event < ActiveRecord::Base
   
   validates_presence_of :type_id
 
+  validates_format_of :facebook, :with => /\Ahttp.*facebook/i, :message => :invalid_facebook_link, :allow_blank => true
+
   class CourseWeeklyValidator < ActiveModel::Validator
     def validate(record)
       if record.type.id == 3 && record.event_details.any? { |ed| ed.repeat_mode.internal_name != "weekly" }
@@ -43,6 +47,8 @@ class Event < ActiveRecord::Base
   end
 
   validates_with CourseWeeklyValidator
+
+  # METHODS
 
   # event_type to display
   def display_type

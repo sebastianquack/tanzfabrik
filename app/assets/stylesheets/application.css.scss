@@ -146,6 +146,14 @@ ul, li {
 	}
 }
 
+.facebook-link {
+	@include menu-font(100%);
+	color:#00d2ff !important;
+	&:hover {
+		//color:#3b5998 !important;
+	}
+}
+
 /**** Layout rows/columns ****/
 
 #header, #headlines, .headlines {
@@ -1109,6 +1117,10 @@ dl.tags {
 	.time-end + .daynames:before {
 		content: "\A";
 		white-space: pre-wrap;
+	}
+
+	small p:last-child { // unintended result of wysiwyg editor
+		margin: 0;
 	}
 }
 

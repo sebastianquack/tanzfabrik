@@ -318,6 +318,9 @@ de:
   activerecord:
     errors:
       <<: *errors
+      models:
+        event:
+          invalid_facebook_link: "Ungültige Angabe. Bitte eine URL zu Facebook eingeben oder leer lassen. Am Anfang oder am Ende keine überschüssigen Leerzeichen eingeben. Beispiel: <i>https://www.facebook.com/events/877048289058664/</i>"
     models:
       page:
         one: Seite
@@ -438,5 +441,6 @@ de:
   devise:
     failure:
       already_authenticated: "Sie sind bereits angemeldet"
+
 
 

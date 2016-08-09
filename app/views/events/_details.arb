@@ -61,7 +61,14 @@ div :class => "info" do
         div a t(:tickets), :href => page_path("tickets"), :class => "registration" if event.stage_event?
       end
     end
-  end
+  end  
+
+  # facebook
+  unless event.facebook.nil? || event.facebook.empty?
+    small do
+      a "facebook", :href=>event.facebook, :class=>"facebook-link", :target=>"_blank"
+    end
+  end  
 
   # Copyright
 
