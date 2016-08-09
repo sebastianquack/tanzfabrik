@@ -64,7 +64,7 @@ $container-large-desktop:      ((960px + $grid-gutter-width));
 
 /**** Variables ****/
 
-$vertical-menu-width: 300px;
+$vertical-menu-width: 340px;
 $overall-container-margin: 32px; /* margin for vertical secondary menu */
 $line-height: 1.45em;
 $vertical-box-padding: 0.3em;
@@ -184,6 +184,7 @@ ul, li {
 
 body {
 	min-height: $vertical-menu-width;
+	overflow-y: scroll;
 }
 
 #overall-container {
