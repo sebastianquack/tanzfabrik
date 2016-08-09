@@ -94,7 +94,9 @@ de:
   registration_error: "Fehler bei der Anmeldung. Bitte versuche Sie es noch einmal. Füllen Sie alle Felder aus. Wählen Sie mindestens einen Workshop und stimmen Sie den AGB zu."
 
   ticket_link: "http://www.reservix.de/off/login_check.php?id=c6ec16e8cf3cd5077514ebef590a1f763d4616b372ef8900411779bf6bedf213&vID=9246"
-
+  
+  draft: Entwurf (nicht gelistet)
+  
   date:
     abbr_day_names:
     - So
@@ -423,6 +425,7 @@ de:
         image: Bild
         images: Bilder
         dance_intensive: Dance-Intensive-LehrerIn
+        draft: Entwurf (versteckt)
       studio:
         location: Adresse
         name: Name

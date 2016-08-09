@@ -11,5 +11,7 @@ class EventDetailOccurrence < ActiveRecord::Base
       where("")
     end
   end
+  
+  scope :no_draft, -> { where("events.draft = ? OR events.draft IS NULL", false) }
 
 end

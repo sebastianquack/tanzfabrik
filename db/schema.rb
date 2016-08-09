@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(version: 20160809135945) do
     t.date     "end_date_cache"
     t.integer  "sequence",                                            default: 0
     t.string   "facebook"
+    t.boolean  "draft"
   end
 
   create_table "festival_containers", force: :cascade do |t|
@@ -193,6 +194,7 @@ ActiveRecord::Schema.define(version: 20160809135945) do
     t.boolean  "feature_on_welcome_screen"
     t.string   "slug",                      limit: 255
     t.string   "facebook"
+    t.boolean  "draft"
   end
 
   add_index "festivals", ["slug"], name: "index_festivals_on_slug", unique: true, using: :btree
@@ -249,6 +251,7 @@ ActiveRecord::Schema.define(version: 20160809135945) do
     t.string   "description_en", limit: 255
     t.float    "priority",                   default: 0.5
     t.string   "changefreq",     limit: 255, default: "weekly"
+    t.boolean  "draft"
   end
 
   add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
@@ -267,6 +270,7 @@ ActiveRecord::Schema.define(version: 20160809135945) do
     t.boolean  "dance_intensive"
     t.string   "first_name",         limit: 255
     t.string   "last_name",          limit: 255
+    t.boolean  "draft"
   end
 
   create_table "person_events", force: :cascade do |t|

@@ -29,4 +29,6 @@ class Page < ActiveRecord::Base
     end    
   end
 
+  scope :no_draft, -> { where("pages.draft = ? OR pages.draft IS NULL", false) }
+
 end

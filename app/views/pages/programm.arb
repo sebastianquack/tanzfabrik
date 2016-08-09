@@ -35,10 +35,10 @@ end
 if params[:year]
   start_date = Date.parse('01-01-' + params[:year])
   end_date = start_date.end_of_year
-  events = Event.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ? AND event_details.start_date <= ?', Rails.configuration.stage_event_types, start_date, end_date)
+  events = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ? AND event_details.start_date <= ?', Rails.configuration.stage_event_types, start_date, end_date)
 else 
   start_date = Date.today.beginning_of_month
-  events = Event.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ?', Rails.configuration.stage_event_types, start_date)
+  events = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ?', Rails.configuration.stage_event_types, start_date)
 end
 
 cache_arbre(self, cache_key_for_programm(events, start_date, params[:year])) do
@@ -46,7 +46,7 @@ cache_arbre(self, cache_key_for_programm(events, start_date, params[:year])) do
 end
 
 # figure out in which years event_details exist
-years = Event.joins(:type, :event_details).where('event_types.id IN (?)', Rails.configuration.stage_event_types).group_by_year(:start_date).count
+years = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?)', Rails.configuration.stage_event_types).group_by_year(:start_date).count
 
 # show links for these years
 section :class => "archive-section" do

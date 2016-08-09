@@ -143,6 +143,8 @@ class Event < ActiveRecord::Base
     k << "Tanzfabrik"
   end
   
+  scope :no_draft, -> { where("events.draft = ? OR events.draft IS NULL", false) }
+  
   scope :stage_event, -> { where('type_id IN (?)', Rails.configuration.stage_event_types) }
 
   scope :not_in_festival, -> { includes(:festival_events).where(:festival_events => { :event_id => nil }) }
@@ -265,6 +267,7 @@ class Event < ActiveRecord::Base
     else
     
       oc = EventDetailOccurrence.joins(:event)
+          .no_draft
           .where("events.type_id IN (?)", event_types)
           .where("event_detail_occurrences.time >= ?", time)
           .where("NOT (event_detail_occurrences.time = ? AND events.title_de < ?)", time, self.title_de)
@@ -341,6 +344,7 @@ class Event < ActiveRecord::Base
     else
 
       oc = EventDetailOccurrence.joins(:event)
+          .no_draft
           .where("events.type_id IN (?)", event_types)
           .where("event_detail_occurrences.time <= ?", time)
           .where("NOT (event_detail_occurrences.time = ? AND events.title_de > ?)", time, self.title_de)

@@ -35,9 +35,9 @@ end
 if params[:year]
   start_date = Date.parse('01-01-' + params[:year])
   end_date = start_date.end_of_year
-  performance_projekte = Event.joins(:type, :event_details).where('event_types.id = 5 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq.sort_by{ |e| e.start_date }
+  performance_projekte = Event.no_draft.joins(:type, :event_details).where('event_types.id = 5 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq.sort_by{ |e| e.start_date }
 else 
-  performance_projekte = Event.currently_listed.joins(:type, :event_details).where('event_types.id = 5').uniq.sort_by{ |e| e.start_date }
+  performance_projekte = Event.no_draft.currently_listed.joins(:type, :event_details).where('event_types.id = 5').uniq.sort_by{ |e| e.start_date }
 end
 
 #performance_projekte = Event.of_types([5]).sort_by{ |e| e.start_date }.select { |e| e.start_date > (Date.today.beginning_of_week - 2.week) } # TODO: named scope in model, to reuse in event view
@@ -73,7 +73,7 @@ performance_projekte.each do |project|
 end
 
 # figure out in which years event_details exist
-years = Event.joins(:type, :event_details).where('event_types.id = 5').group_by_year(:start_date).count
+years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 5').group_by_year(:start_date).count
 
 # show links for these years
 section :class => "archive-section" do
