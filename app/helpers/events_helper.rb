@@ -36,11 +36,11 @@ module EventsHelper
     if year
       start_date = Date.parse('01-01-' + year.to_s)
       end_date = start_date.end_of_year
-      workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq
+      workshops = Event.no_draft.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq
     else
       start_date = Date.parse('01-01-' + Time.now.year.to_s) # get workshops from beginning of year
       end_date = Time.now.to_s # don't show workshops that ended before today
-      workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.end_date >= ?', start_date, end_date).uniq
+      workshops = Event.no_draft.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.end_date >= ?', start_date, end_date).uniq
     end
   
     events_by_dates = workshops

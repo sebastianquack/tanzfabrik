@@ -2,7 +2,7 @@ ActiveAdmin.register Festival do
 
   menu :priority => 2
 
-  permit_params :name_de, :description_de, :name_en, :description_en, :feature_on_welcome_screen, :event_ids => [], :festival_ids => [], :festival_container_ids => [],
+  permit_params :name_de, :description_de, :name_en, :description_en, :feature_on_welcome_screen, :draft, :event_ids => [], :festival_ids => [], :festival_container_ids => [],
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
     
@@ -41,7 +41,7 @@ ActiveAdmin.register Festival do
       end
       row :feature_on_welcome_screen
       row "Events" do |festival|
-        festival.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
+        festival.events.map { |e| (link_to e.title + (e.draft ? " (Entwurf)" : ""), admin_event_path(e)) }.join(', ').html_safe
       end      
       row :festival_containers do |festival|
         festival.festival_containers.map { |fc| (link_to fc.name, admin_festival_container_path(fc)) }.join(', ').html_safe
@@ -52,6 +52,10 @@ ActiveAdmin.register Festival do
       end
       row Download.model_name.human do |festival|
         festival.downloads.map { |d| link_to(d.description_de, d.attachment_de.url) + " " + link_to(d.description_en, d.attachment_en.url) }.join(', ').html_safe
+      end
+      
+      row t(:draft) do |festival|
+        festival.draft
       end
       
     end
@@ -100,8 +104,9 @@ ActiveAdmin.register Festival do
       end
     end
     
-    f.inputs "Special" do
+    f.inputs "Spezial" do
       f.input :feature_on_welcome_screen
+      f.input :draft, :label => t(:draft)      
     end
     
     f.actions

@@ -22,7 +22,7 @@ else
           div :class => "description open-close open-trigger overflown-base" do
             div :class => "may-overflow is-overflown open-toggle-height" do
               ul :class => "upcoming" do
-                fc.festivals.now_and_future.each do |f|
+                fc.festivals.no_draft.now_and_future.each do |f|
                   li a f.name, :href => festival_path(f)
                 end
               end
@@ -67,7 +67,7 @@ else
 
 
   # get festivals in the past
-  past_festivals = Festival.select { |f| f.events.length > 0 && f.end_date < Date.today }
+  past_festivals = Festival.no_draft.select { |f| f.events.length > 0 && f.end_date < Date.today }
 
   section :class => "archive-section" do
     h5 t(:past_festivals), :class => "archive-headline"

@@ -55,7 +55,7 @@ div :class => "open-close-shade" do
     else 
       type_ids = [3,5,6]
     end
-    cache_arbre(self, cache_key_for_kursplan(Event.of_types(type_ids), location)) do      
+    cache_arbre(self, cache_key_for_kursplan(Event.no_draft.of_types(type_ids), location)) do      
       render :partial => "/events/timetable", :locals => {:type_ids => type_ids, :start_date => start_date, :location => location}
     end
   end

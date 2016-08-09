@@ -2,7 +2,7 @@ ActiveAdmin.register Person do
 
   menu :priority => 3  
 
-  permit_params :id, :first_name, :last_name, :bio_de, :bio_en, :role, :dance_intensive, :event_ids => [], :images_attributes => [:id, :description, :license, :attachment, :_destroy]
+  permit_params :id, :first_name, :last_name, :bio_de, :bio_en, :role, :dance_intensive, :draft, :event_ids => [], :images_attributes => [:id, :description, :license, :attachment, :_destroy]
 
   index do
     selectable_column
@@ -43,6 +43,9 @@ ActiveAdmin.register Person do
       row :images do |person|
         person.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
+#      row t(:draft) do |person|
+#        person.draft
+#      end
     end
   end
   
@@ -69,7 +72,10 @@ ActiveAdmin.register Person do
           #end
         end
       end
-    
+#      f.inputs "Spezial" do 
+#        f.input :draft, :label => t(:draft)      
+#      end
+      
       f.actions
   end
 

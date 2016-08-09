@@ -2,8 +2,8 @@ with_year = (festival.start_date.year < festival.end_date.year && (festival.end_
 
 div :class => "festival" do
 
-  festival_workshops = festival.events.where(:type_id => 2)
-  events = festival.events.where.not(:type_id => 2)
+  festival_workshops = festival.events.no_draft.where(:type_id => 2)
+  events = festival.events.no_draft.where.not(:type_id => 2)
 
   header :class => "headlines festival-headlines" do
     div :class => "main" do
