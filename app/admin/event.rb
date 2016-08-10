@@ -49,7 +49,7 @@ ActiveAdmin.register Event do
       event.people.map { |p| (link_to p.name, admin_person_path(p)) }.join(', ').html_safe
     end
     column :title_de
-    column t('activerecord.attributes.event.feature_on_welcome_screen_short'), :feature_on_welcome_screen
+    #column t('activerecord.attributes.event.feature_on_welcome_screen_short'), :feature_on_welcome_screen
     actions
   end
 

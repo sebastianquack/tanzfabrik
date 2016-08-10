@@ -21,16 +21,16 @@ class Festival < ActiveRecord::Base
   accepts_nested_attributes_for :downloads, :allow_destroy => true
 
   def start_date
-    if self.events.length > 0
-      return self.events.min_by { |e| e.start_date} .start_date
+    if self.events.no_draft.length > 0
+      return self.events.no_draft.min_by { |e| e.start_date} .start_date
     else
       return nil
     end
   end
 
   def end_date
-    if self.events.length > 0
-      return self.events.max_by { |e| e.end_date } .end_date
+    if self.events.no_draft.length > 0
+      return self.events.no_draft.max_by { |e| e.end_date } .end_date
     else
       return nil
     end

@@ -39,7 +39,7 @@ ActiveAdmin.register Festival do
       row :description_en do |festival|
         festival.description_en.html_safe if festival.description_en
       end
-      row :feature_on_welcome_screen
+      #row :feature_on_welcome_screen
       row "Events" do |festival|
         festival.events.map { |e| (link_to e.title + (e.draft ? " (Entwurf)" : ""), admin_event_path(e)) }.join(', ').html_safe
       end      
@@ -105,7 +105,7 @@ ActiveAdmin.register Festival do
     end
     
     f.inputs "Spezial" do
-      f.input :feature_on_welcome_screen
+      #f.input :feature_on_welcome_screen
       f.input :draft, :label => t(:draft)      
     end
     

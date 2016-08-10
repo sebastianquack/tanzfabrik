@@ -6,7 +6,7 @@ ActiveAdmin.register Page do
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # permit_params :list, :of, :attributes, :on, :model
-  permit_params :title_de, :content_de, :title_en, :content_en, :description_de, :description_en, :priority, :changefreq, :draft,
+  permit_params :title_de, :content_de, :title_en, :content_en, :description_de, :description_en, :priority, :changefreq, :draft, :feature_on_welcome_screen, :feature_on_welcome_screen_note_en, :feature_on_welcome_screen_note_de,
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
 
@@ -37,6 +37,7 @@ ActiveAdmin.register Page do
 
   filter :title_de
   filter :content_de
+  filter :feature_on_welcome_screen
   
   config.per_page = 100
   
@@ -131,6 +132,9 @@ ActiveAdmin.register Page do
     end
     
     f.inputs "Spezial" do 
+      f.input :feature_on_welcome_screen, :label => t(:feature_on_welcome_screen)
+      f.input :feature_on_welcome_screen_note_de, :label => t(:feature_on_welcome_screen_note) + " (DE)"
+      f.input :feature_on_welcome_screen_note_en, :label => t(:feature_on_welcome_screen_note) + " (EN)"
       f.input :draft, :label => t(:draft)
     end
         

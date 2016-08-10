@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809131759) do
+ActiveRecord::Schema.define(version: 20160809161356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -216,18 +216,21 @@ ActiveRecord::Schema.define(version: 20160809131759) do
   end
 
   create_table "pages", force: :cascade do |t|
-    t.string   "title_de",       limit: 255
+    t.string   "title_de",                          limit: 255
     t.text     "content_de"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slug",           limit: 255
-    t.string   "title_en",       limit: 255
+    t.string   "slug",                              limit: 255
+    t.string   "title_en",                          limit: 255
     t.text     "content_en"
-    t.string   "description_de", limit: 255
-    t.string   "description_en", limit: 255
-    t.float    "priority",                   default: 0.5
-    t.string   "changefreq",     limit: 255, default: "weekly"
+    t.string   "description_de",                    limit: 255
+    t.string   "description_en",                    limit: 255
+    t.float    "priority",                                      default: 0.5
+    t.string   "changefreq",                        limit: 255, default: "weekly"
     t.boolean  "draft"
+    t.boolean  "feature_on_welcome_screen"
+    t.string   "feature_on_welcome_screen_note_en"
+    t.string   "feature_on_welcome_screen_note_de"
   end
 
   add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree
