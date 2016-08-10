@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20160809161356) do
     t.date     "end_date_cache"
     t.integer  "sequence",                                            default: 0
     t.boolean  "draft"
+    t.string   "facebook"
   end
 
   create_table "festival_containers", force: :cascade do |t|
@@ -171,6 +172,7 @@ ActiveRecord::Schema.define(version: 20160809161356) do
     t.boolean  "feature_on_welcome_screen"
     t.string   "slug",                      limit: 255
     t.boolean  "draft"
+    t.string   "facebook"
   end
 
   add_index "festivals", ["slug"], name: "index_festivals_on_slug", unique: true, using: :btree

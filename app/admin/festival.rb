@@ -2,7 +2,7 @@ ActiveAdmin.register Festival do
 
   menu :priority => 2
 
-  permit_params :name_de, :description_de, :name_en, :description_en, :feature_on_welcome_screen, :draft, :event_ids => [], :festival_ids => [], :festival_container_ids => [],
+  permit_params :name_de, :description_de, :name_en, :description_en, :feature_on_welcome_screen, :facebook,  :draft, :event_ids => [], :festival_ids => [], :festival_container_ids => [],
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
     
@@ -40,6 +40,11 @@ ActiveAdmin.register Festival do
         festival.description_en.html_safe if festival.description_en
       end
       #row :feature_on_welcome_screen
+      unless festival.facebook.nil? || festival.facebook.empty?
+        row "Facebook-Link" do
+          a festival.facebook, :href=>festival.facebook, :target=>"_blank"
+        end
+      end      
       row "Events" do |festival|
         festival.events.map { |e| (link_to e.title + (e.draft ? " (Entwurf)" : ""), admin_event_path(e)) }.join(', ').html_safe
       end      
@@ -70,6 +75,10 @@ ActiveAdmin.register Festival do
       f.input :description_en, :input_html => { :class => 'wysihtml5' }
       f.input :festival_containers, :as => :check_boxes
     end
+
+    f.inputs "Externe Links" do
+      f.input :facebook, :required => false, :placeholder => "https://www.facebook.com/events/877048289058664/"
+    end     
 
     f.inputs "Images" do
       f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|

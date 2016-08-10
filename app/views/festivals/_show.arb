@@ -12,6 +12,9 @@ div :class => "festival" do
             span festival.name
             time l(festival.start_date, :format => ( with_year ? :default : :short) ) + "-" + l(festival.end_date) if festival.events.exists?
           end
+
+        a "facebook", :href=>festival.facebook, :class=>"facebook-link", :target=>"_blank" unless festival.facebook.nil? || festival.facebook.empty?
+
         a "> " + t(:tickets), :href => page_path("tickets"), :class => "registration" if events.length > 0
         a "> " + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration" if festival_workshops.length > 0
       end

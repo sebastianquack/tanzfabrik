@@ -46,7 +46,7 @@ $(document).ready(function() {
     base = $(this).closest('.open-close')
     if ($(this).hasClass("close-others")) {
       var group = base.data("open-close-group")
-      console.log(group)
+      //console.log(group)
       $(".open-close.opened[data-open-close-group="+group+"]").removeClass("opened")
     }
     if (!base.hasClass("opened")) {
@@ -179,7 +179,7 @@ $(document).ready(function() {
     last_background_status = $("body.start").length == 1 ? "strong" : "weak"
     if (last_background_status == "strong") {
       $(".site-background").addClass(last_background_status)
-      console.log("init "+ last_background_status)
+      //console.log("init "+ last_background_status)
     }
   }
 
@@ -223,7 +223,7 @@ contentHider = function () {
         var contentOffset = contentContainer.offset().top
         var delta = menu3Offset + menu3Height - contentOffset
       }
-      console.log(menu3Height, menu3Offset, contentOffset, delta)
+      //console.log(menu3Height, menu3Offset, contentOffset, delta)
       var topPlus = contentContainer.data("defaultTop")
       var container_height = contentContainer.height()
       if (delta > 0) {
@@ -240,7 +240,7 @@ contentHider = function () {
 }
 
 function reflow(elt){
-    console.log(elt.offsetHeight);
+    //console.log(elt.offsetHeight);
 }
 
 // determine element height for css transition
@@ -274,7 +274,7 @@ $.easing.elasout = function(x, t, b, c, d) {
 var scrollScreenTo = function (el, duration, cb) {
     var elOffset = el.offset().top;
     var elHeight = el.height();
-    console.log(elHeight)
+    //console.log(elHeight)
     var windowHeight = $(window).height();
     var offset;
 
