@@ -15,8 +15,8 @@ else
   event_types = Rails.configuration.stage_event_types
 end
 
-next_occurrence = event.next(params[:time], event_types, festival)
-prev_occurrence = event.prev(params[:time], event_types, festival)
+next_occurrence = event.next(params[:time], event_types, festival) if event.occurs?
+prev_occurrence = event.prev(params[:time], event_types, festival) if event.occurs?
 
 header :id => "headlines", :class => "headlines-event" do
   div :class => "before" do
