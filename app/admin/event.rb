@@ -127,9 +127,11 @@ ActiveAdmin.register Event do
       row Image.model_name.human do |event|
         event.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
-      row :feature_on_welcome_screen
+      row t(:feature_on_welcome_screen) do |event|
+        t(event.feature_on_welcome_screen)
+      end
       row t(:draft) do |event|
-         event.draft
+         t(event.draft)
       end
     end
     active_admin_comments

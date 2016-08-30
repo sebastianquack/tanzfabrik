@@ -135,7 +135,9 @@ $(document).ready(function() {
     if(li.hasClass("unavailable")) {
       return
     } 
-    $(li.toggleClass("selected"))      
+    
+    $(li.toggleClass("selected"))
+    $(".alphabet li").not(li).removeClass("selected")
     
     $(".alphabet li").each(function(index, elem) {
       if($(elem).hasClass("selected") || $(".alphabet .selected").length == 0) {

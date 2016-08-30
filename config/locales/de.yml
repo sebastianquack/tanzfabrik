@@ -1,4 +1,6 @@
 de:
+  :true: "Ja"
+  :false: "Nein"
   section_start: "Start"
   section_school: "Tanz"
   section_classes: "Tanzklassen"
@@ -12,7 +14,7 @@ de:
   section_service: "Service"
   section_about: "Über Uns"
   archive: "Archiv"
-  
+
   search_results: "Such-Ergebnisse"
 
   next_week: "Nächste Woche"
@@ -95,7 +97,7 @@ de:
 
   ticket_link: "http://www.reservix.de/off/login_check.php?id=c6ec16e8cf3cd5077514ebef590a1f763d4616b372ef8900411779bf6bedf213&vID=9246"
   
-  draft: Entwurf (nicht gelistet)
+  draft: Nicht im Front-End angezeigt
   feature_on_welcome_screen: Auf Startseite hervorheben
   feature_on_welcome_screen_note: Hinweis für Hervorhebung
   
@@ -427,7 +429,7 @@ de:
         image: Bild
         images: Bilder
         dance_intensive: Dance-Intensive-LehrerIn
-        draft: Entwurf (versteckt)
+        draft: Nicht im Front-End anzeigen
       studio:
         location: Adresse
         name: Name

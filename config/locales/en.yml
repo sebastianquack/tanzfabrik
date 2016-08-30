@@ -20,6 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  :true: "Yes"
+  :false: "No"
   section_start: "Start"
   section_school: "Tanz"
   section_classes: "Dance Classes"
@@ -33,7 +35,7 @@ en:
   section_service: "Service"
   section_about: "About Us"
   archive: "Archive"
-  
+
   search_results: "Search Results"
 
   next_week: "Next Week"

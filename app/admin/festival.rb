@@ -46,7 +46,7 @@ ActiveAdmin.register Festival do
         end
       end      
       row "Events" do |festival|
-        festival.events.map { |e| (link_to e.title + (e.draft ? " (Entwurf)" : ""), admin_event_path(e)) }.join(', ').html_safe
+        festival.events.map { |e| (link_to e.title + (e.draft ? " (" + t(:draft) + ")" : ""), admin_event_path(e)) }.join(', ').html_safe
       end      
       row :festival_containers do |festival|
         festival.festival_containers.map { |fc| (link_to fc.name, admin_festival_container_path(fc)) }.join(', ').html_safe
