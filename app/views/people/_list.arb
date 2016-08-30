@@ -40,7 +40,6 @@ people.each do |person|
                 li t(:dance_intensive)
               end
               person.events.no_draft.select { |e| e.type.id == 3 }.uniq{|e| e.title}.each do |e| 
-                #li e.title.html_safe, :class => "one-line", :title => e.title.html_safe
                 if event_link(e)
                   li link_to(e.title.html_safe, event_link(e), {:title => e.title.html_safe}), :class => "one-line"
                 else

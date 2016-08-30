@@ -180,12 +180,17 @@ class Event < ActiveRecord::Base
     self.type_id == 5
   end
 
+  # TODO: use this code in timetable generation too. But make sure that it's correct
   def currently_listed_course?
     if([3,5,6].include? self.type_id) # is this an event of type course?
       # is there an occurrence coming up in the next 12 weeks?
       if(EventDetailOccurrence.where("event_id = ? AND time > ? AND time < ?", self.id, Time.now, Time.now + 12.week).count > 0)
         return true
       end
+      # is start_date equal to end_date? by convention this means for weekly events: run forever
+      if (self.start_date == self.end_date)
+        return true
+      end      
     end
     return false
   end
