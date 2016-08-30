@@ -71,9 +71,11 @@ if results.length > 0
                   event.people.each do |person| 
                     link = person_link(person)
                     if(link)
+                      text_node "&nbsp;".html_safe
                       em link_to person.name, link
                     end
                   end
+                  text_node "&nbsp;".html_safe
                   span dates.map { |d| l(d, :format => :day) }.join(" – ")
                 end
               end
