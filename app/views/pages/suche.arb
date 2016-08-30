@@ -25,17 +25,84 @@ if results.length > 0
   end
 
   ol :class => "search-results" do
+
+    # festivals
+
+    if results[:festivals].length > 0
+      li do
+        h4 "Festivals", :class => "search-category-title"
+        ol :class => "search-category-content" do
+          results[:festivals].each do |festival|
+            li link_to festival.name, festival_path(festival)
+          end
+        end
+      end
+    end
+
+    # events
+
+    if results[:events].length > 0
+
+      events_dates = results[:events].map { |event| [event, event.date_range_for_search_result] } # call date_range_for_search_result only once, reuse later
+
+      events_dates.sort! do |y,x|
+        case 
+        when x[1].length == 0 && y[1].length == 0
+          0
+        when x[1].length == 0 
+          1
+        when y[1].length == 0 
+          -1
+        else
+          x[1][-1] <=> y[1][-1]
+        end
+      end
+
+      events_dates.group_by{ |e| e[0].type_id }.each do |type_id, events_of_type|
+
+        li do
+          h4 EventType.find(type_id).name, :class => "search-category-title"
+          ol :class => "search-category-content" do
+            events_of_type.each do |event, dates|
+              link = event_link(event)
+              if(link)
+                li do
+                  text_node link_to (event.title), link
+                  event.people.each do |person| 
+                    link = person_link(person)
+                    if(link)
+                      em link_to person.name, link
+                    end
+                  end
+                  span dates.map { |d| l(d, :format => :day) }.join(" – ")
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+
+    # pages
+
     if results[:pages].length > 0
       li do
         h4 "Seiten", :class => "search-category-title"
         ol :class => "search-category-content" do
           results[:pages].each do |page|
-            li link_to page.title, page_path(page)
+            li link_to page.title, page_path(page, :f => params[:q])
           end
         end
       end
     end
+    
+    # people
+
     if results[:people].length > 0
+      
+      results[:people].uniq!
+      results[:people].sort_by! { |p| p.last_name }
+      
       li do
         h4 "Personen", :class => "search-category-title"
         ol :class => "search-category-content" do
@@ -48,31 +115,7 @@ if results.length > 0
         end
       end
     end
-    if results[:events].length > 0    
-      li do
-        h4 "Veranstaltungen", :class => "search-category-title"
-        ol :class => "search-category-content" do
-          results[:events].each do |event|
-            link = event_link(event)
-            if(link)
-              li do
-                text_node link_to (event.title + " (" + event.type.name + ")"), link
-              end
-            end
-          end
-        end
-      end
-    end
-    if results[:festivals].length > 0
-      li do
-        h4 "Festivals", :class => "search-category-title"
-        ol :class => "search-category-content" do
-          results[:festivals].each do |festival|
-            li link_to festival.name, festival_path(festival)
-          end
-        end
-      end
-    end
+
   end
   
 end

@@ -183,6 +183,14 @@ $(document).ready(function() {
     }
   }
 
+  // highlight finds on page
+
+  var find = getUrlParameterByName('f')
+
+  if (find && typeof(window.find) == "function") {
+    window.find(find)
+  }
+
 });
 
 // background fading on turbolinks page load 
@@ -287,3 +295,14 @@ var scrollScreenTo = function (el, duration, cb) {
 
     $.scrollTo( offset, duration, { easing:'elasout' }, (typeof(cb)=="function"? cb() : null) );
   }
+
+// get parameter from URL
+function getUrlParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}

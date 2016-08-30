@@ -1,3 +1,14 @@
+# Event Types (by convention)
+# 1: Performance
+# 2: Workshop
+# 3: Kurs
+# 4: Profitraining
+# 5: Performance-Projekt
+# 6: Kindertanz
+# 7: Showing
+# 8: Lecture-Performance
+# 9: Gespräch/Talk
+
 class Event < ActiveRecord::Base
 
   translates :title, :description, :warning, :info, fallback: :any
@@ -385,6 +396,10 @@ class Event < ActiveRecord::Base
     return EventDetailOccurrence.where(:event_id => self.id).order("time").first
   end
 
+  def last_event_occurrence
+    return EventDetailOccurrence.where(:event_id => self.id).order("time").last
+  end
+
   def self.where_festival(festival_id)
     if festival_id
       where("id IN (?)", Festival.find(festival_id).events.pluck(:id))      
@@ -393,5 +408,16 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def date_range_for_search_result
+    if self.type_id.in?([3]) # empty if kurs (only currently active courses should appear / there is no archive)
+      return []
+    elsif self.first_event_occurrence.nil? || self.last_event_occurrence.nil?
+      return []
+    elsif self.first_event_occurrence.time.to_date == self.last_event_occurrence.time.to_date
+      return [self.first_event_occurrence.time.to_date]
+    else
+      return [self.first_event_occurrence.time.to_date, self.last_event_occurrence.time.to_date]
+    end
+  end
     
 end
