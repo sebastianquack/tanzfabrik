@@ -372,6 +372,11 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def occurs?
+    #return self.event_details.count > 0
+    EventDetailOccurrence.where(:event_id => self.id).count > 0
+  end
+
   def occurs_on? date 
     self.event_details.each do |detail|
       if detail.occurs_on? date 
