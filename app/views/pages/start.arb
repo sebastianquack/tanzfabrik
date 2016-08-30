@@ -35,6 +35,8 @@ occurrences_today[0..2].each do |o|
   })
 end
 
+tomorrowShortened = t(:tomorrow).length > 7 ? l(Date.tomorrow, :format => :short) : t(:tomorrow)
+
 ############## TOMORROW: EVENTS WITHOUT FESTIVAL TOMORROW ##############
 
 # pick the events (not in festival) that have an occurrence tomorrow
@@ -48,7 +50,7 @@ end
 occurrences_tomorrow.sort_by! { |x| x[0] }
 occurrences_tomorrow.each do |o|
   entries_tomorrow.push({
-    :time => t(:tomorrow),
+    :time => tomorrowShortened,
     :title => o[1].event.title,
     :href => event_path(o[1].event),
   })
@@ -93,7 +95,7 @@ ongoing_festivals.each do |f|
   
   if festival_event_tomorrow  
     entries_tomorrow.push({
-      :time => t(:tomorrow),
+      :time => tomorrowShortened,
       :title => f.name,
       :href => festival_path(f)    
     })
@@ -115,7 +117,7 @@ festivals_tomorrow = Festival.no_draft.now_and_future.includes(:event_details).s
 
 festivals_tomorrow.each do |f|
   entries_tomorrow.push({
-    :time => t(:tomorrow),
+    :time => tomorrowShortened,
     :title => f.name,
     :href => festival_path(f)    
   })  
