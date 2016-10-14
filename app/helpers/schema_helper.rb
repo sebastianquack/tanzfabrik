@@ -48,7 +48,7 @@ module SchemaHelper
       item[:url]        = event_url(event)
       item[:image]      = event.images.first.attachment.url(:medium_detail_column) if event.images.length > 0
       if !o.event_detail.custom_place.empty?
-        item[:location]   = place_jsonld(o.event_detail.custom_place)  
+        item[:location]   = o.event_detail.custom_place
       else
         item[:location]   = place_jsonld(o.event_detail.full_location, o.event_detail.studio.location)
       end
@@ -62,16 +62,17 @@ module SchemaHelper
   def place_jsonld(name, location = nil) # location according to location model
     item = Hash.new
     item[:@type] = "Place"
-    item[:name] = name      
-    item[:address] = Hash.new
-    item[:address][:@type] = "PostalAddress"
-    if location
-      item[:address][:streetAddress] = location.address
+    item[:name] = name        
+    #item[:address] = Hash.new
+    #item[:address][:@type] = "PostalAddress"
+    if location        
+      item[:address] = location.address
+      #item[:address][:streetAddress] = location.address
     end
     item
   end  
 
-  # https://schema.org/place
+  # https://schema.org/person
   def person_jsonld(person) # person according to person model
     item = Hash.new
     item[:@type]      = "Person" # may be "@type": "PerformingGroup" etc if model was more precise
