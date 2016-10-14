@@ -1,11 +1,13 @@
 class EventsController < ApplicationController
   include SeoHelper
+  include SchemaHelper
 
   def show
     @event = Event.find(params[:id])
     set_meta_tags :title => (@event.title + " | " + @event.type.name)
     set_meta_tags :description => auto_generate_description(@event.description) if @event.description
     set_meta_tags :keywords => (@event.keywords)
+    add_to_jsonld event_jsonld(@event) if @event.stage_event?
   end
 
   def index
