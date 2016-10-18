@@ -372,6 +372,16 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def reset_occurrences
+    logger.debug "resetting occurrences on event " + self.id.to_s
+
+    EventDetailOccurrence.where(:event_id => self.id).delete_all
+
+    self.event_details.each do |event_detail|
+      event_detail.reset_occurrences
+    end    
+  end
+
   def occurs?
     #return self.event_details.count > 0
     EventDetailOccurrence.where(:event_id => self.id).count > 0

@@ -168,7 +168,7 @@ class EventDetail < ActiveRecord::Base
 
   # deletes all EventDetailOccurrences associated with this EventDetail, recalculates and saves them
   def reset_occurrences
-    logger.debug "resetting occurrences"
+    logger.debug "resetting occurrences on event_detail " + self.id.to_s
     
     EventDetailOccurrence.where(:event_detail_id => self.id).delete_all
     

@@ -238,9 +238,7 @@ ActiveAdmin.register Event do
     def create
       reset_events if params[:event][:feature_on_welcome_screen] == "1"
       create_event
-      @event.event_details.each do |event_detail|
-        event_detail.reset_occurrences
-      end
+      @event.reset_occurrences
       @event.start_date_cache = @event.start_date
       @event.end_date_cache = @event.end_date
       @event.save
@@ -250,9 +248,7 @@ ActiveAdmin.register Event do
       #logger.debug params
       reset_events if params[:event][:feature_on_welcome_screen] == "1"
       update_event
-      @event.event_details.each do |event_detail|
-        event_detail.reset_occurrences
-      end
+      @event.reset_occurrences
       @event.start_date_cache = @event.start_date
       @event.end_date_cache = @event.end_date
       @event.save
