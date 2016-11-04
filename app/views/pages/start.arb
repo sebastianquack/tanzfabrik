@@ -15,10 +15,17 @@ custom_entry = nil
 # grab stage events that are not in a festival
 events_not_in_festival = Event.no_draft.not_in_festival.stage_event
 
-############ TODAY: EVENTS WITHOUT FESTIVAL ###############
+############ TODAY: EVENTS WITHOUT FESTIVAL OR MANUALLY SELECTED EVENTS ###############
 
 # pick the events (not in festival) that have an occurrence today
 events_today = events_not_in_festival.select {|e| e.occurs_on? Date.today }
+
+# featured events today
+featured_events = Event.no_draft.where(:feature_on_welcome_screen => true)
+
+featured_events.select{ |e| e.next_occurrence && e.next_occurrence.time.to_date == Date.today }.each do |e|
+  events_today.push(e)
+end
 
 # collect all the occurrences for these events and sort by time
 occurrences_today = []
@@ -37,10 +44,15 @@ end
 
 tomorrowShortened = t(:tomorrow).length > 7 ? l(Date.tomorrow, :format => :short) : t(:tomorrow)
 
-############## TOMORROW: EVENTS WITHOUT FESTIVAL TOMORROW ##############
+############## TOMORROW: EVENTS WITHOUT FESTIVAL OR MANUALLY SELECTED EVENTS TOMORROW ##############
 
 # pick the events (not in festival) that have an occurrence tomorrow
 events_tomorrow = events_not_in_festival.select {|e| e.occurs_on? Date.tomorrow }
+
+# featured events tomorrow
+featured_events.select{ |e| e.next_occurrence && e.next_occurrence.time.to_date == Date.tomorrow }.each do |e|
+  events_tomorrow.push(e)
+end
 
 # collect all the occurrences for these events and sort by time
 occurrences_tomorrow = []

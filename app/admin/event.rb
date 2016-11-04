@@ -236,7 +236,7 @@ ActiveAdmin.register Event do
     end    
     alias_method :create_event, :create
     def create
-      reset_events if params[:event][:feature_on_welcome_screen] == "1"
+      # reset_events if params[:event][:feature_on_welcome_screen] == "1"
       create_event
       @event.reset_occurrences
       @event.start_date_cache = @event.start_date
@@ -246,7 +246,7 @@ ActiveAdmin.register Event do
     alias_method :update_event, :update
     def update
       #logger.debug params
-      reset_events if params[:event][:feature_on_welcome_screen] == "1"
+      # reset_events if params[:event][:feature_on_welcome_screen] == "1"
       update_event
       @event.reset_occurrences
       @event.start_date_cache = @event.start_date
