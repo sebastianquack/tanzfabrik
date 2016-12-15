@@ -37,6 +37,9 @@ en:
   archive: "Archive"
 
   search_results: "Search Results"
+  newsletter_subscribe: "Subscribe"
+  newsletter_unsubscribe: "Unsubscribe"
+  newsletter_email_address: "email address"
 
   next_week: "Next Week"
   previous_week: "Previous Week"

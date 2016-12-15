@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  
+  <% if @mode == "subscribe"%>
+      <h1>Neue Newsletter-Anmeldung</h1>
+      <p>Email: <%= @email %></p>
+  <% end %>
+
+  <% if @mode == "unsubscribe"%>
+      <h1>Newsletter-Abmeldung</h1>
+      <p>Email: <%= @email %></p>
+  <% end %>
+  
+</body>
+</html>

@@ -1,0 +1,46 @@
+if I18n.locale == :de
+  page_title = "Newsletter"
+else
+  page_title = "Newsletter"
+end
+set_meta_tags :title => page_title, :reverse => false
+
+header :id => "headlines", :class => "headlines-teachers" do
+  div :class => "before"
+  div :class => "main" do
+    div :class => "line1" do
+      h1 page_title, :class => "title"
+    end
+  end
+end
+
+def subscribe_form(className, mode, value)
+  form :class=>className, :"accept-charset"=>"UTF-8", :action=>"subscriptions#create", :method=>"post" do 
+    input :type=>"hidden", :name=>"timestamp", :value => Time.now.to_i
+    input :type=>"hidden", :name=>"country", :value => ""
+    input :type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token
+    input :type=>"hidden", :name=>"mode", :value => mode
+    input :type=>"email", :placeholder=>t(:newsletter_email_address), :name=>"email", :value=>params[:q], :onclick => "this.select()"
+    input :type=>"submit", :value=>value
+  end
+end
+
+div :class => "row page" do
+  div :class => "basic" do
+
+    if notice == "ok"
+      newsletter_success = TextItem.where(:name => "NewsletterErfolg").first
+      para newsletter_success.content
+    else
+
+      newsletter_intro = TextItem.where(:name => "NewsletterStart").first
+      para newsletter_intro.content
+
+      subscribe_form("newsletter-subscribe-form", "subscribe", t(:newsletter_subscribe))
+      subscribe_form("newsletter-unsubscribe-form", "unsubscribe", t(:newsletter_unsubscribe))
+    end
+
+  end
+  div :class => "details empty", "data-variant" => 2
+end
+

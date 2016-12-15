@@ -15,7 +15,7 @@ if notice == "ok"
       para t(:registration_success)
     end
   end
-  else
+else
 
   unless defined? registration 
     registration = Registration.new

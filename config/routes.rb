@@ -26,6 +26,7 @@ Tanzfabrik::Application.routes.draw do
     resources :festivals, :only => [:show, :update]
     resources :pages, :only => [:show, :update], :path => '' # route everything to pages controller
     resources :registrations, :only => [:create]
+    resources :subscriptions, :only => [:create]
   end
   
   #resources :pages, :only => [:update]

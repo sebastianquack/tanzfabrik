@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809161356) do
+ActiveRecord::Schema.define(version: 20161215141950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,20 +48,6 @@ ActiveRecord::Schema.define(version: 20160809161356) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "assets", force: :cascade do |t|
-    t.string   "storage_uid",          limit: 255
-    t.string   "storage_name",         limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "storage_width"
-    t.integer  "storage_height"
-    t.float    "storage_aspect_ratio"
-    t.integer  "storage_depth"
-    t.string   "storage_format",       limit: 255
-    t.string   "storage_mime_type",    limit: 255
-    t.string   "storage_size",         limit: 255
-  end
 
   create_table "downloads", force: :cascade do |t|
     t.string   "description_de",             limit: 255
@@ -107,14 +93,6 @@ ActiveRecord::Schema.define(version: 20160809161356) do
     t.time     "time"
     t.integer  "repeat_mode_id"
     t.string   "custom_place",   limit: 255
-  end
-
-  create_table "event_tags", id: false, force: :cascade do |t|
-    t.integer  "id",         default: "nextval('event_tags_id_seq'::regclass)", null: false
-    t.integer  "event_id"
-    t.integer  "tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "event_types", force: :cascade do |t|
@@ -327,6 +305,13 @@ ActiveRecord::Schema.define(version: 20160809161356) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.text     "description_en"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string   "email"
+    t.boolean  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|

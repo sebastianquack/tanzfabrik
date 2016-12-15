@@ -16,6 +16,9 @@ de:
   archive: "Archiv"
 
   search_results: "Such-Ergebnisse"
+  newsletter_subscribe: "Anmelden"
+  newsletter_unsubscribe: "Abmelden"
+  newsletter_email_address: "E-Mail-Adresse"
 
   next_week: "Nächste Woche"
   previous_week: "Vorherige Woche"
