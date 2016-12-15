@@ -29,8 +29,13 @@ if notice == "ok"
     .uniq
     #.sort_by { |w| [w.start_date, w.title.split("/")[0].to_i] } # assuming format: "NUMBER / TITLE"
 
-  workshops = workshops_sort workshops
-
+  # first sort and group by early bird date, then sort inside groups by title using workshops_sort
+  workshops_sorted_in_early_bird_groups = []
+  workshops_grouped_by_early_bird = workshops.sort_by { |w| w.early_bird_date}.group_by { |w| w.early_bird_date }
+  workshops_grouped_by_early_bird.each do |early_bird_date, early_bird_workshops|
+    workshops_sorted_in_early_bird_groups += workshops_sort early_bird_workshops
+  end
+  
   div :class => "registration-form" do
     
     form_for registration, :html => {'data-parsley-validate' => ''} do |f|
@@ -50,22 +55,22 @@ if notice == "ok"
         
         div :class => "row" do
           f.label :workshop_id_1, "Workshop 1"
-          f.collection_select :workshop_id_1, workshops, :id, :workshop_select, {:prompt => t(:workshop_registration_choose)}, {:required => "required"}
+          f.collection_select :workshop_id_1, workshops_sorted_in_early_bird_groups, :id, :workshop_select, {:prompt => t(:workshop_registration_choose)}, {:required => "required"}
         end
 
         div :class => "row" do
           f.label :workshop_id_2, "Workshop 2"
-          f.collection_select :workshop_id_2, workshops, :id, :workshop_select, :prompt => t(:workshop_registration_choose)
+          f.collection_select :workshop_id_2, workshops_sorted_in_early_bird_groups, :id, :workshop_select, :prompt => t(:workshop_registration_choose)
         end
 
         div :class => "row" do
           f.label :workshop_id_3, "Workshop 3"
-          f.collection_select :workshop_id_3, workshops, :id, :workshop_select, :prompt => t(:workshop_registration_choose)
+          f.collection_select :workshop_id_3, workshops_sorted_in_early_bird_groups, :id, :workshop_select, :prompt => t(:workshop_registration_choose)
         end
 
         div :class => "row" do  
           f.label :workshop_id_4, "Workshop 4"
-          f.collection_select :workshop_id_4, workshops, :id, :workshop_select, :prompt => t(:workshop_registration_choose)
+          f.collection_select :workshop_id_4, workshops_sorted_in_early_bird_groups, :id, :workshop_select, :prompt => t(:workshop_registration_choose)
         end
 
       end
@@ -161,7 +166,7 @@ if notice == "ok"
         div t(:form_section_concessions), :class => "title"
         div :class => "description" do 
           para t(:form_section_concessions_early_bird)
-          workshops.group_by { |w| w.early_bird_date } .each do |early_bird_date, early_bird_workshops|
+          workshops_grouped_by_early_bird.each do |early_bird_date, early_bird_workshops|
             early_bird_workshops = workshops_sort early_bird_workshops
             para :class => "early_bird_list" do
               early_bird_workshops.each do |workshop|

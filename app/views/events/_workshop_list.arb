@@ -1,7 +1,7 @@
 # local variable workshops: collection of workshop type events 
 # local variable combinations: enable "workshop-kombinationen"
 
-workshop_groups = get_workshop_groups_sorted(params[:year])
+workshop_groups = get_workshop_groups_sorted(params[:year], in_festival ? in_festival.id : nil)
 
 if workshop_groups.length > 0
 

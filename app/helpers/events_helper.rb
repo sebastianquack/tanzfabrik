@@ -31,16 +31,16 @@ module EventsHelper
   end
     
   # generates a list of workshops grouped by dates and sorted inside groups by workshops_sort_function
-  def get_workshop_groups_sorted(year)
+  def get_workshop_groups_sorted(year, festival_id = nil)
 
     if year
       start_date = Date.parse('01-01-' + year.to_s)
       end_date = start_date.end_of_year
-      workshops = Event.no_draft.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq
+      workshops = Event.no_draft.where_festival(festival_id).joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq
     else
       start_date = Date.parse('01-01-' + Time.now.year.to_s) # get workshops from beginning of year
       end_date = Time.now.to_s # don't show workshops that ended before today
-      workshops = Event.no_draft.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.end_date >= ?', start_date, end_date).uniq
+      workshops = Event.no_draft.where_festival(festival_id).joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.end_date >= ?', start_date, end_date).uniq
     end
   
     events_by_dates = workshops
@@ -65,14 +65,17 @@ module EventsHelper
     #   L XXL
     #   LXX
     #   LXX+LXX           
+    #   L-X L ##not implemented yet
+    #   L-X L+L ##not implemented yet
     # Legend:
     #   X = Number without leading zero, e.g. 1 or 10
     #   XX = Number with leading zero, e.g. 01 or 10
     #   L = Letter. At the beginning typically "S" for summer, at the end typically A, B or C to name a series of workshops
     # Tricks:
     #   e.title.split(" ").slice(1..2).count("/") ---------------- put entries without slash (not enumerated in the above way) at first
-    #   e.title.split("/")[0].to_i                ---- case X ---- put 1 before 10
+    #   e.title.split("/")[0].to_i                ---- case X ---- put 1 before 10 -- to_i on string extracts number in beginning
     workshops.sort_by { |e| [e.title.split(" ").slice(1..2).count("/"), e.title.split("/")[0].to_i, e.title] } 
+    ## todo: update
   end
 
 end
