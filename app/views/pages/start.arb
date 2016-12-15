@@ -29,7 +29,7 @@ end
 
 # collect all the occurrences for these events and sort by time
 occurrences_today = []
-events_today.each do |e| 
+events_today.uniq.each do |e| 
   occurrences_today += (e.occurrences_on Date.today)
 end
 occurrences_today.sort_by! { |x| x[0] }
@@ -197,6 +197,8 @@ all_entries += entries_tomorrow
 entries_future.sort_by! { |e| e[:time] }
 entries_future = entries_future.map { |e| {:time => l(e[:time], :format => :short), :title => e[:title], :href => e[:href] }}
 all_entries += entries_future
+
+all_entries.uniq! { |e| e[:title] }
 
 # shorten to maximum 7 entries
 all_entries = all_entries[0..(6 - entries_pages.length)] + entries_pages
