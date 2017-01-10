@@ -5,15 +5,15 @@
 </head>
 <body>
   
-  <% if @mode == "subscribe"%>
-      <h1>Neue Newsletter-Anmeldung</h1>
-      <p>Email: <%= @email %></p>
+  <% if @subscription.status == true %>
+      <h1>Update der Newsletter-Abos</h1>
+      <p><%= t(:newsletter_label_1) %>: <%= (@subscription.newsletter_1 ? "ja" : "nein") %></p>
+      <p><%= t(:newsletter_label_2) %>: <%= (@subscription.newsletter_2 ? "ja" : "nein") %></p>
+      <p><%= t(:newsletter_label_3) %>: <%= (@subscription.newsletter_3 ? "ja" : "nein") %></p>
+  <% else %>
+      <h1>Newsletter-Abmeldung von allen Newslettern</h1>
   <% end %>
+  <p>Email: <%= @subscription.email %></p>
 
-  <% if @mode == "unsubscribe"%>
-      <h1>Newsletter-Abmeldung</h1>
-      <p>Email: <%= @email %></p>
-  <% end %>
-  
 </body>
 </html>

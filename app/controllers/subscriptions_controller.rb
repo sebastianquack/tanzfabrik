@@ -17,19 +17,24 @@ class SubscriptionsController < ApplicationController
 
     subscription = Subscription.where(:email => params[:email]).first
     if(!subscription) 
-      subscription = Subscription.new(:email => params[:email], :status => (params[:mode] == "subscribe"))
+      subscription = Subscription.new(:email => params[:email])
       subscription.save
     else 
-      if subscription.status == true && params[:mode] == "unsubscribe"
-        subscription.status = false
-        subscription.save
-      elsif subscription.status == false && params[:mode] == "subscribe"
+      if params[:unsubscribe]  
+        subscription.status = false      
+        subscription.newsletter_1 = false
+        subscription.newsletter_2 = false
+        subscription.newsletter_3 = false
+      else
         subscription.status = true
-        subscription.save
+        subscription.newsletter_1 = params[:newsletter_1]
+        subscription.newsletter_2 = params[:newsletter_2]
+        subscription.newsletter_3 = params[:newsletter_3]        
       end
+      subscription.save
     end
     
-    SubscriptionMailer.subscription_mail(params[:mode], params[:email]).deliver                  
+    SubscriptionMailer.subscription_mail(subscription).deliver                  
     redirect_to page_url('newsletter'), :notice => 'ok' 
 
   end

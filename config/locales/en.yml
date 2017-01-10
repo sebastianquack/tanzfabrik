@@ -37,9 +37,13 @@ en:
   archive: "Archive"
 
   search_results: "Search Results"
-  newsletter_subscribe: "Subscribe"
+  newsletter_subscribe: "Submit"
   newsletter_unsubscribe: "Unsubscribe"
   newsletter_email_address: "email address"
+  newsletter_label_1: "Events"
+  newsletter_label_2: "Classes"
+  newsletter_label_3: "Workshops"
+  newsletter_unsubscribe_all: "Unsubribe from all newsletters"
 
   next_week: "Next Week"
   previous_week: "Previous Week"

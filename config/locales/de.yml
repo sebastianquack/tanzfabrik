@@ -16,9 +16,14 @@ de:
   archive: "Archiv"
 
   search_results: "Such-Ergebnisse"
-  newsletter_subscribe: "Anmelden"
+  newsletter_subscribe: "Abschicken"
   newsletter_unsubscribe: "Abmelden"
   newsletter_email_address: "E-Mail-Adresse"
+  newsletter_label_1: "Veranstaltungen"
+  newsletter_label_2: "Kurse"
+  newsletter_label_3: "Workshops"
+  newsletter_unsubscribe_all: "von allen Newslettern abmelden"
+
 
   next_week: "Nächste Woche"
   previous_week: "Vorherige Woche"

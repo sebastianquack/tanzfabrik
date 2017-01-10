@@ -20,6 +20,25 @@ def subscribe_form(className, mode, value)
     input :type=>"hidden", :name=>"country", :value => ""
     input :type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token
     input :type=>"hidden", :name=>"mode", :value => mode
+    
+    ul do
+      li do
+        input :type=>"checkbox", :name=>"newsletter_1"
+        label t(:newsletter_label_1)
+      end
+      li do
+        input :type=>"checkbox", :name=>"newsletter_2"
+        label t(:newsletter_label_2)
+      end
+      li do
+        input :type=>"checkbox", :name=>"newsletter_3"
+        label t(:newsletter_label_3)
+      end
+      li do 
+        input :type=>"checkbox", :name=>"unsubscribe"
+        label t(:newsletter_unsubscribe_all)
+      end
+    end    
     input :type=>"email", :placeholder=>t(:newsletter_email_address), :name=>"email", :value=>params[:q], :onclick => "this.select()"
     input :type=>"submit", :value=>value
   end
@@ -37,7 +56,6 @@ div :class => "row page" do
       para newsletter_intro.content
 
       subscribe_form("newsletter-subscribe-form", "subscribe", t(:newsletter_subscribe))
-      subscribe_form("newsletter-unsubscribe-form", "unsubscribe", t(:newsletter_unsubscribe))
     end
 
   end

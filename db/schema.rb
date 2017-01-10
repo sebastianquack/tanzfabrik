@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161215141950) do
+ActiveRecord::Schema.define(version: 20170110111905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -310,8 +310,11 @@ ActiveRecord::Schema.define(version: 20161215141950) do
   create_table "subscriptions", force: :cascade do |t|
     t.string   "email"
     t.boolean  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "newsletter_1", default: false
+    t.boolean  "newsletter_2", default: false
+    t.boolean  "newsletter_3", default: false
   end
 
   create_table "tags", force: :cascade do |t|

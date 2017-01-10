@@ -1,9 +1,8 @@
 class SubscriptionMailer < ActionMailer::Base
   default from: "admin@tanzfabrik-berlin.de"
   
-  def subscription_mail(mode, email)
-    @mode = mode
-    @email = email
+  def subscription_mail(subscription)
+    @subscription = subscription
     to = TextItem.where(:name => "NewsletterAdmin").first
     
     if(to.content)
