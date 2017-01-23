@@ -101,7 +101,10 @@ cache_arbre(self, cache_for_navigation) do
       end
       li do
         a "facebook", :href => "https://www.facebook.com/tanzfabrikberlin.de", :title => "https://www.facebook.com/tanzfabrikberlin.de", :target => "_blank"
-      end      
+      end     
+      li do
+        a "newsletter", :href => I18n.locale.to_s + "/newsletter"
+      end
     end
 
     div :id => "language-logo" do 

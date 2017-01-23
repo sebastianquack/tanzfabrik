@@ -64,7 +64,7 @@ $container-large-desktop:      ((960px + $grid-gutter-width));
 
 /**** Variables ****/
 
-$vertical-menu-width: 340px;
+$vertical-menu-width: 450px;
 $overall-container-margin: 32px; /* margin for vertical secondary menu */
 $line-height: 1.45em;
 $vertical-box-padding: 0.3em;
@@ -2004,6 +2004,10 @@ ul.workshops {
 
 .newsletter-subscribe-form, {
 	margin-top: 1em;
+}
+
+.newsletter-options li label {
+	font-weight: normal;
 }
 
 /**** search page ****/

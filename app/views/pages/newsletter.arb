@@ -21,7 +21,7 @@ def subscribe_form(className, mode, value)
     input :type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token
     input :type=>"hidden", :name=>"mode", :value => mode
     
-    ul do
+    ul :class=>"newsletter-options" do
       li do
         input :type=>"checkbox", :name=>"newsletter_1"
         label t(:newsletter_label_1)
