@@ -142,6 +142,7 @@ cache_arbre(self, cache_for_navigation) do
                 event_view && !params[:festival_id] && Event.find(params[:id]).type.id == 4
               ],           
               "tanzen-im-hof",
+              "20-jahre-axis-syllabus",
               "kindertanz",
               "contact_jam",
               "lehrer",
