@@ -13,12 +13,15 @@ Tanzfabrik::Application.routes.draw do
 
   scope "/:locale" do
     
+    get 'festivals/tanznacht-forum', to: redirect('%{locale}/festivals/tanznacht-forum-2017')
+    
     get 'programm/:year' => 'pages#show', :id => 'programm', :year => /\d{4}/ 
     get 'workshop_programm/:year' => 'pages#show', :id => 'workshop_programm', :year => '%{year}' 
     get 'performance_projekte/:year' => 'pages#show', :id => 'performance_projekte', :year => '%{year}' 
 
     resources :events, :only => [:show, :index, :update]
     get "events/:id/:time" => 'events#show'
+
     get "festivals/:festival_id/events/:id" => 'events#show'
     get "festivals/:festival_id/events/:id/:time" => 'events#show'
 
