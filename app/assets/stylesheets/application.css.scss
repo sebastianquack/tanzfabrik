@@ -735,6 +735,13 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 }
 .timetable td .event {
 	@include transition(border-color 0.3s 0 linear);
+	&:last-of-type {
+		border-color: red;
+	}
+}
+
+.timetable tbody tr:not(:first-child) th {
+	visibility: hidden;
 }
 
 
@@ -862,6 +869,7 @@ table.timetable {
 		@include menu-font(100%);
 		/* text-transform: uppercase;	*/
 
+		color: transparent; /* hide time to prevent confusion */
 		position:relative;
 		top:-1px;
 		padding: $vertical-box-padding 0;
