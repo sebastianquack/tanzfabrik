@@ -100,7 +100,7 @@ en:
   workshop_registration_email: "email"
   form_section_professional: ""
   form_section_payment: "payment"
-  form_section_payment_explanation_html: "Bank für Sozialwirtschaft<br>SWIFT/BIC: BFSWDE33BER<br>IBAN: DE7410020500 000 305 48 10"
+  form_section_payment_explanation_html: "Bank für Sozialwirtschaft<br>SWIFT/BIC: BFSWDE33BER<br>IBAN: DE61 1002 0500 0003 0548 50"
   form_section_conditions: "terms & conditions"
   # -> see text_items # form_section_conditions_explanation: "This registration is binding. It must be done in writing and payment of the full workshop fee is hereby obligatory. Your place is reserved as soon as the workshop fee arrives on our account. In case the workshop is full or cancelled we will refund the full fee. In case of withdrawal or cancellation from your side after the early booking date we are unable to make any refund, unless you find another person to take your place. In any case of cancellation we will hold back an administration fee of 15,- €. Please note that Tanzfabrik holds no responsibility for injury."
   form_section_membership_status: "membership"

@@ -79,7 +79,7 @@ de:
   workshop_registration_email: "Email"
   form_section_professional: ""
   form_section_payment: "Zahlung"
-  form_section_payment_explanation_html: "Bank für Sozialwirtschaft<br>SWIFT/BIC: BFSWDE33BER<br>IBAN: DE7410020500 000 305 48 10"
+  form_section_payment_explanation_html: "Bank für Sozialwirtschaft<br>SWIFT/BIC: BFSWDE33BER<br>IBAN: DE61 1002 0500 0003 0548 50"
   form_section_conditions: "Anmeldebedingung"
   # -> see text_items # form_section_conditions_explanation: "Anmeldungen sind nur schriftlich möglich und verpflichten zur Zahlung der gesamten Kursgebühr. Ein Platz wird reserviert, sobald der Teilnahmebetrag bei uns eingegangen ist. Bei einer Überschreitung der Teilnehmer/innenzahl oder Ausfall des Workshops wird der gesamte Betrag zurückerstattet. Bei einem Rücktritt nach dem Frühbucherdatum ist keine Rückerstattung mehr möglich, außer eine Ersatzperson übernimmt den Platz. Bei einem Rücktritt werden in jedem Fall 15,- € Bearbeitungsgebühr einbehalten. Für eventuelle Verletzungen haftet jede/r Teilnehmer/in selbst."
   form_section_membership_status: "Fördermitgliedschaft"
