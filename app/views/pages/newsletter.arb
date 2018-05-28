@@ -21,43 +21,65 @@ def subscribe_form(className, mode, value)
     input :type=>"hidden", :name=>"authenticity_token", :value=>form_authenticity_token
     input :type=>"hidden", :name=>"mode", :value => mode
     
-    ul :class=>"newsletter-options" do
-      li do
-        input :type=>"checkbox", :name=>"newsletter_1"
-        label t(:newsletter_label_1)
+    div :class => "form-newsletter" do
+
+
+        ul :class=>"newsletter-options row" do
+ 
+          li :class => "form-checkbox" do
+            input :type=>"checkbox", :name=>"newsletter_1"
+            div :class => "input-style-helper"
+            label t(:newsletter_label_1)
+          end
+
+          li :class => "form-checkbox" do
+            input :type=>"checkbox", :name=>"newsletter_2"
+            div :class => "input-style-helper"
+            label t(:newsletter_label_2)
+          end
+
+          li :class => "form-checkbox" do
+            input :type=>"checkbox", :name=>"newsletter_3"
+            div :class => "input-style-helper"
+            label t(:newsletter_label_3)
+          end
+
+          li :class => "form-checkbox" do
+            input :type=>"checkbox", :name=>"unsubscribe"
+            div :class => "input-style-helper"
+            label t(:newsletter_unsubscribe_all)
+          end
+
+        end
+
+      div :class => "row" do    
+        input :type=>"email", :required=>true, :placeholder=>t(:newsletter_email_address), :name=>"email", :value=>params[:q], :onclick => "this.select()"
+      end 
+
+      div :class => "row" do
+        input :type=>"submit", :value=>value
       end
-      li do
-        input :type=>"checkbox", :name=>"newsletter_2"
-        label t(:newsletter_label_2)
-      end
-      li do
-        input :type=>"checkbox", :name=>"newsletter_3"
-        label t(:newsletter_label_3)
-      end
-      li do 
-        input :type=>"checkbox", :name=>"unsubscribe"
-        label t(:newsletter_unsubscribe_all)
-      end
-    end    
-    input :type=>"email", :placeholder=>t(:newsletter_email_address), :name=>"email", :value=>params[:q], :onclick => "this.select()"
-    input :type=>"submit", :value=>value
+
+    end
   end
 end
 
 div :class => "row page" do
   div :class => "basic" do
+    div :class => "newsletter" do
+        
+      if notice == "ok"
+        newsletter_success = TextItem.where(:name => "NewsletterErfolg").first
+        para newsletter_success.content
+      else
 
-    if notice == "ok"
-      newsletter_success = TextItem.where(:name => "NewsletterErfolg").first
-      para newsletter_success.content
-    else
+        newsletter_intro = TextItem.where(:name => "NewsletterStart").first
+        para newsletter_intro.content
 
-      newsletter_intro = TextItem.where(:name => "NewsletterStart").first
-      para newsletter_intro.content
-
-      subscribe_form("newsletter-subscribe-form", "subscribe", t(:newsletter_subscribe))
+        subscribe_form("newsletter-subscribe-form", "subscribe", t(:newsletter_subscribe))
+      end
+      
     end
-
   end
   div :class => "details empty", "data-variant" => 2
 end

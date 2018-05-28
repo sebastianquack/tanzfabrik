@@ -1682,7 +1682,7 @@ ul.workshops {
 
 /**** registration form ****/
 
-.registration-form {
+.registration-form, .newsletter-subscribe-form {
 
 	$gutter-division-factor: 3;
 
@@ -2007,18 +2007,34 @@ ul.workshops {
 	}
 }
 
-/**** newsletter page ****/
+/**** newsletter page ( partially overwriting the workshop form :/ ) ****/
 
+.newsletter {
+	p:first-child {
+		padding-top: $vertical-box-padding;
+	}
+}
 .newsletter-subscribe-form, .newsletter-unsubscribe-form {
-	padding:0 0 1em 0;
-}
-
-.newsletter-subscribe-form, {
-	margin-top: 1em;
-}
-
-.newsletter-options li label {
-	font-weight: normal;
+	@include make-xs-column(3);
+	padding-top: $vertical-box-padding;
+	.row, li {
+		width: 100% !important;
+	}
+	.row {
+		padding: 0.3em 0px 0.6em 0px;
+		margin:0;
+	}
+	label {
+		width: auto !important;
+	}
+	input[type="submit"] {
+		margin-left: 0;
+		width: 100%;
+		left: 0;
+	}
+	input[type="email"] {
+		padding-left: 8px;
+	}
 }
 
 /**** search page ****/
