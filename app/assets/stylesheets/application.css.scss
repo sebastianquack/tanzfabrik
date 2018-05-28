@@ -64,7 +64,7 @@ $container-large-desktop:      ((960px + $grid-gutter-width));
 
 /**** Variables ****/
 
-$vertical-menu-width: 450px;
+$vertical-menu-width: 555px;
 $overall-container-margin: 32px; /* margin for vertical secondary menu */
 $line-height: 1.45em;
 $vertical-box-padding: 0.3em;
@@ -206,7 +206,9 @@ body {
 
 #header {
 	margin-bottom:40px;
-	position:relative;
+	body:not(.start) & {
+		position:relative;
+	}
 }
 
 #content-container {
