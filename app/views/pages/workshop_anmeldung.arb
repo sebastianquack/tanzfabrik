@@ -182,88 +182,6 @@ else
           end          
         end
       end
-      
-      
-      
-      div :class => "row" do
-
-        div t(:form_section_workshop_info), :class => "title"
-
-        div :class => "form-radio" do
-    
-          div :class => "radio-elem" do
-            f.radio_button :workshop_info, 1, :required => true
-            div :class => "input-style-helper"
-            f.label :workshop_info, t(:form_news_mail)
-          end
-
-          div :class => "radio-elem" do
-            f.radio_button :workshop_info, 2, :required => true
-            div :class => "input-style-helper"
-            f.label :workshop_info, t(:form_news_email)
-          end
-
-          div :class => "radio-elem" do
-            f.radio_button :workshop_info, 0, :required => true
-            div :class => "input-style-helper"
-            f.label :workshop_info, t(:form_news_no)
-          end
-
-        end
-      end
-      
-      div :class => "row" do
-
-        div  t(:form_section_course_program), :class => "title"
-
-        div :class => "form-radio" do
-
-          div :class => "radio-elem" do
-            f.radio_button :course_program, 1, :required => true
-            div :class => "input-style-helper"
-            f.label :course_program, t(:form_news_mail)
-          end
-
-          div :class => "radio-elem" do
-            f.radio_button :course_program, 2, :required => true
-            div :class => "input-style-helper"
-            f.label :course_program, t(:form_news_email)
-          end
-
-          div :class => "radio-elem" do
-            f.radio_button :course_program, 0, :required => true
-            div :class => "input-style-helper"
-            f.label :course_program, t(:form_news_no)
-          end
-        end
-      end
-
-      div :class => "row" do
-
-        div t(:form_section_event_program), :class => "title"
-
-        div :class => "form-radio" do
-
-          div :class => "radio-elem" do
-            f.radio_button :event_program, 1, :required => true
-            div :class => "input-style-helper"
-            f.label :event_program, t(:form_news_mail)
-          end
-
-          div :class => "radio-elem" do
-            f.radio_button :event_program, 2, :required => true
-            div :class => "input-style-helper"
-            f.label :event_program, t(:form_news_email)
-          end
-
-          div :class => "radio-elem" do
-            f.radio_button :event_program, 0, :required => true
-            div :class => "input-style-helper"
-            f.label :event_program, t(:form_news_no)
-          end
-        end
-      end
-      
 
       div :class => "row" do
 
@@ -272,10 +190,10 @@ else
         div :class => "form-checkbox" do
           f.check_box :accept_terms, :required => true, "data-parsley-error-message" => t(:please_accept_terms)
           div :class => "input-style-helper"
-          f.label :accept_terms, t(:form_section_accept_terms_label) 
+          f.label :accept_terms, t(:form_section_accept_terms_label, :terms_link => link_to(t(:terms_link), page_path(:agbs), :target => "_blank")).html_safe
         end
       end
-      
+
       div :class => "row form-note label-columns" do
         f.label :note, t(:form_section_note)
         f.text_area :note
