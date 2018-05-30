@@ -1,1 +1,1 @@
-heroku pg:transfer --to `heroku config:get DATABASE_URL -a tanzfabrik-59` --confirm tanzfabrik
+heroku pg:copy tanzfabrik::DATABASE_URL NAVY --app tanzfabrik-59 --confirm tanzfabrik-59
