@@ -193,6 +193,12 @@ $(document).ready(function() {
     window.find(find)
   }
 
+  // manage start video
+
+  $('.start_video_close').click(function(){
+    $('.start_video').addClass('closed')
+  })
+
 });
 
 // background fading on turbolinks page load 
