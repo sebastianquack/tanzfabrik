@@ -118,7 +118,7 @@ cache_arbre(self, cache_for_navigation) do
         a :href => (I18n.locale == I18n.default_locale ? '/' : local_root_path) do
           #img :src => asset_path("tanzfabrik-logo.gif")
           #img :src => asset_path("tanzfabrik-logo-hover.gif")
-          img :src => asset_path("tanzfabrik-logo-40.gif")
+          img :src => asset_path("tanzfabrik-logo-40-slow.gif")
         end
       end
 
