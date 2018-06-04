@@ -199,6 +199,15 @@ $(document).ready(function() {
     $('.start_video').addClass('closed')
   })
 
+  // special 40 years logo
+  $("#logo span").on("transitionend", function() {
+    $("#logo").addClass("transitionend")
+  })
+
+  // add ready to html when it's ready
+
+  $("html").addClass("ready")
+
 });
 
 // background fading on turbolinks page load 

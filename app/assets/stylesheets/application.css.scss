@@ -322,20 +322,66 @@ body {
 	float:right;
 	position:relative;
 	width: 120px;
-	/*height: 130px;*/
+	height: 130px;
 	z-index: 5;
-	}
+	perspective: 50em;
+}
 
 #logo img {
 	display:block;
 	position:absolute;
-	width: 100%;
 	top:0;
 	left:0;
-	transition: opacity 0.2s cubic-bezier(0.445, 0.050, 0.550, 0.950);
+	transition: opacity 0.2s cubic-bezier(0.445, 0.050, 0.550, 0.950), transform 0.35s 3s linear;
+	.ready & {
+		transform: rotateY(90deg);
+	}
 }
 
-/*
+#logo span {
+	font-size: 6.9em;
+	font-weight: bold;
+	font-family: "LuxiMonoBold";
+	position: absolute;
+	top: -0.34em;
+	left: 0;
+	width: 100%;
+	display: block;
+	color: red;
+	text-align: center;
+	transition: transform 0.3s 3.3s linear;
+	transform: rotateY(-90deg);
+	.ready & {
+		transform: rotateY(0)
+	}
+
+	#logo img,
+	#logo span {
+		will-change: transform;
+	}
+}
+
+#logo.transitionend {
+	img {
+		transition: transform 0.15s 0s;
+	}
+	span {
+		transition: transform 0.15s 0.15s;
+	}
+	&:hover {
+		img {
+			transform: rotateY(0deg);
+			transition: transform 0.15s 0.15s;
+			&:nth-child(1) { opacity: 1 !important; }
+			&:nth-child(2) { opacity: 0 !important; }
+		}
+		span {
+			transform: rotateY(90deg);
+			transition: transform 0.15s 0s;
+		}	
+	}
+}
+
 #logo img:nth-child(1) {
 	opacity:1;
 }
@@ -351,7 +397,7 @@ body {
 #logo:hover img:nth-child(2) {
 	opacity:1;
 }
-*/
+
 
 /**** Top Menu: Navigation ****/
 
@@ -1965,6 +2011,7 @@ ul.workshops {
 	@include make-xs-column-offset(1);
 	padding-left:4px;
 	transition: opacity 0.5s;
+	margin-top: 0.5 * $line-height;
 	iframe {
 		display: block;
 		margin-bottom: 2em;
@@ -1989,6 +2036,22 @@ ul.workshops {
 			opacity: 1;
 		}
 	}
+}
+
+div.start_video_close {
+	@include make-xs-column-offset(5);
+	position: absolute;
+	background-color: rgba(255,255,255,0.95);
+	height:1.5em;
+	width:1.5em;
+	line-height: 1.5em;
+	border-radius: 50%;
+	border-color:rgba(0,0,0,0.95);
+	cursor: pointer;
+	text-align:center;
+	left: 1.6em;
+	top:-0.7em;
+	border: 1px solid black;
 }
 
 /**** start page listing ****/
