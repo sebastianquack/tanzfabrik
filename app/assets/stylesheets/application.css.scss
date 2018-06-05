@@ -320,11 +320,12 @@ body {
 	clear:both;
 	display:block;
 	float:right;
-	position:relative;
+	position:absolute;
 	width: 120px;
 	height: 130px;
 	z-index: 5;
 	perspective: 50em;
+	right: 0.5 * $grid-gutter-width;
 }
 
 #logo img {
@@ -2011,7 +2012,7 @@ ul.workshops {
 	@include make-xs-column-offset(1);
 	padding-left:4px;
 	transition: opacity 0.5s;
-	margin-top: 0.5 * $line-height;
+	margin-top: 1 * $line-height;
 	iframe {
 		display: block;
 		margin-bottom: 2em;
