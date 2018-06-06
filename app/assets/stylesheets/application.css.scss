@@ -362,6 +362,7 @@ body {
 	}
 }
 
+/* disable following section to disable special 40 years logo animation */
 #logo.transitionend {
 	img {
 		transition: transform 0.15s 0s;
@@ -382,6 +383,7 @@ body {
 		}	
 	}
 }
+/* end section for special 40 years logo animation */
 
 #logo img:nth-child(1) {
 	opacity:1;
