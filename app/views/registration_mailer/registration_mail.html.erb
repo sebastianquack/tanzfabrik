@@ -26,6 +26,13 @@
   Workshop3: <%= @registration.workshop_3.workshop_select if @registration.workshop_3 %><br>
   Workshop4: <%= @registration.workshop_4.workshop_select if @registration.workshop_4 %><br>
   </p>
+
+  <% verteiler = ["Nein", "Post", "Email"] %>
+  <p>
+  Verteiler Workshops: <%= verteiler[@registration.workshop_info] %><br>
+  Verteiler Kursprogramm: <%= verteiler[@registration.course_program] %><br>
+  Verteiler Eventprogramm: <%= verteiler[@registration.event_program] %>
+  </p>
   
 </body>
 </html>
