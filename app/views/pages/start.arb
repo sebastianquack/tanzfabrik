@@ -208,7 +208,7 @@ all_entries = all_entries[0..(6 - entries_pages.length)] + entries_pages
 div :class => "start_video" do
   div "X", :class => "start_video_close", :title => t(:close)
   text_node '<iframe width="560" height="315" src="https://www.youtube.com/embed/FPaHCzjuLM4?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'.html_safe
-  a "Weiter zu 40 Jahre Tanzfabrik", :href => page_path("40-jahre-tanzfabrik-berlin")
+  a t(:continue_to)+" 40 Jahre Tanzfabrik", :href => page_path("40-jahre-tanzfabrik-berlin")
   # br
   # a "Weiter zur Startseite", :href => "#40", :class => "start_video_close"
 end

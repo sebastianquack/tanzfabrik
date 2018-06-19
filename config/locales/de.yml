@@ -42,6 +42,7 @@ de:
   call: "Aufruf"
   new: "Neu"
   with: "mit"
+  continue_to: "Weiter zu"
 
   kursplan_more: "Wichtige Infos zu den Tanzklassen. Änderungen im Stundenplan vorbehalten."
   profitraining_more: "Wichtige Infos zum Profitraining."
