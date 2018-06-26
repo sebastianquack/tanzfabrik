@@ -385,7 +385,7 @@ GEM
       json (>= 1.8)
       nokogiri (~> 1.5)
       trollop (~> 2.1)
-    rdoc (4.2.0)
+    rdoc (4.3.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     sass (3.2.19)
@@ -429,6 +429,7 @@ GEM
 PLATFORMS
   ruby
   x86_64-darwin-16
+  x86_64-darwin-17
 
 DEPENDENCIES
   activeadmin (~> 1.0.0.pre2)
@@ -473,7 +474,7 @@ DEPENDENCIES
   x-editable-rails!
 
 RUBY VERSION
-   ruby 2.2.4p230
+   ruby 2.3.3p222
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
