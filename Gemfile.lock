@@ -323,6 +323,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.1)
     multi_json (1.13.1)
+    mysql2 (0.4.10)
     newrelic_rpm (3.14.0.305)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
@@ -433,6 +434,9 @@ GEM
     warden (1.2.4)
       rack (>= 1.0)
     xml-simple (1.1.5)
+    yaml_db (0.7.0)
+      rails (>= 3.0)
+      rake (>= 0.8.7)
 
 PLATFORMS
   ruby
@@ -465,6 +469,7 @@ DEPENDENCIES
   jquery-turbolinks
   letter_opener
   meta-tags
+  mysql2 (~> 0.4.0)
   newrelic_rpm
   paperclip
   parsley-rails
@@ -481,6 +486,7 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn-rails
   x-editable-rails!
+  yaml_db
 
 RUBY VERSION
    ruby 2.3.6p384
