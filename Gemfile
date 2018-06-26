@@ -5,7 +5,9 @@ ruby "2.3.3"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 
+gem 'mysql2', '~> 0.4.0'
 gem 'pg'
+gem 'yaml_db'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
