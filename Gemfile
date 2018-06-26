@@ -92,6 +92,7 @@ gem "parsley-rails"
 group :production do
 	gem 'rails_12factor'
   gem 'heroku_rails_deflate' # enables gzip compression
+  gem 'unicorn-rails'
 end
 
 gem 'timecop' # allows to modify time and date, to simulate future dates
