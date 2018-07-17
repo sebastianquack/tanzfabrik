@@ -2170,3 +2170,26 @@ div.start_video_close {
 
 
 }
+
+/**** jubiläum 40 *****/
+
+.jubi-tanzklassen {
+	@include make-xs-column(5);
+	@include make-xs-column-offset(1);
+	margin-bottom: 4em;
+	display: block;
+	padding: 0;
+	clear: both;
+
+	+ * {
+		clear: both;
+	}
+
+	a {
+		display: block;
+	}
+
+	.jubi-image {
+		width: 100%;
+	}
+}
