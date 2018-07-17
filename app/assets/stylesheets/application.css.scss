@@ -2024,10 +2024,11 @@ ul.workshops {
 		text-transform: uppercase;
 		@include menu-font(100%);
 		padding-left: 4px;
+		letter-spacing: 0.5em;
 		// color: red;		
 	}
 	+ .start_events_listing {
-		display: none;
+		z-index: -5;
 		opacity: 0;
 		position: absolute;
 		transition: opacity 0.5s 0.3s;
@@ -2035,7 +2036,7 @@ ul.workshops {
 	&.closed {
 		opacity: 0;
 		+ .start_events_listing {
-			display: block;
+			z-index: 1;
 			opacity: 1;
 		}
 	}
@@ -2179,7 +2180,7 @@ div.start_video_close {
 	margin-bottom: 4em;
 	display: block;
 	padding: 0;
-	clear: both;
+	clear: both;	
 
 	+ * {
 		clear: both;
@@ -2192,4 +2193,22 @@ div.start_video_close {
 	.jubi-image {
 		width: 100%;
 	}
+
+	.jubi-link {
+		@include menu-font(100%);
+		margin-top: 1em;
+		display: block;
+		text-align: right;
+	}
+
+}
+
+.page .description h4 {
+	@include menu-font(100%);
+	@include border-line("bottom", black);
+	color: red;
+	text-transform: uppercase;
+	line-height:2em;
+	padding:0;
+	margin-bottom: 1em;
 }

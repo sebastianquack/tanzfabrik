@@ -32,9 +32,12 @@ cache_arbre(self, cache_key_for_page_headlines(page)) do
   end
 end
 
-div :class => "jubi-tanzklassen" do
-  a :href => page_path("jubilaumsedition-tanzklassen") do
-    img :class => "jubi-image", :src => asset_path("jubi-edition-webbild1.jpg")
+unless Page.friendly.find("jubilaumsedition-tanzklassen").draft
+  div :class => "jubi-tanzklassen" do
+    a :href => page_path("jubilaumsedition-tanzklassen") do
+      img :class => "jubi-image", :src => asset_path("jubi-edition-webbild1.jpg")
+    end
+    a t(:continue_to) +" "+ t(:section_classes) +" "+ Page.friendly.find("jubilaumsedition-tanzklassen").title + " >>>", :href => page_path("jubilaumsedition-tanzklassen"), :class => "jubi-link"
   end
 end
 
