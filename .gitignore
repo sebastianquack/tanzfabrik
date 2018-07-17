@@ -18,6 +18,9 @@
 # Ignore generated sitemap
 #/public/sitemap.xml*
 
+# Ignore data.yml
+/db/data.yml
+
 # Other
 .DS_Store
 /public/system/*
