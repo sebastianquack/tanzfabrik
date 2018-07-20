@@ -17,6 +17,7 @@ class Page < ActiveRecord::Base
   # 1) check if menu header text appears in page title at the beginning and cut it off
   #    example: "DANCE INTENSIVE/DANCE INTENSIVE PROGRAM" -> "DANCE INTENSIVE/PROGRAM"
   # 2) "Jubiläumsedition - Tanzklassen" -> "Jubiläumsedition"
+  # 3) "Jubiläumsedition-Tanzklassen" -> "Jubiläumsedition"
   def title_for_menu_extension header_text
     selected_page_text = self.title
     # 1)
@@ -36,7 +37,14 @@ class Page < ActiveRecord::Base
       if dist > 0.9
         extension = selected_page_text[0..(selected_page_text.length-pattern.length-1)]
       else
-        extension = selected_page_text
+        # 3)
+        pattern = "-" + header_text
+        dist = @jarow.getDistance(pattern, selected_page_text[(selected_page_text.length-pattern.length-1)..selected_page_text.length-1] )
+        if dist > 0.9
+          extension = selected_page_text[0..(selected_page_text.length-pattern.length-1)]
+        else
+          extension = selected_page_text
+        end
       end
     end    
   end
