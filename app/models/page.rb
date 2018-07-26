@@ -33,7 +33,7 @@ class Page < ActiveRecord::Base
     else
       # 2)
       pattern = " - " + header_text
-      dist = @jarow.getDistance(pattern, selected_page_text[(selected_page_text.length-pattern.length-1)..selected_page_text.length-1] )
+      dist = !(pattern.length > selected_page_text.length) ? @jarow.getDistance(pattern, selected_page_text[(selected_page_text.length-pattern.length-1)..selected_page_text.length-1] ) : 0
       if dist > 0.9
         extension = selected_page_text[0..(selected_page_text.length-pattern.length-1)]
       else
