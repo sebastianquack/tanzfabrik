@@ -2014,6 +2014,13 @@ ul.workshops {
 	@include make-xs-column-offset(1.5);
 	padding-left:4px;
 	transition: opacity 0.5s;
+	&:before {
+    content: "///\A\A";
+    white-space: pre;
+		color: red;
+		@include menu-font(100%);
+		letter-spacing: 0.5em;
+	}	
 	.video_wrapper {
 		position: relative;
 		width: 50%;
