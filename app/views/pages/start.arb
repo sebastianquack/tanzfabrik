@@ -219,12 +219,13 @@ ul :class => "start_events_listing" do
       end
     end
   end 
-  div :class => "start_video" do
-    div :class => "video_wrapper" do
-      text_node '<iframe src="https://www.youtube.com/embed/FPaHCzjuLM4?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'.html_safe
-    end
-    a t(:continue_to)+" 40 Jahre Tanzfabrik >>>", :href => page_path("40-jahre-tanzfabrik-berlin")
-  end  
+  #
+  #div :class => "start_video" do
+  #  div :class => "video_wrapper" do
+  #    text_node '<iframe src="https://www.youtube.com/embed/FPaHCzjuLM4?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'.html_safe
+  #  end
+  #  a t(:continue_to)+" 40 Jahre Tanzfabrik >>>", :href => page_path("40-jahre-tanzfabrik-berlin")
+  #end  
 end
 
 

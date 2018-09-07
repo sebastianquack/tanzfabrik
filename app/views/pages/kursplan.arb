@@ -1,12 +1,3 @@
-unless Page.friendly.find("jubilaumsedition-tanzklassen").draft
-  div :class => "jubi-tanzklassen" do
-    a :href => page_path("jubilaumsedition-tanzklassen") do
-      img :class => "jubi-image", :src => asset_path("jubi-edition-webbild1.jpg")
-    end
-    # a t(:section_classes) +" "+ Page.friendly.find("jubilaumsedition-tanzklassen").title + " >>>", :href => page_path("jubilaumsedition-tanzklassen"), :class => "jubi-link"
-  end
-end
-
 cache_arbre(self, cache_key_for_page_headlines(page)) do      
   header :id => "headlines", :class => "headlines-kursplan" do
     div :class => "main" do
