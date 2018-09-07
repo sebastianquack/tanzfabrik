@@ -2011,10 +2011,33 @@ ul.workshops {
 .start_video {
 	@include make-row();
 	@include make-xs-column(4);
-	@include make-xs-column-offset(1);
+	@include make-xs-column-offset(1.5);
 	padding-left:4px;
 	transition: opacity 0.5s;
-	margin-top: 1 * $line-height;
+	&:before {
+    content: "///\A\A";
+    white-space: pre;
+		color: red;
+		@include menu-font(100%);
+		letter-spacing: 0.5em;
+	}	
+	.video_wrapper {
+		position: relative;
+		width: 50%;
+		padding-bottom: 56.25%; /* 16:9 */
+		margin-bottom: -28.125%;
+		height: 0;
+		iframe {
+			width: 100%;
+		}
+		object, embed {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}	
 	iframe {
 		display: block;
 		margin-bottom: 2em;
@@ -2024,10 +2047,11 @@ ul.workshops {
 		text-transform: uppercase;
 		@include menu-font(100%);
 		padding-left: 4px;
+		letter-spacing: 0.5em;
 		// color: red;		
 	}
 	+ .start_events_listing {
-		display: none;
+		z-index: -5;
 		opacity: 0;
 		position: absolute;
 		transition: opacity 0.5s 0.3s;
@@ -2035,7 +2059,7 @@ ul.workshops {
 	&.closed {
 		opacity: 0;
 		+ .start_events_listing {
-			display: block;
+			z-index: 1;
 			opacity: 1;
 		}
 	}
@@ -2169,4 +2193,45 @@ div.start_video_close {
 	}
 
 
+}
+
+/**** jubiläum 40 *****/
+
+.jubi-tanzklassen {
+	@include make-xs-column(5);
+	@include make-xs-column-offset(1);
+	margin-bottom: 4em;
+	display: block;
+	padding: 0;
+	clear: both;	
+
+	+ * {
+		clear: both;
+	}
+
+	a {
+		display: block;
+	}
+
+	.jubi-image {
+		width: 100%;
+	}
+
+	.jubi-link {
+		@include menu-font(100%);
+		margin-top: 1em;
+		display: block;
+		text-align: right;
+	}
+
+}
+
+.page .description h4 {
+	@include menu-font(100%);
+	@include border-line("bottom", black);
+	color: red;
+	text-transform: uppercase;
+	line-height:2em;
+	padding:0;
+	margin-bottom: 1em;
 }

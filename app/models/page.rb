@@ -12,9 +12,15 @@ class Page < ActiveRecord::Base
   
   require 'fuzzystringmatch'
 
+  # determine the extension text for the selected menu item
+  # remove parts that resemble the menu subject to avoid duplicate words 
+  # 1) check if menu header text appears in page title at the beginning and cut it off
+  #    example: "DANCE INTENSIVE/DANCE INTENSIVE PROGRAM" -> "DANCE INTENSIVE/PROGRAM"
+  # 2) "Jubiläumsedition - Tanzklassen" -> "Jubiläumsedition"
+  # 3) "Jubiläumsedition-Tanzklassen" -> "Jubiläumsedition"
   def title_for_menu_extension header_text
     selected_page_text = self.title
-    # check if menu header text appears in page title at the beginning and cut it off
+    # 1)
     @jarow = FuzzyStringMatch::JaroWinkler.create( :pure )
     dist = @jarow.getDistance( header_text, selected_page_text[0..header_text.length-1] )
     if dist > 0.85
@@ -25,7 +31,21 @@ class Page < ActiveRecord::Base
         extension = selected_page_text
       end
     else
-      extension = selected_page_text
+      # 2)
+      pattern = " - " + header_text
+      dist = !(pattern.length > selected_page_text.length) ? @jarow.getDistance(pattern, selected_page_text[(selected_page_text.length-pattern.length-1)..selected_page_text.length-1] ) : 0
+      if dist > 0.9
+        extension = selected_page_text[0..(selected_page_text.length-pattern.length-1)]
+      else
+        # 3)
+        pattern = "-" + header_text
+        dist = !(pattern.length > selected_page_text.length) ? @jarow.getDistance(pattern, selected_page_text[(selected_page_text.length-pattern.length-1)..selected_page_text.length-1] ) : 0
+        if dist > 0.9
+          extension = selected_page_text[0..(selected_page_text.length-pattern.length-1)]
+        else
+          extension = selected_page_text
+        end
+      end
     end    
   end
 

@@ -205,14 +205,6 @@ all_entries = all_entries[0..(6 - entries_pages.length)] + entries_pages
 
 ######### DISPLAY ENTRIES ############
 
-div :class => "start_video" do
-  div "X", :class => "start_video_close", :title => t(:close)
-  text_node '<iframe width="560" height="315" src="https://www.youtube.com/embed/FPaHCzjuLM4?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'.html_safe
-  a t(:continue_to)+" 40 Jahre Tanzfabrik", :href => page_path("40-jahre-tanzfabrik-berlin")
-  # br
-  # a "Weiter zur Startseite", :href => "#40", :class => "start_video_close"
-end
-
 ul :class => "start_events_listing" do
   all_entries.each do |entry|
     logger.debug entry[:time]
@@ -227,6 +219,13 @@ ul :class => "start_events_listing" do
       end
     end
   end 
+  #
+  #div :class => "start_video" do
+  #  div :class => "video_wrapper" do
+  #    text_node '<iframe src="https://www.youtube.com/embed/FPaHCzjuLM4?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'.html_safe
+  #  end
+  #  a t(:continue_to)+" 40 Jahre Tanzfabrik >>>", :href => page_path("40-jahre-tanzfabrik-berlin")
+  #end  
 end
 
 

@@ -12,7 +12,8 @@ $(document).ready(function() {
 
 CKEDITOR.stylesSet.add( 'my_styles', [
     // Block-level styles
-    { name: 'Klein', element: 'small', }
+    { name: 'Klein', element: 'small', },
+    { name: 'H4', element: 'h4', }
     ] );
 
 
