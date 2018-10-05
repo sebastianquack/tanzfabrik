@@ -1562,8 +1562,13 @@ ul.workshops {
 
 		.time-duration {
 			@include make-xs-column(1);
-			color:red;
-			@include menu-font(100%);
+			time { 
+				@include menu-font(100%);
+				color:red;
+			}
+			.festival-link {
+				font-size:0.8em;
+			}
 		}
 
 		.time-duration:before {

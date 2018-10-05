@@ -38,6 +38,10 @@ if workshop_groups.length > 0
       li :class => "group" do
         div :class => "time-duration" do
           time l(dates[0], :format => :short) + "-" + l(dates[1], :format => :short)
+          if !in_festival && events.first.festivals.first
+            festival = events.first.festivals.first
+            a festival.name, href: festival_path(festival), class: 'festival-link'
+          end
         end        
         ul :class => "classes" do
 
