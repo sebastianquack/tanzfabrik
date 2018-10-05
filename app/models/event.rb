@@ -133,10 +133,20 @@ class Event < ActiveRecord::Base
   
   def early_bird_date
     early_bird_weeks = ( self.id == 421 ? 4 : 2) # mormal: 2 weeks. special: 4 weeks!
+    
+    # normal: thursday 3 week earlier
     date = self.start_date.beginning_of_week.next_day(3) - (early_bird_weeks + (self.start_date.wday <= 4 ? 1 : 0)).week
     if (date.month == 12 && [24,31].include?(date.day)) 
       date = date.prev_day(2)
     end
+
+    # special case: when the workshops runs only sat-sun, but there are others workshops running thu-sun in the same week
+    # result: the weekend workshop should have the same early bird date as the others
+    if (self.start_date.day == self.end_date.prev_day(1).day)
+      others = Event.workshop.where(:end_date_cache => self.end_date).where(:start_date_cache => self.end_date.prev_day(3))
+      date = date.prev_day(7) if others.count > 0
+    end
+
     date
   end
   
@@ -157,6 +167,8 @@ class Event < ActiveRecord::Base
   scope :no_draft, -> { where("events.draft = ? OR events.draft IS NULL", false) }
   
   scope :stage_event, -> { where('type_id IN (?)', Rails.configuration.stage_event_types) }
+
+  scope :workshop, -> { where('type_id IN (?)', 2) }
 
   scope :not_in_festival, -> { includes(:festival_events).where(:festival_events => { :event_id => nil }) }
 
