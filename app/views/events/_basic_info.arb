@@ -9,11 +9,9 @@ end
 para :class => "teacher" do
   event.people.map { |p| (person_link(p) ? link_to(p.name, person_link(p)) : p.name ) }.join(', ').html_safe
 end
+
 para do
-  if event.festivals.no_draft.length > 0 && show_festival
-    text_node t(:in_frame_of)
-    span event.festivals.map { |f| (link_to f.name, festival_path(f)) }.join(' und ').html_safe
-  end
+  render :partial => "events/in_festival", :locals => {:event => event, :link => true} if show_festival
 end
 
 div event.description.html_safe, :class => "description" if event.description

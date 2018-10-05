@@ -1395,6 +1395,7 @@ form {
 		margin-bottom: 0;
 		font-weight: normal;
 		line-height: $line-height;
+		float: left;
 	}
 	.month {
 		@include menu-font(100%);
@@ -1405,8 +1406,8 @@ form {
 		padding-top: 1em;
 	}
 	.in-festival {
-		float:right;
-		margin:0;
+		padding-left: 1em;
+		float:left;
 	}
 	.time, .address {
 		@include menu-font(100%);
