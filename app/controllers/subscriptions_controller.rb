@@ -19,20 +19,20 @@ class SubscriptionsController < ApplicationController
     if(!subscription) 
       subscription = Subscription.new(:email => params[:email])
       subscription.save
-    else 
-      if params[:unsubscribe]  
-        subscription.status = false      
-        subscription.newsletter_1 = false
-        subscription.newsletter_2 = false
-        subscription.newsletter_3 = false
-      else
-        subscription.status = true
-        subscription.newsletter_1 = params[:newsletter_1]
-        subscription.newsletter_2 = params[:newsletter_2]
-        subscription.newsletter_3 = params[:newsletter_3]        
-      end
-      subscription.save
+    end 
+    
+    if params[:unsubscribe] == "on"
+      subscription.status = false      
+      subscription.newsletter_1 = false
+      subscription.newsletter_2 = false
+      subscription.newsletter_3 = false
+    else
+      subscription.status = true
+      subscription.newsletter_1 = params[:newsletter_1]
+      subscription.newsletter_2 = params[:newsletter_2]
+      subscription.newsletter_3 = params[:newsletter_3]        
     end
+    subscription.save
     
     SubscriptionMailer.subscription_mail(subscription).deliver                  
     redirect_to page_url('newsletter'), :notice => 'ok' 
