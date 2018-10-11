@@ -1,5 +1,5 @@
 if event.festivals.no_draft.length > 0
-  text_node t(:in_frame_of)
-  text_node " "
+  text_node t(:in_frame_of) if link
+  text_node " " if link
   span event.festivals.map { |f| (link ? (link_to f.name, festival_path(f)) : f.name) }.join(' und ').html_safe
 end

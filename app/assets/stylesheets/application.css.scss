@@ -1408,6 +1408,9 @@ form {
 	.in-festival {
 		padding-left: 1em;
 		float:left;
+		color: #999;
+		// font-size: 0.8em;
+		// padding-top: 0.125em; // = 1 / 0.8
 	}
 	.time, .address {
 		@include menu-font(100%);
@@ -1559,6 +1562,10 @@ ul.workshops {
 
 		+ .group {
 			padding-top: 2em;
+		}
+
+		.headlines {
+			margin-left: 0px;
 		}
 
 		.time-duration {
