@@ -52,9 +52,11 @@ ol :class => "event-calendar" do
               h3 event.title, :class => "title"
               h4 event.display_type, :class => "type"           
               para event.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
-              aside class: "in-festival" do
-                render :partial => "events/in_festival", :locals => {:event => event, :link => false }
-              end                 
+              if !in_festival
+                aside class: "in-festival" do
+                  render :partial => "events/in_festival", :locals => {:event => event, :link => false }
+                end            
+              end     
             end
           end
         end
