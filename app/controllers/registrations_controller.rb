@@ -22,7 +22,7 @@ class RegistrationsController < ApplicationController
     
     @registration = Registration.new(params[:registration])
 
-    if @registration.save
+    #if @registration.save
       
       RegistrationMailer.registration_mail(@registration).deliver
       
@@ -30,9 +30,10 @@ class RegistrationsController < ApplicationController
       logger.debug @registration.workshop_2.workshop_select if @registration.workshop_2             
             
       redirect_to page_url('workshop_anmeldung'), :notice => 'ok'
-    else
-      redirect_to page_url('workshop_anmeldung'), :notice => t(:registration_error)
-    end
+    
+    #else
+    #  redirect_to page_url('workshop_anmeldung'), :notice => t(:registration_error)
+    #end
 
   end
 
