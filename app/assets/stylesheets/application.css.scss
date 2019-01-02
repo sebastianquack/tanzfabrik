@@ -334,9 +334,9 @@ body {
 	top:0;
 	left:0;
 	transition: opacity 0.2s cubic-bezier(0.445, 0.050, 0.550, 0.950), transform 0.35s 3s linear;
-	.ready & {
-		transform: rotateY(90deg);
-	}
+	// .ready & {
+	// 	transform: rotateY(90deg);
+	// }
 }
 
 #logo span {
@@ -363,26 +363,26 @@ body {
 }
 
 /* disable following section to disable special 40 years logo animation */
-#logo.transitionend {
-	img {
-		transition: transform 0.15s 0s;
-	}
-	span {
-		transition: transform 0.15s 0.15s;
-	}
-	&:hover {
-		img {
-			transform: rotateY(0deg);
-			transition: transform 0.15s 0.15s;
-			&:nth-child(1) { opacity: 1 !important; }
-			&:nth-child(2) { opacity: 0 !important; }
-		}
-		span {
-			transform: rotateY(90deg);
-			transition: transform 0.15s 0s;
-		}	
-	}
-}
+//#logo.transitionend {
+//	img {
+//		transition: transform 0.15s 0s;
+//	}
+//	span {
+//		transition: transform 0.15s 0.15s;
+//	}
+//	&:hover {
+//		img {
+//			transform: rotateY(0deg);
+//			transition: transform 0.15s 0.15s;
+//			&:nth-child(1) { opacity: 1 !important; }
+//			&:nth-child(2) { opacity: 0 !important; }
+//		}
+//		span {
+//			transform: rotateY(90deg);
+//			transition: transform 0.15s 0s;
+//		}	
+//	}
+//}
 /* end section for special 40 years logo animation */
 
 #logo img:nth-child(1) {

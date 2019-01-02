@@ -200,9 +200,10 @@ $(document).ready(function() {
   })
 
   // special 40 years logo
-  $("#logo span").on("transitionend", function() {
-    $("#logo").addClass("transitionend")
-  })
+  // $("#logo span").on("transitionend", function() {
+  //   $("#logo").addClass("transitionend")
+  // })
+  
 
   // add ready to html when it's ready
 
