@@ -76,6 +76,8 @@ de:
   workshop_registration_street: "Straße, Nr."
   workshop_registration_zip: "Postleitzahl"
   workshop_registration_city: "Stadt"
+  workshop_registration_country: "Land"
+  workshop_registration_country_choose: "Land auswählen"
   workshop_registration_phone: "Telefon"
   workshop_registration_email: "Email"
   form_section_professional: ""

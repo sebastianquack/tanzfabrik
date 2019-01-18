@@ -10,15 +10,15 @@ class RegistrationsController < ApplicationController
       return
     end
 
-    if params[:registration][:country] != ""
-      logger.debug "form submission includes hidden country field, aborting"
+    if params[:registration][:language] != ""
+      logger.debug "form submission includes hidden language field, aborting"
       redirect_to page_url('workshop_anmeldung'), :notice => t(:registration_error)
       return      
     end
 
     # prepare params for record creation
     params[:registration].delete(:timestamp)
-    params[:registration].delete(:country)
+    params[:registration].delete(:language)
     
     @registration = Registration.new(params[:registration])
 

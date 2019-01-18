@@ -13,6 +13,7 @@
   Straße: <%= @registration.street %><br>
   PLZ: <%= @registration.zip %><br>
   Stadt: <%= @registration.city %><br>
+  Land: <%= @registration.country %><br>
   Telefon: <%= @registration.phone %><br>
   Email: <%= @registration.email %><br>
   Mitglied: <%= (@registration.membership_status == 1 ? "Ja" : "Nein") %>
@@ -31,7 +32,7 @@
   <p>
   Verteiler Workshops: <%= verteiler[@registration.workshop_info] %><br>
   Verteiler Kursprogramm: <%= verteiler[@registration.course_program] %><br>
-  Verteiler Eventprogramm: <%= verteiler[@registration.event_program] %>
+  Verteiler Veranstaltungsprogramm: <%= verteiler[@registration.event_program] %>
   </p>
   
 </body>

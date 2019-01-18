@@ -41,7 +41,7 @@ else
     form_for registration, :html => {'data-parsley-validate' => ''} do |f|
       
       f.hidden_field :timestamp, :value => Time.now.to_i
-      f.hidden_field :country, :value => ""
+      f.hidden_field :language, :value => "" # this is a honeypot for bots to fill in
       
       if notice
         div notice, :class => "warning"
@@ -100,6 +100,11 @@ else
         div :class => "row" do
           f.label :zip, t(:workshop_registration_zip)
           f.text_field :zip, :required => true
+        end
+
+        div :class => "row" do  
+          f.label :country, t(:workshop_registration_country)
+          f.select :country, ISO3166::Country.all_translated(I18n.locale).sort.collect {|c| [ c, c ] }, :prompt => t(:workshop_registration_country_choose)
         end
 
         div :class => "row" do

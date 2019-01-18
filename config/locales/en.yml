@@ -97,6 +97,8 @@ en:
   workshop_registration_street: "street, no."
   workshop_registration_zip: "zip"
   workshop_registration_city: "city"
+  workshop_registration_country: "country"
+  workshop_registration_country_choose: "choose country"
   workshop_registration_phone: "phone"
   workshop_registration_email: "email"
   form_section_professional: ""
