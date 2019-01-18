@@ -11,6 +11,10 @@ Tanzfabrik::Application.routes.draw do
 
   #get '/kurse.php' => redirect('/de/kursplan') # --> see application_controller
 
+  # special route for wrong slug 
+  get '/en/tanzklassen-weekend-special-gaga', to: redirect('/en/tanzklassen-weekend-special')
+  get '/de/tanzklassen-weekend-special-gaga', to: redirect('/de/tanzklassen-weekend-special')
+
   scope "/:locale" do
     
     get 'festivals/tanznacht-forum', to: redirect('%{locale}/festivals/tanznacht-forum-2017')
