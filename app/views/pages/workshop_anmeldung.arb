@@ -104,7 +104,8 @@ else
 
         div :class => "row" do  
           f.label :country, t(:workshop_registration_country)
-          f.select :country, ISO3166::Country.all_translated(I18n.locale).sort.collect {|c| [ c, c ] }, :prompt => t(:workshop_registration_country_choose)
+          f.text_field :country
+        #  f.select :country, ISO3166::Country.all_translated(I18n.locale).sort.collect {|c| [ c, c ] }, :prompt => t(:workshop_registration_country_choose)
         end
 
         div :class => "row" do
