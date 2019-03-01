@@ -205,7 +205,8 @@ cache_arbre(self, cache_for_navigation) do
             li_submenu t(:section_about), [
               "profil_partner", 
               "team",
-              "jobs"
+              "jobs",
+              "40-jahre-tanzfabrik-berlin"
             ]
             li link_to_page("tickets")
             li_submenu t(:section_rental), [
