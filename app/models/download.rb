@@ -15,8 +15,8 @@ class Download < ActiveRecord::Base
   has_attached_file :attachment_en, paperclip_config
   
   # needs to be declared after has_attached_file !!
-  validates_attachment_content_type :attachment_de, :content_type => "application/pdf"
-  validates_attachment_content_type :attachment_en, :content_type => "application/pdf"
+  validates_attachment_content_type :attachment_de, :content_type => ["application/pdf", "application/zip"]
+  validates_attachment_content_type :attachment_en, :content_type => ["application/pdf", "application/zip"]
   
   belongs_to :festival
   belongs_to :page
