@@ -46,7 +46,8 @@ class ApplicationController < ActionController::Base
     if images.length > 0
       # pseudorandom
       bgrand = Random.new(request.user_agent.length + Time.now.round_to_fifteen.to_i)
-      @bg_image_url = images[bgrand.rand(images.length-1)].attachment.url(:background)
+      max_rand = images.length > 1 ? images.length : 1
+      @bg_image_url = images[bgrand.rand(max_rand)].attachment.url(:background)
       return
     end
     
