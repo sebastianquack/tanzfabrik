@@ -396,6 +396,7 @@ de:
         title: Seitentitel
         content: Text
         description: Zusammenfassung
+        hide_download_links: Download-Links oben rechts auf Seite verstecken
       event:
         type: Typ
         custom_type: "Typ: Eigener Text"

@@ -6,7 +6,7 @@ ActiveAdmin.register Page do
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # permit_params :list, :of, :attributes, :on, :model
-  permit_params :title_de, :content_de, :title_en, :content_en, :description_de, :description_en, :priority, :changefreq, :draft, :feature_on_welcome_screen, :feature_on_welcome_screen_note_en, :feature_on_welcome_screen_note_de,
+  permit_params :title_de, :content_de, :title_en, :content_en, :description_de, :description_en, :priority, :changefreq, :draft, :feature_on_welcome_screen, :feature_on_welcome_screen_note_en, :feature_on_welcome_screen_note_de, :hide_download_links,
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
 
@@ -62,6 +62,7 @@ ActiveAdmin.register Page do
       row Download.model_name.human do |page|
         page.downloads.map { |d| link_to(d.description_de, d.attachment_de.url) + " " + link_to(d.description_en, d.attachment_en.url) }.join(', ').html_safe
       end
+      row :hide_download_links
       row t(:draft) do |page|
          page.draft
       end
@@ -107,6 +108,7 @@ ActiveAdmin.register Page do
           end          
           #end
       end
+      f.input :hide_download_links
     end
     f.inputs "SEO" do
 #      priority_hint = "Relative Wichtigkeit der Seite zwischen 0 (links, völlig unwichtig) und 1 (rechts, allerwichtigste Seite). Eingesteller Wert: "
