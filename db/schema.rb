@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190605114220) do
+ActiveRecord::Schema.define(version: 20190618072510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 20190605114220) do
     t.integer  "sequence",                                            default: 0
     t.boolean  "draft"
     t.string   "facebook"
+    t.boolean  "custom_sorting",                                      default: false
   end
 
   create_table "festival_containers", force: :cascade do |t|

@@ -7,7 +7,7 @@ if event.type.name != "Performance-Projekt" && event.type.name != "Workshop" && 
 end
 
 para :class => "teacher" do
-  event.people.map { |p| (person_link(p) ? link_to(p.name, person_link(p)) : p.name ) }.join(', ').html_safe
+  event.people_sorted.map { |p| (person_link(p) ? link_to(p.name, person_link(p)) : p.name ) }.join(', ').html_safe
 end
 
 para do
@@ -17,7 +17,7 @@ end
 div event.description.html_safe, :class => "description" if event.description
 
 if [2,4].include? event.type.id #workshop or profitraining
-  event.people.each do |person|
+  event.people_sorted.each do |person|
     div person.bio.html_safe, :class => "event-bio description"
   end
 end

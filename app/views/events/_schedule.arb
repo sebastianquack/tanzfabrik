@@ -80,7 +80,7 @@ table :class => "schedule" do
         else
           td do
             data.map { |detail| link_to(
-              detail.event.people.map { |p| p.name }.join(', ') + ": " +
+              detail.event.people_sorted.map { |p| p.name }.join(', ') + ": " +
               detail.event.type.name + " " + detail.event.title + " (" +
               detail.event.tags.map { |t| t.name + ', ' }.join('') +
               detail.studio.location.name + " " + detail.studio.name + ")", 
