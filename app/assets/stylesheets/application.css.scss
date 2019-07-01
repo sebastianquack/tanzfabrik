@@ -883,6 +883,10 @@ ul.navigation > li > ul > li > ul > li span.selected a {
 	}
 }
 
+.week .event + .event {
+	@include border-line(top, black);
+}
+
 table.timetable td:last-child .title-description.opened .description {
 	left: -176px;
 
@@ -946,6 +950,7 @@ table.timetable {
 		
 		@include border-line(bottom, black);
 	}
+
 }
 
 ul.timetable {

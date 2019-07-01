@@ -57,29 +57,31 @@ cache_arbre(self, cache_key_for_profitraining) do
               li do 
                 time (l (beginning_of_week+wday.days), :format => :long_day), :class => ( oc ? "day" : "day holiday")
                 if oc
-                  training = details.first.event
-                  detail = details.first
-                  div :class => "event" do
-                    h4 :class => "title" + (training.people.second ? " one-line" : "") do 
-                      a training.title, :href => event_path(training) if training.title
-                    end
-                    div :class => "teacher" do
-                      a training.people.sort.first.name, :href => person_link(training.people.sort.first)
-                    end
-                    if training.people.second
+                  details.each do |detail|
+                    training = detail.event
+                    next if detail.start_date > beginning_of_week # skip some
+                    div :class => "event" do
+                      h4 :class => "title" + (training.people.second ? " one-line" : "") do 
+                        a training.title, :href => event_path(training) if training.title
+                      end
                       div :class => "teacher" do
-                        a training.people.sort.second.name, :href => person_link(training.people.sort.second)
-                      end                    
+                        a training.people.sort.first.name, :href => person_link(training.people.sort.first)
+                      end
+                      if training.people.second
+                        div :class => "teacher" do
+                          a training.people.sort.second.name, :href => person_link(training.people.sort.second)
+                        end                    
+                      end
+                      div :class => "time" do
+                        # assuming all occurrences within one week have same start time and duration
+                        time (l detail.starttime, :format => :hours_minutes), :class => "course-time"
+                        span "-"
+                        time (l detail.endtime_clock, :format => :hours_minutes), :class => "course-time"
+                      end
+                      #div :class => "description" do
+                      #  para training.description.html_safe if training.description
+                      #end
                     end
-                    div :class => "time" do
-                      # assuming all occurrences within one week have same start time and duration
-                      time (l detail.starttime, :format => :hours_minutes), :class => "course-time"
-                      span "-"
-                      time (l detail.endtime_clock, :format => :hours_minutes), :class => "course-time"
-                    end
-                    #div :class => "description" do
-                    #  para training.description.html_safe if training.description
-                    #end
                   end
                 else 
                   div :class => "event empty-event" do
