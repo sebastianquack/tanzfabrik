@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190118113943) do
+ActiveRecord::Schema.define(version: 20190618072510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 20190118113943) do
     t.integer  "sequence",                                            default: 0
     t.boolean  "draft"
     t.string   "facebook"
+    t.boolean  "custom_sorting",                                      default: false
   end
 
   create_table "festival_containers", force: :cascade do |t|
@@ -233,6 +234,7 @@ ActiveRecord::Schema.define(version: 20190118113943) do
     t.boolean  "feature_on_welcome_screen"
     t.string   "feature_on_welcome_screen_note_en"
     t.string   "feature_on_welcome_screen_note_de"
+    t.boolean  "hide_download_links"
   end
 
   add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree

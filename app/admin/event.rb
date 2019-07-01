@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   menu :priority => 1
 
-  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook, :draft,
+  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook, :draft, :custom_sorting,
     :festival_ids => [], :person_ids => [],
     :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :custom_place, :repeat_mode_id, :_destroy, tag_ids: []],
     :people_attributes => [:id, :name, :_destroy],
@@ -119,7 +119,10 @@ ActiveAdmin.register Event do
       #  event.tags.map { |t| (link_to t.name, admin_tag_path(t)) }.join(', ').html_safe
       #end
       row Person.model_name.human do |event|
-        event.people.map { |p| (link_to p.name, admin_person_path(p)) }.join(', ').html_safe
+        event.people_sorted.map { |p| (link_to p.name, admin_person_path(p)) }.join(', ').html_safe
+      end
+      row t(:custom_sorting) do |event|
+        t(event.custom_sorting)
       end
       row Festival.model_name.human do |event|
         event.festivals.map { |f| (link_to f.name, admin_festival_path(f)) }.join(', ').html_safe
@@ -149,6 +152,7 @@ ActiveAdmin.register Event do
           p_f.input :person, :collection => Person.order("lower(last_name) ASC"), :include_blank => false
         #end
       end
+      f.input :custom_sorting
     end
 
     f.inputs "Basic info" do

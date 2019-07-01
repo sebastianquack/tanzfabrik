@@ -5,7 +5,7 @@ if page
 	    div :class => "line1" do
 	      h1 editable(page, :title), :class => "title"
         a "✎", :href => edit_admin_page_path(page), :class => "admin-only classes" if admin_user_signed_in?
-        a "> " + page.downloads.first.description, :href => page.downloads.first.attachment.url, :class => "registration" if page.downloads.first
+        a "> " + page.downloads.first.description, :href => page.downloads.first.attachment.url, :class => "registration" if page.downloads.first && !page.hide_download_links
 	    end
 	  end
 	end

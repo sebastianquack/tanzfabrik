@@ -56,6 +56,7 @@ de:
   past_workshops: "Vergangene Workshops"
   past_events: "Vergangene Veranstaltungen"
   past_events_old_website: "Veranstaltungen vor Juni 2014"
+  custom_sorting: "Manuelle Personen-Reihenfolge"
 
   workshops_combinations: "Workshop-Kombinationen"
   workshops_name: "Name"
@@ -396,6 +397,7 @@ de:
         title: Seitentitel
         content: Text
         description: Zusammenfassung
+        hide_download_links: Download-Links oben rechts auf Seite verstecken
       event:
         type: Typ
         custom_type: "Typ: Eigener Text"
@@ -412,6 +414,7 @@ de:
         price_reduced: Ermäßigter Preis
         image: Bild
         images: Bilder
+        custom_sorting: Manuelle Personen-Reihenfolge (nicht alphabetisch)
       image:
         description: Beschreibung
         license: Copyrightnotiz

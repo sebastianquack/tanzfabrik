@@ -24,7 +24,19 @@ class Event < ActiveRecord::Base
   has_many :person_events
   accepts_nested_attributes_for :person_events, :allow_destroy => true
   
-  has_many :people, -> { order "last_name ASC" }, :through => :person_events
+  #has_many :people, -> { order "last_name ASC" }, :through => :person_events
+  has_many :people, :through => :person_events
+  
+  # returns custom sorting if specified, otherwise standard alphabetical
+  def people_sorted
+    if self.custom_sorting
+      return self.people
+    else
+      return self.people.sort_by{|p| p.last_name}
+    end
+  end
+
+
   accepts_nested_attributes_for :people, :allow_destroy => true
 
   has_many :event_details, :dependent => :destroy

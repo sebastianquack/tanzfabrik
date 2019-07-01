@@ -61,7 +61,7 @@ if workshop_groups.length > 0
               a :href => occurrence_path_no_time(workshop, in_festival) do
 
                 h4 workshop.title, :href => event_path(workshop), :class => "title"
-                span workshop.people.map { |p| p.name }.join(', '), :class => "teacher" if workshop.people.length > 0
+                span workshop.people_sorted.map { |p| p.name }.join(', '), :class => "teacher" if workshop.people.length > 0
                 div :class => "class-data" do
                   render :partial => "/events/details/workshop_days", :locals => {:event => workshop}
                 end

@@ -51,7 +51,7 @@ ol :class => "event-calendar" do
             a :href => occurrence_path(event, time, in_festival) do 
               h3 event.title, :class => "title"
               h4 event.display_type, :class => "type"           
-              para event.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
+              para event.people_sorted.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
               if !in_festival
                 aside class: "in-festival" do
                   render :partial => "events/in_festival", :locals => {:event => event, :link => false }
