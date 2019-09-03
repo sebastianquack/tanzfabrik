@@ -133,7 +133,6 @@ cache_arbre(self, cache_for_navigation) do
             li_submenu t(:section_classes), [
               "jubilaumsedition-tanzklassen",
               "kursplan", 
-              "sommer-tanzklassen-2019",
               "sommer-spezial",
               "sommer-intensive", 
               [
