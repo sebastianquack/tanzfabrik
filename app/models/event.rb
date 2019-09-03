@@ -154,11 +154,16 @@ class Event < ActiveRecord::Base
 
     # special case: when the workshops runs only sat-sun, but there are others workshops running thu-sun in the same week
     # result: the weekend workshop should have the same early bird date as the others
-    if (self.start_date.day == self.end_date.prev_day(1).day)
-      others = Event.workshop.where(:end_date_cache => self.end_date).where(:start_date_cache => self.end_date.prev_day(3))
-      date = date.prev_day(7) if others.count > 0
-    end
+    #if (self.start_date.day == self.end_date.prev_day(1).day)
+    #  others = Event.workshop.where(:end_date_cache => self.end_date).where(:start_date_cache => self.end_date.prev_day(3))
+    #  date = date.prev_day(7) if others.count > 0
+    #end
 
+    # special case: if christmas holidays -> one week earlier
+    if (date.month == 12 && [25,26].include?(date.day))
+      date = date.prev_day(7)
+    end
+    
     date
   end
   
