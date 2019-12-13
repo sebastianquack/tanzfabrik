@@ -24,6 +24,7 @@ else
   # retrieve events of type workshop that start today or in the future
   workshops = Event
     .no_draft
+    .no_no_sign_up
     .joins(:type, :event_details)
     .where('event_types.id = 2 AND event_details.start_date >= ?', Date.today)
     .uniq

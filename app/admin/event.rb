@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   menu :priority => 1
 
-  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook, :draft, :custom_sorting,
+  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook, :draft, :custom_sorting, :no_sign_up,
     :festival_ids => [], :person_ids => [],
     :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :custom_place, :repeat_mode_id, :_destroy, tag_ids: []],
     :people_attributes => [:id, :name, :_destroy],
@@ -221,6 +221,7 @@ ActiveAdmin.register Event do
     
     f.inputs "Spezial" do
       f.input :feature_on_welcome_screen
+      f.input :no_sign_up, :label => t(:no_sign_up)      
       f.input :draft, :label => t(:draft)      
     end
     
