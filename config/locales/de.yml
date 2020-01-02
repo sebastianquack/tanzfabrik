@@ -107,6 +107,7 @@ de:
   ticket_link: "http://www.reservix.de/off/login_check.php?id=c6ec16e8cf3cd5077514ebef590a1f763d4616b372ef8900411779bf6bedf213&vID=9246"
   
   draft: Nicht im Front-End angezeigt
+  no_sign_up: Keine Workshop-Anmeldung
   feature_on_welcome_screen: Auf Startseite hervorheben
   feature_on_welcome_screen_note: Hinweis für Hervorhebung
   

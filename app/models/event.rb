@@ -182,6 +182,7 @@ class Event < ActiveRecord::Base
   end
   
   scope :no_draft, -> { where("events.draft = ? OR events.draft IS NULL", false) }
+  scope :no_no_sign_up, -> { where("events.no_sign_up = ? OR events.no_sign_up IS NULL", false) }
   
   scope :stage_event, -> { where('type_id IN (?)', Rails.configuration.stage_event_types) }
 
