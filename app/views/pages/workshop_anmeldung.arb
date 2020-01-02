@@ -144,29 +144,6 @@ else
           #end
 
       #end
-    
-      div :class => "row" do
-
-        div t(:form_section_membership_status), :class => "title"
-
-        div :class => "form-radio" do
-
-          para t(:form_section_membership_status_explanation)
-
-          div :class => "radio-elem" do
-            f.radio_button :membership_status, 0, :required => true, :checked => false
-            div :class => "input-style-helper"
-            f.label :membership_status, t(:form_section_membership_status_0)
-          end
-
-          div :class => "radio-elem" do
-            f.radio_button :membership_status, 1, :required => true
-            div :class => "input-style-helper"
-            f.label :membership_status, t(:form_section_membership_status_1)
-          end
-        end
-
-      end
       
       div :class => "row" do
         div t(:form_section_concessions), :class => "title"
