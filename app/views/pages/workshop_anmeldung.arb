@@ -149,16 +149,6 @@ else
       div :class => "row" do
         div t(:form_section_concessions), :class => "title"
         div :class => "description" do 
-          para t(:form_section_concessions_early_bird)
-          workshops_grouped_by_early_bird.each do |early_bird_date, early_bird_workshops|
-            early_bird_workshops = workshops_sort early_bird_workshops
-            para :class => "early_bird_list" do
-              early_bird_workshops.each do |workshop|
-                b workshop.title
-              end
-              span t(:form_section_concessions_early_bird_until) + " " + l(early_bird_date, :format => :day)
-            end
-          end
           ermassigungen = Page.find("ermassigungen")
           if ermassigungen
             div editable ermassigungen, :content, :type => "wysihtml5"
