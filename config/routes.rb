@@ -45,6 +45,8 @@ Tanzfabrik::Application.routes.draw do
   get '/de' => redirect('/')
   get '/:locale' => "pages#show", :as => :local_root, locale: /[A-Za-z]{2}/
 
+  get 'google0d69f052c5b126a8.html', to: proc { [200, {}, ['']] }
+
   get '*path' => "redirect#oldsite"
     
   root 'pages#show'
