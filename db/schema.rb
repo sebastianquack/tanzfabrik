@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191213112315) do
+ActiveRecord::Schema.define(version: 20200317124810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -236,6 +236,7 @@ ActiveRecord::Schema.define(version: 20191213112315) do
     t.string   "feature_on_welcome_screen_note_en"
     t.string   "feature_on_welcome_screen_note_de"
     t.boolean  "hide_download_links"
+    t.boolean  "feature_on_welcome_screen_urgent",              default: false
   end
 
   add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true, using: :btree

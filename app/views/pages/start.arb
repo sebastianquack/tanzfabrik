@@ -6,11 +6,22 @@ end
 set_meta_tags :title => page_title, :reverse => false
 
 # use these arrays to collect and sort entries
+entries_pages_urgent = []
 entries_today = []
 entries_tomorrow = []
 entries_future = []
 entries_pages = []
 custom_entry = nil
+
+########### URGENNT FEATURED PAGES ############
+
+Page.no_draft.where(:feature_on_welcome_screen_urgent => true).each do |page|
+  entries_pages_urgent.push({
+    :time => page.feature_on_welcome_screen_note,
+    :title => page.title,
+    :href => page_path(page)
+  })  
+end
 
 # grab stage events that are not in a festival
 events_not_in_festival = Event.no_draft.not_in_festival.stage_event
@@ -201,7 +212,7 @@ all_entries += entries_future
 all_entries.uniq! { |e| e[:title] }
 
 # shorten to maximum 7 entries
-all_entries = all_entries[0..(6 - entries_pages.length)] + entries_pages
+all_entries = entries_pages_urgent + all_entries[0..(6 - entries_pages.length)] + entries_pages
 
 ######### DISPLAY ENTRIES ############
 
