@@ -108,7 +108,8 @@ de:
   
   draft: Nicht im Front-End angezeigt
   no_sign_up: Keine Workshop-Anmeldung
-  feature_on_welcome_screen: Auf Startseite hervorheben
+  feature_on_welcome_screen: Auf Startseite unten
+  feature_on_welcome_screen_urgent: Auf Startseite oben
   feature_on_welcome_screen_note: Hinweis für Hervorhebung
   
   date:
