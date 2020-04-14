@@ -181,11 +181,18 @@ cache_arbre(self, cache_for_navigation) do
             festivals |= [Festival.find(params[:id])] if params[:controller] == "festivals" # for archived festivals: add festival to menu
             festivals |= [Festival.find(params[:festival_id])] if event_view && params[:festival_id]  # for archived festival events: add festival to menu
 
-            if (festivals.length > 0)
+            festival_pages = Page.no_draft.in_project_menu
+
+            if (festivals.length > 0 || festival_pages.length > 0)
               festivals_submenu = []
               festivals.each do |f|
                 festivals_submenu << [f, event_view && params[:festival_id] && Festival.find(params[:festival_id]) == f]
               end
+
+              festival_pages.each do |p|
+                festivals_submenu << p
+              end
+
               li_submenu(t(:section_festivals), ["festivals"] + festivals_submenu)
 
             else

@@ -15,7 +15,7 @@ custom_entry = nil
 
 ########### URGENNT FEATURED PAGES ############
 
-Page.no_draft.where(:feature_on_welcome_screen_urgent => true).each do |page|
+Page.no_draft.where(:feature_on_welcome_screen_urgent => true).order(:start_page_order).each do |page|
   entries_pages_urgent.push({
     :time => page.feature_on_welcome_screen_note,
     :title => page.title,
@@ -175,7 +175,7 @@ end
 
 ########### FEATURED PAGES ############
 
-pages = Page.no_draft.where(:feature_on_welcome_screen => true).each do |page|
+pages = Page.no_draft.where(:feature_on_welcome_screen => true).order(:start_page_order).each do |page|
   entries_pages.push({
     :time => page.feature_on_welcome_screen_note,
     :title => page.title,

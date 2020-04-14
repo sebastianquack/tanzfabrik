@@ -111,6 +111,10 @@ de:
   feature_on_welcome_screen: Auf Startseite unten
   feature_on_welcome_screen_urgent: Auf Startseite oben
   feature_on_welcome_screen_note: Hinweis für Hervorhebung
+
+  start_page_order: Reihenfolge auf Startseite
+  show_in_project_menu: Im Menu Projekte zeigen
+  project_menu_order: Reihenfolge im Menu Projekte
   
   date:
     abbr_day_names:

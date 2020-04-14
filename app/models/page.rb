@@ -51,4 +51,6 @@ class Page < ActiveRecord::Base
 
   scope :no_draft, -> { where("pages.draft = ? OR pages.draft IS NULL", false) }
 
+  scope :in_project_menu, -> { where("pages.show_in_project_menu = ?", true).order("project_menu_order") }
+
 end
