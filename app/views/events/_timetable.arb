@@ -173,7 +173,11 @@ div :class => "timetable-container" do
                         link_to detail.event.people_sorted[1].name.html_safe, person_link(detail.event.people_sorted[1]) if detail.event.people_sorted[1]
                       end
                       div :class => "warning" do
-                        text_node detail.event.warning.html_safe if detail.event.warning
+                        if detail.event.signup_url && detail.event.warning
+                          a detail.event.warning.html_safe, :href => detail.event.signup_url 
+                        else 
+                          text_node detail.event.warning.html_safe if detail.event.warning
+                        end
                       end
                       div :class => "time-footnotes" do
                         time l(detail.starttime, :format => :hours_minutes), :class => "course-time"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200429122502) do
+ActiveRecord::Schema.define(version: 20200429124816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20200429122502) do
     t.string   "facebook"
     t.boolean  "custom_sorting",                                      default: false
     t.boolean  "no_sign_up",                                          default: false
+    t.string   "signup_url"
   end
 
   create_table "festival_containers", force: :cascade do |t|

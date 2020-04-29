@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   menu :priority => 1
 
-  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook, :draft, :custom_sorting, :no_sign_up,
+  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook, :draft, :custom_sorting, :no_sign_up, :signup_url,
     :festival_ids => [], :person_ids => [],
     :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :custom_place, :repeat_mode_id, :_destroy, tag_ids: []],
     :people_attributes => [:id, :name, :_destroy],
@@ -165,6 +165,7 @@ ActiveAdmin.register Event do
       f.input :info_en, :input_html => { :class => 'wysihtml5 wysihtml5-notoolbar' }
       f.input :warning_de
       f.input :warning_en
+      f.input :signup_url, :label => t(:signup_url)
       f.inputs "Externe Links" do
         f.input :facebook, :required => false, :placeholder => "https://www.facebook.com/events/877048289058664/"
       end      

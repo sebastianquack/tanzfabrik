@@ -116,7 +116,8 @@ de:
   show_in_project_menu: Im Menu Projekte zeigen
   project_menu_order: Reihenfolge im Menu Projekte
   disable_close: Info-Schließmöglichkeit deaktivieren (für Kursplan)
-  
+  signup_url: Anmelde-URL
+
   date:
     abbr_day_names:
     - So
