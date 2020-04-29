@@ -44,7 +44,6 @@ details_by_hour =
 
   #.all(:include => :event, :conditions => {:events => {:type_id => type_ids }} )
 
-
 #bench = Benchmark.measure do
 
   details_by_hour.each do |hour, details|
@@ -99,14 +98,24 @@ details_by_hour =
 
 table_data[0][0] = div(location.name, :class => "location-name")
 
-
-
 #pre table_data.to_yaml
+
+# jump out when empty
+if table_data.length <= 2
+  logger.debug "short table data"
+  logger.debug table_data
+
+  if table_data[1][0] == nil
+    return
+  end
+
+end
+
 
 # display the table
 div :class => "timetable-container" do
   table :class => "timetable" do
-    
+      
     # table head
     thead do  
       tr do
@@ -118,6 +127,7 @@ div :class => "timetable-container" do
       end
     end
 
+  
     # table body
     tbody do  
       table_data.shift
