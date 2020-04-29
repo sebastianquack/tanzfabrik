@@ -115,6 +115,7 @@ de:
   start_page_order: Reihenfolge auf Startseite
   show_in_project_menu: Im Menu Projekte zeigen
   project_menu_order: Reihenfolge im Menu Projekte
+  disable_close: Info-Schließmöglichkeit deaktivieren (für Kursplan)
   
   date:
     abbr_day_names:
