@@ -10,6 +10,9 @@ class Page < ActiveRecord::Base
   has_many :downloads
   accepts_nested_attributes_for :downloads, :allow_destroy => true
   
+  has_many :content_modules
+  accepts_nested_attributes_for :content_modules, :allow_destroy => true
+
   require 'fuzzystringmatch'
 
   # determine the extension text for the selected menu item

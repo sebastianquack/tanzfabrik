@@ -7,6 +7,7 @@ ActiveAdmin.register Page do
   #
   # permit_params :list, :of, :attributes, :on, :model
   permit_params :title_de, :content_de, :title_en, :content_en, :description_de, :description_en, :priority, :changefreq, :draft, :feature_on_welcome_screen, :feature_on_welcome_screen_urgent, :feature_on_welcome_screen_note_en, :feature_on_welcome_screen_note_de, :hide_download_links, :start_page_order, :project_menu_order, :show_in_project_menu, :disable_close,
+    :content_modules_attributes => [:id, :module_type, :test_content, :order, :_destroy],
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
     
@@ -70,14 +71,26 @@ ActiveAdmin.register Page do
   end
   
   form do |f|
+    
     f.inputs "Details" do
       f.input :title_de
       f.input :title_en
     end
+    
     f.inputs "Content" do
       f.input :content_de, :input_html => { :class => 'wysihtml5' }
       f.input :content_en, :input_html => { :class => 'wysihtml5' }
     end
+    
+    f.inputs "Content Modules" do
+      f.has_many :content_modules, heading: false, sortable: :order, :new_record => true, :allow_destroy => true do |f_f|
+        f_f.input :module_type, :as => :select, :collection => [
+         ['standard', 'default']
+        ]
+        f_f.input :test_content
+      end
+    end
+    
     f.inputs "Images" do
       f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
         #f_f.inputs do
@@ -91,6 +104,7 @@ ActiveAdmin.register Page do
         #end
       end
     end
+    
     f.inputs "Downloads" do
       f.has_many :downloads, heading: false, :new_record => true, :allow_destroy => true do |f_f|
         #f_f.inputs do
@@ -110,6 +124,7 @@ ActiveAdmin.register Page do
       end
       f.input :hide_download_links
     end
+    
     f.inputs "SEO" do
 #      priority_hint = "Relative Wichtigkeit der Seite zwischen 0 (links, völlig unwichtig) und 1 (rechts, allerwichtigste Seite). Eingesteller Wert: "
 #      f.input :priority, :as => :range, :in => 0..1, :step => 0.1, :input_html => {:onmousemove => "h = document.querySelector('#page_priority_input .inline-hints').innerText = '" + priority_hint + "' + this.value"}, :hint => (priority_hint + params[:priority].to_s)
