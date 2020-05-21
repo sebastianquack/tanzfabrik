@@ -18,10 +18,21 @@ docker-compose up
 open http://localhost:3000
 ````
 
+### dev workflow after setup
+
+````
+docker-compose up -d
+docker-compose run web rake db:migrate # if necessary
+
+# ...develop...
+
+docker-compose down
+````
+
 ### how to docker
 
 * run rake commands: `docker-compose run web rake --help`
-* run everything in background: `docker-compose up -d`
 * check logs: `docker-compose logs`
 * Adminer: `http://localhost:8080` (postgres/postgres)
+* volatile data such as database files are stored in `.data/`
 
