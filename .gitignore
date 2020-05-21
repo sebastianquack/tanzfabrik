@@ -21,6 +21,12 @@
 # Ignore data.yml
 /db/data.yml
 
+# Ignore docker container data (including database)
+/.data/
+
+# Env
+/.env
+
 # Other
 .DS_Store
 /public/system/*

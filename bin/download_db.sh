@@ -1,3 +1,15 @@
+#/bin/bash
+
+# go to to repo root
+cd $(git rev-parse --show-toplevel)
+
+# capture backup
 heroku pg:backups capture --app tanzfabrik
-curl -o /tmp/latest.dump `heroku pg:backups public-url --app tanzfabrik`
-pg_restore --verbose --clean --no-acl --no-owner -h localhost -d tanzfabrik/development /tmp/latest.dump
+
+# download db dump
+mkdir -p .data
+curl -o .data/latest.dump `heroku pg:backups public-url --app tanzfabrik`
+
+# run restore
+echo "password: postgres"
+docker-compose run db pg_restore --verbose --clean --no-acl --no-owner -U postgres -h db -d tanzfabrik/development /data/latest.dump
