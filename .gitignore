@@ -15,6 +15,9 @@
 /log/*.log
 /tmp
 
+/.env
+/.data
+
 # Ignore generated sitemap
 #/public/sitemap.xml*
 
