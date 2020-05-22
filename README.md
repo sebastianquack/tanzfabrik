@@ -4,7 +4,7 @@
 
 #### install prerequisites
 
-* docker: `brew cask install docker`
+* docker: `brew cask install docker` (you need to start the docker gui app once for it to install docker-compose)
 * heroku-cli `brew tap heroku/brew && brew install heroku`
 * put `.env` file containing the secrets in repo root folder
 
