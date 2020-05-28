@@ -32,7 +32,7 @@ div :class => "info" do
   small event.info.html_safe if event.info
 
   # Price(s)
-  if event.price_regular
+  if event.price_regular && !event.no_sign_up
     small do
       if event.type.name == "Workshop"
         text_node t(:price_workshop) + " "
