@@ -51,7 +51,7 @@ end
 #gem 'activeadmin', github: 'activeadmin'
 #gem 'activeadmin', github: 'gregbell/active_admin'
 #gem 'formtastic'#, github: 'justinfrench/formtastic'
-gem 'activeadmin', '~> 1.4.3'
+gem 'activeadmin', '1.1.0'
 
 gem 'devise'
 
@@ -64,7 +64,7 @@ gem 'friendly_id', '~> 5.0.0'
 gem "paperclip" #, "4.1.1"
 gem 'aws-sdk', '< 2.0'
 
-gem "arbre", '~> 1.1.1'
+gem "arbre", '~> 1.2.1'
 gem "ice_cube"
 
 gem 'traco'
