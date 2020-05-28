@@ -7,6 +7,8 @@ ActiveAdmin.register MenuItem do
 
   # disable authentication for ajax sort request
   skip_before_filter :verify_authenticity_token, :only => :sort
+
+  config.batch_actions = false
   
   sortable tree: true
     
