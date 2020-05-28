@@ -20,7 +20,8 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~>3.1.0'
+gem 'jquery-rails', "4.2.0"
+gem 'jquery-ui-rails'
 gem "jquery-scrollto-rails"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -50,7 +51,7 @@ end
 #gem 'activeadmin', github: 'activeadmin'
 #gem 'activeadmin', github: 'gregbell/active_admin'
 #gem 'formtastic'#, github: 'justinfrench/formtastic'
-gem 'activeadmin', '~> 1.0.0.pre2'
+gem 'activeadmin', '~> 1.4.3'
 
 gem 'devise'
 
@@ -63,7 +64,7 @@ gem 'friendly_id', '~> 5.0.0'
 gem "paperclip" #, "4.1.1"
 gem 'aws-sdk', '< 2.0'
 
-gem "arbre"
+gem "arbre", '~> 1.1.1'
 gem "ice_cube"
 
 gem 'traco'
@@ -114,3 +115,7 @@ gem 'fog' # for sitemap_generator, also part of paperclip
 gem "letter_opener", :group => :development # for email testing
 
 gem 'countries' # list of countries and translations
+
+# for menu item tree
+gem 'ancestry', '~> 3.0.7'
+gem "active_admin-sortable_tree", "~> 2.1.0"

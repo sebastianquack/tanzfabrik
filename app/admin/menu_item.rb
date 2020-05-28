@@ -3,14 +3,15 @@ ActiveAdmin.register MenuItem do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :name_en, :name_de, :key, :page_id
+  permit_params :name_en, :name_de, :key, :page_id, :position
+
+  # disable authentication for ajax sort request
+  skip_before_filter :verify_authenticity_token, :only => :sort
   
-  index do 
-    selectable_column
-      column :name_de
-      column :name_en
-      column :key
-      column :page
+  sortable tree: true
+    
+  index :as => :sortable do
+    label :name_de
     actions
   end
   
