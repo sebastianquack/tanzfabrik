@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :set_background_image
   before_action :set_time
+  before_action :load_tree
 
   if Rails.env.production?
     rescue_from ActionController::RoutingError, :with => :raise_routing_404
@@ -51,6 +52,10 @@ class ApplicationController < ActionController::Base
       return
     end
     
+  end
+
+  def load_tree 
+    @menu_tree = MenuItem.arrange(:order => :position)
   end
   
   def default_url_options(options={})
