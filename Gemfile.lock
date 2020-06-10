@@ -263,7 +263,7 @@ GEM
       activerecord (>= 4.0.0)
     fuzzy-string-match (0.9.7)
       RubyInline (>= 3.8.6)
-    geocoder (1.2.12)
+    geocoder (1.6.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     google-webfonts (0.2.0)
