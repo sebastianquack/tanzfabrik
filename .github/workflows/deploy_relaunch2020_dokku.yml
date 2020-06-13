@@ -20,3 +20,4 @@ jobs:
             ssh-private-key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
             dokku-host: 'tanzfabrik.intergestalt.cloud'
             app-name: 'relaunch2020'
+            git-push-flags: '--force'
