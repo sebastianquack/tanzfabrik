@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@master
         with:
           ref: relaunch2020
+          fetch-depth: 0
       - id: deploy
         name: Deploy to dokku
         uses: idoberko2/dokku-deploy-github-action@v1
