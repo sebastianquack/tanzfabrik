@@ -4,6 +4,7 @@ services:
   web:
     build: .
     restart: always
+#    command: bundle update rails
     env_file:
       - ./.env
     volumes:
