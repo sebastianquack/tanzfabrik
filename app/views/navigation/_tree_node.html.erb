@@ -1,0 +1,13 @@
+<ul>
+<% tree.each_pair do |k,v| %>
+
+<li> <%= link_to k.name, page_path(k.page) + "?2020=true" %>
+
+<% if v %>
+  <%= render :partial => "navigation/tree_node", :locals => {:tree => v} %>
+<% end %>
+
+</li>
+
+<% end %>
+</ul>

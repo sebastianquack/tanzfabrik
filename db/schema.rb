@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200513073227) do
+ActiveRecord::Schema.define(version: 20200528104010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,17 @@ ActiveRecord::Schema.define(version: 20200513073227) do
     t.text     "description_en"
     t.integer  "order",                      default: 0
   end
+
+  create_table "menu_items", force: :cascade do |t|
+    t.string  "name_de"
+    t.string  "name_en"
+    t.string  "key"
+    t.integer "page_id"
+    t.string  "ancestry"
+    t.integer "position", default: 0
+  end
+
+  add_index "menu_items", ["ancestry"], name: "index_menu_items_on_ancestry", using: :btree
 
   create_table "pages", force: :cascade do |t|
     t.string   "title_de",                          limit: 255

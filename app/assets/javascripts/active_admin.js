@@ -1,8 +1,7 @@
 #= require active_admin/base
 //= require jquery
-//= require jquery_ujs
 //= require ckeditor-jquery
-
+//= require active_admin/sortable
 //= require bootstrap
 
 $(document).ready(function() {

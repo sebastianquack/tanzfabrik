@@ -2,6 +2,6 @@
   <%= render "/pages/content_modules" %>
 <% end %>
 <hr>
-<%= render "/pages/editable_content" %>
+<%= render partial: "/pages/editable_content", locals: {page: @page} %>
 
       

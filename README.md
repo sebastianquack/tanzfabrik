@@ -35,6 +35,8 @@ docker-compose down
 * check logs: `docker-compose logs`
 * Adminer: `http://localhost:8080` (postgres/postgres)
 * volatile data such as database files are stored in `.data/`
+* add gem: `docker-compose run web bundle install`followed by `docker-compose up --build`
+
 
 ## dokku deploy
 
