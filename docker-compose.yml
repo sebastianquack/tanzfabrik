@@ -3,6 +3,7 @@ services:
 
   web:
     build: .
+    restart: always
     env_file:
       - ./.env
     volumes:
