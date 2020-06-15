@@ -64,3 +64,6 @@ dokku run rake db:create
 dokku run rake db:migrate
 dokku letsencrypt
 ```
+
+## staging server
+https://relaunch2020.tanzfabrik.intergestalt.cloud/
