@@ -31,11 +31,11 @@ docker-compose down
 
 ### how to docker
 
-* run rake commands: `docker-compose run web rake --help`
+* run rake commands: `docker-compose run -v $(pwd)/app web rake --help`
 * check logs: `docker-compose logs`
 * Adminer: `http://localhost:8080` (postgres/postgres)
 * volatile data such as database files are stored in `.data/`
-* add gem: `docker-compose run web bundle install`followed by `docker-compose up --build`
+* add gem: `docker-compose run -v $(pwd)/app web bundle install`followed by `docker-compose up --build`
 
 
 ## dokku deploy
