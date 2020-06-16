@@ -1,4 +1,4 @@
-#= require active_admin/base
+//= require active_admin/base
 //= require jquery
 //= require ckeditor-jquery
 //= require active_admin/sortable

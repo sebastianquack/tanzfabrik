@@ -9,7 +9,8 @@ gem 'ZenTest'
 gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.1'
+#gem 'sass-rails', '~> 5.1' --> replaced by sassc-rails
+gem 'sassc-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -52,7 +53,7 @@ end
 #gem 'activeadmin', github: 'activeadmin'
 #gem 'activeadmin', github: 'gregbell/active_admin'
 #gem 'formtastic'#, github: 'justinfrench/formtastic'
-gem 'activeadmin', '1.4.3' # max 2.7.0
+gem 'activeadmin', '~>2.7.0' # max 2.7.0
 #gem 'actionpack', '~>5.0.0'
 gem 'devise'
 

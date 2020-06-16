@@ -12,7 +12,7 @@ ActiveAdmin.register Event do
 
   config.per_page = 100
 
-  member_action :clone, method: :get do
+  member_action :duplicate, method: :get do
     @resource = resource.dup
     @resource.people = resource.people.dup
     #@resource.event_details = resource.event_details.dup
@@ -21,8 +21,8 @@ ActiveAdmin.register Event do
     render :new, layout: false
   end
 
-  action_item :only => :show do
-    link_to(Event.model_name.human + " duplizieren", clone_admin_event_path(id: event.id))
+  action_item :duplicate, :only => :show do
+    link_to Event.model_name.human + " duplizieren", duplicate_admin_event_path(event)
   end
 
   index do 
