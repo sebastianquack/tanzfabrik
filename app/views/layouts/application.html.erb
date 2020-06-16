@@ -5,7 +5,6 @@
   <%= display_meta_tags :site => 'Tanzfabrik', :reverse => true %>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>  
   <%= stylesheet_link_tag "application_edit", media: "all", "data-turbolinks-track" => true if admin_user_signed_in? %> 
-  <%= google_webfonts_link_tag :roboto => [400, 700] %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application_edit", "data-turbolinks-track" => true if admin_user_signed_in? %>
   <%= csrf_meta_tags %>
@@ -39,8 +38,6 @@
   <div id="background" data-site-background-url="<%= @bg_image_url %>">
   </div>
 </div>
-
-<%= piwik_tracking_tag if !admin_user_signed_in? %>
 
 <%= jsonld_tag %>
 

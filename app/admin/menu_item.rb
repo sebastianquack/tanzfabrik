@@ -6,7 +6,7 @@ ActiveAdmin.register MenuItem do
   permit_params :name_en, :name_de, :key, :page_id, :position
 
   # disable authentication for ajax sort request
-  skip_before_filter :verify_authenticity_token, :only => :sort
+  #skip_before_filter :verify_authenticity_token, :only => :sort
 
   config.batch_actions = false
   

@@ -3,18 +3,19 @@ ruby "2.4.10"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.10'
+gem 'rails', '~>5.2'
+gem 'ZenTest'
 
 gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 5.1'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+#gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -22,14 +23,14 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails', "4.2.0"
 gem 'jquery-ui-rails'
-gem "jquery-scrollto-rails"
+gem "sn-jquery-scrollto-rails"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 2.7'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -51,8 +52,8 @@ end
 #gem 'activeadmin', github: 'activeadmin'
 #gem 'activeadmin', github: 'gregbell/active_admin'
 #gem 'formtastic'#, github: 'justinfrench/formtastic'
-gem 'activeadmin', '1.1.0'
-
+gem 'activeadmin', '1.4.3' # max 2.7.0
+#gem 'actionpack', '~>5.0.0'
 gem 'devise'
 
 #gem 'activeadmin-dragonfly', github: 'stefanoverna/activeadmin-dragonfly'
@@ -61,8 +62,9 @@ gem 'devise'
 gem 'friendly_id', '~> 5.0.0'
 
 #gem "paperclip", '~> 3.5' # newer paperclip does not play nicely with formtastic
-gem "paperclip" #, "4.1.1"
-gem 'aws-sdk', '< 2.0'
+#gem "paperclip" #, "4.1.1"
+gem "kt-paperclip", "~> 6.2"
+gem 'aws-sdk', '>= 2.0'
 
 gem "arbre", '~> 1.2.1'
 gem "ice_cube"
@@ -77,8 +79,8 @@ gem 'x-editable-rails', :git => "https://github.com/retani/x-editable-rails.git"
 #gem 'wysihtml-rails'
 gem 'ckeditor_rails'
 
-gem 'google-webfonts'
-gem 'html5shiv-rails'
+#gem 'google-webfonts'
+#gem 'html5shiv-rails'
 #gem "autoprefixer-rails"
 
 gem 'bourbon'
@@ -92,7 +94,7 @@ gem "parsley-rails"
 
 group :production do
 	gem 'rails_12factor'
-  gem 'heroku_rails_deflate' # enables gzip compression
+  #gem 'heroku_rails_deflate' # enables gzip compression
   gem 'unicorn-rails'
 end
 
@@ -103,11 +105,11 @@ gem "geocoder"
 gem "fuzzy-string-match"
 gem "devise-i18n"
 
-gem 'piwik_analytics', '~> 1.0.2'
+#gem 'piwik_analytics', '~> 1.0.2'
 
 gem 'newrelic_rpm'
 
-gem 'groupdate', '~> 2.2.1'
+gem 'groupdate', '>=4'
 
 gem 'sitemap_generator', '~> 5.0.5'
 gem 'fog' # for sitemap_generator, also part of paperclip

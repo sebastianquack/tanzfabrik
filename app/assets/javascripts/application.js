@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.turbolinks 
-//= require jquery.scrollTo
 //= require turbolinks
 //= require bootstrap
 //= require parsley

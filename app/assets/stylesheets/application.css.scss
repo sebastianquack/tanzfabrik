@@ -17,8 +17,8 @@
 
 /**** Load Fonts ****/
 
-@include font-face(LuxiMonoBold, 'luximb-webfont-westernlatin', bold, normal, $asset-pipeline: true);
-@include font-face(LuxiMonoRegular, 'luximr-webfont', normal, normal, $asset-pipeline: true);
+//@include font-face(LuxiMonoBold, 'luximb-webfont-westernlatin', bold, normal);
+//@include font-face(LuxiMonoRegular, 'luximr-webfont', normal, normal);
 /*
 @include font-face(LuxiMonoOblique, 'luximri-webfont', normal, italic, $asset-pipeline: true);
 @include font-face(LuxiMonoBoldOblique, 'luximbi-webfont', bold, italic, $asset-pipeline: true);
@@ -296,8 +296,8 @@ body {
 	position: absolute;
 	overflow: hidden;
 	text-align: right;
-	@include transform(translateX(-$vertical-menu-width - 3px) rotate(-90deg));
-	@include transform-origin(right top);  
+	//@include transform(translateX(-$vertical-menu-width - 3px) rotate(-90deg));
+	//@include transform-origin(right top);  
   list-style-type: none;
   margin:0;
   padding:0;
@@ -538,8 +538,8 @@ ul.navigation, ul.navigation ul, ul.navigation li {
 	position: absolute;
 	overflow: hidden;
 	text-align: right;
-	@include transform(translateX(-($vertical-menu-width + $overall-container-margin)) rotate(-90deg));
-	@include transform-origin(right top);
+	//@include transform(translateX(-($vertical-menu-width + $overall-container-margin)) rotate(-90deg));
+	//@include transform-origin(right top);
 	padding-top: 1em;
 }
 
@@ -1128,14 +1128,14 @@ form {
 	min-height:330px;
 	width:100%;
 	display: block;
-	background-image: url(asset_path("rotT.png", image));
+	//background-image: url(asset_path("rotT.png", image));
 	background-repeat: no-repeat;
 	background-size: 100%;
 	margin-top: $vertical-box-padding * 2;
 }
 
 .details.empty[data-variant="1"]:after {
-	background-image: url(asset_path("schwarzT.png", image));
+	//background-image: url(asset_path("schwarzT.png", image));
 }
 
 /**** events ****/
@@ -1358,7 +1358,7 @@ form {
 .teachers .image-container.empty {
 	width:146px;
 	height:152px;
-	background-image: url(asset_path("schwarzT.png", image));
+	//background-image: url(asset_path("schwarzT.png", image));
 }
 
 .teachers h3 {
