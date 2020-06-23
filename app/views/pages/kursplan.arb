@@ -1,3 +1,5 @@
+kursplan_address = TextItem.where(:name => "KursplanAdressen").first
+
 cache_arbre(self, cache_key_for_page_headlines(page)) do      
   header :id => "headlines", :class => "headlines-kursplan" do
     div :class => "main" do
@@ -5,7 +7,7 @@ cache_arbre(self, cache_key_for_page_headlines(page)) do
         h1 :class => "title" do
           span editable page, :title
           a "✎", :href => edit_admin_page_path(page), :class => "admin-only classes" if admin_user_signed_in?
-          span t(:kursplan_address), :class => "neutral"
+          span kursplan_address.content, :class => "neutral" if kursplan_address 
         end
       end
       if page.content
