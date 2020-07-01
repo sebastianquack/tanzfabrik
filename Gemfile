@@ -13,7 +13,7 @@ gem 'pg'
 gem 'sassc-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+# gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 #gem 'coffee-rails', '~> 4.0.0'
@@ -82,7 +82,6 @@ gem 'ckeditor_rails'
 
 #gem 'google-webfonts'
 #gem 'html5shiv-rails'
-#gem "autoprefixer-rails"
 
 gem 'bourbon'
 
@@ -122,3 +121,4 @@ gem 'countries' # list of countries and translations
 # for menu item tree
 gem 'ancestry', '~> 3.0.7'
 gem "active_admin-sortable_tree", "~> 2.1.0"
+gem "webpacker", "~> 5.1"
