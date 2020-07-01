@@ -60,7 +60,7 @@ gem 'devise'
 #gem 'activeadmin-dragonfly', github: 'stefanoverna/activeadmin-dragonfly'
 #gem 'activeadmin-wysihtml5', github: 'stefanoverna/activeadmin-wysihtml5'
 
-gem 'friendly_id', '~> 5.0.0'
+gem 'friendly_id', '~> 5.2.4'
 
 #gem "paperclip", '~> 3.5' # newer paperclip does not play nicely with formtastic
 #gem "paperclip" #, "4.1.1"
