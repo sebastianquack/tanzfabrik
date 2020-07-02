@@ -4,6 +4,7 @@
   
   <meta charset="utf-8"> 
   <%= favicon_link_tag 'favicon.ico' %>
+  <%= javascript_pack_tag "application" %>
   
 </head>
 <body>
@@ -11,6 +12,8 @@
   <%= render "/navigation/tree" %>
 
 	<%= yield %>
+
+  <%= image_pack_tag 'tanzfabrik-logo.gif' %>
 
 </body>
 </html>
