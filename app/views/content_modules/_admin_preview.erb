@@ -1,0 +1,9 @@
+<% url = edit_admin_content_module_url(cm.id) if cm.id? %>
+<li>
+  <div>
+    headline: <b><%= cm.headline %></b><br>
+    module_type: <%= cm.module_type %><br>
+    style_option: <%= cm.style_option %><br>
+  </div>
+  <%= link_to "edit content module", url %>
+</li>

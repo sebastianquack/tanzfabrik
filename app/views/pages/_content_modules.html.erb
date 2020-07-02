@@ -1,10 +1,12 @@
-<h1>hello content_modules</h1>
-
 <p>this page has <%= @page.content_modules.length %> modules </p>
 
 <% for @content_module in @page.content_modules %>
 
-<%= render :partial => "pages/content_modules/" + @content_module.module_type, :locals => {:content_module => @content_module} %>
+  <p style="background-color: lightgray">
+    module_type:<%= @content_module.module_type %> / style_option:<%= @content_module.style_option %>
+  </p>
+  
+  <%= render :partial => "/content_modules/" + @content_module.module_type, :locals => {:content_module => @content_module} %>
 
 <% end %>
 

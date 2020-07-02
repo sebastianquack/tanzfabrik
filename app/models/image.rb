@@ -18,7 +18,9 @@ class Image < ActiveRecord::Base
     :storage => :s3,
     :bucket         => ENV['S3_TANZFABRIK_BUCKET'],
     :s3_credentials => { :access_key_id     => ENV['S3_KEY'], 
-                         :secret_access_key => ENV['S3_SECRET'] },
+                         :secret_access_key => ENV['S3_SECRET']
+                          },
+    :s3_region => ENV['AWS_REGION'],                      
     :url => ':s3_domain_url',
     :path => "images/:id/:style.:extension"
   
@@ -36,5 +38,6 @@ class Image < ActiveRecord::Base
   belongs_to :festival
   belongs_to :page
   belongs_to :festival_container
+  belongs_to :content_module
 
 end

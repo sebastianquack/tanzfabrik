@@ -1,0 +1,13 @@
+<%= @content_module.super %>
+<h1><%= @content_module.headline %></h1>
+<%= @content_module.sub %>
+
+<div><%= @content_module.main_text %></div>
+
+<% if @content_module.main_text_col2 %>
+  <div><%= @content_module.main_text_col2 %></div>
+<% end %>
+  
+<% if @content_module.special_text %>
+  <div><%= @content_module.special_text %></div>
+<% end %>

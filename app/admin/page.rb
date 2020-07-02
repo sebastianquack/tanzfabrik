@@ -7,7 +7,7 @@ ActiveAdmin.register Page do
   #
   # permit_params :list, :of, :attributes, :on, :model
   permit_params :title_de, :content_de, :title_en, :content_en, :description_de, :description_en, :priority, :changefreq, :draft, :feature_on_welcome_screen, :feature_on_welcome_screen_urgent, :feature_on_welcome_screen_note_en, :feature_on_welcome_screen_note_de, :hide_download_links, :start_page_order, :project_menu_order, :show_in_project_menu, :disable_close,
-    :content_modules_attributes => [:id, :module_type, :test_content, :order, :_destroy],
+    :content_modules_attributes => [:id, :module_type, :headline, :order, :_destroy],
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
     
@@ -69,9 +69,9 @@ ActiveAdmin.register Page do
       end
     end
   end
-  
+
   form do |f|
-    
+
     f.inputs "Details" do
       f.input :title_de
       f.input :title_en
@@ -81,13 +81,10 @@ ActiveAdmin.register Page do
       f.input :content_de, :input_html => { :class => 'wysihtml5' }
       f.input :content_en, :input_html => { :class => 'wysihtml5' }
     end
-    
+
     f.inputs "Content Modules" do
       f.has_many :content_modules, heading: false, sortable: :order, :new_record => true, :allow_destroy => true do |f_f|
-        f_f.input :module_type, :as => :select, :collection => [
-         ['standard', 'default']
-        ]
-        f_f.input :test_content
+        f_f.template.render partial: "/content_modules/admin_preview", locals: {cm: f_f.object}
       end
     end
     

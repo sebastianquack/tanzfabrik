@@ -1,7 +1,9 @@
 <% if @active_layout == "application2020" %>
   <%= render "/pages/content_modules" %>
 <% end %>
-<hr>
-<%= render partial: "/pages/editable_content", locals: {page: @page} %>
+
+<% if @active_layout == "application" %>
+  <%= render partial: "/pages/editable_content", locals: {page: @page} %>
+<% end %>
 
       

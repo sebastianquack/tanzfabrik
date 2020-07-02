@@ -1,6 +1,6 @@
 ActiveAdmin.register FestivalContainer do
 
-  menu :priority => 3
+  menu false
 
   permit_params :name_de, :description_de, :name_en, :description_en, :display,
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
