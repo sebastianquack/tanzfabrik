@@ -1,0 +1,65 @@
+cache_arbre(self, cache_key_for_page_headlines(page)) do      
+  header :id => "headlines", :class => "headlines-event" do
+    div :class => "main" do
+      div :class => "line1" do
+        h1 editable(page, :title), :class => "title"
+        a "✎", :href => edit_admin_page_path(page), :class => "admin-only classes" if admin_user_signed_in?
+        a "> " + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
+      end
+      if page.content
+        div :class => "line2 open-close opened" do
+          div :class => "open open-toggle-height" do
+            div page.content.html_safe
+            div t(:close), :class => "close-trigger"
+          end
+          div :class => "closed open-trigger" do
+            div t :workshop_program_more
+          end
+        end
+      end
+      div :class => "line3" do
+        ul do
+          page.downloads.each do |download|        
+            li do
+              a download.description, :href => download.attachment.url
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+#if params[:year]
+#  start_date = Date.parse('01-01-' + params[:year])
+#  end_date = start_date.end_of_year
+#  workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq
+#else 
+  #start_date = Date.today.beginning_of_month
+#  start_date = Date.parse('01-01-' + Time.now.year.to_s) # get workshops from beginning of year
+#  end_date = Time.now.to_s # don't show workshops that ended before today
+#  workshops = Event.joins(:type, :event_details).where('event_types.id = 2 AND event_details.start_date >= ? AND event_details.end_date >= ?', start_date, end_date).uniq
+#end
+
+# get all workshops
+#all_workshops = Event.where(:type_id => 2)
+
+render :partial => "/events/workshop_list", :locals => {:in_festival => nil}  
+
+# figure out in which years event_details exist
+years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 2').where("start_date < '"+(Date.today.year+1).to_s+"-01-01'" ).group_by_year(:start_date).count
+
+# show links for these years
+section :class => "archive-section" do
+  h5 t(:past_workshops), :class => "archive-headline"
+  ul :class => "archive-links" do
+    years.keys.each do |y|
+      if y.year <= Time.now.year
+        li do
+          a y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'workshop_programm', :year => y.year.to_s)
+        end
+      end
+    end
+  end
+end
+

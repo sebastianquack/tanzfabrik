@@ -1,0 +1,264 @@
+header :id => "headlines", :class => "headlines-teachers" do
+  div :class => "before"
+  div :class => "main" do
+    div :class => "line1" do
+      h1 :class => "title" do
+        text_node editable page, :title
+      end
+    end
+  end
+end
+
+if notice == "ok"
+  div :class => "row page" do
+    div :class => "basic" do
+      para t(:registration_success)
+    end
+  end
+else
+
+  unless defined? registration 
+    registration = Registration.new
+  end
+
+  # retrieve events of type workshop that start today or in the future
+  workshops = Event
+    .no_draft
+    .no_no_sign_up
+    .joins(:type, :event_details)
+    .where('event_types.id = 2 AND event_details.start_date >= ?', Date.today)
+    .uniq
+    #.sort_by { |w| [w.start_date, w.title.split("/")[0].to_i] } # assuming format: "NUMBER / TITLE"
+
+  # first sort and group by early bird date, then sort inside groups by title using workshops_sort
+  workshops_sorted_in_early_bird_groups = []
+  workshops_grouped_by_early_bird = workshops.sort_by { |w| w.early_bird_date}.group_by { |w| w.early_bird_date }
+  workshops_grouped_by_early_bird.each do |early_bird_date, early_bird_workshops|
+    workshops_sorted_in_early_bird_groups += workshops_sort early_bird_workshops
+  end
+  
+  div :class => "registration-form" do
+    
+    form_for registration, :html => {'data-parsley-validate' => ''} do |f|
+      
+      f.hidden_field :timestamp, :value => Time.now.to_i
+      f.hidden_field :language, :value => "" # this is a honeypot for bots to fill in
+      
+      if notice
+        div notice, :class => "warning"
+      end
+
+      div :class => "form-workshops label-columns" do
+
+        div :class => "basic" do
+          para t(:workshop_registration_intro), :class => "intro"
+        end
+        
+        div :class => "row" do
+          f.label :workshop_id_1, "Workshop 1"
+          f.collection_select :workshop_id_1, workshops_sorted_in_early_bird_groups, :id, :workshop_select, {:prompt => t(:workshop_registration_choose)}, {:required => "required"}
+        end
+
+        div :class => "row" do
+          f.label :workshop_id_2, "Workshop 2"
+          f.collection_select :workshop_id_2, workshops_sorted_in_early_bird_groups, :id, :workshop_select, :prompt => t(:workshop_registration_choose)
+        end
+
+        div :class => "row" do
+          f.label :workshop_id_3, "Workshop 3"
+          f.collection_select :workshop_id_3, workshops_sorted_in_early_bird_groups, :id, :workshop_select, :prompt => t(:workshop_registration_choose)
+        end
+
+        div :class => "row" do  
+          f.label :workshop_id_4, "Workshop 4"
+          f.collection_select :workshop_id_4, workshops_sorted_in_early_bird_groups, :id, :workshop_select, :prompt => t(:workshop_registration_choose)
+        end
+
+      end
+
+      div :class => "form-personal label-columns" do
+      
+        div :class => "row" do
+          f.label :prename, t(:workshop_registration_prename)
+          f.text_field :prename, :required => true
+        end
+
+        div :class => "row" do
+          f.label :surname, t(:workshop_registration_surname)
+          f.text_field :surname, :required => true
+        end
+
+        div :class => "row" do
+          f.label :street, t(:workshop_registration_street)
+          f.text_field :street, :required => true
+        end
+
+        div :class => "row" do
+          f.label :city, t(:workshop_registration_city)
+          f.text_field :city, :required => true
+        end
+
+        div :class => "row" do
+          f.label :zip, t(:workshop_registration_zip)
+          f.text_field :zip, :required => true
+        end
+
+        div :class => "row" do  
+          f.label :country, t(:workshop_registration_country)
+          f.text_field :country
+        #  f.select :country, ISO3166::Country.all_translated(I18n.locale).sort.collect {|c| [ c, c ] }, :prompt => t(:workshop_registration_country_choose)
+        end
+
+        div :class => "row" do
+          f.label :phone, t(:workshop_registration_phone)
+          f.text_field :phone, :required => true
+        end
+
+        div :class => "row" do
+          f.label :email, t(:workshop_registration_email)
+          f.text_field :email, :type => "email", :required => true
+        end
+
+      end
+
+      div :class => "row" do
+        div t(:form_section_payment), :class => "title"
+        para t(:form_section_payment_explanation_html), :class => "description"
+      end
+
+      form_section_conditions_explanation = TextItem.where(:name => "Anmeldebedingung").first
+
+      div :class => "row" do
+        div t(:form_section_conditions), :class => "title"
+        para form_section_conditions_explanation.content, :class => "description"
+      end
+
+
+      #div :class => "row" do
+
+        #div t(:form_section_professional), :class => "title"
+
+        #div :class => "form-checkbox" do
+          #f.check_box :professional
+          #div :class => "input-style-helper"
+          #f.label :professional
+          #end
+
+      #end
+      
+      div :class => "row" do
+        div t(:form_section_concessions), :class => "title"
+        div :class => "description" do 
+          ermassigungen = Page.find("ermassigungen")
+          if ermassigungen
+            div editable ermassigungen, :content, :type => "wysihtml5"
+            a "✎", :href => edit_admin_page_path("ermassigungen"), :class => "admin-only classes" if admin_user_signed_in?
+          end          
+        end
+      end
+      
+      
+      
+      div :class => "row" do
+
+        div t(:form_section_workshop_info), :class => "title"
+
+        div :class => "form-radio" do
+    
+          div :class => "radio-elem" do
+            f.radio_button :workshop_info, 1, :required => true
+            div :class => "input-style-helper"
+            f.label :workshop_info, t(:form_news_mail)
+          end
+
+          div :class => "radio-elem" do
+            f.radio_button :workshop_info, 2, :required => true
+            div :class => "input-style-helper"
+            f.label :workshop_info, t(:form_news_email)
+          end
+
+          div :class => "radio-elem" do
+            f.radio_button :workshop_info, 0, :required => true
+            div :class => "input-style-helper"
+            f.label :workshop_info, t(:form_news_no)
+          end
+
+        end
+      end
+      
+      div :class => "row" do
+
+        div  t(:form_section_course_program), :class => "title"
+
+        div :class => "form-radio" do
+
+          div :class => "radio-elem" do
+            f.radio_button :course_program, 1, :required => true
+            div :class => "input-style-helper"
+            f.label :course_program, t(:form_news_mail)
+          end
+
+          div :class => "radio-elem" do
+            f.radio_button :course_program, 2, :required => true
+            div :class => "input-style-helper"
+            f.label :course_program, t(:form_news_email)
+          end
+
+          div :class => "radio-elem" do
+            f.radio_button :course_program, 0, :required => true
+            div :class => "input-style-helper"
+            f.label :course_program, t(:form_news_no)
+          end
+        end
+      end
+
+      div :class => "row" do
+
+        div t(:form_section_event_program), :class => "title"
+
+        div :class => "form-radio" do
+
+          div :class => "radio-elem" do
+            f.radio_button :event_program, 1, :required => true
+            div :class => "input-style-helper"
+            f.label :event_program, t(:form_news_mail)
+          end
+
+          div :class => "radio-elem" do
+            f.radio_button :event_program, 2, :required => true
+            div :class => "input-style-helper"
+            f.label :event_program, t(:form_news_email)
+          end
+
+          div :class => "radio-elem" do
+            f.radio_button :event_program, 0, :required => true
+            div :class => "input-style-helper"
+            f.label :event_program, t(:form_news_no)
+          end
+        end
+      end
+      
+
+      div :class => "row" do
+
+        div t(:form_section_accept_terms), :class => "title"
+
+        div :class => "form-checkbox" do
+          f.check_box :accept_terms, :required => true, "data-parsley-error-message" => t(:please_accept_terms)
+          div :class => "input-style-helper"
+          f.label :accept_terms, t(:form_section_accept_terms_label, :terms_link => link_to(t(:terms_link), page_path(:agbs), :target => "_blank")).html_safe
+        end
+      end
+
+      div :class => "row form-note label-columns" do
+        f.label :note, t(:form_section_note)
+        f.text_area :note
+      end
+
+      div :class => "row" do
+        f.submit t(:form_submit)
+      end
+
+    end
+  end
+end

@@ -1,0 +1,245 @@
+if I18n.locale == :de
+  page_title = "Zentrum für zeitgenössischen Tanz in Berlin"
+else
+  page_title = "Center for contemporary dance in Berlin"
+end
+set_meta_tags :title => page_title, :reverse => false
+
+# use these arrays to collect and sort entries
+entries_pages_urgent = []
+entries_today = []
+entries_tomorrow = []
+entries_future = []
+entries_pages = []
+custom_entry = nil
+
+########### URGENNT FEATURED PAGES ############
+
+Page.no_draft.where(:feature_on_welcome_screen_urgent => true).order(:start_page_order).each do |page|
+  entries_pages_urgent.push({
+    :time => page.feature_on_welcome_screen_note,
+    :title => page.title,
+    :href => page_path(page)
+  })  
+end
+
+# grab stage events that are not in a festival
+events_not_in_festival = Event.no_draft.not_in_festival.stage_event
+
+############ TODAY: EVENTS WITHOUT FESTIVAL OR MANUALLY SELECTED EVENTS ###############
+
+# pick the events (not in festival) that have an occurrence today
+events_today = events_not_in_festival.select {|e| e.occurs_on? Date.today }
+
+# featured events today
+featured_events = Event.no_draft.where(:feature_on_welcome_screen => true)
+
+featured_events.select{ |e| e.next_occurrence && e.next_occurrence.time.to_date == Date.today }.each do |e|
+  events_today.push(e)
+end
+
+# collect all the occurrences for these events and sort by time
+occurrences_today = []
+events_today.uniq.each do |e| 
+  occurrences_today += (e.occurrences_on Date.today)
+end
+occurrences_today.sort_by! { |x| x[0] }
+
+occurrences_today[0..2].each do |o|
+  entries_today.push({
+    :time => l(o[0], :format => :hours_minutes),
+    :title => o[1].event.title,
+    :href => event_path(o[1].event)    
+  })
+end
+
+tomorrowShortened = t(:tomorrow).length > 7 ? l(Date.tomorrow, :format => :short) : t(:tomorrow)
+
+############## TOMORROW: EVENTS WITHOUT FESTIVAL OR MANUALLY SELECTED EVENTS TOMORROW ##############
+
+# pick the events (not in festival) that have an occurrence tomorrow
+events_tomorrow = events_not_in_festival.select {|e| e.occurs_on? Date.tomorrow }
+
+# featured events tomorrow
+featured_events.select{ |e| e.next_occurrence && e.next_occurrence.time.to_date == Date.tomorrow }.each do |e|
+  events_tomorrow.push(e)
+end
+
+# collect all the occurrences for these events and sort by time
+occurrences_tomorrow = []
+events_tomorrow.each do |e| 
+  occurrences_tomorrow += (e.occurrences_on Date.tomorrow)
+end
+occurrences_tomorrow.sort_by! { |x| x[0] }
+occurrences_tomorrow.each do |o|
+  entries_tomorrow.push({
+    :time => tomorrowShortened,
+    :title => o[1].event.title,
+    :href => event_path(o[1].event),
+  })
+end
+
+###### ONGOING FESTIVALS #########
+
+# get festivals that started before today and have not ended
+ongoing_festivals = Festival.no_draft.now_and_future.includes(:event_details).select {|f| f.start_date ? (f.start_date <= Date.today && f.end_date >= Date.today) : false }
+
+ongoing_festivals.each do |f|
+
+  # check if festival actually has an occurrence today or tomorrow
+  festival_event_today = false
+  festival_event_tomorrow = false
+  festival_event_date = nil
+  f.events.each do |e|
+    if e.occurs_on? Date.today
+      festival_event_today = true
+    elsif e.occurs_on? Date.tomorrow
+      festival_event_tomorrow = true
+    end
+  end
+  # if it doesn't, use next event start date
+  unless festival_event_today or festival_event_tomorrow
+    events_after_tomorrow = f.events.select {|e| e.start_date > Date.tomorrow && !e.draft }
+    if events_after_tomorrow.size > 0
+      events_after_tomorrow.sort_by! { |e| e.start_date }
+      festival_event_date = events_after_tomorrow[0].start_date
+    end
+  end
+
+  # sort festival into right category, depending on when the next event is
+  
+  if festival_event_today
+    entries_today.push({
+      :time => t(:today),
+      :title => f.name,
+      :href => festival_path(f)    
+    })
+  end 
+  
+  if festival_event_tomorrow  
+    entries_tomorrow.push({
+      :time => tomorrowShortened,
+      :title => f.name,
+      :href => festival_path(f)    
+    })
+  end
+  
+  if festival_event_date   
+    entries_future.push({
+      :time => festival_event_date,
+      :title => f.name,
+      :href => festival_path(f)    
+    })
+  end
+
+end
+
+###### FESTIVALS THAT START TOMORROW
+
+festivals_tomorrow = Festival.no_draft.now_and_future.includes(:event_details).select {|f| f.start_date ? (f.start_date == Date.tomorrow) : false }
+
+festivals_tomorrow.each do |f|
+  entries_tomorrow.push({
+    :time => tomorrowShortened,
+    :title => f.name,
+    :href => festival_path(f)    
+  })  
+end
+
+############## FESTIVALS FURTHER IN THE FUTURE ##############
+
+# get festivals that will start after tomorrow
+festivals_after_tomorrow = Festival.no_draft.now_and_future.includes(:event_details).select {|f| f.start_date ? (f.start_date > Date.tomorrow) : false }
+festivals_after_tomorrow.sort! { |a,b| a.start_date <=> b.start_date } # sort by start date
+
+festivals_after_tomorrow.each do |f|
+  entries_future.push({
+    :time => f.start_date,
+    :title => f.name,
+    :href => festival_path(f)    
+  })
+end
+
+############## FEATURED EVENTS FURTHER IN THE FUTURE ##############
+
+# show featured events 
+featured_events = Event.no_draft.where(:feature_on_welcome_screen => true)
+# only shows events whose next oocuurence isn't today or tomorrow
+featured_events.select{ |e| e.next_occurrence && ![Date.today, Date.tomorrow].index(e.next_occurrence.time.to_date) }.each do |e|
+  entries_future.push({
+    :time => e.next_occurrence.time.to_date,
+    :title => e.title + (e.people.length > 0 ? " "+t(:with)+" "+e.people.first.name : ""),
+    :href => event_path(e)
+  })
+end
+
+########### FEATURED PAGES ############
+
+pages = Page.no_draft.where(:feature_on_welcome_screen => true).order(:start_page_order).each do |page|
+  entries_pages.push({
+    :time => page.feature_on_welcome_screen_note,
+    :title => page.title,
+    :href => page_path(page)
+  })  
+end
+
+########### CUSTOM NOTICE ############
+
+custom_date = TextItem.where(:name => "start_datum").first
+custom_notice = TextItem.where(:name => "start_inhalt").first
+unless custom_date.nil? || custom_notice.nil? # if both custom_date and custom_notice are set
+  if custom_date.content && custom_notice.content
+    custom_entry = {
+      :time => custom_date.content[0..5],
+      :title => custom_notice.content[0..51],
+      :href => nil      
+    }
+    entries_pages.push(custom_entry)
+  end
+end
+
+######## ORGANIZE ENTRIES ##########
+
+all_entries = []
+all_entries += entries_today
+all_entries += entries_tomorrow
+
+# sort future entries and format dates with l(festival_event_date, :format => :short)
+entries_future.sort_by! { |e| e[:time] }
+entries_future = entries_future.map { |e| {:time => l(e[:time], :format => :short), :title => e[:title], :href => e[:href] }}
+all_entries += entries_future
+
+all_entries.uniq! { |e| e[:title] }
+
+# shorten to maximum 7 entries
+all_entries = entries_pages_urgent + all_entries[0..(6 - entries_pages.length)] + entries_pages
+
+######### DISPLAY ENTRIES ############
+
+ul :class => "start_events_listing" do
+  all_entries.each do |entry|
+    logger.debug entry[:time]
+    li do
+      span entry[:time], :class => "time"
+      span :class => "event" do
+        if entry[:href]
+          a entry[:title], :href => entry[:href]
+        else
+          text_node entry[:title]
+        end
+      end
+    end
+  end 
+  #
+  #div :class => "start_video" do
+  #  div :class => "video_wrapper" do
+  #    text_node '<iframe src="https://www.youtube.com/embed/FPaHCzjuLM4?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'.html_safe
+  #  end
+  #  a t(:continue_to)+" 40 Jahre Tanzfabrik >>>", :href => page_path("40-jahre-tanzfabrik-berlin")
+  #end  
+end
+
+
+
+
+

@@ -1,0 +1,97 @@
+cache_arbre(self, cache_key_for_page_headlines(page)) do      
+  header :id => "headlines", :class => "headlines-performance-projecte" do
+    div :class => "before"
+    div :class => "main" do
+      div :class => "line1" do
+        h1 :class => "title" do
+          span editable page, :title
+          a "✎", :href => edit_admin_page_path(page), :class => "admin-only classes" if admin_user_signed_in?
+        end
+      end
+      if page.content
+        div :class => "line2 open-close opened" do
+          div :class => "open open-toggle-height" do
+            div page.content.html_safe
+            div t(:close), :class => "close-trigger"
+          end
+          div :class => "closed open-trigger" do
+            div t :performance_projekte_more
+          end
+        end    
+      end
+      div :class => "line3" do
+        ul do
+          page.downloads.each do |download|        
+            li do
+              a download.description, :href => download.attachment.url
+            end
+          end
+        end
+      end      
+    end
+  end
+end
+
+if params[:year]
+  start_date = Date.parse('01-01-' + params[:year])
+  end_date = start_date.end_of_year
+  performance_projekte = Event.no_draft.joins(:type, :event_details).where('event_types.id = 5 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq.sort_by{ |e| e.start_date }
+else 
+  performance_projekte = Event.no_draft.currently_listed.joins(:type, :event_details).where('event_types.id = 5').uniq.sort_by{ |e| e.start_date }
+end
+
+#performance_projekte = Event.of_types([5]).sort_by{ |e| e.start_date }.select { |e| e.start_date > (Date.today.beginning_of_week - 2.week) } # TODO: named scope in model, to reuse in event view
+
+performance_projekte.each do |project| 
+
+  div :class => "row event event-performanceprojekt" do
+    div :class => "basic" do   
+      div :class => "content" do
+        a :href => event_path(project) do 
+          h2 project.title, :class => "title"
+          para project.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
+
+          # hack to allow for links only in short descriptions - on longer descriptions links break format
+          if project.description.length > 350
+            div (sanitize project.description.html_safe, tags: %w(p, strong, em)), :class => "description"
+          else
+            div project.description.html_safe, :class => "description" if project.description
+          end
+          div t(:more), :class => "more" if project.description.length > 350
+        end
+      end
+    end
+
+    div :class => "details" do
+      div :class => "content" do
+
+        div :class => "time-duration" do
+          time l project.event_details.first.starttime, :format => :day
+          text_node " - "
+          time l project.event_details.last.endtime, :format => :day
+        end
+
+        small project.info.html_safe, :class => "info" if project.info
+
+      end    
+    end
+  end  
+end
+
+# figure out in which years event_details exist
+years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 5').group_by_year(:start_date).count
+
+# show links for these years
+section :class => "archive-section" do
+  h5 t(:past_events), :class => "archive-headline"
+  ul :class => "archive-links" do
+    years.keys.each do |y|
+      if y.year <= Time.now.year
+        li do
+          a y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'performance_projekte', :year => y.year.to_s)
+        end
+      end
+    end
+  end
+end
+
