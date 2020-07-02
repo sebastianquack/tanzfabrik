@@ -1,5 +1,7 @@
 ActiveAdmin.register MenuItem do
 
+  menu :priority => -1
+
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -23,7 +25,7 @@ ActiveAdmin.register MenuItem do
     attributes_table do
       row :name_de
       row :name_en
-      row :key
+      #row :key
       row :page
     end
   end
@@ -32,8 +34,8 @@ ActiveAdmin.register MenuItem do
       f.inputs "Details" do
         f.input :name_de
         f.input :name_en
-        f.input :key
-        f.input :page, :include_blank => false
+        #f.input :key
+        f.input :page, :include_blank => false, :collection => Page.all.collect {|page| [page.slug, page.id] }
       end
       f.actions
   end

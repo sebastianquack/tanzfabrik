@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   # GET /pages/:id
   def show
 
-    @active_layout = request.GET["2020"] ? "application2020" : "application"
+    @active_layout = "application2020";
 
     # check if slug was passed in
     if params[:id]
