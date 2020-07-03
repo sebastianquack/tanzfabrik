@@ -1,3 +1,4 @@
 <nav>
-<%= render :partial => "navigation/tree_node", :locals => {:tree => @menu_tree} %>
+<%= link_to "< Home", root_url if @page && @page.slug != "start" %>
+<%= render :partial => "navigation/tree_node", :locals => {:tree => @menu_tree, :depth => 0, :max_depth => @max_depth} %>
 </nav>
