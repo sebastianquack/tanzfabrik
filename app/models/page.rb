@@ -1,7 +1,9 @@
 class Page < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :title_de, use: [:slugged, :finders]
+  #friendly_id :title_de, use: [:slugged, :finders]
 
+  friendly_id :slug, use: [:finders]
+  
   translates :title, :content, :description, :feature_on_welcome_screen_note
 
   has_many :images
@@ -10,7 +12,7 @@ class Page < ActiveRecord::Base
   has_many :downloads
   accepts_nested_attributes_for :downloads, :allow_destroy => true
   
-  has_many :content_modules
+  has_many :content_modules, -> { order :order }
   accepts_nested_attributes_for :content_modules, :allow_destroy => true
 
   require 'fuzzystringmatch'

@@ -1,10 +1,10 @@
 <ul>
 <% tree.each_pair do |k,v| %>
 
-<li> <%= link_to k.name, page_path(k.page) + "?2020=true" %>
+<li> <%= k.page && depth > 0 ? (link_to k.name, page_path(k.page)) : k.name %>
 
-<% if v %>
-  <%= render :partial => "navigation/tree_node", :locals => {:tree => v} %>
+<% if v  && depth < max_depth %>
+  <%= render :partial => "navigation/tree_node", :locals => {:tree => v, :depth => depth + 1, :max_depth => max_depth} %>
 <% end %>
 
 </li>

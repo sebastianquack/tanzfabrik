@@ -4,7 +4,7 @@ module SeoHelper
   include ActionView::Helpers::TextHelper
 
   def auto_generate_description html
-    html = html.gsub(/<\/b>|<br>|<\/p>/, " ")
+    html = html.gsub(/<\/b>|<br>|<\/p>/, " ") if html
     text = ActionController::Base.helpers.strip_tags(html)
     text = HTMLEntities.new.decode(text)
     text = text.gsub(/  /, " ").strip

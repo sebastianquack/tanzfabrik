@@ -4,7 +4,9 @@ class PagesController < ApplicationController
   # GET /pages/:id
   def show
 
-    @active_layout = request.GET["2020"] ? "application2020" : "application"
+    @active_layout = "application2020";
+    @menu_tree = {}
+    @max_depth = 1
 
     # check if slug was passed in
     if params[:id]
@@ -13,23 +15,26 @@ class PagesController < ApplicationController
       if @page
         set_meta_tags :title => @page.title
         set_meta_tags :description => choose_page_description(@page)
-        # try to show special template with page slug name if exists      
-        if !Dir.glob(Rails.root.join("app", "views", "pages", "#{@page.slug}.*")).empty?
-          render "#{@page.slug}", :layout => @active_layout and return
+      
+        menu_item = MenuItem.find_by page_id: @page.id
+        if menu_item
+          @menu_tree = menu_item.subtree.arrange
         end
+
       else
-        # if page doesn't exist in db, check if template exists
-        if !Dir.glob(Rails.root.join("app", "views", "pages", "#{params[:id]}.*")).empty?
-          # if yes, render that template
-          render "#{params[:id]}", :layout => @active_layout and return
-        else
-          # if not, redirect to root in order to clean up url
-          redirect_to root_path
-        end
+        # if page not found, redirect to root in order to clean up url
+        redirect_to root_path
       end  
     else
       # no params passed in, go to default page
       @page = Page.friendly.find('start')
+
+      menu_item = MenuItem.find_by page_id: @page.id
+      if menu_item
+        @menu_tree = menu_item.subtree.arrange
+      end
+      @max_depth = 2
+      
       render "start", :layout => @active_layout and return # this works even if page start is not in db and exists only as template
     end
 
