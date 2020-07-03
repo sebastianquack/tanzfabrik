@@ -11,10 +11,12 @@
 // about supported directives.
 //
 
-//= require editable/bootstrap-editable
-//= require editable/rails
-//= require ckeditor-jquery
-  
+
+// require editable/bootstrap-editable
+// require editable/rails
+// require ckeditor-jquery
+
+
 $(document).ready(function() {
 
   $.ajaxSetup({

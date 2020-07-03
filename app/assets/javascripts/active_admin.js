@@ -1,8 +1,9 @@
-//= require active_admin/base
-//= require jquery
-//= require ckeditor-jquery
-//= require active_admin/sortable
-//= require bootstrap
+// require active_admin/base
+// require jquery
+// require ckeditor-jquery
+// require active_admin/sortable
+// require bootstrap
+
 
 $(document).ready(function() {
   // $(".edit_link, .view_link").addClass("button")

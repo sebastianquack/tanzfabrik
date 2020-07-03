@@ -10,14 +10,14 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require jquery.turbolinks 
-//= require turbolinks
-//= require bootstrap
-//= require parsley
-//= require parsley.i18n.de 
-//= require piwik_turbolinks
+// require jquery
+// require jquery_ujs
+// require jquery.turbolinks 
+// require turbolinks
+// require bootstrap
+// require parsley
+// require parsley.i18n.de 
+// require piwik_turbolinks
 
 $(document).ready(function() {
 
