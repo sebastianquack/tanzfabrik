@@ -1,16 +1,16 @@
 dance_intensivists = Person.where(:dance_intensive => true).order(:last_name)
 
-header :id => "headlines", :class => "headlines-teachers" do
+#header :id => "headlines", :class => "headlines-teachers" do
   div :class => "before"
   div :class => "main" do
     div :class => "line1" do
       h1 :class => "title" do
-        text_node editable page, :title
+        #text_node editable page, :title
       end
       render :partial => "/people/alphabet_menu", :locals => {:people => dance_intensivists}
     end
   end
-end
+#end
 
 
 render :partial => "/people/list", :locals => {:people => dance_intensivists, :mode => "teachers"}

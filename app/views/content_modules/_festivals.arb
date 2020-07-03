@@ -4,16 +4,6 @@ if FestivalContainer.where(:display => true).count == 0
 
 # Otherwise display FestivalContainers
 else
-  header :id => "headlines", :class => "headlines-teachers" do
-    div :class => "before"
-    div :class => "main" do
-      div :class => "line1" do
-        h1 :class => "title" do
-          text_node editable page, :title
-        end
-      end
-    end
-  end
 
   ul :class => "festivalcontainers" do
     FestivalContainer.where(:display => true ).sort_by{ |fc| [fc.name] }.each do |fc|

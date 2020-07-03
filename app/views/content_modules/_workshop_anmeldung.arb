@@ -1,13 +1,13 @@
-header :id => "headlines", :class => "headlines-teachers" do
+#header :id => "headlines", :class => "headlines-teachers" do
   div :class => "before"
   div :class => "main" do
     div :class => "line1" do
-      h1 :class => "title" do
-        text_node editable page, :title
-      end
+      #h1 :class => "title" do
+      #  text_node editable page, :title
+      #end
     end
   end
-end
+#end
 
 if notice == "ok"
   div :class => "row page" do

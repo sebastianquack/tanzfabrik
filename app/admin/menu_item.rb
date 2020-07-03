@@ -16,7 +16,9 @@ ActiveAdmin.register MenuItem do
     
   index :as => :sortable do
     label :name_de
-    actions
+    actions defaults: true do |mi|
+      link_to "Seite bearbeiten", edit_admin_page_path(mi.page), class: "member_link" if mi.page
+    end
   end
   
   config.filters = false
@@ -25,7 +27,7 @@ ActiveAdmin.register MenuItem do
     attributes_table do
       row :name_de
       row :name_en
-      #row :key
+      row :key
       row :page
     end
   end
@@ -34,7 +36,7 @@ ActiveAdmin.register MenuItem do
       f.inputs "Details" do
         f.input :name_de
         f.input :name_en
-        #f.input :key
+        f.input :key
         f.input :page, :include_blank => false, :collection => Page.all.collect {|page| [page.slug, page.id] }
       end
       f.actions

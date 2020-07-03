@@ -157,7 +157,10 @@ ActiveAdmin.register Page do
       f.input :draft, :label => t(:draft)
     end
         
-    f.actions
+    f.actions do
+        f.action :submit
+        f.action :cancel # no idea why, but this leads back to previous view which is good
+      end
   end
   
 end

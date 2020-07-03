@@ -72,7 +72,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    aliyun-sdk (0.7.2)
+    aliyun-sdk (0.7.3)
       nokogiri (~> 1.6)
       rest-client (~> 2.0)
     ancestry (3.0.7)
@@ -1012,7 +1012,7 @@ GEM
       sixarm_ruby_unaccent (~> 1.1)
       unicode_utils (~> 1.4)
     crass (1.0.6)
-    declarative (0.0.10)
+    declarative (0.0.20)
     declarative-option (0.1.0)
     devise (4.7.2)
       bcrypt (~> 3.0)
@@ -1026,7 +1026,7 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     dry-inflector (0.2.0)
     erubi (1.9.0)
-    excon (0.74.0)
+    excon (0.75.0)
     execjs (2.7.0)
     faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
@@ -1068,7 +1068,7 @@ GEM
       fog-xml (~> 0.1.1)
       ipaddress (~> 0.5)
       json (~> 2.0)
-    fog-aliyun (0.3.15)
+    fog-aliyun (0.3.16)
       aliyun-sdk (~> 0.7.2)
       fog-core
       fog-json
@@ -1077,7 +1077,7 @@ GEM
     fog-atmos (0.1.0)
       fog-core
       fog-xml
-    fog-aws (3.6.5)
+    fog-aws (3.6.6)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
       fog-xml (~> 0.1)
@@ -1249,7 +1249,7 @@ GEM
       turbolinks
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (2.3.0)
+    json (2.3.1)
     jwt (2.2.1)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)

@@ -1,7 +1,7 @@
 <ul>
 <% tree.each_pair do |k,v| %>
 
-<li> <%= link_to k.name, page_path(k.page) if k.page %>
+<li> <%= k.page ? (link_to k.name, page_path(k.page)) : k.name %>
 
 <% if v %>
   <%= render :partial => "navigation/tree_node", :locals => {:tree => v} %>
