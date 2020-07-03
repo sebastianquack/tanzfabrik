@@ -47,7 +47,7 @@ Tanzfabrik::Application.routes.draw do
 
   get 'google0d69f052c5b126a8.html', to: proc { [200, {}, ['google-site-verification: google0d69f052c5b126a8.html']] }
 
-  get '*path' => "redirect#oldsite"
+#  get '*path' => "redirect#oldsite"
     
   root 'pages#show'
 
