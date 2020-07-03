@@ -92,6 +92,8 @@ gem "parsley-rails"
 
 # gem 'sprockets_better_errors'
 
+gem "spring", group: :development
+
 group :production do
 	gem 'rails_12factor'
   #gem 'heroku_rails_deflate' # enables gzip compression
