@@ -1,7 +1,7 @@
 <ul>
 <% tree.each_pair do |k,v| %>
 
-<li> <%= k.page && depth > 0 ? (link_to k.name, page_path(k.page)) : k.name %>
+<li> <%= k.page && depth > 0 ? (link_to k.name, page_path(k.page)) : (k.key != "start" ? k.name : "") %>
 
 <% if v  && depth < max_depth %>
   <%= render :partial => "navigation/tree_node", :locals => {:tree => v, :depth => depth + 1, :max_depth => max_depth} %>

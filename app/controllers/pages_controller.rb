@@ -16,9 +16,10 @@ class PagesController < ApplicationController
         set_meta_tags :title => @page.title
         set_meta_tags :description => choose_page_description(@page)
       
-        menu_item = MenuItem.find_by page_id: @page.id
-        if menu_item
-          @menu_tree = menu_item.subtree.arrange
+        # load menu items referencing the page and use the one that is highest in the tree 
+        menu_items = MenuItem.where(page_id: @page.id).sort {|a, b| a.depth <=> b.depth}
+        if menu_items[0]
+          @menu_tree = menu_items[0].subtree.arrange(:order => :position)
         end
 
       else
@@ -27,15 +28,13 @@ class PagesController < ApplicationController
       end  
     else
       # no params passed in, go to default page
-      @page = Page.friendly.find('start')
-
-      menu_item = MenuItem.find_by page_id: @page.id
+      menu_item = MenuItem.find_by key: "start"
       if menu_item
-        @menu_tree = menu_item.subtree.arrange
+        @menu_tree = menu_item.subtree.arrange(:order => :position)
       end
       @max_depth = 2
       
-      render "start", :layout => @active_layout and return # this works even if page start is not in db and exists only as template
+      render "start", :layout => @active_layout and return
     end
 
     render :layout => @active_layout

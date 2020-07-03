@@ -37,7 +37,7 @@ ActiveAdmin.register MenuItem do
         f.input :name_de
         f.input :name_en
         f.input :key
-        f.input :page, :include_blank => false, :collection => Page.all.collect {|page| [page.slug, page.id] }
+        f.input :page, :include_blank => true, :collection => Page.all.order(:slug).collect {|page| [page.slug, page.id] }
       end
       f.actions
   end
