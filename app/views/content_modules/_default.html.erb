@@ -2,7 +2,7 @@
 <h1><%= @content_module.headline %></h1>
 <%= @content_module.sub %>
 
-<div><%= @content_module.main_text %></div>
+<div><%= @content_module.main_text.html_safe if @content_module.main_text %></div>
 
 <% if @content_module.main_text_col2 %>
   <div><%= @content_module.main_text_col2 %></div>

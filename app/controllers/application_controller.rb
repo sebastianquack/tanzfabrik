@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :set_background_image
   before_action :set_time
-  before_action :load_tree
+  #before_action :load_tree
 
   if Rails.env.production?
     rescue_from ActionController::RoutingError, :with => :raise_routing_404
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    if params[:locale]
+    if params[:locale] #and ['en','de'].include? params[:locale]
       I18n.locale = params[:locale] 
     else
       I18n.locale = I18n.default_locale
@@ -54,9 +54,10 @@ class ApplicationController < ActionController::Base
     
   end
 
-  def load_tree 
-    @menu_tree = MenuItem.arrange(:order => :position)
-  end
+  # we do this in page controller now
+  #def load_tree 
+  #  @menu_tree = MenuItem.arrange(:order => :position)
+  #end
   
   def default_url_options(options={})
     logger.debug "default_url_options is passed options: #{options.inspect}\n"

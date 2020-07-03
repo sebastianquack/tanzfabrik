@@ -15,7 +15,7 @@ Tanzfabrik::Application.routes.draw do
   get '/en/tanzklassen-weekend-special-gaga', to: redirect('/en/tanzklassen-weekend-special')
   get '/de/tanzklassen-weekend-special-gaga', to: redirect('/de/tanzklassen-weekend-special')
 
-  scope "/:locale" do
+  scope "/:locale", constraint: { locale: /en|de/ } do
     
     get 'festivals/tanznacht-forum', to: redirect('%{locale}/festivals/tanznacht-forum-2017')
     
@@ -43,11 +43,11 @@ Tanzfabrik::Application.routes.draw do
   # You can have the root of your site routed with "root"    
 
   get '/de' => redirect('/')
-  get '/:locale' => "pages#show", :as => :local_root, locale: /[A-Za-z]{2}/
+  #get '/:locale' => "pages#show", :as => :local_root, locale: /[A-Za-z]{2}/
 
   get 'google0d69f052c5b126a8.html', to: proc { [200, {}, ['google-site-verification: google0d69f052c5b126a8.html']] }
 
-  get '*path' => "redirect#oldsite"
+#  get '*path' => "redirect#oldsite"
     
   root 'pages#show'
 

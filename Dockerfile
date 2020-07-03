@@ -15,9 +15,9 @@ COPY Gemfile* /app/
 RUN bundle install
 
 # install node packages
-COPY package.json /app/
-COPY yarn.lock /app/
-RUN yarn
+#COPY package.json /app/
+#COPY yarn.lock /app/
+#RUN yarn
 
 EXPOSE 3000
 CMD ["rails", "server", "--binding=0.0.0.0"]

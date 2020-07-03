@@ -1,3 +1,11 @@
 .data/
-tmp/
 vendor/cache
+.dockerignore
+Dockerfile
+public/assets/*
+storage/*
+public/packs/*
+public/packs-test/*
+tmp/*
+log/*
+node_modules/*

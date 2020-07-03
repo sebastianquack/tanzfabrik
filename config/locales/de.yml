@@ -345,6 +345,9 @@ de:
         event:
           invalid_facebook_link: "Ungültige Angabe. Bitte eine URL zu Facebook eingeben oder leer lassen. Am Anfang oder am Ende keine überschüssigen Leerzeichen eingeben. Beispiel: <i>https://www.facebook.com/events/877048289058664/</i>"
     models:
+      menu_item: 
+        one: Menustruktur
+        other: Menustruktur
       page:
         one: Seite
         other: Seiten
@@ -399,6 +402,7 @@ de:
     attributes:
       page: 
         title: Seitentitel
+        slug: URL
         content: Text
         description: Zusammenfassung
         hide_download_links: Download-Links oben rechts auf Seite verstecken
