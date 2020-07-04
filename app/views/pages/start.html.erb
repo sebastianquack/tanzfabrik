@@ -1,13 +1,2 @@
-<%
-  if I18n.locale == :de
-    page_title = "Zentrum für zeitgenössischen Tanz in Berlin"
-  else
-    page_title = "Center for contemporary dance in Berlin"
-  end
-  set_meta_tags :title => page_title, :reverse => false
-%>
-
-<h1><%= page_title %></h1>
-
 <%= render "/navigation/tree" %>
 

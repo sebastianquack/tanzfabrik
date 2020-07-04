@@ -22,6 +22,8 @@ if workshop_groups.length > 0
 
   ul :class => "workshops" do
     
+    prev_festival = nil
+    prev_month = nil
     workshop_groups.each do |dates, events|
     #  events = workshops_sort events
       
@@ -38,21 +40,31 @@ if workshop_groups.length > 0
 
       li :class => "group" do
 
+        #new
+        if dates[0].month != prev_month
+          h1 l(dates[0], :format => :month) 
+          prev_month = dates[0].month
+        end
+
         if !in_festival && events.first.festivals.first
           festival = events.first.festivals.first
-          h2 :class => "headlines" do
-            div :class => "main" do
-              div :class => "line1" do
-                div :class => "title" do
-                  a festival.name, href: festival_path(festival), class: 'festival-link'
+          if festival != prev_festival # new
+            h2 :class => "headlines" do
+              div :class => "main" do
+                div :class => "line1" do
+                  div :class => "title" do
+                    a festival.name, href: festival_path(festival), class: 'festival-link'
+                  end
                 end
               end
             end
+            prev_festival = festival #new
           end
         end
 
         div :class => "time-duration" do
           time l(dates[0], :format => :short) + "-" + l(dates[1], :format => :short)
+          para ((dates[1] - dates[0]).to_i + 1).to_s + "-Tage Workshops" # new
         end        
         ul :class => "classes" do
 

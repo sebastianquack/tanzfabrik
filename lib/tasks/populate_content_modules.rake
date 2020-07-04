@@ -94,21 +94,21 @@ task :populate_content_modules => :environment do
       parent_key: "start",
       name_de: "Bühne",
       name_en: "Stage",
-      page_slug: "buehne-landing"
+      page_slug: "buehne"
     },
     {
       key: "schule",
       parent_key: "start",
       name_de: "Schule",
       name_en: "Schule",
-      page_slug: "schule-landing"
+      page_slug: "schule"
     },
     {
       key: "fabrik",
       parent_key: "start",
       name_de: "Fabrik",
       name_en: "Factory",
-      page_slug: nil
+      page_slug: "fabrik"
     },
     # buehne/programm
     {
@@ -387,12 +387,16 @@ task :populate_content_modules => :environment do
       end
     end
 
-    # load page if specified
+    # load page if specified, create if slug is defind but page not found
     page = nil
     if item[:page_slug]
       page = Page.find_by slug: item[:page_slug]
       if item[:page_slug] && !page
         puts "no page found for slug: " + item[:page_slug]
+        puts "creating..."
+        page = Page.create(
+          slug: item[:page_slug]
+        )
       end
     end
 

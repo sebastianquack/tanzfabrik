@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 
     @active_layout = "application2020";
     @menu_tree = {}
-    @max_depth = 1
+    @max_depth = 2
 
     # check if slug was passed in
     if params[:id]
@@ -16,10 +16,18 @@ class PagesController < ApplicationController
         set_meta_tags :title => @page.title
         set_meta_tags :description => choose_page_description(@page)
       
-        # load menu items referencing the page and use the one that is highest in the tree 
-        menu_items = MenuItem.where(page_id: @page.id).sort {|a, b| a.depth <=> b.depth}
-        if menu_items[0]
-          @menu_tree = menu_items[0].subtree.arrange(:order => :position)
+        # load menu items referencing the page and use the one that is the deepest in the tree 
+        menu_items = MenuItem.where(page_id: @page.id).sort {|a, b| b.depth <=> a.depth}
+
+        if menu_items[0] 
+          @menu_item = menu_items[0]
+          # always show menu from landing pages down
+          if menu_items[0].ancestors.length == 1 # this is a landing page, show full subtree
+            @menu_tree = menu_items[0].subtree.arrange(:order => :position) 
+          elsif menu_items[0].ancestors.length > 1 # we are deeper, show from depth 1 down
+            @menu_tree = menu_items[0].ancestors[1].subtree.arrange(:order => :position) 
+          end
+
         end
 
       else
@@ -32,7 +40,6 @@ class PagesController < ApplicationController
       if menu_item
         @menu_tree = menu_item.subtree.arrange(:order => :position)
       end
-      @max_depth = 2
       
       render "start", :layout => @active_layout and return
     end
