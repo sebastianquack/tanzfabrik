@@ -103,7 +103,7 @@ cache_arbre(self, cache_for_navigation) do
         a "facebook", :href => "https://www.facebook.com/tanzfabrikberlin.de", :title => "https://www.facebook.com/tanzfabrikberlin.de", :target => "_blank"
       end     
       li do
-        a "newsletter", :href => local_root_path + "/newsletter"
+        a "newsletter", :href => root_url + "/newsletter"
       end
     end
 
@@ -115,7 +115,7 @@ cache_arbre(self, cache_for_navigation) do
       end
 
       div :id => "logo" do
-        a :href => (I18n.locale == I18n.default_locale ? '/' : local_root_path) do
+        a :href => (I18n.locale == I18n.default_locale ? '/' : root_url) do
           img :src => asset_path("tanzfabrik-logo.gif")
           img :src => asset_path("tanzfabrik-logo-hover.gif")
           # span "40"

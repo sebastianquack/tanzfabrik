@@ -1,5 +1,14 @@
 module ApplicationHelper
 
+  def get_text_item(name)
+    item = TextItem.find_by(name: "page_title")
+    if !item
+      return "text_item " + name + " no set"
+    else
+      return item.content
+    end
+  end
+
   def search(query)
     if !query
       return []

@@ -18,10 +18,10 @@ end
 next_occurrence = event.next(params[:time], event_types, festival) if event.occurs?
 prev_occurrence = event.prev(params[:time], event_types, festival) if event.occurs?
 
-header :id => "headlines", :class => "headlines-event" do
-  div :class => "before" do
+#header :id => "headlines", :class => "headlines-event" do
+  #div :class => "before" do
     a "<", :class => "previous", :rel => "prev", :href => occurrence_path(prev_occurrence.event, prev_occurrence.time, festival) if prev_occurrence
-  end
+  #end
   div :class => "main" do
     div :class => "line1" do
       if event.type.name == "Workshop"
@@ -38,7 +38,7 @@ header :id => "headlines", :class => "headlines-event" do
       a ">", :class => "next", :rel => "next", :href => occurrence_path(next_occurrence.event, next_occurrence.time, festival) if next_occurrence
     end
   end
-end
+#end
 
 div :class => "row event single-event" do
   div :class => "basic" do 

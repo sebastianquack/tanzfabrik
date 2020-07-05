@@ -1,0 +1,10 @@
+<% 
+  def active(locale) 
+    return I18n.locale == locale
+  end
+%>
+
+<ul>
+  <li><%= active(:en) ? (link_to "DE", url_for(:locale => :de)) : "DE (active)" %></li>
+  <li><%= active(:de) ? (link_to "EN", url_for(:locale => :en)) : "EN (active)" %></li>
+</ul>

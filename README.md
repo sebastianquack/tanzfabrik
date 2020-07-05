@@ -72,3 +72,7 @@ https://relaunch2020.tanzfabrik.intergestalt.cloud/
 
 1. copy live data to local `bin/download_db.sh`
 2. convert and seed `docker-compose run -v $(pwd)/app web rake populate_content_modules`
+
+## seed text items
+
+`docker-compose run -v $(pwd)/app web rake seed_text_items`

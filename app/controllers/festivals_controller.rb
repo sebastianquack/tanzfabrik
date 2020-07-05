@@ -5,6 +5,7 @@ class FestivalsController < ApplicationController
     @festival = Festival.find(params[:id])
     set_meta_tags :title => (@festival.name)
     set_meta_tags :description => auto_generate_description(@festival.description) if @festival.description
+    render :layout => "application2020"
   end
 
   def update
