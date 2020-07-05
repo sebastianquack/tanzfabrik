@@ -26,8 +26,8 @@ module Tanzfabrik
     
     config.serve_static_files = true
 
-    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-    config.assets.precompile += ['application_edit.js', 'application_edit.css']
+    #config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    #config.assets.precompile += ['application_edit.js', 'application_edit.css']
 
     config.stage_event_types = [1,7,8,9]
     config.event_types_with_page = config.stage_event_types + [2,4,5]
