@@ -238,6 +238,8 @@ ActiveRecord::Schema.define(version: 2020_07_05_112501) do
     t.string "key"
     t.integer "page_id"
     t.integer "position", default: 0
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_menu_items_on_ancestry"
   end
 
   create_table "pages", id: :serial, force: :cascade do |t|
