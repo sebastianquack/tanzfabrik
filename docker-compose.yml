@@ -7,7 +7,7 @@ services:
       context: .
     restart: always
 #    command: /bin/bash
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "bundle check && rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     env_file:
       - ./.env
     volumes:
@@ -16,7 +16,11 @@ services:
       - "3000:3000"
     environment:
       - RAILS_ENV=development
+    # volumes_from: 
+    #   - gemcache
     depends_on:
+      # gemcache:
+      #   condition: service_started
       db:
         condition: service_healthy
 
@@ -42,9 +46,14 @@ services:
       test: pg_isready -U postgres -h 127.0.0.1
       interval: 5s      
 
+  # gemcache:
+  #   image: busybox
+  #   volumes:
+  #     - /gemcache
+
   adminer:
     image: adminer
     ports:
-      - 8080:8080
+      - 3001:8080
     depends_on:
       - db     
