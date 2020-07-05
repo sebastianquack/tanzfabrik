@@ -3,23 +3,22 @@ task :populate_content_modules => :environment do
 
   # clean slate for menu structure
   MenuItem.delete_all
+
   unregistered_menu_item = MenuItem.create(
-          page_id: nil,
           key: "unregistered",
           name_de: "Ohne Ort im Menü",
           name_en: "Unregistered Elements",
           position: 100
         )
-
+  puts "created special item for unregistered items, id " + unregistered_menu_item.to_s
+  
   # go over imported pages
   Page.all.each do |page|  
     
     # do this for all pages that use the old content attribute
     if page.content_de
       puts "re-creating content modules for page " + page.title_de
-
       ContentModule.where(page_id: page.id).delete_all
-
       cm = ContentModule.create({
           page_id: page.id,
           module_type: :default,
@@ -27,17 +26,14 @@ task :populate_content_modules => :environment do
           main_text: page.content_de,
           order: 0
         });
-
       page.images.each do |image|
         image.content_module_id = cm.id
         image.save
       end
-
       page.downloads.each do |download|
         download.content_module_id = cm.id
         download.save
       end
-
       # set up a menu item for the page if there isn't one already
       menu_items = MenuItem.where(page_id: page.id)
       if menu_items.length == 0
@@ -49,7 +45,6 @@ task :populate_content_modules => :environment do
           name_en: page.title_en
         )
       end
-
       # some pages need special modules to work, todo: expand list
       specials = [
         "dance_intensive_lehrer",
@@ -65,7 +60,6 @@ task :populate_content_modules => :environment do
         "workshop_anmeldung",
         "workshop_programm"
       ]
-
       if specials.include? page.slug
         ContentModule.create({
           page_id: page.id,
@@ -73,9 +67,7 @@ task :populate_content_modules => :environment do
           order: 1
         });
       end
-
     end
-
   end
   
   # seed data for menu items
@@ -373,11 +365,8 @@ task :populate_content_modules => :environment do
       name_en: "Contact",
     },    
   ]
-
   basic_menu_data.each_with_index do |item, index|
-
     puts item.to_s
-
     # load parent item if specified
     parent_item = nil
     if item[:parent_key]
@@ -386,7 +375,6 @@ task :populate_content_modules => :environment do
         puts "parent menu item not found: " + item[:parent_key]
       end
     end
-
     # load page if specified, create if slug is defind but page not found
     page = nil
     if item[:page_slug]
@@ -399,18 +387,17 @@ task :populate_content_modules => :environment do
         )
       end
     end
-
     # check if this menu_item exist already
     menu_item = MenuItem.find_by key: item[:key]
-
     if menu_item
       # update it
-      menu_item.parent_id = parent_item.id if parent_item
+      menu_item.parent_id = parent_item ? parent_item.id : nil
       menu_item.page_id = page.id if page
       menu_item.name_de = item[:name_de]
       menu_item.name_en = item[:name_en]
       menu_item.position = index
       menu_item.save
+      puts "updated menu_item " + item[:key]
     else 
       # create it
       MenuItem.create(
@@ -421,6 +408,7 @@ task :populate_content_modules => :environment do
         name_en: item[:name_en],
         position: index
       )
+      puts "created menu_item " + item[:key]
     end
   
   end
