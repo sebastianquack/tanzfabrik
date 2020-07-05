@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
-ruby "2.4.10"
+ruby "2.5.7"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~>5.2'
+gem 'rails', '~>6.0'
 #gem 'ZenTest'
 
 gem 'pg'
@@ -35,7 +35,7 @@ end
 gem 'activeadmin', '~>2.7.0' # max 2.7.0
 gem 'devise'
 
-gem 'friendly_id', '~> 5.2.4'
+gem 'friendly_id', '~> 5.3'
 
 gem "kt-paperclip", "~> 6.2"
 #gem 'aws-sdk', '>= 2.0'
@@ -95,4 +95,5 @@ end
 group :development do
   gem "spring"
   gem "letter_opener" # for email testing
+  gem 'listen' # auto reload on file change
 end
