@@ -344,11 +344,13 @@ PLATFORMS
   x86_64-darwin-17
 
 DEPENDENCIES
+  ZenTest
   active_admin-sortable_tree (~> 2.1.0)
   activeadmin (~> 2.7.0)
   ancestry (~> 3.0.7)
   arbre (~> 1.2.1)
   aws-sdk-s3 (~> 1)
+  bundler
   ckeditor_rails
   countries
   devise
@@ -378,7 +380,7 @@ DEPENDENCIES
   webpacker (~> 5.1)
 
 RUBY VERSION
-   ruby 2.5.7p206
+   ruby 2.7.0p0
 
 BUNDLED WITH
-   1.17.3
+   2.1.2
