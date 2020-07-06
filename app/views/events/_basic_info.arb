@@ -16,6 +16,7 @@ end
 
 div event.description.html_safe, :class => "description" if event.description
 
+
 if [2,4].include? event.type.id #workshop or profitraining
   event.people_sorted.each do |person|
     div person.bio.html_safe, :class => "event-bio description"

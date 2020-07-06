@@ -1,9 +1,9 @@
 module ApplicationHelper
 
   def get_text_item(name)
-    item = TextItem.find_by(name: "page_title")
+    item = TextItem.find_by(name: name)
     if !item
-      return "text_item " + name + " no set"
+      return "[" + name + "]"
     else
       return item.content
     end

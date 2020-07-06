@@ -14,12 +14,8 @@
 </head>
 <body>
 
-  <%
-    page_title = get_text_item("page_title")
-    set_meta_tags :title => page_title, :reverse => false
-  %>
-
-  <%= @page && @page.slug != "start" ? (link_to page_title, root_url) : page_title %>
+  <% page_title = get_text_item("page_title") %>
+  <%= !@page || @page && @page.slug != "start" ? (link_to page_title, root_url) : page_title %>
   
 
   <%= render "/navigation/language_switcher" %>
