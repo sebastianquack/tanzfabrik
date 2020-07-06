@@ -26,7 +26,7 @@ ActiveAdmin.register Page do
       link_to page.slug, page_path(page)
     end
     column :content_modules do |page|
-       page.content_modules.map { |cm| cm.module_type + " " + cm.headline.to_s }.join(', ')
+       page.content_modules.map { |cm| cm.module_type.to_s + " " + cm.headline.to_s + " images: " + cm.images.length.to_s + " dl: " + cm.downloads.length.to_s }.join(', ')
     end  
     #column :title_de
     #column :content do |page|

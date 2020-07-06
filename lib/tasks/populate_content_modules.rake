@@ -27,10 +27,17 @@ task :populate_content_modules => :environment do
           order: 0
         });
       page.images.each do |image|
+        puts "moving image " + image.id.to_s + " to cm " + cm.id.to_s
         image.content_module_id = cm.id
-        image.save
+        if image.save
+          puts "success"
+        else
+          puts "error"
+          puts image.errors.full_messages
+        end
       end
       page.downloads.each do |download|
+        puts "moving download to cm"
         download.content_module_id = cm.id
         download.save
       end

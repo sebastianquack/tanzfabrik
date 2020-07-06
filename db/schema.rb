@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_05_112501) do
+ActiveRecord::Schema.define(version: 2020_07_06_164541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,7 +77,8 @@ ActiveRecord::Schema.define(version: 2020_07_05_112501) do
     t.integer "attachment_en_file_size"
     t.datetime "attachment_en_updated_at"
     t.integer "festival_container_id"
-    t.integer "content_module_id"
+    t.bigint "content_module_id"
+    t.index ["content_module_id"], name: "index_downloads_on_content_module_id"
   end
 
   create_table "event_detail_occurrences", id: :serial, force: :cascade do |t|
@@ -219,7 +220,8 @@ ActiveRecord::Schema.define(version: 2020_07_05_112501) do
     t.integer "page_id"
     t.boolean "show_on_welcome_screen"
     t.integer "festival_container_id"
-    t.integer "content_module_id"
+    t.bigint "content_module_id"
+    t.index ["content_module_id"], name: "index_images_on_content_module_id"
   end
 
   create_table "locations", id: :serial, force: :cascade do |t|

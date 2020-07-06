@@ -21,5 +21,9 @@
     <% end %>
   </div>
   <br>
-  <%= link_to "Modul bearbeiten", url %>
+  <% if url %>
+    <%= link_to "Modul bearbeiten", url %>
+  <% else %>
+    <span>Die Seite muss erst gespeichert werden, bevor das Modul bearbeitet werden kann!</span>
+  <% end %>
 </li>

@@ -32,5 +32,7 @@ module Tanzfabrik
     config.stage_event_types = [1,7,8,9]
     config.event_types_with_page = config.stage_event_types + [2,4,5]
 
+    config.active_record.belongs_to_required_by_default = false
+
   end
 end
