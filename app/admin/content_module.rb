@@ -38,11 +38,15 @@ ActiveAdmin.register ContentModule do
       end
     end
   end
+
   
   form do |f|
+
+      style_options = CM_CONFIG[f.object.module_type].map { |a| [ a, a ] }
+      
       f.inputs "Meta" do
-        f.input :module_type
-        f.input :style_option
+        f.input :module_type, :as => :select, :collection => CM_CONFIG.keys, :include_blank => false
+        f.input :style_option, :as => :select, :collection => style_options, :include_blank => false
       end
       f.inputs "Content" do
         f.input :super

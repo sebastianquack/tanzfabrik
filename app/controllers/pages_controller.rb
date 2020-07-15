@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   # GET /pages/:id
   def show
 
-    @active_layout = "application2020";
+    #@active_layout = "application";
     @menu_tree = {}
     @max_depth = 2
 
@@ -44,7 +44,7 @@ class PagesController < ApplicationController
       render "start", :layout => @active_layout and return
     end
 
-    render :layout => @active_layout
+    #render :layout => @active_layout
 
   end
 

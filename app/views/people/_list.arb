@@ -1,58 +1,17 @@
 #local variable people
 
 people.each do |person|
-  div :class => "row teachers teacher", :id => ("_" + person.id.to_s), "data-letter": person.last_name.first.upcase do
-    div :class => "basic" do
-      if person.bio
-        div :class => "description open-close open-trigger overflown-base" do
-          div person.bio.html_safe, :class => "bio is-overflown open-toggle-height"
-          div :class => "if-overflown" do
-            div t(:more) + " >", :class => "more"
-            div t(:close), :class => "close-trigger"
-          end
-        end
-      else
-        div :class => "description empty-description" do
-          div :class => "bio"
+  div do
+    a :href=>person_path(person) do
+      div :class => "image-container" do
+        if person.images.exists?
+          img :src => person.images.first.attachment.url(:people_hires)
+        else
+          #img :src => asset_path("schwarzT.png", type: :image)
         end
       end
-    end
-    div :class => "details" do
-      div :class => "row" do
-        div :class => "image-container" do
-          if person.images.exists?
-            img :src => person.images.first.attachment.url(:people_hires)
-          else
-            img :src => asset_path("schwarzT.png", type: :image)
-          end
-        end
-        div :class => "info" do
-          h3 do
-            text_node person.name
-            a "✎", :href => edit_admin_person_path(person), :class => "admin-only classes" if admin_user_signed_in?
-          end
-          ul :class => "classes" do # TODO: account for ppl both teachers and artists
-            if mode == "teachers"
-              person.events.no_draft.select { |e| [4, 5].include?e.type.id }.map { |e| e.type }.uniq.each do |t|
-                li t.name
-              end
-              if person.dance_intensive
-                li t(:dance_intensive)
-              end
-              person.events.no_draft.select { |e| e.type.id == 3 }.uniq{|e| e.title}.each do |e| 
-                if event_link(e)
-                  li link_to(e.title.html_safe, event_link(e), {:title => e.title.html_safe}), :class => "one-line"
-                else
-                  li e.title.html_safe, :class => "one-line", :title => e.title.html_safe
-                end
-              end              
-            else # artist list
-              person.events.no_draft.select { |e| e.stage_event? }.each do |e| 
-                li link_to(e.title.html_safe, event_path(e), {:title => e.title.html_safe}), :class => "one-line"
-              end
-            end
-          end
-        end
+      div :class => "info" do
+        h3 person.name
       end
     end
   end

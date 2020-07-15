@@ -8,7 +8,7 @@ class EventsController < ApplicationController
     set_meta_tags :description => auto_generate_description(@event.description) if @event.description
     set_meta_tags :keywords => (@event.keywords)
     add_to_jsonld event_jsonld(@event) if @event.stage_event?
-    render :layout => "application2020"
+    #render :layout => "application"
   end
 
   def index
