@@ -20,12 +20,31 @@ $( document ).ready(function() {
     let selectedModuleType = $("#content_module_module_type").val()
     console.log("module type changed to", selectedModuleType);
 
-    var options = CMConfig[selectedModuleType]
+    // update style option drop down
+    var options = CMConfig[selectedModuleType]["style-options"]
     var optionsSelect = $("#content_module_style_option");
     optionsSelect.empty(); // remove old options
     options.forEach((option)=> {
       optionsSelect.append($("<option></option>").attr("value", option).text(option));
     });
+
+    // update hidden form fields
+    let inputs = ["super", "headline", "sub", "main_text", "main_text_col2", "special_text"]
+
+    inputs.forEach((input)=>{
+
+      let el = $("#content_module_" + input + "_input");
+
+      if(CMConfig[selectedModuleType]["form-fields"].includes(input)) {
+        el.show()
+      } else {
+        el.hide()
+      }
+
+    })
+
+
+
 
   })
 

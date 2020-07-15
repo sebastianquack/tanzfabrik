@@ -1,7 +1,30 @@
+# content_module model reference for form fields
+#t.string "super"
+#t.string "headline"
+#t.string "sub"
+#t.text "main_text"
+#t.text "main_text_col2"
+#t.text "special_text"
+
+
 page-intro:
-  - default
-  - magazine
+  style-options:
+    - default
+    - magazine
+  form-fields:
+    - super 
+    - headline
+    - sub
+    - main_text
 content-element:
-  - default
-  - centered
-  - 2-column
+  style-options:
+    - default
+    - centered
+    - 2-column
+  form-fields:
+    - super 
+    - headline
+    - sub
+
+
+

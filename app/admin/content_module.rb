@@ -16,7 +16,10 @@ ActiveAdmin.register ContentModule do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :module_type, :style_option, :headline # todo add all
+  permit_params :module_type, :style_option, :headline, :super, :sub, :main_text, :main_text_col2, :special_text
+
+
+   # todo add all
 
   index do 
     selectable_column
@@ -42,19 +45,27 @@ ActiveAdmin.register ContentModule do
   
   form do |f|
 
-      style_options = CM_CONFIG[f.object.module_type].map { |a| [ a, a ] }
+      #para CM_CONFIG[f.object.module_type].inspect
+
+      def content_module_input(f, field)
+        return f.input field, :wrapper_html => { 
+          :class => CM_CONFIG[f.object.module_type]["form-fields"].include?(field) ? "cm-field-active" : "cm-field-hidden" 
+        }
+      end
+
+      style_options = CM_CONFIG[f.object.module_type]["style-options"].map { |a| [ a, a ] }
       
       f.inputs "Meta" do
         f.input :module_type, :as => :select, :collection => CM_CONFIG.keys, :include_blank => false
         f.input :style_option, :as => :select, :collection => style_options, :include_blank => false
       end
       f.inputs "Content" do
-        f.input :super
-        f.input :headline
-        f.input :sub
-        f.input :main_text
-        f.input :main_text_col2
-        f.input :special_text
+        content_module_input f, "super"
+        content_module_input f, "headline"
+        content_module_input f, "sub"
+        content_module_input f, "main_text"
+        content_module_input f, "main_text_col2"
+        content_module_input f, "special_text"
       end
 
       f.inputs "Images" do
