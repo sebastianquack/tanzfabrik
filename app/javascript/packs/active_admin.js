@@ -32,7 +32,8 @@ $( document ).ready(function() {
     });
 
     // update hidden form fields
-    let inputs = ["super", "headline", "sub", "special_text", "rich_content_1", "rich_content_2"]
+    let inputs = [
+    "super", "headline", "sub", "special_text", "rich_content_1", "rich_content_2", "custom_html", "parameter"]
 
     inputs.forEach((input)=>{
 

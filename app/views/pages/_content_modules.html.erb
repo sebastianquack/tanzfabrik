@@ -2,10 +2,10 @@
 
 <% for @content_module in @page.content_modules.no_draft %>
 
-
   <%
     partial = ""
-    if File.exists?(Rails.root.join("app", "views", "content_modules", "_{@content_module.module_type}.html.erb"))
+    if File.exists?(Rails.root.join("app", "views", "content_modules", "_#{@content_module.module_type}.html.erb")) || 
+      File.exists?(Rails.root.join("app", "views", "content_modules", "_#{@content_module.module_type}.arb"))
       partial = @content_module.module_type
     else
       partial = "default"
@@ -13,7 +13,7 @@
   %>
 
   <p style="background-color: lightgray">
-    module_type:<%= @content_module.module_type %> (using <%= partial %>) / style_option:<%= @content_module.style_option %>
+    module_type: <%= @content_module.module_type %> (using <%= partial %>) / style_option:<%= @content_module.style_option %>
   </p>
 
   

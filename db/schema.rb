@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_17_135330) do
+ActiveRecord::Schema.define(version: 2020_07_17_140555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 2020_07_17_135330) do
     t.text "special_text"
     t.boolean "draft"
     t.text "custom_html"
+    t.string "parameter"
   end
 
   create_table "downloads", id: :serial, force: :cascade do |t|
@@ -274,6 +275,7 @@ ActiveRecord::Schema.define(version: 2020_07_17_135330) do
     t.integer "page_id"
     t.integer "position", default: 0
     t.string "ancestry"
+    t.string "anchor"
     t.index ["ancestry"], name: "index_menu_items_on_ancestry"
   end
 

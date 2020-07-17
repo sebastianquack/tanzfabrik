@@ -16,7 +16,7 @@ ActiveAdmin.register ContentModule do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :module_type, :style_option, :draft, :headline, :super, :sub, :special_text, :rich_content_1, :rich_content_2
+  permit_params :module_type, :style_option, :draft, :headline, :super, :sub, :special_text, :rich_content_1, :rich_content_2, :custom_html, :parameter
 
 
    # todo add all
@@ -54,34 +54,41 @@ ActiveAdmin.register ContentModule do
 
       #para CM_CONFIG[f.object.module_type].inspect
 
-      def content_module_input(f, field, action_text=false)
-        Rails.logger.info field
-        Rails.logger.info CM_CONFIG[f.object.module_type]["form-fields"].include?(field)
+      default_module_type = "page_intro"
+
+      type = f.object.module_type
+      if !type || !CM_CONFIG[type]
+        type = default_module_type
+      end
+      style_options = CM_CONFIG[type]["style-options"].map { |a| [ a, a ] }
+      
+      def content_module_input(f, type, field, action_text=false)
         unless action_text
           return f.input field, :wrapper_html => { 
-            :class => CM_CONFIG[f.object.module_type]["form-fields"].include?(field) ? "cm-field-active" : "cm-field-hidden" 
+            :class => CM_CONFIG[type]["form-fields"].include?(field) ? "cm-field-active" : "cm-field-hidden" 
           }
         else 
           return f.input field, :wrapper_html => { 
-            :class => CM_CONFIG[f.object.module_type]["form-fields"].include?(field) ? "cm-field-active" : "cm-field-hidden" 
+            :class => CM_CONFIG[type]["form-fields"].include?(field) ? "cm-field-active" : "cm-field-hidden" 
           }, :as => :action_text
         end
       end
 
-      style_options = CM_CONFIG[f.object.module_type]["style-options"].map { |a| [ a, a ] }
       
       f.inputs "Meta" do
-        f.input :module_type, :as => :select, :collection => CM_CONFIG.keys, :include_blank => false
+        f.input :module_type, :as => :select, :collection => CM_CONFIG.keys, :include_blank => false, selected: f.object.module_type || default_module_type
         f.input :style_option, :as => :select, :collection => style_options, :include_blank => false
         f.input :draft
       end
       f.inputs "Content" do
-        content_module_input f, "super"
-        content_module_input f, "headline"
-        content_module_input f, "sub"
-        content_module_input f, "special_text"
-        content_module_input f, "rich_content_1", :action_text
-        content_module_input f, "rich_content_2", :action_text
+        content_module_input f, type, "super"
+        content_module_input f, type, "headline"
+        content_module_input f, type, "sub"
+        content_module_input f, type, "special_text"
+        content_module_input f, type, "parameter"
+        content_module_input f, type, "rich_content_1", :action_text
+        content_module_input f, type, "rich_content_2", :action_text
+        content_module_input f, type, "custom_html"
       end
 
       f.inputs "Images" do

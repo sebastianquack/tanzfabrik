@@ -12,5 +12,7 @@ class ContentModule < ActiveRecord::Base
   has_rich_text :rich_content_2
 
   scope :no_draft, -> { where("content_modules.draft = ? OR content_modules.draft IS NULL", false) }
+
+  scope :submenu_dividers, -> { where("module_type = ? ", :submenu_divider) }
   
 end

@@ -18,7 +18,9 @@ default:
     - special_text
     - rich_content_1
     - rich_content_2
-page-intro:
+    - custom_html
+    - parameter
+page_intro:
   style-options:
     - default
     - magazine
@@ -27,7 +29,7 @@ page-intro:
     - headline
     - sub
     - rich_content_1
-content-element:
+content_element:
   style-options:
     - default
     - centered
@@ -36,6 +38,13 @@ content-element:
     - super 
     - headline
     - sub
+submenu_divider:
+  style-options:
+    - default
+  form-fields:
+    - headline
+    - parameter
+
 
 
 

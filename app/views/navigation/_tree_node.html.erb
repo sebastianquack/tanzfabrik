@@ -32,7 +32,10 @@
   end
 %>
 
-<li> <%= should_link ? (link_to menu_item_name, page_path(k.page)) : menu_item_name %>
+<li> <%= should_link ? 
+  (link_to menu_item_name, (page_path(k.page) + (k.anchor ? "#" + k.anchor : ""))) 
+  : menu_item_name 
+  %>
 
 <% if v  && depth < max_depth %>
   <%= render :partial => "navigation/tree_node", :locals => {:tree => v, :depth => depth + 1, :max_depth => max_depth} %>

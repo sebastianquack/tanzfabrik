@@ -4,6 +4,25 @@ task :populate_content_modules => :environment do
   # clean slate for menu structure
   MenuItem.delete_all
 
+  # clean slate for content modules
+  ContentModule.delete_all
+
+  # some pages need special modules to work, todo: expand list
+  specials = [
+    "dance_intensive_lehrer",
+    "festivals", # no page, just template?
+    "kuenstler",
+    "kursplan",
+    "lehrer",
+    "newsletter", # no page, just template?
+    "performance_projekte",
+    "profitraining",
+    "programm",
+    "studios",
+    "workshop_anmeldung",
+    "workshop_programm"
+  ]
+      
   unregistered_menu_item = MenuItem.create(
           key: "unregistered",
           name_de: "Ohne Ort im Menü",
@@ -52,21 +71,7 @@ task :populate_content_modules => :environment do
           name_en: page.title_en
         )
       end
-      # some pages need special modules to work, todo: expand list
-      specials = [
-        "dance_intensive_lehrer",
-        "festivals", # no page, just template?
-        "kuenstler",
-        "kursplan",
-        "lehrer",
-        "newsletter", # no page, just template?
-        "performance_projekte",
-        "profitraining",
-        "programm",
-        "studios",
-        "workshop_anmeldung",
-        "workshop_programm"
-      ]
+      
       if specials.include? page.slug
         ContentModule.create({
           page_id: page.id,
@@ -264,31 +269,37 @@ task :populate_content_modules => :environment do
     # schule/dance_intensive
     {
       key: "schule-dance-intensive",
-      page_slug: "dance_intensive_programm", # default for section
+      page_slug: "dance_intensive", # default for section
       parent_key: "schule",
       name_de: "Dance Intensive",
       name_en: "Dance Intensive",
     },
     {
       key: "dance_intensive_programm",
-      page_slug: "dance_intensive_programm",
+      page_slug: "dance_intensive",
+      anchor: "programm",
+      old_page: "dance_intensive_programm",
       parent_key: "schule-dance-intensive",
       name_de: "Programm",
-      name_en: "Programm",
+      name_en: "Programm"
     },
     {
       key: "dance_intensive_lehrer",
-      page_slug: "dance_intensive_lehrer",
+      page_slug: "dance_intensive",
+      anchor: "teachers",
+      old_page: "dance_intensive_lehrer",
       parent_key: "schule-dance-intensive",
       name_de: "Lehrer*innen",
-      name_en: "Teachers",
+      name_en: "Teachers"
     },
     {
       key: "dance_intensive_bewerbung",
-      page_slug: "dance_intensive_bewerbung",
+      page_slug: "dance_intensive",
+      anchor: "bewerbung",
+      old_page: "dance_intensive_bewerbung",
       parent_key: "schule-dance-intensive",
       name_de: "Bewerbung",
-      name_en: "Application",
+      name_en: "Application"
     },
     # schule/veranstaltungen
     {
@@ -372,6 +383,7 @@ task :populate_content_modules => :environment do
       name_en: "Contact",
     },    
   ]
+  submenu_counter = 0
   basic_menu_data.each_with_index do |item, index|
     puts item.to_s
     # load parent item if specified
@@ -400,6 +412,7 @@ task :populate_content_modules => :environment do
       # update it
       menu_item.parent_id = parent_item ? parent_item.id : nil
       menu_item.page_id = page.id if page
+      menu_item.anchor = item[:anchor] if item[:anchor]
       menu_item.name_de = item[:name_de]
       menu_item.name_en = item[:name_en]
       menu_item.position = index
@@ -411,11 +424,60 @@ task :populate_content_modules => :environment do
         parent_id: parent_item ? parent_item.id : nil,
         key: item[:key],
         page_id: page ? page.id : nil,
+        anchor: item[:anchor] ? item[:anchor] : nil, 
         name_de: item[:name_de],
         name_en: item[:name_en],
         position: index
       )
       puts "created menu_item " + item[:key]
+    end
+
+    # if this entry has an anchor specified, add a cm to the page
+    if item[:anchor] && page
+      puts "creating divider " + item[:anchor] + " on page " + page.slug
+      ContentModule.create({
+          page_id: page.id,
+          module_type: :submenu_divider,
+          parameter: item[:anchor],
+          headline: item[:name_de],
+          order: submenu_counter
+      })      
+      submenu_counter += 1
+      
+      puts "looking for old page " + item[:old_page]
+      old_page = Page.find_by slug: item[:old_page]
+
+      if old_page
+        puts "merging old page as default content module"
+        ContentModule.create({
+            page_id: page.id,
+            module_type: :default,
+            headline: item[:name_de],
+            rich_content_1: old_page.content_de,
+            order: submenu_counter
+        })
+        submenu_counter += 1        
+        if specials.include? old_page.slug
+          puts "adding special content module for " + old_page.slug
+          ContentModule.create({
+            page_id: page.id,
+            module_type: old_page.slug,
+            order: submenu_counter
+          });
+          submenu_counter += 1
+        end
+      else
+        puts "creating blank content module for subsection"
+        ContentModule.create({
+            page_id: page.id,
+            module_type: :default,
+            headline: item[:name_de],
+            order: submenu_counter
+        })      
+        submenu_counter += 1
+      end
+    else
+      submenu_counter = 0
     end
   
   end
