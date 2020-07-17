@@ -10,5 +10,7 @@ class ContentModule < ActiveRecord::Base
   
   has_rich_text :rich_content_1
   has_rich_text :rich_content_2
+
+  scope :no_draft, -> { where("content_modules.draft = ? OR content_modules.draft IS NULL", false) }
   
 end

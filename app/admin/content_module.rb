@@ -16,7 +16,7 @@ ActiveAdmin.register ContentModule do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :module_type, :style_option, :headline, :super, :sub, :special_text, :rich_content_1, :rich_content_2
+  permit_params :module_type, :style_option, :draft, :headline, :super, :sub, :special_text, :rich_content_1, :rich_content_2
 
 
    # todo add all
@@ -36,8 +36,15 @@ ActiveAdmin.register ContentModule do
       row :page_id
       row :module_type
       row :style_option
-      row "page" do |content_module|
-        link_to "go to page", edit_admin_page_url(content_module.page.id)
+      row :draft
+      row "Vorschau" do |content_module|
+        render partial: "/content_modules/index", locals: {content_module: content_module}
+      end
+      row "Links" do |content_module|
+        ul do
+          li link_to "Seite bearbeiten", edit_admin_page_url(content_module.page.id)
+          li link_to "Seite anschauen", content_module.page
+        end
       end
     end
   end
@@ -66,6 +73,7 @@ ActiveAdmin.register ContentModule do
       f.inputs "Meta" do
         f.input :module_type, :as => :select, :collection => CM_CONFIG.keys, :include_blank => false
         f.input :style_option, :as => :select, :collection => style_options, :include_blank => false
+        f.input :draft
       end
       f.inputs "Content" do
         content_module_input f, "super"

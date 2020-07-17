@@ -1,0 +1,12 @@
+<%
+    partial = ""
+    if File.exists?(Rails.root.join("app", "views", "content_modules", "_{content_module.module_type}.html.erb"))
+      partial = content_module.module_type
+    else
+      partial = "default"
+    end
+%>
+
+<%= render :partial => "/content_modules/" + partial, :locals => {:content_module => content_module} %>
+
+

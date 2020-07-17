@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_17_123129) do
+ActiveRecord::Schema.define(version: 2020_07_17_135330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 2020_07_17_123129) do
     t.text "main_text"
     t.text "main_text_col2"
     t.text "special_text"
+    t.boolean "draft"
+    t.text "custom_html"
   end
 
   create_table "downloads", id: :serial, force: :cascade do |t|
