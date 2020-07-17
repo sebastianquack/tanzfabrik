@@ -19,6 +19,14 @@
 //   .status_tag { background: #6090DB; }
 
 
+/* active admin trix integration */
+
+// hide attachment button
+span.trix-button-group--file-tools {
+  display: none
+}
+
+// display in active admin form
 .active_admin {
   form trix-editor {
     margin-left: 20%;
@@ -27,6 +35,7 @@
   }
 }
 
+// hide and show content module fields
 .cm-field-active {
 
 }
