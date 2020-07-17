@@ -15,6 +15,11 @@
     if k.page_id == @page.id
       menu_item_name += " (page active)"
       should_link = false
+
+      # exception: this has an anchor link
+      if k.anchor
+        should_link = true
+      end
     end
   end
 

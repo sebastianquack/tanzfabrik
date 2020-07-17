@@ -16,7 +16,7 @@ ActiveAdmin.register ContentModule do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :module_type, :style_option, :draft, :headline, :super, :sub, :special_text, :rich_content_1, :rich_content_2, :custom_html, :parameter
+  permit_params :module_type, :style_option, :draft, :headline_de, :headline_en, :super_de, :super_en, :sub_de, :sub_en, :special_text_de, :special_text_en, :rich_content_1_de, :rich_content_1_en, :rich_content_2_de, :rich_content_2_en, :custom_html_de, :custom_html_en, :parameter
 
 
    # todo add all
@@ -62,19 +62,32 @@ ActiveAdmin.register ContentModule do
       end
       style_options = CM_CONFIG[type]["style-options"].map { |a| [ a, a ] }
       
-      def content_module_input(f, type, field, action_text=false)
+      def make_input(f, type, field, active, action_text)    
+        Rails.logger.info "make_input" + field
         unless action_text
           return f.input field, :wrapper_html => { 
-            :class => CM_CONFIG[type]["form-fields"].include?(field) ? "cm-field-active" : "cm-field-hidden" 
+            :class => active ? "cm-field-active" : "cm-field-hidden" 
           }
         else 
           return f.input field, :wrapper_html => { 
-            :class => CM_CONFIG[type]["form-fields"].include?(field) ? "cm-field-active" : "cm-field-hidden" 
+            :class => active ? "cm-field-active" : "cm-field-hidden" 
           }, :as => :action_text
+        end        
+      end 
+
+      def content_module_input(f, type, field, action_text=false, localise=true)
+        active = CM_CONFIG[type]["form-fields"].include?(field)
+        Rails.logger.info field + " localise? " + localise.to_s
+        if localise
+          return [
+            make_input(f, type, field + "_de", active, action_text),
+            make_input(f, type, field + "_en", active, action_text)
+          ]
+        else
+          return make_input(f, type, field, active, action_text)
         end
       end
 
-      
       f.inputs "Meta" do
         f.input :module_type, :as => :select, :collection => CM_CONFIG.keys, :include_blank => false, selected: f.object.module_type || default_module_type
         f.input :style_option, :as => :select, :collection => style_options, :include_blank => false
@@ -85,9 +98,9 @@ ActiveAdmin.register ContentModule do
         content_module_input f, type, "headline"
         content_module_input f, type, "sub"
         content_module_input f, type, "special_text"
-        content_module_input f, type, "parameter"
-        content_module_input f, type, "rich_content_1", :action_text
-        content_module_input f, type, "rich_content_2", :action_text
+        content_module_input f, type, "parameter", false, false
+        content_module_input f, type, "rich_content_1", true
+        content_module_input f, type, "rich_content_2", true
         content_module_input f, type, "custom_html"
       end
 

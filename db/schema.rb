@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_17_140555) do
+ActiveRecord::Schema.define(version: 2020_07_17_154046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,15 +84,18 @@ ActiveRecord::Schema.define(version: 2020_07_17_140555) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "style_option"
-    t.string "super"
-    t.string "headline"
-    t.string "sub"
-    t.text "main_text"
-    t.text "main_text_col2"
-    t.text "special_text"
+    t.string "super_de"
+    t.string "headline_de"
+    t.string "sub_de"
+    t.text "special_text_de"
     t.boolean "draft"
-    t.text "custom_html"
+    t.text "custom_html_de"
     t.string "parameter"
+    t.string "super_en"
+    t.string "headline_en"
+    t.string "sub_en"
+    t.string "special_text_en"
+    t.text "custom_html_en"
   end
 
   create_table "downloads", id: :serial, force: :cascade do |t|

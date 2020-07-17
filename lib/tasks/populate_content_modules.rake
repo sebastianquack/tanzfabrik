@@ -41,8 +41,10 @@ task :populate_content_modules => :environment do
       cm = ContentModule.create({
           page_id: page.id,
           module_type: :default,
-          headline: page.title_de,
-          main_text: page.content_de,
+          headline_de: page.title_de,
+          headline_en: page.title_en,
+          rich_content_1_de: page.content_de,
+          rich_content_1_en: page.content_en,
           order: 0
         });
       page.images.each do |image|
@@ -452,8 +454,10 @@ task :populate_content_modules => :environment do
         ContentModule.create({
             page_id: page.id,
             module_type: :default,
-            headline: item[:name_de],
-            rich_content_1: old_page.content_de,
+            headline_de: item[:name_de],
+            headline_en: item[:name_en],
+            rich_content_1_de: old_page.content_de,
+            rich_content_1_en: old_page.content_en,
             order: submenu_counter
         })
         submenu_counter += 1        
@@ -471,7 +475,8 @@ task :populate_content_modules => :environment do
         ContentModule.create({
             page_id: page.id,
             module_type: :default,
-            headline: item[:name_de],
+            headline_de: item[:name_de],
+            headline_en: item[:name_en],
             order: submenu_counter
         })      
         submenu_counter += 1

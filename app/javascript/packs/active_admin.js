@@ -38,11 +38,17 @@ $( document ).ready(function() {
     inputs.forEach((input)=>{
 
       let el = $("#content_module_" + input + "_input");
+      let el_en = $("#content_module_" + input + "_en_input");
+      let el_de = $("#content_module_" + input + "_de_input");
 
       if(CMConfig[selectedModuleType]["form-fields"].includes(input)) {
         el.show()
+        el_en.show()
+        el_de.show()
       } else {
         el.hide()
+        el_en.hide()
+        el_de.hide()
       }
 
     })
