@@ -2,11 +2,22 @@
 
 <% for @content_module in @page.content_modules %>
 
+
+  <%
+    partial = ""
+    if File.exists?(Rails.root.join("app", "views", "content_modules", "_{@content_module.module_type}.html.erb"))
+      partial = @content_module.module_type
+    else
+      partial = "default"
+    end
+  %>
+
   <p style="background-color: lightgray">
-    module_type:<%= @content_module.module_type %> / style_option:<%= @content_module.style_option %>
+    module_type:<%= @content_module.module_type %> (using <%= partial %>) / style_option:<%= @content_module.style_option %>
   </p>
+
   
-  <%= render :partial => "/content_modules/" + @content_module.module_type, :locals => {:content_module => @content_module} %>
+  <%= render :partial => "/content_modules/" + partial, :locals => {:content_module => @content_module} %>
 
 <% end %>
 

@@ -16,7 +16,7 @@ ActiveAdmin.register ContentModule do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :module_type, :style_option, :headline, :super, :sub, :main_text, :main_text_col2, :special_text, :rich_content
+  permit_params :module_type, :style_option, :headline, :super, :sub, :special_text, :rich_content_1, :rich_content_2
 
 
    # todo add all

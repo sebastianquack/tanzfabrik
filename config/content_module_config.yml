@@ -8,7 +8,16 @@
 
 # a list of all existing form-fields must be manually updates in active_admin.js
 
-
+default:
+  style-options: 
+    - default
+  form-fields:
+    - super
+    - headline
+    - sub
+    - special_text
+    - rich_content_1
+    - rich_content_2
 page-intro:
   style-options:
     - default
