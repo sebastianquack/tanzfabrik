@@ -441,7 +441,8 @@ task :populate_content_modules => :environment do
           page_id: page.id,
           module_type: :submenu_divider,
           parameter: item[:anchor],
-          headline: item[:name_de],
+          headline_de: item[:name_de],
+          headline_en: item[:name_en],
           order: submenu_counter
       })      
       submenu_counter += 1
