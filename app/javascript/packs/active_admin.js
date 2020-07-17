@@ -11,6 +11,9 @@ import "../sortable_tree/sortable.js";
 import "../sortable_tree/sortable.sass";
 
 
+import "trix"
+
+
 import CMConfig from "../../../config/content_module_config.yml"
 
 $( document ).ready(function() {
@@ -29,7 +32,7 @@ $( document ).ready(function() {
     });
 
     // update hidden form fields
-    let inputs = ["super", "headline", "sub", "main_text", "main_text_col2", "special_text"]
+    let inputs = ["super", "headline", "sub", "special_text", "rich_content_1", "rich_content_2"]
 
     inputs.forEach((input)=>{
 

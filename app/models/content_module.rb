@@ -8,5 +8,7 @@ class ContentModule < ActiveRecord::Base
   has_many :downloads
   accepts_nested_attributes_for :downloads, :allow_destroy => true
   
+  has_rich_text :rich_content_1
+  has_rich_text :rich_content_2
   
 end

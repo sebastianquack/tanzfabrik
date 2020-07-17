@@ -16,7 +16,7 @@ ActiveAdmin.register ContentModule do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :module_type, :style_option, :headline, :super, :sub, :main_text, :main_text_col2, :special_text
+  permit_params :module_type, :style_option, :headline, :super, :sub, :main_text, :main_text_col2, :special_text, :rich_content
 
 
    # todo add all
@@ -47,10 +47,18 @@ ActiveAdmin.register ContentModule do
 
       #para CM_CONFIG[f.object.module_type].inspect
 
-      def content_module_input(f, field)
-        return f.input field, :wrapper_html => { 
-          :class => CM_CONFIG[f.object.module_type]["form-fields"].include?(field) ? "cm-field-active" : "cm-field-hidden" 
-        }
+      def content_module_input(f, field, action_text=false)
+        Rails.logger.info field
+        Rails.logger.info CM_CONFIG[f.object.module_type]["form-fields"].include?(field)
+        unless action_text
+          return f.input field, :wrapper_html => { 
+            :class => CM_CONFIG[f.object.module_type]["form-fields"].include?(field) ? "cm-field-active" : "cm-field-hidden" 
+          }
+        else 
+          return f.input field, :wrapper_html => { 
+            :class => CM_CONFIG[f.object.module_type]["form-fields"].include?(field) ? "cm-field-active" : "cm-field-hidden" 
+          }, :as => :action_text
+        end
       end
 
       style_options = CM_CONFIG[f.object.module_type]["style-options"].map { |a| [ a, a ] }
@@ -63,9 +71,9 @@ ActiveAdmin.register ContentModule do
         content_module_input f, "super"
         content_module_input f, "headline"
         content_module_input f, "sub"
-        content_module_input f, "main_text"
-        content_module_input f, "main_text_col2"
         content_module_input f, "special_text"
+        content_module_input f, "rich_content_1", :action_text
+        content_module_input f, "rich_content_2", :action_text
       end
 
       f.inputs "Images" do

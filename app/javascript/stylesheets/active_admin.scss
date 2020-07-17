@@ -11,11 +11,21 @@
 @import "~@activeadmin/activeadmin/src/scss/mixins";
 @import "~@activeadmin/activeadmin/src/scss/base";
 
+@import "trix/dist/trix";
+
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
 
+
+.active_admin {
+  form trix-editor {
+    margin-left: 20%;
+    width: calc(80% - 17px);
+    background-color: #fff;
+  }
+}
 
 .cm-field-active {
 
