@@ -52,10 +52,12 @@ $( document ).ready(function() {
       }
 
     })
+  })
 
 
-
-
+  $(".active-admin-delete-content-module").click((event)=>{
+    if(!confirm("Modul löschen?"))
+      event.preventDefault();
   })
 
 })

@@ -1,9 +1,10 @@
 <% url = edit_admin_content_module_url(cm.id) if cm.id? %>
+
 <li>
   <div>
-    headline: <b><%= cm.headline %></b><br>
-    module_type: <%= cm.module_type %><br>
+    module_type: <b><%= cm.module_type %></b><br>
     style_option: <%= cm.style_option %><br>
+    headline: <%= cm.headline %><br>
     <% if cm.images.length > 0 %>
       images:
       <% cm.images.each do |image| %>
@@ -23,6 +24,7 @@
   <br>
   <% if url %>
     <%= link_to "Modul bearbeiten", url %>
+
   <% else %>
     <span>Die Seite muss erst gespeichert werden, bevor das Modul bearbeitet werden kann!</span>
   <% end %>

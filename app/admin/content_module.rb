@@ -19,6 +19,15 @@ ActiveAdmin.register ContentModule do
   permit_params :module_type, :style_option, :draft, :headline_de, :headline_en, :super_de, :super_en, :sub_de, :sub_en, :special_text_de, :special_text_en, :rich_content_1_de, :rich_content_1_en, :rich_content_2_de, :rich_content_2_en, :custom_html_de, :custom_html_en, :parameter
 
 
+ActiveAdmin.register ContentModule do
+
+    member_action :delete_content_module, method: :get do
+      ContentModule.delete(resource.id)
+      redirect_to edit_admin_page_path(resource.page), notice: "Modul gelöscht!"
+    end
+
+  end
+
    # todo add all
 
   index do 
@@ -43,7 +52,7 @@ ActiveAdmin.register ContentModule do
       row "Links" do |content_module|
         ul do
           li link_to "Seite bearbeiten", edit_admin_page_url(content_module.page.id)
-          li link_to "Seite anschauen", content_module.page
+          li link_to "Seite am Front-End anschauen", content_module.page
         end
       end
     end
@@ -91,7 +100,8 @@ ActiveAdmin.register ContentModule do
       f.inputs "Meta" do
         f.input :module_type, :as => :select, :collection => CM_CONFIG.keys, :include_blank => false, selected: f.object.module_type || default_module_type
         f.input :style_option, :as => :select, :collection => style_options, :include_blank => false
-        f.input :draft
+        f.input :draft, :label => t(:draft)
+        f.li link_to "löschen", delete_content_module_admin_content_module_path, :class => "button active-admin-delete-content-module"
       end
       f.inputs "Content" do
         content_module_input f, type, "super"
@@ -132,10 +142,11 @@ ActiveAdmin.register ContentModule do
           end          
         end
       end
-      
+
+
       f.actions do
         f.action :submit
-        f.action :cancel # no idea why, but this leads back to page edit view which is good
+        li link_to "Zurück zur Seite", edit_admin_page_url(f.object.page.id)
       end
   end
   

@@ -19,6 +19,22 @@ ActiveAdmin.register Page do
   #  permitted << :other if resource.something?
   #  permitted
   # end
+
+  ActiveAdmin.register Page do
+
+    member_action :create_content_module, method: :get do
+      
+      ContentModule.create({
+        page_id: resource.id,
+        module_type: :default
+      })
+      redirect_to edit_admin_page_path, notice: "Modul hinzugefügt!"
+    end
+
+  end
+
+    
+
   
   index do
     selectable_column
@@ -70,6 +86,7 @@ ActiveAdmin.register Page do
       row t(:draft) do |page|
          page.draft
       end
+
     end
   end
 
@@ -84,12 +101,17 @@ ActiveAdmin.register Page do
     #  f.input :content_en, :input_html => { :class => 'wysihtml5' }
     #end
 
-    f.inputs "Content Modules" do
-      f.has_many :content_modules, heading: false, sortable: :order, :new_record => true, :allow_destroy => true do |f_f|
+    f.inputs "Module" do
+      
+      f.has_many :content_modules, heading: false, sortable: :order do |f_f|
         f_f.template.render partial: "/content_modules/admin_preview", locals: {cm: f_f.object}
       end
+      
+      f.li link_to "Neues Modul hinzufügen", create_content_module_admin_page_path, :class => :button
     end
-    
+
+
+
     #f.inputs "Images" do
     #  f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
         #f_f.inputs do
@@ -156,10 +178,11 @@ ActiveAdmin.register Page do
      # f.input :disable_close, :label => t(:disable_close)
       f.input :draft, :label => t(:draft)
     end
-        
+
+      
     f.actions do
         f.action :submit
-        f.action :cancel # no idea why, but this leads back to previous view which is good
+        li link_to "Zurück zur Menu-Übersicht", admin_menu_items_path
       end
   end
   
