@@ -4,7 +4,8 @@
   # we show all people that have at least one of the tags specified in parameter
 
   # split tags up into individual tags
-  tags = content_module.parameter.split(" ")
+  no_commas = content_module.parameter.gsub(",", "")
+  tags = no_commas.split(" ")
 
   # find people that have this tag
   tags.each do |tag|
