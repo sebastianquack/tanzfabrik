@@ -1,6 +1,6 @@
 ActiveAdmin.register Festival do
 
-  menu :priority => 2
+  menu :priority => 4
 
   permit_params :name_de, :description_de, :name_en, :description_en, :feature_on_welcome_screen, :facebook,  :draft, :event_ids => [], :festival_ids => [], :festival_container_ids => [],
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
@@ -14,7 +14,8 @@ ActiveAdmin.register Festival do
       festival.description_de.html_safe
     end
     column :events do |festival|
-      festival.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
+      festival.events.length
+      #festival.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
     end
     column :images do |festival|
       festival.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
@@ -71,8 +72,8 @@ ActiveAdmin.register Festival do
     f.inputs do
       f.input :name_de
       f.input :name_en
-      f.input :description_de, :input_html => { :class => 'wysihtml5' }
-      f.input :description_en, :input_html => { :class => 'wysihtml5' }
+      f.input :description_de
+      f.input :description_en
       f.input :festival_containers, :as => :check_boxes
     end
 

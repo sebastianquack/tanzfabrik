@@ -1,14 +1,16 @@
 ActiveAdmin.register Person do
 
-  menu :priority => 3  
+  menu :priority => 5  
 
-  permit_params :id, :first_name, :last_name, :bio_de, :bio_en, :role, :dance_intensive, :draft, :event_ids => [], :images_attributes => [:id, :description, :license, :attachment, :_destroy]
+  permit_params :id, :first_name, :last_name, :bio_de, :bio_en, :role, :dance_intensive, :draft, :tags, :event_ids => [], :images_attributes => [:id, :description, :license, :attachment, :_destroy]
+
+  config.sort_order = 'last_name_asc'
 
   index do
     selectable_column
     column :first_name
     column :last_name
-    #column :role
+    column :tags
     column :events do |person|
         person.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
     end
@@ -20,7 +22,7 @@ ActiveAdmin.register Person do
   
   filter :first_name
   filter :last_name
-  filter :role
+  filter :tags
   filter :events
   
   config.per_page = 100
@@ -49,15 +51,17 @@ ActiveAdmin.register Person do
     end
   end
   
-  form :html => { :enctype => "multipart/form-data" } do |f|
+  form do |f|
       f.inputs "Details" do
         f.input :first_name
         f.input :last_name
-        f.input :dance_intensive        
+        #f.input :dance_intensive        
+        f.input :tags
         #f.input :role
-        f.input :bio_de, :input_html => { :class => 'wysihtml5' }
-        f.input :bio_en, :input_html => { :class => 'wysihtml5' }
+        f.input :bio_de
+        f.input :bio_en
         #f.input :events, :as => :check_boxes
+        
       end
       f.inputs "Images" do
         f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|

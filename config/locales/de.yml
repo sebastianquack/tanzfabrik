@@ -345,6 +345,9 @@ de:
         event:
           invalid_facebook_link: "Ungültige Angabe. Bitte eine URL zu Facebook eingeben oder leer lassen. Am Anfang oder am Ende keine überschüssigen Leerzeichen eingeben. Beispiel: <i>https://www.facebook.com/events/877048289058664/</i>"
     models:
+      content_module:
+        one: Modul
+        other: Module
       menu_item: 
         one: Menustruktur
         other: Menustruktur
@@ -400,6 +403,10 @@ de:
         one: Textblock
         other: Textblöcke
     attributes:
+      content_module:
+        parameter: Auswahl
+        module_type: Modul-Typ
+        style_option: Darstellungs-Option
       page: 
         title: Seitentitel
         slug: URL

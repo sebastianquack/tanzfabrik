@@ -1,0 +1,20 @@
+<%
+  people = []
+  
+  # we show all people that have at least one of the tags specified in parameter
+
+  # split tags up into individual tags
+  tags = content_module.parameter.split(" ")
+
+  # find people that have this tag
+  tags.each do |tag|
+    people_tag = Person.where('tags LIKE ?', "%" + tag.strip + "%").all
+    people += people_tag
+  end
+  
+  # make unique and sort
+  people = people.uniq
+  people = people.sort_by(&:last_name)
+%>
+
+<%= render :partial => "/people/list", :locals => {:people => people} %>

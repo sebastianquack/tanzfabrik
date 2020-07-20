@@ -15,15 +15,20 @@ div :class => "open-close-shade" do
   #events = Event.of_types([3, 4, 5, 6])
   #.includes(:people, :event_details => [{:studio => :location}, {:event_detail_tags => :tag}, :repeat_mode])
 
-  Location.where(:name => ["Wedding", "Kreuzberg", "Online"]).order(:order).each do |location|
+  name = ["Wedding", "Kreuzberg", "Online"]
+  if content_module.parameter && content_module.parameter != ""
+    name = [content_module.parameter]
+  end
+
+  Location.where(:name => name).order(:order).each do |location|
     if location.name == "Kreuzberg" 
       type_ids = [3,6] # do not show perfomance projekte in kreuzberg
     else 
       type_ids = [3,5,6]
     end
-    cache_arbre(self, cache_key_for_kursplan(Event.no_draft.of_types(type_ids), location)) do      
+    #cache_arbre(self, cache_key_for_kursplan(Event.no_draft.of_types(type_ids), location)) do      
       render :partial => "/events/timetable", :locals => {:type_ids => type_ids, :start_date => start_date, :location => location}
-    end
+    #end
   end
 
 end

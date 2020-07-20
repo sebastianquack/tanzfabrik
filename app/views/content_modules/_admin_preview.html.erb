@@ -2,9 +2,13 @@
 
 <li>
   <div>
-    module_type: <b><%= cm.module_type %></b><br>
-    style_option: <%= cm.style_option %><br>
-    headline: <%= cm.headline %><br>
+    Modul: <b><%= cm.module_type %></b><br>
+    <% if cm.parameter && cm.parameter != "" %> 
+      Auswahl: <%= cm.parameter %><br>
+    <% end %>
+    <% if cm.headline %>
+      headline: <%= cm.headline %><br>
+    <% end %>
     <% if cm.images.length > 0 %>
       images:
       <% cm.images.each do |image| %>

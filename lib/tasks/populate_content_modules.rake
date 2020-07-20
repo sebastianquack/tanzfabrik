@@ -22,6 +22,60 @@ task :populate_content_modules => :environment do
     "workshop_anmeldung",
     "workshop_programm"
   ]
+
+  def add_special_module_to_page page, module_type, order 
+
+    # special populations
+    if module_type == "kursplan"
+      ContentModule.create({
+        page_id: page.id,
+        module_type: page.slug,
+        parameter: "Kreuzberg",
+        order: order
+      });
+      ContentModule.create({
+        page_id: page.id,
+        module_type: page.slug,
+        parameter: "Wedding",
+        order: order + 1
+      });
+      ContentModule.create({
+        page_id: page.id,
+        module_type: page.slug,
+        parameter: "Online",
+        order: order + 2
+      });
+    elsif module_type == "kuenstler"
+      ContentModule.create({
+        page_id: page.id,
+        module_type: "people_gallery",
+        parameter: "Künstler",
+        order: order
+      });
+    elsif module_type == "lehrer"
+      ContentModule.create({
+        page_id: page.id,
+        module_type: "people_gallery",
+        parameter: "Kurslehrer",
+        order: order
+      });
+    elsif module_type == "dance_intensive_lehrer"
+      ContentModule.create({
+        page_id: page.id,
+        module_type: "people_gallery",
+        parameter: "Dance-Intensive",
+        order: order
+      });
+    # default
+    else
+      ContentModule.create({
+        page_id: page.id,
+        module_type: page.slug,
+        order: 1
+      });
+    end
+
+  end
       
   unregistered_menu_item = MenuItem.create(
           key: "unregistered",
@@ -75,11 +129,7 @@ task :populate_content_modules => :environment do
       end
       
       if specials.include? page.slug
-        ContentModule.create({
-          page_id: page.id,
-          module_type: page.slug,
-          order: 1
-        });
+        add_special_module_to_page page, page.slug, 1
       end
     end
   end
@@ -464,11 +514,7 @@ task :populate_content_modules => :environment do
         submenu_counter += 1        
         if specials.include? old_page.slug
           puts "adding special content module for " + old_page.slug
-          ContentModule.create({
-            page_id: page.id,
-            module_type: old_page.slug,
-            order: submenu_counter
-          });
+          add_special_module_to_page page, old_page.slug, submenu_counter
           submenu_counter += 1
         end
       else
@@ -487,6 +533,31 @@ task :populate_content_modules => :environment do
     end
   
   end
+
+
+  # add tags to people
+
+  Person.all.each do |person|  
+
+    tags = []
+
+    if person.dance_intensive 
+      tags.push "Dance-Intensive"
+    end
+
+    if person.kurslehrer?
+      tags.push "Kurslehrer"
+    end
+
+    if person.artist?
+      tags.push "Künstler"
+    end
+
+    person.tags = tags.join(" ")
+    person.save
+
+  end
+
 
 end
 

@@ -42,19 +42,18 @@ ActiveAdmin.register ContentModule do
   
   show do
     attributes_table do
-      row :page_id
       row :module_type
-      row :style_option
-      row :draft
-      row "Vorschau" do |content_module|
-        render partial: "/content_modules/index", locals: {content_module: content_module}
-      end
       row "Links" do |content_module|
         ul do
           li link_to "Seite bearbeiten", edit_admin_page_url(content_module.page.id)
           li link_to "Seite am Front-End anschauen", content_module.page
         end
       end
+      row :draft
+      row "Vorschau" do |content_module|
+        render partial: "/content_modules/index", locals: {content_module: content_module}
+      end
+      
     end
   end
 
@@ -114,32 +113,36 @@ ActiveAdmin.register ContentModule do
         content_module_input f, type, "custom_html"
       end
 
-      f.inputs "Images" do
-        f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
-          f_f.input :description
-          f_f.input :license
-          if f_f.object.attachment.exists?
-            f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.image_tag(f_f.object.attachment.url(:thumb))
-          else
-            f_f.input :attachment, :as => :file, :required => false
+      if !CM_CONFIG[type].has_key? "images" || CM_CONFIG[type]["images"] != false
+        f.inputs "Images", :id => "active_admin_cm_images" do
+          f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
+            f_f.input :description
+            f_f.input :license
+            if f_f.object.attachment.exists?
+              f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.image_tag(f_f.object.attachment.url(:thumb))
+            else
+              f_f.input :attachment, :as => :file, :required => false
+            end
           end
         end
       end
 
-      f.inputs "Downloads" do
-        f.has_many :downloads, heading: false, :new_record => true, :allow_destroy => true do |f_f|
-          f_f.input :description_de
-          f_f.input :description_en
-          if f_f.object.attachment_de.exists?
-            f_f.input :attachment_de, :as => :file, :required => false, :hint => link_to(f_f.object.attachment_de.original_filename, f_f.object.attachment.url)
-          else
-            f_f.input :attachment_de, :as => :file, :required => false
+      if !CM_CONFIG[type].has_key? "downloads" || CM_CONFIG[type]["downloads"] != false
+        f.inputs "Downloads", :id => "active_admin_cm_downloads" do
+          f.has_many :downloads, heading: false, :new_record => true, :allow_destroy => true do |f_f|
+            f_f.input :description_de
+            f_f.input :description_en
+            if f_f.object.attachment_de.exists?
+              f_f.input :attachment_de, :as => :file, :required => false, :hint => link_to(f_f.object.attachment_de.original_filename, f_f.object.attachment.url)
+            else
+              f_f.input :attachment_de, :as => :file, :required => false
+            end
+            if f_f.object.attachment_en.exists?
+              f_f.input :attachment_en, :as => :file, :required => false, :hint => link_to(f_f.object.attachment_en.original_filename, f_f.object.attachment_en.url)
+            else
+              f_f.input :attachment_en, :as => :file, :required => false
+            end          
           end
-          if f_f.object.attachment_en.exists?
-            f_f.input :attachment_en, :as => :file, :required => false, :hint => link_to(f_f.object.attachment_en.original_filename, f_f.object.attachment_en.url)
-          else
-            f_f.input :attachment_en, :as => :file, :required => false
-          end          
         end
       end
 

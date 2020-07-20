@@ -1,6 +1,6 @@
 ActiveAdmin.register Page do
 
-  menu :priority => 0
+  menu :priority => 2
   
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -19,6 +19,8 @@ ActiveAdmin.register Page do
   #  permitted << :other if resource.something?
   #  permitted
   # end
+
+  config.sort_order = 'slug_asc'
 
   ActiveAdmin.register Page do
 

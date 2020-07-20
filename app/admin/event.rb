@@ -1,6 +1,6 @@
 ActiveAdmin.register Event do
 
-  menu :priority => 1
+  menu :priority => 3
 
   permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook, :draft, :custom_sorting, :no_sign_up, :signup_url,
     :festival_ids => [], :person_ids => [],

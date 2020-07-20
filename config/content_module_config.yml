@@ -1,12 +1,6 @@
-# content_module model reference for form fields
-#t.string "super"
-#t.string "headline"
-#t.string "sub"
-#t.text "special_text"
-# rich_content_1
-# rich_content_2
+# when adding a new form-field to the content_module model, you need to also update the list of form-fields in active_admin.js (module_types you define here are picked up automatically)
 
-# a list of all existing form-fields must be manually updates in active_admin.js
+# note: rails app needs to restart for changes in this config to take effect
 
 default:
   style-options: 
@@ -44,6 +38,25 @@ submenu_divider:
   form-fields:
     - headline
     - parameter
+  images: false
+  downloads: false
+people_gallery:
+  style-options:
+    - default
+  form-fields:
+    - parameter
+  images: false
+  downloads: false
+kursplan:
+  style-options:
+    - default
+  form-fields:
+    - parameter
+  images: false
+  downloads: false
+
+
+
 
 
 

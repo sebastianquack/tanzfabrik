@@ -51,7 +51,23 @@ $( document ).ready(function() {
         el_de.hide()
       }
 
-    })
+    });
+
+    // hide or show images and downloads area
+    if(CMConfig[selectedModuleType].images == false) {
+      $("#active_admin_cm_images").hide()
+    } else {
+      $("#active_admin_cm_images").show()
+    }
+
+    if(CMConfig[selectedModuleType].downloads == false) {
+      $("#active_admin_cm_downloads").hide()
+    } else {
+      $("#active_admin_cm_downloads").show()
+    }
+    
+
+
   })
 
 
