@@ -14,10 +14,9 @@
 const images = require.context('../images', true)
 const imagePath = (name) => images(name, true)
 
-console.log('Hello World from Webpacker...')
-
 // styles handled by webpacker
-import "stylesheets/application"
+import 'minimal-css-reset/sass/_reset.scss'
+import "stylesheets/application/_general.scss"
 
 // all other generic js imports here
 import "core-js/stable"
@@ -33,5 +32,6 @@ const application = Application.start()
 const context = require.context("../controllers", true, /\.js$/)
 application.load(definitionsFromContext(context))
 
+// other
 require("trix")
 require("@rails/actiontext")
