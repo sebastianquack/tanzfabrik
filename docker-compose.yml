@@ -28,8 +28,7 @@ services:
     image: rails-tanzfabrik
     command: ["./scripts/start_webpack_dev.sh"]
     volumes:
-      - ./config:/app/config:cached
-      - ./app:/app/app:cached
+      - .:/app:cached
     ports:
       - "3035:3035"
     environment:

@@ -1,3 +1,26 @@
-li {
-  padding-left: 20px;
+@import "./__variables.scss";
+@import "./__mixins.scss";
+
+* {
+  font-family: Garnett, sans-serif;
+}
+
+h1 {
+  @include font-h1;
+}
+
+h2 {
+  @include font-h2;
+}
+
+h3 {
+  @include font-h3;
+}
+
+h4 {
+  @include font-h4;
+}
+
+h5 {
+  @include font-h5;
 }
