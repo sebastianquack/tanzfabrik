@@ -41,10 +41,8 @@ class PagesController < ApplicationController
         @menu_tree = menu_item.subtree.arrange(:order => :position)
       end
       
-      render "start", :layout => @active_layout and return
+      render "start"
     end
-
-    #render :layout => @active_layout
 
   end
 
