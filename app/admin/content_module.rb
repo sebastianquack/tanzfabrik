@@ -91,10 +91,8 @@ ActiveAdmin.register ContentModule do
       if type == "" || !type || !CM_CONFIG[type]
         type = default_module_type
       end
-      style_options = CM_CONFIG[type]["style-options"] ? CM_CONFIG[type]["style-options"].map { |a| [ a, a ] } : []
+      style_options = CM_CONFIG[type]["style-options"] ? CM_CONFIG[type]["style-options"].map { |a| [ t("content_modules.style_options." + a), a ] } : []
 
-      para type
-      
       def make_input(f, mtype, field, active, action_text)    
         
         unless action_text
@@ -126,7 +124,7 @@ ActiveAdmin.register ContentModule do
       end
 
       f.inputs "Meta" do
-        f.input :module_type, :as => :select, :collection => CM_CONFIG.keys, :include_blank => false, selected: f.object.module_type || default_module_type
+        f.input :module_type, :as => :select, :collection => CM_CONFIG.keys.map{|k| [t("content_modules.module_types." + k), k]}, :include_blank => false, selected: f.object.module_type || default_module_type
         if style_options.length > 0
           f.input :style_option, :as => :select, :collection => style_options, :include_blank => false
         end
