@@ -1,6 +1,13 @@
 ActiveAdmin.register Page do
 
   menu :priority => 2
+
+  breadcrumb do
+    [ 
+      link_to("Menü", admin_menu_items_path),
+      resource.slug
+    ]
+  end
   
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
