@@ -24,7 +24,6 @@ de:
   newsletter_label_3: "Workshops"
   newsletter_unsubscribe_all: "von allen Newslettern abmelden"
 
-
   next_week: "Nächste Woche"
   previous_week: "Vorherige Woche"
   next_month: "Nächser Monat"
@@ -478,6 +477,13 @@ de:
   devise:
     failure:
       already_authenticated: "Sie sind bereits angemeldet"
+
+  content_modules:
+    module_types:
+      default: "Alles" 
+    style_options:
+      magazine: "Magazin"
+
 
 
 

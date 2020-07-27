@@ -26,14 +26,14 @@ $( document ).ready(function() {
   $("#content_module_module_type").on("change", (e)=>{
     let selectedModuleType = $("#content_module_module_type").val()
     
-    // always do direct submit
+    // always do direct submit & reload
     if(confirm("Modul wird gespeichert - fortfahren?")) {
       $("#edit_content_module").submit()
       return;
     }
     
-    // not needed anymore ...
-
+    // js updates of form not needed anymore - here for future reference
+    /*
     console.log("module type changed to", selectedModuleType);
 
     // update style option drop down
@@ -78,8 +78,7 @@ $( document ).ready(function() {
     } else {
       $("#active_admin_cm_downloads").show()
     }
-    
-
+    */
 
   })
 
