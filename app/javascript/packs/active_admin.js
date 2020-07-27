@@ -1,16 +1,20 @@
 // Load Active Admin's styles into Webpacker,
 // see `active_admin.scss` for customization.
+
+// active admin basics
 import "../stylesheets/active_admin";
-
 import "@activeadmin/activeadmin";
-
 import "jquery-ui";
 
+// sortable tree (extracted from gem)
 import "../sortable_tree/jquery.mjs.nestedSortable.js";
 import "../sortable_tree/sortable.js";
 import "../sortable_tree/sortable.sass";
 
+// front end style sheet for preview
+import "stylesheets/application/"
 
+// trix
 import "trix"
 
 

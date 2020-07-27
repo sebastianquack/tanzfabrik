@@ -1,0 +1,60 @@
+@import "./__variables.scss";
+@import "./__mixins.scss";
+
+* {
+  font-family: Garnett, sans-serif;
+}
+
+h1 {
+  @include font-h1;
+}
+
+h2 {
+  @include font-h2;
+}
+
+h3 {
+  @include font-h3;
+}
+
+h4 {
+  @include font-h4;
+}
+
+h5 {
+  @include font-h5;
+}
+
+
+
+.horizontal_bar_container {
+
+  display: flex;
+  @include font-stripes;
+
+  .horizontal_bar_left {
+    width: 50%;
+  }
+
+  .horizontal_bar_center {
+    flex:1;
+  }
+
+  .horizontal_bar_right {
+  }
+}
+
+header {
+
+  height: $header-height;
+
+  @include page-dist("margin-top", "top");
+  @include page-dist("margin-left", "left");
+  @include page-dist("margin-right", "right");
+
+  img {
+    height: $header-height-logo;
+  }
+
+}
+

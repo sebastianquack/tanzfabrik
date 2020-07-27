@@ -1,0 +1,103 @@
+@import "./__variables.scss";
+
+// font-style: normal
+
+@font-face {
+  font-family: "Garnett";
+  font-weight: $font-weight-regular;
+  src: 
+    url("../../fonts/Garnett/Garnett-Regular.woff") format("woff"), 
+    url("../../fonts/Garnett/Garnett-Regular.woff2") format("woff2"), 
+    url("../../fonts/Garnett/Garnett-Regular.eot") format("eot"), 
+}
+
+@font-face {
+  font-family: "Garnett";
+  font-weight: $font-weight-medium;
+  src: 
+    url("../../fonts/Garnett/Garnett-Medium.woff") format("woff"), 
+    url("../../fonts/Garnett/Garnett-Medium.woff2") format("woff2"), 
+    url("../../fonts/Garnett/Garnett-Medium.eot") format("eot"), 
+}
+
+@font-face {
+  font-family: "Garnett";
+  font-weight: $font-weight-semibold; // semibold ----> special font by Eps51!!
+  src: 
+    url("../../fonts/Garnett/Garnett-SemiboldEps51.woff") format("woff"), 
+    url("../../fonts/Garnett/Garnett-SemiboldEps51.woff2") format("woff2"), 
+    url("../../fonts/Garnett/Garnett-SemiboldEps51.eot") format("eot"), 
+}
+
+
+@font-face {
+  font-family: "Garnett";
+  font-weight: $font-weight-bold;
+  src: 
+    url("../../fonts/Garnett/Garnett-Bold.woff") format("woff"), 
+    url("../../fonts/Garnett/Garnett-Bold.woff2") format("woff2"), 
+    url("../../fonts/Garnett/Garnett-Bold.eot") format("eot"), 
+}
+
+@font-face {
+  font-family: "Garnett";
+  font-weight: $font-weight-black;
+  src: 
+    url("../../fonts/Garnett/Garnett-Black.woff") format("woff"), 
+    url("../../fonts/Garnett/Garnett-Black.woff2") format("woff2"), 
+    url("../../fonts/Garnett/Garnett-Black.eot") format("eot"), 
+}
+
+// font-style:  italic
+
+@font-face {
+  font-family: "Garnett";
+  font-weight: $font-weight-regular;
+  font-style: italic;
+  src: 
+    url("../../fonts/Garnett/Garnett-RegularItalic.woff") format("woff"), 
+    url("../../fonts/Garnett/Garnett-RegularItalic.woff2") format("woff2"), 
+    url("../../fonts/Garnett/Garnett-RegularItalic.eot") format("eot"), 
+}
+
+@font-face {
+  font-family: "Garnett";
+  font-weight: $font-weight-medium;
+  font-style: italic;
+  src: 
+    url("../../fonts/Garnett/Garnett-MediumItalic.woff") format("woff"), 
+    url("../../fonts/Garnett/Garnett-MediumItalic.woff2") format("woff2"), 
+    url("../../fonts/Garnett/Garnett-MediumItalic.eot") format("eot"), 
+}
+
+@font-face {
+  font-family: "Garnett";
+  font-weight: $font-weight-semibold;
+  font-style: italic;
+  src: 
+    url("../../fonts/Garnett/Garnett-SemiboldItalic.woff") format("woff"), 
+    url("../../fonts/Garnett/Garnett-SemiboldItalic.woff2") format("woff2"), 
+    url("../../fonts/Garnett/Garnett-SemiboldItalic.eot") format("eot"), 
+}
+
+
+@font-face {
+  font-family: "Garnett";
+  font-weight: $font-weight-bold;
+  font-style: italic;
+  src: 
+    url("../../fonts/Garnett/Garnett-BoldItalic.woff") format("woff"), 
+    url("../../fonts/Garnett/Garnett-BoldItalic.woff2") format("woff2"), 
+    url("../../fonts/Garnett/Garnett-BoldItalic.eot") format("eot"), 
+}
+
+@font-face {
+  font-family: "Garnett";
+  font-weight: $font-weight-black;
+  font-style: italic;
+  src: 
+    url("../../fonts/Garnett/Garnett-BlackItalic.woff") format("woff"), 
+    url("../../fonts/Garnett/Garnett-BlackItalic.woff2") format("woff2"), 
+    url("../../fonts/Garnett/Garnett-BlackItalic.eot") format("eot"), 
+}
+

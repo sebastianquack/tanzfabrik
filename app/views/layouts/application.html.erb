@@ -14,15 +14,22 @@
 </head>
 <body>
 
-  <% page_title = get_text_item("page_title") %>
-  <%= !@page || @page && @page.slug != "start" ? (link_to page_title, root_url) : page_title %>
+  <% page_title = get_text_item("page_title").sub!(" ", "<br />").html_safe %>
   
-
-  <%= render "/navigation/language_switcher" %>
+  <header class="horizontal_bar_container">
+    <div class="horizontal_bar_left">
+      <%= !@page || @page && @page.slug != "start" ? (link_to page_title, root_url) : page_title %>
+    </div>
+    <div class="horizontal_bar_center">
+      BÜHNE?
+      <%= render "/navigation/language_switcher" %>
+    </div>
+    <div class="horizontal_bar_right">
+      <%= image_pack_tag 'tanzfabrik-logo.gif' %>
+    </div>
+  </header>
   
 	<%= yield %>
-
-  <%= image_pack_tag 'tanzfabrik-logo.gif' %>
 
 </body>
 </html>

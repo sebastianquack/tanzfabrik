@@ -1,0 +1,183 @@
+@import "./__variables.scss";
+@use "sass:map";
+
+/* --------------------------------------------------
+   Font Style Mixins
+   -------------------------------------------------- */
+
+@mixin font-h1 {
+  font-size: 150px;
+  line-height: 140px;
+  font-weight: $font-weight-medium;
+  font-style: italic;
+  color: $color-red;
+}
+
+@mixin font-h2 {
+  font-size: 72px;
+  line-height: 72px;
+  font-weight: $font-weight-medium;
+  font-style: italic;
+  color: $color-red;
+}
+
+@mixin font-h3 {
+  font-size: 48px;
+  line-height: 52px;
+  font-weight: $font-weight-medium;
+  font-style: italic;
+  color: $color-red;
+}
+
+@mixin font-h4 {
+  font-size: 28px;
+  line-height: 28px;
+  font-weight: $font-weight-medium;
+  font-style: italic;
+  text-transform: uppercase;
+  color: $color-red;
+}
+
+@mixin font-h5 {
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: $font-weight-medium;
+  font-style: italic;
+  text-transform: uppercase;
+  color: $color-red;
+}
+
+@mixin font-kalender-h1 {
+  font-size: 32px;
+  line-height: 48px;
+  font-weight: $font-weight-medium;
+  color: $color-red;
+}
+
+@mixin font-pullquote {
+  font-size: 32px;
+  line-height: 44px;
+  font-weight: $font-weight-regular;
+  letter-spacing: -0.32px;
+  color: $color-red;
+}
+
+@mixin font-menüpunkte {
+  font-size: 28px;
+  line-height:17px;
+  font-weight: $font-weight-medium;
+  color: $color-red;
+}
+
+@mixin font-menü-unterpunkte {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: $font-weight-regular;
+  color: $color-red;
+}
+
+@mixin font-titel {
+  font-size: 28px;
+  line-height: 17px;
+  font-weight: $font-weight-medium;
+  color: $color-red;
+}
+
+@mixin font-fliesstext-l {
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: $font-weight-medium;
+  color: $color-red;
+}
+
+@mixin font-fliesstext-m {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: $font-weight-medium;
+  color: $color-red;
+}
+
+@mixin font-fliesstext-s {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: $font-weight-medium;
+  color: $color-red;
+}
+
+@mixin font-tanzklassen { 
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: $font-weight-semibold; // should this be special eps51 font or not?
+  letter-spacing: 0.16px;
+  text-transform: uppercase;
+  color: $color-red;
+}
+
+@mixin font-menu-quicklinks {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.16px;
+  text-decoration: underline;
+  text-transform: uppercase;
+  color: $color-red;
+}
+
+@mixin font-stripes {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.16px;
+  text-transform: uppercase;
+  color: $color-red;
+}
+
+@mixin font-stripes-infos {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.16px;
+  text-transform: uppercase;
+  color: $color-red;
+}
+
+/* --------------------------------------------------
+   Breakpoint Mixin
+   -------------------------------------------------- */
+
+// $breakpoint = die Größe die ihr braucht.
+// Ihr könnt aber auch anstelle von 'xs', 's', 'm', 'l', 'xl' einfach einen Wert eintragen.
+// Das macht Sinn wenn man mal einen speziellen Breakpoint braucht. Den muss man dann nicht zwingend in die Sass Map packen.
+// $direction: $media-direction = das was ihr in den Settings eingestellt habt.
+@mixin breakpoint($breakpoint,$direction: $media-direction) {
+
+  // Es wird gecheckt ob der Wert in der Sass Map vorhanden ist
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    // Ausgabe
+    @media (#{$direction}-width: #{map-get($breakpoints, $breakpoint)}) {
+      @content;
+    }
+  }
+
+  // Wenn ihr oben einen Wert eingetragen habt wird hier gecheckt ob ihr einen Einheit angehängt habt. Falls nicht wird px genutzt.
+  @else if unitless($breakpoint) {
+    $breakpoint: $breakpoint + 0px;
+
+    // Ausgabe
+    @media (#{$direction}-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+/* --------------------------------------------------
+   Other Mixins
+   -------------------------------------------------- */
+
+@mixin page-dist($attr: "margin-top", $direction: "top") {
+  #{$attr}: map-get($page-dist-l, $direction);
+  @include breakpoint('s') {
+    #{$attr}: map-get($page-dist-s, $direction);
+  }
+}
