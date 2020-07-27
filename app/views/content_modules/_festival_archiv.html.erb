@@ -1,0 +1,24 @@
+<%#
+#festivals = Festival.no_draft.select { |f| f.events.length > 0 && f.end_date >= Date.today }.sort { |a,b| b <=> a } 
+#
+#festivals.each do |festival|
+#  content_module = ContentModule.new(:parameter => festival.id)
+#  render partial: "/content_modules/festival_vorschau", locals: {content_module: content_module}
+#  a "zur Festival-Seite", :href => page_url(festival.page)
+#end
+%>
+
+<h1>archiv</h1>
+
+<%
+# get festivals in the past
+past_festivals = Festival.no_draft.select { |f| f.events.length > 0 && f.end_date < Date.today }.sort { |a,b| b <=> a } 
+%>
+
+<ul>
+<%  past_festivals.each do |festival| %>
+
+  <li><a src = "<%= page_url(festival.page)%>"><%=festival.name%></a></li>
+
+<% end %>
+</ul>
