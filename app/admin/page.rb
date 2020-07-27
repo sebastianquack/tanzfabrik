@@ -107,7 +107,8 @@ ActiveAdmin.register Page do
   form do |f|
 
     f.inputs "Details" do
-      f.input :slug
+      f.input :title_de
+      f.input :title_en
       if f.object.id
        f.li link_to "Seite am Front-End anschauen", page_path(f.object)
       end
