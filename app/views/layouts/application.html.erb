@@ -12,7 +12,7 @@
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   
 </head>
-<body data-menu-item-key="<%= @menu_item.key %>">
+<body data-menu-item-key="<%= @menu_item.key %>" data-section="<%= @landing_page_menu_item ? @landing_page_menu_item.key : "start" %>">
 
   <% page_title = get_text_item("page_title").sub!(" ", "<br />").html_safe %>
   
