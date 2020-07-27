@@ -3,18 +3,6 @@
 # note: rails app needs to restart for changes in this config to take effect
 # translations are in config/locales under content_modules key
 
-default:
-  style-options: 
-    - default
-  form-fields:
-    - super
-    - headline
-    - sub
-    - special_text
-    - rich_content_1
-    - rich_content_2
-    - custom_html
-    - parameter
 page_intro:
   style-options:
     - default
@@ -72,7 +60,18 @@ festival_archiv:
   form-fields:
   images: false
   downloads: false
-
+default:
+  style-options: 
+    - default
+  form-fields:
+    - super
+    - headline
+    - sub
+    - special_text
+    - rich_content_1
+    - rich_content_2
+    - custom_html
+    - parameter
 
 
 
