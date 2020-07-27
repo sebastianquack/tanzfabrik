@@ -1,8 +1,8 @@
 class Page < ActiveRecord::Base
   extend FriendlyId
-  #friendly_id :title_de, use: [:slugged, :finders]
+  friendly_id :title_de, use: [:slugged, :finders]
 
-  friendly_id :slug, use: [:finders]
+  #friendly_id :slug, use: [:finders]
   
   translates :title, :content, :description, :feature_on_welcome_screen_note
 
