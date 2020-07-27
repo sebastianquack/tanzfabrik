@@ -1,6 +1,10 @@
 @import "./__variables.scss";
 @import "./__mixins.scss";
 
+:root, html, body {
+  min-height: 100%;
+}
+
 * {
   font-family: Garnett, sans-serif;
 }

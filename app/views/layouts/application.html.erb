@@ -22,10 +22,10 @@
     </div>
     <div class="horizontal_bar_center">
       <% if @landing_page_menu_item %>
-      <%= link_to @landing_page_menu_item.name, page_path(@landing_page_menu_item.name) %>
+        <%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.name) %>
+      <% else %> 
+        <%= render "/navigation/language_switcher" %>
       <% end %>
-
-      <%= render "/navigation/language_switcher" %>
     </div>
     <div class="horizontal_bar_right">
       <%= image_pack_tag 'tanzfabrik-logo.gif' %>

@@ -1,0 +1,60 @@
+@import "./__variables.scss";
+@import "./__mixins.scss";
+
+#start {
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  nav > ul > li > ul > li {
+
+    display: flex;
+    
+    border: solid 1px $color-red;
+    border-width: 0 0 1px 0;
+    &:last-child {
+      border:none;
+    }
+
+    padding-left: 13px; // guessword based on appearance
+
+    > a {
+      font-size:15vw;
+      line-height:15vw;
+      display: block;
+
+      color: white;
+      text-shadow:
+      -1px -1px 0 $color-red,  
+        1px -1px 0 $color-red,
+        -1px 1px 0 $color-red,
+        1px 1px 0 $color-red;
+
+      text-decoration: none;
+    }
+
+    ul, ul a {
+      color: $color-red;
+      font-size: 1.4vw;
+      line-height: 1.4vw * 1.25;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      margin-left: 1em;
+
+      > li {
+        position: relative;
+        bottom: 1.5vw;
+      }
+    }
+
+  }
+
+}
