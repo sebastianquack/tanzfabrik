@@ -1,6 +1,7 @@
 # when adding a new form-field to the content_module model, you need to also update the list of form-fields in active_admin.js (module_types you define here are picked up automatically)
 
 # note: rails app needs to restart for changes in this config to take effect
+# translations are in config/locales under content_modules key
 
 default:
   style-options: 
