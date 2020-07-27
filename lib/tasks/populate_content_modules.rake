@@ -489,12 +489,20 @@ task :populate_content_modules => :environment do
     page = nil
     if item[:page_slug]
       page = Page.find_by slug: item[:page_slug]
-      if item[:page_slug] && !page
-        puts "no page found for slug: " + item[:page_slug]
-        puts "creating..."
-        page = Page.create(
-          slug: item[:page_slug]
-        )
+      if item[:page_slug] 
+        if !page
+          puts "no page found for slug: " + item[:page_slug]
+          puts "creating..."
+          page = Page.create(
+            title_de: item[:name_de],
+            title_en: item[:name_en]
+          )
+        else
+          puts "updating page title"
+          page.title_de = item[:name_de]
+          page.title_en = item[:name_en]
+          page.save
+        end
       end
     end
     # check if this menu_item exist already
@@ -613,7 +621,8 @@ task :populate_content_modules => :environment do
       end  
 
       p = Page.create(
-        slug: slug
+        title_de: festival.name_de,
+        title_en: festival.name_en
       )
 
       if p.errors
@@ -625,6 +634,16 @@ task :populate_content_modules => :environment do
       festival.save
 
       puts "created new page " + p.slug + " for festival " + festival.name_de
+    else
+
+      if !festival.page.title_de 
+        p = Page.find(festival.page_id)
+        p.title_de = festival.name_de 
+        p.title_en = festival.name_en
+        p.save
+      end
+
+
     end
 
     if festival.page_id 

@@ -1,3 +1,7 @@
+if content_module.parameter == ""
+  return
+end
+
 # load the festival
 festival = Festival.find(content_module.parameter)
 

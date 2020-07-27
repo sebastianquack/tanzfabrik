@@ -5,6 +5,10 @@ if !festival
   return
 end
 
+if !festival.start_date
+  return
+end
+
 with_year = (festival.start_date.year < festival.end_date.year && (festival.end_date - festival.start_date) > 45)
 
 div :class => "festival" do

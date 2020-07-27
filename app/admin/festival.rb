@@ -6,6 +6,32 @@ ActiveAdmin.register Festival do
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
 
+
+  ActiveAdmin.register Festival do
+      member_action :create_and_associate_page, method: :get do
+        p = Page.create(
+          title_de: resource.name_de,
+          title_en: resource.name_en
+        )
+        resource.page_id = p.id
+        resource.save
+
+        ContentModule.create(
+          page_id: p.id,
+          module_type: "festival_vorschau",
+          parameter: resource.id,
+          order: 1
+        )
+        ContentModule.create(
+          page_id: p.id,
+          module_type: "festival_programm",
+          parameter: resource.id,
+          order: 2
+        )
+        redirect_to admin_festival_path(resource), notice: "Festival-Seite angelegt!"
+     end
+  end
+
   
   index do
     selectable_column
@@ -48,7 +74,6 @@ ActiveAdmin.register Festival do
         div festival.rich_content_en
       end
 
-
       #row :feature_on_welcome_screen
       #unless festival.facebook.nil? || festival.facebook.empty?
       #  row "Facebook-Link" do
@@ -73,8 +98,12 @@ ActiveAdmin.register Festival do
       #  festival.draft
       #end
 
-      row "Seite" do |festival|
-        link_to "Festival-Seite", edit_admin_page_url(festival.page.id) if festival.page
+      row "Festival-Seite" do |festival|
+        if festival.page
+          link_to "Festival-Seite", edit_admin_page_url(festival.page.id)
+        else
+          link_to "Festival-Seite anlegen", create_and_associate_page_admin_festival_path, :class => :button
+        end
       end
     end
     #active_admin_comments
@@ -92,6 +121,10 @@ ActiveAdmin.register Festival do
 
       #f.input :festival_containers, :as => :check_boxes
       f.input :page, :collection => Page.order("slug asc").all.map { |p| [p.slug, p.id] }
+
+      if f.object.page
+        f.li (link_to "zur Festival-Seite", edit_admin_page_path(f.object.page)), :class => "admin-form-right"
+      end
     end
 
     #f.inputs "Externe Links" do
