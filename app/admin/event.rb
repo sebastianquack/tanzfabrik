@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   menu :priority => 3
 
-  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook, :draft, :custom_sorting, :no_sign_up, :signup_url,
+  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook, :draft, :custom_sorting, :no_sign_up, :signup_url, :rich_content_de, :rich_content_en,
     :festival_ids => [], :person_ids => [],
     :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :custom_place, :repeat_mode_id, :_destroy, tag_ids: []],
     :people_attributes => [:id, :name, :_destroy],
@@ -27,22 +27,16 @@ ActiveAdmin.register Event do
 
   index do 
     selectable_column
-    column EventDetail.model_name.human do |event|
-      event.event_details.map do |ed|
-        if ed.valid?
-          div do
-            div b ed.repeat_mode.description
-            span ed.datetime_l(:default)
-          end
-        end
-      end
-    end
-    column Image.model_name.human do |event|
-      event.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
-    end
-    column Festival.model_name.human do |event|
-      event.festivals.map { |f| (link_to f.name, admin_festival_path(f)) }.join(', ').html_safe
-    end
+    #column EventDetail.model_name.human do |event|
+    #  event.event_details.map do |ed|
+    #    if ed.valid?
+    #      div do
+    #        div b ed.repeat_mode.description
+    #        span ed.datetime_l(:default)
+    #      end
+    #    end
+    #  end
+    #end
     column :type do |event|
       event.display_type
     end
@@ -54,6 +48,12 @@ ActiveAdmin.register Event do
     end
     column :title_de
     #column t('activerecord.attributes.event.feature_on_welcome_screen_short'), :feature_on_welcome_screen
+    column Image.model_name.human do |event|
+      event.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
+    end
+    column Festival.model_name.human do |event|
+      event.festivals.map { |f| (link_to f.name, admin_festival_path(f)) }.join(', ').html_safe
+    end
     actions
   end
 
@@ -94,12 +94,15 @@ ActiveAdmin.register Event do
 
       row :title_de
       row :title_en
-      row :description_de do |event|
-        event.description_de.html_safe if event.description_de
+      
+      row :rich_content_de do |event|
+        div event.rich_content_de
       end
-      row :description_en do |event|
-        event.description_en.html_safe if event.description_en
+      row :rich_content_en do |event|
+        div event.rich_content_en
       end
+
+
       row :info_de do |event|
         event.info_de.html_safe if event.info_de
       end
@@ -163,10 +166,15 @@ ActiveAdmin.register Event do
       f.input :title_de, :as => :text, :input_html => { :class => 'autogrow', :rows => 2  }
       f.input :title_en, :as => :text, :input_html => { :class => 'autogrow', :rows => 2  }
       #f.input :sequence
-      f.input :description_de, :input_html => { :class => 'wysihtml5' }
-      f.input :description_en, :input_html => { :class => 'wysihtml5' }
-      f.input :info_de, :input_html => { :class => 'wysihtml5 wysihtml5-notoolbar' }
-      f.input :info_en, :input_html => { :class => 'wysihtml5 wysihtml5-notoolbar' }
+      #f.input :description_de, :input_html => { :class => 'wysihtml5' }
+      #f.input :description_en, :input_html => { :class => 'wysihtml5' }
+
+      f.input :rich_content_de, :as => :action_text
+      f.input :rich_content_en, :as => :action_text
+      
+      f.input :info_de
+      f.input :info_en
+      
       f.input :warning_de
       f.input :warning_en
       f.input :signup_url, :label => t(:signup_url)

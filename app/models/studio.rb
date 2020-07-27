@@ -1,5 +1,8 @@
 class Studio < ActiveRecord::Base
-  translates :description
+  translates :description, :rich_content
+
+  has_rich_text :rich_content_de
+  has_rich_text :rich_content_en
   
   belongs_to :location
 

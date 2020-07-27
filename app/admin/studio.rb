@@ -5,7 +5,7 @@ ActiveAdmin.register Studio do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :name, :description_de, :description_en, :location_id, :rentable, :images_attributes => [:id, :description, :license, :attachment, :_destroy]
+  permit_params :name, :description_de, :description_en, :rich_content_de, :rich_content_en, :location_id, :rentable, :images_attributes => [:id, :description, :license, :attachment, :_destroy]
   #
   # or
   #
@@ -19,7 +19,9 @@ ActiveAdmin.register Studio do
     selectable_column
     column :location
     column :name
-    column :description
+    column :description do |studio|
+      div studio.rich_content_de
+    end
     column "images" do |page|
       page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
@@ -34,11 +36,17 @@ ActiveAdmin.register Studio do
     attributes_table do
       row :location
       row :name
-      row :description_de do |studio|
-        studio.description_de.html_safe if studio.description_de
+      #row :description_de do |studio|
+      #  studio.description_de.html_safe if studio.description_de
+      #end
+      #row :description_en do |studio|
+      #  studio.description_en.html_safe if studio.description_en
+      #end
+      row :rich_content_de do |person|
+        div person.rich_content_de
       end
-      row :description_en do |studio|
-        studio.description_en.html_safe if studio.description_en
+      row :rich_content_en do |person|
+        div person.rich_content_en
       end
       row "images" do |page|
         page.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
@@ -52,8 +60,11 @@ ActiveAdmin.register Studio do
       end
       f.inputs "Details" do
         f.input :name
-        f.input :description_de, :input_html => { :class => 'wysihtml5' }
-        f.input :description_en, :input_html => { :class => 'wysihtml5' }
+        #f.input :description_de, :input_html => { :class => 'wysihtml5' }
+        #f.input :description_en, :input_html => { :class => 'wysihtml5' }
+        f.input :rich_content_de, :as => :action_text
+        f.input :rich_content_en, :as => :action_text
+
       end
       f.inputs "Images" do
         f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|

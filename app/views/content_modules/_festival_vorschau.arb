@@ -13,7 +13,7 @@ h1 :class => "title" do
 end
 
 if festival.description
-  div festival.description.html_safe, :class => "description"
+  div festival.rich_content
 end
 
 div do
