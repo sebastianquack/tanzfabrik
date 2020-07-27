@@ -60,7 +60,15 @@ ActiveAdmin.register ContentModule do
   
   show do
     attributes_table do
-      row :module_type
+      row "Seite" do |content_module| 
+        content_module.page.title_de
+      end
+      row :module_type do |content_module|
+        t("content_modules.module_types." + content_module.module_type)
+      end
+      row :style_option do |content_module|
+        t("content_modules.style_options." + content_module.style_option)
+      end
       row "weiter zu" do |content_module|
         ul do
           li link_to "Modul bearbeiten", edit_admin_content_module_url(content_module.id)

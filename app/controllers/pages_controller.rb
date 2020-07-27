@@ -23,12 +23,14 @@ class PagesController < ApplicationController
           @menu_item = menu_items[0]
           # always show menu from landing pages down
           if menu_items[0].ancestors.length == 1 # this is a landing page, show full subtree
-            @menu_tree = menu_items[0].subtree.arrange(:order => :position) 
+            @menu_tree = menu_items[0].descendants.arrange(:order => :position) 
+            @landing_page_menu_item = menu_items[0]
           elsif menu_items[0].ancestors.length > 1 # we are deeper, show from depth 1 down
-            @menu_tree = menu_items[0].ancestors[1].subtree.arrange(:order => :position) 
+            @menu_tree = menu_items[0].ancestors[1].descendants.arrange(:order => :position) 
+            @landing_page_menu_item = menu_items[0].ancestors[1]
           end
 
-          @landing_page_menu_item = menu_items[0].ancestors[1]
+          
         end
 
       else

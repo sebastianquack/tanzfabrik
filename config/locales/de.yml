@@ -406,6 +406,7 @@ de:
         parameter: Auswahl
         module_type: Modul-Typ
         style_option: Darstellungs-Option
+        draft: Im Font-End verbergen
       page: 
         title: Seitentitel
         slug: URL
