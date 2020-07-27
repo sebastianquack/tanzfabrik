@@ -235,9 +235,9 @@
    Other Mixins
    -------------------------------------------------- */
 
-@mixin page-dist($attr: "margin-top", $direction: "top") {
-  #{$attr}: map-get($page-dist-l, $direction);
+@mixin page-dist($attr: "margin-top", $direction: "top", $add: 0) {
+  #{$attr}: map-get($page-dist-l, $direction) + $add;
   @include breakpoint('s') {
-    #{$attr}: map-get($page-dist-s, $direction);
+    #{$attr}: map-get($page-dist-s, $direction) + $add;
   }
 }

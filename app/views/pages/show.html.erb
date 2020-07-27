@@ -2,11 +2,10 @@
     page_title = get_text_item("page_title")
     set_meta_tags :title => page_title, :reverse => false
 %>
+<main class="page">
+    <%= render "/navigation/tree" %>
 
-<%= render "/navigation/tree" %>
+    <%= render "/navigation/sidemenu" %>
 
-<%= render "/navigation/sidemenu" %>
-
-<%= render "/pages/content_modules" %>
-
-      
+    <%= render "/pages/content_modules" %>
+</main>

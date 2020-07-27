@@ -1,7 +1,27 @@
+@import "./__mixins.scss";
 
 body:not([data-menu-item-key="start"]) #main_nav {
 
-  li {
-    padding-left: 20px;
+  @include page-dist("margin-left","left");
+  @include page-dist("margin-right","right");
+
+  > ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    > li > a { // section headers
+      @include font-menüpunkte
+    }
+
+    > ul {
+      display: flex;
+      flex-direction: column;
+
+
+        @include font-menü-unterpunkte
+      
+    }
   }
+
 }

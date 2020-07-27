@@ -33,6 +33,7 @@ h5 {
 
 .horizontal_bar_container {
 
+  width: 100%;
   display: flex;
   @include font-stripes;
 
@@ -49,12 +50,15 @@ h5 {
 }
 
 header {
+  position: fixed;
+  top:0;
+  z-index: 1;
 
   height: $header-height;
 
-  @include page-dist("margin-top", "top");
-  @include page-dist("margin-left", "left");
-  @include page-dist("margin-right", "right");
+  @include page-dist("padding-top", "top");
+  @include page-dist("padding-left", "left");
+  @include page-dist("padding-right", "right");
 
   img {
     height: $header-height-logo;
@@ -62,3 +66,7 @@ header {
 
 }
 
+main.page {
+  @include page-dist("margin-top", "top", $header-height);
+  @include page-dist("padding-top", "top");
+}

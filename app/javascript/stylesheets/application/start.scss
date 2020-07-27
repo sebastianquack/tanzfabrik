@@ -1,16 +1,22 @@
 @import "./__variables.scss";
 @import "./__mixins.scss";
 
-body[data-menu-item-key="start"] {
+body[data-menu-item-key="start"] #main_nav {
   font-weight: $font-weight-semibold;
   text-transform: uppercase;
 
-  height: 100%;
+  /*height: calc(100vh - #{$header-height});
+  position: fixed;
+  top: $header-height;
+  width: 100%;*/
+  margin-top: $header-height;
+  @include page-dist("padding-top", "top");
+
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 
-  nav > ul > li > ul > li {
+  > ul > li > ul > li {
 
     display: flex;
     
