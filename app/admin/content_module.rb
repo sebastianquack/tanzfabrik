@@ -43,6 +43,9 @@ ActiveAdmin.register ContentModule do
   show do
     attributes_table do
       row :module_type
+      row "Seite" do |content_module|
+        span content_module.page.title
+      end
       row "Links" do |content_module|
         ul do
           li link_to "Seite bearbeiten", edit_admin_page_url(content_module.page.id)

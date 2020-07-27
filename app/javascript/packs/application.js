@@ -16,10 +16,7 @@ const imagePath = (name) => images(name, true)
 
 // styles handled by webpacker
 import 'minimal-css-reset/sass/_reset.scss'
-import "stylesheets/application/__variables.scss"
-import "stylesheets/application/_fonts.scss"
-import "stylesheets/application/_general.scss"
-import "stylesheets/application/_main_nav.scss"
+import "stylesheets/application/"
 
 // all other generic js imports here
 import "core-js/stable"
