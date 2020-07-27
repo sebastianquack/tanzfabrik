@@ -21,6 +21,15 @@ $( document ).ready(function() {
 
   $("#content_module_module_type").on("change", (e)=>{
     let selectedModuleType = $("#content_module_module_type").val()
+    
+    // always do direct submit
+    if(confirm("Modul wird gespeichert - fortfahren?")) {
+      $("#edit_content_module").submit()
+      return;
+    }
+    
+    // not needed anymore ...
+
     console.log("module type changed to", selectedModuleType);
 
     // update style option drop down
@@ -75,5 +84,7 @@ $( document ).ready(function() {
     if(!confirm("Modul löschen?"))
       event.preventDefault();
   })
+
+
 
 })

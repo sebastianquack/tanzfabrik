@@ -1,0 +1,39 @@
+# load the festival
+festival = Festival.find(content_module.parameter)
+
+if !festival
+  return
+end
+
+with_year = (festival.start_date.year < festival.end_date.year && (festival.end_date - festival.start_date) > 45)
+
+div :class => "festival" do
+
+  festival_workshops = festival.events.no_draft.where(:type_id => 2)
+  events = festival.events.no_draft.where.not(:type_id => 2)
+
+  # festival workshops
+  if festival_workshops.length > 0
+    h2 :class => "headlines" do
+      div :class => "main" do
+        div :class => "line1" do
+          div t(:festival_workshops), :class => "title"
+        end
+      end
+    end
+    render :partial => "/events/workshop_list", :locals => {:workshops => festival_workshops, :combinations => false, :in_festival => festival}  
+  end
+
+  # festival events
+  if events.length > 0
+    h2 :class => "headlines" do
+      div :class => "main" do
+        div :class => "line1" do
+          div t(:festival_programm), :class => "title"
+        end
+      end
+    end  
+    render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.start_date, :in_festival => festival, :is_archive => false, :display_year => with_year }
+  end
+
+end

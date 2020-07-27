@@ -10,7 +10,7 @@ task :populate_content_modules => :environment do
   # some pages need special modules to work, todo: expand list
   specials = [
     "dance_intensive_lehrer",
-    "festivals", # no page, just template?
+    "festivals", 
     "kuenstler",
     "kursplan",
     "lehrer",
@@ -44,6 +44,12 @@ task :populate_content_modules => :environment do
         module_type: page.slug,
         parameter: "Online",
         order: order + 2
+      });
+    elsif module_type == "festivals"
+      ContentModule.create({
+        page_id: page.id,
+        module_type: "festival_archiv",
+        order: order
       });
     elsif module_type == "kuenstler"
       ContentModule.create({
@@ -558,6 +564,57 @@ task :populate_content_modules => :environment do
 
   end
 
+  # create a page for each festival
+
+  Festival.all.each do |festival|
+
+    # check if festival does not yet have a page
+    if !festival.page
+      # create brand new page - do this only once to not regenerate pages each time
+
+      slug = festival.name_de.parameterize
+
+      # check if slug exists
+      if Page.find_by(:slug => slug)
+        slug = "festival-" + festival.id.to_s 
+      end  
+
+      p = Page.create(
+        slug: slug
+      )
+
+      if p.errors
+        puts p.errors.full_messages
+      end
+
+      # link it to the festival 
+      festival.page_id = p.id
+      festival.save
+
+      puts "created new page " + p.slug + " for festival " + festival.name_de
+    end
+
+    if festival.page_id 
+
+      # first module contains all static content
+      cm = ContentModule.create({
+          page_id: festival.page_id,
+          module_type: "festival_vorschau",
+          parameter: festival.id,
+          order: 1
+      })
+      
+      # second is for the dynamic programm
+      ContentModule.create({
+          page_id: festival.page_id,
+          module_type: "festival_programm",
+          parameter: festival.id,
+          order: 2
+      })            
+
+    end
+
+  end
 
 end
 

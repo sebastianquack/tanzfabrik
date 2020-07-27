@@ -28,9 +28,13 @@ ActiveAdmin.register Event do
   index do 
     selectable_column
     column EventDetail.model_name.human do |event|
-      event.event_details.select { |ed| ed.valid? }. each do |ed|
-        div b ed.repeat_mode.description
-        span ed.datetime_l(:default)
+      event.event_details.map do |ed|
+        if ed.valid?
+          div do
+            div b ed.repeat_mode.description
+            span ed.datetime_l(:default)
+          end
+        end
       end
     end
     column Image.model_name.human do |event|
@@ -141,7 +145,7 @@ ActiveAdmin.register Event do
   end
 
   form do |f|
-    f.inputs :type do
+    f.inputs do
       f.input :type, :include_blank => false#, :hint => (link_to "Verwalten", admin_event_types_path)
       f.input :custom_type
     end
@@ -169,7 +173,7 @@ ActiveAdmin.register Event do
       f.inputs "Externe Links" do
         f.input :facebook, :required => false, :placeholder => "https://www.facebook.com/events/877048289058664/"
       end      
-      f.inputs :prices, :title => "Preise" do
+      f.inputs "Preise" do
         f.input :price_regular, :required => false
         f.input :price_reduced, :required => false 
       end
@@ -221,8 +225,8 @@ ActiveAdmin.register Event do
     end
     
     f.inputs "Spezial" do
-      f.input :feature_on_welcome_screen
-      f.input :no_sign_up, :label => t(:no_sign_up)      
+      #f.input :feature_on_welcome_screen
+      #f.input :no_sign_up, :label => t(:no_sign_up)      
       f.input :draft, :label => t(:draft)      
     end
     

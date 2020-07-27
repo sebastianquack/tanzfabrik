@@ -54,6 +54,25 @@ kursplan:
     - parameter
   images: false
   downloads: false
+festival_vorschau:
+  style-options:
+    - default
+  form-fields:
+    - parameter
+festival_programm:
+  style-options:
+    - default
+  form-fields:
+    - parameter
+  images: false
+  downloads: false
+festival_archiv:
+  style-options:
+  form-fields:
+  images: false
+  downloads: false
+
+
 
 
 

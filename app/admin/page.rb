@@ -33,6 +33,8 @@ ActiveAdmin.register Page do
       redirect_to edit_admin_page_path, notice: "Modul hinzugefügt!"
     end
 
+    
+
   end
 
     
@@ -96,6 +98,7 @@ ActiveAdmin.register Page do
 
     f.inputs "Details" do
       f.input :slug
+      f.li link_to "Seite am Front-End anschauen", page_path(f.object)
     end
     
     #f.inputs "Content" do
@@ -184,7 +187,7 @@ ActiveAdmin.register Page do
       
     f.actions do
         f.action :submit
-        li link_to "Zurück zur Menu-Übersicht", admin_menu_items_path
+        li link_to "Zurück zur Menu-Übersicht", admin_menu_items_path, :class => :button
       end
   end
   

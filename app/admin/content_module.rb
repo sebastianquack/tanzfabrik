@@ -19,13 +19,31 @@ ActiveAdmin.register ContentModule do
   permit_params :module_type, :style_option, :draft, :headline_de, :headline_en, :super_de, :super_en, :sub_de, :sub_en, :special_text_de, :special_text_en, :rich_content_1_de, :rich_content_1_en, :rich_content_2_de, :rich_content_2_en, :custom_html_de, :custom_html_en, :parameter
 
 
-ActiveAdmin.register ContentModule do
+  ActiveAdmin.register ContentModule do
+      member_action :delete_content_module, method: :get do
+        ContentModule.delete(resource.id)
+        redirect_to edit_admin_page_path(resource.page), notice: "Modul gelöscht!"
+      end
 
-    member_action :delete_content_module, method: :get do
-      ContentModule.delete(resource.id)
-      redirect_to edit_admin_page_path(resource.page), notice: "Modul gelöscht!"
+      member_action :save_and_preview, method: :post do      
+        ContentModule.update(resource.id, permitted_params)
+        redirect_to admin_content_module_path
+      end
+
+  end
+
+  controller do
+    def update
+      update! do |format|
+        format.html { 
+          if params[:preview]
+            redirect_to admin_content_module_path, notice: "Modul gespeichert!" 
+          else
+            redirect_to edit_admin_content_module_path, notice: "Modul gespeichert!" 
+          end
+        }
+      end
     end
-
   end
 
    # todo add all
@@ -43,17 +61,20 @@ ActiveAdmin.register ContentModule do
   show do
     attributes_table do
       row :module_type
-      row "Links" do |content_module|
+      row "weiter zu" do |content_module|
         ul do
+          li link_to "Modul bearbeiten", edit_admin_content_module_url(content_module.id)
           li link_to "Seite bearbeiten", edit_admin_page_url(content_module.page.id)
           li link_to "Seite am Front-End anschauen", content_module.page
+          if content_module.module_type == "festival_vorschau" || content_module.module_type == "festival_programm"
+            li link_to "Festival bearbeiten", edit_admin_festival_url(content_module.parameter)
+          end
         end
       end
-      row :draft
       row "Vorschau" do |content_module|
         render partial: "/content_modules/index", locals: {content_module: content_module}
       end
-      
+      row :draft
     end
   end
 
@@ -65,17 +86,26 @@ ActiveAdmin.register ContentModule do
       default_module_type = "page_intro"
 
       type = f.object.module_type
-      if !type || !CM_CONFIG[type]
+      Rails.logger.info "type-foo"
+      Rails.logger.info type
+      if type == "" || !type || !CM_CONFIG[type]
         type = default_module_type
       end
-      style_options = CM_CONFIG[type]["style-options"].map { |a| [ a, a ] }
+      style_options = CM_CONFIG[type]["style-options"] ? CM_CONFIG[type]["style-options"].map { |a| [ a, a ] } : []
+
+      para type
       
-      def make_input(f, type, field, active, action_text)    
-        Rails.logger.info "make_input" + field
+      def make_input(f, mtype, field, active, action_text)    
+        
         unless action_text
-          return f.input field, :wrapper_html => { 
-            :class => active ? "cm-field-active" : "cm-field-hidden" 
-          }
+          # special types
+          if field == "parameter" && (mtype == "festival_programm" || mtype == "festival_vorschau")
+            f.input field, :as => :select, :collection => Festival.all, :include_blank => false
+          else
+            return f.input field, :wrapper_html => { 
+              :class => active ? "cm-field-active" : "cm-field-hidden" 
+            }
+          end
         else 
           return f.input field, :wrapper_html => { 
             :class => active ? "cm-field-active" : "cm-field-hidden" 
@@ -83,24 +113,25 @@ ActiveAdmin.register ContentModule do
         end        
       end 
 
-      def content_module_input(f, type, field, action_text=false, localise=true)
-        active = CM_CONFIG[type]["form-fields"].include?(field)
-        Rails.logger.info field + " localise? " + localise.to_s
+      def content_module_input(f, mtype, field, action_text=false, localise=true)
+        active = CM_CONFIG[mtype]["form-fields"] ? CM_CONFIG[mtype]["form-fields"].include?(field) : false
         if localise
           return [
-            make_input(f, type, field + "_de", active, action_text),
-            make_input(f, type, field + "_en", active, action_text)
+            make_input(f, mtype, field + "_de", active, action_text),
+            make_input(f, mtype, field + "_en", active, action_text)
           ]
         else
-          return make_input(f, type, field, active, action_text)
+          return make_input(f, mtype, field, active, action_text)
         end
       end
 
       f.inputs "Meta" do
         f.input :module_type, :as => :select, :collection => CM_CONFIG.keys, :include_blank => false, selected: f.object.module_type || default_module_type
-        f.input :style_option, :as => :select, :collection => style_options, :include_blank => false
+        if style_options.length > 0
+          f.input :style_option, :as => :select, :collection => style_options, :include_blank => false
+        end
         f.input :draft, :label => t(:draft)
-        f.li link_to "löschen", delete_content_module_admin_content_module_path, :class => "button active-admin-delete-content-module"
+        f.li link_to "Modul löschen", delete_content_module_admin_content_module_path, :class => "button active-admin-delete-content-module"
       end
       f.inputs "Content" do
         content_module_input f, type, "super"
@@ -149,7 +180,8 @@ ActiveAdmin.register ContentModule do
 
       f.actions do
         f.action :submit
-        li link_to "Zurück zur Seite", edit_admin_page_url(f.object.page.id)
+        f.action :submit, :as => :button, label: 'Speichern und Vorschau', button_html: {name: 'preview', value: 'preview'}
+        li link_to "Zurück zur Seite", edit_admin_page_url(f.object.page.id), :class=>:button
       end
   end
   

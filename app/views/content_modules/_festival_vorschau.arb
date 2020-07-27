@@ -1,0 +1,31 @@
+# load the festival
+festival = Festival.find(content_module.parameter)
+
+if !festival
+  return
+end
+
+#with_year = (festival.start_date.year < festival.end_date.year && (festival.end_date - festival.start_date) > 45)
+
+h1 :class => "title" do
+    span festival.name
+    time l(festival.start_date, :format => ( :default ) ) + "-" + l(festival.end_date) if festival.events.exists?
+end
+
+if festival.description
+  div festival.description.html_safe, :class => "description"
+end
+
+div do
+  festival.images.each do |image|  
+    img :src => image.attachment.url(:medium)
+  end
+end
+
+ul do
+  festival.downloads.each do |download|        
+    li do
+      a download.description, :href => download.attachment.url
+    end
+  end
+end
