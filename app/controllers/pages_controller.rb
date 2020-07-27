@@ -28,6 +28,7 @@ class PagesController < ApplicationController
             @menu_tree = menu_items[0].ancestors[1].subtree.arrange(:order => :position) 
           end
 
+          @landing_page_menu_item = menu_items[0].ancestors[1]
         end
 
       else

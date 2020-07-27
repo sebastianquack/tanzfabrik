@@ -21,8 +21,10 @@
       <%= !@page || @page && @page.slug != "start" ? (link_to page_title, root_url) : page_title %>
     </div>
     <div class="horizontal_bar_center">
-      BÜHNE?
-      
+      <% if @landing_page_menu_item %>
+      <%= link_to @landing_page_menu_item.name, page_path(@landing_page_menu_item.name) %>
+      <% end %>
+
       <%= render "/navigation/language_switcher" %>
     </div>
     <div class="horizontal_bar_right">
