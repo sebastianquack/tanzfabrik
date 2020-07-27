@@ -2,7 +2,7 @@ ActiveAdmin.register Person do
 
   menu :priority => 5  
 
-  permit_params :id, :first_name, :last_name, :bio_de, :bio_en, :role, :dance_intensive, :draft, :tags, :event_ids => [], :images_attributes => [:id, :description, :license, :attachment, :_destroy]
+  permit_params :id, :first_name, :last_name, :bio_de, :bio_en, :rich_content_de, :rich_content_en, :role, :dance_intensive, :draft, :tags, :event_ids => [], :images_attributes => [:id, :description, :license, :attachment, :_destroy]
 
   config.sort_order = 'last_name_asc'
 
@@ -32,16 +32,24 @@ ActiveAdmin.register Person do
       row :first_name
       row :last_name
       #row :role
-      row :dance_intensive
+      row :tags
+      #row :dance_intensive
       row :events do |person|
         person.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
       end      
-      row :bio_de do |bio|
-        bio.bio_de.html_safe if bio.bio_de
+      #row :bio_de do |bio|
+      #  bio.bio_de.html_safe if bio.bio_de
+      #end
+      #row :bio_en do |bio|
+      #  bio.bio_en.html_safe if bio.bio_en
+      #end
+      row :rich_content_de do |person|
+        div person.rich_content_de
       end
-      row :bio_en do |bio|
-        bio.bio_en.html_safe if bio.bio_en
+      row :rich_content_en do |person|
+        div person.rich_content_en
       end
+
       row :images do |person|
         person.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
@@ -58,9 +66,12 @@ ActiveAdmin.register Person do
         #f.input :dance_intensive        
         f.input :tags
         #f.input :role
-        f.input :bio_de
-        f.input :bio_en
+        #f.input :bio_de
+        #f.input :bio_en
         #f.input :events, :as => :check_boxes
+
+        f.input :rich_content_de, :as => :action_text
+        f.input :rich_content_en, :as => :action_text
         
       end
       f.inputs "Images" do

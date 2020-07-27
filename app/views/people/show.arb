@@ -1,7 +1,7 @@
 div :class => "row" do
   div :class => "basic" do
     h1 person.name
-    div person.bio.html_safe if person.bio
+    div person.rich_content
     div do
       person.events.map { |e| (link_to e.type.name + " " + e.title, event_path(e)) }.join(', ').html_safe
     end  

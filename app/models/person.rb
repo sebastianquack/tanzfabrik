@@ -1,6 +1,6 @@
 
 class Person < ActiveRecord::Base
-  translates :bio, fallback: :any
+  translates :bio, :rich_content, fallback: :any
 
   has_many :person_events
   has_many :events, :through => :person_events
@@ -8,6 +8,9 @@ class Person < ActiveRecord::Base
   has_many :images
   accepts_nested_attributes_for :images, :allow_destroy => true
 
+  has_rich_text :rich_content_de
+  has_rich_text :rich_content_en
+  
   scope :kurslehrer, -> {
     joins("events")
     .where("event.type_id = 3")#,4,5,6

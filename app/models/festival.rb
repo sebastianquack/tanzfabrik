@@ -1,6 +1,9 @@
 class Festival < ActiveRecord::Base
-  translates :name, :description
+  translates :name, :description, :rich_content
 
+  has_rich_text :rich_content_de
+  has_rich_text :rich_content_en
+  
   extend FriendlyId
   friendly_id :name_de, use: [:slugged, :finders]
 

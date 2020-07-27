@@ -2,21 +2,21 @@ ActiveAdmin.register Festival do
 
   menu :priority => 4
 
-  permit_params :page_id, :name_de, :description_de, :name_en, :description_en, :feature_on_welcome_screen, :facebook,  :draft, :event_ids => [], :festival_ids => [], :festival_container_ids => [],
+  permit_params :page_id, :name_de, :rich_content_de, :rich_content_en, :description_de, :name_en, :description_en, :feature_on_welcome_screen, :facebook,  :draft, :event_ids => [], :festival_ids => [], :festival_container_ids => [],
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
-    
+
   
   index do
     selectable_column
     column :name_de
     column :description do |festival|
-      festival.description_de.html_safe
+      div festival.rich_content_de
     end
-    column :events do |festival|
-      festival.events.length
+    #column :events do |festival|
+    #  festival.events.length
       #festival.events.map { |e| (link_to e.title, admin_event_path(e)) }.join(', ').html_safe
-    end
+    #end
     column :images do |festival|
       festival.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
     end
@@ -34,12 +34,21 @@ ActiveAdmin.register Festival do
     attributes_table do
       row :name_de
       row :name_en
-      row :description_de do |festival|
-        festival.description_de.html_safe if festival.description_de
+      #row :description_de do |festival|
+      #  festival.description_de.html_safe if festival.description_de
+      #end
+      #row :description_en do |festival|
+      #  festival.description_en.html_safe if festival.description_en
+      #end
+
+      row :rich_content_de do |festival|
+        div festival.rich_content_de
       end
-      row :description_en do |festival|
-        festival.description_en.html_safe if festival.description_en
+      row :rich_content_en do |person|
+        div festival.rich_content_en
       end
+
+
       #row :feature_on_welcome_screen
       #unless festival.facebook.nil? || festival.facebook.empty?
       #  row "Facebook-Link" do
@@ -75,8 +84,12 @@ ActiveAdmin.register Festival do
     f.inputs do
       f.input :name_de
       f.input :name_en
-      f.input :description_de
-      f.input :description_en
+      #f.input :description_de
+      #f.input :description_en
+
+      f.input :rich_content_de, :as => :action_text
+      f.input :rich_content_en, :as => :action_text
+
       #f.input :festival_containers, :as => :check_boxes
       f.input :page, :collection => Page.order("slug asc").all.map { |p| [p.slug, p.id] }
     end

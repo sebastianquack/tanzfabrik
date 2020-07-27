@@ -1,6 +1,39 @@
 desc 'sets up content modules for page data from old site'
 task :populate_content_modules => :environment do
 
+
+  # move old html descriptions into action text
+
+
+  puts "converting event content to action text"
+  Event.all.each do |event|
+    event.rich_content_de = event.description_de
+    event.rich_content_en = event.description_en
+    event.save
+  end
+
+  puts "converting festival content to action text"
+  Festival.all.each do |festival|
+    festival.rich_content_de = festival.description_de
+    festival.rich_content_en = festival.description_en
+    festival.save
+  end
+
+  puts "converting people content to action text"
+  Person.all.each do |person|
+    person.rich_content_de = person.bio_de
+    person.rich_content_en = person.bio_en
+    person.save
+  end
+
+  puts "converting studio content to action text"
+  Studio.all.each do |studio|
+    studio.rich_content_de = studio.description_de
+    studio.rich_content_en = studio.description_en
+    studio.save
+  end
+
+
   # clean slate for menu structure
   MenuItem.delete_all
 

@@ -3,7 +3,7 @@ ul :class => "studios" do
     li :class => "row studio" do
       div :class => "basic" do   
         div :class => "content" do
-          div studio.description.html_safe if studio.description
+          div studio.rich_content
           para studio.location.address
         end
       end

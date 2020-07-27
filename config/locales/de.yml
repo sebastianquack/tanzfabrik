@@ -429,6 +429,7 @@ de:
         image: Bild
         images: Bilder
         custom_sorting: Manuelle Personen-Reihenfolge (nicht alphabetisch)
+        rich_content: Text
       image:
         description: Beschreibung
         license: Copyrightnotiz
@@ -443,7 +444,9 @@ de:
         custom_place: Anderer Ort
       festival:
         name: Titel
+        images: Bild
         description: Text
+        rich_content: Text
         events: Ereignisse
         festival_containers: Projekt- und Festivalreihen
       festival_container:
@@ -459,10 +462,12 @@ de:
         images: Bilder
         dance_intensive: Dance-Intensive-LehrerIn
         draft: Nicht im Front-End anzeigen
+        rich_content: Bio
       studio:
         location: Adresse
         name: Name
         description: Text
+        rich_content: Bio
       download:
         description: Titel
         attachment: Datei

@@ -14,7 +14,7 @@ para do
   render :partial => "events/in_festival", :locals => {:event => event, :link => true} if show_festival
 end
 
-div event.description.html_safe, :class => "description" if event.description
+div event.rich_content
 
 
 if [2,4].include? event.type.id #workshop or profitraining
