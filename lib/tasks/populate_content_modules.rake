@@ -7,29 +7,29 @@ task :populate_content_modules => :environment do
 
   puts "converting event content to action text"
   Event.all.each do |event|
-    event.rich_content_de = event.description_de
-    event.rich_content_en = event.description_en
+    event.rich_content_de = event.description_de if !event.rich_content_de
+    event.rich_content_en = event.description_en if !event.rich_content_en
     event.save
   end
 
   puts "converting festival content to action text"
   Festival.all.each do |festival|
-    festival.rich_content_de = festival.description_de
-    festival.rich_content_en = festival.description_en
+    festival.rich_content_de = festival.description_de if !festival.rich_content_de
+    festival.rich_content_en = festival.description_en if !festival.rich_content_en
     festival.save
   end
 
   puts "converting people content to action text"
   Person.all.each do |person|
-    person.rich_content_de = person.bio_de
-    person.rich_content_en = person.bio_en
+    person.rich_content_de = person.bio_de if !person.rich_content_de
+    person.rich_content_en = person.bio_en if !person.rich_content_en
     person.save
   end
 
   puts "converting studio content to action text"
   Studio.all.each do |studio|
-    studio.rich_content_de = studio.description_de
-    studio.rich_content_en = studio.description_en
+    studio.rich_content_de = studio.description_de if !studio.rich_content_de
+    studio.rich_content_en = studio.description_en if !studio.rich_content_en
     studio.save
   end
 
@@ -395,7 +395,7 @@ task :populate_content_modules => :environment do
     # schule/veranstaltungen
     {
       key: "schule-veranstaltungen",
-      page_slug: nil,
+      page_slug: "schule-veranstaltungen-overview",
       parent_key: "schule",
       name_de: "Veranstaltungen",
       name_en: "Events",
