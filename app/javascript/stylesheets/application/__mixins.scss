@@ -8,6 +8,10 @@
 @mixin font-h1 {
   font-size: 150px;
   line-height: 140px;
+  @include breakpoint('s') {
+    font-size: 72px;
+    line-height: 73px;
+  }
   font-weight: $font-weight-medium;
   font-style: italic;
   color: $color-red;
@@ -16,6 +20,10 @@
 @mixin font-h2 {
   font-size: 72px;
   line-height: 72px;
+  @include breakpoint('s') {
+    font-size: 48px;
+    line-height: 50px;
+  }
   font-weight: $font-weight-medium;
   font-style: italic;
   color: $color-red;
@@ -24,6 +32,10 @@
 @mixin font-h3 {
   font-size: 48px;
   line-height: 52px;
+  @include breakpoint('s') {
+    font-size: 36px;
+    line-height: 48px;
+  }
   font-weight: $font-weight-medium;
   font-style: italic;
   color: $color-red;
@@ -32,6 +44,10 @@
 @mixin font-h4 {
   font-size: 28px;
   line-height: 28px;
+  @include breakpoint('s') {
+    font-size: 26px;
+    line-height: 28px;
+  }  
   font-weight: $font-weight-medium;
   font-style: italic;
   text-transform: uppercase;
@@ -41,6 +57,10 @@
 @mixin font-h5 {
   font-size: 22px;
   line-height: 28px;
+  @include breakpoint('s') {
+    font-size: 20px;
+    line-height: 24px;
+  }    
   font-weight: $font-weight-medium;
   font-style: italic;
   text-transform: uppercase;
@@ -50,6 +70,10 @@
 @mixin font-kalender-h1 {
   font-size: 32px;
   line-height: 48px;
+  @include breakpoint('s') {
+    font-size: 26px;
+    line-height: 26px;
+  }      
   font-weight: $font-weight-medium;
   color: $color-red;
 }
@@ -57,6 +81,10 @@
 @mixin font-pullquote {
   font-size: 32px;
   line-height: 44px;
+  @include breakpoint('s') {
+    font-size: 20px;
+    line-height: 27px;
+  }    
   font-weight: $font-weight-regular;
   letter-spacing: -0.32px;
   color: $color-red;
@@ -65,6 +93,10 @@
 @mixin font-menüpunkte {
   font-size: 28px;
   line-height:17px;
+  @include breakpoint('s') {
+    font-size: 28px;
+    line-height: 34px;
+  }        
   font-weight: $font-weight-medium;
   color: $color-red;
 }
@@ -72,13 +104,21 @@
 @mixin font-menü-unterpunkte {
   font-size: 20px;
   line-height: 28px;
+  @include breakpoint('s') {
+    font-size: 20px;
+    line-height: 20px;
+  }        
   font-weight: $font-weight-regular;
   color: $color-red;
 }
 
-@mixin font-titel {
+@mixin font-kalender-titel {
   font-size: 28px;
   line-height: 17px;
+  @include breakpoint('s') {
+    font-size: 18px;
+    line-height: 22px;
+  }        
   font-weight: $font-weight-medium;
   color: $color-red;
 }
@@ -86,6 +126,10 @@
 @mixin font-fliesstext-l {
   font-size: 22px;
   line-height: 28px;
+  @include breakpoint('s') {
+    font-size: 16px;
+    line-height: 24px;
+  }        
   font-weight: $font-weight-medium;
   color: $color-red;
 }
@@ -93,6 +137,10 @@
 @mixin font-fliesstext-m {
   font-size: 18px;
   line-height: 26px;
+  @include breakpoint('s') {
+    font-size: 14px;
+    line-height: 21px;
+  }        
   font-weight: $font-weight-medium;
   color: $color-red;
 }
@@ -100,6 +148,10 @@
 @mixin font-fliesstext-s {
   font-size: 14px;
   line-height: 20px;
+  @include breakpoint('s') {
+    font-size: 12px;
+    line-height: 16px;
+  }        
   font-weight: $font-weight-medium;
   color: $color-red;
 }
@@ -107,6 +159,10 @@
 @mixin font-tanzklassen { 
   font-size: 16px;
   line-height: 18px;
+  @include breakpoint('s') {
+    font-size: 12px;
+    line-height: 14px;
+  }        
   font-weight: $font-weight-semibold; // should this be special eps51 font or not?
   letter-spacing: 0.16px;
   text-transform: uppercase;
@@ -126,6 +182,10 @@
 @mixin font-stripes {
   font-size: 16px;
   line-height: 16px;
+  @include breakpoint('s') {
+    font-size: 12px;
+    line-height: 14px;
+  }          
   font-weight: $font-weight-semibold;
   letter-spacing: 0.16px;
   text-transform: uppercase;

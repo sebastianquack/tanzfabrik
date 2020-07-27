@@ -1,6 +1,5 @@
-#main_nav {
 
-  background-color: lightblue;
+body:not([data-menu-item-key="start"]) #main_nav {
 
   li {
     padding-left: 20px;
