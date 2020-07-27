@@ -1,4 +1,9 @@
 @import "./__variables.scss";
+@use "sass:map";
+
+/* --------------------------------------------------
+   Font Style Mixins
+   -------------------------------------------------- */
 
 @mixin font-h1 {
   font-size: 150px;
@@ -134,4 +139,45 @@
   letter-spacing: 0.16px;
   text-transform: uppercase;
   color: $color-red;
+}
+
+/* --------------------------------------------------
+   Breakpoint Mixin
+   -------------------------------------------------- */
+
+// $breakpoint = die Größe die ihr braucht.
+// Ihr könnt aber auch anstelle von 'xs', 's', 'm', 'l', 'xl' einfach einen Wert eintragen.
+// Das macht Sinn wenn man mal einen speziellen Breakpoint braucht. Den muss man dann nicht zwingend in die Sass Map packen.
+// $direction: $media-direction = das was ihr in den Settings eingestellt habt.
+@mixin breakpoint($breakpoint,$direction: $media-direction) {
+
+  // Es wird gecheckt ob der Wert in der Sass Map vorhanden ist
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    // Ausgabe
+    @media (#{$direction}-width: #{map-get($breakpoints, $breakpoint)}) {
+      @content;
+    }
+  }
+
+  // Wenn ihr oben einen Wert eingetragen habt wird hier gecheckt ob ihr einen Einheit angehängt habt. Falls nicht wird px genutzt.
+  @else if unitless($breakpoint) {
+    $breakpoint: $breakpoint + 0px;
+
+    // Ausgabe
+    @media (#{$direction}-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+/* --------------------------------------------------
+   Other Mixins
+   -------------------------------------------------- */
+
+@mixin page-dist($attr: "margin-top", $direction: "top") {
+  #{$attr}: map-get($page-dist-l, $direction);
+  @include breakpoint('s') {
+    #{$attr}: map-get($page-dist-s, $direction);
+  }
 }

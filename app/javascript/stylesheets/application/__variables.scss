@@ -1,7 +1,39 @@
-$font-weight-regular: 400 !default;
+@use "sass:map";
+
+$font-weight-regular: 400;
 $font-weight-medium: 500;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 $font-weight-black: 800;
 
 $color-red: #ff0000;
+$color-black: #000000;
+
+$page-dist-l: (
+  'top':  16px,
+  'left': 22px,
+  'right': 22px,
+);
+
+$page-dist-s: (
+  'top':  14px,
+  'left': 14px,
+  'right': 14px,
+);
+
+$header-height: 38px;
+$header-height-logo: 31px;
+
+/* --------------------------------------------------
+   Breakpoint Settings, see https://davidhellmann.com/blog/development/sass-breakpoint-mixin
+   -------------------------------------------------- */
+
+// min or max
+$media-direction:       max;  // max -> desktop first
+
+// Breakpoints
+// A Sass Map for all Breakpoints you need. But keep it simple! Just add Sizes that you need several times.
+$breakpoints: (
+  'default':            '',
+  's':                  667px,
+);
