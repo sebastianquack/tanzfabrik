@@ -5,8 +5,8 @@ ActiveAdmin.register ContentModule do
   breadcrumb do
     [ 
       link_to("Menü", admin_menu_items_path),
-      link_to(resource.page.slug, edit_admin_page_path(resource.page)),
-      "Modul #" + resource.id.to_s
+      request.params["id"] ? link_to(resource.page.slug, edit_admin_page_path(resource.page)) : nil,
+      request.params["id"] ? "Modul #" + request.params["id"] : nil
     ]
   end
 

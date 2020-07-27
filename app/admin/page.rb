@@ -5,9 +5,10 @@ ActiveAdmin.register Page do
   breadcrumb do
     [ 
       link_to("Menü", admin_menu_items_path),
-      resource.slug
+      request.params["id"] ? request.params["id"] : "Seiten"
     ]
-  end
+    end
+  
   
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -48,6 +49,7 @@ ActiveAdmin.register Page do
 
   
   index do
+
     selectable_column
     column "URL" do |page|
       link_to page.slug, page_path(page)
