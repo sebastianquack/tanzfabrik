@@ -1,7 +1,7 @@
 @import "./__variables.scss";
 @import "./__mixins.scss";
 
-#start {
+body[data-menu-item-key="start"] {
   font-weight: $font-weight-semibold;
   text-transform: uppercase;
 
@@ -20,9 +20,9 @@
       border:none;
     }
 
-    padding-left: 13px; // guessword based on appearance
+    padding-left: 12px; // guessword based on appearance -> TODO depend on vw too
 
-    > a {
+    > a { // HUGE LETTERS
       font-size:15vw;
       line-height:15vw;
       display: block;
@@ -35,15 +35,20 @@
         1px 1px 0 $color-red;
 
       text-decoration: none;
+
+      &:hover, &:active {
+        color: $color-red;
+        text-shadow: none;
+      }
     }
 
-    ul, ul a {
+    ul, ul a { // Submenu typography
       color: $color-red;
       font-size: 1.4vw;
       line-height: 1.4vw * 1.25;
     }
 
-    ul {
+    ul { // submenu
       display: flex;
       flex-direction: column;
       justify-content: flex-end;

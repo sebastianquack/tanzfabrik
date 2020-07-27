@@ -1,6 +1,7 @@
-#main_nav {
-  
+
+body:not([data-menu-item-key="start"]) #main_nav {
+
   li {
-    // padding-left: 20px;
+    padding-left: 20px;
   }
 }

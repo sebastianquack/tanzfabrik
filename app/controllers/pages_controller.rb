@@ -37,9 +37,9 @@ class PagesController < ApplicationController
       end  
     else
       # no params passed in, go to default page
-      menu_item = MenuItem.find_by key: "start"
-      if menu_item
-        @menu_tree = menu_item.subtree.arrange(:order => :position)
+      @menu_item = MenuItem.find_by key: "start"
+      if @menu_item
+        @menu_tree = @menu_item.subtree.arrange(:order => :position)
       end
       
       render "start"
