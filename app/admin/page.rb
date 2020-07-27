@@ -28,7 +28,8 @@ ActiveAdmin.register Page do
   #  permitted
   # end
 
-  config.sort_order = 'slug_asc'
+  config.sort_order = 'updated_at_desc'
+  config.filters = false
 
   ActiveAdmin.register Page do
 
@@ -36,7 +37,7 @@ ActiveAdmin.register Page do
       
       ContentModule.create({
         page_id: resource.id,
-        module_type: :default
+        module_type: :content_element
       })
       redirect_to edit_admin_page_path, notice: "Modul hinzugefügt!"
     end
@@ -51,13 +52,16 @@ ActiveAdmin.register Page do
   index do
 
     selectable_column
+    column :title_de
     column "URL" do |page|
       link_to page.slug, page_path(page)
     end
     column :content_modules do |page|
        page.content_modules.map { |cm| cm.module_type.to_s + " " + cm.headline.to_s + " images: " + cm.images.length.to_s + " dl: " + cm.downloads.length.to_s }.join(', ')
     end  
-    #column :title_de
+
+    column :updated_at
+    
     #column :content do |page|
     #  page.content.html_safe if page.content
     #end

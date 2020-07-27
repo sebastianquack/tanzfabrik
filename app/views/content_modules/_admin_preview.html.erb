@@ -2,12 +2,9 @@
 
 <li>
   <div>
-    Modul: <b><%= cm.module_type %></b><br>
+    Modul: <b><%= t("content_modules.module_types." + cm.module_type.to_s) %></b><br>
     <% if cm.parameter && cm.parameter != "" %> 
       Auswahl: <%= cm.parameter %><br>
-    <% end %>
-    <% if cm.headline %>
-      headline: <%= cm.headline %><br>
     <% end %>
     <% if cm.images.length > 0 %>
       images:
@@ -16,7 +13,6 @@
       <% end %>
       <br>
     <% end %>
-
     <% if cm.downloads.length > 0 %>
       downloads: 
       <% cm.downloads.each do |dl| %>
@@ -27,6 +23,11 @@
   </div>
   <br>
   <% if url %>
+
+  <div style="transform: scale(0.1); height: 200px">
+    <%= render :partial => "/content_modules/index", locals: {content_module: cm} %>
+  </div>
+
     <%= link_to "Modul bearbeiten", url %>
 
   <% else %>

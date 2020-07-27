@@ -4,7 +4,7 @@ ActiveAdmin.register ContentModule do
 
   breadcrumb do
     [ 
-      link_to("Menü", admin_menu_items_path),
+      #link_to("Menü", admin_menu_items_path),
       request.params["id"] ? link_to(resource.page.slug, edit_admin_page_path(resource.page)) : nil,
       request.params["id"] ? "Modul #" + request.params["id"] : nil
     ]
@@ -115,6 +115,8 @@ ActiveAdmin.register ContentModule do
           # special types
           if field == "parameter" && (mtype == "festival_programm" || mtype == "festival_vorschau")
             f.input field, :as => :select, :collection => Festival.all, :include_blank => false
+          elsif field == "parameter" && (mtype == "kursplan")
+            f.input field, :as => :select, :collection => Location.all.map {|l| [l.name, l.name]}, :include_blank => false
           else
             return f.input field, :wrapper_html => { 
               :class => active ? "cm-field-active" : "cm-field-hidden" 
