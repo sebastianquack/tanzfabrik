@@ -1,6 +1,14 @@
 ActiveAdmin.register Page do
 
   menu :priority => 2
+
+  breadcrumb do
+    [ 
+      link_to("Menü", admin_menu_items_path),
+      request.params["id"] ? request.params["id"] : "Seiten"
+    ]
+    end
+  
   
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -41,6 +49,7 @@ ActiveAdmin.register Page do
 
   
   index do
+
     selectable_column
     column "URL" do |page|
       link_to page.slug, page_path(page)
@@ -59,9 +68,10 @@ ActiveAdmin.register Page do
     actions
   end
 
-  filter :title_de
-  filter :content_de
-  filter :feature_on_welcome_screen
+  #filter :title_de
+  #filter :content_de
+  #filter :feature_on_welcome_screen
+
   
   config.per_page = 100
   
@@ -98,7 +108,9 @@ ActiveAdmin.register Page do
 
     f.inputs "Details" do
       f.input :slug
-      f.li link_to "Seite am Front-End anschauen", page_path(f.object)
+      if f.object.id
+       f.li link_to "Seite am Front-End anschauen", page_path(f.object)
+      end
     end
     
     #f.inputs "Content" do
@@ -106,15 +118,16 @@ ActiveAdmin.register Page do
     #  f.input :content_en, :input_html => { :class => 'wysihtml5' }
     #end
 
-    f.inputs "Module" do
-      
-      f.has_many :content_modules, heading: false, sortable: :order do |f_f|
-        f_f.template.render partial: "/content_modules/admin_preview", locals: {cm: f_f.object}
+    if f.object.id
+      f.inputs "Module" do
+        
+        f.has_many :content_modules, heading: false, sortable: :order do |f_f|
+          f_f.template.render partial: "/content_modules/admin_preview", locals: {cm: f_f.object}
+        end
+        
+        f.li link_to "Neues Modul hinzufügen", create_content_module_admin_page_path, :class => :button
       end
-      
-      f.li link_to "Neues Modul hinzufügen", create_content_module_admin_page_path, :class => :button
     end
-
 
 
     #f.inputs "Images" do

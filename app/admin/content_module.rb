@@ -2,6 +2,14 @@ ActiveAdmin.register ContentModule do
 
   menu false
 
+  breadcrumb do
+    [ 
+      link_to("Menü", admin_menu_items_path),
+      request.params["id"] ? link_to(resource.page.slug, edit_admin_page_path(resource.page)) : nil,
+      request.params["id"] ? "Modul #" + request.params["id"] : nil
+    ]
+  end
+
   #  t.string "module_type"
   #  t.integer "page_id"
   #  t.string "style_option"
