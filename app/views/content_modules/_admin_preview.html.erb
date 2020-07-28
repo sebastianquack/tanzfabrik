@@ -24,8 +24,11 @@
   <br>
   <% if url %>
 
-  <div style="transform: scale(0.1); height: 200px">
-    <%= render :partial => "/content_modules/index", locals: {content_module: cm} %>
+  <div class="embedded_preview_container">
+    <div class="embedded_preview_small">
+      <%= render :partial => "/content_modules/index", locals: {content_module: cm} %>
+    </div>
+    <a href=<%=url%> class="embedded_preview_link" ></a>
   </div>
 
     <%= link_to "Modul bearbeiten", url %>

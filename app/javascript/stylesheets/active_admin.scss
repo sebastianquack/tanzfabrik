@@ -47,3 +47,39 @@
 #edit_page .has_many_add {
   display: none;
 }
+
+.embedded_preview_container {
+  $preview_width: 400px;
+  $preview_height: 200px;
+  $preview_scale: 0.33333;
+
+  background-color: white;
+  overflow: hidden;
+  height: $preview_height;
+  width: $preview_width;
+
+  mask-mode: luminance;
+  mask-image: linear-gradient(0deg, transparent 0%, white 10%, white 90%, transparent 100%);    
+
+  margin-bottom: 1em;
+  
+  position: relative;
+
+  .embedded_preview_link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    &:hover {
+      background-color: rgba(0,0,0,0.02);
+    }
+  }
+
+  .embedded_preview_small {
+    transform: scale($preview_scale); 
+    transform-origin: 0 0;
+    overflow: hidden;
+    width: 1 / $preview_scale * $preview_width;
+  }
+}
