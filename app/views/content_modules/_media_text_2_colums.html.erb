@@ -1,7 +1,8 @@
 
 <div class="module__media_text_2_colums">
-XXX
+  
   <div class="column_left">
+
     <h2>
       <%= content_module.headline %>
     </h2>
@@ -9,18 +10,21 @@ XXX
     <div class="rich_content_1">
       <%= content_module.rich_content_1 if content_module.rich_content_1 %>
     </div>
+
   </div>
 
   <div class="column_right">
+
     <div class="rich_content_2">
       <%= content_module.rich_content_2 %>
-    </di>
+    </div>
 
     <div class="downloads">
       <% content_module.downloads.each do |download| %>
         <a href="<%= download.attachment.url %>"><%= download.description %></a>
       <% end %>
     </div>
+
   </div>
 
 </div>

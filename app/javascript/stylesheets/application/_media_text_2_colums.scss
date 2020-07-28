@@ -1,0 +1,30 @@
+@import "./__mixins.scss";
+
+.module__media_text_2_colums {
+
+  display: flex;
+
+  @include page-dist("padding-left", "left");
+  @include page-dist("padding-right", "right");
+  
+  .column_left {
+    flex: 0.57;
+  }
+
+  .column_right {
+    flex: 0.43;
+    padding-left: 60px;
+  }
+
+  h2 {
+    margin-bottom: 30px;
+  }
+
+  h4 {
+    &:before {
+      content: "↪ ";
+    }
+  }
+
+
+}

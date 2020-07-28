@@ -53,12 +53,15 @@ header {
   position: fixed;
   top:0;
   z-index: 1;
+  background-color: white;
+  overflow: hidden;
 
-  height: $header-height;
+  // height: $header-height;
 
   @include page-dist("padding-top", "top");
   @include page-dist("padding-left", "left");
   @include page-dist("padding-right", "right");
+  @include page-dist("padding-bottom", "bottom");
 
   img {
     height: $header-height-logo;

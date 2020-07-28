@@ -1,0 +1,38 @@
+
+<div class="module__page_intro">
+
+  <div class="grid_image">
+    <img src="https://picsum.photos/<%=rand(600..1000)%>/<%=rand(400..600)%>">
+  </div>
+
+  <div class="grid_headline">
+
+    <h1>
+      <%= content_module.headline.html_safe %>
+    </h1>
+
+  </div>
+
+  <div class="grid_text">
+
+    <div class="special_text">
+      <%= content_module.special_text  if content_module.special_text %>
+    </div>    
+
+    <div class="rich_content_1">
+      <%= content_module.rich_content_1 if content_module.rich_content_1 %>
+    </div>
+
+    <div class="rich_content_2">
+      <%= content_module.rich_content_2  if content_module.rich_content_2 %>
+    </div>
+
+    <div class="downloads">
+      <% content_module.downloads.each do |download| %>
+        <a href="<%= download.attachment.url %>"><%= download.description %></a>
+      <% end %>
+    </div>
+
+  </div>
+
+</div>
