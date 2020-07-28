@@ -2,24 +2,38 @@
 
 body:not([data-menu-item-key="start"]) #main_nav {
 
-  @include page-dist("margin-left","left");
-  @include page-dist("margin-right","right");
+  @include page-dist("padding-left","left");
+  @include page-dist("padding-right","right");
 
-  > ul {
+  display: flex;
+  width: 100%;
+
+  > ul:nth-child(1) { // language switcher
+
+  }
+
+  > ul:nth-child(2) { // tree
+    flex: 1;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
 
     > li > a { // section headers
       @include font-menüpunkte
     }
 
-    > ul {
-      display: flex;
-      flex-direction: column;
-
-
-        @include font-menü-unterpunkte
+    ul {
+      
+      li, a {
+        @include font-menü-unterpunkte;
+      }
       
     }
   }

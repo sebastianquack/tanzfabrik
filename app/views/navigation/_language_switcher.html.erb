@@ -4,7 +4,7 @@
   end
 %>
 
-<ul>
+<ul id="language_switcher">
   <li><%= active(:en) ? (link_to "DE", url_for(:locale => :de)) : "DE (active)" %></li>
   <li><%= active(:de) ? (link_to "EN", url_for(:locale => :en)) : "EN (active)" %></li>
 </ul>

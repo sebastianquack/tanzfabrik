@@ -12,6 +12,13 @@ page_intro:
     - headline
     - sub
     - rich_content_1
+media_text_2_colums:
+  style-options:
+    - default
+  form-fields:
+    - headline
+    - rich_content_1
+    - rich_content_2
 content_element:
   style-options:
     - default

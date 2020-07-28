@@ -15,10 +15,15 @@ import "../sortable_tree/sortable.sass";
 import "stylesheets/application/"
 
 // trix
-import "trix"
+import Trix from "trix"
+import "@rails/actiontext"
 
-
+// import content modules definitions
 import CMConfig from "../../../config/content_module_config.yml"
+
+// customize Trix
+Trix.config.blockAttributes.heading1.tagName = "h4";
+// --> see here for further customization: https://matthaliski.com/blog/customizing-the-trix-toolbar
 
 $( document ).ready(function() {
   console.log("loaded content module config", CMConfig)

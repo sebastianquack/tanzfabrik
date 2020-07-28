@@ -1,3 +1,4 @@
 <nav id="main_nav">
-<%= render :partial => "navigation/tree_node", :locals => {:tree => @menu_tree, :depth => 0, :max_depth => @max_depth} %>
+  <%= render "/navigation/language_switcher" if defined?(withNavigation) && withNavigation %>
+  <%= render :partial => "navigation/tree_node", :locals => {:tree => @menu_tree, :depth => 0, :max_depth => @max_depth} %>
 </nav>
