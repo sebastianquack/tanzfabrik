@@ -4,8 +4,8 @@ ActiveAdmin.register Page do
 
   breadcrumb do
     [ 
-      link_to("Menü", admin_menu_items_path),
-      request.params["id"] ? request.params["id"] : "Seiten"
+      #link_to("Menü", admin_menu_items_path),
+      #request.params["id"] ? resource.slug : "Seiten"
     ]
     end
   
@@ -35,11 +35,11 @@ ActiveAdmin.register Page do
 
     member_action :create_content_module, method: :get do
       
-      ContentModule.create({
+      cm = ContentModule.create({
         page_id: resource.id,
         module_type: :content_element
       })
-      redirect_to edit_admin_page_path, notice: "Modul hinzugefügt!"
+      redirect_to edit_admin_content_module_path(cm), notice: "Modul hinzugefügt!"
     end
 
     
@@ -56,9 +56,9 @@ ActiveAdmin.register Page do
     column "URL" do |page|
       link_to page.slug, page_path(page)
     end
-    column :content_modules do |page|
-       page.content_modules.map { |cm| cm.module_type.to_s + " " + cm.headline.to_s + " images: " + cm.images.length.to_s + " dl: " + cm.downloads.length.to_s }.join(', ')
-    end  
+    #column :content_modules do |page|
+    #   page.content_modules.map { |cm| cm.module_type.to_s + " " + cm.headline.to_s + " images: " + cm.images.length.to_s + " dl: " + cm.downloads.length.to_s }.join(', ')
+    #end  
 
     column :updated_at
     
@@ -131,6 +131,10 @@ ActiveAdmin.register Page do
         end
         
         f.li link_to "Neues Modul hinzufügen", create_content_module_admin_page_path, :class => :button
+      end
+    else 
+      f.inputs "Module" do
+        f.li "Hinweis: Zum Anlegen von Modulen muss die Seite einmal gespeichert werden. Unten auf den Button 'Seite anlegen'."
       end
     end
 

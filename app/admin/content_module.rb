@@ -114,9 +114,11 @@ ActiveAdmin.register ContentModule do
         unless action_text
           # special types
           if field == "parameter" && (mtype == "festival_programm" || mtype == "festival_vorschau")
-            f.input field, :as => :select, :collection => Festival.all, :include_blank => false
+            f.input field, :as => :select, :collection => Festival.order("name_de").all, :include_blank => false
           elsif field == "parameter" && (mtype == "kursplan")
             f.input field, :as => :select, :collection => Location.all.map {|l| [l.name, l.name]}, :include_blank => false
+          elsif field == "parameter" && (mtype == "people_gallery")
+            f.input field, :label => "Gruppen", :hint => "z.B. Künstler, Kurslehrer, Dance-Intensive"
           else
             return f.input field, :wrapper_html => { 
               :class => active ? "cm-field-active" : "cm-field-hidden" 
