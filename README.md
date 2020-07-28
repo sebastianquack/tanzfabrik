@@ -76,3 +76,9 @@ https://relaunch2020.tanzfabrik.intergestalt.cloud/
 ## seed text items
 
 `docker-compose run -v $(pwd)/app web rake seed_text_items`
+
+## create example page
+
+`docker-compose run -v $(pwd)/app web rake create_example_page`
+--> URL /de/module
+
