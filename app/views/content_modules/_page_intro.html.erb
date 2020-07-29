@@ -15,17 +15,23 @@
 
   <div class="grid_text">
 
-    <div class="special_text">
-      <%= content_module.special_text  if content_module.special_text %>
-    </div>    
+    <% if content_module.special_text %>
+      <div class="special_text">
+        <%= content_module.special_text  %>
+      </div>    
+    <% end %>
 
-    <div class="rich_content_1">
-      <%= content_module.rich_content_1 if content_module.rich_content_1 %>
-    </div>
+    <% if content_module.rich_content_1 %>
+      <div class="rich_content_1">
+        <%= content_module.rich_content_1 %>
+      </div>
+    <% end %>
 
-    <div class="rich_content_2">
-      <%= content_module.rich_content_2  if content_module.rich_content_2 %>
-    </div>
+    <% if content_module.rich_content_2 %>
+      <div class="rich_content_2">
+        <%= content_module.rich_content_2 %>
+      </div>
+    <% end %>
 
     <div class="downloads">
       <% content_module.downloads.each do |download| %>
