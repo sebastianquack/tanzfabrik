@@ -51,8 +51,6 @@ Tanzfabrik::Application.configure do
   # number of complex assets.
   config.assets.debug = true
   
-  Paperclip.options[:command_path] = "/usr/local/bin/"
-  
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
   
@@ -80,5 +78,34 @@ Tanzfabrik::Application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   #config.public_file_server.enabled = true
+
+  Paperclip.options[:command_path] = "/usr/local/bin/"
+
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :bucket         => ENV['S3_TANZFABRIK_BUCKET'],
+    :s3_credentials => { :access_key_id     => ENV['S3_KEY'], 
+                         :secret_access_key => ENV['S3_SECRET']
+                          },
+    :s3_region => ENV['AWS_REGION'],                      
+    :url => ':s3_domain_url',    
+  }
+
+  # Modify setting for Minio if present
+  if !ENV['S3_MINIO_HOSTNAME'].to_s.empty? && !ENV['S3_MINIO_ENDPOINT'].to_s.empty?
+    puts "Using MINIO S3, HOSTNAME=" + ENV['S3_MINIO_HOSTNAME'] + ", ENDPOINT=" + ENV['S3_MINIO_ENDPOINT']
+    paperclip_minio_defaults = {
+      s3_host_name: ENV['S3_MINIO_HOSTNAME'],
+      s3_options: {
+        endpoint: "http://" + ENV['S3_MINIO_ENDPOINT'],
+        force_path_style: true 
+      },    
+      :url => ':s3_path_url',   
+    }
+    config.paperclip_defaults = config.paperclip_defaults.merge(paperclip_minio_defaults)
+  else
+    puts "Using AWS bucket " + ENV['S3_TANZFABRIK_BUCKET']
+  end
+
   
 end

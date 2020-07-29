@@ -71,14 +71,17 @@ https://relaunch2020.tanzfabrik.intergestalt.cloud/
 ## convert pages from old site to content modules and seed menu items
 
 1. copy live data to local `bin/download_db.sh`
-2. convert and seed `docker-compose run -v $(pwd)/app web rake populate_content_modules`
+2. convert and seed `docker-compose run --rm -v $(pwd)/app web rake populate_content_modules`
 
 ## seed text items
 
-`docker-compose run -v $(pwd)/app web rake seed_text_items`
+`docker-compose run --rm -v $(pwd)/app web rake seed_text_items`
 
 ## create example page
 
-`docker-compose run -v $(pwd)/app web rake create_example_page`
+`docker-compose run --rm -v $(pwd)/app web rake create_example_page`
 --> URL /de/module
 
+## mirror production bucket to local minio bucket
+
+`bin/copy_files_live2local.sh`

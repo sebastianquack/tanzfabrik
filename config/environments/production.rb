@@ -149,4 +149,14 @@ Tanzfabrik::Application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
    # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   
+   config.paperclip_defaults = {
+    :storage => :s3,
+    :bucket         => ENV['S3_TANZFABRIK_BUCKET'],
+    :s3_credentials => { :access_key_id     => ENV['S3_KEY'], 
+                         :secret_access_key => ENV['S3_SECRET']
+                          },
+    :s3_region => ENV['AWS_REGION'],                      
+    :url => ':s3_domain_url',    
+  }
+
 end

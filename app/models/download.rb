@@ -3,12 +3,6 @@ class Download < ActiveRecord::Base
   translates :description
 
   paperclip_config = {
-    :storage => :s3,
-    :bucket         => ENV['S3_TANZFABRIK_BUCKET'],
-    :s3_region => ENV['AWS_REGION'],
-    :s3_credentials => { :access_key_id     => ENV['S3_KEY'], 
-                         :secret_access_key => ENV['S3_SECRET'] },
-    :url => ':s3_domain_url',
     :path => "downloads/:id/:filename"
   }
 
