@@ -87,3 +87,30 @@
 .admin-form-right {
   margin-left: 20%;
 }
+
+.module_hint {
+  color: #5E6469;
+  font-weight: bold;
+  padding: 0 10px 1em 10px;    
+  box-sizing: border-box;
+
+  img {
+    width: 100%;
+    height: auto;
+    opacity: 0.8;
+    display: block;
+  }
+}
+
+li.text textarea {
+  height: 2em;
+}
+
+hr {
+  height: 2px;
+  background-color: #e4e4e4;
+  border: none;
+  border: solid 1px #f9f9f9;
+  border-width: 3px 0 0 0 ;
+  margin:0;
+}

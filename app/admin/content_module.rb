@@ -137,10 +137,14 @@ ActiveAdmin.register ContentModule do
         if localise
           return [
             make_input(f, mtype, field + "_de", active, action_text),
-            make_input(f, mtype, field + "_en", active, action_text)
+            make_input(f, mtype, field + "_en", active, action_text),
+            hr
           ]
         else
-          return make_input(f, mtype, field, active, action_text)
+          return [
+              make_input(f, mtype, field, active, action_text),
+              hr
+          ]
         end
       end
 
@@ -152,7 +156,11 @@ ActiveAdmin.register ContentModule do
         f.input :draft, :label => t(:draft)
         f.li link_to "Modul löschen", delete_content_module_admin_content_module_path, :class => "button active-admin-delete-content-module"
       end
+      
       f.inputs "Content" do
+        div "Nutzungsbeispiel(e)", class: "module_hint" do 
+          img src: '/module_hints/' + type + '.png' # should be done with image_pack_tag but couldn't make it work!!
+        end
         content_module_input f, type, "super"
         content_module_input f, type, "headline"
         content_module_input f, type, "sub"

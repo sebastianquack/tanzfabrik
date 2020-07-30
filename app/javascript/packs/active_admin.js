@@ -1,6 +1,10 @@
 // Load Active Admin's styles into Webpacker,
 // see `active_admin.scss` for customization.
 
+// enable image_pack_tag
+const images = require.context('../images', true)
+const imagePath = (name) => images(name, true)
+
 // active admin basics
 import "../stylesheets/active_admin";
 import "@activeadmin/activeadmin";
@@ -10,6 +14,9 @@ import "jquery-ui";
 import "../sortable_tree/jquery.mjs.nestedSortable.js";
 import "../sortable_tree/sortable.js";
 import "../sortable_tree/sortable.sass";
+
+// additional npm modules
+import autosize from "autosize"
 
 // front end style sheet for preview
 import "stylesheets/application/"
@@ -93,6 +100,7 @@ $( document ).ready(function() {
       event.preventDefault();
   })
 
-
+  const textareas = document.querySelectorAll('li.text textarea')
+  autosize(textareas);
 
 })

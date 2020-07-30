@@ -489,7 +489,11 @@ de:
       default: "Alles" 
     style_options:
       magazine: "Magazin"
-
-
-
-
+    form_fields:
+      super: "Über-Headline"
+      headline: "Headline"
+      sub: "Unter-Headline"
+      special_text: "Spezialtext"
+      rich_content_1: "Text 1"
+      rich_content_2: "Text 2"
+      custom_html: "HTML"
