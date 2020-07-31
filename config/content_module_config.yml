@@ -27,6 +27,13 @@ content_element:
     - headline
     - special_text
     - rich_content_1
+reference:
+  style-options:
+    - default
+  form-fields:
+    - special_text
+    - headline
+    - rich_content_1    
 submenu_divider:
   style-options:
     - default

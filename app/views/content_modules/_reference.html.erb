@@ -1,0 +1,56 @@
+<div class="module__reference">
+  
+  <div class="column_left">
+
+    <div class="grid_image">
+      <img src="https://picsum.photos/<%=rand(600..1000)%>/<%=rand(400..1000)%>">
+    </div>  
+
+  </div>
+
+  <div class="column_right">
+    
+    <!--= # render :partial => 'stripes', :locals => { 
+      style: "schule",  
+      direction: "vertical",
+      content: "schule"
+    } -->
+
+    <div class="stripes_vertical">
+      <span data-repeated-text="Bühne"></span>
+      <span data-repeated-text="Bühne"></span>
+      <span data-repeated-text="Bühne"></span>
+    </div>
+
+    <div class="text_content">
+
+      <% if content_module.special_text %>
+        <div class="special_text">
+          <%= content_module.special_text  %>
+        </div>    
+      <% end %>
+
+      <% if content_module.headline %>
+        <h3>
+          <%= content_module.headline.html_safe %>
+        </h3>
+      <% end %>
+
+      <% if content_module.rich_content_1 %>
+        <div class="rich_content_1">
+          <%= content_module.rich_content_1 %>
+        </div>
+      <% end %>
+
+    </div>
+
+    <div class="stripes_vertical">
+      <span data-logo></span>
+      <span data-logo></span>
+      <span data-logo></span>
+    </div>
+
+  </div>
+
+</div>
+

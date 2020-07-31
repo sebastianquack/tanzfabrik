@@ -73,3 +73,31 @@ main.page {
   @include page-dist("margin-top", "top", $header-height);
   @include page-dist("padding-top", "top");
 }
+
+.stripes_vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @include font-stripes;
+
+  span {
+    
+    &[data-repeated-text] {
+      &:before, &:after {
+        content: attr(data-repeated-text);
+        display: block;
+      }
+    }
+
+    &[data-logo] {
+      &:before {
+        content: url("/images/Tanzfabrik_Signet-red.svg");
+        display: block;
+        width: $logo-width;
+        height: $logo-height;
+      }
+    }
+  }
+
+}

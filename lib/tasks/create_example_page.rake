@@ -17,6 +17,7 @@ task :create_example_page => :environment do
     puts p.errors.full_messages
   end
 
+  module_id_prefix = 10000000
   counter = 1
 
   # BEGIN
@@ -49,7 +50,7 @@ danceintensive@tanzfabrik-berlin.de<br />
 RICHCONTENT
 
   rich_content_2 = <<~RICHCONTENT2
-<h4>↪Termine</h4>
+<h4>↪ Termine</h4>
 <br />
 <br />
 Sa 04. und So 05.04.2020 (Bewerbungsfrist am 23.02) 
@@ -61,12 +62,20 @@ Sa 16. und So 17.05.2020 (Bewerbungsfrist am 19.04)
 Sa 04. und So 05.07.2020 (Bewerbungsfrist am 24.05)
 <br />
 <br />
-<h4>↪Aufnahmeverfahren</h4>
+<h4>↪ Aufnahmeverfahren</h4>
 <br />
 Das Aufnahmeverfahren findet jeweils an einem Wochenende (Samstag + Sonntag) in der Tanzfabrik Kreuzberg statt. Das Wochenende setzt sich aus einem Informationsgespräch, der Teilnahme an drei unterschiedlichen Contemporary Klassen sowie einem persönlichen Gespräch zusammen.
 RICHCONTENT2
 
-  cm = ContentModule.create({
+
+  begin
+    ContentModule.destroy module_id_prefix + counter
+  rescue ActiveRecord::RecordNotFound
+    # no problem
+  end
+  
+  ContentModule.create({
+      id: module_id_prefix + counter,
       page_id: p.id,
       module_type: "content_2_columns",
       headline_de: "Bewerbung",
@@ -75,7 +84,7 @@ RICHCONTENT2
       rich_content_1_en: "",
       rich_content_2_de: rich_content_2,
       rich_content_2_en: "",
-      order: counter += 1
+      order: counter += 1,
   })
 
 
@@ -85,7 +94,14 @@ rich_content_1 = <<~RICHCONTENT1
 Die Übersicht über Workshops sind im dazugehörigen PDF zu finden
 RICHCONTENT1
 
-  cm = ContentModule.create({
+  begin
+    ContentModule.destroy module_id_prefix + counter
+  rescue ActiveRecord::RecordNotFound
+    # no problem
+  end
+
+  ContentModule.create({
+      id: module_id_prefix + counter,
       page_id: p.id,
       module_type: "page_intro",
       headline_de: "Work&shy;shops",
@@ -113,7 +129,14 @@ Zur Vermeidung von Verletzungen bitte beachten: High Level insbesondere bei den 
 Kein Training während der Workshops, an gesetzlichen Feiertagen und in den Ferien der Tanzfabrik. Um an anderen Tanzklassen der Tanzfabrik teilzunehmen, können Tanzprofis auf Anfrage eine 10er Karte zu 65 € (10 x 75 Min.), zu 80 € (10 x 90 Min.), 95 € (10 x 120 Min.) erwerben.
 RICHCONTENT2
 
-  cm = ContentModule.create({
+  begin
+    ContentModule.destroy module_id_prefix + counter
+  rescue ActiveRecord::RecordNotFound
+    # no problem
+  end
+
+  ContentModule.create({
+      id: module_id_prefix + counter,
       page_id: p.id,
       module_type: "page_intro",
       headline_de: "Profi&shy;klassen",
@@ -148,7 +171,14 @@ RICHCONTENT1
 #Kein Training während der Workshops, an gesetzlichen Feiertagen und in den Ferien der Tanzfabrik. Um an anderen Tanzklassen der Tanzfabrik teilzunehmen, können Tanzprofis auf Anfrage eine 10er Karte zu 65 € (10 x 75 Min.), zu 80 € (10 x 90 Min.), 95 € (10 x 120 Min.) erwerben.
 #RICHCONTENT2
 
-  cm = ContentModule.create({
+  begin
+    ContentModule.destroy module_id_prefix + counter
+  rescue ActiveRecord::RecordNotFound
+    # no problem
+  end
+
+  ContentModule.create({
+      id: module_id_prefix + counter,
       page_id: p.id,
       module_type: "page_intro",
       headline_de: "Dance In&shy;tensive",
@@ -182,7 +212,14 @@ RICHCONTENT1
 #Kein Training während der Workshops, an gesetzlichen Feiertagen und in den Ferien der Tanzfabrik. Um an anderen Tanzklassen der Tanzfabrik teilzunehmen, können Tanzprofis auf Anfrage eine 10er Karte zu 65 € (10 x 75 Min.), zu 80 € (10 x 90 Min.), 95 € (10 x 120 Min.) erwerben.
 #RICHCONTENT2
 
-  cm = ContentModule.create({
+  begin
+    ContentModule.destroy module_id_prefix + counter
+  rescue ActiveRecord::RecordNotFound
+    # no problem
+  end
+
+  ContentModule.create({
+      id: module_id_prefix + counter,
       page_id: p.id,
       module_type: "content_element",
       headline_de: "Open Spaces",
@@ -214,7 +251,14 @@ RICHCONTENT1
 #Kein Training während der Workshops, an gesetzlichen Feiertagen und in den Ferien der Tanzfabrik. Um an anderen Tanzklassen der Tanzfabrik teilzunehmen, können Tanzprofis auf Anfrage eine 10er Karte zu 65 € (10 x 75 Min.), zu 80 € (10 x 90 Min.), 95 € (10 x 120 Min.) erwerben.
 #RICHCONTENT2
 
-  cm = ContentModule.create({
+  begin
+    ContentModule.destroy module_id_prefix + counter
+  rescue ActiveRecord::RecordNotFound
+    # no problem
+  end
+
+  ContentModule.create({
+      id: module_id_prefix + counter,
       page_id: p.id,
       module_type: "content_element",
       headline_de: "Tanznacht Berlin",
@@ -224,9 +268,49 @@ RICHCONTENT1
       rich_content_1_de: rich_content_1,
       rich_content_1_en: "",
       rich_content_2_de: "",
+      rich_content_2_en: "",
+      order: counter += 1
+  })
+
+### reference / identifying a physical script
+
+special_text = <<~SPECIALTEXT
+06.01.2020 – 19.02.2020, Wedding 3
+SPECIALTEXT
+
+rich_content_1 = <<~RICHCONTENT1
+<b>Workshop</b> mit Igor Dobricic, Guillaume Marie, Roger Sala Reyner
+RICHCONTENT1
+
+#rich_content_2 = <<~RICHCONTENT2
+#Zur Vermeidung von Verletzungen bitte beachten: High Level insbesondere bei den Trainings von Stella Zannou und Blenard Azizaj.<br />
+#<br />
+#Kein Training während der Workshops, an gesetzlichen Feiertagen und in den Ferien der Tanzfabrik. Um an anderen Tanzklassen der Tanzfabrik teilzunehmen, können Tanzprofis auf Anfrage eine 10er Karte zu 65 € (10 x 75 Min.), zu 80 € (10 x 90 Min.), 95 € (10 x 120 Min.) erwerben.
+#RICHCONTENT2
+
+  begin
+    ContentModule.destroy module_id_prefix + counter
+  rescue ActiveRecord::RecordNotFound
+    # no problem
+  end
+
+  ContentModule.create({
+      id: module_id_prefix + counter,
+      page_id: p.id,
+      module_type: "reference",
+      headline_de: "Identifying a physical script",
+      headline_en: "Identifying a physical script",
+      special_text_de: special_text,
+      special_text_en: "",      
+      rich_content_1_de: rich_content_1,
+      rich_content_1_en: "",
+      rich_content_2_de: "",
       rich_content_2_en: "",      
       order: counter += 1
   })
+
+
+
 
 
   
