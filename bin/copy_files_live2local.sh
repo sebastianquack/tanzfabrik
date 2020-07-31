@@ -5,8 +5,8 @@ set -e
 echo "Mirroring production to local"
 SOURCE_KEY=AKIAILDX56AXKPWMIVXA
 
-TARGET_KEY=2Jzqm8gfWaJSLNqFB6
-TARGET_SECRET=WnJEDA1dxrjWYKuImKa4Xdih0R7sz5ioZg0kLepT
+TARGET_KEY=development
+TARGET_SECRET=development
 
 # go to to repo root
 cd $(git rev-parse --show-toplevel)

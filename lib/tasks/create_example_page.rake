@@ -51,19 +51,23 @@ RICHCONTENT
 
   rich_content_2 = <<~RICHCONTENT2
 <h4>↪ Termine</h4>
+Sa 04. und So 05.04.2020<br />
+(Bewerbungsfrist am 23.02) 
 <br />
 <br />
-Sa 04. und So 05.04.2020 (Bewerbungsfrist am 23.02) 
+Sa 25. und So 26.04.2020<br />
+(Bewerbungsfrist am 22.03)
 <br />
-Sa 25. und So 26.04.2020 (Bewerbungsfrist am 22.03)
 <br />
-Sa 16. und So 17.05.2020 (Bewerbungsfrist am 19.04) 
+Sa 16. und So 17.05.2020<br />
+(Bewerbungsfrist am 19.04) 
 <br />
-Sa 04. und So 05.07.2020 (Bewerbungsfrist am 24.05)
+<br />
+Sa 04. und So 05.07.2020<br />
+(Bewerbungsfrist am 24.05)
 <br />
 <br />
 <h4>↪ Aufnahmeverfahren</h4>
-<br />
 Das Aufnahmeverfahren findet jeweils an einem Wochenende (Samstag + Sonntag) in der Tanzfabrik Kreuzberg statt. Das Wochenende setzt sich aus einem Informationsgespräch, der Teilnahme an drei unterschiedlichen Contemporary Klassen sowie einem persönlichen Gespräch zusammen.
 RICHCONTENT2
 
