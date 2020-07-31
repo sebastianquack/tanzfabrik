@@ -21,7 +21,7 @@ task :create_example_page => :environment do
 
   # BEGIN
 
-  ### media_text_2_colums
+  ### content_2_columns
 
   rich_content_1 = <<~RICHCONTENT
 Das Bewerbungsformular steht oben auf dieser Seite zum Download bereit. Bitte ausfüllen und als scan (pdf oder jpeg) zusammen mit den anderen Dokumenten an obige e-mail Adresse senden. Bewerbungen bitte nur als e-mail schicken. 
@@ -49,7 +49,7 @@ danceintensive@tanzfabrik-berlin.de<br />
 RICHCONTENT
 
   rich_content_2 = <<~RICHCONTENT2
-<h4>Termine</h4>
+<h4>↪Termine</h4>
 <br />
 <br />
 Sa 04. und So 05.04.2020 (Bewerbungsfrist am 23.02) 
@@ -61,14 +61,14 @@ Sa 16. und So 17.05.2020 (Bewerbungsfrist am 19.04)
 Sa 04. und So 05.07.2020 (Bewerbungsfrist am 24.05)
 <br />
 <br />
-<h4>Aufnahmeverfahren</h4>
+<h4>↪Aufnahmeverfahren</h4>
 <br />
 Das Aufnahmeverfahren findet jeweils an einem Wochenende (Samstag + Sonntag) in der Tanzfabrik Kreuzberg statt. Das Wochenende setzt sich aus einem Informationsgespräch, der Teilnahme an drei unterschiedlichen Contemporary Klassen sowie einem persönlichen Gespräch zusammen.
 RICHCONTENT2
 
   cm = ContentModule.create({
       page_id: p.id,
-      module_type: "media_text_2_colums",
+      module_type: "content_2_columns",
       headline_de: "Bewerbung",
       headline_en: "Application",
       rich_content_1_de: rich_content_1,
@@ -151,8 +151,8 @@ RICHCONTENT1
   cm = ContentModule.create({
       page_id: p.id,
       module_type: "page_intro",
-      headline_de: "Dance Intensive",
-      headline_en: "Dance Intensive",
+      headline_de: "Dance In&shy;tensive",
+      headline_en: "Dance In&shy;tensive",
       special_text_de: special_text,
       special_text_en: "",      
       rich_content_1_de: rich_content_1,
@@ -161,6 +161,75 @@ RICHCONTENT1
       rich_content_2_en: "",      
       order: counter += 1
   })
+
+### content_element / Open Spaces
+
+special_text = <<~SPECIALTEXT
+Tanzdokumentation als künstlerische Praxis 
+Ein TANZFONDS ERBE Projekt 
+Projektzeitraum: Juni 2015 bis Juli 2016
+SPECIALTEXT
+
+rich_content_1 = <<~RICHCONTENT1
+Das Projekt “Capturing Dance - Tanzdokumentation als künstlerische Praxis” richtet erstmals einen künstlerischen und damit neuen Fokus auf den Umgang mit Tanzdokumentation und versucht ihn mit einer jüngeren Künstlergeneration exemplarisch in Berlin und Köln umzusetzen. Ein Symposium (16.-17.10.2015), ein Labor (Januar 2016) und eine Ausstellung (Juni 2016) bieten hierfür den Rahmen, in dem Student_innen des Hochschulübergreifendem Zentrums für Tanz Berlin (HZT) und der Kunsthochschule für Medien Köln (KHM) sowie professionelle Kolleg_innen die Wechselbeziehung zwischen Choreografie, Performance und Dokumentation beleuchten können. 
+<br /><br />
+www.capturingdance.de
+RICHCONTENT1
+
+#rich_content_2 = <<~RICHCONTENT2
+#Zur Vermeidung von Verletzungen bitte beachten: High Level insbesondere bei den Trainings von Stella Zannou und Blenard Azizaj.<br />
+#<br />
+#Kein Training während der Workshops, an gesetzlichen Feiertagen und in den Ferien der Tanzfabrik. Um an anderen Tanzklassen der Tanzfabrik teilzunehmen, können Tanzprofis auf Anfrage eine 10er Karte zu 65 € (10 x 75 Min.), zu 80 € (10 x 90 Min.), 95 € (10 x 120 Min.) erwerben.
+#RICHCONTENT2
+
+  cm = ContentModule.create({
+      page_id: p.id,
+      module_type: "content_element",
+      headline_de: "Open Spaces",
+      headline_en: "Open Spaces",
+      special_text_de: special_text,
+      special_text_en: "",      
+      rich_content_1_de: rich_content_1,
+      rich_content_1_en: "",
+      rich_content_2_de: "",
+      rich_content_2_en: "",      
+      order: counter += 1
+  })
+
+### content_element / Tanznacht Berlin
+
+#special_text = <<~SPECIALTEXT
+#Tanzdokumentation als künstlerische Praxis 
+#Ein TANZFONDS ERBE Projekt 
+#Projektzeitraum: Juni 2015 bis Juli 2016
+#SPECIALTEXT
+
+rich_content_1 = <<~RICHCONTENT1
+Eine kritische Recherche über Tanzinstitutionen von und mit Tanzfabrik Berlin in Kooperation mit ada Studio, HZT Berlin, Uferstudios, Freie Universität und Humboldt Universität, beraten von Diversity Arts Culture. Das Projekt »Twists: Dance and Decoloniality« wirft systematisch die Frage nach den Auswirkungen des Kolonialismus im Tanz auf. Am Beispiel der Tanzfabrik Berlin sowie von ada Studio, HZT Berlin und Uferstudios werden in einer institutionskritischen Recherche der Künstler*innen Choy Ka Fai, Jay Pather, Lia Rodrigues, und Jessica Lauren Elizabeth Taylor bestehende Hegemonien, Rassismen und Exklusionen innerhalb der etablierten Produktionsbedingungen im Tanz aufgezeigt. Das Projekt trägt aktuelles Wissen aus
+RICHCONTENT1
+
+#rich_content_2 = <<~RICHCONTENT2
+#Zur Vermeidung von Verletzungen bitte beachten: High Level insbesondere bei den Trainings von Stella Zannou und Blenard Azizaj.<br />
+#<br />
+#Kein Training während der Workshops, an gesetzlichen Feiertagen und in den Ferien der Tanzfabrik. Um an anderen Tanzklassen der Tanzfabrik teilzunehmen, können Tanzprofis auf Anfrage eine 10er Karte zu 65 € (10 x 75 Min.), zu 80 € (10 x 90 Min.), 95 € (10 x 120 Min.) erwerben.
+#RICHCONTENT2
+
+  cm = ContentModule.create({
+      page_id: p.id,
+      module_type: "content_element",
+      headline_de: "Tanznacht Berlin",
+      headline_en: "Tanznacht Berlin",
+      special_text_de: "",
+      special_text_en: "",      
+      rich_content_1_de: rich_content_1,
+      rich_content_1_en: "",
+      rich_content_2_de: "",
+      rich_content_2_en: "",      
+      order: counter += 1
+  })
+
+
+  
 
 
 

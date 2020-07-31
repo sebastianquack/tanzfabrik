@@ -30,10 +30,54 @@ import CMConfig from "../../../config/content_module_config.yml"
 
 // customize Trix
 Trix.config.blockAttributes.heading1.tagName = "h4";
+
+
+Trix.config.textAttributes.small = { tagName: "small", terminal: true }
+
+addEventListener("trix-initialize", function(event) {
+	var element = event.target
+  var editor = element.editor
+  var toolbarElement = element.toolbarElement
+  console.log(toolbarElement)
+  var blockGroupElement = toolbarElement.querySelector(".trix-button-group--block-tools")
+  var textGroupElement = toolbarElement.querySelector(".trix-button-group--text-tools")
+	
+  // insert "small" button
+  blockGroupElement.insertAdjacentHTML("beforeend", '<button title="Small" type="button" class="trix-button trix-button--icon trix-button--icon-small" data-trix-attribute="small"><small>small</small></button>')
+  
+  var selectedAttributes = new Set
+  function updateSelectedAttributes() {
+    selectedAttributes = new Set
+    
+    var selectedRange = editor.getSelectedRange()
+    if (selectedRange[0] === selectedRange[1]) { selectedRange[1]++ }
+    
+    var selectedPieces = editor.getDocument().getDocumentAtRange(selectedRange).getPieces()
+    selectedPieces.forEach(function(piece) {
+    	Object.keys(piece.getAttributes()).forEach(function(attribute) {
+      	selectedAttributes.add(attribute)
+      })
+    })
+  }
+  
+	updateSelectedAttributes()
+  element.addEventListener("trix-selection-change", updateSelectedAttributes) 
+
+  // insert arrow button
+  textGroupElement.insertAdjacentHTML("afterbegin", '<button title="↪" type="button" data-trix-action="x-arrow" class="trix-button trix-button--icon trix-button--icon-arrow">↪</button>')
+
+  document.addEventListener("trix-action-invoke", function(event) {
+    if(event.actionName === "x-arrow"){
+      editor.insertString("↪ ") // <-- the space is a UTF non-breaking space
+    }
+})
+
+})
+
 // --> see here for further customization: https://matthaliski.com/blog/customizing-the-trix-toolbar
 
 $( document ).ready(function() {
-  console.log("loaded content module config", CMConfig)
+ console.log("loaded content module config", CMConfig)
 
   $("#content_module_module_type").on("change", (e)=>{
     let selectedModuleType = $("#content_module_module_type").val()

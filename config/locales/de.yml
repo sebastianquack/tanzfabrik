@@ -487,6 +487,9 @@ de:
   content_modules:
     module_types:
       default: "Alles" 
+      content_2_columns: "Inhaltselement zweizeilig"
+      content_element: "Inhaltselement"
+      page_intro: "Intro"
     style_options:
       magazine: "Magazin"
     form_fields:

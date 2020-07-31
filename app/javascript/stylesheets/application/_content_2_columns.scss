@@ -1,0 +1,46 @@
+@import "./__mixins.scss";
+
+.module__content_2_columns {
+
+  display: flex;
+
+  @include page-dist("padding-left", "left");
+  @include page-dist("padding-right", "right");
+  
+  .column_left {
+    flex: 0.57;
+  }
+
+  .column_right {
+    flex: 0.43;
+    padding-left: 60px;
+    padding-top: 40px;
+    &:before {
+      content: "\A0"; // add a space same height as headline
+      @include font-h2;
+    }
+  }
+
+  h2 {
+    margin-bottom: 40px;
+  }
+
+  h4 {
+  }
+
+  .rich_content_1 {
+    @include font-fliesstext-m;
+  }  
+
+  .rich_content_2 {
+    @include font-fliesstext-m;
+  }  
+
+  // h4 {
+  //   &:before {
+  //     content: "↪ ";
+  //   }
+  // }
+
+
+}

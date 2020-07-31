@@ -1,0 +1,34 @@
+<div class="module__content_element">
+  
+  <div class="column_left">
+
+    <div class="grid_image">
+      <img src="https://picsum.photos/<%=rand(600..1000)%>/<%=rand(400..1000)%>">
+    </div>  
+
+  </div>
+
+  <div class="column_right">
+
+    <% if content_module.headline %>
+      <h2>
+        <%= content_module.headline.html_safe %>
+      </h2>
+    <% end %>
+
+    <% if content_module.special_text %>
+      <div class="special_text">
+        <%= content_module.special_text  %>
+      </div>    
+    <% end %>
+
+    <% if content_module.rich_content_1 %>
+      <div class="rich_content_1">
+        <%= content_module.rich_content_1 %>
+      </div>
+    <% end %>
+
+  </div>
+
+</div>
+
