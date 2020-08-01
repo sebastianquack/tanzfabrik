@@ -17,8 +17,20 @@ task :create_example_page => :environment do
     puts p.errors.full_messages
   end
 
-  module_id_prefix = 10000000
+  module_id_prefix = 100000000
   counter = 1
+
+  img_landscape = {
+    description: "description description description",
+    license: "licence licence licence",
+    attachment: File.open(Rails.root.join('public', 'images', 'landscape.png'))
+  }
+
+  img_portrait = {
+    description: "description description description",
+    license: "licence licence licence",
+    attachment: File.open(Rails.root.join('public', 'images', 'portrait.png'))
+  }
 
   # BEGIN
 
@@ -73,6 +85,7 @@ RICHCONTENT2
 
 
   begin
+    ContentModule.find(module_id_prefix + counter).images.destroy_all
     ContentModule.destroy module_id_prefix + counter
   rescue ActiveRecord::RecordNotFound
     # no problem
@@ -82,6 +95,7 @@ RICHCONTENT2
       id: module_id_prefix + counter,
       page_id: p.id,
       module_type: "content_2_columns",
+      section: "schule",
       headline_de: "Bewerbung",
       headline_en: "Application",
       rich_content_1_de: rich_content_1,
@@ -91,7 +105,6 @@ RICHCONTENT2
       order: counter += 1,
   })
 
-
 ### page_intro / Workshops
 
 rich_content_1 = <<~RICHCONTENT1
@@ -99,6 +112,7 @@ Die Übersicht über Workshops sind im dazugehörigen PDF zu finden
 RICHCONTENT1
 
   begin
+    ContentModule.find(module_id_prefix + counter).images.destroy_all
     ContentModule.destroy module_id_prefix + counter
   rescue ActiveRecord::RecordNotFound
     # no problem
@@ -108,12 +122,14 @@ RICHCONTENT1
       id: module_id_prefix + counter,
       page_id: p.id,
       module_type: "page_intro",
+      section: "schule",
       headline_de: "Work&shy;shops",
       headline_en: "Work&shy;shops",
       rich_content_1_de: rich_content_1,
       rich_content_1_en: "",
       order: counter += 1
-  })
+  }).images.create(img_landscape)
+
 
 ### page_intro / Profiklassen
 
@@ -134,6 +150,7 @@ Kein Training während der Workshops, an gesetzlichen Feiertagen und in den Feri
 RICHCONTENT2
 
   begin
+    ContentModule.find(module_id_prefix + counter).images.destroy_all
     ContentModule.destroy module_id_prefix + counter
   rescue ActiveRecord::RecordNotFound
     # no problem
@@ -143,6 +160,7 @@ RICHCONTENT2
       id: module_id_prefix + counter,
       page_id: p.id,
       module_type: "page_intro",
+      section: "schule",
       headline_de: "Profi&shy;klassen",
       headline_en: "Profi&shy;klassen",
       rich_content_1_de: rich_content_1,
@@ -150,7 +168,7 @@ RICHCONTENT2
       rich_content_2_de: rich_content_2,
       rich_content_2_en: "",      
       order: counter += 1
-  })
+  }).images.create(img_landscape)
 
 ### page_intro / Dance Intensive
 
@@ -176,6 +194,7 @@ RICHCONTENT1
 #RICHCONTENT2
 
   begin
+    ContentModule.find(module_id_prefix + counter).images.destroy_all
     ContentModule.destroy module_id_prefix + counter
   rescue ActiveRecord::RecordNotFound
     # no problem
@@ -185,6 +204,7 @@ RICHCONTENT1
       id: module_id_prefix + counter,
       page_id: p.id,
       module_type: "page_intro",
+      section: "schule",
       headline_de: "Dance In&shy;tensive",
       headline_en: "Dance In&shy;tensive",
       special_text_de: special_text,
@@ -192,9 +212,9 @@ RICHCONTENT1
       rich_content_1_de: rich_content_1,
       rich_content_1_en: "",
       rich_content_2_de: "",
-      rich_content_2_en: "",      
+      rich_content_2_en: "",
       order: counter += 1
-  })
+  }).images.create(img_landscape)
 
 ### content_element / Open Spaces
 
@@ -217,6 +237,7 @@ RICHCONTENT1
 #RICHCONTENT2
 
   begin
+    ContentModule.find(module_id_prefix + counter).images.destroy_all
     ContentModule.destroy module_id_prefix + counter
   rescue ActiveRecord::RecordNotFound
     # no problem
@@ -226,6 +247,7 @@ RICHCONTENT1
       id: module_id_prefix + counter,
       page_id: p.id,
       module_type: "content_element",
+      section: "schule",
       headline_de: "Open Spaces",
       headline_en: "Open Spaces",
       special_text_de: special_text,
@@ -233,9 +255,9 @@ RICHCONTENT1
       rich_content_1_de: rich_content_1,
       rich_content_1_en: "",
       rich_content_2_de: "",
-      rich_content_2_en: "",      
+      rich_content_2_en: "",
       order: counter += 1
-  })
+  }).images.create(img_landscape)
 
 ### content_element / Tanznacht Berlin
 
@@ -256,6 +278,7 @@ RICHCONTENT1
 #RICHCONTENT2
 
   begin
+    ContentModule.find(module_id_prefix + counter).images.destroy_all
     ContentModule.destroy module_id_prefix + counter
   rescue ActiveRecord::RecordNotFound
     # no problem
@@ -265,6 +288,7 @@ RICHCONTENT1
       id: module_id_prefix + counter,
       page_id: p.id,
       module_type: "content_element",
+      section: "buehne",
       headline_de: "Tanznacht Berlin",
       headline_en: "Tanznacht Berlin",
       special_text_de: "",
@@ -274,7 +298,36 @@ RICHCONTENT1
       rich_content_2_de: "",
       rich_content_2_en: "",
       order: counter += 1
-  })
+  }).images.create(img_landscape)
+
+### content_element / Werde Teil der Tanzfabrik!
+
+rich_content_1 = <<~RICHCONTENT1
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+RICHCONTENT1
+
+  begin
+    ContentModule.find(module_id_prefix + counter).images.destroy_all
+    ContentModule.destroy module_id_prefix + counter
+  rescue ActiveRecord::RecordNotFound
+    # no problem
+  end
+
+  ContentModule.create({
+      id: module_id_prefix + counter,
+      page_id: p.id,
+      module_type: "content_element",
+      section: "buehne",
+      headline_de: "Werde Teil der Tanzfabrik!",
+      headline_en: "Werde Teil der Tanzfabrik!",
+      special_text_de: "",
+      special_text_en: "",      
+      rich_content_1_de: rich_content_1,
+      rich_content_1_en: "",
+      rich_content_2_de: "",
+      rich_content_2_en: "",
+      order: counter += 1
+  }).images.create(img_portrait)
 
 ### reference / identifying a physical script
 
@@ -293,6 +346,7 @@ RICHCONTENT1
 #RICHCONTENT2
 
   begin
+    ContentModule.find(module_id_prefix + counter).images.destroy_all
     ContentModule.destroy module_id_prefix + counter
   rescue ActiveRecord::RecordNotFound
     # no problem
@@ -302,6 +356,7 @@ RICHCONTENT1
       id: module_id_prefix + counter,
       page_id: p.id,
       module_type: "reference",
+      section: "buehne",
       headline_de: "Identifying a physical script",
       headline_en: "Identifying a physical script",
       special_text_de: special_text,
@@ -309,16 +364,64 @@ RICHCONTENT1
       rich_content_1_de: rich_content_1,
       rich_content_1_en: "",
       rich_content_2_de: "",
-      rich_content_2_en: "",      
+      rich_content_2_en: "",
       order: counter += 1
-  })
+  }).images.create(img_landscape)
 
 
+### reference / Unsere Tanzklassen
 
+  begin
+    ContentModule.find(module_id_prefix + counter).images.destroy_all
+    ContentModule.destroy module_id_prefix + counter
+  rescue ActiveRecord::RecordNotFound
+    # no problem
+  end
 
+  ContentModule.create({
+      id: module_id_prefix + counter,
+      page_id: p.id,
+      module_type: "reference",
+      section: "schule",
+      headline_de: "Unsere Tanzklassen",
+      headline_en: "Unsere Tanzklassen",
+      sub_de: "Anfänger bis Profi",
+      sub_en: "Anfänger bis Profi",
+      special_text_de: "",
+      special_text_en: "",
+      rich_content_1_de: "",
+      rich_content_1_en: "",
+      rich_content_2_de: "",
+      rich_content_2_en: "",
+      order: counter += 1
+  }).images.create(img_landscape)
 
-  
+### reference / Tanznacht Berlin 2020
 
+begin
+  ContentModule.find(module_id_prefix + counter).images.destroy_all
+  ContentModule.destroy module_id_prefix + counter
+rescue ActiveRecord::RecordNotFound
+  # no problem
+end
+
+ContentModule.create({
+    id: module_id_prefix + counter,
+    page_id: p.id,
+    module_type: "reference",
+    section: "festival",
+    headline_de: "Tanznacht Berlin 2020",
+    headline_en: "Tanznacht Berlin 2020",
+    sub_de: "Age of Displacement",
+    sub_en: "Age of Displacement",
+    special_text_de: "",
+    special_text_en: "",
+    rich_content_1_de: "",
+    rich_content_1_en: "",
+    rich_content_2_de: "",
+    rich_content_2_en: "",
+    order: counter += 1
+}).images.create(img_landscape)
 
 
 # END

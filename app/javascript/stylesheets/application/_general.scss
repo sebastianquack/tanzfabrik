@@ -74,6 +74,10 @@ main.page {
   @include page-dist("padding-top", "top");
 }
 
+/**
+ ** stripes
+ **/
+
 .stripes_vertical {
   display: flex;
   flex-direction: column;
@@ -92,12 +96,46 @@ main.page {
 
     &[data-logo] {
       &:before {
-        content: url("/images/Tanzfabrik_Signet-red.svg");
+        content: url("/images/Tanzfabrik_Signet-black.svg");
         display: block;
         width: $logo-width;
         height: $logo-height;
+        [data-section="schule"] & {
+          content: url("/images/Tanzfabrik_Signet-red.svg");
+        }
+        [data-section="festival"] & {
+          content: url("/images/Tanzfabrik_Signet-green.svg");
+        }        
       }
     }
   }
 
+}
+
+/**
+ ** content modules defaults
+ **/
+
+[data-section] {
+  color: $color-black;
+  border-color: $color-black;
+  .embedded_preview_container & {
+    * { color: $color-black;}
+  }
+}
+
+[data-section="schule"] {
+  color: $color-red;
+  border-color: $color-red;
+  .embedded_preview_container & {
+    * { color: $color-red;}
+  }  
+}
+
+[data-section="festival"] {
+  color: $color-green;
+  border-color: $color-green;
+  .embedded_preview_container & {
+    * { color: $color-green; }
+  }
 }

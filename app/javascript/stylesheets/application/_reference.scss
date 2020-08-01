@@ -6,6 +6,12 @@
 
   @include page-dist("padding-left", "left");
   @include page-dist("padding-right", "right");
+
+  border-style: solid;
+  border-width: 1px 0 1px 0;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  
   
   .column_left {
     flex: 1;
@@ -24,10 +30,17 @@
     display: flex;
 
     .text_content {
-      flex: 1;
       box-sizing: border-box;
       padding-left: 50px;
       padding-right: 50px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+
+      align-items: center;
+      justify-content: center;
+
     }
   }
 
@@ -41,6 +54,10 @@
       @include font-stripes-infos;
     }
   }  
+
+  .sub {
+    @include font-title;
+  }
 
   .special_text {
     @include font-stripes-infos;

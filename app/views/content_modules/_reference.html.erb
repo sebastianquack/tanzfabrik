@@ -1,10 +1,10 @@
-<div class="module__reference">
+<div class="module__reference" data-section="<%= content_module.section %>">
   
   <div class="column_left">
 
-    <div class="grid_image">
-      <img src="https://picsum.photos/<%=rand(600..1000)%>/<%=rand(400..1000)%>">
-    </div>  
+    <% if content_module.images.count > 0 %>
+      <img src=<%= content_module.images[0].attachment.url(:large) %>>
+    <% end %>
 
   </div>
 
@@ -24,23 +24,33 @@
 
     <div class="text_content">
 
-      <% if content_module.special_text %>
-        <div class="special_text">
-          <%= content_module.special_text  %>
-        </div>    
-      <% end %>
+      <div class="text_content_inner">      
 
-      <% if content_module.headline %>
-        <h3>
-          <%= content_module.headline.html_safe %>
-        </h3>
-      <% end %>
+        <% if content_module.special_text %>
+          <div class="special_text">
+            <%= content_module.special_text  %>
+          </div>    
+        <% end %>
 
-      <% if content_module.rich_content_1 %>
-        <div class="rich_content_1">
-          <%= content_module.rich_content_1 %>
-        </div>
-      <% end %>
+        <% if content_module.headline %>
+          <h3>
+            <%= content_module.headline_shy.html_safe %>
+          </h3>
+        <% end %>
+
+        <% if content_module.sub %>
+          <div class="sub">
+            <%= content_module.sub  %>
+          </div>
+        <% end %>
+
+        <% if content_module.rich_content_1 %>
+          <div class="rich_content_1">
+            <%= content_module.rich_content_1 %>
+          </div>
+        <% end %>
+
+      </div>
 
     </div>
 

@@ -1,15 +1,17 @@
 
-<div class="module__page_intro">
+<div class="module__page_intro" data-section="<%= content_module.section %>">
 
   <div class="grid_image">
-    <img src="https://picsum.photos/<%=rand(600..1000)%>/<%=rand(400..600)%>">
-  </div>
+    <% if content_module.images.count > 0 %>
+      <img src=<%= content_module.images[0].attachment.url(:large) %>>
+    <% end %>
+  </div>  
 
   <div class="grid_headline">
 
   <% if content_module.headline %>
     <h1>
-      <%= content_module.headline.html_safe %>
+      <%= content_module.headline_shy.html_safe %>
     </h1>
   <% end %>
 

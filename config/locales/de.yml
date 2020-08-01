@@ -406,6 +406,7 @@ de:
         parameter: Auswahl
         module_type: Modul-Typ
         style_option: Darstellungs-Option
+        section: Bereich (Farbe)
         draft: Im Font-End verbergen
       page: 
         title: Seitentitel
@@ -493,6 +494,10 @@ de:
       reference: "Verweis"
     style_options:
       magazine: "Magazin"
+    sections:
+      buehne: "Bühne (Schwarz)"
+      schule: "Schule (Rot)"
+      festival: "Festival (Grün)"
     form_fields:
       super: "Über-Headline"
       headline: "Headline"

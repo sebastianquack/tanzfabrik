@@ -14,8 +14,12 @@ page_intro:
 content_2_columns:
   style-options:
     - default
+  sections:
+    - buehne
+    - schule
   form-fields:
     - headline
+    - sub
     - rich_content_1
     - rich_content_2
   images: false
@@ -23,6 +27,9 @@ content_element:
   style-options:
     - default
     - centered
+  sections:
+    - buehne
+    - schule    
   form-fields:
     - headline
     - special_text
@@ -30,6 +37,10 @@ content_element:
 reference:
   style-options:
     - default
+  sections:
+    - buehne
+    - schule
+    - festival
   form-fields:
     - special_text
     - headline

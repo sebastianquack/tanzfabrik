@@ -13,6 +13,7 @@ ActiveAdmin.register ContentModule do
   #  t.string "module_type"
   #  t.integer "page_id"
   #  t.string "style_option"
+  #  t.string "section"
   #  t.string "super"
   #  t.string "headline"
   #  t.string "sub"
@@ -24,7 +25,7 @@ ActiveAdmin.register ContentModule do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :module_type, :style_option, :draft, :headline_de, :headline_en, :super_de, :super_en, :sub_de, :sub_en, :special_text_de, :special_text_en, :rich_content_1_de, :rich_content_1_en, :rich_content_2_de, :rich_content_2_en, :custom_html_de, :custom_html_en, :parameter, :locale,
+  permit_params :module_type, :style_option, :section, :draft, :headline_de, :headline_en, :super_de, :super_en, :sub_de, :sub_en, :special_text_de, :special_text_en, :rich_content_1_de, :rich_content_1_en, :rich_content_2_de, :rich_content_2_en, :custom_html_de, :custom_html_en, :parameter, :locale,
   :images_attributes => [:id, :description, :license, :attachment, :_destroy]
 
 
@@ -78,6 +79,9 @@ ActiveAdmin.register ContentModule do
       row :style_option do |content_module|
         t("content_modules.style_options." + content_module.style_option)
       end
+      row :section do |content_module|
+        t("content_modules.sections." + content_module.section)
+      end      
       row "weiter zu" do |content_module|
         ul do
           li link_to "Modul bearbeiten", edit_admin_content_module_url(content_module.id)
@@ -108,9 +112,11 @@ ActiveAdmin.register ContentModule do
       if type == "" || !type || !CM_CONFIG[type]
         type = default_module_type
       end
-      style_options = CM_CONFIG[type]["style-options"] ? CM_CONFIG[type]["style-options"].map { |a| [ t("content_modules.style_options." + a), a ] } : []
 
-      def make_input(f, mtype, field, active, action_text)    
+      style_options = CM_CONFIG[type]["style-options"] ? CM_CONFIG[type]["style-options"].map { |a| [ t("content_modules.style_options." + a), a ] } : []
+      sections = CM_CONFIG[type]["sections"] ? CM_CONFIG[type]["sections"].map { |a| [ t("content_modules.sections." + a), a ] } : []
+
+      def make_input(f, mtype, field, active, action_text, hint="")    
         
         unless action_text
           # special types
@@ -122,22 +128,23 @@ ActiveAdmin.register ContentModule do
             f.input field, :label => "Gruppen", :hint => "z.B. Künstler, Kurslehrer, Dance-Intensive"
           else
             return f.input field, :wrapper_html => { 
-              :class => active ? "cm-field-active" : "cm-field-hidden" 
-            }
+              :class => active ? "cm-field-active" : "cm-field-hidden"
+            },
+            :hint => hint
           end
         else 
           return f.input field, :wrapper_html => { 
             :class => active ? "cm-field-active" : "cm-field-hidden" 
-          }, :as => :action_text
+          }, :as => :action_text, :hint => hint
         end        
       end 
 
-      def content_module_input(f, mtype, field, action_text=false, localise=true)
+      def content_module_input(f, mtype, field, action_text=false, localise=true, hint="")
         active = CM_CONFIG[mtype]["form-fields"] ? CM_CONFIG[mtype]["form-fields"].include?(field) : false
         if localise
           return [
-            make_input(f, mtype, field + "_de", active, action_text),
-            make_input(f, mtype, field + "_en", active, action_text),
+            make_input(f, mtype, field + "_de", active, action_text, hint),
+            make_input(f, mtype, field + "_en", active, action_text, hint),
             hr
           ]
         else
@@ -153,6 +160,9 @@ ActiveAdmin.register ContentModule do
         if style_options.length > 0
           f.input :style_option, :as => :select, :collection => style_options, :include_blank => false
         end
+        if sections.length > 0
+          f.input :section, :as => :select, :collection => sections, :include_blank => false
+        end
         f.input :draft, :label => t(:draft)
         f.li link_to "Modul löschen", delete_content_module_admin_content_module_path, :class => "button active-admin-delete-content-module"
       end
@@ -162,7 +172,7 @@ ActiveAdmin.register ContentModule do
           img src: '/module_hints/' + type + '.png' # should be done with image_pack_tag but couldn't make it work!!
         end
         content_module_input f, type, "super"
-        content_module_input f, type, "headline"
+        content_module_input f, type, "headline", false, true, "Bitte mit \"\\\" mögliche Trennungen markieren, z.B. \"Tanz\\klassen\"."
         content_module_input f, type, "sub"
         content_module_input f, type, "special_text"
         content_module_input f, type, "parameter", false, false

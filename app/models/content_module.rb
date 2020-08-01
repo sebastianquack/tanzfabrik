@@ -21,4 +21,9 @@ class ContentModule < ActiveRecord::Base
 
   scope :submenu_dividers, -> { where("module_type = ? ", :submenu_divider) }
   
+
+  def headline_shy
+    self.headline.gsub("\\", "&shy;")
+  end
+
 end
