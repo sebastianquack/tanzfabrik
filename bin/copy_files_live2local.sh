@@ -3,7 +3,7 @@
 set -e
 
 echo "Mirroring production to local"
-SOURCE_KEY=AKIAILDX56AXKPWMIVXA
+SOURCE_KEY=AKIASBAQF5EANW35E7O4
 
 TARGET_KEY=development
 TARGET_SECRET=development
@@ -23,5 +23,5 @@ docker-compose up -d minio
 docker run --rm -ti --network tanzfabrik --entrypoint="/bin/sh" minio/mc -c "\
   mc config host add production https://s3.amazonaws.com $SOURCE_KEY $SOURCE_SECRET
   mc config host add local http://minio:9000 $TARGET_KEY $TARGET_SECRET  
-  mc mirror --overwrite --remove production/tanzfabrik-production/ local/tanzfabrik-local  
+  mc mirror --overwrite --remove production/tanzfabrik-relaunch2020/ local/tanzfabrik-local  
  "

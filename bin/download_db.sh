@@ -4,11 +4,11 @@
 cd $(git rev-parse --show-toplevel)
 
 # capture backup
-heroku pg:backups capture --app tanzfabrik
+heroku pg:backups capture --app tanzfabrik2020
 
 # download db dump
-mkdir -p .data
-curl -o .data/downloads/latest.dump `heroku pg:backups public-url --app tanzfabrik`
+mkdir -p .data/downloads
+curl -o .data/downloads/latest.dump `heroku pg:backups public-url --app tanzfabrik2020`
 
 # run restore
 echo "password: postgres"
