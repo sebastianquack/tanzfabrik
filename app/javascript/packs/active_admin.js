@@ -13,7 +13,6 @@ import "jquery-ui";
 // sortable tree (extracted from gem)
 import "sortable_tree/jquery.mjs.nestedSortable.js";
 import "sortable_tree/sortable.js";
-import "sortable_tree/sortable.sass";
 
 // additional npm modules
 import autosize from "autosize"
