@@ -6,14 +6,14 @@
 // const imagePath = (name) => images(name, true)
 
 // active admin basics
-import "../stylesheets/active_admin";
+import "stylesheets/active_admin";
 import "@activeadmin/activeadmin";
 import "jquery-ui";
 
 // sortable tree (extracted from gem)
-import "../sortable_tree/jquery.mjs.nestedSortable.js";
-import "../sortable_tree/sortable.js";
-import "../sortable_tree/sortable.sass";
+import "sortable_tree/jquery.mjs.nestedSortable.js";
+import "sortable_tree/sortable.js";
+import "sortable_tree/sortable.sass";
 
 // additional npm modules
 import autosize from "autosize"
