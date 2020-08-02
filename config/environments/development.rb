@@ -95,10 +95,10 @@ Tanzfabrik::Application.configure do
   if !ENV['S3_MINIO_HOSTNAME'].to_s.empty? && !ENV['S3_MINIO_ENDPOINT'].to_s.empty?
     puts "Using MINIO S3, HOSTNAME=" + ENV['S3_MINIO_HOSTNAME'] + ", ENDPOINT=" + ENV['S3_MINIO_ENDPOINT']
     paperclip_minio_defaults = {
-      s3_host_name: ENV['S3_MINIO_HOSTNAME'],
+      s3_host_name: ENV['S3_MINIO_HOSTNAME'], # without http://
       s3_options: {
-        endpoint: "http://" + ENV['S3_MINIO_ENDPOINT'],
-        force_path_style: true 
+        endpoint: ENV['S3_MINIO_ENDPOINT'], # with  http://
+        force_path_style: ENV['S3_PATH_STYLE'] == "true"
       },    
       :url => ':s3_path_url',   
     }
