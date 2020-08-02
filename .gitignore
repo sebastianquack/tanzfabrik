@@ -27,6 +27,9 @@
 # Env
 /.env
 
+# preompiled assets
+/public/assets/
+
 # Other
 .DS_Store
 /public/system/*
