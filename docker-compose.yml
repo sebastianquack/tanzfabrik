@@ -43,6 +43,7 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - ./.data/db:/var/lib/postgresql/data:cached
+      - ./.data/downloads:/downloads
     healthcheck:
       test: pg_isready -U postgres -h 127.0.0.1
       interval: 5s      

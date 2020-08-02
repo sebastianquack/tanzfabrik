@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_30_144318) do
+ActiveRecord::Schema.define(version: 2020_08_01_115209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,12 @@ ActiveRecord::Schema.define(version: 2020_07_30_144318) do
     t.string "sub_en"
     t.text "special_text_en"
     t.text "custom_html_en"
+    t.string "section"
+    t.string "super"
+    t.string "headline"
+    t.string "sub"
+    t.text "special_text"
+    t.text "custom_html"
   end
 
   create_table "downloads", id: :serial, force: :cascade do |t|
