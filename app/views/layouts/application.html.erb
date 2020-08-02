@@ -14,7 +14,8 @@
 </head>
 <body data-menu-item-key="<%= @menu_item.key if @menu_item %>" data-section="<%= @landing_page_menu_item ? @landing_page_menu_item.key : "start" %>">
 
-  <% page_title = get_text_item("page_title").sub!(" ", "<br />").html_safe if get_text_item("page_title") %>
+  <%= get_text_item("page_title") %>
+  <% page_title = get_text_item("page_title").sub(" ", "<br />").html_safe %>
   
   <header class="horizontal_bar_container">
     <div class="horizontal_bar_left">

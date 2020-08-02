@@ -2,8 +2,8 @@
 // see `active_admin.scss` for customization.
 
 // enable image_pack_tag
-const images = require.context('../images', true)
-const imagePath = (name) => images(name, true)
+// const images = require.context('../images', true)
+// const imagePath = (name) => images(name, true)
 
 // active admin basics
 import "../stylesheets/active_admin";
