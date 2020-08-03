@@ -105,7 +105,7 @@ if table_data.length <= 2
   logger.debug "short table data"
   logger.debug table_data
 
-  if table_data[1][0] == nil
+  if table_data[1] == nil || table_data[1][0] == nil
     return
   end
 
