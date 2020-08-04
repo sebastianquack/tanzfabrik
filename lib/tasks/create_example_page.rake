@@ -25,17 +25,24 @@ task :create_example_page => :environment do
   img_landscape = {
     description: "description description description",
     license: "licence licence licence",
-    attachment: File.open(Rails.root.join('public', 'images', 'landscape.png'))
+    attachment: File.open(Rails.root.join('public', 'seeds', 'landscape.png'))
   }
 
   img_portrait = {
     description: "description description description",
     license: "licence licence licence",
-    attachment: File.open(Rails.root.join('public', 'images', 'portrait.png'))
+    attachment: File.open(Rails.root.join('public', 'seeds', 'portrait.png'))
   }
 
-  def make_module(attributes_hash, image=nil)
-    puts "making " + attributes_hash[:module_type].to_s + " / " + attributes_hash[:headline_de].to_s
+  pdf = {
+    description_de: "Beispiel PDF",
+    description_en: "Example PDF",
+    attachment_de: File.open(Rails.root.join('public', 'seeds', 'test-PDF.pdf')),
+    attachment_en: File.open(Rails.root.join('public', 'seeds', 'test-PDF.pdf'))
+  }
+
+  def make_module(attributes_hash, image=nil, download=nil)
+    puts "creating " + attributes_hash[:module_type].to_s + " / " + attributes_hash[:headline_de].to_s
 
     begin
       #ContentModule.find($module_id_prefix + $counter).slides.destroy_all
@@ -62,8 +69,14 @@ task :create_example_page => :environment do
 
     if image 
       cm.images.create(image)
-      cm.save!
     end
+
+    if download
+      cm.downloads.create(download)
+    end
+
+    cm.save!
+
   end
 
   # BEGIN
@@ -321,7 +334,7 @@ make_module({
   headline_en: "Unsere Tanzklassen",
   sub_de: "Anfänger bis Profi",
   sub_en: "Anfänger bis Profi",
-}, img_landscape)
+}, img_landscape, pdf)
 
 ### reference / Tanznacht Berlin 2020
 

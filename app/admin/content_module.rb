@@ -26,7 +26,8 @@ ActiveAdmin.register ContentModule do
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   permit_params :module_type, :style_option, :section, :draft, :headline_de, :headline_en, :super_de, :super_en, :sub_de, :sub_en, :special_text_de, :special_text_en, :rich_content_1_de, :rich_content_1_en, :rich_content_2_de, :rich_content_2_en, :custom_html_de, :custom_html_en, :parameter, :locale,
-  :images_attributes => [:id, :description, :license, :attachment, :_destroy]
+  :images_attributes => [:id, :description, :license, :attachment, :_destroy],
+  :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
 
 
   ActiveAdmin.register ContentModule do

@@ -18,6 +18,33 @@
 //
 //   .status_tag { background: #6090DB; }
 
+/* general adcitve admin interface changes */
+
+.admin_namespace #wrapper {
+  background-color: #77777a;
+
+  .pagination_information b {
+    color: #ddd;
+  }
+
+  tr {
+    border-color:black;
+    &.even { background-color: #ddd; }
+    &.odd  { background-color: #eee; }
+  }
+
+  form .actions {
+    margin-top: 35px;
+
+    input, button, a.button {
+      padding: 15px 25px;
+      margin-left: 10px;
+      font-size: 115%;
+      border-color:  #222;
+    }
+  }
+}
+
 
 /* active admin trix integration */
 
