@@ -7,9 +7,11 @@
     end
 %>
 
-<p style="background-color: lightgray">
-    module_type: <%= content_module.module_type %> (using <%= partial %>) / style_option: <%= content_module.style_option %> / parameter: <%= content_module.parameter %>
-</p>
+<% if Rails.env.development? %>
+  <!--p style="background-color: lightgray">
+      module_type: <%= content_module.module_type %> (using <%= partial %>) / style_option: <%= content_module.style_option %> / parameter: <%= content_module.parameter %>
+  </p-->
+<% end %>
 
 <%= render :partial => "/content_modules/" + partial, :locals => {:content_module => content_module} %>
 

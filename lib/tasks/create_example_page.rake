@@ -34,6 +34,35 @@ task :create_example_page => :environment do
 
   # BEGIN
 
+
+### feature / The Morning Show of Celine and Renana - Focus: Choreographers
+
+rich_content_1 = <<~RICHCONTENT1
+<b>TV-Show</b> mit Igor Dobricic, Guillaume Marie, Roger Sala Reyner
+RICHCONTENT1
+
+  begin
+    ContentModule.find(module_id_prefix + counter).images.destroy_all
+    ContentModule.destroy module_id_prefix + counter
+  rescue ActiveRecord::RecordNotFound
+    # no problem
+  end
+
+  ContentModule.create({
+      id: module_id_prefix + counter,
+      page_id: p.id,
+      module_type: "feature",
+      section: "buehne",
+      headline_de: "The Morning Show of Celine and Renana - Focus: Choreographers",
+      headline_en: "The Morning Show of Celine and Renana - Focus: Choreographers",
+      rich_content_1_de: rich_content_1,
+      rich_content_1_en: "",
+      special_text_de: "02.02.2020, Kreuzberg 1",
+      special_text_en: "02.02.2020, Kreuzberg 1",
+      order: counter += 1
+  }).images.create(img_landscape)
+
+
   ### content_2_columns
 
   rich_content_1 = <<~RICHCONTENT
@@ -123,8 +152,8 @@ RICHCONTENT1
       page_id: p.id,
       module_type: "page_intro",
       section: "schule",
-      headline_de: "Work&shy;shops",
-      headline_en: "Work&shy;shops",
+      headline_de: "Work\\shops",
+      headline_en: "Work\\shops",
       rich_content_1_de: rich_content_1,
       rich_content_1_en: "",
       order: counter += 1
@@ -161,8 +190,8 @@ RICHCONTENT2
       page_id: p.id,
       module_type: "page_intro",
       section: "schule",
-      headline_de: "Profi&shy;klassen",
-      headline_en: "Profi&shy;klassen",
+      headline_de: "Profi\\klassen",
+      headline_en: "Profi\\klassen",
       rich_content_1_de: rich_content_1,
       rich_content_1_en: "",
       rich_content_2_de: rich_content_2,
@@ -205,8 +234,8 @@ RICHCONTENT1
       page_id: p.id,
       module_type: "page_intro",
       section: "schule",
-      headline_de: "Dance In&shy;tensive",
-      headline_en: "Dance In&shy;tensive",
+      headline_de: "Dance In\\tensive",
+      headline_en: "Dance In\\tensive",
       special_text_de: special_text,
       special_text_en: "",      
       rich_content_1_de: rich_content_1,

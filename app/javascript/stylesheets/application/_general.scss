@@ -94,9 +94,35 @@ main.page {
       }
     }
 
+    &[data-text] {
+      &:before {
+        content: attr(data-text);
+        display: block;
+        white-space: pre-line;
+      }
+    }    
+
+    &[data-text-section] {
+      &:before, &:after {
+        display: block;
+        [data-section="buehne"] & {
+          content: "Bühne";
+        }
+        [data-section="schule"] & {
+          content: "Schule";
+        }
+        [data-section="fabrik"] & {
+          content: "Fabrik";
+        }        
+      }
+    }
+
     &[data-logo] {
       &:before {
         content: url("/images/Tanzfabrik_Signet-black.svg");
+        .module__feature[data-section="buehne"] & {
+          content: url("/images/Tanzfabrik_Signet-white.svg");  
+        }        
         display: block;
         width: $logo-width;
         height: $logo-height;
@@ -138,4 +164,8 @@ main.page {
   .embedded_preview_container & {
     * { color: $color-green; }
   }
+}
+
+[class^="module__"] {
+  margin-bottom: 150px;
 }

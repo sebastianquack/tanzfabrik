@@ -1,0 +1,77 @@
+<div class="module__feature" data-section="<%= content_module.section %>" data-style-option="<%= content_module.style_option %>">
+
+  <% if content_module.images.count > 0 %>
+    <img src=<%= content_module.images[0].attachment.url(:background) %>>
+  <% end %>
+
+  <div class="columns">
+
+    <div class="column_left">
+
+      <div class="stripes_vertical">
+        <span data-text="Tanzfabrik &#10;Berlin"></span>
+        <span data-text="Tanzfabrik &#10;Berlin"></span>
+        <span data-text="Tanzfabrik &#10;Berlin"></span>
+      </div>
+
+    </div>
+
+    <div class="column_right">
+      
+      <!--= # render :partial => 'stripes', :locals => { 
+        style: "schule",  
+        direction: "vertical",
+        content: "schule"
+      } -->
+
+      <div class="stripes_vertical">
+        <span data-text-section></span>
+        <span data-text-section></span>
+        <span data-text-section></span>
+      </div>
+
+      <div class="text_content">
+
+        <div class="text_content_inner">      
+
+          <% if content_module.special_text %>
+            <div class="special_text">
+              <%= content_module.special_text  %>
+            </div>    
+          <% end %>
+
+          <% if content_module.headline %>
+            <h3 class="headline">
+              <%= content_module.headline_shy.html_safe %>
+            </h3>
+          <% end %>
+
+          <% if content_module.sub %>
+            <div class="sub">
+              <%= content_module.sub  %>
+            </div>
+          <% end %>
+
+          <% if content_module.rich_content_1 %>
+            <div class="rich_content_1">
+              <%= content_module.rich_content_1 %>
+            </div>
+          <% end %>
+
+        </div>
+
+      </div>
+
+      <div class="stripes_vertical">
+        <span data-logo></span>
+        <span data-logo></span>
+        <span data-logo></span>
+      </div>
+
+    </div>
+    
+
+  </div>
+
+</div>
+

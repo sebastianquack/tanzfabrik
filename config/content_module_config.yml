@@ -7,6 +7,9 @@ feature:
   style-options:
     - default
     - left
+  sections:
+    - buehne
+    - schule    
   form-fields:
     - headline
     - special_text
