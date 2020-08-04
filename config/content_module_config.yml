@@ -3,6 +3,15 @@
 # note: rails app needs to restart for changes in this config to take effect
 # translations are in config/locales under content_modules key
 
+feature:
+  style-options:
+    - default
+    - left
+  form-fields:
+    - headline
+    - special_text
+    - rich_content_1
+  downloads: false
 page_intro:
   style-options:
     - default
@@ -17,9 +26,9 @@ content_2_columns:
   sections:
     - buehne
     - schule
+    - fabrik
   form-fields:
     - headline
-    - sub
     - rich_content_1
     - rich_content_2
   images: false
@@ -29,7 +38,8 @@ content_element:
     - centered
   sections:
     - buehne
-    - schule    
+    - schule
+    - fabrik
   form-fields:
     - headline
     - special_text
@@ -40,10 +50,11 @@ reference:
   sections:
     - buehne
     - schule
+    - fabrik
     - festival
   form-fields:
-    - special_text
     - headline
+    - sub
     - rich_content_1    
 submenu_divider:
   style-options:

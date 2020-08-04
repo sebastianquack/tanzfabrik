@@ -495,7 +495,7 @@ de:
   content_modules:
     module_types:
       default: "Alles" 
-      content_2_columns: "Inhaltselement zweizeilig"
+      content_2_columns: "Inhaltselement zweispaltig"
       content_element: "Inhaltselement"
       page_intro: "Intro"
       reference: "Verweis"
@@ -504,7 +504,8 @@ de:
     sections:
       buehne: "Bühne (Schwarz)"
       schule: "Schule (Rot)"
-      festival: "Festival (Grün)"
+      fabrik: "Fabrik (Rot)"
+      festival: "Tanznacht (Grün)"
     form_fields:
       super: "Über-Headline"
       headline: "Headline"

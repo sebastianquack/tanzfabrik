@@ -60,9 +60,32 @@ dokku config:set BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-ruby P
 
 git push dokku relaunch2020:master
 
-dokku run rake db:create
-dokku run rake db:migrate
+# dokku postgres:import relaunch2020_postgres < .data/downloads/latest.dump
+# or 
+# dokku run rake db:create
+# dokku run rake db:migrate
 dokku letsencrypt
+
+dokku apps:create minio
+dokku config:set --no-restart minio MINIO_ACCESS_KEY=$(echo `openssl rand -base64 45` | tr -d \=+ | cut -c 1-20)
+dokku config:set --no-restart minio MINIO_SECRET_KEY=$(echo `openssl rand -base64 45` | tr -d \=+ | cut -c 1-32)
+dokku config:set --no-restart minio NGINX_MAX_REQUEST_BODY=100M
+dokku config:set --no-restart minio MINIO_DOMAIN=minio.tanzfabrik.intergestalt.cloud
+dokku config minio # get keys
+
+mkdir -p /var/lib/dokku/data/storage/minio
+chown 32769:32769 /var/lib/dokku/data/storage/minio
+dokku storage:mount minio /var/lib/dokku/data/storage/minio:/home/dokku/data
+
+dokku proxy:ports-add minio http:80:9000
+dokku proxy:ports-remove minio http:80:5000
+dokku proxy:ports-remove minio http:9000:9000
+
+dokku letsencrypt minio
+
+dokku config:set --no-restart relaunch2020 S3_TANZFABRIK_BUCKET=tanzfabrik-relaunch2020
+dokku config:set --no-restart relaunch2020 S3_MINIO_HOSTNAME=
+
 ```
 
 ## staging server
