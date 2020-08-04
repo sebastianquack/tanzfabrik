@@ -1,17 +1,20 @@
 #local variable people
 
-people.each do |person|
-  div do
-    a :href=>person_path(person) do
-      div :class => "image-container" do
-        if person.images.exists?
-          img :src => person.images.first.attachment.url(:people_hires)
-        else
-          #img :src => asset_path("schwarzT.png", type: :image)
+
+ol :class => "people_list" do
+  people.each do |person|
+    li do
+      a :href=>person_path(person) do
+        div :class => "image-container" do
+          if person.images.exists?
+            img :src => person.images.first.attachment.url(:people_hires)
+          else
+            #img :src => asset_path("schwarzT.png", type: :image)
+          end
         end
-      end
-      div :class => "info" do
-        h3 person.name
+        div :class => "info" do
+          text_node person.name
+        end
       end
     end
   end

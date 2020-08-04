@@ -1,0 +1,24 @@
+@import "./__mixins.scss";
+
+.people_list {
+  display: flex;
+  flex-wrap: wrap;
+
+  li {
+    width: 202px;
+    margin-right: 18px;
+    margin-bottom: 50px;
+    
+    .image-container img {
+      height: 263px;
+      width: 100%;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .info, a {
+      @include font-title;
+    }
+  }
+}

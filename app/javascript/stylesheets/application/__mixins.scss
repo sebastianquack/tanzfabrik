@@ -117,7 +117,7 @@
 
 @mixin font-title {
   font-size: 28px;
-  line-height: 17px;
+  line-height: 32px;
   @include breakpoint('s') {
     font-size: 18px;
     line-height: 22px;
@@ -208,6 +208,26 @@
   .embedded_preview_container & {
     font-size: 40px !important;
     line-height: 46px !important;
+  }
+}
+
+@mixin font-button {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: $font-weight-medium;
+  .embedded_preview_container & {
+    font-size: 18px !important;
+    line-height: 24px !important;
+  }
+}
+
+@mixin font-button {
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: $font-weight-medium;
+  .embedded_preview_container & {
+    font-size: 14px !important;
+    line-height: 24px !important;
   }
 }
 

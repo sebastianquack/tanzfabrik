@@ -172,3 +172,27 @@ main.page {
 [class^="module__"] {
   margin-bottom: 150px;
 }
+
+/**
+ ** buttons
+ **/
+
+.button {
+  @include font-button;
+  border: 1px solid;
+  display: block;
+  border-radius: 7px;
+  padding: 4px 11px 4px 12px;
+  position: relative;
+
+  &:hover {
+    background-color:currentColor;
+    &:after {
+      content: attr(title);
+      color: white;
+      position: absolute;
+      left: 12px;
+      top: 4px;
+    }
+  }
+}
