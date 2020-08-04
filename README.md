@@ -108,3 +108,16 @@ https://relaunch2020.tanzfabrik.intergestalt.cloud/
 ## mirror production bucket to local minio bucket
 
 `bin/copy_files_live2local.sh`
+
+
+## install dip for easier interaction with docker locally
+
+````
+brew tap bibendi/dip
+brew install dip
+````
+- see commands: `dip ls`
+- examples: 
+  - `dip rake create_example_page`
+  - `dip rake db:migrate`
+  - `dip rails c`
