@@ -157,7 +157,7 @@ make_module({
   rich_content_1_en: "",
   rich_content_2_de: rich_content_2,
   rich_content_2_en: "",
-})
+}, nil, pdf)
 
 
 ### page_intro / Workshops
@@ -176,11 +176,6 @@ make_module({
 }, img_landscape)
 
 ### page_intro / Profiklassen
-
-#spacial_text = <<~SPECIALTEXT
-#1 Klasse á 90 Minuten: 7 € / 10er Karte: 65 €<br />
-#1 Klasse á 120 Minuten: 8,50 € / 10er Karte: 65 € +1 € pro 120 Min.-Klasse.
-#SPECIALTEXT
 
 rich_content_1 = <<~RICHCONTENT1
 1 Klasse á 90 Minuten: 7 € / 10er Karte: 65 €<br />
@@ -202,7 +197,7 @@ make_module({
   rich_content_1_en: "",
   rich_content_2_de: rich_content_2,
   rich_content_2_en: "",      
-}, img_landscape)
+}, img_landscape, pdf)
 
 ### page_intro / Dance Intensive
 
