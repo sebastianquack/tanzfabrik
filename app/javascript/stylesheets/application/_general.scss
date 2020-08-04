@@ -113,6 +113,9 @@ main.page {
         }
         [data-section="fabrik"] & {
           content: "Fabrik";
+        }
+        [data-section="festival"] & {
+          content: "Festival";
         }        
       }
     }

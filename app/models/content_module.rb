@@ -8,7 +8,7 @@ class ContentModule < ActiveRecord::Base
   has_rich_text :rich_content_2_de
   has_rich_text :rich_content_2_en
 
-  translates :super, :headline, :sub, :special_text, :custom_html, :rich_content_1, :rich_content_2
+  translates :super, :headline, :sub, :special_text, :custom_html, :rich_content_1, :rich_content_2, :link_title, :link_href
 
   has_many :images
   accepts_nested_attributes_for :images, :allow_destroy => true

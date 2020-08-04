@@ -47,6 +47,8 @@ content_element:
     - headline
     - special_text
     - rich_content_1
+    - link_title
+    - link_href
 reference:
   style-options:
     - default
@@ -59,6 +61,8 @@ reference:
     - headline
     - sub
     - rich_content_1    
+    - link_title
+    - link_href
 submenu_divider:
   style-options:
     - default
@@ -110,6 +114,8 @@ default:
     - rich_content_2
     - custom_html
     - parameter
+    - link_title
+    - link_href
 
 
 

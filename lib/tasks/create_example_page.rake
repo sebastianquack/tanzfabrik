@@ -42,7 +42,7 @@ task :create_example_page => :environment do
   }
 
   def make_module(attributes_hash, image=nil, download=nil)
-    puts "creating " + attributes_hash[:module_type].to_s + " / " + attributes_hash[:headline_de].to_s
+    puts "creating " + ($module_id_prefix + $counter).to_s + " " + attributes_hash[:module_type].to_s + " / " + attributes_hash[:headline_de].to_s
 
     begin
       #ContentModule.find($module_id_prefix + $counter).slides.destroy_all
@@ -64,6 +64,10 @@ task :create_example_page => :environment do
         rich_content_1_en: "",
         special_text_de: "",
         special_text_en: "",
+        link_href_de:"",
+        link_href_en:"",
+        link_title_de:"",
+        link_title_en:"",
         order: $counter += 1
     }.merge(attributes_hash))
 
@@ -329,7 +333,7 @@ make_module({
   headline_en: "Unsere Tanzklassen",
   sub_de: "Anfänger bis Profi",
   sub_en: "Anfänger bis Profi",
-}, img_landscape, pdf)
+}, img_landscape)
 
 ### reference / Tanznacht Berlin 2020
 
@@ -340,6 +344,10 @@ make_module({
   headline_en: "Tanznacht Berlin 2020",
   sub_de: "Age of Displacement",
   sub_en: "Age of Displacement",
+  link_title_de: "Tanznacht",
+  link_title_en: "Tanznacht",
+  link_href_de: "http://tanznachtberlin.de/",
+  link_href_en: "http://tanznachtberlin.de/",  
 }, img_landscape)
 
 # END

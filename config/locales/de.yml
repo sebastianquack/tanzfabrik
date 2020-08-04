@@ -414,7 +414,9 @@ de:
         special_text: "Spezialtext"
         rich_content_1: "Text 1"
         rich_content_2: "Text 2"
-        custom_html: "HTML"        
+        custom_html: "HTML"
+        link_title: "Button Text"
+        link_href: "Button URL"
       page: 
         title: Seitentitel
         slug: URL
@@ -507,11 +509,3 @@ de:
       schule: "Schule (Rot)"
       fabrik: "Fabrik (Rot)"
       festival: "Tanznacht (Grün)"
-    form_fields:
-      super: "Über-Headline"
-      headline: "Headline"
-      sub: "Unter-Headline"
-      special_text: "Spezialtext"
-      rich_content_1: "Text 1"
-      rich_content_2: "Text 2"
-      custom_html: "HTML"

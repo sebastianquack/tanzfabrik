@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_115209) do
+ActiveRecord::Schema.define(version: 2020_08_04_124139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,10 @@ ActiveRecord::Schema.define(version: 2020_08_01_115209) do
     t.string "sub"
     t.text "special_text"
     t.text "custom_html"
+    t.string "link_href_de"
+    t.string "link_href_en"
+    t.string "link_title_de"
+    t.string "link_title_en"
   end
 
   create_table "downloads", id: :serial, force: :cascade do |t|
