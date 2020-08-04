@@ -8,8 +8,9 @@
   tags = no_commas.split(" ")
 
   # find people that have this tag
+  sep = Person.get_tag_separator_regex_string
   tags.each do |tag|
-    people_tag = Person.where('tags LIKE ?', "%" + tag.strip + "%").all
+    people_tag = Person.where('tags ~* ?', "(^|#{sep})" + tag.strip + "($|#{sep})").all
     people += people_tag
   end
   

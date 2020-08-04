@@ -64,7 +64,7 @@ ActiveAdmin.register Person do
         f.input :first_name
         f.input :last_name
         #f.input :dance_intensive        
-        f.input :tags
+        f.input :tags, :hint=> ("<span class='people_tags_list'><u>Verwendete Tags</u><br /><span>" + Person.get_all_tags.join("</span><br /><span>") + "</span></span>").html_safe
         #f.input :role
         #f.input :bio_de
         #f.input :bio_en

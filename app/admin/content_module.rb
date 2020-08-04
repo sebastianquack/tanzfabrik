@@ -26,6 +26,7 @@ ActiveAdmin.register ContentModule do
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   permit_params :module_type, :style_option, :section, :draft, :headline_de, :headline_en, :super_de, :super_en, :sub_de, :sub_en, :special_text_de, :special_text_en, :rich_content_1_de, :rich_content_1_en, :rich_content_2_de, :rich_content_2_en, :custom_html_de, :custom_html_en, :parameter, :locale,
+  :link_href_de, :link_href_en, :link_title_de, :link_title_en,
   :images_attributes => [:id, :description, :license, :attachment, :_destroy],
   :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
 
@@ -126,7 +127,7 @@ ActiveAdmin.register ContentModule do
           elsif field == "parameter" && (mtype == "kursplan")
             f.input field, :as => :select, :collection => Location.all.map {|l| [l.name, l.name]}, :include_blank => false
           elsif field == "parameter" && (mtype == "people_gallery")
-            f.input field, :label => "Gruppen", :hint => "z.B. Künstler, Kurslehrer, Dance-Intensive"
+            f.input field, :label => "Gruppen", :hint => ("<span class='people_tags_list'><u>Verwendete Tags</u><br /><span>" + Person.get_all_tags.join("</span><br /><span>") + "</span></span>").html_safe
           else
             return f.input field, :wrapper_html => { 
               :class => active ? "cm-field-active" : "cm-field-hidden"
@@ -179,6 +180,8 @@ ActiveAdmin.register ContentModule do
         content_module_input f, type, "parameter", false, false
         content_module_input f, type, "rich_content_1", true
         content_module_input f, type, "rich_content_2", true
+        content_module_input f, type, "link_title", false, true
+        content_module_input f, type, "link_href", false, true
         content_module_input f, type, "custom_html"
       end
 

@@ -53,4 +53,12 @@ class Person < ActiveRecord::Base
     self.events.any? { |e| [1, 7, 8, 10].include?(e.type_id) }
   end
 
+  def self.get_tag_separator_regex_string
+    "[ ,;]+"
+  end
+
+  def self.get_all_tags
+    all_tags = self.distinct.pluck(:tags).join(" ").split(/#{self.get_tag_separator_regex_string}/).uniq.sort
+  end
+
 end
