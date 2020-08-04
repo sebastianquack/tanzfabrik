@@ -8,17 +8,19 @@ task :create_example_page => :environment do
     # no problem
   end
 
-  p = Page.create(
+  $p = Page.create(
     title_de: "Module",
     title_en: "Modules"
   )
+
+  p=$p
 
   if p.errors
     puts p.errors.full_messages
   end
 
-  module_id_prefix = 100000000
-  counter = 1
+  $module_id_prefix = 100000000
+  $counter = 1
 
   img_landscape = {
     description: "description description description",
@@ -32,6 +34,38 @@ task :create_example_page => :environment do
     attachment: File.open(Rails.root.join('public', 'images', 'portrait.png'))
   }
 
+  def make_module(attributes_hash, image=nil)
+    puts "making " + attributes_hash[:module_type].to_s + " / " + attributes_hash[:headline_de].to_s
+
+    begin
+      #ContentModule.find($module_id_prefix + $counter).slides.destroy_all
+      ContentModule.find($module_id_prefix + $counter).downloads.destroy_all
+      ContentModule.find($module_id_prefix + $counter).images.destroy_all
+      ContentModule.destroy $module_id_prefix + $counter
+    rescue ActiveRecord::RecordNotFound
+      # no problem
+    end
+  
+    cm = ContentModule.create({
+        id: $module_id_prefix + $counter,
+        page_id: $p.id,
+        module_type: "content_element",
+        section: "buehne",
+        headline_de: "",
+        headline_en: "",
+        rich_content_1_de: "",
+        rich_content_1_en: "",
+        special_text_de: "",
+        special_text_en: "",
+        order: $counter += 1
+    }.merge(attributes_hash))
+
+    if image 
+      cm.images.create(image)
+      cm.save!
+    end
+  end
+
   # BEGIN
 
 
@@ -41,31 +75,20 @@ rich_content_1 = <<~RICHCONTENT1
 <b>TV-Show</b> mit Igor Dobricic, Guillaume Marie, Roger Sala Reyner
 RICHCONTENT1
 
-  begin
-    ContentModule.find(module_id_prefix + counter).images.destroy_all
-    ContentModule.destroy module_id_prefix + counter
-  rescue ActiveRecord::RecordNotFound
-    # no problem
-  end
+make_module({
+  module_type: "feature",
+  section: "buehne",
+  headline_de: "The Morning Show of Celine and Renana - Focus: Choreographers",
+  headline_en: "The Morning Show of Celine and Renana - Focus: Choreographers",
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: "",
+  special_text_de: "02.02.2020, Kreuzberg 1",
+  special_text_en: "02.02.2020, Kreuzberg 1",
+}, img_landscape)
 
-  ContentModule.create({
-      id: module_id_prefix + counter,
-      page_id: p.id,
-      module_type: "feature",
-      section: "buehne",
-      headline_de: "The Morning Show of Celine and Renana - Focus: Choreographers",
-      headline_en: "The Morning Show of Celine and Renana - Focus: Choreographers",
-      rich_content_1_de: rich_content_1,
-      rich_content_1_en: "",
-      special_text_de: "02.02.2020, Kreuzberg 1",
-      special_text_en: "02.02.2020, Kreuzberg 1",
-      order: counter += 1
-  }).images.create(img_landscape)
+### content_2_columns
 
-
-  ### content_2_columns
-
-  rich_content_1 = <<~RICHCONTENT
+rich_content_1 = <<~RICHCONTENT
 Das Bewerbungsformular steht oben auf dieser Seite zum Download bereit. Bitte ausfüllen und als scan (pdf oder jpeg) zusammen mit den anderen Dokumenten an obige e-mail Adresse senden. Bewerbungen bitte nur als e-mail schicken. 
 <br />
 <br />
@@ -90,7 +113,7 @@ D-10965 Berlin <br />
 danceintensive@tanzfabrik-berlin.de<br />
 RICHCONTENT
 
-  rich_content_2 = <<~RICHCONTENT2
+rich_content_2 = <<~RICHCONTENT2
 <h4>↪ Termine</h4>
 Sa 04. und So 05.04.2020<br />
 (Bewerbungsfrist am 23.02) 
@@ -112,27 +135,17 @@ Sa 04. und So 05.07.2020<br />
 Das Aufnahmeverfahren findet jeweils an einem Wochenende (Samstag + Sonntag) in der Tanzfabrik Kreuzberg statt. Das Wochenende setzt sich aus einem Informationsgespräch, der Teilnahme an drei unterschiedlichen Contemporary Klassen sowie einem persönlichen Gespräch zusammen.
 RICHCONTENT2
 
+make_module({
+  module_type: "content_2_columns",
+  section: "schule",
+  headline_de: "Bewerbung",
+  headline_en: "Application",
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: "",
+  rich_content_2_de: rich_content_2,
+  rich_content_2_en: "",
+})
 
-  begin
-    ContentModule.find(module_id_prefix + counter).images.destroy_all
-    ContentModule.destroy module_id_prefix + counter
-  rescue ActiveRecord::RecordNotFound
-    # no problem
-  end
-  
-  ContentModule.create({
-      id: module_id_prefix + counter,
-      page_id: p.id,
-      module_type: "content_2_columns",
-      section: "schule",
-      headline_de: "Bewerbung",
-      headline_en: "Application",
-      rich_content_1_de: rich_content_1,
-      rich_content_1_en: "",
-      rich_content_2_de: rich_content_2,
-      rich_content_2_en: "",
-      order: counter += 1,
-  })
 
 ### page_intro / Workshops
 
@@ -140,25 +153,14 @@ rich_content_1 = <<~RICHCONTENT1
 Die Übersicht über Workshops sind im dazugehörigen PDF zu finden
 RICHCONTENT1
 
-  begin
-    ContentModule.find(module_id_prefix + counter).images.destroy_all
-    ContentModule.destroy module_id_prefix + counter
-  rescue ActiveRecord::RecordNotFound
-    # no problem
-  end
-
-  ContentModule.create({
-      id: module_id_prefix + counter,
-      page_id: p.id,
-      module_type: "page_intro",
-      section: "schule",
-      headline_de: "Work\\shops",
-      headline_en: "Work\\shops",
-      rich_content_1_de: rich_content_1,
-      rich_content_1_en: "",
-      order: counter += 1
-  }).images.create(img_landscape)
-
+make_module({
+  module_type: "page_intro",
+  section: "schule",
+  headline_de: "Work\\shops",
+  headline_en: "Work\\shops",
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: "",
+}, img_landscape)
 
 ### page_intro / Profiklassen
 
@@ -178,26 +180,16 @@ Zur Vermeidung von Verletzungen bitte beachten: High Level insbesondere bei den 
 Kein Training während der Workshops, an gesetzlichen Feiertagen und in den Ferien der Tanzfabrik. Um an anderen Tanzklassen der Tanzfabrik teilzunehmen, können Tanzprofis auf Anfrage eine 10er Karte zu 65 € (10 x 75 Min.), zu 80 € (10 x 90 Min.), 95 € (10 x 120 Min.) erwerben.
 RICHCONTENT2
 
-  begin
-    ContentModule.find(module_id_prefix + counter).images.destroy_all
-    ContentModule.destroy module_id_prefix + counter
-  rescue ActiveRecord::RecordNotFound
-    # no problem
-  end
-
-  ContentModule.create({
-      id: module_id_prefix + counter,
-      page_id: p.id,
-      module_type: "page_intro",
-      section: "schule",
-      headline_de: "Profi\\klassen",
-      headline_en: "Profi\\klassen",
-      rich_content_1_de: rich_content_1,
-      rich_content_1_en: "",
-      rich_content_2_de: rich_content_2,
-      rich_content_2_en: "",      
-      order: counter += 1
-  }).images.create(img_landscape)
+make_module({
+  module_type: "page_intro",
+  section: "schule",
+  headline_de: "Profi\\klassen",
+  headline_en: "Profi\\klassen",
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: "",
+  rich_content_2_de: rich_content_2,
+  rich_content_2_en: "",      
+}, img_landscape)
 
 ### page_intro / Dance Intensive
 
@@ -216,34 +208,17 @@ Es werden 6 Leistungsklassen pro Woche in der Regel von Mo-Do 12:00-14:00 Uhr od
 Der Schwerpunkt der Leistungsklassen liegt auf der Vermittlung von zeitgenössischen Tanztechniken und Stilen, der Körperarbeit (Körperwahrnehmungstechniken/angewandte Anatomie) und der Improvisation/Komposition. Zudem wird Unterricht in zeitgenössischem Ballett und Theorieklassen angeboten. Während der Ausbildung werden die Teilnehmer*innen an mehreren Aufführungen mitwirken. Unter der Leitung der Dozent*innen werden Gruppenprojekte erarbeitet sowie die Möglichkeit geboten, mit Unterstützung der Ausbildungsleiterin, eigene Stücke zu realisieren. Außerdem erhalten die Teilnehmer*innen Unterstützung bei der Erstellung ihrer Bewerbungsunterlagen. Neben der regelmäßigen Unterrichtsteilnahme erhalten die Teilnehmer*Innen einen Einblick in den tänzerischen Alltag und können die Veranstaltungen der Tanzfabrik Berlin kostenlos besuchen.
 RICHCONTENT1
 
-#rich_content_2 = <<~RICHCONTENT2
-#Zur Vermeidung von Verletzungen bitte beachten: High Level insbesondere bei den Trainings von Stella Zannou und Blenard Azizaj.<br />
-#<br />
-#Kein Training während der Workshops, an gesetzlichen Feiertagen und in den Ferien der Tanzfabrik. Um an anderen Tanzklassen der Tanzfabrik teilzunehmen, können Tanzprofis auf Anfrage eine 10er Karte zu 65 € (10 x 75 Min.), zu 80 € (10 x 90 Min.), 95 € (10 x 120 Min.) erwerben.
-#RICHCONTENT2
+make_module({
+  module_type: "page_intro",
+  section: "schule",
+  headline_de: "Dance In\\tensive",
+  headline_en: "Dance In\\tensive",
+  special_text_de: special_text,
+  special_text_en: special_text,
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: rich_content_1,
+}, img_landscape)
 
-  begin
-    ContentModule.find(module_id_prefix + counter).images.destroy_all
-    ContentModule.destroy module_id_prefix + counter
-  rescue ActiveRecord::RecordNotFound
-    # no problem
-  end
-
-  ContentModule.create({
-      id: module_id_prefix + counter,
-      page_id: p.id,
-      module_type: "page_intro",
-      section: "schule",
-      headline_de: "Dance In\\tensive",
-      headline_en: "Dance In\\tensive",
-      special_text_de: special_text,
-      special_text_en: "",      
-      rich_content_1_de: rich_content_1,
-      rich_content_1_en: "",
-      rich_content_2_de: "",
-      rich_content_2_en: "",
-      order: counter += 1
-  }).images.create(img_landscape)
 
 ### content_element / Open Spaces
 
@@ -259,34 +234,15 @@ Das Projekt “Capturing Dance - Tanzdokumentation als künstlerische Praxis” 
 www.capturingdance.de
 RICHCONTENT1
 
-#rich_content_2 = <<~RICHCONTENT2
-#Zur Vermeidung von Verletzungen bitte beachten: High Level insbesondere bei den Trainings von Stella Zannou und Blenard Azizaj.<br />
-#<br />
-#Kein Training während der Workshops, an gesetzlichen Feiertagen und in den Ferien der Tanzfabrik. Um an anderen Tanzklassen der Tanzfabrik teilzunehmen, können Tanzprofis auf Anfrage eine 10er Karte zu 65 € (10 x 75 Min.), zu 80 € (10 x 90 Min.), 95 € (10 x 120 Min.) erwerben.
-#RICHCONTENT2
-
-  begin
-    ContentModule.find(module_id_prefix + counter).images.destroy_all
-    ContentModule.destroy module_id_prefix + counter
-  rescue ActiveRecord::RecordNotFound
-    # no problem
-  end
-
-  ContentModule.create({
-      id: module_id_prefix + counter,
-      page_id: p.id,
-      module_type: "content_element",
-      section: "schule",
-      headline_de: "Open Spaces",
-      headline_en: "Open Spaces",
-      special_text_de: special_text,
-      special_text_en: "",      
-      rich_content_1_de: rich_content_1,
-      rich_content_1_en: "",
-      rich_content_2_de: "",
-      rich_content_2_en: "",
-      order: counter += 1
-  }).images.create(img_landscape)
+make_module({
+  module_type: "content_element",
+  section: "schule",
+  headline_de: "Open Spaces",
+  headline_en: "Open Spaces",
+  special_text_de: special_text,
+  special_text_en: "",      
+  rich_content_1_de: rich_content_1,
+}, img_landscape)
 
 ### content_element / Tanznacht Berlin
 
@@ -306,28 +262,17 @@ RICHCONTENT1
 #Kein Training während der Workshops, an gesetzlichen Feiertagen und in den Ferien der Tanzfabrik. Um an anderen Tanzklassen der Tanzfabrik teilzunehmen, können Tanzprofis auf Anfrage eine 10er Karte zu 65 € (10 x 75 Min.), zu 80 € (10 x 90 Min.), 95 € (10 x 120 Min.) erwerben.
 #RICHCONTENT2
 
-  begin
-    ContentModule.find(module_id_prefix + counter).images.destroy_all
-    ContentModule.destroy module_id_prefix + counter
-  rescue ActiveRecord::RecordNotFound
-    # no problem
-  end
 
-  ContentModule.create({
-      id: module_id_prefix + counter,
-      page_id: p.id,
-      module_type: "content_element",
-      section: "buehne",
-      headline_de: "Tanznacht Berlin",
-      headline_en: "Tanznacht Berlin",
-      special_text_de: "",
-      special_text_en: "",      
-      rich_content_1_de: rich_content_1,
-      rich_content_1_en: "",
-      rich_content_2_de: "",
-      rich_content_2_en: "",
-      order: counter += 1
-  }).images.create(img_landscape)
+make_module({
+  module_type: "content_element",
+  section: "buehne",
+  headline_de: "Tanznacht Berlin",
+  headline_en: "Tanznacht Berlin",
+  special_text_de: "",
+  special_text_en: "",      
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: "",
+}, img_landscape)
 
 ### content_element / Werde Teil der Tanzfabrik!
 
@@ -335,28 +280,16 @@ rich_content_1 = <<~RICHCONTENT1
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
 RICHCONTENT1
 
-  begin
-    ContentModule.find(module_id_prefix + counter).images.destroy_all
-    ContentModule.destroy module_id_prefix + counter
-  rescue ActiveRecord::RecordNotFound
-    # no problem
-  end
-
-  ContentModule.create({
-      id: module_id_prefix + counter,
-      page_id: p.id,
-      module_type: "content_element",
-      section: "buehne",
-      headline_de: "Werde Teil der Tanzfabrik!",
-      headline_en: "Werde Teil der Tanzfabrik!",
-      special_text_de: "",
-      special_text_en: "",      
-      rich_content_1_de: rich_content_1,
-      rich_content_1_en: "",
-      rich_content_2_de: "",
-      rich_content_2_en: "",
-      order: counter += 1
-  }).images.create(img_portrait)
+make_module({
+  module_type: "content_element",
+  section: "buehne",
+  headline_de: "Werde Teil der Tanzfabrik!",
+  headline_en: "Werde Teil der Tanzfabrik!",
+  special_text_de: "",
+  special_text_en: "",      
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: "",
+}, img_portrait)
 
 ### reference / identifying a physical script
 
@@ -368,90 +301,38 @@ rich_content_1 = <<~RICHCONTENT1
 <b>Workshop</b> mit Igor Dobricic, Guillaume Marie, Roger Sala Reyner
 RICHCONTENT1
 
-#rich_content_2 = <<~RICHCONTENT2
-#Zur Vermeidung von Verletzungen bitte beachten: High Level insbesondere bei den Trainings von Stella Zannou und Blenard Azizaj.<br />
-#<br />
-#Kein Training während der Workshops, an gesetzlichen Feiertagen und in den Ferien der Tanzfabrik. Um an anderen Tanzklassen der Tanzfabrik teilzunehmen, können Tanzprofis auf Anfrage eine 10er Karte zu 65 € (10 x 75 Min.), zu 80 € (10 x 90 Min.), 95 € (10 x 120 Min.) erwerben.
-#RICHCONTENT2
-
-  begin
-    ContentModule.find(module_id_prefix + counter).images.destroy_all
-    ContentModule.destroy module_id_prefix + counter
-  rescue ActiveRecord::RecordNotFound
-    # no problem
-  end
-
-  ContentModule.create({
-      id: module_id_prefix + counter,
-      page_id: p.id,
-      module_type: "reference",
-      section: "buehne",
-      headline_de: "Identifying a physical script",
-      headline_en: "Identifying a physical script",
-      special_text_de: special_text,
-      special_text_en: "",      
-      rich_content_1_de: rich_content_1,
-      rich_content_1_en: "",
-      rich_content_2_de: "",
-      rich_content_2_en: "",
-      order: counter += 1
-  }).images.create(img_landscape)
-
+make_module({
+  module_type: "reference",
+  section: "buehne",
+  headline_de: "Identifying a physical script",
+  headline_en: "Identifying a physical script",
+  special_text_de: special_text,
+  special_text_en: "",      
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: "",
+}, img_landscape)
 
 ### reference / Unsere Tanzklassen
 
-  begin
-    ContentModule.find(module_id_prefix + counter).images.destroy_all
-    ContentModule.destroy module_id_prefix + counter
-  rescue ActiveRecord::RecordNotFound
-    # no problem
-  end
-
-  ContentModule.create({
-      id: module_id_prefix + counter,
-      page_id: p.id,
-      module_type: "reference",
-      section: "schule",
-      headline_de: "Unsere Tanzklassen",
-      headline_en: "Unsere Tanzklassen",
-      sub_de: "Anfänger bis Profi",
-      sub_en: "Anfänger bis Profi",
-      special_text_de: "",
-      special_text_en: "",
-      rich_content_1_de: "",
-      rich_content_1_en: "",
-      rich_content_2_de: "",
-      rich_content_2_en: "",
-      order: counter += 1
-  }).images.create(img_landscape)
+make_module({
+  module_type: "reference",
+  section: "schule",
+  headline_de: "Unsere Tanzklassen",
+  headline_en: "Unsere Tanzklassen",
+  sub_de: "Anfänger bis Profi",
+  sub_en: "Anfänger bis Profi",
+}, img_landscape)
 
 ### reference / Tanznacht Berlin 2020
 
-begin
-  ContentModule.find(module_id_prefix + counter).images.destroy_all
-  ContentModule.destroy module_id_prefix + counter
-rescue ActiveRecord::RecordNotFound
-  # no problem
-end
-
-ContentModule.create({
-    id: module_id_prefix + counter,
-    page_id: p.id,
-    module_type: "reference",
-    section: "festival",
-    headline_de: "Tanznacht Berlin 2020",
-    headline_en: "Tanznacht Berlin 2020",
-    sub_de: "Age of Displacement",
-    sub_en: "Age of Displacement",
-    special_text_de: "",
-    special_text_en: "",
-    rich_content_1_de: "",
-    rich_content_1_en: "",
-    rich_content_2_de: "",
-    rich_content_2_en: "",
-    order: counter += 1
-}).images.create(img_landscape)
-
+make_module({
+  module_type: "reference",
+  section: "festival",
+  headline_de: "Tanznacht Berlin 2020",
+  headline_en: "Tanznacht Berlin 2020",
+  sub_de: "Age of Displacement",
+  sub_en: "Age of Displacement",
+}, img_landscape)
 
 # END
 
