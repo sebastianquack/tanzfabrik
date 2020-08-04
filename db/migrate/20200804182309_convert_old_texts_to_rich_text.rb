@@ -1,5 +1,6 @@
 class ConvertOldTextsToRichText < ActiveRecord::Migration[6.0]
   def up
+    
     puts "converting content to action text"
 
     Event.all.each do |event|
