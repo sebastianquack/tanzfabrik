@@ -174,7 +174,7 @@ ActiveAdmin.register ContentModule do
           img src: '/module_hints/' + type + '.png' # should be done with image_pack_tag but couldn't make it work!!
         end
         content_module_input f, type, "super"
-        content_module_input f, type, "headline", false, true, "Bitte mit \"\\\" mögliche Trennungen markieren, z.B. \"Tanz\\klassen\"."
+        content_module_input f, type, "headline", false, true, "Bitte mit \"\\\" mögliche  Worttrennungen innerhalb von Wörtern markieren, z.B. \"Wort\\trennung\"."
         content_module_input f, type, "sub"
         content_module_input f, type, "special_text"
         content_module_input f, type, "parameter", false, false
