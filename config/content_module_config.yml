@@ -80,6 +80,10 @@ people_gallery:
     - default
   form-fields:
     - parameter
+  sections:
+    - buehne
+    - schule
+    - fabrik     
   images: false
   downloads: false
 kursplan:
