@@ -7,7 +7,7 @@ Tanzfabrik::Application.routes.draw do
   #get "/kalenderarchiv2" => redirect('http://archiv.tanzfabrik-berlin.de/kalenderarchiv2-kalender2%5Bshow%5D=archiv&kalender2%5Bvktg_code%5D%3D99&kalenderarchiv%5Byear%5D=2014&date=2587.php')
 
   get 'admin' => 'admin/menu_items#index'
-  ActiveAdmin.routes(self)
+  ActiveAdmin.routes(self) rescue ActiveAdmin::DatabaseHitDuringLoad # avoid crash whe db is not yet initialized
 
   #get '/kurse.php' => redirect('/de/kursplan') # --> see application_controller
 
