@@ -19,6 +19,10 @@ page_intro:
   style-options:
     - default
     - magazine
+  sections:
+    - buehne
+    - schule
+    - fabrik    
   form-fields:
     - headline
     - special_text
