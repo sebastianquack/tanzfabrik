@@ -8,17 +8,27 @@
     width: 202px;
     margin-right: 18px;
     margin-bottom: 50px;
-    
-    .image-container img {
-      height: 263px;
-      width: 100%;
-      object-fit: cover;
+
+    a {
       display: block;
+    }    
+    
+    .image_container  { // does this get ignored by compilers?
+      width: 100%;
+      height: 263px;
       margin-bottom: 16px;
+    
+      img {
+        width: inherit;
+        height: inherit;
+        object-fit: cover;
+        display: block;        
+      }
     }
 
     .info, a {
       @include font-title;
     }
+
   }
 }
