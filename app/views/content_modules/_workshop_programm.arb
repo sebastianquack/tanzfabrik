@@ -12,22 +12,25 @@
 # get all workshops
 #all_workshops = Event.where(:type_id => 2)
 
-render :partial => "/events/workshop_list", :locals => {:in_festival => nil}  
+div :class => "module__workshop_programm" do 
 
-# figure out in which years event_details exist
-years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 2').where("start_date < '"+(Date.today.year+1).to_s+"-01-01'" ).group_by_year(:start_date).count
+  render :partial => "/events/workshop_list", :locals => {:in_festival => nil}  
 
-# show links for these years
-section :class => "archive-section" do
-  h5 t(:past_workshops), :class => "archive-headline"
-  ul :class => "archive-links" do
-    years.keys.each do |y|
-      if y.year <= Time.now.year
-        li do
-          a y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'workshop_programm', :year => y.year.to_s)
+  # figure out in which years event_details exist
+  years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 2').where("start_date < '"+(Date.today.year+1).to_s+"-01-01'" ).group_by_year(:start_date).count
+
+  # show links for these years
+  section :class => "archive-section" do
+    h5 t(:past_workshops), :class => "archive-headline"
+    ul :class => "archive-links" do
+      years.keys.each do |y|
+        if y.year <= Time.now.year
+          li do
+            a y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'workshop_programm', :year => y.year.to_s)
+          end
         end
       end
     end
   end
-end
 
+end

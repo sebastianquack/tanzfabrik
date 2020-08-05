@@ -1,0 +1,61 @@
+@import "./__variables.scss";
+@import "./__mixins.scss";
+
+.module__workshop_programm {
+
+  .workshops {
+
+    .group {
+      
+      .month-festival {
+        display: flex;
+        flex-direction: row;
+
+        .month { flex: 6; }
+        .title { flex: 6;}
+      }
+
+      .date-classes {
+        display: flex;
+        flex-direction: row;        
+
+        .time-duration {
+          flex: 3;
+
+          time {}
+          p {}
+        }
+      
+        .classes {
+          flex: 9;
+
+          .class a {
+            display: flex;
+            flex-direction: row;
+
+            .title {
+              flex: 6;
+              order: 3;
+            }
+
+            .teacher {
+              flex: 2;
+              order: 2;
+            }
+
+            .class-data {
+              flex: 1;
+              oder: 1;
+            }
+
+          }
+
+        }
+      
+      }
+
+    }
+
+  }
+
+}
