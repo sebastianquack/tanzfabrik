@@ -73,16 +73,16 @@ ActiveAdmin.register ContentModule do
   show do
     attributes_table do
       row "Seite" do |content_module| 
-        content_module.page.title_de
+        content_module.page.title_de.to_s
       end
       row :module_type do |content_module|
-        t("content_modules.module_types." + content_module.module_type)
+        t("content_modules.module_types." + content_module.module_type.to_s)
       end
       row :style_option do |content_module|
-        t("content_modules.style_options." + content_module.style_option)
+        t("content_modules.style_options." + content_module.style_option.to_s)
       end
       row :section do |content_module|
-        t("content_modules.sections." + content_module.section)
+        t("content_modules.sections." + content_module.section.to_s)
       end      
       row "weiter zu" do |content_module|
         ul do
