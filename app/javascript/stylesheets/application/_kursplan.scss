@@ -1,0 +1,80 @@
+@import "./__variables.scss";
+@import "./__mixins.scss";
+
+.module__kursplan {
+
+  @include page-dist("padding-left", "left");
+  @include page-dist("padding-right", "right");
+
+  table, thead, tbody, tr, th, td {
+    display: block;
+  }
+
+  .timetable-container {
+
+    .timetable {
+
+      tr {
+        @include flex-row;
+
+        th, td {
+          @include flex-row-item(2,12, false);
+          overflow: hidden;
+          border-style: solid;
+          border-width: 1px 0 0 1px;
+          &:last-child { border-right-width: 1px; }
+        }
+    
+      }
+
+      tbody {
+        th {
+          visibility: hidden;
+        }
+        tr:last-child { th, td {
+          border-bottom-width: 1px;
+        } }
+
+        .event {
+          padding: 6px;
+          min-height: 233px;
+
+          display: flex;
+          flex-direction: column;
+
+          .title-description {
+            @include debug(white);
+            flex: 1;
+          }
+
+          .time-footnotes {
+            @include font-tanzklassen;
+            .footnote {
+              float: right;
+            }
+          }
+
+          .warning {
+            @include font-stripes;
+          }
+
+          .title {
+            @include font-title;
+          }
+
+          .teacher, .studio {
+            @include font-tanzklassen;
+          }
+
+          & + .event {
+            border-style: solid;
+            border-width: 1px 0 0 0;
+          }
+        }
+      }
+
+    }
+  }
+
+}
+

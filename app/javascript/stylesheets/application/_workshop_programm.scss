@@ -5,49 +5,91 @@
 
   .workshops {
 
+    @include page-dist("padding-left", "left");
+    @include page-dist("padding-right", "right");
+
     .group {
+      @include debug(rgba(0,0,255,0.5));
+
+      padding-top: 12px;
+      padding-bottom: 12px;
+
+      border-style: solid;
+      border-width: 1px 0 0 0;
+      &:last-child {
+        border-bottom-width: 1px;
+      }
+
+      &+.group {
+        margin-top: 30px;
+        .month-festival {
+          margin-top: 20px; // 20+30 = 50
+        }
+      }
       
       .month-festival {
-        display: flex;
-        flex-direction: row;
+        @include debug(rgba(255,0,0,0.5));
+        @include flex-row;
+        
+        border-style: solid;
+        border-width: 0 0 1px 0;
+        margin-bottom: 12px;
 
-        .month { flex: 6; }
-        .title { flex: 6;}
+        .month { flex: 3; @include font-h3; @include flex-row-item(3,12); @include debug(#0ff8); }
+        .title { flex: 9; @include font-kalender-h1; @include flex-row-item(9,12); }
       }
 
       .date-classes {
-        display: flex;
-        flex-direction: row;        
+        @include debug(rgba(0,255,0,0.5));
+        @include flex-row;
 
         .time-duration {
-          flex: 3;
+          @include debug(rgba(255,255,0,0.5));
 
-          time {}
-          p {}
+          @include flex-row-item(3,12);
+
+          time { @include font-title; }
+          p { @include font-fliesstext-m; }
         }
       
         .classes {
-          flex: 9;
+          @include flex-row-item(9,12, false);
+          margin:0;
 
-          .class a {
-            display: flex;
-            flex-direction: row;
+          .class {
 
-            .title {
-              flex: 6;
-              order: 3;
+            border-style: solid;
+            border-width: 0 0 1px 0;
+            padding: 12px 0;
+            &:first-child {
+              padding-top: 0;
             }
+            &:last-child {
+              border:none;
+              padding-bottom: 0;
+            }            
 
-            .teacher {
-              flex: 2;
-              order: 2;
+            a {
+              @include flex-row;
+
+              .title {
+                @include flex-row-item(6,9);
+                order: 3;
+                @include font-title;
+              }
+
+              .teacher {
+                @include flex-row-item(2,9);
+                order: 2;
+                @include font-stripes;
+              }
+
+              .class-data {
+                @include flex-row-item(1,9);
+                order: 1;
+                @include font-stripes;
+              }
             }
-
-            .class-data {
-              flex: 1;
-              oder: 1;
-            }
-
           }
 
         }

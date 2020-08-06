@@ -4,9 +4,17 @@
   display: flex;
   flex-wrap: wrap;
 
+  @include page-dist("margin-left", "left");
+  @include page-dist("margin-right", "right");
+
+  padding-left: calc(100% / 12);
+  padding-right: calc(100% / 12);
+
   li {
-    width: 202px;
+    width: calc( ( 100% - ( 4 * 18px ) ) / 5 );
+    overflow: hidden;
     margin-right: 18px;
+    &:nth-child(5n+5) { margin-right: 0; }
     margin-bottom: 50px;
 
     a {

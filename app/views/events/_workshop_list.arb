@@ -40,23 +40,24 @@ if workshop_groups.length > 0
 
       li :class => "group" do
 
-        div :class => "month-festival" do
-          
-          if dates[0].month != prev_month
-            h1 l(dates[0], :format => :month), :class => "month"
-            prev_month = dates[0].month
-          end
+        if dates[0].month != prev_month && !in_festival && events.first.festivals.first
+          div :class => "month-festival" do
+            
+            if dates[0].month != prev_month
+              h3 l(dates[0], :format => :month), :class => "month"
+              prev_month = dates[0].month
+            end
 
-          if !in_festival && events.first.festivals.first
-            festival = events.first.festivals.first
-            if festival != prev_festival # new
-              div :class => "title" do
-                a festival.name, href: festival_path(festival), class: 'festival-link'
+            if !in_festival && events.first.festivals.first
+              festival = events.first.festivals.first
+              if festival != prev_festival # new
+                div :class => "title" do
+                  a festival.name, href: festival_path(festival), class: 'festival-link'
+                end
+                prev_festival = festival #new
               end
-              prev_festival = festival #new
             end
           end
-
         end
 
         div :class => "date-classes" do

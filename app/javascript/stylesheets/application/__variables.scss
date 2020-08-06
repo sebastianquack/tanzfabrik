@@ -1,5 +1,8 @@
 @use "sass:map";
 
+$debug: false;
+$debug-grid: false;
+
 $font-weight-regular: 400;
 $font-weight-medium: 500;
 $font-weight-semibold: 600;
@@ -23,6 +26,9 @@ $page-dist-s: (
   'right': 14px,
   'bottom': 14px,
 );
+
+$grid-gap-l: 18px;
+$grid-gap-s: 14px;
 
 $header-height: 38px;
 $header-height-logo: 31px;

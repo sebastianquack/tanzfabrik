@@ -29,23 +29,32 @@ h5 {
   @include font-h5;
 }
 
+a {
+  font-style: normal;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 
 
 .horizontal_bar_container {
 
-  width: 100%;
-  display: flex;
+  @include flex-row;
   @include font-stripes;
 
   .horizontal_bar_left {
-    width: 50%;
+    @include flex-row-item(6,12);
   }
 
   .horizontal_bar_center {
-    flex:1;
+    @include flex-row-item(3,12);
   }
 
   .horizontal_bar_right {
+    @include flex-row-item(3,12, false);
+    text-align: right;
   }
 }
 

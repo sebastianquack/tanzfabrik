@@ -1,0 +1,27 @@
+@import "./__variables.scss";
+@import "./__mixins.scss";
+@use "sass:map";
+
+@if $debug-grid {
+
+  body {
+    position: relative;
+    &:after {
+      content: " ";
+      position: absolute;
+      top:0;
+      @include page-dist("left", "left");
+      @include page-dist("right", "right");
+      height: 100%;
+      z-index: 1;
+      opacity: 0.5;
+      mix-blend-mode: hue;
+      background-image: url("/images/grid.png");
+      background-size: contain;
+      box-sizing: border-box;
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+
+}

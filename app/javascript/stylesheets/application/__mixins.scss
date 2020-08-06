@@ -162,7 +162,7 @@
     font-size: 12px;
     line-height: 14px;
   }        
-  font-weight: $font-weight-semibold; // should this be special eps51 font or not?
+  font-weight: $font-weight-medium; 
   letter-spacing: 0.16px;
   text-transform: uppercase;
 }
@@ -262,12 +262,55 @@
 }
 
 /* --------------------------------------------------
-   Other Mixins
+   distances
    -------------------------------------------------- */
 
 @mixin page-dist($attr: "margin-top", $direction: "top", $add: 0) {
   #{$attr}: map-get($page-dist-l, $direction) + $add;
   @include breakpoint('s') {
     #{$attr}: map-get($page-dist-s, $direction) + $add;
+  }
+}
+
+@mixin grid-gap-dist($attr: "padding-right", $multiply: 1) {
+  #{$attr}: $grid-gap-l * $multiply;
+  @include breakpoint('s') {
+    #{$attr}: $grid-gap-s * $multiply;
+  }
+}
+
+@mixin flex-row {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+
+  //width: calc(100% + $grid-gap-l);
+  //margin-left: -$grid-gap-l;
+  //@include breakpoint('s') {
+  //  width: calc(100% + $grid-gap-s);
+  //  margin-left: -$grid-gap-s;
+  //}
+}
+
+@mixin flex-row-item($row-width, $total-rows, $border: true) {
+  //@include grid-gap-dist("margin-left", ($row-begin - 1)/($total-rows - 1));
+  //@include grid-gap-dist("padding-right", (($total-rows - 1) - ($row-end - 1))/($total-rows - 1));
+  //box-sizing: border-box;
+  @if($border) {
+    margin-right: $grid-gap-l;
+  }
+  flex: 0 0 calc(#{100 * $row-width / $total-rows}% - #{if($border, $grid-gap-l, "0px")});
+  @if ($debug) {
+    background: rgba(random(255), random(255), random(255), 0.5);
+  }
+}
+
+/* --------------------------------------------------
+   Other Mixins
+   -------------------------------------------------- */
+
+@mixin debug($color) {
+  @if ($debug) {
+    background-color: $color;
   }
 }

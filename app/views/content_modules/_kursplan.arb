@@ -1,4 +1,4 @@
-div :class => "open-close-shade" do
+div :class => "module__kursplan" do
   if params[:start_date]
     start_date = Date.parse(params[:start_date])
   else 

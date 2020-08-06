@@ -157,60 +157,60 @@ div :class => "timetable-container" do
                     article :class => "event empty-event"
                   else
                     detail = data[detail_index]
-                    a :href =>event_path(detail.event) do
-                      article :class => "event", :id => "_"+detail.event.id.to_s do
+                    article :class => "event", :id => "_"+detail.event.id.to_s do
+                      
+                      # time and tag
+                      div :class => "time-footnotes" do
+                        # 12:00-13:00
+                        time l(detail.starttime, :format => :hours_minutes), :class => "course-time"
+                        text_node "-"
+                        time l(detail.endtime_clock, :format => :hours_minutes), :class => "course-time"
                         
-                        # time and tag
-                        div :class => "time-footnotes" do
-                          # 12:00-13:00
-                          time l(detail.starttime, :format => :hours_minutes), :class => "course-time"
-                          text_node "-"
-                          time l(detail.endtime_clock, :format => :hours_minutes), :class => "course-time"
-                          
-                          # (offen)
-                          span "(" + detail.tags.map { |t| t.short }.join('/') + ")" if detail.tags.length > 0
-                        end
-
-                        # title
-                        if detail.event.type_id == 5 # performance-projekt -> link to event page
-                          div :class => "title-description" do
-                            h4 :class => "title" do
-                              a detail.event.title.html_safe, :href => event_path(detail.event) if detail.event.title
-                            end
-                          end
-                        else 
-                          div :class => "title-description open-close", "data-open-close-group" => "timetable" do
-                            h4 :class => "title close-others" + (detail.event.description ? " open-trigger" : "") do
-                              text_node detail.event.title.html_safe if detail.event.title
-                            end
-                          end
-                        end
-
-                        # warning
-                        div :class => "warning" do
-                          #if detail.event.signup_url && detail.event.warning
-                            #a detail.event.warning.html_safe, :href => detail.event.signup_url 
-                          #else 
-                            text_node detail.event.warning.html_safe if detail.event.warning
-                          #end
-                        end
-                        
-                        # teacher 1
-                        div :class => "teacher" do
-                          detail.event.people_sorted[0].name.html_safe if detail.event.people_sorted[0]
-                        end
-
-                        # teacher 2
-                        div :class => "teacher" do
-                          detail.event.people_sorted[1].name.html_safe if detail.event.people_sorted[1]
-                        end
-
-                        # studio
-                        div :class => "studio" do
-                          text_node detail.studio.location.name + " " + detail.studio.name if detail.studio
-                        end
-                        
+                        # (offen)
+                        span "(" + detail.tags.map { |t| t.short }.join('/') + ")", :class=>"footnote" if detail.tags.length > 0
                       end
+
+                      # warning
+                      div :class => "warning" do
+                        #if detail.event.signup_url && detail.event.warning
+                          #a detail.event.warning.html_safe, :href => detail.event.signup_url 
+                        #else 
+                          text_node detail.event.warning.html_safe if detail.event.warning
+                        #end
+                      end
+
+                      # title
+                      if detail.event.type_id == 5 # performance-projekt -> link to event page
+                        div :class => "title-description" do
+                          h6 :class => "title" do
+                            a detail.event.title.html_safe, :href => event_path(detail.event) if detail.event.title
+                          end
+                        end
+                      else 
+                        div :class => "title-description open-close", "data-open-close-group" => "timetable" do
+                          h6 :class => "title close-others" + (detail.event.description ? " open-trigger" : "") do
+                            a detail.event.title.html_safe, :href =>event_path(detail.event) if detail.event.title
+                          end
+                        end
+                      end
+
+                      
+                      # teacher 1
+                      div :class => "teacher" do
+                        detail.event.people_sorted[0].name.html_safe if detail.event.people_sorted[0]
+                      end
+
+                      # teacher 2
+                      div :class => "teacher" do
+                        detail.event.people_sorted[1].name.html_safe if detail.event.people_sorted[1]
+                      end
+
+                      # studio
+                      div :class => "studio" do
+                        text_node detail.studio.location.name + " " + detail.studio.name if detail.studio
+                      end
+                      
+
 
                     end          
                   end
