@@ -1,11 +1,11 @@
 
-<div class="module__page_intro" data-section="<%= content_module.section %>">
+<div class="module__page_intro" <%= "data-no-images" if content_module.images.empty? %> data-section="<%= content_module.section %>">
 
-  <div class="grid_image">
-    <% if content_module.images.count > 0 %>
-      <img src=<%= content_module.images[0].attachment.url(:large) %>>
-    <% end %>
-  </div>  
+  <% if content_module.images.count > 0 %>
+    <div class="grid_image">
+        <img src=<%= content_module.images[0].attachment.url(:large) %>>
+    </div>  
+  <% end %>
 
   <div class="grid_headline">
 

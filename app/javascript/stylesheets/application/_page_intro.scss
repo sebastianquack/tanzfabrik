@@ -8,6 +8,10 @@
   align-items: end;
   width: 100%;
 
+  &[data-no-images] {
+    grid-template-columns: 1fr 11fr;
+  }
+
   @include page-dist("padding-left", "left");
   @include page-dist("padding-right", "right");
   
