@@ -29,6 +29,11 @@ interaction:
     service: web
     command: bundle exec rake
 
+  yarn:
+    description: Run yarn commands
+    service: webpacker
+    command: yarn
+
   rspec:
     description: Run Rspec commands
     service: web
