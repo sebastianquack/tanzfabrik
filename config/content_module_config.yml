@@ -67,6 +67,19 @@ reference:
     - rich_content_1    
     - link_title
     - link_href
+slideshow:
+  style-options:
+    - default
+    - fixed_height
+  sections:
+    - buehne
+    - schule
+    - fabrik
+  form-fields:
+    - headline
+    - link_title
+    - link_href    
+  downloads: false
 submenu_divider:
   style-options:
     - default

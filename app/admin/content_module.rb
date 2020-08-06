@@ -190,6 +190,18 @@ ActiveAdmin.register ContentModule do
           f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
             f_f.input :description
             f_f.input :license
+            if type == "slideshow"
+              f_f.input :super_de
+              f_f.input :super_en
+              f_f.input :headline_de
+              f_f.input :headline_en
+              f_f.input :rich_content_1_de, :as => :action_text
+              f_f.input :rich_content_1_en, :as => :action_text
+              f_f.input :link_title_de
+              f_f.input :link_title_en
+              f_f.input :link_href_de
+              f_f.input :link_href_en
+            end
             if f_f.object.attachment.exists?
               f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.image_tag(f_f.object.attachment.url(:thumb))
             else

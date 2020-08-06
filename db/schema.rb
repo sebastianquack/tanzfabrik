@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_04_182309) do
+ActiveRecord::Schema.define(version: 2020_08_06_113512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,11 +97,6 @@ ActiveRecord::Schema.define(version: 2020_08_04_182309) do
     t.text "special_text_en"
     t.text "custom_html_en"
     t.string "section"
-    t.string "super"
-    t.string "headline"
-    t.string "sub"
-    t.text "special_text"
-    t.text "custom_html"
     t.string "link_href_de"
     t.string "link_href_en"
     t.string "link_title_de"
@@ -269,6 +264,14 @@ ActiveRecord::Schema.define(version: 2020_08_04_182309) do
     t.boolean "show_on_welcome_screen"
     t.integer "festival_container_id"
     t.bigint "content_module_id"
+    t.string "super_de"
+    t.string "super_en"
+    t.string "headline_de"
+    t.string "headline_en"
+    t.string "link_href_de"
+    t.string "link_href_en"
+    t.string "link_title_de"
+    t.string "link_title_en"
     t.index ["content_module_id"], name: "index_images_on_content_module_id"
   end
 
@@ -287,10 +290,9 @@ ActiveRecord::Schema.define(version: 2020_08_04_182309) do
     t.string "name_en"
     t.string "key"
     t.integer "page_id"
-    t.integer "position", default: 0
     t.string "ancestry"
+    t.integer "position", default: 0
     t.string "anchor"
-    t.index ["ancestry"], name: "index_menu_items_on_ancestry"
   end
 
   create_table "pages", id: :serial, force: :cascade do |t|

@@ -446,6 +446,20 @@ de:
         license: Copyrightnotiz
         attachment: Datei
         show_on_welcome_screen: Als Hintergrundbild verwenden
+        parameter: Auswahl
+        module_type: Modul-Typ
+        style_option: Darstellungs-Option
+        section: Bereich (Farbe)
+        draft: Im Font-End verbergen
+        super: "Über-Headline"
+        headline: "Headline"
+        sub: "Unter-Headline"
+        special_text: "Spezialtext"
+        rich_content_1: "Text 1"
+        rich_content_2: "Text 2"
+        custom_html: "HTML"
+        link_title: "Button Text"
+        link_href: "Button URL"        
       event_detail:
         start_date: Startdatum
         end_date: Enddatum

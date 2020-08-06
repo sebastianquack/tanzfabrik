@@ -25,7 +25,7 @@ task :create_example_page => :environment do
   img_landscape = {
     description: "description description description",
     license: "licence licence licence",
-    attachment: File.open(Rails.root.join('public', 'seeds', 'landscape.png'))
+    attachment: File.open(Rails.root.join('public', 'seeds', 'landscape.png')),
   }
 
   img_portrait = {
@@ -34,6 +34,12 @@ task :create_example_page => :environment do
     attachment: File.open(Rails.root.join('public', 'seeds', 'portrait.png'))
   }
 
+  img_square = {
+    description: "description description description",
+    license: "licence licence licence",
+    attachment: File.open(Rails.root.join('public', 'seeds', 'square.png'))
+  }  
+
   pdf = {
     description_de: "Beispiel PDF",
     description_en: "Example PDF",
@@ -41,7 +47,7 @@ task :create_example_page => :environment do
     attachment_en: File.open(Rails.root.join('public', 'seeds', 'test-PDF.pdf'))
   }
 
-  def make_module(attributes_hash, image=nil, download=nil)
+  def make_module(attributes_hash, images=nil, download=nil)
     puts "creating " + ($module_id_prefix + $counter).to_s + " " + attributes_hash[:module_type].to_s + " / " + attributes_hash[:headline_de].to_s
 
     begin
@@ -71,8 +77,11 @@ task :create_example_page => :environment do
         order: $counter += 1
     }.merge(attributes_hash))
 
-    if image 
-      cm.images.create(image)
+    if images
+      images = [images] if not images.is_a? Array
+      [images].each do |image|
+        cm.images.create(image)
+      end
     end
 
     if download
@@ -367,6 +376,42 @@ make_module({
   link_href_de: "http://tanznachtberlin.de/",
   link_href_en: "http://tanznachtberlin.de/",  
 }, img_landscape)
+
+### slideshow / Upcoming Workshops
+
+image_attributes = {
+  super_de: "Roberto Olivian",
+  super_en: "Roberto Olivian",
+  headline_de: "Instinct as a source of movement",
+  headline_en: "Instinct as a source of movement",
+  rich_content_1_de: "<b>Workshop</b> mit Igor Dobricic, Guillaume Marie, Roger Sala Reyner",
+  rich_content_1_en: "<b>Workshop</b> mit Igor Dobricic, Guillaume Marie, Roger Sala Reyner",
+  link_title_de: "Zum Workshop",
+  link_title_en: "Zum Workshop",
+  link_href_de: "http://tanznachtberlin.de/",
+  link_href_en: "http://tanznachtberlin.de/",    
+}
+
+images = [
+  img_landscape.merge(image_attributes),
+  img_square.merge(image_attributes),
+  img_portrait.merge(image_attributes),
+  img_landscape.merge(image_attributes),
+  img_square.merge(image_attributes),
+  img_portrait.merge(image_attributes),  
+]
+
+make_module({
+  module_type: "slideshow",
+  section: "schule",
+  headline_de: "Upcoming Workshops",
+  headline_en: "Upcoming Workshops",
+  link_title_de: "Workshops",
+  link_title_en: "Workshops",
+  link_href_de: "http://tanznachtberlin.de/",
+  link_href_en: "http://tanznachtberlin.de/",  
+}, [images])
+
 
 # END
 

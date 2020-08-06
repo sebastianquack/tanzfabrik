@@ -25,6 +25,11 @@ class Image < ActiveRecord::Base
 
   validates_presence_of :description
 
+  has_rich_text :rich_content_1_de
+  has_rich_text :rich_content_1_en
+
+  translates :super, :headline, :rich_content_1, :link_title, :link_href
+
   belongs_to :studio
   belongs_to :person
   belongs_to :event
