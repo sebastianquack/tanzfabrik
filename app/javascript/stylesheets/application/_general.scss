@@ -189,7 +189,7 @@ main.page {
 .button {
   @include font-button;
   border: 1px solid;
-  display: block;
+  display: inline-block;
   border-radius: 7px;
   padding: 4px 11px 4px 12px;
   position: relative;

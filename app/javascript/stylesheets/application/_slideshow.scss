@@ -1,0 +1,77 @@
+@import "./__variables.scss";
+@import "./__mixins.scss";
+
+.module__slideshow {
+
+  @include page-dist("padding-left", "left");
+
+  .headline_container {
+    @include flex-row;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+    h2 {
+      @include flex-row-item(11,12);
+      display: flex;
+      align-items: center;
+      .button {
+        margin-left: 1.5em;
+        position: relative;
+        top: 0.8em;
+      }
+    }
+  }
+
+  .slideshow {
+
+    @include flex-row;
+    justify-content: flex-end;
+
+    .slides {
+
+      @include flex-row-item(11,12, false);
+      @include flex-row;
+
+      .slide {
+        @include flex-row-item(3,11);
+
+        .image {
+          img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+          }
+          .caption {
+            @include font-fliesstext-s;
+            margin-bottom: 10px;
+          }
+          .licence:not(:first-child) {
+            &:before {
+              content: ", ";
+            }
+          }        
+        }
+
+        .super {
+          @include font-stripes;
+          margin-bottom: 10px;
+        }
+        .headline {
+          @include font-title;
+          margin-bottom: 5px;
+        }
+        .rich_content_1 {
+          @include font-fliesstext-m;
+          margin-bottom: 20px;
+      
+          b {
+            @include font-stripes-infos;
+          }
+        }  
+
+      }
+     }
+
+  }
+
+}
