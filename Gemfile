@@ -68,6 +68,7 @@ group :production do
 	gem 'rails_12factor'
   #gem 'heroku_rails_deflate' # enables gzip compression
   gem 'unicorn-rails'
+  gem 'unicorn-worker-killer'
 end
 
 group :development do

@@ -153,6 +153,8 @@ GEM
     fuzzy-string-match (1.0.1)
       RubyInline (>= 3.8.6)
     geocoder (1.6.3)
+    get_process_mem (0.2.5)
+      ffi (~> 1.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     groupdate (5.0.0)
@@ -328,6 +330,9 @@ GEM
     unicorn-rails (2.2.1)
       rack
       unicorn
+    unicorn-worker-killer (0.4.4)
+      get_process_mem (~> 0)
+      unicorn (>= 4, < 6)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (4.0.3)
@@ -384,6 +389,7 @@ DEPENDENCIES
   traco
   turbolinks
   unicorn-rails
+  unicorn-worker-killer
   web-console (>= 3.3.0)
   webpacker (~> 5.1)
 

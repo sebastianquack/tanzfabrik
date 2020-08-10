@@ -1,5 +1,5 @@
 # for live setup with unicorn server
-worker_processes 3
+worker_processes 2
 timeout 300
 
 # combine Ruby 2.0.0+ with "preload_app true" for memory savings
