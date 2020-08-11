@@ -4,15 +4,19 @@
 ol :class => "people_list" do
   people.each do |person|
     li do
-      a :href=>person_path(person) do
-        div :class => "image_container" do
-          if person.images.exists?
-            img :src => person.images.first.attachment.url(:people_hires)
-          else
-            #img :src => asset_path("schwarzT.png", type: :image)
+      div :class => "image_container" do
+        if person.images.exists?
+          a :href=>person_path(person) do
+            img :src => person.images.first.attachment.url(:people),
+              :srcset => "#{person.images.first.attachment.url(:people)} 150w, #{person.images.first.attachment.url(:people_hires)} 300w",
+              :sizes => "20vw"
           end
+        else
+          img :width => 200, :height => 260, :src => "/images/people_empty.png"
         end
-        div :class => "info" do
+      end
+      div :class => "info" do
+        a :href=>person_path(person) do
           text_node person.name
         end
       end

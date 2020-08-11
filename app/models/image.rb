@@ -4,8 +4,8 @@ class Image < ActiveRecord::Base
       :background => "1000x1000>", 
       :large => ["600x600>"],
       :medium_detail_column => ["330>"], 
-      :people => ['144x150#'],
-      :people_hires => ['288x300#'],
+      :people => ['150x195#'],
+      :people_hires => ['300x390#'],
       :medium => ["300x300>"], 
       :thumb => ["100x100>"]
       },

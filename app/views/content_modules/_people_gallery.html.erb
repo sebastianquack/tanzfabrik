@@ -1,22 +1,32 @@
-<%
-  people = []
-  
-  # we show all people that have at least one of the tags specified in parameter
+<div class="module__people_gallery" data-section="<%= content_module.section %>">
 
-  # split tags up into individual tags
-  no_commas = content_module.parameter.gsub(",", "")
-  tags = no_commas.split(" ")
+  <% if content_module.headline %>
+    <h1>
+      <%= content_module.headline_shy.html_safe %>
+    </h1>
+  <% end %>
 
-  # find people that have this tag
-  sep = Person.get_tag_separator_regex_string
-  tags.each do |tag|
-    people_tag = Person.where('tags ~* ?', "(^|#{sep})" + tag.strip + "($|#{sep})").all
-    people += people_tag
-  end
-  
-  # make unique and sort
-  people = people.uniq
-  people = people.sort_by(&:last_name)
-%>
+  <%
+    people = []
+    
+    # we show all people that have at least one of the tags specified in parameter
 
-<%= render :partial => "/people/list", :locals => {:people => people} %>
+    # split tags up into individual tags
+    no_commas = content_module.parameter.gsub(",", "")
+    tags = no_commas.split(" ")
+
+    # find people that have this tag
+    sep = Person.get_tag_separator_regex_string
+    tags.each do |tag|
+      people_tag = Person.where('tags ~* ?', "(^|#{sep})" + tag.strip + "($|#{sep})").all
+      people += people_tag
+    end
+    
+    # make unique and sort
+    people = people.uniq
+    people = people.sort_by(&:last_name)
+  %>
+
+  <%= render :partial => "/people/list", :locals => {:people => people} %>
+
+</div>
