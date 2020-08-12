@@ -4,8 +4,11 @@
 
   display: flex;
 
-  @include page-dist("padding-left", "left");
-  @include page-dist("padding-right", "right");
+  @include page-dist("margin-left", "left");
+  @include page-dist("margin-right", "right");
+
+  @include grid-dist("padding-left", 1);
+  @include grid-dist("padding-right", 1);
   
   .column_left {
     flex: 1;
@@ -25,6 +28,10 @@
 
   h2 {
     margin-bottom: 30px;
+  }
+
+  h4{
+    margin-bottom: 12px;
   }
 
   .rich_content_1 {

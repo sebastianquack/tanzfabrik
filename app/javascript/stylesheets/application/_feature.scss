@@ -30,6 +30,7 @@
   .columns {
     @include flex-row;
     background-size: cover;
+    background-position: 50%;
     @include page-dist("padding-left", "left");
     @include page-dist("padding-right", "right");
     @include page-dist("padding-top", "top");
