@@ -126,6 +126,8 @@ ActiveAdmin.register ContentModule do
             f.input field, :as => :select, :collection => Festival.order("name_de").all, :include_blank => false
           elsif field == "parameter" && (mtype == "kursplan")
             f.input field, :as => :select, :collection => Location.all.map {|l| [l.name, l.name]}, :include_blank => false
+          elsif field == "parameter" && (mtype == "studio")
+            f.input field, :as => :select, :collection => Studio.all.map {|s| [s.location.name + " " + s.name, s.id]}, :include_blank => false            
           elsif field == "parameter" && (mtype == "people_gallery")
             f.input field, :label => "Gruppen", :hint => ("<span class='people_tags_list'><u>Verwendete Tags</u><br /><span>" + Person.get_all_tags.join("</span><br /><span>") + "</span></span>").html_safe
           else

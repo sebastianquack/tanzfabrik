@@ -107,6 +107,11 @@ kursplan:
     - parameter
   images: false
   downloads: false
+studio:
+  form-fields:
+    - parameter
+  images: false
+  downloads: false
 festival_vorschau:
   style-options:
     - default

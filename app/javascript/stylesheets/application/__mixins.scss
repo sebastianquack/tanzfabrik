@@ -279,6 +279,13 @@
   }
 }
 
+@mixin grid-dist($attr: "padding-right", $multiply: 1) {
+  #{$attr}: 100%/12 * $multiply;
+  @include breakpoint('s') {
+    #{$attr}: 100%/12 * $multiply;
+  }
+}
+
 @mixin flex-row {
   display: flex;
   width: 100%;

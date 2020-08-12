@@ -1,0 +1,40 @@
+<%
+return if content_module.parameter.empty?
+studio = Studio.find(content_module.parameter.to_i)
+%>
+
+<div class="module__studio" data-section="schule">
+  
+  <div class="column_left">
+
+  <% if studio.images.count > 0 %>
+    <img src=<%= studio.images[0].attachment.url(:large) %>>
+  <% end %>
+
+  </div>
+
+  <div class="column_right">
+    
+    <div class="rich_content">
+
+      <% if (studio.location.name || studio.name) %>
+        <h3>
+          <%= studio.location.name.to_s + " " + studio.name.to_s %>
+        </h3>
+      <% end %>
+
+      <% if studio.location.address %>
+        <div class="special_text">
+          <%= studio.location.address  %>
+        </div>    
+      <% end %>
+
+      <% if studio.rich_content %>
+        <%= studio.rich_content %>
+      <% end %>
+    </div>
+
+  </div>
+
+</div>
+

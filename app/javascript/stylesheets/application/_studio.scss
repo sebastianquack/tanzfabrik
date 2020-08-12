@@ -1,0 +1,43 @@
+@import "./__mixins.scss";
+
+.module__studio {
+
+  display: flex;
+
+  @include page-dist("margin-left", "left");
+  @include page-dist("margin-right", "right");
+
+  @include grid-dist("padding-left", 1);
+  @include grid-dist("padding-right", 1);  
+  
+  .column_left {
+    flex: 1;
+    box-sizing: border-box;
+
+    img {
+      width: 100%;
+      padding-right: 16px;
+      box-sizing: border-box;
+      display: block;
+    }
+  }
+
+  .column_right {
+    flex:1;
+  }
+
+  h2 {
+    margin-bottom: 30px;
+  }
+
+  .rich_content_1 {
+    @include font-fliesstext-m;
+  }  
+
+  .special_text {
+    @include font-stripes-infos;
+    white-space: pre-line;
+    margin-bottom: 5px;
+  }  
+
+}
