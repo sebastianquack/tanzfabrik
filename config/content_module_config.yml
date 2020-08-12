@@ -18,7 +18,6 @@ feature:
 page_intro:
   style-options:
     - default
-    - magazine
   sections:
     - buehne
     - schule
@@ -27,6 +26,30 @@ page_intro:
     - headline
     - special_text
     - rich_content_1
+page_intro_magazine:
+  style-options:
+    - default
+  sections:
+    - buehne
+    - schule
+    - fabrik    
+  form-fields:
+    - headline
+    - sub
+  downloads: false
+content_element:
+  style-options:
+    - default
+  sections:
+    - buehne
+    - schule
+    - fabrik
+  form-fields:
+    - headline
+    - special_text
+    - rich_content_1
+    - link_title
+    - link_href
 content_2_columns:
   style-options:
     - default
@@ -38,21 +61,19 @@ content_2_columns:
     - headline
     - rich_content_1
     - rich_content_2
-  images: false
-content_element:
+  images: false    
+content_element_magazine:
   style-options:
     - default
     - centered
+    - large_left
+    - large_right
   sections:
     - buehne
     - schule
     - fabrik
   form-fields:
-    - headline
-    - special_text
     - rich_content_1
-    - link_title
-    - link_href
 reference:
   style-options:
     - default

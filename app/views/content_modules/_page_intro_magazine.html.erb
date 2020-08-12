@@ -1,0 +1,27 @@
+<div class="module__page_intro_magazine" data-section="<%= content_module.section %>">
+  
+  <div class="text">
+
+    <% if content_module.headline %>
+      <h1>
+        <%= content_module.headline_shy.html_safe %>
+      </h1>
+    <% end %>
+
+    <% if content_module.sub %>
+      <div class="sub">
+        <%= content_module.sub  %>
+      </div>    
+    <% end %>
+
+  </div>
+
+  
+  <% if content_module.images.count > 0 %>
+    <img class="image" src=<%= content_module.images[0].attachment.url(:large) %>>
+  <% end %>
+
+  
+
+</div>
+

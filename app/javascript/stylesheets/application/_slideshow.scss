@@ -4,6 +4,7 @@
 .module__slideshow {
 
   @include page-dist("padding-left", "left");
+  overflow: hidden;
 
   .headline_container {
     @include flex-row;

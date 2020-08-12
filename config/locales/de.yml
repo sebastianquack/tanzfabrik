@@ -513,9 +513,11 @@ de:
   content_modules:
     module_types:
       default: "Alles" 
-      content_2_columns: "Inhaltselement zweispaltig"
-      content_element: "Inhaltselement"
-      page_intro: "Intro"
+      content_2_columns: "Text zweispaltig"
+      content_element: "Inhaltselement komplett"
+      content_element_magazine: "Text (Magazinstil)"
+      page_intro: "Seiten-Intro"
+      page_intro_magazine: "Seiten-Intro (Magazinstil)"
       reference: "Verweis"
       feature: "Feature Landing Page"
       slideshow: "Diashow"

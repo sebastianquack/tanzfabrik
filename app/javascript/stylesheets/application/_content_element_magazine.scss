@@ -1,0 +1,42 @@
+@import "./__variables.scss";
+@import "./__mixins.scss";
+
+.module__content_element_magazine {
+
+  @include page-dist("padding-left", "left");
+  @include page-dist("padding-right", "right");
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: $grid-gap-l;
+  @include breakpoint('s') {
+    column-gap: $grid-gap-s;
+  }
+
+  &[data-style-option$="_left"] .text {
+    grid-column: 2 / span 9;
+  }
+
+  &[data-style-option$="_right"] .text {
+    grid-column: 4 / span 9;
+  }
+
+  &[data-style-option="center"] .text {
+    grid-column: 4 / span 6;
+  }
+
+  &[data-style-option=""] .text {
+    grid-column: 7 / span 6;
+    color: blue;
+  }
+
+  @include font-fliesstext-m;
+  &[data-style-option^="large_"] {
+    @include font-fliesstext-l;
+  }
+
+  h4{
+    margin-bottom: 12px;
+  }
+
+}

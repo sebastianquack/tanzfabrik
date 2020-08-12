@@ -198,6 +198,26 @@ make_module({
   headline_en: "Contact",
 })
 
+### page_intro_magazine / Twists: Dance and Decoloniality (Magazin!)
+
+rich_content_1 = <<~RICHCONTENT1
+Die Tanzfabrik Berlin bietet für alle, die sich intensiv mit Tanz beschäftigen möchten, ein zehnmonatiges Dance Intensive- Programm an. Dance Intensive ist ein Qualifizierungsprogramm, das sich an Personen richtet, die sich im Bereich Tanz orientieren, weiterbilden und/oder sich auf Aufnahmeprüfungen an unterschiedlichen nationalen und internationalen Ausbildungsinstituten vorbereiten möchten. Das Programm bietet die Möglichkeit der Orientierung im Bereich Zeitgenössischer Tanz und bietet Einblick in Tanzrichtungen und Tanzstile um sich gezielt auf eine zukünftige Ausbildung vorzubereiten (das Vortanzen an Hochschulen und Instituten) oder die Integration des erlernten Wissens in bestehende Berufsbereiche. Ziel des Qualifizierungsprogramms ist es, ein Fundament in tänzerischen Disziplinen und Techniken zu legen sowie an der Integration von Körper, Form, Alignment, Dynamik und Musikalität zu arbeiten. Die Teilnehmer*innen erhalten individuelle Förderung und Betreuung, mit dem Ziel die tänzerischen und kreativen Potentiale zu stärken, so dass ein erfolgreicher Ausbildungsweg eingeschlagen werden kann. 
+<br /><br />
+Es werden 6 Leistungsklassen pro Woche in der Regel von Mo-Do 12:00-14:00 Uhr oder 14:30-16:30 Uhr und Fr 12:00-16:30 Uhr angeboten. Diese sind obligatorisch und ausschließlich für die Dance Intensive-Teilnehmer*innen. Daneben können alle weiteren Kurse des offenen Kursprogramms der Tanzfabrik besucht werden. Das Angebot des regulären Kursprogramms beinhaltet u.a. die Fächer Contemporary, Contemporary Ballett, Contact Improvisation, Gaga, Dynamic Improvisation, Movement Research, Axis Syllabus, Afrikanischer Tanz, Contemporary Jazz, Streetdance, Yoga, Body- Mind Centering, Pilates, Feldenkrais, Butoh, Urban Flow. 
+<br /><br />
+Der Schwerpunkt der Leistungsklassen liegt auf der Vermittlung von zeitgenössischen Tanztechniken und Stilen, der Körperarbeit (Körperwahrnehmungstechniken/angewandte Anatomie) und der Improvisation/Komposition. Zudem wird Unterricht in zeitgenössischem Ballett und Theorieklassen angeboten. Während der Ausbildung werden die Teilnehmer*innen an mehreren Aufführungen mitwirken. Unter der Leitung der Dozent*innen werden Gruppenprojekte erarbeitet sowie die Möglichkeit geboten, mit Unterstützung der Ausbildungsleiterin, eigene Stücke zu realisieren. Außerdem erhalten die Teilnehmer*innen Unterstützung bei der Erstellung ihrer Bewerbungsunterlagen. Neben der regelmäßigen Unterrichtsteilnahme erhalten die Teilnehmer*Innen einen Einblick in den tänzerischen Alltag und können die Veranstaltungen der Tanzfabrik Berlin kostenlos besuchen.
+RICHCONTENT1
+
+make_module({
+  module_type: "page_intro_magazine",
+  section: "buehne",
+  headline_de: "Twists: Dance and De\\colonia\\lity",
+  headline_en: "Twists: Dance and De\\colonia\\lity",
+  sub_de: "40 Jahre Tanzfabrik",
+  sub_en: "40 Jahre Tanzfabrik",
+}, img_landscape)
+
+
 ### content_2_columns
 
 rich_content_1 = <<~RICHCONTENT
@@ -329,6 +349,64 @@ make_module({
   rich_content_1_de: rich_content_1,
   rich_content_1_en: "",
 }, img_portrait)
+
+### content_element_magazine / This specific generative history
+
+rich_content_1 = <<~RICHCONTENT1
+This specific generative history, which you can learn much more about in the following pages, as well as the profound changes that Tanzfabrik Berlin has witnessed over the last 40 years have resulted in a structure that is much more flexible, albeit fragile. 
+On the one hand, this flexibility is a powerful resource that allows adaptation and reaction in different times and circumstances, thus avoiding the rigidity that often results as a function of institutionalisation. On the other hand, it places Berlin’s oldest institution for contemporary dance in a state of constant precariousness. 
+Even today in 2018, amidst focused political efforts intended to help Berlin’s contemporary dance community organise itself structurally through the formation of a Dance Round Table Berlin, Tanzfabrik Berlin continues to work to come to terms with private responsibility, political marginalisation and a lack of infrastructural funding.
+RICHCONTENT1
+
+make_module({
+  module_type: "content_element_magazine",
+  section: "schule",
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: rich_content_1,
+})
+
+### content_element_magazine / Tanzfabrik Berlin has served
+
+rich_content_1 = <<~RICHCONTENT1
+Tanzfabrik Berlin has served as house for contemporary dance in Berlin since 1978. Initiated by a visionary group of artists with the simple goal of “living and working” together when Berlin was still divided by the Berlin Wall, Tanzfabrik Berlin has developed itself into an internationally renowned production center that welcomes thousands of artists, students and dance lovers to its studios each year.
+RICHCONTENT1
+
+make_module({
+  module_type: "content_element_magazine",
+  section: "schule",
+  style_option: "large_left",  
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: rich_content_1,
+})
+
+### content_element_magazine / Weit hinten
+
+rich_content_1 = <<~RICHCONTENT1
+Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans.
+RICHCONTENT1
+
+make_module({
+  module_type: "content_element_magazine",
+  section: "schule",
+  style_option: "large_right",
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: rich_content_1,
+})
+
+### content_element_magazine / ↪#1
+
+rich_content_1 = <<~RICHCONTENT1
+<h4>↪ #1</h4>
+Teilresidenzen ermöglichen zum einen den Erstkontakt mit der Tanzfabrik Berlin und ersten Austausch über Arbeitsweisen und Erfordernisse sowie eine informelle öffentliche Präsentation der Arbeit. Die Raumkosten werden mit 50% der Betriebskosten unterstützt. Die Präsentation wird durch die Öffentlichkeitsarbeit der Tanzfabrik Berlin kommuniziert.
+RICHCONTENT1
+
+make_module({
+  module_type: "content_element_magazine",
+  section: "buehne",
+  style_option: "center",
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: rich_content_1,
+})
 
 ### reference / identifying a physical script
 

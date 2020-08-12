@@ -132,7 +132,7 @@
     font-size: 16px;
     line-height: 24px;
   }        
-  font-weight: $font-weight-medium;
+  font-weight: $font-weight-regular;
 }
 
 @mixin font-fliesstext-m {
@@ -307,6 +307,19 @@
     margin-right: $grid-gap-l;
   }
   flex: 0 0 calc(#{100 * $row-width / $total-rows}% - #{if($border, $grid-gap-l, "0px")});
+  @if ($debug) {
+    background: rgba(random(255), random(255), random(255), 0.5);
+  }
+}
+
+@mixin width-row-item($row-width, $total-rows, $border: true) {
+  //@include grid-gap-dist("margin-left", ($row-begin - 1)/($total-rows - 1));
+  //@include grid-gap-dist("padding-right", (($total-rows - 1) - ($row-end - 1))/($total-rows - 1));
+  //box-sizing: border-box;
+  @if($border) {
+    margin-right: $grid-gap-l;
+  }
+  width: calc(#{100 * $row-width / $total-rows}% - #{if($border, $grid-gap-l, "0px")});
   @if ($debug) {
     background: rgba(random(255), random(255), random(255), 0.5);
   }

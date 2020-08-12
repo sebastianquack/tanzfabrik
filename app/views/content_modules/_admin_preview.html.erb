@@ -2,7 +2,7 @@
 
 <li>
   <div>
-    Modul: <b><%= t("content_modules.module_types." + cm.module_type.to_s) %></b><br>
+    <b style="font-size: 120%;"><%= t("content_modules.module_types." + cm.module_type.to_s) %></b><br>
     <% if cm.parameter && cm.parameter != "" %> 
       Auswahl: <%= cm.parameter %><br>
     <% end %>
