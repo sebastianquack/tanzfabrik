@@ -31,12 +31,7 @@ ol :class => "event-calendar" do
     if in_festival.nil?
       # NOTE: having a li that acts as a heading is probable semantically wrong. instead, there should be sub-lists for monthly sections.
       li :class => "row event-programm event-programm-section" do
-        div :class => "basic" do
-          h2 l(month, :format => ( is_archive ? :month_year : :month )), :class => "month"
-        end
-        div :class => "details" do
-          div :class => "content"
-        end        
+        h3 l(month, :format => ( is_archive ? :month_year : :month )), :class => "month"
       end
     end
 
@@ -46,29 +41,30 @@ ol :class => "event-calendar" do
       detail = o[:detail]
 
       li :class => "row event event-programm" do
-        div :class => "basic" do   
-          div :class => "content" do
-            a :href => occurrence_path(event, time, in_festival) do 
-              h3 event.title, :class => "title"
-              h4 event.display_type, :class => "type"           
-              para event.people_sorted.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
-              if !in_festival
-                aside class: "in-festival" do
-                  render :partial => "events/in_festival", :locals => {:event => event, :link => false }
-                end            
-              end     
-            end
+
+        a :href => occurrence_path(event, time, in_festival) do 
+          
+          span :class => "title-teacher" do 
+            span event.title, :class => "title"
+
+            span event.people_sorted.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
+            if !in_festival
+              aside class: "in-festival" do
+                render :partial => "events/in_festival", :locals => {:event => event, :link => false }
+              end            
+            end     
           end
-        end
+                   
+          time(:class => "date") do
+            span l(time, :format => (display_year ? :day_month_year : :day_month) ), :class => "day"
+          end
 
-        div :class => "details" do
-          div :class => "content" do
+          time(:class => "time") do
+            span l(time, :format => :hours_minutes), :class => "clock"
+          end
 
-            time(:class => "time") do
-              span l(time, :format => (display_year ? :day_month_year : :day_month) ), :class => "day"
-              span l(time, :format => :hours_minutes), :class => "clock"
-            end
-
+          div :class => "type-location" do
+            span event.display_type, :class => "type"    
             div :class => "address" do
               if detail.custom_place?
                 div detail.custom_place, :class => "location"
@@ -78,7 +74,8 @@ ol :class => "event-calendar" do
                 div detail.studio.name, :class => (too_long ? "location" : "studio")
               end
             end
-          end    
+          end
+
         end
       end  
     end

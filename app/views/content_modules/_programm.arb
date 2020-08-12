@@ -8,8 +8,10 @@ else
   events = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ?', Rails.configuration.stage_event_types, start_date)
 end
 
-cache_arbre(self, cache_key_for_programm(events, start_date, params[:year])) do
-  render :partial => "/events/event_list", :locals => {:events => events, :start_date => start_date, :in_festival => nil, :is_archive => params[:year] != nil }
+div :class => "module__programm" do 
+  cache_arbre(self, cache_key_for_programm(events, start_date, params[:year])) do
+    render :partial => "/events/event_list", :locals => {:events => events, :start_date => start_date, :in_festival => nil, :is_archive => params[:year] != nil }
+  end
 end
 
 # figure out in which years event_details exist

@@ -1,0 +1,63 @@
+@import "./__variables.scss";
+@import "./__mixins.scss";
+
+.module__programm {
+
+  .event-calendar {
+
+    @include page-dist("padding-left", "left");
+    @include page-dist("padding-right", "right");
+
+    .row.event {
+      @include debug(rgba(0,0,255,0.5));
+
+      padding-top: 12px;
+      padding-bottom: 12px;
+
+      border-style: solid;
+      border-width: 1px 0 0 0;
+      &:last-child {
+        border-bottom-width: 1px;
+      }
+
+      &+.group {
+        margin-top: 30px;
+        .month-festival {
+          margin-top: 20px; // 20+30 = 50
+        }
+      }
+      
+      a {
+
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        column-gap: $grid-gap-l;
+        @include breakpoint('s') {
+          column-gap: $grid-gap-s;
+        }
+
+        .title-teacher {
+          grid-column: 7 / span 6;
+        }
+
+        .type-location {
+          grid-column: 4 / span 3;
+        }
+
+        .time {
+          grid-column: 3 / span 1;
+        }
+
+        .date {
+          grid-column: 1 / span 2;
+        }
+
+
+      }  
+    
+
+    }
+
+  }
+
+}
