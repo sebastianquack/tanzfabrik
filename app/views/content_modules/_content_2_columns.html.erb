@@ -27,7 +27,7 @@
 
     <div class="downloads">
       <% content_module.downloads.each do |download| %>
-        <a href="<%= download.attachment.url %>"><%= download.description %></a>
+        <a class="button pdf" title="<%= download.description %>" href="<%= download.attachment.url %>"><%= download.description %></a>
       <% end %>
     </div>
 
