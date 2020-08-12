@@ -198,6 +198,20 @@ make_module({
   headline_en: "Contact",
 })
 
+### page_intro / Headline und Text (kein Bild)
+
+make_module({
+  module_type: "page_intro",
+  section: "schule",
+  headline_de: "Kursplan",
+  headline_en: "Kursplan",
+  special_text_de: special_text,
+  special_text_en: special_text,
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: rich_content_1,  
+})
+
+
 ### page_intro_magazine / Twists: Dance and Decoloniality (Magazin!)
 
 rich_content_1 = <<~RICHCONTENT1

@@ -51,7 +51,11 @@
     margin-bottom: 20px;
   }
 
-  .rich_content_1 {
+  &[data-no-images] .rich_content_1 {
+    margin-left: calc( 100% * 5 / 11 );
+  }  
+
+  .rich_content_1 .rich_content_1 {
     @include font-fliesstext-m;
   }
 
