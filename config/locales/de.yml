@@ -483,6 +483,7 @@ de:
         role: Rolle
         event: Ereignis
         events: Ereignisse
+        tags: "Gruppen"
         image: Bild
         images: Bilder
         dance_intensive: Dance-Intensive-LehrerIn
@@ -491,8 +492,9 @@ de:
       studio:
         location: Adresse
         name: Name
+        fullname: Ganzer Name
         description: Text
-        rich_content: Bio
+        rich_content: Text
       download:
         description: Titel
         attachment: Datei
@@ -516,8 +518,13 @@ de:
       page_intro: "Intro"
       reference: "Verweis"
       feature: "Feature Landing Page"
+      slideshow: "Diashow"
+      submenu_divider: "Ankerpunkt für Seitenmenü"
+      people_gallery: "Personensammlung"
+      festival_vorschau: "Festival Intro"
     style_options:
       magazine: "Magazin"
+      large: "Groß"
     sections:
       buehne: "Bühne (Schwarz)"
       schule: "Schule (Rot)"

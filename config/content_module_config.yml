@@ -91,6 +91,7 @@ submenu_divider:
 people_gallery:
   style-options:
     - default
+    - larges
   form-fields:
     - headline
     - parameter
@@ -117,6 +118,8 @@ festival_vorschau:
     - default
   form-fields:
     - parameter
+  images: false
+  downloads: true
 festival_programm:
   style-options:
     - default

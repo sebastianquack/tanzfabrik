@@ -1,9 +1,13 @@
-if content_module.parameter == ""
+if content_module.parameter.nil?
   return
 end
 
 # load the festival
-festival = Festival.find(content_module.parameter)
+begin
+  festival = Festival.find(content_module.parameter.to_i)
+rescue ActiveRecord::RecordNotFound
+  return
+end
 
 if !festival
   return

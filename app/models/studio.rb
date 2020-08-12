@@ -11,5 +11,11 @@ class Studio < ActiveRecord::Base
 
   has_many :images
   accepts_nested_attributes_for :images, :allow_destroy => true
+
+  def fullname
+    self.location.name.to_s + " " + self.name.to_s
+  end
+
+  scope :by_fullname, ->  { joins(:location).order('locations.name ASC, studios.name ASC') }
   
 end

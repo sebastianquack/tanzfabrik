@@ -18,7 +18,7 @@ past_festivals = Festival.no_draft.select { |f| f.events.length > 0 && f.end_dat
 <ul>
 <%  past_festivals.each do |festival| %>
 
-  <li><a src = "<%= page_url(festival.page)%>"><%=festival.name%></a></li>
+  <li><a href="<%= page_url(festival.page)%>"><%=festival.name%></a></li>
 
 <% end %>
 </ul>

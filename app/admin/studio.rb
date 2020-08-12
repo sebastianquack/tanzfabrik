@@ -14,11 +14,25 @@ ActiveAdmin.register Studio do
   #  permitted << :other if resource.something?
   #  permitted
   # end
+
+  includes :location
+
+  controller do
+    def scoped_collection
+      Studio.all.by_fullname
+    end
+  end
+  config.sort_order = ''
+
+  #config.sort_order = 'locations.name_ASC, studios.name_ASC'
   
   index do
     selectable_column
-    column :location
-    column :name
+
+    column :fullname
+
+    column :location, sortable: 'locations.name'
+    column :name, sortable: true
     column :description do |studio|
       div studio.rich_content_de
     end
