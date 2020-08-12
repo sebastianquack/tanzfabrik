@@ -95,7 +95,8 @@ ActiveAdmin.register ContentModule do
         end
       end
       row "Vorschau" do |content_module|
-        render partial: "/content_modules/index", locals: {content_module: content_module}
+        #render partial: "/content_modules/index", locals: {content_module: content_module}
+        render partial: "/content_modules/admin_preview", locals: {cm: content_module}
       end
       row :draft
     end
