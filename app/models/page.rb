@@ -15,6 +15,8 @@ class Page < ActiveRecord::Base
   has_many :content_modules, -> { order :order }, dependent: :destroy
   accepts_nested_attributes_for :content_modules, :allow_destroy => true
 
+  has_many :menu_items
+
   require 'fuzzystringmatch'
 
   # determine the extension text for the selected menu item

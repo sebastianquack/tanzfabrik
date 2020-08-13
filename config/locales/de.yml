@@ -423,6 +423,8 @@ de:
         content: Text
         description: Zusammenfassung
         hide_download_links: Download-Links oben rechts auf Seite verstecken
+        number_of_content_modules: Anzahl Module
+        menu_items: Menüverknüpfung
       event:
         type: Typ
         custom_type: "Typ: Eigener Text"
@@ -527,6 +529,8 @@ de:
     style_options:
       magazine: "Magazin"
       large: "Groß"
+      large_left: "Großer Text – linksbündig"
+      large_right: "Großer Text – rechtsbündig"
     sections:
       buehne: "Bühne (Schwarz)"
       schule: "Schule (Rot)"

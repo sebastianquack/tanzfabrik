@@ -112,7 +112,7 @@ submenu_divider:
 people_gallery:
   style-options:
     - default
-    - larges
+    - large
   form-fields:
     - headline
     - parameter

@@ -29,7 +29,14 @@ ActiveAdmin.register Page do
   # end
 
   config.sort_order = 'updated_at_desc'
-  config.filters = false
+  config.filters = true
+
+  filter :title_de
+  filter :slug
+  filter :content_de
+  
+
+  config.per_page = 100
 
   ActiveAdmin.register Page do
 
@@ -52,8 +59,20 @@ ActiveAdmin.register Page do
   index do
 
     selectable_column
-    column :title_de
-    column "URL" do |page|
+    column :title_de, sortable: true
+    column :number_of_content_modules do |page|
+      page.content_modules.count
+    end
+    column :menu_items do |page|
+      #page.menu_item
+      #Activity.joins(:locations).where('locations.country = "Australia"')
+      #MenuItem.joins(:page).where(page: { id: page.id })
+      #MenuItem.find
+      page.menu_items.each do |item|
+        edit_admin_menu_item_url(item)
+      end
+    end    
+    column "URL-Pfad" do |page|
       link_to page.slug, page_path(page)
     end
     #column :content_modules do |page|
@@ -71,17 +90,10 @@ ActiveAdmin.register Page do
     
     actions
   end
-
-  #filter :title_de
-  #filter :content_de
-  #filter :feature_on_welcome_screen
-
-  
-  config.per_page = 100
   
   show do
     attributes_table do
-      row "URL" do |page|
+      row "URL-Pfad" do |page|
         link_to page.slug, page
       end
       #row :title_de
