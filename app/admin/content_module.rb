@@ -27,9 +27,8 @@ ActiveAdmin.register ContentModule do
   #
   permit_params :module_type, :style_option, :section, :draft, :headline_de, :headline_en, :super_de, :super_en, :sub_de, :sub_en, :special_text_de, :special_text_en, :rich_content_1_de, :rich_content_1_en, :rich_content_2_de, :rich_content_2_en, :custom_html_de, :custom_html_en, :parameter, :locale,
   :link_href_de, :link_href_en, :link_title_de, :link_title_en,
-  :images_attributes => [:id, :description, :license, :attachment, :_destroy],
+  :images_attributes => [:id, :description, :license, :attachment, :_destroy, :super_de, :super_en, :headline_de, :headline_en, :rich_content_1_de, :rich_content_1_en, :link_title_de, :link_title_en, :link_href_de, :link_href_en],
   :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
-
 
   ActiveAdmin.register ContentModule do
       member_action :delete_content_module, method: :get do

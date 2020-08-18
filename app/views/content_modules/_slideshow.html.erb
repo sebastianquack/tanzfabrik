@@ -21,7 +21,7 @@
 
       <li class="slide">
 
-        <% if image.headline%>
+        <% if image.attachment%>
           <figure class="image">
             <img src="<%= image.attachment.url(:medium) %>">
             <figcaption class="caption">
@@ -68,21 +68,5 @@
   <% if content_module.special_text %>
     <div><%= content_module.special_text %></div>
   <% end %>
-
-
-  <div>
-  <% content_module.images.each do |image| %>
-    <image src="<%= image.attachment.url(:medium) %>">
-    <caption><%= image.license %></caption>
-    <caption><%= image.description %></caption>
-  <% end %>
-  </div>
-
-
-  <div>
-  <% content_module.downloads.each do |download| %>
-    <a href="<%= download.attachment.url %>"><%= download.description %></a>
-  <% end %>
-  </div>
 
   </div>
