@@ -41,7 +41,7 @@ ActiveAdmin.register MenuItem do
       f.inputs "Details" do
         f.input :name_de
         f.input :name_en
-        f.input :key
+        #f.input :key
         #f.input :position # changed via drag&drop
         f.input :page, :include_blank => true, :collection => Page.all.order(:slug).collect {|page| [page.slug, page.id] }
         f.input :anchor

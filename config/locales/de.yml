@@ -512,6 +512,10 @@ de:
       text_item:
         rich_content: Formatierter Inhalt
         content: Einfacher Inhalt
+      menu_item: 
+        name: Menü-Eintrag
+        page: Seite
+        anchor: (optional) Stelle im kleinen Seitenmenü links auf der Seite
 
   formtastic:
     update: "%{model} speichern"
