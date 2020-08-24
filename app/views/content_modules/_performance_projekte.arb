@@ -18,13 +18,20 @@ performance_projekte.each do |project|
           h2 project.title, :class => "title"
           para project.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
 
-          # hack to allow for links only in short descriptions - on longer descriptions links break format
-          if project.description.length > 350
-            div (sanitize project.description.html_safe, tags: %w(p, strong, em)), :class => "description"
-          else
-            div project.description.html_safe, :class => "description" if project.description
+          if project.rich_content
+            div project.rich_content
           end
-          div t(:more), :class => "more" if project.description.length > 350
+
+          if project.description
+            # hack to allow for links only in short descriptions - on longer descriptions links break format
+            if project.description.length > 350
+              div (sanitize project.description.html_safe, tags: %w(p, strong, em)), :class => "description"
+            else
+              div project.description.html_safe, :class => "description" if project.description
+            end
+            div t(:more), :class => "more" if project.description.length > 350
+          end
+
         end
       end
     end
