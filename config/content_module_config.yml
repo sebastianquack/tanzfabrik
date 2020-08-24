@@ -166,6 +166,10 @@ newsletter:
   form-fields:
     - headline
     - rich_content_1
+accordeon_element:
+  form-fields:
+    - headline
+    - rich_content_1
 default:
   style-options: 
     - default
