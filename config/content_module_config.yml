@@ -153,6 +153,9 @@ festival_archiv:
   form-fields:
   images: false
   downloads: false
+preis_tabelle:
+  form-fields: 
+    - custom_html
 default:
   style-options: 
     - default

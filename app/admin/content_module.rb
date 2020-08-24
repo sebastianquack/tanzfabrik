@@ -149,12 +149,12 @@ ActiveAdmin.register ContentModule do
           return [
             make_input(f, mtype, field + "_de", active, action_text, hint),
             make_input(f, mtype, field + "_en", active, action_text, hint),
-            hr
+            #hr
           ]
         else
           return [
               make_input(f, mtype, field, active, action_text),
-              hr
+              #hr
           ]
         end
       end
@@ -172,9 +172,15 @@ ActiveAdmin.register ContentModule do
       end
       
       f.inputs "Content" do
-        div "Nutzungsbeispiel(e)", class: "module_hint" do 
-          img src: '/module_hints/' + type + '.png' # should be done with image_pack_tag but couldn't make it work!!
+
+        # usage hint images
+        path = '/module_hints/' + type + '.png' # should be done with image_pack_tag but couldn't make it work!!
+        if File.exist?("#{Rails.public_path}#{path}")
+          div "Nutzungsbeispiel(e)", class: "module_hint" do 
+            img src: path
+          end
         end
+
         content_module_input f, type, "super"
         content_module_input f, type, "headline", false, true, "Bitte mit \"\\\" mögliche  Worttrennungen innerhalb von Wörtern markieren, z.B. \"Wort\\trennung\"."
         content_module_input f, type, "sub"
