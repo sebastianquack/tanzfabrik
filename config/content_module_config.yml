@@ -156,6 +156,16 @@ festival_archiv:
 preis_tabelle:
   form-fields: 
     - custom_html
+video:
+  form-fields:
+    - headline
+    - parameter
+    - link_href
+    - link_title
+newsletter:
+  form-fields:
+    - headline
+    - rich_content_1
 default:
   style-options: 
     - default
