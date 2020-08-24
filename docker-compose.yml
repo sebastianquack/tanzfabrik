@@ -81,7 +81,7 @@ services:
       sleep 10;
       /usr/bin/mc config host add myminio http://minio:9000 ${S3_KEY} ${S3_SECRET};
       /usr/bin/mc mb myminio/${S3_TANZFABRIK_BUCKET};
-      /usr/bin/mc policy set download myminio/${S3_TANZFABRIK_BUCKET};
+      /usr/bin/mc policy set public myminio/${S3_TANZFABRIK_BUCKET};
       exit 0;
       "
 

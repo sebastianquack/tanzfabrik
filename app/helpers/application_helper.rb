@@ -9,6 +9,15 @@ module ApplicationHelper
     end
   end
 
+  def get_text_item_rich(name)
+    item = TextItem.find_by(name: name)
+    if !item
+      return "[" + name + ".rich_content]"
+    else
+      return item.rich_content
+    end
+  end
+
   def search(query)
     if !query
       return []

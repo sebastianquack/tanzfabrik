@@ -14,7 +14,7 @@ ActiveAdmin.register Page do
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # permit_params :list, :of, :attributes, :on, :model
-  permit_params :slug, :title_de, :content_de, :title_en, :content_en, :description_de, :description_en, :priority, :changefreq, :draft, :feature_on_welcome_screen, :feature_on_welcome_screen_urgent, :feature_on_welcome_screen_note_en, :feature_on_welcome_screen_note_de, :hide_download_links, :start_page_order, :project_menu_order, :show_in_project_menu, :disable_close,
+  permit_params :slug, :title_de, :content_de, :title_en, :content_en, :description_de, :description_en, :priority, :changefreq, :draft, :feature_on_welcome_screen, :feature_on_welcome_screen_urgent, :feature_on_welcome_screen_note_en, :feature_on_welcome_screen_note_de, :hide_download_links, :start_page_order, :project_menu_order, :show_in_project_menu, :disable_close, :section,
     :content_modules_attributes => [:id, :module_type, :headline, :order, :_destroy],
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
@@ -215,6 +215,15 @@ ActiveAdmin.register Page do
      # f.input :show_in_project_menu, :label => t(:show_in_project_menu)
      # f.input :project_menu_order, :label => t(:project_menu_order)
      # f.input :disable_close, :label => t(:disable_close)
+      f.input :section, 
+        :as => :select, 
+        :include_blank => false, 
+        :collection => [
+          [t(:section_school), 'school'], 
+          [t(:section_stage), 'stage'],
+          [t(:section_factory), 'factory']
+        ]
+
       f.input :draft, :label => t(:draft)
     end
 

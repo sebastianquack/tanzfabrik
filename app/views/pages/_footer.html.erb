@@ -1,0 +1,34 @@
+<footer>
+
+<p>Bereich: <%= @page.section %></p>
+
+<% footer_content_left = get_text_item_rich("footer_content_" + @page.section + "_left") %>
+<% footer_content_right = get_text_item_rich("footer_content_" + @page.section + "_right") %>
+<% footer_images = TextItem.find_by(name: "footer_logos") %>
+
+<div>
+  <%= footer_content_left %>
+</div>
+
+
+<div>
+<% if footer_images %>
+
+    <% footer_images.images.each do |image| %>
+      <a href="<%= image.link_href %>">
+        <image alt="<%= image.description %>" src="<%= image.attachment.url(:medium) %>">
+      </a>
+    <% end %>
+
+<% else %>
+  [footer_images]
+<% end %>
+</div>
+
+<% instagram = get_text_item("footer_instagram") %>
+<% vimeo = get_text_item("footer_vimeo") %>
+
+<a href="<%= instagram %>">[INSTAGRAM-LINK]</a>
+<a href="<%= vimeo %>">[VIMEO-LINK]</a>
+
+</footer>
