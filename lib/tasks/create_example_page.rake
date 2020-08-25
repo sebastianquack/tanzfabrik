@@ -25,26 +25,26 @@ task :create_example_page => :environment do
   img_landscape = {
     description: "description description description",
     license: "licence licence licence",
-    attachment: File.open(Rails.root.join('lib', 'seeds', 'landscape.png')),
+    attachment: File.open(Rails.public_path.join('seeds', 'landscape.png')),
   }
 
   img_portrait = {
     description: "description description description",
     license: "licence licence licence",
-    attachment: File.open(Rails.root.join('lib', 'seeds', 'portrait.png'))
+    attachment: File.open(Rails.public_path.join('seeds', 'portrait.png'))
   }
 
   img_square = {
     description: "description description description",
     license: "licence licence licence",
-    attachment: File.open(Rails.root.join('lib', 'seeds', 'square.png'))
+    attachment: File.open(Rails.public_path.join('seeds', 'square.png'))
   }  
 
   pdf = {
     description_de: "Beispiel PDF",
     description_en: "Example PDF",
-    attachment_de: File.open(Rails.root.join('lib', 'seeds', 'test-PDF.pdf')),
-    attachment_en: File.open(Rails.root.join('lib', 'seeds', 'test-PDF.pdf'))
+    attachment_de: File.open(Rails.public_path.join('seeds', 'test-PDF.pdf')),
+    attachment_en: File.open(Rails.public_path.join('seeds', 'test-PDF.pdf'))
   }
 
   def make_module(attributes_hash, images=nil, download=nil)
@@ -504,6 +504,34 @@ make_module({
   link_href_en: "http://tanznachtberlin.de/",  
 }, [images])
 
+
+# video module / youtube
+
+make_module({
+  module_type: "video",
+  section: "schule",
+  headline_de: "Video Youtube",
+  headline_en: "Video Youtube",
+  parameter: "https://www.youtube.com/watch?v=5inySyAPVOw",
+  link_title_de: "Watch this",
+  link_title_en: "Watch this",
+  link_href_de: "http://tanznachtberlin.de/",
+  link_href_en: "http://tanznachtberlin.de/",    
+})
+
+# video module / vimeo
+
+make_module({
+  module_type: "video",
+  section: "schule",
+  headline_de: "Video Vimeo",
+  headline_en: "Video Vimeo",
+  parameter: "https://vimeo.com/415570097",
+  link_title_de: "Watch this",
+  link_title_en: "Watch this",
+  link_href_de: "http://tanznachtberlin.de/",
+  link_href_en: "http://tanznachtberlin.de/",    
+})
 
 # END
 
