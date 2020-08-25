@@ -23,35 +23,54 @@ else
   next_occurrence = event.next(params[:time], event_types, festival) if event.occurs?
   prev_occurrence = event.prev(params[:time], event_types, festival) if event.occurs?
 
-  a "<", :class => "previous", :rel => "prev", :href => occurrence_path(prev_occurrence.event, prev_occurrence.time, festival) if prev_occurrence
-  a ">", :class => "next", :rel => "next", :href => occurrence_path(next_occurrence.event, next_occurrence.time, festival) if next_occurrence
+  div :class => "overlay" do 
 
-  div :class => "main" do
-    div :class => "line1" do
-      if event.type.name == "Workshop"
-        h1 event.type.name, :class => "title"
-        #a ">" + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
-      elsif event.type.name == "Performance-Projekt"
-        h1 event.type.name, :class => "title"
-      elsif event.type.name == "Profitraining"
-        h1 event.type.name, :class => "title" 
-      else
-        h1 t(:programm_event_headline), :class => "title"
-        #a ">" + t(:tickets), :href => page_path("tickets"), :class => "registration"
-      end    
+    div :class => "stripes_vertical stripes_left" do
+      span "X"
+      a "<", :class => "previous", :rel => "prev", :href => occurrence_path(prev_occurrence.event, prev_occurrence.time, festival) if prev_occurrence
+      span "X"
     end
+      
+    div :class => "stripes_vertical stripes_right" do
+      span "X"
+      a ">", :class => "next", :rel => "next", :href => occurrence_path(next_occurrence.event, next_occurrence.time, festival) if next_occurrence
+      span "X"
+    end
+
+    div :class => "stripes_vertical stripes_mid" do
+      span "?"
+      # Address
+      span do 
+        if event.event_details.first && event.event_details.first.studio && event.event_details.all? { |ed| ed.custom_place && ed.custom_place.empty? }
+          small event.event_details.first.studio.location.address
+        end
+      end
+      span "?"
+    end
+
+    # Image
+    if event.images.length > 0 || event.type.name == "Profitraining" && event.people.first && event.people.first.images.length > 0
+      div :class => "image" do
+        figure do
+          if event.type.name == "Profitraining"
+            img :src => event.people.first.images.first.attachment.url(:medium_detail_column)
+          else
+            img :src => event.images.first.attachment.url(:medium_detail_column)
+          end
+        end
+      end
+    end
+
   end
 
-
-  render :partial => "events/basic_info", :locals => {:event => event, :show_festival => show_festival}
-        
-  render :partial => "events/details", :locals => {:event => event, :show_festival => show_festival}
-
-
-  if admin_user_signed_in?
-    div :class => "admin-only admin-nav" do
-      a "> Dieses Ereignis bearbeiten", :href => edit_admin_event_path(event)
+  div :class => "info" do
+    render :partial => "events/basic_info", :locals => {:event => event, :show_festival => show_festival}
+    if admin_user_signed_in?
+      div :class => "admin-only admin-nav" do
+        a "> Dieses Ereignis bearbeiten", :href => edit_admin_event_path(event)
+      end
     end
+    render :partial => "events/details", :locals => {:event => event, :show_festival => show_festival}
   end
 
 end

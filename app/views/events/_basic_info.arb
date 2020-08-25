@@ -1,25 +1,41 @@
 show_festival = nil if !defined? show_festival
 
-h2 event.title, :class => "title"
+h3 event.title, :class => "title"
+
+div :class => "line1" do
+  if event.type.name == "Workshop"
+    b event.type.name, :class => "title"
+    #a ">" + t(:workshop_registration), :href => page_path("workshop_anmeldung"), :class => "registration"
+  elsif event.type.name == "Performance-Projekt"
+    b event.type.name, :class => "title"
+  elsif event.type.name == "Profitraining"
+    b event.type.name, :class => "title" 
+  else
+    b t(:programm_event_headline), :class => "title"
+    #a ">" + t(:tickets), :href => page_path("tickets"), :class => "registration"
+  end    
+end
 
 if event.type.name != "Performance-Projekt" && event.type.name != "Workshop" && event.type.name != "Profitraining"
   para event.display_type, :class => "type"
 end
 
-para :class => "teacher" do
+div event.rich_content
+
+h4 :class => "teacher" do
   event.people_sorted.map { |p| (person_link(p) ? link_to(p.name, person_link(p)) : p.name ) }.join(', ').html_safe
+end
+
+if [2,4].include? event.type.id #workshop or profitraining
+  event.people_sorted.each do |person|
+    h4 person.name
+    div person.bio.html_safe, :class => "event-bio description"
+  end
 end
 
 para do
   render :partial => "events/in_festival", :locals => {:event => event, :link => true} if show_festival
 end
 
-div event.rich_content
 
-
-if [2,4].include? event.type.id #workshop or profitraining
-  event.people_sorted.each do |person|
-    div person.bio.html_safe, :class => "event-bio description"
-  end
-end
 

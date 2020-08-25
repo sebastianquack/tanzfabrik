@@ -2,55 +2,74 @@
 @import "./__mixins.scss";
 
 .single-event-page {
-  position: fixed;
+  position: absolute;
+  z-index: 10; // place above menu
+  background-color: white;
   top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index: 10;
-
-  @include page-dist("padding-left", "left");
-  @include page-dist("padding-right", "right");
+  min-height: 100%;
   @include page-dist("padding-top", "top");
-  @include page-dist("padding-bottom", "bottom");
+
+  .overlay {
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index: 10;
+
+    @include page-dist("padding-left", "left");
+    @include page-dist("padding-right", "right");
+    @include page-dist("padding-top", "top");
+    @include page-dist("padding-bottom", "bottom");
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr;
+    @include grid-gap-dist("grid-gap");
+
+    .stripes_left {
+      grid-column: 1 / span 1;
+    }
+
+    .stripes_mid {
+      grid-column: 7 / span 2;
+      grid-row: 1;
+    }  
+
+    .image {
+      grid-column: 9 / span 3;
+      grid-row: 1;
+      figure, img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+      .button {
+        position: absolute;
+        margin-bottom: 1em;
+        @include page-dist("bottom", "bottom");
+      }
+    }
+
+    .stripes_right {
+      grid-column: 12 / span 1;
+      text-align: right;
+    }
+
+  }
+}
+
+.info {
+  @include grid-col-gap-dist("padding-left", 1, 1, "left");
+  @include grid-col-gap-dist("padding-right", 6, 6, "right");
   box-sizing: border-box;
 
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  //overflow-y: auto;
-  background: #08f4;
-
-  .stripes_left {
-    grid-column: 1 / span 1;
+  h4:before {
+    content: "↪\a0";
   }
 
-  .info {
-    grid-column: 2 / span 5;
-    overflow-y: auto;
-    height: 100%;
-    bottom:0;
-    left:0; 
-    @include grid-col-gap-dist("padding-left", 1, 1, "left");
-    @include grid-col-gap-dist("padding-right", 6, 6, "right");
-    position: fixed;
-    box-sizing: border-box;
-    background: #f884;
-
-    h4:before {
-      content: "↪\a0";
-    }
+  > * {
+    margin-bottom: 24px;
   }
-
-  .stripes_mid {
-    grid-column: 7 / span 2;
-  }  
-
-  .image {
-    grid-column: 9 / span 3;
-  }
-
-  .stripes_right {
-    grid-column: 12 / span 1;
-  }
-
 }

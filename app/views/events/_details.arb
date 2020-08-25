@@ -1,14 +1,3 @@
-# Image
-if event.images.length > 0 || event.type.name == "Profitraining" && event.people.first && event.people.first.images.length > 0
-  div :class => "image-container" do
-    if event.type.name == "Profitraining"
-      img :src => event.people.first.images.first.attachment.url(:medium_detail_column)
-    else
-      img :src => event.images.first.attachment.url(:medium_detail_column)
-    end
-  end
-end
-
 # details/ (List of occurrances)
 if event.type.name == "Performance-Projekt" || event.type.name == "Workshop"
   render :partial => "/events/details/durations", :locals => {:event => event}
@@ -22,12 +11,7 @@ if event.type.name == "Workshop"
   end
 end
 
-div :class => "info" do
-
-  # Address
-  if event.event_details.first && event.event_details.first.studio && event.event_details.all? { |ed| ed.custom_place && ed.custom_place.empty? }
-    small event.event_details.first.studio.location.address
-  end
+div do
 
   small event.info.html_safe if event.info
 
