@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_06_113512) do
+ActiveRecord::Schema.define(version: 2020_08_24_094443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -272,6 +272,7 @@ ActiveRecord::Schema.define(version: 2020_08_06_113512) do
     t.string "link_href_en"
     t.string "link_title_de"
     t.string "link_title_en"
+    t.integer "text_item_id"
     t.index ["content_module_id"], name: "index_images_on_content_module_id"
   end
 
@@ -317,6 +318,7 @@ ActiveRecord::Schema.define(version: 2020_08_06_113512) do
     t.boolean "show_in_project_menu", default: false
     t.integer "project_menu_order", default: 0
     t.boolean "disable_close", default: false
+    t.string "section", default: "school"
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 

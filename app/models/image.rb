@@ -37,5 +37,6 @@ class Image < ActiveRecord::Base
   belongs_to :page
   belongs_to :festival_container
   belongs_to :content_module
+  belongs_to :text_item
 
 end

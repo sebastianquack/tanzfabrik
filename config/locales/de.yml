@@ -15,6 +15,10 @@ de:
   section_about: "Über Uns"
   archive: "Archiv"
 
+  section_stage: "Bühne"
+  section_school: "Schule"
+  section_factory: "Fabrik"
+
   search_results: "Such-Ergebnisse"
   newsletter_subscribe: "Abschicken"
   newsletter_unsubscribe: "Abmelden"
@@ -425,6 +429,7 @@ de:
         hide_download_links: Download-Links oben rechts auf Seite verstecken
         number_of_content_modules: Anzahl Module
         menu_items: Menüverknüpfung
+        section: Bereich
       event:
         type: Typ
         custom_type: "Typ: Eigener Text"
@@ -504,6 +509,13 @@ de:
         abbr: Kürzel
         name: Name
         priority: Sortierreihenfolge
+      text_item:
+        rich_content: Formatierter Inhalt
+        content: Einfacher Inhalt
+      menu_item: 
+        name: Menü-Eintrag
+        page: Seite
+        anchor: (optional) Stelle im kleinen Seitenmenü links auf der Seite
 
   formtastic:
     update: "%{model} speichern"
@@ -526,6 +538,9 @@ de:
       submenu_divider: "Ankerpunkt für Seitenmenü"
       people_gallery: "Personensammlung"
       festival_vorschau: "Festival Intro"
+      preis_tabelle: "Preis-Tabelle"
+      video: "Video"
+      accordeon_element: "Akkordeon-Element"
     style_options:
       magazine: "Magazin"
       large: "Groß"

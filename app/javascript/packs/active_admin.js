@@ -30,12 +30,16 @@ import CMConfig from "../../../config/content_module_config.yml"
 // customize Trix
 Trix.config.blockAttributes.heading1.tagName = "h4";
 
+var editors = {}
+var trixListenerSet = false
 
 Trix.config.textAttributes.small = { tagName: "small", terminal: true }
 
 addEventListener("trix-initialize", function(event) {
-	var element = event.target
-  var editor = element.editor
+  console.log("trix-initialize")
+  var element = event.target
+  let trixId = "trix-id-" + $(element).attr("trix-id")
+  editors[trixId] = element.editor
   var toolbarElement = element.toolbarElement
   console.log(toolbarElement)
   var blockGroupElement = toolbarElement.querySelector(".trix-button-group--block-tools")
@@ -48,10 +52,10 @@ addEventListener("trix-initialize", function(event) {
   function updateSelectedAttributes() {
     selectedAttributes = new Set
     
-    var selectedRange = editor.getSelectedRange()
+    var selectedRange = editors[trixId].getSelectedRange()
     if (selectedRange[0] === selectedRange[1]) { selectedRange[1]++ }
     
-    var selectedPieces = editor.getDocument().getDocumentAtRange(selectedRange).getPieces()
+    var selectedPieces = editors[trixId].getDocument().getDocumentAtRange(selectedRange).getPieces()
     selectedPieces.forEach(function(piece) {
     	Object.keys(piece.getAttributes()).forEach(function(attribute) {
       	selectedAttributes.add(attribute)
@@ -65,11 +69,16 @@ addEventListener("trix-initialize", function(event) {
   // insert arrow button
   textGroupElement.insertAdjacentHTML("afterbegin", '<button title="↪" type="button" data-trix-action="x-arrow" class="trix-button trix-button--icon trix-button--icon-arrow">↪</button>')
 
-  document.addEventListener("trix-action-invoke", function(event) {
-    if(event.actionName === "x-arrow"){
-      editor.insertString("↪ ") // <-- the space is a UTF non-breaking space
-    }
-})
+  if(!trixListenerSet) {
+    trixListenerSet = true;
+    document.addEventListener("trix-action-invoke", function(event) {
+      let trixId = "trix-id-" + $(event.target).attr("trix-id")
+      console.log(trixId)
+      if(event.actionName === "x-arrow"){
+        editors[trixId].insertString("↪ ") // <-- the space is a UTF non-breaking space
+      }
+    })
+  }
 
 })
 
