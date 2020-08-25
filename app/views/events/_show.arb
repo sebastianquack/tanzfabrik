@@ -3,7 +3,6 @@ if event.type.id == 3
   render :partial => "/events/tanzklasse", :locals => {:event => event}
 else
 
-
   show_festival = nil if !defined? show_festival
 
   set_meta_tags :canonical => event_url(event)

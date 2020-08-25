@@ -286,6 +286,18 @@
   }
 }
 
+// creates an attribute with value that sums up 
+//   $multiplyCol amount of column widths
+// + $multiplyGap amount of gap widths 
+// + optional page border of direction $pageBorderDirection
+@mixin grid-col-gap-dist($attr: "padding-right", $multiplyCol: 1, $multiplyGap: 1, $pageBorderDirection: false) {
+  #{$attr}: calc( (100% - (12 * #{$grid-gap-l})) / 12 * #{$multiplyCol} + ( #{$grid-gap-l} * #{$multiplyGap} ) #{if($pageBorderDirection,"+","")} #{map-get($page-dist-l, $pageBorderDirection)} )  ;
+  @include breakpoint('s') {
+    #{$attr}: calc( (100% - (12 * #{$grid-gap-s})) / 12 * #{$multiplyCol} + ( #{$grid-gap-s} * #{$multiplyGap} ) #{if($pageBorderDirection,"+","")} #{map-get($page-dist-s, $pageBorderDirection)} )  ;
+  }
+}
+
+
 @mixin flex-row {
   display: flex;
   width: 100%;
