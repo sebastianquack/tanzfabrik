@@ -23,7 +23,7 @@ def render_list_for(performance_projekte)
           div :class => "time-duration" do
             span l project.event_details.first.starttime, :format => :day_month
             text_node " - "
-            span l project.event_details.last.endtime, :format => :day_month
+            span l project.event_details.last.endtime, :format => :day_month_year
           end
 
           div project.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
