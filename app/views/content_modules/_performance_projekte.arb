@@ -1,70 +1,56 @@
 
-if params[:year]
-  start_date = Date.parse('01-01-' + params[:year])
-  end_date = start_date.end_of_year
-  performance_projekte = Event.no_draft.joins(:type, :event_details).where('event_types.id = 5 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq.sort_by{ |e| e.start_date }
-else 
-  performance_projekte = Event.no_draft.joins(:type, :event_details).where('event_types.id = 5').currently_listed.sort_by{ |e| e.start_date }
+def load_performance_projects(year)
+
+  if year
+    start_date = Date.parse('01-01-' + year.to_s)
+    end_date = start_date.end_of_year
+    performance_projekte = Event.no_draft.joins(:type, :event_details).where('event_types.id = 5 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq.sort_by{ |e| e.start_date }
+  else 
+    performance_projekte = Event.no_draft.joins(:type, :event_details).where('event_types.id = 5').currently_listed.sort_by{ |e| e.start_date }
+  end
+
+  return performance_projekte
+
 end
 
-#performance_projekte = Event.of_types([5]).sort_by{ |e| e.start_date }.select { |e| e.start_date > (Date.today.beginning_of_week - 2.week) } # TODO: named scope in model, to reuse in event view
-
-performance_projekte.each do |project| 
-
-  div :class => "row event event-performanceprojekt" do
-    div :class => "basic" do   
-      div :class => "content" do
+def render_list_for(performance_projekte) 
+  
+  ul do
+    performance_projekte.each do |project| 
+      li do
         a :href => event_path(project) do 
-          h2 project.title, :class => "title"
-          para project.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
-
-          if project.rich_content
-            div project.rich_content
+          
+          div :class => "time-duration" do
+            span l project.event_details.first.starttime, :format => :day_month
+            text_node " - "
+            span l project.event_details.last.endtime, :format => :day_month_year
           end
 
-          if project.description
-            # hack to allow for links only in short descriptions - on longer descriptions links break format
-            if project.description.length > 350
-              div (sanitize project.description.html_safe, tags: %w(p, strong, em)), :class => "description"
-            else
-              div project.description.html_safe, :class => "description" if project.description
-            end
-            div t(:more), :class => "more" if project.description.length > 350
-          end
-
+          div project.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
+          div project.title, :class => "title"
+          
         end
       end
-    end
-
-    div :class => "details" do
-      div :class => "content" do
-
-        div :class => "time-duration" do
-          time l project.event_details.first.starttime, :format => :day
-          text_node " - "
-          time l project.event_details.last.endtime, :format => :day
-        end
-
-        small project.info.html_safe, :class => "info" if project.info
-
-      end    
-    end
-  end  
+    end  
+  end
+  
 end
+
+h2 Date.today.year
+performance_projekte = load_performance_projects(nil)
+render_list_for(performance_projekte)
 
 # figure out in which years event_details exist
 years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 5').group_by_year(:start_date).count
 
 # show links for these years
 section :class => "archive-section" do
-  h5 t(:past_events), :class => "archive-headline"
+  h2 t(:past_events), :class => "archive-headline"
   ul :class => "archive-links" do
-    years.keys.each do |y|
-      if y.year <= Time.now.year
-        li do
-          a y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'performance_projekte', :year => y.year.to_s)
-        end
-      end
+    years.keys.reverse.each do |y|
+      h3 y.year
+      performance_projekte = load_performance_projects(y.year)
+      render_list_for(performance_projekte)
     end
   end
 end

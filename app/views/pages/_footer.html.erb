@@ -1,6 +1,9 @@
 
-<% images_left =          TextItem.find_by(name: "footer_" + @page.section + "_content_left").images %>
-<% images_right =         TextItem.find_by(name: "footer_" + @page.section + "_content_right").images %>
+<% item_left = TextItem.find_by(name: "footer_" + @page.section + "_content_left") %>
+<% item_right = TextItem.find_by(name: "footer_" + @page.section + "_content_right") %>
+
+<% images_left =          item_left ? item_left.images : [] %>
+<% images_right =         item_right ? item_right.images : [] %>
 <% footer_content_left =  get_text_item_rich("footer_" + @page.section + "_content_left") %>
 <% footer_content_right = get_text_item_rich("footer_" + @page.section + "_content_right") %>
 <% instagram =            get_text_item("footer_" + @page.section + "_instagram_link") %>

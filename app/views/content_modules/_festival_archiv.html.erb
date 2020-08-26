@@ -8,9 +8,10 @@
 #end
 %>
 
-<h1>archiv</h1>
+<h2><%= t(:past_events)%></h2>
 
 <%
+
 # get festivals in the past
 past_festivals = Festival.no_draft.select { |f| f.events.length > 0 && f.end_date < Date.today }.sort { |a,b| b <=> a } 
 %>
@@ -18,7 +19,14 @@ past_festivals = Festival.no_draft.select { |f| f.events.length > 0 && f.end_dat
 <ul>
 <%  past_festivals.each do |festival| %>
 
-  <li><a href="<%= page_url(festival.page)%>"><%=festival.name%></a></li>
+  <% if content_module.parameter == "" || !content_module.parameter || (content_module.parameter && content_module.parameter == festival.section) %>
+
+  <li>
+    <a href="<%= page_url(festival.page)%>"><h3><%= festival.name %></h3></a>
+
+  </li>
+
+  <% end %>
 
 <% end %>
 </ul>

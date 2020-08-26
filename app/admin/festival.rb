@@ -160,10 +160,16 @@ ActiveAdmin.register Festival do
       end
     end
     
-    #f.inputs "Spezial" do
-      #f.input :feature_on_welcome_screen
-    #  f.input :draft, :label => t(:draft)      
-    #end
+    f.inputs "Spezial" do 
+      f.input :section, 
+        :as => :select, 
+        :include_blank => false, 
+        :collection => [
+          [t(:section_school), 'schule'], 
+          [t(:section_stage), 'buehne'],
+          [t(:section_factory), 'fabrik']
+        ]
+    end
     
     f.actions
   end
