@@ -13,6 +13,11 @@
   </p-->
 <% end %>
 
-<%= render :partial => "/content_modules/" + partial, :locals => {:content_module => content_module} %>
+<% unless defined? preview
+      preview = false
+  end
+%>
+
+<%= render :partial => "/content_modules/" + partial, :locals => {:content_module => content_module, :preview => preview} %>
 
 

@@ -139,7 +139,7 @@ ActiveAdmin.register Page do
       f.inputs "Module" do
         
         f.has_many :content_modules, heading: false, sortable: :order do |f_f|
-          f_f.template.render partial: "/content_modules/admin_preview", locals: {cm: f_f.object, preview: true}
+          f_f.template.render partial: "/content_modules/admin_preview", locals: {cm: f_f.object}
         end
         
         f.li link_to "Neues Modul hinzufügen", create_content_module_admin_page_path, :class => :button
