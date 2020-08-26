@@ -8,8 +8,12 @@ body:not([data-menu-item-key="start"]) #main_nav {
   display: flex;
   width: 100%;
 
-  > ul:nth-child(1) { // language switcher
+  .active { 
+    font-style: italic; 
+  }
 
+  > ul:nth-child(1) { // language switcher
+    @include font-language-select;
   }
 
   > ul:nth-child(2) { // tree
@@ -25,7 +29,7 @@ body:not([data-menu-item-key="start"]) #main_nav {
       }
     }
 
-    > li > a { // section headers
+    > li { // section headers
       @include font-menüpunkte
     }
 
