@@ -63,8 +63,9 @@ div :class => "newsletter" do
     #newsletter_intro = TextItem.where(:name => "NewsletterStart").first
     #para newsletter_intro.content
     
-
-    subscribe_form("newsletter-subscribe-form", "subscribe", t(:newsletter_subscribe), content_module.rich_content_1)
+    unless defined? preview 
+      subscribe_form("newsletter-subscribe-form", "subscribe", t(:newsletter_subscribe), content_module.rich_content_1)
+    end  
   end
   
 end

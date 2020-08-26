@@ -139,7 +139,7 @@ ActiveAdmin.register Page do
       f.inputs "Module" do
         
         f.has_many :content_modules, heading: false, sortable: :order do |f_f|
-          f_f.template.render partial: "/content_modules/admin_preview", locals: {cm: f_f.object}
+          f_f.template.render partial: "/content_modules/admin_preview", locals: {cm: f_f.object, preview: true}
         end
         
         f.li link_to "Neues Modul hinzufügen", create_content_module_admin_page_path, :class => :button
@@ -215,23 +215,22 @@ ActiveAdmin.register Page do
      # f.input :show_in_project_menu, :label => t(:show_in_project_menu)
      # f.input :project_menu_order, :label => t(:project_menu_order)
      # f.input :disable_close, :label => t(:disable_close)
-      f.input :section, 
-        :as => :select, 
-        :include_blank => false, 
-        :collection => [
-          [t(:section_school), 'school'], 
-          [t(:section_stage), 'stage'],
-          [t(:section_factory), 'factory']
-        ]
+      #f.input :section, :as => :select, :include_blank => false, :collection => [
+      #    [t(:section_school), 'school'], 
+      #    [t(:section_stage), 'stage'],
+      #    [t(:section_factory), 'factory']
+      #  ]
 
       f.input :draft, :label => t(:draft)
     end
 
       
     f.actions do
-        f.action :submit
-        li link_to "Zurück zur Menu-Übersicht", admin_menu_items_path, :class => :button
-      end
+       f.action :submit
+       li link_to "Zurück zur Menu-Übersicht", admin_menu_items_path, :class => :button
+    end
+  
+
   end
   
 end
