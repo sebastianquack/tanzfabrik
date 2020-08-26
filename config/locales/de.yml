@@ -26,7 +26,7 @@ de:
   newsletter_label_1: "Veranstaltungen"
   newsletter_label_2: "Kurse"
   newsletter_label_3: "Workshops"
-  newsletter_unsubscribe_all: "von allen Newslettern abmelden"
+  newsletter_unsubscribe_all: "Abmelden"
 
   next_week: "Nächste Woche"
   previous_week: "Vorherige Woche"
@@ -538,9 +538,10 @@ de:
       submenu_divider: "Ankerpunkt für Seitenmenü"
       people_gallery: "Personensammlung"
       festival_vorschau: "Festival Intro"
-      preis_tabelle: "Preis-Tabelle"
+      custom_html: "Custom HTML"
       video: "Video"
       accordeon_element: "Akkordeon-Element"
+      today: "Heute"
     style_options:
       magazine: "Magazin"
       large: "Groß"

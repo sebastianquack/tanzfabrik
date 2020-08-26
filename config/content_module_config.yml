@@ -153,23 +153,36 @@ festival_archiv:
   form-fields:
   images: false
   downloads: false
-preis_tabelle:
+custom_html:
   form-fields: 
     - custom_html
+  images: false
+  downloads: false
 video:
   form-fields:
     - headline
     - parameter
     - link_href
     - link_title
+  images: false
+  downloads: false
 newsletter:
   form-fields:
     - headline
     - rich_content_1
+  images: false
+  downloads: false
 accordeon_element:
   form-fields:
     - headline
     - rich_content_1
+  images: false
+  downloads: false
+today: 
+  form-fields:
+    - headline
+  images: false
+  downloads: false
 default:
   style-options: 
     - default
