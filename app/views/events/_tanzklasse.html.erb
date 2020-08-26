@@ -1,45 +1,65 @@
-<% event.event_details.each do |detail| %>
+<% detail = event.event_details.first %>
 
-  <span><%= l(detail.start_date, :format => :weekday) %></span>
-  
-  <!-- start_date - end_date is not used currently, tf doesn't enter start and end dates for tanzklassen -->
-  <!--span><%#= l(detail.start_date, :format => :short) %> - <%#= l(detail.end_date, :format => :short) %></span-->
-  
-  <span><%= l(detail.starttime, :format => :hours_minutes) %> - <%= l(detail.endtime_clock, :format => :hours_minutes) %></span>
-
-  <span><%= detail.studio.location.name + " " + detail.studio.name %></span>
-  <span><%= detail.studio.location.address %></span>
-
-  <span><%= get_text_item("tanklassen_level") %>: <%= detail.tags.map { |t| t.short }.join('/') if detail.tags.length > 0 %></span>
-                                                    
-<% end %>
-
-
-<h1><%= event.title %></h1>
-
-<div><%= event.rich_content %></div>
-
-<h2><%= event.people.first.name %></h2>
-<div><%= event.people.first.bio.html_safe %></div>
-
-<!-- tell tf team we can now use warning and signup_url separately  -->
-<% if event.signup_url %>
-  <a href="<%= event.signup_url %>"><%= get_text_item("tanklassen_anmeldung") %></a>
-<% end %>
-
-<% if event.warning %>
-  <span><%=event.warning%></span>
-<% end %>
-
-
-<% if event.people.first.images.length > 0 %>
-  <div>
-    <image src="<%= event.people.first.images.first.attachment.url(:medium) %>">
-    <caption><%= event.people.first.images.first.license %></caption>
+<div class="overlay">
+  <div class="stripes_vertical stripes_left">
+    <span>X</span>
+    <span><</span>
+    <span>X</span>
   </div>
-<% end %>
 
+  <div class="stripes_vertical stripes_mid">
+    <span>
+      <span><%= l(detail.start_date, :format => :weekday) %></span>
+      <br />
+      <span><%= l(detail.starttime, :format => :hours_minutes) %> - <%= l(detail.endtime_clock, :format => :hours_minutes) %></span>
+    </span>
+    <span>
+      <span><%= detail.studio.location.name + " " + detail.studio.name %></span><br />
+      <span><%= detail.studio.location.address %></span>
+    </span>
+    <span>
+      <span><%= get_text_item("tanklassen_level") %>: <br /></span>
+      <span><%= detail.tags.map { |t| t.short }.join('/') if detail.tags.length > 0 %></span>
+    </span>
+  </div>
 
-<% if admin_user_signed_in? %>
-  <a href="<%= edit_admin_event_path(event)%>">Dieses Ereignis bearbeiten</a>
-<% end %> 
+  <!-- tell tf team we can now use warning and signup_url separately  -->
+
+  <div class="image">
+    <% if event.people.first.images.length > 0 %>
+      <figure>
+        <image src="<%= event.people.first.images.first.attachment.url(:medium) %>">
+        <caption><%= event.people.first.images.first.license %></caption>
+      </figure>
+    <% end %>
+
+    <% if event.signup_url %>
+      <a class="button" title="<%= get_text_item("tanklassen_anmeldung") %>" href="<%= event.signup_url %>">
+        <%= get_text_item("tanklassen_anmeldung") %>
+      </a>
+    <% end %>
+  </div>
+
+  <div class="stripes_vertical stripes_right">
+    <span>X</span>
+    <span>></span>
+    <span>X</span>
+  </div>
+</div>
+
+<div class="info">
+  <h3><%= event.title %></h3>
+
+  <% if admin_user_signed_in? %>
+    <a href="<%= edit_admin_event_path(event)%>">Dieses Ereignis bearbeiten</a>
+  <% end %> 
+
+  <% if event.warning %>
+    <span><%=event.warning%></span>
+  <% end %>
+
+  <div><%= event.rich_content %></div>
+
+  <h4><%= event.people.first.name %></h4>
+  <div><%= event.people.first.bio.html_safe %></div>
+</div>

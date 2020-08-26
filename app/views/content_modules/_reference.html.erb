@@ -50,11 +50,7 @@
           </div>
         <% end %>
 
-        <% if content_module.link_href and content_module.link_title %>
-          <a class="button" href="<%= content_module.link_href %>" title="<%= content_module.link_title %>">
-            <%= content_module.link_title %>
-          </a>
-        <% end %>        
+        <%= render :partial => "content_modules/_button", :locals => { :obj => content_module } %> 
 
       </div>
 

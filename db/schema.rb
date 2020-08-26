@@ -318,7 +318,7 @@ ActiveRecord::Schema.define(version: 2020_08_24_094443) do
     t.boolean "show_in_project_menu", default: false
     t.integer "project_menu_order", default: 0
     t.boolean "disable_close", default: false
-    t.string "section", default: "school"
+    t.string "section", default: "stage"
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 

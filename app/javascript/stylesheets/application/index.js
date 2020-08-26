@@ -1,8 +1,8 @@
 import "./__variables.scss"
+
 import "./_fonts.scss"
 import "./_general.scss"
 import "./_main_nav.scss"
-import "./start.scss"
 import "./_content_element.scss"
 import "./_content_2_columns.scss"
 import "./_page_intro.scss"
@@ -17,3 +17,6 @@ import "./_slideshow.scss"
 import "./_studio.scss"
 import "./_page_intro_magazine.scss"
 import "./_content_element_magazine.scss"
+
+import "./start.scss"
+import "./single_event_page.scss"
