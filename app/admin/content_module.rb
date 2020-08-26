@@ -196,7 +196,7 @@ ActiveAdmin.register ContentModule do
       if !CM_CONFIG[type].has_key? "images" || CM_CONFIG[type]["images"] != false
         f.inputs "Images", :id => "active_admin_cm_images" do
           f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
-            f_f.input :description
+            f_f.input :description, :hint => "für barrierefreie Browser"
             f_f.input :license
             if type == "slideshow"
               f_f.input :super_de

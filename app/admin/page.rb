@@ -223,15 +223,16 @@ ActiveAdmin.register Page do
           [t(:section_stage), 'buehne'],
           [t(:section_factory), 'fabrik']
         ]
-
       f.input :draft, :label => t(:draft)
     end
 
       
     f.actions do
-        f.action :submit
-        li link_to "Zurück zur Menu-Übersicht", admin_menu_items_path, :class => :button
-      end
+       f.action :submit
+       li link_to "Zurück zur Menu-Übersicht", admin_menu_items_path, :class => :button
+    end
+  
+
   end
   
 end
