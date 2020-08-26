@@ -16,6 +16,7 @@
     right:0;
     bottom:0;
     z-index: 10;
+    pointer-events: none;
 
     @include page-dist("padding-left", "left");
     @include page-dist("padding-right", "right");

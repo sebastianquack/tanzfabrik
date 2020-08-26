@@ -1,0 +1,101 @@
+<div class="single-event-page">
+
+  <% detail = @event.event_details.first %>
+
+  <div class="overlay">
+    <div class="stripes_vertical stripes_left">
+      <span>X</span>
+      <!--<span><</span>-->
+      <span>X</span>
+    </div>
+
+    <div class="stripes_vertical stripes_mid">
+      <span>
+        <% if @event.type.name == "Kurs" %>
+          <span><%= l(detail.start_date, :format => :weekday) %></span>
+          <br />
+          <span><%= l(detail.starttime, :format => :hours_minutes) %> - <%= l(detail.endtime_clock, :format => :hours_minutes) %></span>
+        <% end %>
+      </span>
+      <span>
+        <span><%= detail.studio.location.name + " " + detail.studio.name %></span><br />
+        <span><%= detail.studio.location.address %></span>
+      </span>
+      <span>
+        <% if @event.type.name == "Kurs" %>
+          <span><%= get_text_item("tanklassen_level") %>: <br /></span>
+          <span><%= detail.tags.map { |t| t.short }.join('/') if detail.tags.length > 0 %></span>
+        <% end %>
+      </span>
+    </div>
+
+    <!-- tell tf team we can now use warning and signup_url separately  -->
+
+    <div class="image">
+      <% if @event.type.name == "Profitraining" || @event.type.name == "Kurs" %>
+        <%
+          imageSrc = @event.people.first.images.first.attachment.url(:medium)
+          caption = @event.people.first.images.first.license
+        %>
+       <% else %>
+        <%  imageSrc = @event.images.first.attachment.url(:medium_detail_column) if @event.images.first
+          caption = @event.images.first.license if @event.images.first %>
+      <% end %>
+      <% if imageSrc %>
+      <figure>
+        <img src="<%= imageSrc %>"/>
+        <caption><%= caption %></caption>
+      </figure>
+      <% end %>
+            
+        
+      
+      <% if @event.signup_url %>
+        <a class="button" title="<%= get_text_item("tanklassen_anmeldung") %>" href="<%= @event.signup_url %>">
+          <%= get_text_item("tanzklassen_anmeldung") %>
+        </a>
+      <% end %>
+  </div>
+
+
+    <div class="stripes_vertical stripes_right">
+      <span>X</span>
+      <!--<span>></span>-->
+      <span>X</span>
+    </div>
+  
+  </div>
+  
+  
+  <div class="info">
+    <h3><%= @event.title %></h3>
+
+    <p><b><%= @event.display_type %></b>
+     <% if @event.people.first %>
+     mit <%= @event.people.first.name %>
+     <% end %>
+    </p>
+    
+    <div><%= @event.rich_content %></div>
+
+    <% if @event.warning %>
+      <p><%=@event.warning%> [Feld Warnhinweis]</p>
+    <% end %>
+
+    <% unless @event.type.name == "Kurs" %>
+      <%= render :partial => "/events/details/moments", :locals => {:event => @event} %>
+    <% end %>
+
+    <% @event.people.each do |person| %>
+      <a href="<%= person_path(person) %>"><h4><%= person.name %></h4></a>
+      <div><%= person.rich_content %></div>
+    <% end %>
+  
+    <% if admin_user_signed_in? %>
+      <a href="<%= edit_admin_event_path(@event)%>">Dieses Ereignis bearbeiten</a>
+    <% end %> 
+
+
+  </div>
+
+</div>
