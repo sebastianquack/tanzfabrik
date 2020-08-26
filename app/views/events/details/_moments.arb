@@ -13,17 +13,19 @@ ul :class => "times-places moments" do
     li :class => "time-place moment" do
       div :class => "time-moment" do
         time do 
-          span l occurrence, :format => :day
+          span l occurrence, :format => :timetable
           span l occurrence, :format => :hours_minutes
+          text_node "-"
+          span l (occurrence + ed.duration * 60), :format => :hours_minutes
         end
       end
-      span :class => "place" do
-        if ed.custom_place?
-          span ed.custom_place
-        else
-          span (ed.studio.location.name + " " + ed.studio.name)
-        end
-      end
+      #span :class => "place" do
+      #  if ed.custom_place?
+      #    span ed.custom_place
+      #  else
+      #    span (ed.studio.location.name + " " + ed.studio.name)
+      #  end
+      #end
     end
   end  
 end

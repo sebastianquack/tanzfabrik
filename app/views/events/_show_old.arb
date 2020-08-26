@@ -27,13 +27,13 @@ else
 
     div :class => "stripes_vertical stripes_left" do
       span "X"
-      a "<", :class => "previous", :rel => "prev", :href => occurrence_path(prev_occurrence.event, prev_occurrence.time, festival) if prev_occurrence
+      #a "<", :class => "previous", :rel => "prev", :href => occurrence_path(prev_occurrence.event, prev_occurrence.time, festival) if prev_occurrence
       span "X"
     end
       
     div :class => "stripes_vertical stripes_right" do
       span "X"
-      a ">", :class => "next", :rel => "next", :href => occurrence_path(next_occurrence.event, next_occurrence.time, festival) if next_occurrence
+      #a ">", :class => "next", :rel => "next", :href => occurrence_path(next_occurrence.event, next_occurrence.time, festival) if next_occurrence
       span "X"
     end
 

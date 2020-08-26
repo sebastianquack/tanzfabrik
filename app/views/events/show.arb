@@ -1,3 +1,0 @@
-div :class => "single-event-page" do
-  render :partial => "/events/show", :locals => {:event => event, :show_festival => true}
-end

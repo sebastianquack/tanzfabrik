@@ -16,6 +16,11 @@
     right:0;
     bottom:0;
     z-index: 15;
+    pointer-events: none;
+
+    a, .stripes_vertical {
+      pointer-events: auto;
+    }
 
     @include page-dist("padding-left", "left");
     @include page-dist("padding-right", "right");
