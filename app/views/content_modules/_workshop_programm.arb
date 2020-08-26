@@ -15,32 +15,33 @@ end
 
 def render_list_for(workshops) 
 
-  ul do
+  ul :class => "project_list" do
     workshops.each do |event_detail| 
       li do
-        a :href => event_path(event_detail.event) do 
-          
-          div :class => "time-duration" do
-            if event_detail.occurrences.length > 1
+        a :class => "project", :href => event_path(event_detail.event) do 
+          if event_detail.occurrences.length > 1
+            time :class => "date" do
               span l event_detail.starttime, :format => :day_month
-              text_node " - "
+              text_node " – "
               span l event_detail.endtime, :format => :day_month_year
-            else 
+            end
+          else 
+            time :class => "date" do
               span l event_detail.starttime, :format => :day_month
-              div do
-                span l event_detail.starttime, :format => :hours_minutes
-                text_node " - "
-                span l event_detail.starttime + event_detail.duration * 60, :format => :hours_minutes
-              end
+            end
+            time :class => "time" do
+              span l event_detail.starttime, :format => :hours_minutes
+              text_node " - "
+              span l event_detail.starttime + event_detail.duration * 60, :format => :hours_minutes
             end
           end
-
           
           div event_detail.event.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
           div event_detail.event.title, :class => "title"
 
-          render :partial => "events/in_festival", :locals => {:event => event_detail.event, :link => false }
-
+          span :class => "festival" do
+            render :partial => "events/in_festival", :locals => {:event => event_detail.event, :link => false }
+          end
           
         end
       end
@@ -49,25 +50,26 @@ def render_list_for(workshops)
   
 end
 
-h2 Date.today.year
-workshops = load_workshops(nil)
-render_list_for(workshops)
+div :class => "module__workshop_programm" do
+  h3 Date.today.year
+  workshops = load_workshops(nil)
+  render_list_for(workshops)
 
-# figure out in which years event_details exist
-years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 4').group_by_year(:start_date).count
+  # figure out in which years event_details exist
+  years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 4').group_by_year(:start_date).count
 
-# show links for these years
-section :class => "archive-section" do
-  h2 t(:past_events), :class => "archive-headline"
-  ul :class => "archive-links" do
-    years.keys.reverse.each do |y|
-      h3 y.year
-      workshops = load_workshops(y.year)
-      render_list_for(workshops)
+  # show links for these years
+  section :class => "archive-section" do
+    h3 t(:past_events), :class => "archive-headline"
+    ul :class => "archive-links" do
+      years.keys.reverse.each do |y|
+        h3 y.year
+        workshops = load_workshops(y.year)
+        render_list_for(workshops)
+      end
     end
   end
 end
-
 
 
 

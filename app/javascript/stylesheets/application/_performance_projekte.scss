@@ -1,6 +1,6 @@
 @import "./__mixins.scss";
 
-.module__workshop_programm {
+.module__performance_projekte {
 
   h3, .project_list {
     @include page-dist("padding-left", "left");
@@ -25,14 +25,9 @@
     @include grid-gap-dist("grid-gap");
     align-items: end;
 
-    .date {
+    .time-duration {
       @include font-title;
-      grid-column: 1 / span 3;
-    }
-
-    .time {
-      @include font-stripes;
-      grid-column: 4 / span 1;
+      grid-column: 1 / span 4;
     }
 
     .teacher {
@@ -43,10 +38,6 @@
     .title {
       @include font-title;
       grid-column: 7 / span 6;
-    }
-
-    .festival {
-      grid-column: 1 / span 3;
     }
   }
 

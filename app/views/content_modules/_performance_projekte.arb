@@ -15,10 +15,10 @@ end
 
 def render_list_for(performance_projekte) 
   
-  ul do
+  ul :class => "project_list" do
     performance_projekte.each do |project| 
       li do
-        a :href => event_path(project) do 
+        a :class => "project", :href => event_path(project) do 
           
           div :class => "time-duration" do
             span l project.event_details.first.starttime, :format => :day_month
@@ -36,22 +36,23 @@ def render_list_for(performance_projekte)
   
 end
 
-h2 Date.today.year
-performance_projekte = load_performance_projects(nil)
-render_list_for(performance_projekte)
+div :class => "module__performance_projekte" do
+  h3 Date.today.year
+  performance_projekte = load_performance_projects(nil)
+  render_list_for(performance_projekte)
 
-# figure out in which years event_details exist
-years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 5').group_by_year(:start_date).count
+  # figure out in which years event_details exist
+  years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 5').group_by_year(:start_date).count
 
-# show links for these years
-section :class => "archive-section" do
-  h2 t(:past_events), :class => "archive-headline"
-  ul :class => "archive-links" do
-    years.keys.reverse.each do |y|
-      h3 y.year
-      performance_projekte = load_performance_projects(y.year)
-      render_list_for(performance_projekte)
+  # show links for these years
+  section :class => "archive-section" do
+    h3 t(:past_events), :class => "archive-headline"
+    ul :class => "archive-links" do
+      years.keys.reverse.each do |y|
+        h3 y.year
+        performance_projekte = load_performance_projects(y.year)
+        render_list_for(performance_projekte)
+      end
     end
   end
 end
-
