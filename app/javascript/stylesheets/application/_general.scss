@@ -54,23 +54,33 @@ a {
 
   .horizontal_bar_right {
     @include flex-row-item(3,12, false);
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 
 header {
   position: fixed;
   top:0;
-  z-index: 1;
+  z-index: 11;
   background-color: white;
-  overflow: hidden;
+  body.featured_visible & {
+    background-color: transparent;
+  }
+  body.featured_visible[data-section="buehne"] & {
+    color: white;
+  }  
+  transition: background-color 0.2s;
+  //overflow: hidden;
 
-  // height: $header-height;
+  height: $header-height;
+  box-sizing: border-box;
 
-  @include page-dist("padding-top", "top");
+  padding-top: 12px;
+  padding-bottom: 12px;
+
   @include page-dist("padding-left", "left");
   @include page-dist("padding-right", "right");
-  @include page-dist("padding-bottom", "bottom");
 
   img {
     height: $header-height-logo;
@@ -79,8 +89,7 @@ header {
 }
 
 main.page {
-  @include page-dist("margin-top", "top", $header-height);
-  @include page-dist("padding-top", "top");
+  padding-top: $header-height + $menu-height + $page-top-padding;
 }
 
 /**
@@ -128,26 +137,27 @@ main.page {
         }        
       }
     }
-
-    &[data-logo] {
-      &:before {
-        content: url("/images/Tanzfabrik_Signet-black.svg");
-        .module__feature[data-section="buehne"] & {
-          content: url("/images/Tanzfabrik_Signet-white.svg");  
-        }        
-        display: block;
-        width: $logo-width;
-        height: $logo-height;
-        [data-section="schule"] & {
-          content: url("/images/Tanzfabrik_Signet-red.svg");
-        }
-        [data-section="festival"] & {
-          content: url("/images/Tanzfabrik_Signet-green.svg");
-        }        
-      }
-    }
   }
 
+}
+
+span[data-logo] {
+  &:before {
+    content: url("/images/Tanzfabrik_Signet-red.svg");
+    .module__feature[data-section="buehne"] &,
+    body.featured_visible .horizontal_bar_container & {
+      content: url("/images/Tanzfabrik_Signet-white.svg");  
+    }        
+    display: block;
+    width: $logo-width;
+    height: $logo-height;
+    [data-section="buehne"] & {
+      content: url("/images/Tanzfabrik_Signet-black.svg");
+    }
+    [data-section="festival"] & {
+      content: url("/images/Tanzfabrik_Signet-green.svg");
+    }        
+  }
 }
 
 /**
@@ -155,19 +165,19 @@ main.page {
  **/
 
 [data-section] {
-  color: $color-black;
-  border-color: $color-black;
-  .embedded_preview_container & {
-    * { color: $color-black;}
-  }
-}
-
-[data-section="schule"] {
   color: $color-red;
   border-color: $color-red;
   .embedded_preview_container & {
     * { color: $color-red;}
   }  
+}
+
+[data-section="buehne"] {
+  color: $color-black;
+  border-color: $color-black;
+  .embedded_preview_container & {
+    * { color: $color-black;}
+  }
 }
 
 [data-section="festival"] {

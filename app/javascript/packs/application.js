@@ -35,3 +35,26 @@ application.load(definitionsFromContext(context))
 // other
 require("trix")
 require("@rails/actiontext")
+
+
+
+/*********************************/
+
+// observe if the feature module is visible
+document.addEventListener("DOMContentLoaded", function () {
+  if (
+    "IntersectionObserver" in window &&
+    "IntersectionObserverEntry" in window &&
+    "intersectionRatio" in window.IntersectionObserverEntry.prototype
+  ) {
+    let observer = new IntersectionObserver(entries => {
+      //console.log(entries[0].boundingClientRect.height + entries[0].boundingClientRect.y - entries[0].intersectionRect.height)
+      if (entries[0].boundingClientRect.height + entries[0].boundingClientRect.y - entries[0].intersectionRect.height >= 0) {
+        document.body.classList.add("featured_visible");
+      } else {
+        document.body.classList.remove("featured_visible");
+      }
+    });
+    observer.observe(document.querySelector(".end_of_module__feature"));
+  }
+})

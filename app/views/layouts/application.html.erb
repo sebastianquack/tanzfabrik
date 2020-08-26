@@ -12,9 +12,13 @@
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   
 </head>
-<body data-menu-item-key="<%= @menu_item.key if @menu_item %>" data-section="<%= @landing_page_menu_item ? @landing_page_menu_item.key : "start" %>">
+<%
+  section = "schule"
+  section = @landing_page_menu_item if @landing_page_menu_item
+  section = @page.section if @page and @page.section
+%>
+<body data-menu-item-key="<%= @page ? section : "start" %>" data-section="<%= section %>">
 
-  <%= get_text_item("page_title") %>
   <% page_title = get_text_item("page_title").sub(" ", "<br />").html_safe %>
   
   <header class="horizontal_bar_container">
@@ -29,7 +33,7 @@
       <% end %>
     </div>
     <div class="horizontal_bar_right">
-      <img src="/images/Tanzfabrik_Signet-red.svg">
+      <span data-logo></span>
     </div>
   </header>
   

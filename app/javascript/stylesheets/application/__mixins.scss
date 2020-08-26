@@ -97,7 +97,7 @@
 
 @mixin font-menüpunkte {
   font-size: 28px;
-  line-height:17px;
+  line-height:34px;
   @include breakpoint('s') {
     font-size: 28px;
     line-height: 34px;

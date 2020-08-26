@@ -14,10 +14,10 @@ $color-black: #000000;
 $color-green: #00EA1A;
 
 $page-dist-l: (
-  'top':  16px,
+  'top':  12px,
   'left': 22px,
   'right': 22px,
-  'bottom': 16px,
+  'bottom': 12px,
 );
 
 $page-dist-s: (
@@ -30,8 +30,14 @@ $page-dist-s: (
 $grid-gap-l: 18px;
 $grid-gap-s: 14px;
 
-$header-height: 38px;
-$header-height-logo: 31px;
+$header-height: 52px;
+$header-height-logo: 38px;
+$menu-height: 52px;
+$page-top-padding: 20px;
+
+// :root {
+//   --feature-visible-offset: #{$header-height + $menu-height};
+// }
 
 $logo-width: 34px;
 $logo-height: 38px;

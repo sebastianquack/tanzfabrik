@@ -5,6 +5,6 @@
 %>
 
 <ul id="language_switcher">
-  <li><%= active(:en) ? (link_to "DE", url_for(:locale => :de)) : "DE" %></li>
-  <li><%= active(:de) ? (link_to "EN", url_for(:locale => :en)) : "EN" %></li>
+  <li <%= !active(:en) ? "class=\"active\"".html_safe : nil %>><%= active(:en) ? (link_to "DE", url_for(:locale => :de)) : "DE" %></li>
+  <li <%= !active(:de) ? "class=\"active\"".html_safe : nil %>><%= active(:de) ? (link_to "EN", url_for(:locale => :en)) : "EN" %></li>
 </ul>

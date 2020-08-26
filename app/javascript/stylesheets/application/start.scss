@@ -10,7 +10,7 @@ body[data-menu-item-key="start"] #main_nav {
   top: $header-height;
   width: 100%;*/
   margin-top: $header-height;
-  @include page-dist("padding-top", "top");
+  //@include page-dist("padding-top", "top");
 
   display: flex;
   flex-direction: column;
