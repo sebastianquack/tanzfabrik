@@ -2,6 +2,7 @@
 <% tree.each_pair do |k,v| %>
 
 <% 
+  is_active = false
   should_link = false
   menu_item_name = k.name
   
@@ -13,7 +14,8 @@
   # but don't link to the active page and add active
   if @page
     if k.page_id == @page.id
-      menu_item_name += " (page active)"
+      #menu_item_name += " (page active)"
+      is_active = true
       should_link = false
 
       # exception: this has an anchor link
@@ -26,7 +28,8 @@
   # if this menu item is an ancestor of the one we want, mark as active
   if @menu_item
     if @menu_item.ancestor_ids.include? k.id
-      menu_item_name += " (section active)"
+      #menu_item_name += " (section active)"
+      is_active = true
     end
   end
 
@@ -37,7 +40,7 @@
   end
 %>
 
-<li> <%= should_link ? 
+<li <%= is_active ? "class=\"active\"".html_safe : nil %>> <%= should_link ? 
   (link_to menu_item_name, (page_path(k.page) + (k.anchor ? "#" + k.anchor : ""))) 
   : menu_item_name 
   %>

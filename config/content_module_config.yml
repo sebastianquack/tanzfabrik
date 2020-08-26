@@ -9,7 +9,8 @@ feature:
     - left
   sections:
     - buehne
-    - schule    
+    - schule
+    - fabrik
   form-fields:
     - headline
     - special_text

@@ -97,7 +97,7 @@
 
 @mixin font-menüpunkte {
   font-size: 28px;
-  line-height:17px;
+  line-height:34px;
   @include breakpoint('s') {
     font-size: 28px;
     line-height: 34px;
@@ -156,6 +156,18 @@
 }
 
 @mixin font-tanzklassen { 
+  font-size: 16px;
+  line-height: 18px;
+  @include breakpoint('s') {
+    font-size: 12px;
+    line-height: 14px;
+  }        
+  font-weight: $font-weight-medium; 
+  letter-spacing: 0.16px;
+  text-transform: uppercase;
+}
+
+@mixin font-language-select { 
   font-size: 16px;
   line-height: 18px;
   @include breakpoint('s') {
