@@ -1,3 +1,106 @@
+# here we load the event details joined with events so that we can sort and separate them
+def load_workshops(year)
+
+  if year
+    start_date = Date.parse('01-01-' + year.to_s)
+    end_date = start_date.end_of_year
+    workshops = EventDetail.joins(:event).where('events.type_id = 2 AND start_date >= ? AND start_date <= ?', start_date, end_date).uniq.sort_by{ |e| e.start_date }
+  else 
+    workshops = EventDetail.joins(:event).where('events.type_id = 2 AND end_date >= ?', Date.today).sort_by{ |e| e.start_date }
+  end
+
+  return workshops
+
+end
+
+def render_list_for(workshops) 
+
+  ul do
+    workshops.each do |event_detail| 
+      li do
+        a :href => event_path(event_detail.event) do 
+          
+          div :class => "time-duration" do
+            if event_detail.occurrences.length > 1
+              span l event_detail.starttime, :format => :day_month
+              text_node " - "
+              span l event_detail.endtime, :format => :day_month_year
+            else 
+              span l event_detail.starttime, :format => :day_month
+              div do
+                span l event_detail.starttime, :format => :hours_minutes
+                text_node " - "
+                span l event_detail.starttime + event_detail.duration * 60, :format => :hours_minutes
+              end
+            end
+          end
+
+          
+          div event_detail.event.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
+          div event_detail.event.title, :class => "title"
+
+          render :partial => "events/in_festival", :locals => {:event => event_detail.event, :link => false }
+
+          
+        end
+      end
+    end  
+  end
+  
+end
+
+h2 Date.today.year
+workshops = load_workshops(nil)
+render_list_for(workshops)
+
+# figure out in which years event_details exist
+years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 4').group_by_year(:start_date).count
+
+# show links for these years
+section :class => "archive-section" do
+  h2 t(:past_events), :class => "archive-headline"
+  ul :class => "archive-links" do
+    years.keys.reverse.each do |y|
+      h3 y.year
+      workshops = load_workshops(y.year)
+      render_list_for(workshops)
+    end
+  end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #if params[:year]
 #  start_date = Date.parse('01-01-' + params[:year])
 #  end_date = start_date.end_of_year
@@ -12,25 +115,25 @@
 # get all workshops
 #all_workshops = Event.where(:type_id => 2)
 
-div :class => "module__workshop_programm" do 
+#div :class => "module__workshop_programm" do #
 
-  render :partial => "/events/workshop_list", :locals => {:in_festival => nil}  
+#  render :partial => "/events/workshop_list", :locals => {:in_festival => nil}  #
 
-  # figure out in which years event_details exist
-  years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 2').where("start_date < '"+(Date.today.year+1).to_s+"-01-01'" ).group_by_year(:start_date).count
+#  # figure out in which years event_details exist
+#  years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 2').where("start_date < '"+(Date.today.year+1).to_s+"-01-01'" ).group_by_year(:start_date).count#
 
-  # show links for these years
-  section :class => "archive-section" do
-    h5 t(:past_workshops), :class => "archive-headline"
-    ul :class => "archive-links" do
-      years.keys.each do |y|
-        if y.year <= Time.now.year
-          li do
-            a y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'workshop_programm', :year => y.year.to_s)
-          end
-        end
-      end
-    end
-  end
+#  # show links for these years
+#  section :class => "archive-section" do
+#    h5 t(:past_workshops), :class => "archive-headline"
+#    ul :class => "archive-links" do
+#      years.keys.each do |y|
+#        if y.year <= Time.now.year
+#          li do
+#            a y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'workshop_programm', :year => y.year.to_s)
+#          end
+#        end
+#      end
+#    end
+#  end#
 
-end
+#end
