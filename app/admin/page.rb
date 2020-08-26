@@ -219,9 +219,9 @@ ActiveAdmin.register Page do
         :as => :select, 
         :include_blank => false, 
         :collection => [
-          [t(:section_school), 'school'], 
-          [t(:section_stage), 'stage'],
-          [t(:section_factory), 'factory']
+          [t(:section_school), 'schule'], 
+          [t(:section_stage), 'buehne'],
+          [t(:section_factory), 'fabrik']
         ]
 
       f.input :draft, :label => t(:draft)
