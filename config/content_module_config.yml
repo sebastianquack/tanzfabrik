@@ -151,6 +151,7 @@ festival_programm:
 festival_archiv:
   style-options:
   form-fields:
+    - parameter
   images: false
   downloads: false
 custom_html:

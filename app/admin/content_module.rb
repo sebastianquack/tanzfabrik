@@ -130,6 +130,15 @@ ActiveAdmin.register ContentModule do
             f.input field, :as => :select, :collection => Studio.all.map {|s| [s.location.name + " " + s.name, s.id]}, :include_blank => false            
           elsif field == "parameter" && (mtype == "people_gallery")
             f.input field, :label => t("attributes.person.tags", scope: [:activerecord]), :hint => ("<span class='people_tags_list'><u>Verwendete Tags</u><br /><span>" + Person.get_all_tags.join("</span><br /><span>") + "</span></span>").html_safe
+          elsif field == "parameter" && (mtype == "festival_archiv")
+            f.input field, :as => :select, 
+              :include_blank => true, 
+              :hint => "Feld leer lassen, um Festival und Projekt aus allen Bereichen im Archiv zu zeigen",
+              :collection => [
+                [t(:section_school), 'schule'], 
+                [t(:section_stage), 'buehne'],
+                [t(:section_factory), 'fabrik']
+              ]
           else
             return f.input field, :wrapper_html => { 
               :class => active ? "cm-field-active" : "cm-field-hidden"

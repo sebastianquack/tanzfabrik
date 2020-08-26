@@ -46,6 +46,7 @@ de:
   new: "Neu"
   with: "mit"
   continue_to: "Weiter zu"
+  open_festival_page: "zur Projekt-Seite"
 
   kursplan_more: "Wichtige Infos zu den Tanzklassen. Änderungen im Stundenplan vorbehalten."
   profitraining_more: "Wichtige Infos zum Profitraining."
@@ -481,6 +482,7 @@ de:
         rich_content: Text
         events: Ereignisse
         festival_containers: Projekt- und Festivalreihen
+        section: Bereich
       festival_container:
         name: Titel
         description: Text
