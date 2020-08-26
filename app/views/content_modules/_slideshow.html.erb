@@ -19,9 +19,8 @@
 
         <% if image.attachment%>
           <figure class="image">
-            <img src="<%= image.attachment.url(:medium) %>">
+            <img alt="<%= image.description %>" src="<%= image.attachment.url(:medium) %>">
             <figcaption class="caption">
-              <span class="description"><%= image.description %></span>
               <span class="licence"><%= image.license %></span>
             </figcaption>
           </figure>
