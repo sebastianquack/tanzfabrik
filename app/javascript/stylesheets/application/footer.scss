@@ -1,0 +1,55 @@
+@import "./__mixins.scss";
+
+.imprint_footer {
+  border-width: 1px 0 0 0;
+  border-style: solid;
+
+  @include page-dist("padding-left", "left");
+  @include page-dist("padding-right", "right");
+  @include page-dist("padding-top", "top");
+  @include page-dist("padding-bottom", "bottom");  
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 1fr;
+  @include grid-gap-dist("grid-gap");
+
+  & > * {
+    grid-row: 1;
+  }
+
+  .content_left, .content_right {
+    margin-top: 2em;
+    margin-bottom: 3em;
+    @include font-fliesstext-s;
+
+    img {
+      width: 10vw;
+      height: 10vw;
+      object-fit: contain;
+      float: left;
+    }
+  }
+
+  .stripes_left {
+    grid-column: 1 / span 2;
+  }
+
+  .content_left {
+    grid-column: 3 / span 4;
+  }
+
+  .stripes_mid {
+    grid-column: 7 / span 2;
+  }
+
+  .content_right {
+    grid-column: 9 / span 3;
+  }
+
+  .stripes_right {
+    grid-column: 12 / span 1;
+    text-align: right;
+  }  
+
+}

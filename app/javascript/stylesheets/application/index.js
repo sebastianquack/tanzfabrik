@@ -20,3 +20,4 @@ import "./_content_element_magazine.scss"
 
 import "./start.scss"
 import "./single_event_page.scss"
+import "./footer.scss"

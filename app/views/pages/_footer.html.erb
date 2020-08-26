@@ -1,34 +1,70 @@
-<footer>
 
-<p>Bereich: <%= @page.section %></p>
+<% images_left =          TextItem.find_by(name: "footer_" + @page.section + "_content_left").images %>
+<% images_right =         TextItem.find_by(name: "footer_" + @page.section + "_content_right").images %>
+<% footer_content_left =  get_text_item_rich("footer_" + @page.section + "_content_left") %>
+<% footer_content_right = get_text_item_rich("footer_" + @page.section + "_content_right") %>
+<% instagram =            get_text_item("footer_" + @page.section + "_instagram_link") %>
+<% vimeo =                get_text_item("footer_" + @page.section + "_vimeo_link") %>
+<% facebook =             get_text_item("footer_" + @page.section + "_facebook_link") %>
 
-<% footer_content_left = get_text_item_rich("footer_content_" + @page.section + "_left") %>
-<% footer_content_right = get_text_item_rich("footer_content_" + @page.section + "_right") %>
-<% footer_images = TextItem.find_by(name: "footer_logos") %>
+<% tanzfabrik =           get_text_item("page_title").sub(" ", "<br />").html_safe %>
+<footer class="imprint_footer" data-section="<%= @page.section %>">
 
-<div>
-  <%= footer_content_left %>
-</div>
+  <div class="stripes_vertical stripes_left">
+    <span data-text><%= tanzfabrik %></span>
+    <span data-text><%= tanzfabrik %></span>
+  </div>
 
+  <div class="stripes_vertical stripes_mid">
+    <span data-text-section></span>
+    <span data-text-section></span>
+  </div>
 
-<div>
-<% if footer_images %>
+  <div class="stripes_vertical stripes_right">
+    <% if vimeo %>
+      <span data-text>
+        <a href="<%= vimeo %>">[vimeo]</a>
+      </span> 
+    <% end %>    
 
-    <% footer_images.images.each do |image| %>
-      <a href="<%= image.link_href %>">
-        <image alt="<%= image.description %>" src="<%= image.attachment.url(:medium) %>">
-      </a>
+     <% if instagram %>
+       <span data-text>
+        <a href="<%= instagram %>">[instagram]</a>
+      </span>
     <% end %>
+    
+    <% if facebook %>
+      <span data-text>
+        <a href="<%= facebook %>">[facebook]</a>
+      </span>
+    <% end %>      
+  </div>
 
-<% else %>
-  [footer_images]
-<% end %>
-</div>
+  <div class="content_left">
+    <%= footer_content_left %>
+    <% if images_left.count > 0 %>
+      <% images_left.each do |image| %>
+        <a href="<%= image.link_href %>">
+          <img alt="<%= image.description %>" src="<%= image.attachment.url(:medium) %>">
+        </a>
+      <% end %>
+    <% end %>
+  </div>
 
-<% instagram = get_text_item("footer_instagram") %>
-<% vimeo = get_text_item("footer_vimeo") %>
+  <div class="content_right">
+    <%= footer_content_right %>
+    <% if images_right.count > 0 %>
+      <% images_right.each do |image| %>
+        <a href="<%= image.link_href %>">
+          <img alt="<%= image.description %>" src="<%= image.attachment.url(:medium) %>">
+        </a>
+      <% end %>
+    <% end %>
+  </div>
 
-<a href="<%= instagram %>">[INSTAGRAM-LINK]</a>
-<a href="<%= vimeo %>">[VIMEO-LINK]</a>
+
+
+
+
 
 </footer>
