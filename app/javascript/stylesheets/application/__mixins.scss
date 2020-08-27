@@ -125,6 +125,16 @@
   font-weight: $font-weight-medium;
 }
 
+@mixin font-subtitle {
+  font-size: 22px;
+  line-height: 32px;
+  @include breakpoint('s') {
+    font-size: 16px;
+    line-height: 22px;
+  }        
+  font-weight: $font-weight-medium;
+}
+
 @mixin font-fliesstext-l {
   font-size: 22px;
   line-height: 28px;
