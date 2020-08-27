@@ -107,7 +107,7 @@ https://relaunch2020.tanzfabrik.intergestalt.cloud/
 
 ## mirror production bucket to local minio bucket
 
-`bin/copy_files_live2local.sh`
+`bin/download_files.sh`
 
 
 ## install dip for easier interaction with docker locally
