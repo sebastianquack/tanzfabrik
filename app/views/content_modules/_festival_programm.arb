@@ -14,7 +14,11 @@ with_year = (festival.start_date.year < festival.end_date.year && (festival.end_
 div :class => "festival" do
 
   festival_workshops = festival.events.no_draft.where(:type_id => 2)
-  events = festival.events.no_draft.where.not(:type_id => 2)
+
+  workshops_details = []
+  festival_workshops.each do |w|
+    workshops_details.concat(w.event_details)
+  end
 
   # festival workshops
   if festival_workshops.length > 0
@@ -25,8 +29,16 @@ div :class => "festival" do
         end
       end
     end
-    render :partial => "/events/workshop_list", :locals => {:workshops => festival_workshops, :combinations => false, :in_festival => festival}  
+    #render :partial => "/events/workshop_list", :locals => {:workshops => festival_workshops, :combinations => false, :in_festival => festival}  
+
+    div :class => "module__workshop_programm" do
+      render :partial => "content_modules/workshop_list_2020", :locals => {:workshops => workshops_details, :in_festival => true}
+    end
+
+
   end
+
+  events = festival.events.no_draft.where.not(:type_id => 2)
 
   # festival events
   if events.length > 0
@@ -37,7 +49,9 @@ div :class => "festival" do
         end
       end
     end  
-    render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.start_date, :in_festival => festival, :is_archive => false, :display_year => with_year }
+    div :class => "module__programm" do
+      render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.start_date, :in_festival => festival, :is_archive => false, :display_year => with_year }
+    end
   end
 
 end
