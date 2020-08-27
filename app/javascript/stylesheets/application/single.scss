@@ -1,7 +1,7 @@
 @import "./__variables.scss";
 @import "./__mixins.scss";
 
-.single-event-page {
+.single-event-page, .single-person-page {
   position: absolute;
   z-index: 15; // place above menu
   background-color: white;
@@ -46,9 +46,7 @@
       grid-column: 9 / span 3;
       grid-row: 1;
       figure, img {
-        height: 100%;
         width: 100%;
-        object-fit: contain;
       }
       .button {
         position: absolute;
@@ -60,21 +58,38 @@
     .stripes_right {
       grid-column: 12 / span 1;
       text-align: right;
+      :before {
+        float: right;
+      }
     }
 
   }
-}
 
-.info {
-  @include grid-col-gap-dist("padding-left", 1, 1, "left");
-  @include grid-col-gap-dist("padding-right", 6, 6, "right");
-  box-sizing: border-box;
+  .info {
+    @include grid-col-gap-dist("padding-left", 1, 1, "left");
+    @include grid-col-gap-dist("padding-right", 6, 6, "right");
+    box-sizing: border-box;
 
-  h4:before {
-    content: "↪\a0";
-  }
+    @include font-fliesstext-m;
 
-  > * {
-    margin-bottom: 24px;
-  }
+    h4:before {
+      content: "↪\a0";
+    }
+
+    > * {
+      margin-bottom: 24px;
+    }
+
+    .events li {
+      @include font-fliesstext-l;
+      display: inline-block;
+      padding: 5px;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 5px;
+      + li {
+        margin-top: 6px;
+      }
+    }
+  }  
 }

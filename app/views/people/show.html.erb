@@ -1,0 +1,53 @@
+<% person=@person %>
+
+<div class="single-person-page" data-section="<%= person.artist? and "buehne" %>">
+
+  <div class="info">
+    <h3><%= person.name %></h3>
+    <p><%= person.rich_content %></p>
+    <% if admin_user_signed_in? %>
+      <a href="<%= edit_admin_person_path(person) %>" class="admin-only classes">✎ Person bearbeiten</a>
+    <% end %>    
+    <ol class="events">
+      <% person.events.each do |e| %>
+        <li class="event" <%= e.stage_event? ? "data-section=\"buehne\"".html_safe : nil %>>
+          <%= (link_to e.type.name + " " + e.title, event_path(e)).html_safe %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+
+  <div class="overlay">
+
+    <div class="stripes_vertical stripes_left">
+      <span data-close></span>
+      <span data-close></span>
+      <span data-close></span>
+    </div>
+
+    <div class="stripes_vertical stripes_right">
+      <span data-close></span>
+      <span data-close></span>
+      <span data-close></span>
+    </div>
+
+    <div class="stripes_vertical stripes_mid">
+      <span data-text-section></span>
+      <span data-text-section></span>
+      <span data-text-section></span>
+    </div>        
+
+    <div class="image">
+      <%  if person.images.length > 0 %>
+        <figure>
+            <img src="<%= person.images.first.attachment.url(:medium)%>" alt="<%= person.name %>">
+            <figcaption>
+              <%= person.images.first.license if person.images.first.license %>
+            </figcaption>
+        </figure>
+      <% end %>
+    </div>
+    
+  </div>
+
+</div>

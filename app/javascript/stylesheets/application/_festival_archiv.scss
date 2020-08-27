@@ -1,0 +1,16 @@
+@import "./__mixins.scss";
+
+.module__festival_archiv {
+  @include page-dist("padding-left", "left");
+  @include page-dist("padding-right", "right");
+  margin-bottom: 50px;
+
+  * {
+    @include font-title;
+  }
+  .archive-headline, .archive-links li {
+    padding: 12px 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+}  

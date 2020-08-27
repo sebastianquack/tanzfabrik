@@ -59,7 +59,9 @@ ActiveAdmin.register Page do
   index do
 
     selectable_column
-    column :title_de, sortable: true
+    column :title_de, sortable: true do |page|
+      h3 page.title_de, :class => "table_headline", "data-section" => page.section
+    end
     column :number_of_content_modules do |page|
       page.content_modules.count
     end

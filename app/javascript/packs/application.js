@@ -55,6 +55,16 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.classList.remove("featured_visible");
       }
     });
-    observer.observe(document.querySelector(".end_of_module__feature"));
+    var elements = document.querySelector(".end_of_module__feature")
+    if (elements) observer.observe(elements);
   }
+})
+
+// do something when X is clicked
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("[data-close]").forEach((button) => {
+    button.addEventListener('click', () => {
+      window.history.back();
+    });
+  });
 })
