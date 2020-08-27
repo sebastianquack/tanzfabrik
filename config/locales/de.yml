@@ -470,6 +470,7 @@ de:
         custom_html: "HTML"
         link_title: "Button Text"
         link_href: "Button URL"        
+        order: "Reihenfolge"
       event_detail:
         start_date: Startdatum
         end_date: Enddatum
@@ -546,6 +547,7 @@ de:
       video: "Video"
       accordeon_element: "Akkordeon-Element"
       today: "Heute"
+      festival_logos: "Festival-Logoleiste"
     style_options:
       magazine: "Magazin"
       large: "Groß"

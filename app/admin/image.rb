@@ -13,7 +13,7 @@ ActiveAdmin.register Image do
   #  permitted << :other if resource.something?
   #  permitted
   # end
-
+  
   index do
     selectable_column
     column "Image" do |image|

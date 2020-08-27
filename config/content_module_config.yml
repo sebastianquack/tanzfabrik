@@ -15,6 +15,7 @@ feature:
     - headline
     - special_text
     - rich_content_1
+    - link_href
   downloads: false
 page_intro:
   style-options:
@@ -152,6 +153,11 @@ festival_programm:
   form-fields:
     - parameter
   images: false
+  downloads: false
+festival_logos:
+  style-options:
+    - default
+  form-fields:
   downloads: false
 festival_archiv:
   style-options:
