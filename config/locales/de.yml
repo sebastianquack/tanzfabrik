@@ -440,6 +440,8 @@ de:
         sequence: Sortier-Nummer (optional)
         description: Text
         info: Zusatzinformation
+        info_rich: Zusatzinformation
+        credits_rich: Credits
         warning: Warnhinweis
         feature_on_welcome_screen: Auf Startseite gesondert hervorheben
         feature_on_welcome_screen_short: Hervorheben

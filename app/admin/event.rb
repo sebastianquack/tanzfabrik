@@ -2,7 +2,9 @@ ActiveAdmin.register Event do
 
   menu :priority => 3
 
-  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook, :draft, :custom_sorting, :no_sign_up, :signup_url, :rich_content_de, :rich_content_en,
+  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, 
+    :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook, :draft, :custom_sorting, :no_sign_up, :signup_url, 
+    :rich_content_de, :rich_content_en, :info_rich_de, :info_rich_en, :credits_rich_de, :credits_rich_en,
     :festival_ids => [], :person_ids => [],
     :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :custom_place, :repeat_mode_id, :_destroy, tag_ids: []],
     :people_attributes => [:id, :name, :_destroy],
@@ -101,13 +103,13 @@ ActiveAdmin.register Event do
         div event.rich_content_en
       end
 
-
-      row :info_de do |event|
-        event.info_de.html_safe if event.info_de
+      row :info_rich_de do |event|
+        event.info_rich_de
       end
-      row :info_en do |event|
-        event.info_en.html_safe if event.info_en
+      row :info_rich_en do |event|
+        event.info_rich_en
       end
+      
       unless event.facebook.nil? || event.facebook.empty?
         row "Facebook-Link" do
           a event.facebook, :href=>event.facebook, :target=>"_blank"
@@ -136,9 +138,9 @@ ActiveAdmin.register Event do
       row Image.model_name.human do |event|
         event.images.map { |i| image_tag i.attachment(:thumb) }.join('').html_safe
       end
-      row t(:feature_on_welcome_screen) do |event|
-        t(event.feature_on_welcome_screen)
-      end
+      #row t(:feature_on_welcome_screen) do |event|
+      #  t(event.feature_on_welcome_screen)
+      #end
       row t(:draft) do |event|
          t(event.draft)
       end
@@ -171,12 +173,18 @@ ActiveAdmin.register Event do
       f.input :rich_content_de, :as => :action_text
       f.input :rich_content_en, :as => :action_text
       
-      f.input :info_de
-      f.input :info_en
+      f.input :warning_de, :hint => "z.B. fällt heute aus!"
+      f.input :warning_en, :hint => "e.g. cancelled!"
+
+      f.input :info_rich_de, :as => :action_text
+      f.input :info_rich_en, :as => :action_text
       
-      f.input :warning_de
-      f.input :warning_en
+      f.input :credits_rich_de, :as => :action_text
+      f.input :credits_rich_en, :as => :action_text
+      
       f.input :signup_url, :label => t(:signup_url)
+      
+
       f.inputs "Externe Links" do
         f.input :facebook, :required => false, :placeholder => "https://www.facebook.com/events/877048289058664/"
       end      
@@ -184,6 +192,8 @@ ActiveAdmin.register Event do
         f.input :price_regular, :required => false
         f.input :price_reduced, :required => false 
       end
+
+      
     end
 
     f.inputs Image.model_name.human do

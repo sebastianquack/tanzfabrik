@@ -11,10 +11,15 @@
 
 class Event < ActiveRecord::Base
 
-  translates :title, :description, :rich_content, :warning, :info, fallback: :any
+  translates :title, :description, :rich_content, :warning, :info, :info_rich, :credits_rich, fallback: :any
 
   has_rich_text :rich_content_de
   has_rich_text :rich_content_en
+
+  has_rich_text :info_rich_de
+  has_rich_text :info_rich_en
+  has_rich_text :credits_rich_de
+  has_rich_text :credits_rich_en
   
   belongs_to :type, :class_name => "EventType"
 
