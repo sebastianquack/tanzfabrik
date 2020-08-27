@@ -22,7 +22,7 @@
         <span><%= detail.studio.location.address %></span>
       </span>
       <span>
-        <% if detail.tags.length %>
+        <% if @event.type.name == "Kurs" %>
           <span><%= get_text_item("tanklassen_level") %>:</span>
           <span><%= detail.tags.map { |t| t.short }.join('/') if detail.tags.length > 0 %></span><br>
         <% end %>
