@@ -74,6 +74,8 @@ de:
   price_event: Eintritt
   price_reduced_limit: "Frühbucherrabatt: Gilt bei Eingang der Gesamtzahlung bis"
 
+  video_url: "Video-URL"
+
   workshop_registration_intro: "Hiermit melde ich mich verbindlich für folgende(n) Workshop(s) an:"
   workshop_registration_choose: "Workshop wählen"
   workshop_registration_surname: "Name"
@@ -415,7 +417,7 @@ de:
         draft: Im Font-End verbergen
         super: "Über-Headline"
         headline: "Headline"
-        sub: "Unter-Headline"
+        sub: "Hinweis links"
         special_text: "Spezialtext"
         rich_content_1: "Text 1"
         rich_content_2: "Text 2"
@@ -468,6 +470,7 @@ de:
         custom_html: "HTML"
         link_title: "Button Text"
         link_href: "Button URL"        
+        order: "Reihenfolge"
       event_detail:
         start_date: Startdatum
         end_date: Enddatum
@@ -544,6 +547,7 @@ de:
       video: "Video"
       accordeon_element: "Akkordeon-Element"
       today: "Heute"
+      festival_logos: "Festival-Logoleiste"
     style_options:
       magazine: "Magazin"
       large: "Groß"

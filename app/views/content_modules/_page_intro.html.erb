@@ -7,6 +7,12 @@
     </div>  
   <% end %>
 
+  <% if content_module.parameter %>
+    <div class="grid_image">
+      <%= render :partial => "content_modules/video_embed", :locals => { :content_module => content_module } %>
+    </div>
+  <% end %>
+
   <div class="grid_headline">
 
   <% if content_module.headline %>
@@ -16,6 +22,12 @@
   <% end %>
 
   </div>
+
+  <% if content_module.sub %>
+      <div>
+        <%= content_module.sub  %>
+      </div>    
+  <% end %>
 
   <div class="grid_text">
 
@@ -42,6 +54,8 @@
         <a class="button pdf" title="<%= download.description %>" href="<%= download.attachment.url %>"><%= download.description %></a>
       <% end %>
     </div>
+
+    <%= render :partial => "content_modules/_button", :locals => { :obj => content_module } %> 
 
   </div>
 

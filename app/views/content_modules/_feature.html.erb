@@ -4,7 +4,7 @@
     <!--img src=<%= content_module.images[0].attachment.url(:background) %>-->
   <% end %>
 
-  <div class="columns" style="background-image: url(<%= content_module.images[0].attachment.url(:background) %>);">
+  <div class="columns" style="background-image: url(<%= content_module.images[0].attachment.url(:background) if content_module.images[0] %>);">
 
     <div class="stripes_vertical">
       <span data-text="Tanzfabrik &#10;Berlin"></span>
@@ -31,9 +31,15 @@
         <% end %>
 
         <% if content_module.headline %>
+          <% if content_module.link_href %>
+            <a href="<%= content_module.link_href %>">
+          <% end %>
           <h3 class="headline">
             <%= content_module.headline_shy.html_safe %>
           </h3>
+          <% if content_module.link_href %>
+            </a>
+          <% end %>
         <% end %>
 
         <% if content_module.sub %>

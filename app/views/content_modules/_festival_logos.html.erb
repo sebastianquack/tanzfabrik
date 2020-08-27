@@ -1,0 +1,21 @@
+
+<% sections = content_module.images.group_by { |i| i.headline } %>
+
+<% sections.keys.each do |key| %>
+
+  <div>
+  <h2><%= key %></h2>
+
+  <% sections[key].each do |image| %>
+    <% if image.link_href %>
+      <a href="<%= image.link_href%>">
+    <% end %>
+      <img alt="<%= image.description %>" src="<%= image.attachment.url(:thumb) %>">
+    <% if image.link_href %>
+      </a>
+    <% end %>
+  <% end %>
+
+  </div>
+  
+<% end %>

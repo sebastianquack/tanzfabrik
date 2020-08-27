@@ -27,7 +27,7 @@ ActiveAdmin.register ContentModule do
   #
   permit_params :module_type, :style_option, :section, :draft, :headline_de, :headline_en, :super_de, :super_en, :sub_de, :sub_en, :special_text_de, :special_text_en, :rich_content_1_de, :rich_content_1_en, :rich_content_2_de, :rich_content_2_en, :custom_html_de, :custom_html_en, :parameter, :locale,
   :link_href_de, :link_href_en, :link_title_de, :link_title_en,
-  :images_attributes => [:id, :description, :license, :attachment, :_destroy, :super_de, :super_en, :headline_de, :headline_en, :rich_content_1_de, :rich_content_1_en, :link_title_de, :link_title_en, :link_href_de, :link_href_en],
+  :images_attributes => [:id, :description, :license, :attachment, :_destroy, :super_de, :super_en, :headline_de, :headline_en, :rich_content_1_de, :rich_content_1_en, :link_title_de, :link_title_en, :link_href_de, :link_href_en, :order],
   :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
 
   ActiveAdmin.register ContentModule do
@@ -130,6 +130,8 @@ ActiveAdmin.register ContentModule do
             f.input field, :as => :select, :collection => Studio.all.map {|s| [s.location.name + " " + s.name, s.id]}, :include_blank => false            
           elsif field == "parameter" && (mtype == "people_gallery")
             f.input field, :label => t("attributes.person.tags", scope: [:activerecord]), :hint => ("<span class='people_tags_list'><u>Verwendete Tags</u><br /><span>" + Person.get_all_tags.join("</span><br /><span>") + "</span></span>").html_safe
+          elsif field == "parameter" && (mtype == "page_intro")          
+            f.input field, :label => t("video_url"), :hint => "Optional Video einbetten statt eines Bildes"
           elsif field == "parameter" && (mtype == "festival_archiv")
             f.input field, :as => :select, 
               :include_blank => true, 
@@ -192,14 +194,14 @@ ActiveAdmin.register ContentModule do
 
         content_module_input f, type, "super"
         content_module_input f, type, "headline", false, true, "Bitte mit \"\\\" mögliche  Worttrennungen innerhalb von Wörtern markieren, z.B. \"Wort\\trennung\"."
-        content_module_input f, type, "sub"
         content_module_input f, type, "special_text"
-        content_module_input f, type, "parameter", false, false
+        content_module_input f, type, "sub"
         content_module_input f, type, "rich_content_1", true
         content_module_input f, type, "rich_content_2", true
         content_module_input f, type, "link_title", false, true
         content_module_input f, type, "link_href", false, true
         content_module_input f, type, "custom_html"
+        content_module_input f, type, "parameter", false, false
       end
 
       if !CM_CONFIG[type].has_key? "images" || CM_CONFIG[type]["images"] != false
@@ -207,6 +209,7 @@ ActiveAdmin.register ContentModule do
           f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
             f_f.input :description, :hint => "für barrierefreie Browser"
             f_f.input :license
+            f_f.input :order
             if type == "slideshow"
               f_f.input :super_de
               f_f.input :super_en
@@ -219,6 +222,13 @@ ActiveAdmin.register ContentModule do
               f_f.input :link_href_de
               f_f.input :link_href_en
             end
+            if type == "festival_logos"
+              f_f.input :headline_de
+              f_f.input :headline_en
+              f_f.input :link_href_de
+              f_f.input :link_href_en
+            end
+
             if f_f.object.attachment.exists?
               f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.image_tag(f_f.object.attachment.url(:thumb))
             else

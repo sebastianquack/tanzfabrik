@@ -10,7 +10,7 @@ class ContentModule < ActiveRecord::Base
 
   translates :super, :headline, :sub, :special_text, :custom_html, :rich_content_1, :rich_content_2, :link_title, :link_href
 
-  has_many :images
+  has_many :images, -> { order(:order) }
   accepts_nested_attributes_for :images, :allow_destroy => true
   
   has_many :downloads

@@ -38,13 +38,13 @@
           caption = @event.people.first.images.first.license
         %>
        <% else %>
-        <%  imageSrc = @event.images.first.attachment.url(:medium_detail_column) if @event.images.first
-          caption = @event.images.first.license if @event.images.first %>
+        <%  imageSrc = @event.images.first.attachment.url(:medium_detail_column) if @event.no_logo_images.first
+          caption = @event.no_logo_images.first.license if @event.no_logo_images.first %>
       <% end %>
       <% if imageSrc %>
       <figure>
         <img src="<%= imageSrc %>"/>
-        <caption><%= caption %></caption>
+        <figcaption><%= caption %></figcaption>
       </figure>
       <% end %>
             
@@ -89,6 +89,17 @@
     <% @event.people.each do |person| %>
       <a href="<%= person_path(person) %>"><h4><%= person.name %></h4></a>
       <div><%= person.rich_content %></div>
+    <% end %>
+
+
+    <% if @event.logos.length %>
+      <div>
+      <% @event.logos.each do |logo| %>
+        <a href="<%= logo.link_href %>">
+          <img src="<%= logo.attachment.url(:thumb)%>"/>
+        </a>
+      <% end %>
+      </div>
     <% end %>
   
     <% if admin_user_signed_in? %>
