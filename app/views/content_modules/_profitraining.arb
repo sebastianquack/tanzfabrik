@@ -15,10 +15,10 @@ end
 
 def render_list_for(profitrainings) 
 
-  ul do
+  ul :class => "project_list" do
     profitrainings.each do |event_detail| 
       li do
-        a :href => event_path(event_detail.event) do 
+        a :class => "project", :href => event_path(event_detail.event) do 
           
           div :class => "time-duration" do
             span l event_detail.starttime, :format => :day_month
@@ -26,7 +26,7 @@ def render_list_for(profitrainings)
             span l event_detail.endtime, :format => :day_month_year
           end
 
-          div do
+          div :class=>"time" do
             span l event_detail.starttime, :format => :hours_minutes
             text_node " - "
             span l event_detail.starttime + event_detail.duration * 60, :format => :hours_minutes
@@ -42,25 +42,26 @@ def render_list_for(profitrainings)
   
 end
 
-h2 Date.today.year
-profitrainings = load_profitrainings(nil)
-render_list_for(profitrainings)
+div :class => "module__profitraining" do
+  h3 Date.today.year
+  profitrainings = load_profitrainings(nil)
+  render_list_for(profitrainings)
 
-# figure out in which years event_details exist
-years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 4').group_by_year(:start_date).count
+  # figure out in which years event_details exist
+  years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 4').group_by_year(:start_date).count
 
-# show links for these years
-section :class => "archive-section" do
-  h2 t(:past_events), :class => "archive-headline"
-  ul :class => "archive-links" do
-    years.keys.reverse.each do |y|
-      h3 y.year
-      profitrainings = load_profitrainings(y.year)
-      render_list_for(profitrainings)
+  # show links for these years
+  section :class => "archive-section" do
+    h2 t(:past_events), :class => "archive-headline"
+    ul :class => "archive-links" do
+      years.keys.reverse.each do |y|
+        h3 y.year
+        profitrainings = load_profitrainings(y.year)
+        render_list_for(profitrainings)
+      end
     end
   end
 end
-
 
 
 

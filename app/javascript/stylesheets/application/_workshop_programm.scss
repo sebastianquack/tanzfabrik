@@ -23,7 +23,7 @@
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 1fr;
     @include grid-gap-dist("grid-gap");
-    align-items: end;
+    align-items: center;
 
     .date {
       @include font-title;
