@@ -23,8 +23,11 @@
       </span>
       <span>
         <% if @event.type.name == "Kurs" %>
-          <span><%= get_text_item("tanklassen_level") %>: <br /></span>
-          <span><%= detail.tags.map { |t| t.short }.join('/') if detail.tags.length > 0 %></span>
+          <span><%= get_text_item("tanklassen_level") %>:</span>
+          <span><%= detail.tags.map { |t| t.short }.join('/') if detail.tags.length > 0 %></span><br>
+        <% end %>
+        <% if @event.price_regular %>
+          <span><%= @event.price_regular %>€ (<%= @event.price_reduced %>€)</span>
         <% end %>
       </span>
     </div>
@@ -51,7 +54,7 @@
         
       
       <% if @event.signup_url %>
-        <a class="button" title="<%= get_text_item("tanklassen_anmeldung") %>" href="<%= @event.signup_url %>">
+        <a class="button" title="<%= get_text_item("tanzklassen_anmeldung") %>" href="<%= @event.signup_url %>">
           <%= get_text_item("tanzklassen_anmeldung") %>
         </a>
       <% end %>
@@ -72,15 +75,17 @@
 
     <p><b><%= @event.display_type %></b>
      <% if @event.people.first %>
-     mit <%= @event.people.first.name %>
+     mit <%= @event.people.map { |p| p.name }.join(", ") %>
      <% end %>
     </p>
     
     <div><%= @event.rich_content %></div>
 
     <% if @event.warning %>
-      <p><%=@event.warning%> [Feld Warnhinweis]</p>
+      <p><%=@event.warning%></p>
     <% end %>
+
+    <div><%= @event.info_rich %></div>
 
     <% unless @event.type.name == "Kurs" %>
       <%= render :partial => "/events/details/moments", :locals => {:event => @event} %>
@@ -91,6 +96,7 @@
       <div><%= person.rich_content %></div>
     <% end %>
 
+    <div><%= @event.credits_rich %></div>
 
     <% if @event.logos.length %>
       <div>

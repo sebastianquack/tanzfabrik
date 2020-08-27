@@ -2,7 +2,7 @@ ActiveAdmin.register Festival do
 
   menu :priority => 4
 
-  permit_params :page_id, :name_de, :rich_content_de, :rich_content_en, :description_de, :name_en, :description_en, :feature_on_welcome_screen, :facebook,  :draft, :event_ids => [], :festival_ids => [], :festival_container_ids => [],
+  permit_params :page_id, :section, :name_de, :rich_content_de, :rich_content_en, :description_de, :name_en, :description_en, :feature_on_welcome_screen, :facebook,  :draft, :event_ids => [], :festival_ids => [], :festival_container_ids => [],
     :images_attributes => [:id, :description, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
 
