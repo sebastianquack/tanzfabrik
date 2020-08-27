@@ -472,5 +472,13 @@ class Event < ActiveRecord::Base
       return [self.first_event_occurrence.time.to_date, self.last_event_occurrence.time.to_date]
     end
   end
+
+  def no_logo_images 
+    return self.images.filter {|i| !i.logo}
+  end
+
+  def logos
+    return self.images.filter {|i| i.logo}
+  end
     
 end

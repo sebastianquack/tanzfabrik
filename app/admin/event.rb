@@ -8,7 +8,7 @@ ActiveAdmin.register Event do
     :people_attributes => [:id, :name, :_destroy],
     :person_events_attributes => [:id, :person_id, :event_id, :_destroy],
     :festival_events_attributes => [:id, :event_id, :festival_id, :_destroy],
-    :images_attributes => [:id, :description, :license, :attachment, :_destroy]
+    :images_attributes => [:id, :description, :license, :attachment, :logo, :_destroy]
 
   config.per_page = 100
 
@@ -191,6 +191,8 @@ ActiveAdmin.register Event do
         #f_f.inputs do
           f_f.input :description
           f_f.input :license
+          f_f.input :logo
+          f_f.input :link_href
           if f_f.object.attachment.exists?
             f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.image_tag(f_f.object.attachment.url(:thumb))
           else
