@@ -3,9 +3,4 @@
   <%= render :partial => "content_modules/_button", :locals => { :obj => content_module } %> 
 </h3>
 
-<% if content_module.parameter %>
-  <iframe width="560" height="315" src="<%= content_module.parameter %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<% end %>
-
-<!--a class="oembed" href="<%= content_module.parameter %>">video link</a-->
-
+<%= render :partial => "content_modules/video_embed", :locals => { :content_module => content_module } %>

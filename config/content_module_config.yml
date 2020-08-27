@@ -26,7 +26,11 @@ page_intro:
   form-fields:
     - headline
     - special_text
+    - sub
     - rich_content_1
+    - link_title
+    - link_href
+    - parameter
 page_intro_magazine:
   style-options:
     - default

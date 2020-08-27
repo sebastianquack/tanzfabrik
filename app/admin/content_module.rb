@@ -130,6 +130,8 @@ ActiveAdmin.register ContentModule do
             f.input field, :as => :select, :collection => Studio.all.map {|s| [s.location.name + " " + s.name, s.id]}, :include_blank => false            
           elsif field == "parameter" && (mtype == "people_gallery")
             f.input field, :label => t("attributes.person.tags", scope: [:activerecord]), :hint => ("<span class='people_tags_list'><u>Verwendete Tags</u><br /><span>" + Person.get_all_tags.join("</span><br /><span>") + "</span></span>").html_safe
+          elsif field == "parameter" && (mtype == "page_intro")          
+            f.input field, :label => t("video_url"), :hint => "Optional Video einbetten statt eines Bildes"
           elsif field == "parameter" && (mtype == "festival_archiv")
             f.input field, :as => :select, 
               :include_blank => true, 
@@ -192,14 +194,14 @@ ActiveAdmin.register ContentModule do
 
         content_module_input f, type, "super"
         content_module_input f, type, "headline", false, true, "Bitte mit \"\\\" mögliche  Worttrennungen innerhalb von Wörtern markieren, z.B. \"Wort\\trennung\"."
-        content_module_input f, type, "sub"
         content_module_input f, type, "special_text"
-        content_module_input f, type, "parameter", false, false
+        content_module_input f, type, "sub"
         content_module_input f, type, "rich_content_1", true
         content_module_input f, type, "rich_content_2", true
         content_module_input f, type, "link_title", false, true
         content_module_input f, type, "link_href", false, true
         content_module_input f, type, "custom_html"
+        content_module_input f, type, "parameter", false, false
       end
 
       if !CM_CONFIG[type].has_key? "images" || CM_CONFIG[type]["images"] != false
