@@ -19,12 +19,14 @@ years = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?)
 
 # show links for these years
 section :class => "archive-section" do
-  h5 t(:past_events), :class => "archive-headline"
+  h3 t(:past_events), :class => "archive-headline"
   ul :class => "archive-links" do
-    years.keys.each do |y|
+    years.keys.reverse.each do |y|
       if y.year <= Time.now.year
         li do
-          a y.year.to_s, :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :year => y.year.to_s)
+          a :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :year => y.year.to_s) do
+            h4 y.year.to_s 
+          end
         end
       end
     end
