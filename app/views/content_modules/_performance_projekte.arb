@@ -49,9 +49,11 @@ div :class => "module__performance_projekte" do
     h3 t(:past_events), :class => "archive-headline"
     ul :class => "archive-links" do
       years.keys.reverse.each do |y|
-        h3 y.year
-        performance_projekte = load_performance_projects(y.year)
-        render_list_for(performance_projekte)
+        details :class => "drawer" do
+          summary y.year
+          performance_projekte = load_performance_projects(y.year)
+          render_list_for(performance_projekte)
+        end
       end
     end
   end

@@ -43,6 +43,13 @@
 
   .archive-section {
     margin-top: 50px;
+    li {
+      border-top-width: 0 !important;
+      border-bottom-width: 1px;
+    }
+    details[open] {
+      margin-bottom: 50px;
+    }
   }
 
 }
