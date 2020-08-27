@@ -26,7 +26,7 @@
           div event_detail.event.title, :class => "title"
 
           # hide festival reference in festival program
-          unless in_festival 
+          unless defined? in_festival 
             span :class => "festival" do
               render :partial => "events/in_festival", :locals => {:event => event_detail.event, :link => false }
             end
