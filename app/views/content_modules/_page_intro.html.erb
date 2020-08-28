@@ -43,12 +43,6 @@
       </div>
     <% end %>
 
-    <% if content_module.rich_content_2 %>
-      <div class="rich_content_2">
-        <%= content_module.rich_content_2 %>
-      </div>
-    <% end %>
-
     <div class="downloads">
       <% content_module.downloads.each do |download| %>
         <a class="button pdf" title="<%= download.description %>" href="<%= download.attachment.url %>"><%= download.description %></a>

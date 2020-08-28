@@ -537,6 +537,7 @@ de:
       content_2_columns: "Text zweispaltig"
       content_element: "Inhaltselement komplett"
       content_element_magazine: "Text (Magazinstil)"
+      image_element_magazine: "Magazin-Abschnitt Bild+Text"
       page_intro: "Seiten-Intro"
       page_intro_magazine: "Seiten-Intro (Magazinstil)"
       reference: "Verweis"

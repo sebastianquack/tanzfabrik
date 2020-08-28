@@ -80,6 +80,18 @@ content_element_magazine:
     - fabrik
   form-fields:
     - rich_content_1
+image_element_magazine:
+  style-options:
+    - default
+  sections:
+    - buehne
+    - schule
+    - fabrik
+  form-fields:
+    - headline
+    - rich_content_1
+  images: true
+  downloads: false
 reference:
   style-options:
     - default
