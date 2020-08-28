@@ -1,5 +1,12 @@
+<% parameterSet = false %>
+<% if content_module.parameter %>
+  <% unless content_module.parameter.empty? %>
+    <% parameterSet = true %>
+  <% end %>
+<% end %>
 
-<div class="module__page_intro" <%= "data-no-images" if (content_module.images.empty? and !content_module.parameter) %> data-section="<%= content_module.section %>">
+
+<div class="module__page_intro" <%= "data-no-images" if (content_module.images.empty? and !parameterSet) %> data-section="<%= content_module.section %>">
 
   <% if content_module.images.count > 0 %>
     <div class="grid_image">
@@ -7,7 +14,7 @@
     </div>  
   <% end %>
 
-  <% if content_module.parameter %>
+  <% if parameterSet %>
     <div class="grid_image">
       <%= render :partial => "content_modules/video_embed", :locals => { :content_module => content_module } %>
     </div>
