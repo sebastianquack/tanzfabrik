@@ -550,6 +550,35 @@ make_module({
   headline_en: "Today",
 })
 
+# newsletter module / schule
+
+make_module({
+  module_type: "newsletter",
+  section: "schule",
+  headline_de: "Alle Highlights in unserem Newsletter!",
+  headline_en: "Alle Highlights in unserem Newsletter!",
+})
+
+# newsletter module / buehne
+
+make_module({
+  module_type: "newsletter",
+  section: "buehne",
+  headline_de: "Alle Highlights in unserem Newsletter!",
+  headline_en: "Alle Highlights in unserem Newsletter!",
+})
+
+
+# image element magzine module
+
+# make_module({
+#   module_type: "newsletter",
+#   section: "schule",
+#   headline_de: "Alle Highlights in unserem Newsletter!",
+#   headline_en: "Alle Highlights in unserem Newsletter!",
+# })
+
+
 # END
 
 end

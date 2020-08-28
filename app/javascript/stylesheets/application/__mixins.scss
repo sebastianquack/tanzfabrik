@@ -116,6 +116,16 @@
   font-weight: $font-weight-regular;
 }
 
+@mixin font-input {
+  font-size: 28px;
+  line-height: 32px;
+  @include breakpoint('s') {
+    font-size: 18px;
+    line-height: 22px;
+  }        
+  font-weight: $font-weight-regular;
+}
+
 @mixin font-title {
   font-size: 28px;
   line-height: 32px;

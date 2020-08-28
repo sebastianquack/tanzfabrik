@@ -26,6 +26,7 @@ import "./_performance_projekte_profitraining.scss"
 import "./_festival_archiv.scss"
 import "./_today.scss"
 import "./_video.scss"
+import "./_newsletter.scss"
 
 // dedicated views
 import "./start.scss"
