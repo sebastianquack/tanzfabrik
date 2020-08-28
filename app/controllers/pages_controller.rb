@@ -31,6 +31,12 @@ class PagesController < ApplicationController
           end
 
           
+        else 
+          # page is not in nav tree, use section as starting point 
+          @menu_item = MenuItem.find_by key: @page.section
+          if @menu_item
+            @menu_tree = @menu_item.descendants.arrange(:order => :position)
+          end
         end
 
       else
