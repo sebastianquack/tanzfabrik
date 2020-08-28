@@ -24,6 +24,7 @@ import "./_page_intro_magazine.scss"
 import "./_content_element_magazine.scss"
 import "./_performance_projekte.scss"
 import "./_festival_archiv.scss"
+import "./_today.scss"
 
 // dedicated views
 import "./start.scss"

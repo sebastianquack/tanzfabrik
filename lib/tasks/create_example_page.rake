@@ -533,6 +533,15 @@ make_module({
   link_href_en: "http://tanznachtberlin.de/",    
 })
 
+# today module
+
+make_module({
+  module_type: "today",
+  section: "schule",
+  headline_de: "Heute",
+  headline_en: "Today",
+})
+
 # END
 
 end

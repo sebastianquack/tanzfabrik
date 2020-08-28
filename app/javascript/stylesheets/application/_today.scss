@@ -1,0 +1,55 @@
+@import "./__mixins.scss";
+
+.module__today {
+
+  @include grid-col-gap-dist("padding-left", 1,1, "left");
+  @include grid-col-gap-dist("padding-right", 1,1, "right");  
+  
+  h3 {
+    @include font-kalender-h1;
+  }
+
+  .event_list {
+
+    .event {
+
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      @include grid-gap-dist("grid-gap");
+      & > {
+        grid-row: 1;
+      }
+      align-items: center;
+
+      padding-top: 12px;
+      padding-bottom: 12px;
+      border-width: 0 0 1px 0;
+      border-style: solid;
+      &:first-child { border-top-width: 1px;}
+
+      .title {
+        grid-column: 6 / span 5;
+        @include font-title;
+      }
+
+      .time {
+        grid-column: 1 / span 1;
+        @include font-stripes;
+      }
+
+      .place {
+        grid-column: 4 / span 2;
+        @include font-stripes;
+      }
+
+      .teacher {
+        grid-column: 2 / span 2;
+        @include font-stripes;
+      }      
+
+    }
+
+
+  }
+
+}
