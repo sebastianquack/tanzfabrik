@@ -51,8 +51,13 @@
       </figure>
       <% end %>
             
-        
-      
+      <br>
+      <% if @event.warning %>
+      <p><%=@event.warning%></p>
+      <% end %>
+
+      <div><%= @event.info_rich %></div>
+  
       <% if @event.signup_url %>
         <a class="button" title="<%= get_text_item("tanzklassen_anmeldung") %>" href="<%= @event.signup_url %>">
           <%= get_text_item("tanzklassen_anmeldung") %>
@@ -80,12 +85,6 @@
     </p>
     
     <div><%= @event.rich_content %></div>
-
-    <% if @event.warning %>
-      <p><%=@event.warning%></p>
-    <% end %>
-
-    <div><%= @event.info_rich %></div>
 
     <% unless @event.type.name == "Kurs" %>
       <%= render :partial => "/events/details/moments", :locals => {:event => @event} %>
