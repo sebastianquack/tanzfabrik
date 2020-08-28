@@ -1,6 +1,8 @@
-<h3>
-  <%= content_module.headline %>
-  <%= render :partial => "content_modules/_button", :locals => { :obj => content_module } %> 
-</h3>
+<div class="module__video">
+  <h3 class="headline">
+    <%= content_module.headline %>
+    <%= render :partial => "content_modules/_button", :locals => { :obj => content_module } %> 
+  </h3>
 
-<%= render :partial => "content_modules/video_embed", :locals => { :content_module => content_module } %>
+  <%= render :partial => "content_modules/video_embed", :locals => { :content_module => content_module } %>
+</div>

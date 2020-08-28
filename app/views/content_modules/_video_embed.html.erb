@@ -1,5 +1,7 @@
 <% if content_module.parameter %>
-  <iframe width="560" height="315" src="<%= content_module.parameter %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="videoWrapper">
+    <iframe width="560" height="315" src="<%= content_module.parameter %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
 <% end %>
 
 <!--a class="oembed" href="<%= content_module.parameter %>">video link</a-->
