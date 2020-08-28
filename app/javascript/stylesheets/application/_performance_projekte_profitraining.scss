@@ -51,13 +51,36 @@
 
   .archive-section {
     margin-top: 50px;
-    li {
-      border-top-width: 0 !important;
+    .archive-links .project_list li:first-child {
+      border-top-width: 0;
       border-bottom-width: 1px;
     }
     details[open] {
       margin-bottom: 50px;
     }
+    .archive-links li:first-child, details:first-child summary {
+      border-top-style: solid;
+      border-top-width: 1px;
+    }
+    .project_list + .year {
+      margin-top: 50px;
+    }
   }
 
+}
+
+.module__profitraining {
+  .archive-section {
+    margin-top: 50px;
+    .archive-links .project_list li:first-child, .archive-headline + .archive-links + h3.year {
+      border-top-width: 1px;
+      border-top-style: solid;
+    }
+    .year {
+      @include page-dist("margin-left", "left");
+      @include page-dist("margin-right", "right");      
+      padding-left:0;
+      padding-right: 0;
+    }
+  }
 }

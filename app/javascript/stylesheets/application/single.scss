@@ -45,6 +45,7 @@
     .image {
       grid-column: 9 / span 3;
       grid-row: 1;
+      margin: auto; // center
       figure, img {
         width: 100%;
       }

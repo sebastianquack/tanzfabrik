@@ -417,7 +417,7 @@ RICHCONTENT1
 make_module({
   module_type: "content_element_magazine",
   section: "buehne",
-  style_option: "center",
+  style_option: "centered",
   rich_content_1_de: rich_content_1,
   rich_content_1_en: rich_content_1,
 })
