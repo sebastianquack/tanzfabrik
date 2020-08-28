@@ -37,8 +37,8 @@ def render_list_for(performance_projekte)
 end
 
 div :class => "module__performance_projekte" do
-  h3 Date.today.year
-  performance_projekte = load_performance_projects(nil)
+  h3 params[:year] ? params[:year] : Date.today.year
+  performance_projekte = load_performance_projects(params[:year])
   render_list_for(performance_projekte)
 
   # figure out in which years event_details exist
@@ -49,11 +49,14 @@ div :class => "module__performance_projekte" do
     h3 t(:past_events), :class => "archive-headline"
     ul :class => "archive-links" do
       years.keys.reverse.each do |y|
-        details :class => "drawer" do
-          summary y.year
-          performance_projekte = load_performance_projects(y.year)
-          render_list_for(performance_projekte)
-        end
+        #details :class => "drawer" do
+          #summary y.year
+          li do
+            a :href => (url_for :controller => 'pages', :action => 'show', :id => 'performance_projekte', :year => y.year.to_s) do
+              h4 y.year, :class => "year"
+            end
+          end
+        #end
       end
     end
   end

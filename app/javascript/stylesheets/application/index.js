@@ -27,6 +27,7 @@ import "./_festival_archiv.scss"
 import "./_festival_programm.scss"
 import "./_today.scss"
 import "./_video.scss"
+import "./_accordeon_element.scss"
 
 // dedicated views
 import "./start.scss"

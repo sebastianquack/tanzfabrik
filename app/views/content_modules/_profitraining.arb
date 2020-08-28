@@ -43,8 +43,8 @@ def render_list_for(profitrainings)
 end
 
 div :class => "module__profitraining" do
-  h3 Date.today.year
-  profitrainings = load_profitrainings(nil)
+  h3 params[:year] ? params[:year] : Date.today.year
+  profitrainings = load_profitrainings(params[:year])
   render_list_for(profitrainings)
 
   # figure out in which years event_details exist
@@ -55,9 +55,11 @@ div :class => "module__profitraining" do
     h3 t(:past_events), :class => "archive-headline"
     ul :class => "archive-links" do
       years.keys.reverse.each do |y|
-        h3 y.year, :class => "year"
-        profitrainings = load_profitrainings(y.year)
-        render_list_for(profitrainings)
+        li do
+          a :href => (url_for :controller => 'pages', :action => 'show', :id => 'profitraining', :year => y.year.to_s) do
+            h4 y.year, :class => "year"
+          end
+        end
       end
     end
   end
