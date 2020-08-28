@@ -28,7 +28,7 @@ tags = []
 table_data[0] = []
 table_data[0][0] = ""
 dates.each_with_index do |date, index|
-  table_data[0][index + 1] = l date, :format=>:weekday
+  table_data[0][index + 1] = l date, :format=>:weekday_short
 end
 
 row_index = 1
@@ -118,13 +118,19 @@ div :class => "timetable-container" do
       
     # table head
     thead do  
-      tr do
-        table_data[0].each_with_index do |header, i|
-          th do
-            div header, :class => (i == 0 ? "studio" : "day")
-          end
+      tr :class => "row-studio" do
+        th
+        th :class => "studio", :colspan => table_data[0].length-1 do
+          h2 table_data[0][0]
         end
       end
+      tr :class => "row-days" do
+        table_data[0].each_with_index do |header, i|
+          th do
+            div header, :class => "day" if i != 0
+          end
+        end
+      end      
     end
 
   
@@ -224,8 +230,10 @@ div :class => "timetable-container" do
   end
   dl :class => "tags" do
     tags.uniq.sort_by { |t| [t.priority, t.abbr] } .each do |tag|
-      dt "(" + tag.short + ")"
-      dd tag.name
+      span :class => "tag" do
+        dt "(" + tag.short + ")"
+        dd tag.name
+      end
     end
   end
 end

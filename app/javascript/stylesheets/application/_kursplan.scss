@@ -27,6 +27,21 @@
     
       }
 
+      thead {
+        th {
+          border: none;
+        }
+        .row-studio th {
+          overflow: visible;
+          padding-bottom: 20px;
+        }
+        .row-days th {
+          text-align: left;
+          @include font-stripes;
+          padding: 6px;
+        }
+      }
+
       tbody {
         th {
           visibility: hidden;
@@ -45,6 +60,7 @@
           .title-description {
             @include debug(white);
             flex: 1;
+            hyphens: auto;
           }
 
           .time-footnotes {
@@ -73,6 +89,23 @@
         }
       }
 
+    }
+  }
+
+  .tags {
+    @include grid-col-gap-dist("padding-left",2,2);
+    @include font-fliesstext-s;
+    margin-top: 12px;
+    dt:after {
+      content: "\a0=\a0";
+    }
+    .tag {
+      float: left;
+      margin-right: 1em;
+      white-space: nowrap;
+    }
+    dt,dd {
+      display: inline;
     }
   }
 
