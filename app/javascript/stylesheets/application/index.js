@@ -25,9 +25,11 @@ import "./_content_element_magazine.scss"
 import "./_performance_projekte_profitraining.scss"
 import "./_festival_archiv.scss"
 import "./_festival_logos.scss"
+import "./_newsletter.scss"
+import "./_festival_programm.scss"
 import "./_today.scss"
 import "./_video.scss"
-import "./_newsletter.scss"
+import "./_accordeon_element.scss"
 
 // dedicated views
 import "./start.scss"

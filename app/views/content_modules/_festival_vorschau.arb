@@ -4,36 +4,44 @@ end
 
 # load the festival
 begin
-  festival = Festival.find(content_module.parameter.to_i)
+  $festival = Festival.find(content_module.parameter.to_i)
 rescue ActiveRecord::RecordNotFound
   return
 end
 
-if !festival
+if !$festival
   return
 end
 
-#with_year = (festival.start_date.year < festival.end_date.year && (festival.end_date - festival.start_date) > 45)
+subHeadline = l($festival.start_date, :format => ( :default ) ) + "-" + l($festival.end_date) if $festival.events.exists?
 
-h1 :class => "title" do
-    span festival.name
-    time l(festival.start_date, :format => ( :default ) ) + "-" + l(festival.end_date) if festival.events.exists?
+cm1 = ContentModule.new(
+  headline: $festival.name,
+  sub: subHeadline,
+  images: $festival.images,
+  section: $festival.section
+)
+
+render :partial => "content_modules/page_intro_magazine", :locals => {
+  :content_module => cm1
+}
+
+cm2 = ContentModule.new(
+  style_option: :large_left,
+  section: $festival.section
+)
+# override active text accessor method, use $ so festival is in global scope
+def cm2.rich_content_1
+  return $festival.rich_content
 end
 
-if festival.description
-  div festival.rich_content
-end
+render :partial => "content_modules/content_element_magazine", :locals => {
+  :content_module => cm2
+}
 
-div do
-  festival.images.each do |image|  
-    img :src => image.attachment.url(:medium)
-  end
-end
-
-ul do
-  festival.downloads.each do |download|        
-    li do
-      a download.description, :href => download.attachment.url
-    end
-  end
-end
+cm3 = ContentModule.new(
+  downloads: $festival.downloads
+)
+render :partial => "content_modules/content_element", :locals => {
+  :content_module => cm3
+}

@@ -27,8 +27,8 @@ page_intro:
   form-fields:
     - headline
     - special_text
-    - sub
     - rich_content_1
+    - rich_content_2
     - link_title
     - link_href
     - parameter
@@ -80,6 +80,17 @@ content_element_magazine:
     - fabrik
   form-fields:
     - rich_content_1
+image_element_magazine:
+  style-options:
+    - default
+  sections:
+    - buehne
+    - schule
+    - fabrik
+  form-fields:
+    - headline
+    - rich_content_1
+  downloads: false
 reference:
   style-options:
     - default
