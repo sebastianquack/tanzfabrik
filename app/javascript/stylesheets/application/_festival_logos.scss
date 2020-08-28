@@ -1,8 +1,11 @@
 @import "./__mixins.scss";
 
 .module__festival_logos{
-  @include grid-col-gap-dist("padding-left", 1,1, "left");
-  @include grid-col-gap-dist("padding-right",1,1,  "right");
+  @include grid-col-gap-dist("margin-left", 1,1, "left");
+  @include grid-col-gap-dist("margin-right",1,1,  "right");
+  padding-top: 12px;
+  border-top-width: 1px;
+  border-top-style: solid;
   margin-bottom: 50px;
 
   * {
@@ -14,6 +17,10 @@
 
   .section {
     @include grid-col-gap-dist("margin-right",1,1);
+
+    .headline {
+      margin-bottom: 12px;
+    }
 
     .logo {
       float: left;
