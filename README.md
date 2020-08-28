@@ -1,5 +1,7 @@
 ## develop
 
+Graphics for module hints are in lib/ folder
+
 ### setup
 
 #### install prerequisites
