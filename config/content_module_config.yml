@@ -27,8 +27,8 @@ page_intro:
   form-fields:
     - headline
     - special_text
-    - sub
     - rich_content_1
+    - rich_content_2
     - link_title
     - link_href
     - parameter

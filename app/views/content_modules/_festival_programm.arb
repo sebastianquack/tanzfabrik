@@ -11,7 +11,7 @@ end
 
 with_year = (festival.start_date.year < festival.end_date.year && (festival.end_date - festival.start_date) > 45)
 
-div :class => "festival" do
+div :class => "module__festival_programm" do
 
   festival_workshops = festival.events.no_draft.where(:type_id => 2)
 
@@ -22,34 +22,17 @@ div :class => "festival" do
 
   # festival workshops
   if festival_workshops.length > 0
-    h2 :class => "headlines" do
-      div :class => "main" do
-        div :class => "line1" do
-          div t(:festival_workshops), :class => "title"
-        end
-      end
-    end
-    #render :partial => "/events/workshop_list", :locals => {:workshops => festival_workshops, :combinations => false, :in_festival => festival}  
-
-    div :class => "module__workshop_programm" do
+    h2 t(:festival_workshops)
+    div :class => "module__workshop_programm indent" do
       render :partial => "content_modules/workshop_list_2020", :locals => {:workshops => workshops_details, :in_festival => true}
     end
-
-
   end
 
-  events = festival.events.no_draft.where.not(:type_id => 2)
-
   # festival events
+  events = festival.events.no_draft.where.not(:type_id => 2)
   if events.length > 0
-    h2 :class => "headlines" do
-      div :class => "main" do
-        div :class => "line1" do
-          div t(:festival_programm), :class => "title"
-        end
-      end
-    end  
-    div :class => "module__programm" do
+    h2 t(:festival_programm)
+    div :class => "module__programm indent" do
       render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.start_date, :in_festival => festival, :is_archive => false, :display_year => with_year }
     end
   end

@@ -77,6 +77,21 @@
 
   }
 
+  &.indent {
+    .event-calendar {
+      @include grid-col-gap-dist("padding-left", 1, 1, "left")
+      .row {
+        a {
+          grid-template-columns: repeat(11, 1fr);    
+          .title-teacher {
+            grid-column: 7 / span 5;
+          }
+        }
+      }
+    }
+  }
+
+
   & + .archive-section {
     @include page-dist("padding-left", "left");
     @include page-dist("padding-right", "right");
@@ -91,5 +106,6 @@
       border-bottom-style: solid;
     }
   }
+
 
 }

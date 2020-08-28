@@ -17,11 +17,10 @@
   </div>
 
   
-  <% if content_module.images.count > 0 %>
-    <img class="image" src=<%= content_module.images[0].attachment.url(:large) %>>
+  <% if content_module.images.length > 0 %>
+    <img class="image" src="<%= content_module.images[0].attachment.url(:large) %>">
   <% end %>
 
-  
+
 
 </div>
-
