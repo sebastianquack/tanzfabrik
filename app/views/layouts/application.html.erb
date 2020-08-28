@@ -14,7 +14,7 @@
 </head>
 <%
   section = "schule"
-  section = @landing_page_menu_item if @landing_page_menu_item
+  #section = @landing_page_menu_item if @landing_page_menu_item
   section = @page.section if @page and @page.section
 %>
 <body data-menu-item-key="<%= @page ? section : "start" %>" data-section="<%= section %>">
