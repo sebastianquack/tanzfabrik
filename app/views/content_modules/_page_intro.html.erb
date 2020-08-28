@@ -1,5 +1,5 @@
 
-<div class="module__page_intro" <%= "data-no-images" if (content_module.images.empty? and content_module.parameter.empty?) %> data-section="<%= content_module.section %>">
+<div class="module__page_intro" <%= "data-no-images" if (content_module.images.empty? and !content_module.parameter) %> data-section="<%= content_module.section %>">
 
   <% if content_module.images.count > 0 %>
     <div class="grid_image">

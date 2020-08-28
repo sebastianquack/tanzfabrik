@@ -135,6 +135,7 @@ main.page {
   border-radius: 7px;
   padding: 4px 11px 4px 12px;
   position: relative;
+  white-space: nowrap;
 
   &:hover {
     background-color:currentColor;
