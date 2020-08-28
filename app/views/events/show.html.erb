@@ -25,9 +25,9 @@
         <% if @event.type.name == "Kurs" %>
           <span><%= get_text_item("tanklassen_level") %>:</span>
           <span><%= detail.tags.map { |t| t.short }.join('/') if detail.tags.length > 0 %></span><br>
-        <% end %>
-        <% if @event.price_regular %>
-          <span><%= @event.price_regular %>€ (<%= @event.price_reduced %>€)</span>
+          <% if @event.price_regular %>
+            <span><%= @event.price_regular %>€ (<%= @event.price_reduced %>€)</span>
+          <% end %>
         <% end %>
       </span>
     </div>
