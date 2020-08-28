@@ -10,7 +10,7 @@ task :create_example_page => :environment do
 
   $p = Page.create(
     title_de: "Module",
-    title_en: "Modules"
+    title_en: "Modules",
   )
 
   p=$p
@@ -578,6 +578,46 @@ make_module({
 #   headline_en: "Alle Highlights in unserem Newsletter!",
 # })
 
+
+# festival_logos / 
+
+image_attributes1 = {
+  headline_de: "Ein Projekt der Tanzfabrik Berlin",
+  headline_en: "links",
+  description: "logo",
+  link_href_de: "http://tanznachtberlin.de/",
+  link_href_en: "http://tanznachtberlin.de/", 
+}
+
+image_attributes2 = {
+  headline_de: "Gefördert durch",
+  headline_en: "mitte",
+  description: "logo", 
+  link_href_de: "http://tanznachtberlin.de/",
+  link_href_en: "http://tanznachtberlin.de/",   
+}
+
+image_attributes3 = {
+  headline_de: "Kooperationspartner",
+  headline_en: "rechts",
+  description: "logo",
+  link_href_de: "http://tanznachtberlin.de/",
+  link_href_en: "http://tanznachtberlin.de/",   
+}
+
+images = [
+  img_landscape.merge(image_attributes1),
+  img_square.merge(image_attributes2),
+  img_portrait.merge(image_attributes3),
+  img_landscape.merge(image_attributes3),
+  img_square.merge(image_attributes3),
+  img_landscape.merge(image_attributes3),
+]
+
+make_module({
+  module_type: "festival_logos",
+  section: "buehne",
+}, [images])
 
 # END
 
