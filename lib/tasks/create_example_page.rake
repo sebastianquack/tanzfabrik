@@ -174,8 +174,8 @@ make_module({
   section: "schule",
   headline_de: "Dance In\\tensive",
   headline_en: "Dance In\\tensive",
-  special_text_de: special_text,
-  special_text_en: special_text,
+  special_text_de: special_text.strip,
+  special_text_en: special_text.strip,
   rich_content_1_de: rich_content_1,
   rich_content_1_en: rich_content_1,
 }, img_landscape)
@@ -205,8 +205,8 @@ make_module({
   section: "schule",
   headline_de: "Kursplan",
   headline_en: "Kursplan",
-  special_text_de: special_text,
-  special_text_en: special_text,
+  special_text_de: special_text.strip,
+  special_text_en: special_text.strip,
   rich_content_1_de: rich_content_1,
   rich_content_1_en: rich_content_1,  
 })
@@ -312,7 +312,7 @@ make_module({
   section: "schule",
   headline_de: "Open Spaces",
   headline_en: "Open Spaces",
-  special_text_de: special_text,
+  special_text_de: special_text.strip,
   special_text_en: "",      
   rich_content_1_de: rich_content_1,
 }, img_landscape)
@@ -417,7 +417,7 @@ RICHCONTENT1
 make_module({
   module_type: "content_element_magazine",
   section: "buehne",
-  style_option: "center",
+  style_option: "centered",
   rich_content_1_de: rich_content_1,
   rich_content_1_en: rich_content_1,
 })
@@ -437,10 +437,14 @@ make_module({
   section: "buehne",
   headline_de: "Identifying a physical script",
   headline_en: "Identifying a physical script",
-  special_text_de: special_text,
+  special_text_de: special_text.strip,
   special_text_en: "",      
   rich_content_1_de: rich_content_1,
   rich_content_1_en: "",
+  link_title_de: "Tanznacht",
+  link_title_en: "Tanznacht",
+  link_href_de: "http://tanznachtberlin.de/",
+  link_href_en: "http://tanznachtberlin.de/",    
 }, img_landscape)
 
 ### reference / Unsere Tanzklassen
@@ -452,6 +456,10 @@ make_module({
   headline_en: "Unsere Tanzklassen",
   sub_de: "Anfänger bis Profi",
   sub_en: "Anfänger bis Profi",
+  link_title_de: "Tanznacht",
+  link_title_en: "Tanznacht",
+  link_href_de: "http://tanznachtberlin.de/",
+  link_href_en: "http://tanznachtberlin.de/",     
 }, img_landscape)
 
 ### reference / Tanznacht Berlin 2020
@@ -531,6 +539,15 @@ make_module({
   link_title_en: "Watch this",
   link_href_de: "http://tanznachtberlin.de/",
   link_href_en: "http://tanznachtberlin.de/",    
+})
+
+# today module
+
+make_module({
+  module_type: "today",
+  section: "schule",
+  headline_de: "Heute",
+  headline_en: "Today",
 })
 
 # END

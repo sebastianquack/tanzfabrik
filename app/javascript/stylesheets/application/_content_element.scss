@@ -27,7 +27,7 @@
   }
 
   h2 {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   h4{
@@ -41,7 +41,8 @@
   .special_text {
     @include font-stripes-infos;
     white-space: pre-line;
-    margin-bottom: 5px;
+    margin-top: -10px;
+    margin-bottom: 30px;
   }  
 
 }

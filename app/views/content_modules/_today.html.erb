@@ -1,45 +1,48 @@
 <% events_today = Event.where(type: 3).or(Event.where(type: 4)).select {|e| e.occurs_on? Date.today } %>
 
-<h2><%= content_module.headline %></h2>
+<div class="module__today">
 
-<h3><%= l(Date.today, :format => :short_day) %></h3>
+  <h2><%= content_module.headline %></h2>
 
-<% occurrences_today = [] %>
-<% events_today.each do |event| %>
-  <% occurrences_today.concat(event.occurrences_on(Date.today)) %>
-<% end %>
-<% occurrences_today.sort! { |a, b| a[0] <=> b[0] } %>
+  <h3><%= l(Date.today, :format => :short_day) %></h3>
 
-<ul>
+  <% occurrences_today = [] %>
+  <% events_today.each do |event| %>
+    <% occurrences_today.concat(event.occurrences_on(Date.today)) %>
+  <% end %>
+  <% occurrences_today.sort! { |a, b| a[0] <=> b[0] } %>
 
-<% occurrences_today.each do |oc| %>
-  <% occurrence = oc[0] %>
-  <% event_detail = oc[1] %>
-  <% event = event_detail.event %>
+  <ul class="event_list">
 
-  <li>
+  <% occurrences_today.each do |oc| %>
+    <% occurrence = oc[0] %>
+    <% event_detail = oc[1] %>
+    <% event = event_detail.event %>
 
-    <div>
-      <%= l(occurrence, :format => :hours_minutes) %>
-      –
-      <%= l(occurrence + event_detail.duration * 60, :format => :hours_minutes) %>
-    </div>
+    <li class="event">
 
-    <div>
-      <%= event.people[0].name if event.people.length > 0 %>
-    </div>
+      <div class="time">
+        <%= l(occurrence, :format => :hours_minutes) %>
+        –
+        <%= l(occurrence + event_detail.duration * 60, :format => :hours_minutes) %>
+      </div>
 
-    <div>
-      <%= event.type.name %>
-      <%= event_detail.studio.location.name %>
-    </div>
+      <div class="teacher">
+        <%= link_to(event.people[0].name) if event.people.length > 0 %>
+      </div>
 
-    <div>
-      <%= event.title %>
-    </div>
+      <div class="place">
+        <%= event.type.name %>
+        <%= event_detail.studio.location.name %>
+      </div>
 
-  </li>
+      <div class="title">
+        <%= event.title %>
+      </div>
 
-<% end %>
+    </li>
 
-</ul>
+  <% end %>
+
+  </ul>
+</div>

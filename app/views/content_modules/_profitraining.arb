@@ -52,10 +52,10 @@ div :class => "module__profitraining" do
 
   # show links for these years
   section :class => "archive-section" do
-    h2 t(:past_events), :class => "archive-headline"
+    h3 t(:past_events), :class => "archive-headline"
     ul :class => "archive-links" do
       years.keys.reverse.each do |y|
-        h3 y.year
+        h3 y.year, :class => "year"
         profitrainings = load_profitrainings(y.year)
         render_list_for(profitrainings)
       end

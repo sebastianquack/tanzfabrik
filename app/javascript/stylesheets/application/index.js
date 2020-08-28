@@ -22,9 +22,11 @@ import "./_slideshow.scss"
 import "./_studio.scss"
 import "./_page_intro_magazine.scss"
 import "./_content_element_magazine.scss"
-import "./_performance_projekte.scss"
+import "./_performance_projekte_profitraining.scss"
 import "./_festival_archiv.scss"
 import "./_festival_programm.scss"
+import "./_today.scss"
+import "./_video.scss"
 
 // dedicated views
 import "./start.scss"
