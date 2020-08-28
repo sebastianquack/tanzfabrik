@@ -44,16 +44,16 @@ def subscribe_form(className, mode, value, prompt)
 
 
       div :class => "row" do
-        input :type=>"submit", :value=>value
+        input :type=>"submit", :value=>value, :class=>"button", :title=>value
       end
 
     end
   end
 end
 
-div :class => "newsletter" do
+div :class => "module__newsletter" do
 
-  h1 content_module.headline
+  h3 content_module.headline
     
   if notice == "ok"
     newsletter_success = TextItem.where(:name => "NewsletterErfolg").first

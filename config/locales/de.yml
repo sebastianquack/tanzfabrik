@@ -157,6 +157,7 @@ de:
     - Samstag
     formats:
       weekday: "%A"
+      weekday_short: "%a"
       month: "%B"
       month_year: "%B %Y"
       day: '%d.%m.%Y'

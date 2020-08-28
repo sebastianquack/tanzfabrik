@@ -165,6 +165,7 @@ en:
     - Sat 
     formats:
       weekday: "%A"
+      weekday_short: "%a"
       month: "%B"
       day: '%d.%m.%Y'
       default: ! '%d.%m.%Y'

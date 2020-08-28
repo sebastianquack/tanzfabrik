@@ -1,21 +1,23 @@
 
 <% sections = content_module.images.group_by { |i| i.headline } %>
 
-<% sections.keys.each do |key| %>
+<aside class="module__festival_logos">
+  <% sections.keys.each do |key| %>
 
-  <div>
-  <h2><%= key %></h2>
+  <section class="section">
 
-  <% sections[key].each do |image| %>
-    <% if image.link_href %>
-      <a href="<%= image.link_href%>">
-    <% end %>
-      <img alt="<%= image.description %>" src="<%= image.attachment.url(:thumb) %>">
-    <% if image.link_href %>
-      </a>
-    <% end %>
+    <h6 class="headline"><%= key %></h6>
+
+      <% sections[key].each do |image| %>
+        <% if image.link_href %>
+          <a class="logo" href="<%= image.link_href%>" title="<%= image.description %>">
+        <% end %>
+          <img alt="<%= image.description %>" src="<%= image.attachment.url(:medium) %>">
+        <% if image.link_href %>
+          </a>
+        <% end %>
+      <% end %>
+
+  </section>
   <% end %>
-
-  </div>
-  
-<% end %>
+</aside>
