@@ -64,6 +64,9 @@ gem "active_admin-sortable_tree", "~> 2.1.0"
 # webpack
 gem "webpacker", "~> 5.1"
 
+# embed svg files
+gem 'inline_svg'
+
 group :production do
 	gem 'rails_12factor'
   #gem 'heroku_rails_deflate' # enables gzip compression

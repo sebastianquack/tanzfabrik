@@ -172,6 +172,9 @@ GEM
       has_scope (~> 0.6)
       railties (>= 5.0, < 6.1)
       responders (>= 2, < 4)
+    inline_svg (1.7.1)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     ipaddress (0.8.3)
     jmespath (1.4.0)
     jquery-rails (4.4.0)
@@ -374,6 +377,7 @@ DEPENDENCIES
   groupdate (>= 4)
   htmlentities
   ice_cube
+  inline_svg
   kt-paperclip (~> 6.2)
   letter_opener
   listen

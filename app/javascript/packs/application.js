@@ -36,7 +36,9 @@ application.load(definitionsFromContext(context))
 require("trix")
 require("@rails/actiontext")
 
-
+// enable assets for webpacker
+require.context('../svgs', true)
+require.context('../images', true)
 
 /*********************************/
 
