@@ -25,26 +25,28 @@ task :create_example_page => :environment do
   img_landscape = {
     description: "description description description",
     license: "licence licence licence",
-    attachment: File.open(Rails.public_path.join('seeds', 'landscape.png')),
+    attachment: File.open(Rails.root.join('lib', 'seeds', 'landscape.png')),
   }
 
   img_portrait = {
     description: "description description description",
     license: "licence licence licence",
-    attachment: File.open(Rails.public_path.join('seeds', 'portrait.png'))
+    attachment: File.open(Rails.root.join('lib', 'seeds', 'portrait.png'))
   }
 
   img_square = {
     description: "description description description",
     license: "licence licence licence",
-    attachment: File.open(Rails.public_path.join('seeds', 'square.png'))
+    attachment: File.open(Rails.root.join('lib', 'seeds', 'square.png'))
   }  
+
+  #File.open("tmp/tmp.pdf", "w") {|f| f.write("write your stuff here") }
 
   pdf = {
     description_de: "Beispiel PDF",
     description_en: "Example PDF",
-    attachment_de: File.open(Rails.public_path.join('seeds', 'testPDF')),
-    attachment_en: File.open(Rails.public_path.join('seeds', 'testPDF'))
+    attachment_de: File.open(Rails.root.join('lib', 'seeds', 'test-PDF.pdf')),
+    attachment_en: File.open(Rails.root.join('lib', 'seeds', 'test-PDF.pdf'))
   }
 
   def make_module(attributes_hash, images=nil, download=nil)
