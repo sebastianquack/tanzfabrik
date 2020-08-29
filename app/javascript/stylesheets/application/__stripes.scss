@@ -52,19 +52,19 @@
 
 span[data-logo] {
   &:before {
-    content: url("/images/Tanzfabrik_Signet-red.svg");
+    content: url("~svgs/Tanzfabrik_Signet-red.svg");
     .module__feature[data-section="buehne"] &,
     body.featured_visible .horizontal_bar_container & {
-      content: url("/images/Tanzfabrik_Signet-white.svg");  
+      content: url("~svgs/Tanzfabrik_Signet-white.svg");  
     }        
     display: block;
     width: $logo-width;
     height: $logo-height;
     [data-section="buehne"] & {
-      content: url("/images/Tanzfabrik_Signet-black.svg");
+      content: url("~svgs/Tanzfabrik_Signet-black.svg");
     }
     [data-section="festival"] & {
-      content: url("/images/Tanzfabrik_Signet-green.svg");
+      content: url("~svgs/Tanzfabrik_Signet-green.svg");
     }        
   }
 }
@@ -72,13 +72,13 @@ span[data-logo] {
 span[data-close] {
   cursor: pointer;
   &:before {
-    content: url("/images/TAFA20/TAFA20-Webseite_x_red.svg");
+    content: url("~svgs/TAFA20-Webseite_x_red.svg");
 
     display: block;
     width: $logo-width;
     height: $logo-height;
     [data-section="buehne"] & {
-      content: url("/images/TAFA20/TAFA20-Webseite_x_black.svg");
+      content: url("~svgs/TAFA20-Webseite_x_black.svg");
     }
   }
 }

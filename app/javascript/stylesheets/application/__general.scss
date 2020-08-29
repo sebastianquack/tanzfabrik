@@ -152,12 +152,12 @@ main.page {
 
 .downloads .button.pdf {
   padding-left: 2.4em;
-  background-image: url("/images/PDF-Icon-black.svg");
+  background-image: url("~svgs/PDF-Icon-black.svg");
   background-repeat: no-repeat;
   background-position: -1em 50%;
   background-size: 4em;
   &:hover {
-    background-image: url("/images/PDF-Icon-white.svg") !important;
+    background-image: url("~svgs/PDF-Icon-white.svg") !important;
       &:after {
       left: calc(2.4em);
     }
@@ -165,5 +165,5 @@ main.page {
 }
 
 [data-section="schule"] .downloads .button.pdf {
-  background-image: url("/images/PDF-Icon-red.svg");
+  background-image: url("~svgs/PDF-Icon-red.svg");
 }
