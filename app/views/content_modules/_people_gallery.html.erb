@@ -1,4 +1,4 @@
-<div class="module__people_gallery" data-section="<%= content_module.section %>">
+<div class="module__people_gallery" data-section="<%= content_module.section %>" data-style-option="<%= content_module.style_option %>">
 
   <% if content_module.headline %>
     <h1>
@@ -27,6 +27,6 @@
     people = people.sort_by(&:last_name)
   %>
 
-  <%= render :partial => "/people/list", :locals => {:people => people} %>
+  <%= render :partial => "/people/list", :locals => {:people => people, :style_option => content_module.style_option} %>
 
 </div>

@@ -43,11 +43,26 @@
         }
       }    
 
-      .info, .info a {
+      .info {
         @include font-title;
-        hypens: auto;
+        hyphens: auto;
       }
 
     }
   }
+
+  &[data-style-option="large"] {
+    .people_list {
+      li {
+        width: calc( ( 100% - ( 2 * 18px ) ) / 3 );
+        &:nth-child(5n+5) { margin-right: 18px; }
+        &:nth-child(3n+3) { margin-right: 0; }
+      }
+      .rich_text_1 {
+        margin-top:4px;
+        @include font-fliesstext-m;
+      }
+    }
+  }
+
 }
