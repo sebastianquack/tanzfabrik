@@ -41,12 +41,17 @@ task :create_example_page => :environment do
   }  
 
   #File.open("tmp/tmp.pdf", "w") {|f| f.write("write your stuff here") }
+  pdfPath = Rails.root.join('lib', 'seeds', 'test-PDF.pdf')
+  pdfFile = nil 
+  if File.exist?(pdfPath)
+    pdfFile = File.open(pdfPath)
+  end
 
   pdf = {
     description_de: "Beispiel PDF",
     description_en: "Example PDF",
-    attachment_de: File.open(Rails.root.join('lib', 'seeds', 'test-PDF.pdf')),
-    attachment_en: File.open(Rails.root.join('lib', 'seeds', 'test-PDF.pdf'))
+    attachment_de: pdfFile,
+    attachment_en: pdfFile,
   }
 
   def make_module(attributes_hash, images=nil, download=nil)
