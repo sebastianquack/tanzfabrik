@@ -319,6 +319,10 @@
   }
 }
 
+@mixin grid-gap {
+  @include grid-gap-dist("grid-gap", 1);
+}
+
 // creates an attribute with value that sums up 
 //   $multiplyCol amount of column widths
 // + $multiplyGap amount of gap widths 

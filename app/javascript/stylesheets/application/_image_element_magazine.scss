@@ -1,0 +1,30 @@
+@import "./__mixins.scss";
+
+.module__image_element_magazine {
+  @include grid-col-gap-dist("padding-left", 0, 0, "left");
+  @include grid-col-gap-dist("padding-right", 0, 0, "right");
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto;
+  @include grid-gap;
+
+  .headline {
+    grid-column: 7 / span 6;
+    grid-row: 1;
+  }
+
+  .image {
+    grid-column: 2 / span 5;
+    grid-row: 2;
+    width: 100%;
+    height: auto;
+    max-height: 65vh;
+  }
+
+  .text {
+    grid-column: 7 / span 6;
+    grid-row: 2;
+    @include font-fliesstext-m;
+  }
+}
