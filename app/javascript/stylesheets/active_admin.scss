@@ -103,9 +103,10 @@ button[data-trix-action="increaseNestingLevel"] {
   display: none;
 }
 
+// embedded preview
 .embedded_preview_container {
-  $preview_width: 400px;
-  $preview_height: 200px;
+  $preview_width: 300px;
+  $preview_height: 150px;
   $preview_scale: 0.33333;
 
   background-color: white;
@@ -136,6 +137,14 @@ button[data-trix-action="increaseNestingLevel"] {
     transform-origin: 0 0;
     overflow: hidden;
     width: 1 / $preview_scale * $preview_width;
+  }
+}
+
+// page index module list entry
+.page_index_module {
+  .page_index_module, .embedded_preview_container {
+    float: left;
+    margin-right: 24px;
   }
 }
 

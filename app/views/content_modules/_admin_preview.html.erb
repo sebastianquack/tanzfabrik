@@ -1,7 +1,19 @@
 <% url = edit_admin_content_module_url(cm.id) if cm.id? %>
 
-<li>
-  <div>
+<li class="page_index_module">
+
+  <% if url %>
+    <div class="embedded_preview_container">
+      <div class="embedded_preview_small">
+        <%= render :partial => "/content_modules/index", locals: {content_module: cm, preview: true} %>
+      </div>
+      <a href=<%=url%> class="embedded_preview_link" ></a>
+    </div>
+  <% else %>
+    <span>Die Seite muss erst gespeichert werden, bevor das Modul bearbeitet werden kann!</span>
+  <% end %>
+
+  <div class="page_index_module_info">
     <b style="font-size: 120%;"><%= t("content_modules.module_types." + cm.module_type.to_s) %></b><br>
     <% if cm.parameter && cm.parameter != "" %> 
       Auswahl: <%= cm.parameter %><br>
@@ -13,20 +25,8 @@
       <% end %>
       <br>
     <% end %>
-  </div>
-  <br>
-  <% if url %>
-
-  <div class="embedded_preview_container">
-    <div class="embedded_preview_small">
-      <%= render :partial => "/content_modules/index", locals: {content_module: cm, preview: true} %>
-    </div>
-    <a href=<%=url%> class="embedded_preview_link" ></a>
+    <br>
+    <%= link_to "Modul bearbeiten", url if url %>
   </div>
 
-    <%= link_to "Modul bearbeiten", url %>
-
-  <% else %>
-    <span>Die Seite muss erst gespeichert werden, bevor das Modul bearbeitet werden kann!</span>
-  <% end %>
 </li>
