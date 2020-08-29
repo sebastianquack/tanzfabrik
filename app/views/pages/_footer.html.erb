@@ -26,20 +26,25 @@
   <div class="stripes_vertical stripes_right">
     <% if vimeo %>
       <span data-text>
-        <a href="<%= vimeo %>">[vimeo]</a>
-        <%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_VIMEO_red.svg") %>
+        <a href="<%= vimeo %>">
+          <%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_VIMEO_red.svg") %>
+        </a>
       </span> 
     <% end %>    
 
      <% if instagram %>
        <span data-text>
-        <a href="<%= instagram %>">[instagram]</a>
+        <a href="<%= instagram %>">
+          <%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_IG_red.svg") %>
+        </a>
       </span>
     <% end %>
     
     <% if facebook %>
       <span data-text>
-        <a href="<%= facebook %>">[facebook]</a>
+        <a href="<%= facebook %>">
+          <%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_FB_red.svg") %>
+        </a>
       </span>
     <% end %>      
   </div>
