@@ -15,25 +15,26 @@ Tanzfabrik::Application.routes.draw do
   get '/en/tanzklassen-weekend-special-gaga', to: redirect('/en/tanzklassen-weekend-special')
   get '/de/tanzklassen-weekend-special-gaga', to: redirect('/de/tanzklassen-weekend-special')
 
-  scope "/:locale", constraint: { locale: /en|de/ } do
-    
-    get 'festivals/tanznacht-forum', to: redirect('%{locale}/festivals/tanznacht-forum-2017')
-    
-    get 'programm/:year' => 'pages#show', :id => 'programm', :year => /\d{4}/ 
-    get 'workshop_programm/:year' => 'pages#show', :id => 'workshop_programm', :year => '%{year}' 
-    get 'performance_projekte/:year' => 'pages#show', :id => 'performance_projekte', :year => '%{year}' 
+  scope "/:locale" do
+    constraints(locale: /en|de/) do
+      get 'festivals/tanznacht-forum', to: redirect('%{locale}/festivals/tanznacht-forum-2017')
+      
+      get 'programm/:year' => 'pages#show', :id => 'programm', :year => /\d{4}/ 
+      get 'workshop_programm/:year' => 'pages#show', :id => 'workshop_programm', :year => '%{year}' 
+      get 'performance_projekte/:year' => 'pages#show', :id => 'performance_projekte', :year => '%{year}' 
 
-    resources :events, :only => [:show, :index, :update]
-    get "events/:id/:time" => 'events#show'
+      resources :events, :only => [:show, :index, :update]
+      get "events/:id/:time" => 'events#show'
 
-    get "festivals/:festival_id/events/:id" => 'events#show'
-    get "festivals/:festival_id/events/:id/:time" => 'events#show'
+      get "festivals/:festival_id/events/:id" => 'events#show'
+      get "festivals/:festival_id/events/:id/:time" => 'events#show'
 
-    resources :people, :only => [:show, :update]
-    resources :festivals, :only => [:show, :update]
-    resources :pages, :only => [:show, :update], :path => '' # route everything to pages controller
-    resources :registrations, :only => [:create]
-    resources :subscriptions, :only => [:create]
+      resources :people, :only => [:show, :update]
+      resources :festivals, :only => [:show, :update]
+      resources :pages, :only => [:show, :update], :path => '' # route everything to pages controller
+      resources :registrations, :only => [:create]
+      resources :subscriptions, :only => [:create]
+    end
   end
   
   #resources :pages, :only => [:update]
