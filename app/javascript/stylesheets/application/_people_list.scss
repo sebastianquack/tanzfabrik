@@ -45,6 +45,7 @@
 
       .info, .info a {
         @include font-title;
+        hypens: auto;
       }
 
     }
