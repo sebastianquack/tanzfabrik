@@ -1,8 +1,7 @@
 @import "./__mixins.scss";
 
 #main_nav + .module__feature {
-  top: - $header-height - $menu-height - $page-top-padding;
-  margin-bottom: 150px - $header-height - $menu-height - $page-top-padding;
+  margin-top: - $header-height - $menu-height - $page-top-padding;
 }
 
 .end_of_module__feature {
