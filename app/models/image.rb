@@ -1,4 +1,6 @@
 class Image < ActiveRecord::Base  
+  include ModelHelpers
+
   has_attached_file :attachment,
     :styles => { 
       :background => "1000x1000>", 
@@ -24,6 +26,13 @@ class Image < ActiveRecord::Base
     'image/jpg', 'image/png', 'image/gif'], :message => "Erlaubte Bildformate: JPG, GIF, PNG."
 
   #validates_presence_of :description
+
+  before_validation :clean_link
+
+  private def clean_link
+    self.link_href_en = ModelHelpers.strip_domain_from_link self.link_href_en.to_s
+    self.link_href_de = ModelHelpers.strip_domain_from_link self.link_href_de.to_s
+  end
 
   has_rich_text :rich_content_1_de
   has_rich_text :rich_content_1_en

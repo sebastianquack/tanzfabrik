@@ -34,5 +34,14 @@ module Tanzfabrik
 
     config.active_record.belongs_to_required_by_default = false
 
+    config.eager_load_paths += %W(#{config.root}/lib)
+
+    # enter TLDs to remove
+    config.domains_to_remove_from_links = [
+      "herokuapp.com",
+      "tanzfabrik-berlin.de",
+      "localhost:3000"
+    ]
+
   end
 end

@@ -1,5 +1,6 @@
 class ContentModule < ActiveRecord::Base
-  
+  include ModelHelpers
+
   belongs_to :page
 
   has_rich_text :rich_content_1_de
@@ -15,7 +16,13 @@ class ContentModule < ActiveRecord::Base
   
   has_many :downloads
   accepts_nested_attributes_for :downloads, :allow_destroy => true
-  
+
+  before_validation :clean_link
+
+  private def clean_link
+    self.link_href_en = ModelHelpers.strip_domain_from_link self.link_href_en.to_s
+    self.link_href_de = ModelHelpers.strip_domain_from_link self.link_href_de.to_s
+  end
   
   scope :no_draft, -> { where("content_modules.draft = ? OR content_modules.draft IS NULL", false) }
 
