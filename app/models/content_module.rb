@@ -26,4 +26,16 @@ class ContentModule < ActiveRecord::Base
     self.headline.gsub("\\", "&shy;")
   end
 
+  def process_rich_text rtxt
+    rtxt.to_s.gsub(/<h4>↪ /, "<h4>↪" + [160].pack('U*')).html_safe # 160 is the ASCII character code of a non-breaking space
+  end
+
+  def rich_content_1_processed
+    process_rich_text self.rich_content_1
+  end
+
+  def rich_content_2_processed
+    process_rich_text self.rich_content_2
+  end
+
 end
