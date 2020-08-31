@@ -330,11 +330,14 @@ de:
       default: ! '%A, %d. %B %Y, %H:%M Uhr'
       long: ! '%A, %d. %B %Y, %H:%M Uhr'
       short: ! '%d. %B, %H:%M Uhr'
-      short_day: '%A, %d.%m.'     
+      short_day: '%A, %d.%m.'
+      weekday: '%A'
       timetable: '%a, %d.%m.%Y'
       day: '%d.%m.%Y'
       day_month: '%d.%m.'
       day_month_year: '%d.%m.%y'
+      time_tag_datetime: '%Y-%m-%d %H:%M'
+      time_tag_datetime_hours_minutes: '%H:%M'
     pm: nachmittags
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   

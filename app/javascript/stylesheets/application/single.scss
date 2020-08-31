@@ -49,12 +49,27 @@
       figure, img {
         width: 100%;
       }
-      .button {
-        position: absolute;
-        margin-bottom: 1em;
-        @include page-dist("bottom", "bottom");
-      }
     }
+
+    .signup {
+      @include font-fliesstext-s;
+      grid-column: 9 / span 3;
+      grid-row: 1;
+      @include page-dist("bottom", "bottom");
+      position: absolute;
+      width: 100%;
+      text-align: left;
+      .button {
+        margin-bottom: 2em;
+      }
+      .button + * {
+        margin-top: -1em;
+        //position: relative;
+        //left: 50%;
+        //transform: translateX(-50%);
+      }
+    }    
+
 
     .stripes_right {
       grid-column: 12 / span 1;
@@ -73,12 +88,46 @@
 
     @include font-fliesstext-m;
 
-    h4:before {
-      content: "↪\a0";
+    h4 {
+      margin-bottom: 4px;
+      &:before {
+        content: "↪\a0";
+      }
     }
 
     > * {
       margin-bottom: 24px;
+    }
+
+    .trix-content {
+      p + p > small:first-child { // this is a vintage case in imported data
+        display: block;
+        padding-top: 1em;
+      }
+    }
+
+    .moments {
+      @include font-stripes-infos;
+      border-style: solid;
+      border-width: 1px 0 1px 0;
+      padding: 12px 0 12px 0;
+      // @include grid-col-gap-dist("padding-left", 1,1);
+
+      display: grid;
+      grid-template-areas: "a a a";
+      grid-auto-columns: min-content;
+      grid-column-gap: 1em;
+
+      li, time {
+        display: contents;
+        span {
+          white-space: nowrap;
+          &:first-child {
+            padding-right: 1em;
+          }
+        }
+      }
+
     }
 
     .events li {
@@ -92,5 +141,28 @@
         margin-top: 6px;
       }
     }
+
+    .image {
+      position: absolute;
+      width: 100%;
+      //background: red;
+      left:0;
+      right:0;
+      @include grid-col-gap-dist("padding-right", 1,1,"right");
+      @include grid-col-gap-dist("padding-left", 8,7, "left");
+      box-sizing: border-box;
+      top: 50vh;
+      transform: translateY(-50%);
+
+
+      grid-column: 9 / span 3;
+      grid-row: 1;
+      margin: auto; // center
+      figure, img {
+        width: 100%;
+        @include font-fliesstext-s;
+      }
+    }
+
   }  
 }

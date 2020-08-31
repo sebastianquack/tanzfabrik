@@ -8,15 +8,16 @@ event.event_details.each do |ed|
   end
 end
 
-ul :class => "times-places moments" do
+ul :class => "moments" do
   occurrences.sort_by{ |oc| oc[0] }.each do |occurrence, ed|
-    li :class => "time-place moment" do
-      div :class => "time-moment" do
-        time do 
-          span l occurrence, :format => :timetable
-          span l occurrence, :format => :hours_minutes
-          text_node "-"
-          span l (occurrence + ed.duration * 60), :format => :hours_minutes
+    li :class => "moment" do
+      time :datetime => (l occurrence, :format => :time_tag_datetime) do 
+        span l occurrence, :format => :weekday
+        span l occurrence, :format => :day
+        span do 
+          text_node l occurrence, :format => :hours_minutes
+          text_node "–"
+          text_node l (occurrence + ed.duration * 60), :format => :hours_minutes
         end
       end
       #span :class => "place" do
