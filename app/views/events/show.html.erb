@@ -1,4 +1,4 @@
-<div class="single-event-page">
+<div class="single-event-page" data-section="<%= @event.stage_event? ? "buehne" : "schule" %>">
 
   <% detail = @event.event_details.first %>
 
