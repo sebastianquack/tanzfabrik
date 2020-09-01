@@ -1,0 +1,14 @@
+@import "./__mixins.scss";
+
+.module__submenu_divider {
+  height: 0px;
+  width: 100%;
+  // border: solid 1px green;
+  background: blue;
+  position: relative;
+  bottom: $header-height + $menu-height + $page-top-padding;
+}
+
+html {
+  scroll-behavior: smooth;
+}

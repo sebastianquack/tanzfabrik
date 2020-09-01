@@ -1,16 +1,19 @@
-<% 
-  dividers = @page.content_modules.submenu_dividers
-%>
+<% dividers = @page.content_modules.submenu_dividers %>
 
 <% if dividers.length > 0 %>
 
-side menu: 
-<ul>
-<% for cm in dividers %>
-
-  <li><a href="#<%= cm.parameter %>"><%= cm.headline %></a></li>
-
-<% end %>
-</ul>
+  <ul class="side_menu">
+  
+    <% for cm in dividers %>
+  
+      <li>
+        <a href="#<%= cm.parameter %>">
+          <%= cm.headline %>
+        </a>
+      </li>
+  
+    <% end %>
+  
+  </ul>
 
 <% end %>

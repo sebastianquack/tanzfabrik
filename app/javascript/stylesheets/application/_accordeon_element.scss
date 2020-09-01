@@ -14,7 +14,7 @@
    **/
 
   details.drawer {
-      @include page-dist("margin-left", "left");
+      @include grid-col-gap-dist("margin-left", 1,1,"left");
       @include page-dist("margin-right", "right");
 
       summary::marker {

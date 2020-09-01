@@ -31,8 +31,10 @@ import "./_today.scss"
 import "./_video.scss"
 import "./_accordeon_element.scss"
 import "./_image_element_magazine.scss"
+import "./_submenu_divider.scss"
 
 // dedicated views
 import "./start.scss"
 import "./single.scss"
 import "./footer.scss"
+import "./side_menu.scss"

@@ -1,0 +1,15 @@
+@import "./__mixins.scss";
+
+.side_menu {
+  position: fixed;
+  @include page-dist("left", "left");
+  top: 50%;
+  transform: translateY(-50%);
+  @include font-stripes;
+}
+
+[class^=module]:first-of-type {
+  .grid_image img {
+    position: relative;
+  }
+}
