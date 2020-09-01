@@ -70,7 +70,7 @@
           caption = @event.people.first.images.first.license
         %>
        <% else %>
-        <%  imageSrc = @event.images.first.attachment.url(:medium_detail_column) if @event.no_logo_images.first
+        <%  imageSrc = @event.no_logo_images.first.attachment.url(:medium_detail_column) if @event.no_logo_images.first
           caption = @event.no_logo_images.first.license if @event.no_logo_images.first %>
       <% end %>
       <% if imageSrc %>
