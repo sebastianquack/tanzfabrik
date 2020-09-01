@@ -186,20 +186,12 @@ div :class => "timetable-container" do
                       end
 
                       # title
-                      if detail.event.type_id == 5 # performance-projekt -> link to event page
-                        div :class => "title-description" do
-                          h6 :class => "title" do
-                            a detail.event.title.html_safe, :href => event_path(detail.event) if detail.event.title
-                          end
-                        end
-                      else 
-                        div :class => "title-description open-close", "data-open-close-group" => "timetable" do
-                          h6 :class => "title close-others" + (detail.event.description ? " open-trigger" : "") do
-                            a detail.event.title.html_safe, :href =>event_path(detail.event) if detail.event.title
-                          end
+                      
+                      div :class => "title-description" do
+                        h6 :class => "title" do
+                          a detail.event.title.html_safe, :href => event_path(detail.event) if detail.event.title
                         end
                       end
-
                       
                       # teacher 1
                       div :class => "teacher" do
