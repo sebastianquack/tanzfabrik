@@ -46,6 +46,15 @@
     .title {
       @include font-title;
       grid-column: 7 / span 6;
+      .title-link {
+        padding-right: 0.5ex;
+      }
+      .tickets-icon {
+        position: relative;
+        height: 1.2em;
+        bottom: -0.15em;
+        @include font-title;
+      }
     }
   }
 

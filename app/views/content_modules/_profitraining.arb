@@ -18,7 +18,7 @@ def render_list_for(profitrainings)
   ul :class => "project_list" do
     profitrainings.each do |event_detail| 
       li do
-        a :class => "project", :href => event_path(event_detail.event) do 
+        div :class => "project" do 
           
           div :class => "time-duration" do
             span l event_detail.starttime, :format => :day_month
@@ -33,7 +33,12 @@ def render_list_for(profitrainings)
           end
 
           div event_detail.event.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
-          div event_detail.event.title, :class => "title"
+          div :class => "title" do
+            a event_detail.event.title, :href => event_path(event_detail.event), :class => "title-link"
+            if !event_detail.event.signup_url.empty?
+              a inline_svg_pack_tag("media/svgs/TAFA20-Webseite_Ticket_red.svg", class: "tickets-icon"), title: get_text_item("tanzklassen_anmeldung"), href: event_detail.event.signup_url, target: "_blank"
+            end            
+          end
           
         end
       end
