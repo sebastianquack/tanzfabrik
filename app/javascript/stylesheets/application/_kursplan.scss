@@ -78,6 +78,13 @@
             @include font-title;
           }
 
+          .tickets-icon {
+            height: 1.5em;
+            padding-top: 0.3em;
+            display: block;
+            @include font-title;
+          }
+
           .teacher, .studio {
             @include font-tanzklassen;
           }
