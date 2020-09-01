@@ -49,6 +49,10 @@
             @include font-subtitle;
             display: block;
           }
+          .in-festival {
+            @include font-stripes;
+            margin-bottom: 0.1em;
+          }
         }
 
         .type-location {

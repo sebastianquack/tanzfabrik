@@ -1,3 +1,7 @@
+#########################################################
+#### PROBABLY DEPRECATED AND NOT IN USE ANYMORE #########
+#########################################################
+
 # local variable workshops: collection of workshop type events 
 # local variable combinations: enable "workshop-kombinationen"
 
@@ -21,7 +25,6 @@ if workshop_groups.length > 0
   #puts events_by_dates
 
   ul :class => "workshops" do
-    
     prev_festival = nil
     prev_month = nil
     workshop_groups.each do |dates, events|

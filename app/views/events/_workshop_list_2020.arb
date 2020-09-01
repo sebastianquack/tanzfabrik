@@ -23,13 +23,15 @@
           end
           
           div event_detail.event.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
-          div event_detail.event.title, :class => "title"
 
           # hide festival reference in festival program
-          unless defined? in_festival 
-            span :class => "festival" do
-              render :partial => "events/in_festival", :locals => {:event => event_detail.event, :link => false }
+          div :class => "festival-title" do
+            unless defined? in_festival 
+              div :class => "festival" do
+                render :partial => "events/in_festival", :locals => {:event => event_detail.event, :link => false }
+              end
             end
+            div event_detail.event.title, :class => "title"
           end
           
         end

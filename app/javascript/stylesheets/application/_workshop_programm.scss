@@ -21,8 +21,8 @@
   .project {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 1fr;
-    @include grid-gap-dist("grid-gap");
+    grid-template-rows: auto auto;
+    @include grid-gap-dist("grid-column-gap");
     align-items: center;
 
     .date {
@@ -40,13 +40,15 @@
       grid-column: 5 / span 2;
     }
 
-    .title {
-      @include font-title;
+    .festival-title {
       grid-column: 7 / span 6;
-    }
+      .title {
+          @include font-title;
+        }
 
-    .festival {
-      grid-column: 1 / span 3;
+      .festival {
+        @include font-stripes;
+      }
     }
   }
 

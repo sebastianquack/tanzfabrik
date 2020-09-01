@@ -24,7 +24,7 @@ div :class => "module__festival_programm" do
   if festival_workshops.length > 0
     h2 t(:festival_workshops)
     div :class => "module__workshop_programm indent" do
-      render :partial => "content_modules/workshop_list_2020", :locals => {:workshops => workshops_details, :in_festival => true}
+      render :partial => "events/workshop_list_2020", :locals => {:workshops => workshops_details, :in_festival => true}
     end
   end
 

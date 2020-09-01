@@ -45,14 +45,16 @@ ol :class => "event-calendar" do
         a :href => occurrence_path(event, time, in_festival) do 
           
           span :class => "title-teacher" do 
-            span event.title, :class => "title"
 
-            span event.people_sorted.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
             if !in_festival
               aside class: "in-festival" do
                 render :partial => "events/in_festival", :locals => {:event => event, :link => false }
               end            
-            end     
+            end
+
+            span event.title, :class => "title"
+
+            span event.people_sorted.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
           end
                    
           time(:class => "date") do
