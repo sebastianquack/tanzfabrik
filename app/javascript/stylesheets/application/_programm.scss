@@ -101,13 +101,18 @@
     @include page-dist("padding-right", "right");
     margin-bottom: 50px;
 
+    .archive-headline {
+      @include font-h3;
+    }
+
     * {
       @include font-title;
     }
+    
     .archive-headline, .archive-links li {
       padding: 12px 0;
-      border-bottom-width: 1px;
-      border-bottom-style: solid;
+      // border-bottom-width: 1px;
+      // border-bottom-style: solid;
     }
   }
 
