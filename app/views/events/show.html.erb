@@ -39,7 +39,7 @@
     <!-- tell tf team we can now use warning and signup_url separately  -->
 
     <div class="signup">  
-      <% if !@event.signup_url.empty? %>
+      <% if @event.signup_url and !@event.signup_url.empty? %>
         <a class="button" title="<%= get_text_item("tanzklassen_anmeldung") %>" href="<%= @event.signup_url %>">
           <%= get_text_item("tanzklassen_anmeldung") %>
         </a>

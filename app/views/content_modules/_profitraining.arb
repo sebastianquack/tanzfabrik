@@ -35,7 +35,7 @@ def render_list_for(profitrainings)
           div event_detail.event.people.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
           div :class => "title" do
             a event_detail.event.title, :href => event_path(event_detail.event), :class => "title-link"
-            if !event_detail.event.signup_url.empty?
+            if event_detail.event.signup_url  and !event_detail.event.signup_url.empty?
               a inline_svg_pack_tag("media/svgs/TAFA20-Webseite_Ticket_red.svg", class: "tickets-icon"), title: get_text_item("tanzklassen_anmeldung"), href: event_detail.event.signup_url, target: "_blank"
             end            
           end
