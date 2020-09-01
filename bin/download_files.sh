@@ -16,7 +16,7 @@ echo -n "Enter production ($SOURCE_KEY) secret for read source files: "
 read SOURCE_SECRET
 
 # run 
-echo "NOTE: local minio must be initialized by minio-mc-init"
+echo "NOTE: local minio must have been be initialized by minio-mc-init prior to using this script"
 docker-compose up -d minio
 
 # mirror
