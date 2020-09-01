@@ -2,8 +2,11 @@
 
 .module__accordeon_element {
 
+  $margin-bottom: 100px;
+
+  margin-bottom: $margin-bottom;
   + .module__accordeon_element {
-    margin-top: -150px;
+    margin-top: -$margin-bottom;
   } 
   
   /**
@@ -13,10 +16,6 @@
   details.drawer {
       @include page-dist("margin-left", "left");
       @include page-dist("margin-right", "right");
-
-      * {
-        @include font-title;
-      }
 
       summary::marker {
         color: transparent;
@@ -31,6 +30,7 @@
       }
 
       summary {
+        @include font-title;
         cursor: pointer;
         outline: none;
         background: transparent url("~svgs/TAFA20-Webseite_Pfeil-unten_red.svg") no-repeat 100% 50%;
@@ -54,6 +54,7 @@
         transition: all 1s;
         user-select: none;
       }
+
       &[open] summary + ol, &[open] summary + ul {
       }    
 
@@ -64,7 +65,9 @@
       }
 
       .content {
-        margin-bottom: 50px;
+        @include font-fliesstext-l;
+        padding-top: 12px;
+        padding-bottom: 50px;
       }    
   }
 
