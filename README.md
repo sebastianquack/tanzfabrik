@@ -123,3 +123,12 @@ brew install dip
   - `dip rake create_example_page`
   - `dip rake db:migrate`
   - `dip rails c`
+
+## optimize svg for inline
+
+this must be done once for new SVGs to strip global style definitions into inline styles
+
+````
+cd app/javascript/svgs
+npx svgo *.svg
+````
