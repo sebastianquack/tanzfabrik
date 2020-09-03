@@ -1,0 +1,80 @@
+@import "./__mixins.scss";
+
+body:not([data-menu-item-key="start"]) 
+{ 
+  &.featured_visible #main_nav {
+    background-color: transparent;
+  }
+
+  &.featured_visible[data-section="buehne"] #main_nav {
+    color: white;
+  }
+
+  #main_nav {
+
+  position: fixed;
+  top: $header-height;
+  z-index: 12;
+  background-color: white;
+
+  overflow: hidden;
+
+  max-height: $menu-height;
+  box-sizing: border-box;
+  &:hover {
+    max-height: 100vh;
+  }
+  transition: max-height 0.3s, background-color 0.2s;
+
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  @include page-dist("padding-left", "left");
+  @include page-dist("padding-right", "right");
+
+  border-style: solid;
+  border-width: 1px 0 1px 0;
+
+  display: flex;
+  width: 100%;
+
+  .active { 
+    font-style: italic; 
+  }
+
+  > ul:nth-child(1) { // language switcher
+    @include font-language-select;
+    position: relative;
+    top: -5px;
+  }
+
+  > ul:nth-child(2) { // tree
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    a {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    > li { // section headers
+      @include font-menüpunkte;
+      position: relative;
+      top: -3px;
+    }
+
+    ul {
+      
+      li, a {
+        @include font-menü-unterpunkte;
+      }
+      
+    }
+  }
+
+}
+}
