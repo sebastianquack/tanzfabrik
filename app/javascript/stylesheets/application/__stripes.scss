@@ -83,11 +83,23 @@ span[data-close] {
   }
 }
 
-[data-section="buehne"] svg {
+svg.icon {
   width: 40px;
   height: 40px;
   path {
+    stroke-linecap:round;
+    stroke-width:2px;
+  }
+}
+
+[data-section="buehne"] svg.section-fill-color {
+  path {
     fill: $color-black;
+  }
+}
+
+[data-section="buehne"] svg.section-stroke-color {
+  path {
     stroke: $color-black;
   }
 }
