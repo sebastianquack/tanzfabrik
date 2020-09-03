@@ -137,8 +137,8 @@
 }
 
 @mixin font-subtitle {
-  font-size: 22px;
-  line-height: 32px;
+  font-size: 18px;
+  line-height: 28px;
   @include breakpoint('s') {
     font-size: 16px;
     line-height: 22px;
@@ -154,16 +154,18 @@
     line-height: 24px;
   }        
   font-weight: $font-weight-regular;
+  font-feature-settings: 'ss01' on, 'ss02' on;
 }
 
 @mixin font-fliesstext-m {
   font-size: 18px;
-  line-height: 26px;
+  line-height: 22px;
   @include breakpoint('s') {
     font-size: 14px;
-    line-height: 21px;
+    line-height: 18px;
   }        
   font-weight: $font-weight-medium;
+  font-feature-settings: 'ss01' on, 'ss02' on;
 }
 
 @mixin font-fliesstext-s {
@@ -174,6 +176,7 @@
     line-height: 16px;
   }        
   font-weight: $font-weight-medium;
+  font-feature-settings: 'ss01' on, 'ss02' on;
 }
 
 @mixin font-tanzklassen { 
