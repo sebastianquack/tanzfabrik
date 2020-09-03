@@ -83,10 +83,11 @@
 
     <h3><%= @event.title %></h3>
 
-    <p><b><%= @event.display_type %></b>
-     <% if @event.people.first %>
-     mit <%= @event.people.map { |p| p.name }.join(", ") %>
-     <% end %>
+    <p><b class="type"><%= @event.display_type %></b>
+    <% if @event.people.first %>
+      <%= t "with" %>
+      <%= @event.people.map { |p| p.name }.join(", ") %>
+    <% end %>
     </p>
     
     <div><%= @event.rich_content %></div>
