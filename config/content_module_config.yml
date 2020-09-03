@@ -102,6 +102,7 @@ reference:
   form-fields:
     - headline
     - sub
+    - special_text
     - rich_content_1    
     - link_title
     - link_href
