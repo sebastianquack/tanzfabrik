@@ -28,8 +28,13 @@
     bottom:0;
   }
 
-  &[data-section="buehne"] {
+  &[data-section="buehne"],
+  &[data-section="festival"] {
     color: white;
+    .stripes_vertical {
+      fill: white;
+      stroke: white;
+    }
   }
 
   .columns {
@@ -104,6 +109,10 @@
 
   &[data-style-option="left"] .text_content {
     order: 1;
+  }
+
+  &[data-section="festival"] .text_content {
+    color: $color-green;
   }
 
   .headline {

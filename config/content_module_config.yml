@@ -11,6 +11,7 @@ feature:
     - buehne
     - schule
     - fabrik
+    - festival
   form-fields:
     - headline
     - special_text
