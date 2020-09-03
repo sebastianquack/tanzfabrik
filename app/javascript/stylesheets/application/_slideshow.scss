@@ -3,11 +3,11 @@
 
 .module__slideshow {
 
-  @include page-dist("padding-left", "left");
   overflow: hidden;
 
   .headline_container {
     @include flex-row;
+    @include page-dist("padding-left", "left");
     justify-content: flex-end;
     margin-bottom: 30px;
     h2 {
@@ -22,15 +22,33 @@
     }
   }
 
+  .controls {
+    position: relative;
+    cursor: pointer;
+    .next, .previous {
+      position: absolute;
+      top: 100px;
+    }
+    .next {
+      right: 20px;
+    }
+    .previous {
+      left: 20px;
+    }
+  }
+
   .slideshow {
 
     @include flex-row;
     justify-content: flex-end;
+    overflow: auto;
+    //@include page-dist("margin-left", "left");
 
     .slides {
 
-      @include flex-row-item(11,12, false);
+      @include flex-row-item(11,12, true);
       @include flex-row;
+      margin-right: 0;
 
       .slide {
         @include flex-row-item(3,11);

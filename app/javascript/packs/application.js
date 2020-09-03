@@ -39,7 +39,7 @@ require("@rails/actiontext")
 // enable assets for webpacker
 require.context('../svgs', true)
 
-/*********************************/
+/***************** feature module ****************/
 
 // observe if the feature module is visible
 document.addEventListener("DOMContentLoaded", function () {
@@ -60,6 +60,62 @@ document.addEventListener("DOMContentLoaded", function () {
     if (elements) observer.observe(elements);
   }
 })
+
+/*************** slideshow module ****************/
+
+document.addEventListener("DOMContentLoaded", function () {
+  var moduleElems = document.querySelectorAll(".module__slideshow")
+
+  moduleElems.forEach( moduleElem => {
+
+    // get elements
+    var nextElem = moduleElem.querySelector(".next")
+    var previousElem = moduleElem.querySelector(".previous")
+
+    var slideContainer = moduleElem.querySelector(".slideshow")
+    var slides = slideContainer.querySelectorAll(".slide")
+    var firstSlide = slides.item(0)
+
+    // TODO re-initialize when layout changes on viewport
+    // reset
+    var scrollWidth = slideContainer.scrollWidth
+    var clientWidth = slideContainer.clientWidth    
+    var index = 0
+    slideContainer.scrollTo({
+      left: 0
+    })
+
+    var amountVisibleSlides = Array.from(slides.values()).findIndex(function(slide){ 
+      return slide.offsetLeft > clientWidth
+    })
+    
+    nextElem.addEventListener("click", function() { moveSlide(1) })
+    previousElem.addEventListener("click", function () { moveSlide(-1) })
+
+    console.log(slideContainer, amountVisibleSlides)
+
+    function moveSlide(direction=1) {
+
+      var currentSlide = Array.from(slides.values()).findIndex(function (slide) {
+        return slide.offsetLeft > (slideContainer.scrollLeft)
+      })
+
+      index = currentSlide
+
+      var scrollLeft = slideContainer.scrollLeft
+      var targetSlide = slides.item(index + direction)
+
+      console.log(index, scrollLeft)
+      var newIndex = index + direction
+      if (newIndex >= 0 && newIndex <= slides.length - amountVisibleSlides + 1) {
+        slideContainer.scrollTo({ left: targetSlide.offsetLeft - firstSlide.offsetLeft, behavior: 'smooth' })
+      }
+    }
+
+  })
+})
+
+/*******************************/
 
 // do something when X is clicked
 document.addEventListener("DOMContentLoaded", function () {
