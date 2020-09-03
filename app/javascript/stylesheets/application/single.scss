@@ -89,7 +89,7 @@
     @include font-fliesstext-m;
 
     h4 {
-      margin-bottom: 4px;
+      margin-bottom: 12px;
       &:before {
         content: "↪\a0";
       }
@@ -97,6 +97,11 @@
 
     .type {
       @include font-stripes;
+    }
+
+    .bio {
+      @include font-fliesstext-s;
+      margin-bottom: 30px;
     }
 
     > * {

@@ -97,8 +97,8 @@
     <% end %>
 
     <% @event.people.each do |person| %>
-      <a href="<%= person_path(person) %>"><h4><%= person.name %></h4></a>
-      <div><%= person.rich_content %></div>
+      <h4><%= person.name %></h4>
+      <div class="bio"><%= person.rich_content %></div>
     <% end %>
 
     <div><%= @event.credits_rich %></div>
