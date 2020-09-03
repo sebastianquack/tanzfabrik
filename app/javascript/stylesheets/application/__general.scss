@@ -41,6 +41,13 @@ b, strong {
   font-weight: $font-weight-semibold;
 }
 
+#language_switcher {
+  @include font-language-select;
+  li.active, li.active a {
+    font-style: italic;
+  }
+}
+
 .horizontal_bar_container {
 
   @include flex-row;
@@ -55,10 +62,6 @@ b, strong {
 
   .horizontal_bar_center {
     @include flex-row-item(3,12);
-    @include font-language-select;
-    li.active, li.active a {
-      font-style: italic;
-    }
   }
 
   .horizontal_bar_right {
