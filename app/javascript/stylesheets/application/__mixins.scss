@@ -22,6 +22,7 @@
   }
   font-weight: $font-weight-medium;
   font-style: italic;
+  letter-spacing: -0.02em;
 }
 
 @mixin font-h2 {
@@ -33,6 +34,7 @@
   }
   font-weight: $font-weight-medium;
   font-style: italic;
+  letter-spacing: -0.02em;
 }
 
 @mixin font-h3 {
@@ -44,6 +46,7 @@
   }
   font-weight: $font-weight-medium;
   font-style: italic;
+  letter-spacing: -0.02em;
   .embedded_preview_container & {
     font-size: 48px !important;
     line-height: 52px !important;
@@ -104,6 +107,7 @@
     line-height: 34px;
   }        
   font-weight: $font-weight-medium;
+  letter-spacing: -0.02em;
 }
 
 @mixin font-menü-unterpunkte {
@@ -114,6 +118,7 @@
     line-height: 20px;
   }        
   font-weight: $font-weight-regular;
+  letter-spacing: -0.02em;
 }
 
 @mixin font-input {
