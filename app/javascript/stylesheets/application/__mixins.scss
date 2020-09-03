@@ -229,7 +229,7 @@
 @mixin font-menu-quicklinks {
   font-size: 16px;
   line-height: 20px;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-semibold-eps51;
   letter-spacing: 0.16px;
   text-decoration: underline;
   text-transform: uppercase;
@@ -242,7 +242,7 @@
     font-size: 12px;
     line-height: 14px;
   }          
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-semibold-eps51;
   letter-spacing: 0.16px;
   text-transform: uppercase;
 }
@@ -250,7 +250,7 @@
 @mixin font-stripes-infos {
   font-size: 16px;
   line-height: 20px;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-semibold-eps51;
   letter-spacing: 0.16px;
   text-transform: uppercase;
 }

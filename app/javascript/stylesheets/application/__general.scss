@@ -37,7 +37,9 @@ a {
   }
 }
 
-
+b {
+  font-weight: $font-weight-semibold;
+}
 
 .horizontal_bar_container {
 
@@ -53,6 +55,7 @@ a {
 
   .horizontal_bar_center {
     @include flex-row-item(3,12);
+    @include font-language-select;
     li.active, li.active a {
       font-style: italic;
     }

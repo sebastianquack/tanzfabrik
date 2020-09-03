@@ -22,7 +22,7 @@
 
 @font-face {
   font-family: "Garnett";
-  font-weight: $font-weight-semibold; // semibold ----> special font by Eps51!!
+  font-weight: $font-weight-semibold-eps51; // semibold ----> special font by Eps51!!
   src: 
     url("../../fonts/Garnett/Garnett-SemiboldEps51.woff") format("woff"), 
     url("../../fonts/Garnett/Garnett-SemiboldEps51.woff2") format("woff2"), 
@@ -32,11 +32,11 @@
 
 @font-face {
   font-family: "Garnett";
-  font-weight: $font-weight-bold;
+  font-weight: $font-weight-semibold;
   src: 
-    url("../../fonts/Garnett/Garnett-Bold.woff") format("woff"), 
-    url("../../fonts/Garnett/Garnett-Bold.woff2") format("woff2"), 
-    url("../../fonts/Garnett/Garnett-Bold.eot") format("eot"), 
+    url("../../fonts/Garnett/Garnett-Semibold.woff") format("woff"), 
+    url("../../fonts/Garnett/Garnett-Semibold.woff2") format("woff2"), 
+    url("../../fonts/Garnett/Garnett-Semibold.eot") format("eot"), 
 }
 
 @font-face {
@@ -83,7 +83,7 @@
 
 @font-face {
   font-family: "Garnett";
-  font-weight: $font-weight-bold;
+  font-weight: $font-weight-semibold;
   font-style: italic;
   src: 
     url("../../fonts/Garnett/Garnett-BoldItalic.woff") format("woff"), 

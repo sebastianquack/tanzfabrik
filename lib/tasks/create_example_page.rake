@@ -11,6 +11,7 @@ task :create_example_page => :environment do
   $p = Page.create(
     title_de: "Module",
     title_en: "Modules",
+    section: "schule",
   )
 
   p=$p
