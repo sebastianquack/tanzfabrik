@@ -50,6 +50,9 @@ a {
 
   .horizontal_bar_center {
     @include flex-row-item(3,12);
+    li.active, li.active a {
+      font-style: italic;
+    }
   }
 
   .horizontal_bar_right {

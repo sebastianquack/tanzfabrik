@@ -8,7 +8,6 @@ import "./__debug.scss"
 import "./__stripes.scss"
 
 // modules
-import "./_main_nav.scss"
 import "./_content_element.scss"
 import "./_content_2_columns.scss"
 import "./_page_intro.scss"
@@ -33,8 +32,9 @@ import "./_accordeon_element.scss"
 import "./_image_element_magazine.scss"
 import "./_submenu_divider.scss"
 
-// dedicated views
+// other views
 import "./start.scss"
 import "./single.scss"
 import "./footer.scss"
 import "./side_menu.scss"
+import "./main_nav.scss"
