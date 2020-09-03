@@ -34,4 +34,13 @@
     margin-bottom: -30px;
   }
 
+  h1 {
+    @include font-h1(true);
+    margin-bottom: 0.2em;
+  }
+
+  &[data-style-option] h1 {
+    @include font-h1-small(true);
+  }  
+
 }

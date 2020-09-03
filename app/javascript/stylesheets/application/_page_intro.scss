@@ -68,4 +68,8 @@
     margin-bottom: 0.2em;
   }
 
+  &[data-style-option] h1 {
+    @include font-h1-small(true);
+  }
+
 }

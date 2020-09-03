@@ -560,6 +560,7 @@ de:
       large: "Groß"
       large_left: "Großer Text – linksbündig"
       large_right: "Großer Text – rechtsbündig"
+      small_headline_font: "Überschrift kleiner"
     sections:
       buehne: "Bühne (Schwarz)"
       schule: "Schule (Rot)"

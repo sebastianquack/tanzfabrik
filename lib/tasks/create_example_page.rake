@@ -227,6 +227,17 @@ make_module({
   rich_content_1_en: rich_content_1,  
 })
 
+
+### page_intro / small font
+
+make_module({
+  module_type: "page_intro",
+  section: "schule",
+  headline_de: "Ganz lange Headline mit viel Text",
+  style_option: "small_headline_font"
+})
+
+
 ### submenu_divider / page_intro_magazine
 
 make_module({
@@ -256,6 +267,21 @@ make_module({
   sub_en: "40 Jahre Tanzfabrik",
 }, img_landscape)
 
+make_module({
+  module_type: "page_intro_magazine",
+  section: "buehne",
+  headline_de: "Twists: Dance and De\\colonia\\lity",
+  headline_en: "Twists: Dance and De\\colonia\\lity",
+}, img_landscape)
+
+### page_intro_magazine / small font
+
+make_module({
+  module_type: "page_intro_magazine",
+  section: "schule",
+  headline_de: "Ganz lange Headline mit viel Text",
+  style_option: "small_headline_font"
+}, img_landscape)
 
 ### submenu_divider / content_2_columns
 

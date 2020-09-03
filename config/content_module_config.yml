@@ -20,6 +20,7 @@ feature:
 page_intro:
   style-options:
     - default
+    - small_headline_font
   sections:
     - buehne
     - schule
@@ -35,6 +36,7 @@ page_intro:
 page_intro_magazine:
   style-options:
     - default
+    - small_headline_font
   sections:
     - buehne
     - schule
