@@ -16,9 +16,20 @@ body[data-menu-item-key="start"] #main_nav {
   flex-direction: column;
   justify-content: space-around;
 
+  > ul > li > ul {
+    //display: flex;
+    //flex-direction: column;
+    //min-height: calc( 100vh - #{$header-height + $menu-height + $page-top-padding});
+    //justify-content: space-around;
+    //background: green;
+    //align-items: stretch;
+  }
+
   > ul > li > ul > li {
 
     display: flex;
+
+    min-height: calc( 15vw );
     
     border: solid 1px $color-red;
     border-width: 0 0 1px 0;
@@ -29,13 +40,13 @@ body[data-menu-item-key="start"] #main_nav {
     padding-left: 12px; // guessword based on appearance -> TODO depend on vw too
 
     > a { // HUGE LETTERS
-      font-size:15vw;
-      line-height:15vw;
+      font-size: 15vw;
+      line-height: calc( 33.33333vh - #{ ($header-height + $page-top-padding) / 3} );
       display: block;
 
       color: white;
       text-shadow:
-      -1px -1px 0 $color-red,  
+        -1px -1px 0 $color-red,  
         1px -1px 0 $color-red,
         -1px 1px 0 $color-red,
         1px 1px 0 $color-red;
@@ -62,7 +73,7 @@ body[data-menu-item-key="start"] #main_nav {
 
       > li {
         position: relative;
-        bottom: 1.5vw;
+        bottom: calc( ( .45 * ( (33.33333vh - #{ ($header-height + $page-top-padding) / 3} ) ) ) - 5vw );
       }
     }
 
