@@ -119,6 +119,15 @@ make_module({
   special_text_en: "02.02.2020, Kreuzberg 1",
 }, img_landscape)
 
+### submenu_divider / page_intro
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "page_intro",
+  headline_en: "page_intro",
+  parameter: "page_intro"
+})
+
 
 ### page_intro / Workshops
 
@@ -218,6 +227,15 @@ make_module({
   rich_content_1_en: rich_content_1,  
 })
 
+### submenu_divider / page_intro_magazine
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "page_intro_magazine",
+  headline_en: "page_intro_magazine",
+  parameter: "page_intro_magazine"
+})
+
 
 ### page_intro_magazine / Twists: Dance and Decoloniality (Magazin!)
 
@@ -238,6 +256,15 @@ make_module({
   sub_en: "40 Jahre Tanzfabrik",
 }, img_landscape)
 
+
+### submenu_divider / content_2_columns
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "content_2_columns",
+  headline_en: "content_2_columns",
+  parameter: "content_2_columns"
+})
 
 ### content_2_columns
 
@@ -299,6 +326,23 @@ make_module({
   rich_content_2_en: "",
 }, nil, pdf)
 
+make_module({
+  module_type: "content_2_columns",
+  section: "schule",
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: "",
+  rich_content_2_de: rich_content_2,
+  rich_content_2_en: "",
+}, nil, pdf)
+
+### submenu_divider / content_element
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "content_element",
+  headline_en: "content_element",
+  parameter: "content_element"
+})
 
 ### content_element / Open Spaces
 
@@ -371,6 +415,16 @@ make_module({
   rich_content_1_en: "",
 }, img_portrait)
 
+### submenu_divider / content_element_magazine
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "content_element_magazine",
+  headline_en: "content_element_magazine",
+  parameter: "content_element_magazine"
+})
+
+
 ### content_element_magazine / This specific generative history
 
 rich_content_1 = <<~RICHCONTENT1
@@ -429,6 +483,16 @@ make_module({
   rich_content_1_en: rich_content_1,
 })
 
+### submenu_divider / reference
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "reference",
+  headline_en: "reference",
+  parameter: "reference"
+})
+
+
 ### reference / identifying a physical script
 
 special_text = <<~SPECIALTEXT
@@ -484,6 +548,16 @@ make_module({
   link_href_en: "http://tanznachtberlin.de/",  
 }, img_landscape)
 
+### submenu_divider / slideshow
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "slideshow",
+  headline_en: "slideshow",
+  parameter: "slideshow"
+})
+
+
 ### slideshow / Upcoming Workshops
 
 image_attributes = {
@@ -519,6 +593,14 @@ make_module({
   link_href_en: "http://tanznachtberlin.de/",  
 }, [images])
 
+### submenu_divider / slideshow
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "video",
+  headline_en: "video",
+  parameter: "video"
+})
 
 # video module / youtube
 
@@ -548,6 +630,16 @@ make_module({
   link_href_en: "http://tanznachtberlin.de/",    
 })
 
+
+### submenu_divider / today
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "today",
+  headline_en: "today",
+  parameter: "today"
+})
+
 # today module
 
 make_module({
@@ -555,6 +647,15 @@ make_module({
   section: "schule",
   headline_de: "Heute",
   headline_en: "Today",
+})
+
+### submenu_divider / newsletter
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "newsletter",
+  headline_en: "newsletter",
+  parameter: "newsletter"
 })
 
 # newsletter module / schule
@@ -575,6 +676,14 @@ make_module({
   headline_en: "Alle Highlights in unserem Newsletter!",
 })
 
+### submenu_divider / image_element_magazine
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "image_element_magazine",
+  headline_en: "image_element_magazine",
+  parameter: "image_element_magazine"
+})
 
 # image element magzine module
 
@@ -591,6 +700,14 @@ make_module({
   rich_content_1_en: "",
 }, img_landscape)
 
+### submenu_divider / festival_logos
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "festival_logos",
+  headline_en: "festival_logos",
+  parameter: "festival_logos"
+})
 
 # festival_logos / 
 
