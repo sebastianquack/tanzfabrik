@@ -21,7 +21,7 @@
       </span>
       <span>
         <span><%= detail.studio.location.name + " " + detail.studio.name %></span><br />
-        <span><%= detail.studio.location.address %></span>
+        <span><%= detail.studio.location.address.gsub(/,( +[0-9]{5})/, '<br>\1').html_safe %></span>
       </span>
       <span>
         <% if @event.type.id == 3 # kurs %>
