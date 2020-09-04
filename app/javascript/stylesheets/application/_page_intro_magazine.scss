@@ -37,6 +37,7 @@
   h1 {
     @include font-h1(true);
     margin-bottom: 0.2em;
+    max-width: 80%;
   }
 
   &[data-style-option="small_headline_font"] h1 {
