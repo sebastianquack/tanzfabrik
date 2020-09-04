@@ -179,6 +179,7 @@
     line-height: 24px;
   }        
   font-weight: $font-weight-regular;
+  letter-spacing: normal;
   font-feature-settings: 'ss01' on, 'ss02' on;
 }
 
@@ -190,6 +191,7 @@
     line-height: 18px;
   }        
   font-weight: $font-weight-medium;
+  letter-spacing: normal;
   font-feature-settings: 'ss01' on, 'ss02' on;
 }
 
@@ -201,6 +203,7 @@
     line-height: 16px;
   }        
   font-weight: $font-weight-medium;
+  letter-spacing: normal;
   font-feature-settings: 'ss01' on, 'ss02' on;
 }
 
@@ -292,9 +295,10 @@
     font-size: 18px !important;
     line-height: 24px !important;
   }
+  letter-spacing: normal;
 }
 
-@mixin font-button {
+@mixin font-button-small {
   font-size: 14px;
   line-height: 24px;
   font-weight: $font-weight-medium;
@@ -302,6 +306,7 @@
     font-size: 14px !important;
     line-height: 24px !important;
   }
+  letter-spacing: normal;
 }
 
 /* --------------------------------------------------
