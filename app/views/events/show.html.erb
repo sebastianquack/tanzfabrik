@@ -36,33 +36,6 @@
       </span>
     </div>
 
-    <!-- tell tf team we can now use warning and signup_url separately  -->
-
-    <div class="signup">  
-      <% if @event.signup_url and !@event.signup_url.empty? %>
-        <a class="button" title="<%= get_text_item("tanzklassen_anmeldung") %>" href="<%= @event.signup_url %>">
-          <%= get_text_item("tanzklassen_anmeldung") %>
-        </a>
-      <% end %>
-
-      <% if @event.warning %>
-      <p><%=@event.warning%></p>
-      <% end %>
-
-      <%= @event.info_rich %>
-    </div>    
-
-    <div class="stripes_vertical stripes_right">
-      <span data-close></span>
-      <span data-close></span>
-      <span data-close></span>
-    </div>
-  
-  </div>
-  
-  
-  <div class="info">
-
     <div class="image">
       <% if @event.type.id == 4 || @event.type.id == 3 # profitraining or kurs %>
         <%
@@ -79,7 +52,18 @@
         <figcaption><%= caption %></figcaption>
       </figure>
       <% end %>
+    </div>    
+
+    <div class="stripes_vertical stripes_right">
+      <span data-close></span>
+      <span data-close></span>
+      <span data-close></span>
     </div>
+  
+  </div>
+  
+  
+  <div class="info">
 
     <h3><%= @event.title %></h3>
 
@@ -92,14 +76,37 @@
     
     <div><%= @event.rich_content %></div>
 
-    <% unless @event.type.id == 3 # kurs %>
-      <%= render :partial => "/events/details/moments", :locals => {:event => @event} %>
-    <% end %>
-
     <% @event.people.each do |person| %>
       <h4><%= person.name %></h4>
       <div class="bio"><%= person.rich_content %></div>
     <% end %>
+
+    <!-- tell tf team we can now use warning and signup_url separately  -->
+
+    <div class="extra">  
+
+      <%if @event.info_rich && !@event.info_rich.to_s.strip.empty? %>
+        <div class="event_info">
+          <%= @event.info_rich %>
+        </div>
+      <% end %>
+
+      <% unless @event.type.id == 3 # kurs %>
+        <%= render :partial => "/events/details/moments", :locals => {:event => @event} %>
+      <% end %>
+
+      <% if @event.warning && !@event.warning.empty? %>
+        <p class="warning"><%=@event.warning%></p>
+      <% end %>
+
+      <% if @event.signup_url and !@event.signup_url.empty? %>
+        <a class="button" title="<%= get_text_item("tanzklassen_anmeldung") %>" href="<%= @event.signup_url %>">
+          <%= get_text_item("tanzklassen_anmeldung") %>
+        </a>
+      <% end %>
+
+  
+    </div>    
 
     <div><%= @event.credits_rich %></div>
 

@@ -46,6 +46,7 @@
       grid-column: 9 / span 3;
       grid-row: 1;
       margin: auto; // center
+      @include font-photocredit;
       figure, img {
         width: 100%;
       }
@@ -115,12 +116,32 @@
       }
     }
 
-    .moments {
-      @include font-stripes-infos;
+    .extra {
       border-style: solid;
       border-width: 1px 0 1px 0;
-      padding: 12px 0 12px 0;
+      padding: 12px 0 0 0;
+    }
+
+    .event_info {
+      @include font-stripes-infos;
+      &:not(:empty) {
+        margin-bottom: 12px;
+      }
+    }
+
+    .warning {
+      @include font-stripes-infos;
+      margin-bottom: 12px;
+    }
+
+    .button {
+      margin-bottom: 12px;
+    }
+
+    .moments {
+      @include font-stripes-infos;
       // @include grid-col-gap-dist("padding-left", 1,1);
+      margin-bottom: 12px;
 
       display: grid;
       grid-template-areas: "a a a";
@@ -136,7 +157,6 @@
           }
         }
       }
-
     }
 
     .events li {
