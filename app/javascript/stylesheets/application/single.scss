@@ -1,4 +1,3 @@
-@import "./__variables.scss";
 @import "./__mixins.scss";
 
 .single-event-page, .single-person-page {
@@ -107,13 +106,6 @@
 
     > * {
       margin-bottom: 24px;
-    }
-
-    .trix-content {
-      p + p > small:first-child { // this is a vintage case in imported data
-        display: block;
-        padding-top: 1em;
-      }
     }
 
     .extra {

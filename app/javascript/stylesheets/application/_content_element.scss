@@ -24,6 +24,9 @@
 
   .column_right {
     flex:1;
+    > *:last-child {
+      margin-bottom: 0;
+    }
   }
 
   h2 {
@@ -36,12 +39,13 @@
 
   .rich_content_1 {
     @include font-fliesstext-m;
+    margin-bottom: 30px;
   }  
 
   .special_text {
     @include font-stripes-infos;
     white-space: pre-line;
-    margin-top: -10px;
+    margin-top: -20px;
     margin-bottom: 30px;
   }  
 

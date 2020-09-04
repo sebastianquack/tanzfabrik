@@ -440,6 +440,35 @@ make_module({
   special_text_en: "",      
   rich_content_1_de: rich_content_1,
   rich_content_1_en: "",
+  link_title_de: "Link",
+  link_href_de: "Link",
+}, img_portrait)
+
+### content_element / Contact
+
+
+special_text = <<~SPECIALTEXT
+Möckernstraße 68, 10965 Berlin.
+Offen ab 19:00-21:30 im Studio 3 
+Kosten pro Person: 3 €
+SPECIALTEXT
+
+rich_content_1 = <<~RICHCONTENT1
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+<p><small>Keine Jam: 28.12.2019, 4.1.2020 und 11.4.2020 (Ostersamstag).</small></p>
+RICHCONTENT1
+
+make_module({
+  module_type: "content_element",
+  section: "buehne",
+  headline_de: "Contact",
+  headline_en: "Contact",
+  special_text_de: special_text.strip,
+  special_text_en: special_text.strip,      
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: "",
+  link_title_de: "Link",
+  link_href_de: "Link",
 }, img_portrait)
 
 ### submenu_divider / content_element_magazine
