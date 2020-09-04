@@ -28,7 +28,7 @@ gem 'friendly_id', '~> 5.3'
 gem "kt-paperclip", "~> 6.2"
 gem 'aws-sdk-s3', '~> 1'
 
-gem "arbre", '~> 1.2.1'
+gem "arbre", '~> 1.3'
 
 
 gem "ice_cube" # date recurrance library
