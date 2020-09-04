@@ -26,19 +26,19 @@ task :create_example_page => :environment do
   img_landscape = {
     description: "description description description",
     license: "licence licence licence",
-    attachment: File.open(Rails.root.join('lib', 'seeds', 'landscape.png')),
+    attachment: URI.open("https://picsum.photos/1500/1000") # File.open(Rails.root.join('lib', 'seeds', 'landscape.png')),
   }
 
   img_portrait = {
     description: "description description description",
     license: "licence licence licence",
-    attachment: File.open(Rails.root.join('lib', 'seeds', 'portrait.png'))
+    attachment: URI.open("https://picsum.photos/1000/1500") # File.open("Rails.root.join('lib', 'seeds', 'portrait.png')")
   }
 
   img_square = {
     description: "description description description",
     license: "licence licence licence",
-    attachment: File.open(Rails.root.join('lib', 'seeds', 'square.png'))
+    attachment: URI.open("https://picsum.photos/1500/1500") # File.open(Rails.root.join('lib', 'seeds', 'square.png'))
   }  
 
   #File.open("tmp/tmp.pdf", "w") {|f| f.write("write your stuff here") }
