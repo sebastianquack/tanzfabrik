@@ -189,8 +189,8 @@ RICHCONTENT1
 make_module({
   module_type: "page_intro",
   section: "schule",
-  headline_de: "Dance In\\tensive",
-  headline_en: "Dance In\\tensive",
+  headline_de: "Dance In\\tgnsivg",
+  headline_en: "Dance In\\tgnsivg",
   special_text_de: special_text.strip,
   special_text_en: special_text.strip,
   rich_content_1_de: rich_content_1,
@@ -235,7 +235,9 @@ make_module({
   module_type: "page_intro",
   section: "schule",
   headline_de: "Ganz lange Headline mit viel Text",
-  style_option: "small_headline_font"
+  style_option: "small_headline_font",
+  rich_content_1_de: rich_content_1,
+  rich_content_1_en: rich_content_1,    
 }, img_landscape)
 
 
