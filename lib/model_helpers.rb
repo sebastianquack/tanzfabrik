@@ -5,4 +5,8 @@ module ModelHelpers
     end
     str
   end
+
+  def ModelHelpers.fix_trix str
+    str.gsub /<br><br>(\s)/m, '<br>\1'
+  end
 end

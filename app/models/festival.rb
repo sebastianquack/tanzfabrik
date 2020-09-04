@@ -25,6 +25,15 @@ class Festival < ActiveRecord::Base
   has_many :downloads
   accepts_nested_attributes_for :downloads, :allow_destroy => true
 
+  before_validation :fix_trix
+
+  private def fix_trix
+    self.rich_content_1_de = ModelHelpers.fix_trix self.rich_content_1_de.to_s
+    self.rich_content_1_en = ModelHelpers.fix_trix self.rich_content_1_en.to_s
+    self.rich_content_2_de = ModelHelpers.fix_trix self.rich_content_2_de.to_s
+    self.rich_content_2_en = ModelHelpers.fix_trix self.rich_content_2_en.to_s
+  end   
+
   def start_date
     if self.events.no_draft.length > 0
       return self.events.no_draft.min_by { |e| e.start_date} .start_date

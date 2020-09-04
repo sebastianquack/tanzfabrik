@@ -80,6 +80,14 @@ button[data-trix-action="increaseNestingLevel"] {
   display: none;
 }
 
+// trix content input style
+trix-editor { // normalize, so gaps look similar to output
+  h4 {
+    margin: 0 0 12px 0;
+  }
+}
+
+@import './application/trix.scss';
 
 // display in active admin form
 .active_admin {

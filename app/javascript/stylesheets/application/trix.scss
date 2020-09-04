@@ -6,4 +6,8 @@
     padding-top: 1.5em;
     @include font-fliesstext-s;
   }
+  br:last-child { // corresponds to the extra <br> that trix creates
+    display: block;
+    height: 1em;
+  }
 }
