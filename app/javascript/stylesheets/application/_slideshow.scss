@@ -47,6 +47,8 @@
 
       @include flex-row-item(11,12, true);
       @include flex-row;
+      width: calc(#{100 * 11 / 12}% - #{$grid-gap-l});
+      overflow: visible;
       margin-right: 0;
 
       .slide {
