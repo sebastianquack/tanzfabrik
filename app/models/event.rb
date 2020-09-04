@@ -15,7 +15,6 @@ class Event < ActiveRecord::Base
 
   has_rich_text :rich_content_de
   has_rich_text :rich_content_en
-
   has_rich_text :info_rich_de
   has_rich_text :info_rich_en
   has_rich_text :credits_rich_de
@@ -56,10 +55,12 @@ class Event < ActiveRecord::Base
   before_validation :fix_trix
 
   private def fix_trix
-    self.rich_content_1_de = ModelHelpers.fix_trix self.rich_content_1_de.to_s
-    self.rich_content_1_en = ModelHelpers.fix_trix self.rich_content_1_en.to_s
-    self.rich_content_2_de = ModelHelpers.fix_trix self.rich_content_2_de.to_s
-    self.rich_content_2_en = ModelHelpers.fix_trix self.rich_content_2_en.to_s
+    self.rich_content_de = ModelHelpers.fix_trix self.rich_content_1_de.to_s
+    self.rich_content_en = ModelHelpers.fix_trix self.rich_content_1_de.to_s
+    self.info_rich_de = ModelHelpers.fix_trix self.rich_content_1_de.to_s
+    self.info_rich_en = ModelHelpers.fix_trix self.rich_content_1_de.to_s
+    self.credits_rich_de = ModelHelpers.fix_trix self.rich_content_1_de.to_s
+    self.credits_rich_en = ModelHelpers.fix_trix self.rich_content_1_de.to_s
   end     
 
   # VALIDATIONS

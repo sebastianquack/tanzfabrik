@@ -27,20 +27,6 @@ class Image < ActiveRecord::Base
 
   #validates_presence_of :description
 
-  before_validation :clean_link, :fix_trix
-
-  private def fix_trix
-    self.rich_content_1_de = ModelHelpers.fix_trix self.rich_content_1_de.to_s
-    self.rich_content_1_en = ModelHelpers.fix_trix self.rich_content_1_en.to_s
-    self.rich_content_2_de = ModelHelpers.fix_trix self.rich_content_2_de.to_s
-    self.rich_content_2_en = ModelHelpers.fix_trix self.rich_content_2_en.to_s
-  end   
-
-  private def clean_link
-    self.link_href_en = ModelHelpers.strip_domain_from_link self.link_href_en.to_s
-    self.link_href_de = ModelHelpers.strip_domain_from_link self.link_href_de.to_s
-  end  
-
   has_rich_text :rich_content_1_de
   has_rich_text :rich_content_1_en
 
@@ -54,5 +40,17 @@ class Image < ActiveRecord::Base
   belongs_to :festival_container
   belongs_to :content_module
   belongs_to :text_item
+
+  before_validation :clean_link, :fix_trix
+
+  private def fix_trix
+    self.rich_content_1_de = ModelHelpers.fix_trix self.rich_content_1_de.to_s
+    self.rich_content_1_en = ModelHelpers.fix_trix self.rich_content_1_en.to_s
+  end   
+
+  private def clean_link
+    self.link_href_en = ModelHelpers.strip_domain_from_link self.link_href_en.to_s
+    self.link_href_de = ModelHelpers.strip_domain_from_link self.link_href_de.to_s
+  end  
 
 end

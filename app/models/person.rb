@@ -23,10 +23,8 @@ class Person < ActiveRecord::Base
   } 
 
   private def fix_trix
-    self.rich_content_1_de = ModelHelpers.fix_trix self.rich_content_1_de.to_s
-    self.rich_content_1_en = ModelHelpers.fix_trix self.rich_content_1_en.to_s
-    self.rich_content_2_de = ModelHelpers.fix_trix self.rich_content_2_de.to_s
-    self.rich_content_2_en = ModelHelpers.fix_trix self.rich_content_2_en.to_s
+    self.rich_content_de = ModelHelpers.fix_trix self.rich_content_de.to_s
+    self.rich_content_en = ModelHelpers.fix_trix self.rich_content_en.to_s
   end    
     
   def name    
