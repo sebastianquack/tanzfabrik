@@ -770,6 +770,34 @@ make_module({
   rich_content_1_en: "",
 }, img_landscape)
 
+### submenu_divider / people_gallery
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "people_gallery",
+  headline_en: "people_gallery",
+  parameter: "team"
+})
+
+# people_gallery
+
+make_module({
+  module_type: "people_gallery",
+  section: "schule",
+  headline_de: "Normal",
+  headline_en: "Normal",
+  parameter: "team"
+}, img_landscape)
+
+make_module({
+  module_type: "people_gallery",
+  section: "schule",
+  style_option: "large",
+  headline_de: "Large",
+  headline_en: "Large",
+  parameter: "team"
+}, img_landscape)
+
 ### submenu_divider / festival_logos
 
 make_module({

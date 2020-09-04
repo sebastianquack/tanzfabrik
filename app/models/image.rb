@@ -3,19 +3,21 @@ class Image < ActiveRecord::Base
 
   has_attached_file :attachment,
     :styles => { 
-      :background => "1000x1000>", 
-      :large => ["600x600>"],
+      :background => "1500x1500>", 
+      :large => ["800x800>"],
       :medium_detail_column => ["330>"], 
       :people => ['150x195#'],
       :people_hires => ['300x390#'],
-      :medium => ["300x300>"], 
+      :medium => ["450x450>"], 
       :thumb => ["100x100>"]
       },
     :convert_options => { 
-      :background => "-quality 92 -strip",
+      :background => "-quality 90 -strip",
+      :large => "-quality 85 -strip",
       :medium_detail_column => "-quality 72",
-      :people => "-quality 70", 
-      :people_hires => "-quality 70"
+      :people => "-quality 80", 
+      :people_hires => "-quality 80",
+      :medium  => "-quality 85",
       },
     :path => "images/:id/:style.:extension"
   
