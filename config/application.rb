@@ -31,6 +31,7 @@ module Tanzfabrik
 
     config.stage_event_types = [1,7,8,9]
     config.event_types_with_page = (1..9).to_s # all event types have pages finally as of relaunch  2020
+    config.module_border_bottom_types = ['l', 'm', 's']
 
     config.active_record.belongs_to_required_by_default = false
 

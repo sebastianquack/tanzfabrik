@@ -418,6 +418,7 @@ de:
         module_type: Modul-Typ
         style_option: Darstellungs-Option
         section: Bereich (Farbe)
+        border_bottom: "Abstand darunter"
         draft: Im Font-End verbergen
         super: "Über-Headline"
         headline: "Headline"
@@ -569,3 +570,7 @@ de:
       schule: "Schule (Rot)"
       fabrik: "Fabrik (Rot)"
       festival: "Tanznacht (Grün)"
+    border_bottom:
+      l: "Weit"
+      m: "Mittel"
+      s: "Gering"

@@ -51,7 +51,7 @@ def subscribe_form(className, mode, value, prompt)
   end
 end
 
-div :class => "module__newsletter" do
+div :class => "module__newsletter", :"data-border-bottom" => content_module.border_bottom do
 
   h3 content_module.headline
     

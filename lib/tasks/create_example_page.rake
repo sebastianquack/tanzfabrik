@@ -506,6 +506,7 @@ RICHCONTENT1
 make_module({
   module_type: "content_element_magazine",
   section: "schule",
+  border_bottom: "s",
   rich_content_1_de: rich_content_1,
   rich_content_1_en: rich_content_1,
 })
@@ -519,6 +520,7 @@ RICHCONTENT1
 make_module({
   module_type: "content_element_magazine",
   section: "schule",
+  border_bottom: "s",
   style_option: "large_left",  
   rich_content_1_de: rich_content_1,
   rich_content_1_en: rich_content_1,
@@ -533,6 +535,7 @@ RICHCONTENT1
 make_module({
   module_type: "content_element_magazine",
   section: "schule",
+  border_bottom: "s",
   style_option: "large_right",
   rich_content_1_de: rich_content_1,
   rich_content_1_en: rich_content_1,
@@ -548,10 +551,30 @@ RICHCONTENT1
 make_module({
   module_type: "content_element_magazine",
   section: "buehne",
+  border_bottom: "s",
   style_option: "centered",
   rich_content_1_de: rich_content_1,
   rich_content_1_en: rich_content_1,
 })
+
+### submenu_divider / content_element_magazine border_bottom
+
+make_module({
+  module_type: "submenu_divider",
+  headline_de: "(border_bottom)",
+  headline_en: "(border_bottom)",
+  parameter: "(border_bottom)"
+})
+
+Rails.configuration.module_border_bottom_types.each do |border|
+  make_module({
+    module_type: "content_element_magazine",
+    section: "buehne",
+    border_bottom: border,
+    style_option: "centered",
+    rich_content_1_de: "Abstand: " + border,
+  })
+end
 
 ### submenu_divider / reference
 
@@ -770,33 +793,33 @@ make_module({
   rich_content_1_en: "",
 }, img_landscape)
 
-### submenu_divider / people_gallery
-
-make_module({
-  module_type: "submenu_divider",
-  headline_de: "people_gallery",
-  headline_en: "people_gallery",
-  parameter: "team"
-})
-
-# people_gallery
-
-make_module({
-  module_type: "people_gallery",
-  section: "schule",
-  headline_de: "Normal",
-  headline_en: "Normal",
-  parameter: "team"
-}, img_landscape)
-
-make_module({
-  module_type: "people_gallery",
-  section: "schule",
-  style_option: "large",
-  headline_de: "Large",
-  headline_en: "Large",
-  parameter: "team"
-}, img_landscape)
+# ### submenu_divider / people_gallery
+# 
+# make_module({
+#   module_type: "submenu_divider",
+#   headline_de: "people_gallery",
+#   headline_en: "people_gallery",
+#   parameter: "team"
+# })
+# 
+# # people_gallery
+# 
+# make_module({
+#   module_type: "people_gallery",
+#   section: "schule",
+#   headline_de: "Normal",
+#   headline_en: "Normal",
+#   parameter: "team"
+# }, img_landscape)
+# 
+# make_module({
+#   module_type: "people_gallery",
+#   section: "schule",
+#   style_option: "large",
+#   headline_de: "Large",
+#   headline_en: "Large",
+#   parameter: "team"
+# }, img_landscape)
 
 ### submenu_divider / festival_logos
 

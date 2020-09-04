@@ -6,7 +6,7 @@
 <% end %>
 
 
-<div class="module__page_intro" <%= "data-no-images" if (content_module.images.empty? and !parameterSet) %> data-section="<%= content_module.section %>" data-style-option="<%= content_module.style_option %>">
+<div class="module__page_intro" <%= "data-no-images" if (content_module.images.empty? and !parameterSet) %> data-section="<%= content_module.section %>" data-style-option="<%= content_module.style_option %>" data-border-bottom="<%= content_module.border_bottom%>"> 
 
   <% if content_module.images.count > 0 %>
     <div class="grid_image">

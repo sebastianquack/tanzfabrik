@@ -135,6 +135,11 @@ main.page {
 
 [class^="module__"] {
   margin-bottom: 100px;
+  &[data-border-bottom] {
+    &[data-border-bottom="l"] { margin-bottom: 150px; }
+    &[data-border-bottom="m"] { margin-bottom: 100px; }
+    &[data-border-bottom="s"] { margin-bottom: 50px; }
+  }
 }
 
 /**

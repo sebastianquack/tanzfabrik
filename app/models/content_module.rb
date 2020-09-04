@@ -17,6 +17,14 @@ class ContentModule < ActiveRecord::Base
   has_many :downloads
   accepts_nested_attributes_for :downloads, :allow_destroy => true
 
+  validate :border_bottom_is_valid
+
+  private def border_bottom_is_valid
+    border_types = Rails.configuration.module_border_bottom_types
+    errors.add(:border_bottom, "must be one of: " + border_types.join(", ")) unless
+       border_types.include? border_bottom
+  end 
+
   before_validation :clean_link, :fix_trix
 
   private def clean_link

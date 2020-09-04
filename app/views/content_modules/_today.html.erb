@@ -1,6 +1,6 @@
 <% events_today = Event.where(type: 3).or(Event.where(type: 4)).select {|e| e.occurs_on? Date.today } %>
 
-<div class="module__today">
+<div class="module__today" data-border-bottom="<%= content_module.border_bottom%>">
 
   <h2><%= content_module.headline %></h2>
 

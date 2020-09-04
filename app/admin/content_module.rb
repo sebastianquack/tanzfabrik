@@ -25,7 +25,7 @@ ActiveAdmin.register ContentModule do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :module_type, :style_option, :section, :draft, :headline_de, :headline_en, :super_de, :super_en, :sub_de, :sub_en, :special_text_de, :special_text_en, :rich_content_1_de, :rich_content_1_en, :rich_content_2_de, :rich_content_2_en, :custom_html_de, :custom_html_en, :parameter, :locale,
+  permit_params :module_type, :style_option, :section, :border_bottom, :draft, :headline_de, :headline_en, :super_de, :super_en, :sub_de, :sub_en, :special_text_de, :special_text_en, :rich_content_1_de, :rich_content_1_en, :rich_content_2_de, :rich_content_2_en, :custom_html_de, :custom_html_en, :parameter, :locale,
   :link_href_de, :link_href_en, :link_title_de, :link_title_en,
   :images_attributes => [:id, :description, :license, :attachment, :_destroy, :super_de, :super_en, :headline_de, :headline_en, :rich_content_1_de, :rich_content_1_en, :link_title_de, :link_title_en, :link_href_de, :link_href_en, :order],
   :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
@@ -178,6 +178,11 @@ ActiveAdmin.register ContentModule do
         if sections.length > 0
           f.input :section, :as => :select, :collection => sections, :include_blank => false
         end
+        if (Rails.configuration.module_border_bottom_types.length > 0 ) &&
+           (CM_CONFIG[type].has_key? "border-bottom-options" ) &&
+           (CM_CONFIG[type]["border-bottom-options"] == true)
+          f.input :border_bottom, :as => :select, :collection => Rails.configuration.module_border_bottom_types.map{|k| [t("content_modules.border_bottom." + k), k]}, :include_blank => false
+        end        
         f.input :draft, :label => t(:draft)
         f.li link_to "Modul löschen", delete_content_module_admin_content_module_path, :class => "button active-admin-delete-content-module"
       end
