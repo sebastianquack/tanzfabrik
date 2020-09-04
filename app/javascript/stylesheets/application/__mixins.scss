@@ -10,14 +10,14 @@
   line-height: 140px;
   @if ($bottom-adjust) {
     position: relative;
-    bottom: -9px;
+    bottom: -0.25em;
   }
   @include breakpoint('s') {
     font-size: 72px;
     line-height: 73px;
     @if ($bottom-adjust) {
       position: relative;
-      bottom: -4px;
+      bottom: -0.25px;
     }    
   }
   font-weight: $font-weight-medium;
@@ -26,20 +26,12 @@
 }
 
 @mixin font-h1-small($bottom-adjust: false) {
-  @include font-h1;
+  @include font-h1($bottom-adjust);
   font-size: 100px;
   line-height: 100px;
-  @if ($bottom-adjust) {
-    position: relative;
-    bottom: -9px;
-  }
   @include breakpoint('s') {
     font-size: 72px;
     line-height: 73px;
-    @if ($bottom-adjust) {
-      position: relative;
-      bottom: -4px;
-    }    
   }
 }
 

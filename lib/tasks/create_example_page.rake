@@ -236,7 +236,7 @@ make_module({
   section: "schule",
   headline_de: "Ganz lange Headline mit viel Text",
   style_option: "small_headline_font"
-})
+}, img_landscape)
 
 
 ### submenu_divider / page_intro_magazine
