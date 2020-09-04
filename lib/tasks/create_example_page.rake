@@ -362,6 +362,18 @@ make_module({
   rich_content_2_en: "",
 }, nil, pdf)
 
+make_module({
+  module_type: "content_2_columns",
+  section: "schule",
+  style_option: "indent_more",
+  headline_de: "Mehr eingerückt",
+  headline_en: "Mehr eingerückt",
+  rich_content_1_de: "text links",
+  rich_content_1_en: "",
+  rich_content_2_de: "text rechts",
+  rich_content_2_en: "",
+})
+
 ### submenu_divider / content_element
 
 make_module({

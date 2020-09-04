@@ -556,6 +556,8 @@ de:
       today: "Heute"
       festival_logos: "Festival-Logoleiste"
     style_options:
+      default: "Normal"
+      indent_more: "Stärker eingerückt"
       magazine: "Magazin"
       large: "Groß"
       large_left: "Großer Text – linksbündig"

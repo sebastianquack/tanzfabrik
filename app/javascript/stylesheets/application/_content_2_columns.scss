@@ -2,30 +2,40 @@
 
 .module__content_2_columns {
 
+  @include grid-col-gap-dist("margin-left", 0, 0, "left");
+  @include grid-col-gap-dist("margin-right", 0, 0, "right");
 
   .headline {
-    @include page-dist("margin-left", "left");
-    @include grid-dist("padding-left", 1);    
+    @include grid-col-gap-dist("margin-left", 1, 1);
     margin-bottom: 40px;
   }
 
   .columns {
-    display: flex;
-
-    @include page-dist("margin-left", "left");
-    @include page-dist("margin-right", "right");
-
-    @include grid-dist("padding-left", 1);
-    @include grid-dist("padding-right", 1);
+    display: grid;
+    @include grid-gap;
+    grid-template-columns: repeat(12, 1fr);
 
     .column_left {
-      flex: 0.57;
+      grid-column: 2 / span 6;
     }
 
     .column_right {
-      flex: 0.43;
-      padding-left: 60px;
+      grid-column: 8 / span 4;
     }
+  }
+
+
+  &[data-style-option="indent_more"] {
+    .headline {
+      @include grid-col-gap-dist("margin-left", 2, 2);
+    }
+    .column_left {
+      grid-column: 3 / span 5;
+    }
+    .column_right {
+      grid-column: 9 / span 3;
+    }    
+
   }
 
   h4 {
