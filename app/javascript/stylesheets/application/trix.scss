@@ -1,13 +1,17 @@
 @import './_mixins';
 
 .trix-content {
-  p + p > small:first-child {
+  p + p > small:first-child { // from vintage imports
     display: block;
     padding-top: 1.5em;
     @include font-fliesstext-s;
   }
-  br:last-child { // corresponds to the extra <br> that trix creates
-    display: block;
-    height: 1em;
+  div + h4 { // corresponds to the extra <br> that trix creates
+    &::before {
+      @include font-fliesstext-m;
+      display: block;
+      height: 1em;
+      content: "\A0";
+    }
   }
 }
