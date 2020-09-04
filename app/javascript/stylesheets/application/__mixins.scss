@@ -424,7 +424,7 @@
   }
 }
 @mixin hide-scrollbar-x {
-  ::-webkit-scrollbar { 
+  &::-webkit-scrollbar { 
     display: none;  /* Chrome Safari */
   }
   scrollbar-width: none; /* Firefox */
