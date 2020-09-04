@@ -2,30 +2,30 @@
 
 .module__content_2_columns {
 
-  display: flex;
 
-  @include page-dist("margin-left", "left");
-  @include page-dist("margin-right", "right");
-
-  @include grid-dist("padding-left", 1);
-  @include grid-dist("padding-right", 1);
-  
-  .column_left {
-    flex: 0.57;
-  }
-
-  .column_right {
-    flex: 0.43;
-    padding-left: 60px;
-    padding-top: 40px;
-    &:before {
-      content: "\A0"; // add a space same height as headline
-      @include font-h2;
-    }
-  }
-
-  h2 {
+  .headline {
+    @include page-dist("margin-left", "left");
+    @include grid-dist("padding-left", 1);    
     margin-bottom: 40px;
+  }
+
+  .columns {
+    display: flex;
+
+    @include page-dist("margin-left", "left");
+    @include page-dist("margin-right", "right");
+
+    @include grid-dist("padding-left", 1);
+    @include grid-dist("padding-right", 1);
+
+    .column_left {
+      flex: 0.57;
+    }
+
+    .column_right {
+      flex: 0.43;
+      padding-left: 60px;
+    }
   }
 
   h4 {

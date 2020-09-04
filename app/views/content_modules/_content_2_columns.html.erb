@@ -1,34 +1,38 @@
 
 <div class="module__content_2_columns" data-section="<%= content_module.section %>">
   
-  <div class="column_left">
+  <% if content_module.headline %>
+    <h2 class="headline">
+      <%= content_module.headline_shy.html_safe %>
+    </h2>
+  <% end %>
 
-    <% if content_module.headline %>
-      <h2>
-        <%= content_module.headline_shy.html_safe %>
-      </h2>
-    <% end %>
+  <div class="columns">
 
-    <% if content_module.rich_content_1 %>
-      <div class="rich_content_1">
-        <%= content_module.rich_content_1%>
-      </div>
-    <% end %>
+    <div class="column_left">
 
-  </div>
-
-  <div class="column_right">
-
-    <% if content_module.rich_content_2 %>
-      <div class="rich_content_2">
-        <%= content_module.rich_content_2_processed %>
-      </div>
-    <% end %>
-
-    <div class="downloads">
-      <% content_module.downloads.each do |download| %>
-        <a class="button pdf" title="<%= download.description %>" href="<%= download.attachment.url %>"><%= download.description %></a>
+      <% if content_module.rich_content_1 %>
+        <div class="rich_content_1">
+          <%= content_module.rich_content_1%>
+        </div>
       <% end %>
+
+    </div>
+
+    <div class="column_right">
+
+      <% if content_module.rich_content_2 %>
+        <div class="rich_content_2">
+          <%= content_module.rich_content_2_processed %>
+        </div>
+      <% end %>
+
+      <div class="downloads">
+        <% content_module.downloads.each do |download| %>
+          <a class="button pdf" title="<%= download.description %>" href="<%= download.attachment.url %>"><%= download.description %></a>
+        <% end %>
+      </div>
+
     </div>
 
   </div>
