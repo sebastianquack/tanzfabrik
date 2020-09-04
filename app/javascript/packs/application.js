@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function moveSlide(direction=1) {
 
       var currentSlide = Array.from(slides.values()).findIndex(function (slide) {
-        return slide.offsetLeft > (slideContainer.scrollLeft)
+        return slide.offsetLeft >= (slideContainer.scrollLeft)
       })
 
       index = currentSlide

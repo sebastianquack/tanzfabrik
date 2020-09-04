@@ -40,7 +40,7 @@
 
     @include flex-row;
     justify-content: flex-end;
-    overflow: auto;
+    @include hide-scrollbar-x;
     //@include page-dist("margin-left", "left");
 
     .slides {
