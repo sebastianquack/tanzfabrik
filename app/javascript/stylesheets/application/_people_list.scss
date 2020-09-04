@@ -44,7 +44,7 @@
       }    
 
       .info {
-        @include font-title;
+        @include font-title-small;
         hyphens: auto;
       }
 

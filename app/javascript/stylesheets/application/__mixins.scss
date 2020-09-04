@@ -159,6 +159,16 @@
   font-weight: $font-weight-medium;
 }
 
+@mixin font-title-small {
+  font-size: 22px;
+  line-height: 24px;
+  @include breakpoint('s') {
+    font-size: 18px;
+    line-height: 22px;
+  }        
+  font-weight: $font-weight-medium;
+}
+
 @mixin font-subtitle {
   font-size: 18px;
   line-height: 28px;
@@ -262,7 +272,7 @@
 @mixin font-stripes-infos {
   font-size: 16px;
   line-height: 20px;
-  font-weight: $font-weight-semibold-eps51;
+  font-weight: $font-weight-semibold;
   letter-spacing: 0.16px;
   text-transform: uppercase;
 }
