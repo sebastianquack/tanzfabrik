@@ -39,6 +39,7 @@ body[data-menu-item-key="start"] #main_nav {
     padding-left: 12px; // guessword based on appearance -> TODO depend on vw too
 
     > a { // HUGE LETTERS
+      font-weight: $font-weight-semibold-eps51;
       font-size: 15vw;
       line-height: calc( 33.33333vh - #{ ($header-height + $page-top-padding) / 3} );
       display: block;
