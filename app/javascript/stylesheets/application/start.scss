@@ -16,7 +16,6 @@ body[data-menu-item-key="start"] #main_nav {
   user-select:none;
 
   font-weight: $font-weight-semibold;
-  text-transform: uppercase;
 
   /*height: calc(100vh - #{$header-height});
   position: fixed;
@@ -68,6 +67,9 @@ body[data-menu-item-key="start"] #main_nav {
       letter-spacing: -10px;
       line-height: 100%;
       display: block;
+      text-transform: uppercase;
+
+      transition: all 0.35s;
 
       @include outline;
 
@@ -84,9 +86,10 @@ body[data-menu-item-key="start"] #main_nav {
         color: $color-red;
         font-size: 16px;
         line-height: 20px;
+        text-transform: uppercase;
       }
 
-      ul { // submenu
+      ul { // submenu layout
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -96,7 +99,7 @@ body[data-menu-item-key="start"] #main_nav {
         @include debug(#ff05);
         //padding-bottom: calc( 20px + 0.5 * ( 100% - var(--start-font-size-large) ) );
 
-        ul {
+        ul { // sub submenu
           display: none;
         }
       }
@@ -110,50 +113,63 @@ body[data-menu-item-key="start"] #main_nav {
 
     // BASE STATE
     > ul > li > ul > li {
-      a { // HUGE LETTERS
+      > a { // HUGE LETTERS
         color: $color-red;
         letter-spacing: 0;
         text-shadow: none;
-        text-align: center;
-        width: 100%;
+        text-align: left;
         padding-right: 12px;
         display: block;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
       }
       ul {
         display: none;
       }
     }
 
-    // SELECTED
-    > ul > li.selected > ul > li {
+    // SELECTED ROOT LEVEL
+    > ul > li.selected > ul > li { 
 
       &.selected {
-        height: calc( 100% - ( 2 * ( var(--start-font-size-large-passive) / var(--start-font-line-factor) ) ) );
-        //height: auto;
-        flex-direction: column;
-        place-items: stretch;
+        > a {
+          left: 0%;
+          transform: translateX(0%);             
+        }
+                  height: calc( 100% - ( 2 * ( var(--start-font-size-large-passive) / var(--start-font-line-factor) ) ) );
+          //height: auto;
+          flex-direction: column;
+          place-items: stretch;
+          overflow: hidden;
       }
 
       &:not(.selected) {
         height: calc(  var(--start-font-size-large-passive) / var(--start-font-line-factor) );
       }
 
-      &:not(.selected) a { // HUGE LETTERS not selected
+      &:not(.selected) > a { // HUGE LETTERS not selected
         @include outline;
         font-size: var(--start-font-size-large-passive);
       }
 
-      &.selected ul {
+      &.selected > ul {
         display: block;
-        
+      }
+
+      > ul {
         ul {
-          padding-left: 50px;
+          display: block;
+          li, a { // sub submenu
+            margin-left: 3em;
+            text-indent: -4em;
+            @include font-menü-unterpunkte;
+          }
         }
 
         li, a { // Submenu typography
           color: $color-red;
-          font-size: 28px;
-          line-height: 38px;
+          @include font-menüpunkte;
           text-align: left
         }
       }

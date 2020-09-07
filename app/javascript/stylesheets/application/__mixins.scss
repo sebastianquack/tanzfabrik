@@ -112,10 +112,10 @@
 @mixin font-menüpunkte {
   font-size: 28px;
   line-height:40px;
-  @include breakpoint('s') {
-    font-size: 28px;
-    line-height: 34px;
-  }        
+  //@include breakpoint('s') {
+  //  font-size: 28px;
+  //  line-height: 34px;
+  //}        
   font-weight: $font-weight-medium;
   letter-spacing: -0.02em;
 }
@@ -123,10 +123,10 @@
 @mixin font-menü-unterpunkte {
   font-size: 20px;
   line-height: 28px;
-  @include breakpoint('s') {
-    font-size: 20px;
-    line-height: 20px;
-  }        
+  //@include breakpoint('s') {
+  //  font-size: 20px;
+  //  line-height: 20px;
+  //}        
   font-weight: $font-weight-regular;
   letter-spacing: -0.02em;
 }
