@@ -1,6 +1,6 @@
 <div class="single-event-page" data-section="<%= @event.stage_event? ? "buehne" : "schule" %>">
 
-  <% detail = @event.event_details.first %>
+  <% detail = @detail %>
 
   <div class="overlay">
     <div class="stripes_vertical stripes_left">
@@ -25,8 +25,10 @@
       </span>
       <span>
         <% if @event.type.id == 3 # kurs %>
-          <span><%= get_text_item("tanklassen_level") %>:</span>
-          <span><%= detail.tags.map { |t| t.short }.join('/') if detail.tags.length > 0 %></span><br>
+          <% if !@tag_string_2.empty? || !@tag_string_2.empty? %>
+            <span><%= @tag_string_1 %></span><br>
+            <span><%= @tag_string_2 %></span>
+          <% end %>
           <% if @event.price_regular %>
             <span><%= @event.price_regular %>€ (<%= @event.price_reduced %>€)</span>
           <% end %>
