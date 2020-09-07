@@ -11,7 +11,7 @@ class PagesController < ApplicationController
     # check if slug was passed in
     if params[:id]
       #use regular query because friendly throws error if not found
-      @page = Page.where(:slug => params[:id]).first 
+      @page = Page.no_draft.where(:slug => params[:id]).first 
       if @page
         set_meta_tags :title => @page.title
         set_meta_tags :description => choose_page_description(@page)
