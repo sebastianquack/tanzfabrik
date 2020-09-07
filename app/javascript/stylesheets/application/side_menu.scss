@@ -6,10 +6,17 @@
   top: 50%;
   transform: translateY(-50%);
   @include font-stripes;
-}
-
-[class^=module]:first-of-type {
-  .grid_image img {
-    position: relative;
+  a {
+    background-color: white;
+    line-height: 1.2em;
+    margin: -0.1em 0;
+    padding-right: .5ex;
+    display: inline-block;
   }
 }
+
+// [class^=module]:first-of-type {
+//   .grid_image img {
+//     position: relative;
+//   }
+// }
