@@ -60,6 +60,7 @@ content_element:
     - rich_content_1
     - link_title
     - link_href
+  border-bottom-options: true
 content_2_columns:
   style-options:
     - default
@@ -151,7 +152,7 @@ people_gallery:
     - fabrik     
   images: false
   downloads: false
-  border-bottom-options: false
+  border-bottom-options: true
 kursplan:
   style-options:
     - default
