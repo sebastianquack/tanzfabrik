@@ -1,4 +1,6 @@
-<% events_today = Event.no_draft.where(type: [3,4]).select {|e| e.occurs_on? Date.today } %>
+<% events_today = Event.no_draft.where(type: [4]).select {|e| e.occurs_on? Date.today } %>
+
+<% kurse_today = EventDetail.joins(:event).where('events.type_id = 3').filter {|ed| ed.start_date.wday == Date.today.wday} %>
 
 <div class="module__today" data-border-bottom="<%= content_module.border_bottom%>">
 
@@ -10,7 +12,12 @@
   <% events_today.each do |event| %>
     <% occurrences_today.concat(event.occurrences_on(Date.today)) %>
   <% end %>
-  <% occurrences_today.sort! { |a, b| a[0] <=> b[0] } %>
+
+  <% kurse_today.each do |ed| %>
+    <% occurrences_today.concat([[ed.time, ed]]) %>
+  <% end %>
+
+  <% occurrences_today.sort! { |a, b| a[0].to_s(:time) <=> b[0].to_s(:time) } %>
 
   <ul class="event_list">
 
@@ -28,7 +35,7 @@
       </div>
 
       <div class="teacher">
-        <%= link_to(event.people[0].name) if event.people.length > 0 %>
+        <%= link_to(event.people[0].name, event_path(event)) if event.people.length > 0 %>
       </div>
 
       <div class="place">
@@ -45,4 +52,6 @@
   <% end %>
 
   </ul>
+
+  
 </div>
