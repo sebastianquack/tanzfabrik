@@ -191,7 +191,7 @@ div :class => "timetable-container" do
                           a detail.event.title.html_safe, :href => event_path(detail.event) if detail.event.title
                         end
                         if  detail.event.signup_url and !detail.event.signup_url.empty?
-                          a inline_svg_pack_tag("media/svgs/TAFA20-Webseite_Ticket_red.svg", class: "tickets-icon"), title: get_text_item("tanzklassen_anmeldung"), href: detail.event.signup_url, target: "_blank"
+                          a inline_svg_pack_tag("media/svgs/TAFA-Kurs-Anmeldung_Button.svg", class: "tickets-icon"), title: get_text_item("tanzklassen_anmeldung"), href: detail.event.signup_url, target: "_blank"
                         end
                       end
                       
