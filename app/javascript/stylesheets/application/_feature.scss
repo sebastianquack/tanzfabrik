@@ -116,7 +116,7 @@
   }
 
   .headline {
-    @include font-feature;
+    @include font-h3;
     hyphens: auto;
   }
 

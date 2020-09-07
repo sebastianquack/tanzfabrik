@@ -272,20 +272,20 @@
   text-transform: uppercase;
 }
 
-@mixin font-feature {
-  font-size: 40px;
-  line-height: 46px;
-  @include breakpoint('s') {
-    font-size: 40px; // TODO
-    line-height: 46px; // TODO
-  }
-  font-weight: $font-weight-medium;
-  font-style: italic;
-  .embedded_preview_container & {
-    font-size: 40px !important;
-    line-height: 46px !important;
-  }
-}
+//@mixin font-feature {
+//  font-size: 48px;
+//  line-height: 52px;
+//  @include breakpoint('s') {
+//    font-size: 40px; // TODO
+//    line-height: 46px; // TODO
+//  }
+//  font-weight: $font-weight-medium;
+//  font-style: italic;
+//  .embedded_preview_container & {
+//    font-size: 40px !important;
+//    line-height: 46px !important;
+//  }
+//}
 
 @mixin font-button {
   font-size: 18px;
