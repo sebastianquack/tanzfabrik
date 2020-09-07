@@ -6,6 +6,7 @@
   background-color: white;
   top:0;
   min-height: 100%;
+  width: 100%;
   @include page-dist("padding-top", "top");
 
   .overlay {
