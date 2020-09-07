@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 
     #@active_layout = "application";
     @menu_tree = {}
-    @max_depth = 2
+    @max_depth = 3
 
     # check if slug was passed in
     if params[:id]

@@ -125,3 +125,47 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 })
+
+/*************** mobile menu ******************/
+
+document.addEventListener("DOMContentLoaded", function () {
+  var navElem = document.querySelector("#main_nav")
+  var ulLevel0Elem = navElem.querySelector("ul > li > ul")
+  ulLevel0Elem.addEventListener("click", function(e){
+    var mobileMenuEnabled = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mobile-menu-enabled'));
+    if (mobileMenuEnabled) {
+      var targetElem = e.target
+
+      var targetElemIsSelected = (targetElem.closest("li")).classList.contains("selected")
+
+      // find all li elements that are parents
+      var parentLiElems = []
+      var indexElem = targetElem
+      while (indexElem != navElem) {
+        indexElem = indexElem.parentElement
+        if (indexElem.tagName == "LI") {
+          parentLiElems.push(indexElem)
+        }
+      }
+
+      // prevent click unless we are at root of the tree
+      if (parentLiElems.length < 3) {
+        e.preventDefault();
+      }
+
+      // clear marks
+      navElem.querySelectorAll("li").forEach(function(elem){
+        elem.classList.remove("selected")
+      })
+
+      // mark all parent li as selected
+      if (!targetElemIsSelected) {
+        parentLiElems.forEach(function(elem){
+          elem.classList.add("selected")
+        })
+      }
+      //targetElem.parentElement.classList.toggle("selected")
+      //targetElem.closest("#main_nav").classList.toggle("selected")
+    }
+  })
+})
