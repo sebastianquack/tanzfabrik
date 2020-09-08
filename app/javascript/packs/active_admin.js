@@ -68,6 +68,7 @@ addEventListener("trix-initialize", function(event) {
 
   // insert arrow button
   textGroupElement.insertAdjacentHTML("afterbegin", '<button title="↪" type="button" data-trix-action="x-arrow" class="trix-button trix-button--icon trix-button--icon-arrow">↪</button>')
+  textGroupElement.insertAdjacentHTML("beforeend", '<button title="Formatierung löschen" type="button" data-trix-action="x-clear-formatting" class="trix-button trix-button--icon trix-button--icon-clear">x</button>')
 
   if(!trixListenerSet) {
     trixListenerSet = true;
@@ -77,10 +78,21 @@ addEventListener("trix-initialize", function(event) {
       if(event.actionName === "x-arrow"){
         editors[trixId].insertString("↪ ") // <-- the space is a UTF non-breaking space
       }
+
+      if(event.actionName === "x-clear-formatting") {
+        var plainTextOfSelection = editors[trixId].getDocument().toString().substring(...editors[trixId].getSelectedRange());
+        editors[trixId].insertString(plainTextOfSelection);
+      }
     })
   }
 
 })
+
+addEventListener("trix-paste", function(event) {
+  console.log(event.paste)
+
+})
+
 
 // --> see here for further customization: https://matthaliski.com/blog/customizing-the-trix-toolbar
 
