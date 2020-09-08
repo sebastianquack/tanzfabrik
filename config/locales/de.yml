@@ -75,6 +75,7 @@ de:
   price_reduced_limit: "Frühbucherrabatt: Gilt bei Eingang der Gesamtzahlung bis"
 
   video_url: "Video-URL"
+  map_query: "Karten-URL"
 
   workshop_registration_intro: "Hiermit melde ich mich verbindlich für folgende(n) Workshop(s) an:"
   workshop_registration_choose: "Workshop wählen"

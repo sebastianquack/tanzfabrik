@@ -60,6 +60,7 @@ content_element:
     - rich_content_1
     - link_title
     - link_href
+    - parameter
   border-bottom-options: true
 content_2_columns:
   style-options:
