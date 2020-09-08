@@ -8,6 +8,9 @@
   .headline {
     @include grid-col-gap-dist("margin-left", 1, 1);
     margin-bottom: 40px;
+    @include breakpoint('s') {
+      margin-left: 0 !important;
+    }
   }
 
   .columns {
@@ -15,12 +18,22 @@
     @include grid-gap;
     grid-template-columns: repeat(12, 1fr);
 
+    @include breakpoint('s') {
+      grid-template-columns: 1fr;
+    }
+
     .column_left {
       grid-column: 2 / span 6;
+      @include breakpoint('s') {
+        grid-column: 1 !important;
+      }
     }
 
     .column_right {
       grid-column: 8 / span 4;
+      @include breakpoint('s') {
+        grid-column: 1 !important;
+      }
     }
   }
 

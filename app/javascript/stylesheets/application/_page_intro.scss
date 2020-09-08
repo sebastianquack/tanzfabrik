@@ -12,6 +12,10 @@
     grid-template-columns: 1fr 11fr;
   }
 
+  @include breakpoint('s') {
+    grid-template-columns: 1fr !important;
+  }
+
   @include page-dist("padding-left", "left");
   @include page-dist("padding-right", "right");
   
@@ -19,6 +23,10 @@
     padding-right: 17px;
     grid-column: 1;
     grid-row: 1;
+
+    @include breakpoint('s') {
+      padding-right: 0;
+    }
 
     img {
       width: 100%;
@@ -30,12 +38,22 @@
   .grid_headline {
     grid-column: 2;
     grid-row: 1;
+
+    @include breakpoint('s') {
+      grid-column: 1;
+      grid-row: 2;  
+    }
   }
 
   .grid_text {
     grid-column: 2;
     grid-row: 2;
     padding-top: 60px;
+
+    @include breakpoint('s') {
+      grid-column: 1;
+      grid-row: 4;  
+    }    
   }
 
   .special_text {
@@ -51,7 +69,9 @@
   }
 
   &[data-no-images] .rich_content_1 {
-    margin-left: calc( 100% * 5 / 11 );
+    @include breakpoint('s-min', 'min') {
+      margin-left: calc( 100% * 5 / 11 );
+    }
   }  
 
   .rich_content_1 .rich_content_1 {
@@ -60,6 +80,12 @@
 
   .rich_content_2 {
     @include font-fliesstext-s;
+    padding-right: 17px;
+
+    @include breakpoint('s') {
+      grid-column: 1;
+      grid-row: 3;  
+    }       
   }  
 
   h1 {

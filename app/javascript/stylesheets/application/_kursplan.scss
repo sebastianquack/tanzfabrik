@@ -2,22 +2,49 @@
 
 .module__kursplan {
 
-  @include page-dist("padding-left", "left");
-  @include page-dist("padding-right", "right");
+  @include page-dist("margin-left", "left");
+  @include page-dist("margin-right", "right");
 
   table, thead, tbody, tr, th, td {
     display: block;
   }
 
+  @include breakpoint('xs') {
+    position: relative;
+    margin-left:0;
+    margin-right:0;
+  }
+
   .timetable-container {
+
+    @include breakpoint('xs') {
+      width: 100%;
+      @include debug(blue);
+      @include hide-scrollbar-x;
+      @include page-dist("padding-left", "left");
+      @include page-dist("margin-right", "right");
+    }
 
     .timetable {
 
       tr {
         @include flex-row;
 
+        @include breakpoint('s') {
+          th:first-child, td:first-child {
+            display: none;
+          }
+        }
+
+        @include breakpoint('xs') {
+          width: 800px;
+        }
+
         th, td {
           @include flex-row-item(2,12, false);
+          @include breakpoint('s') {
+            @include flex-row-item(2,10, false);
+          }          
           overflow: hidden;
           border-style: solid;
           border-width: 1px 0 0 1px;
@@ -29,6 +56,18 @@
       thead {
         th {
           border: none;
+        }
+        @include breakpoint('xs') {
+          &:before {
+            content: "\A0";
+            @include font-h2;
+            padding-bottom: 20px;
+            display: block;
+          }
+          .row-studio th {
+            position: absolute;
+            top:0;
+          }
         }
         .row-studio th {
           overflow: visible;
@@ -48,6 +87,7 @@
         tr:last-child { th, td {
           border-bottom-width: 1px;
         } }
+        
 
         .event {
           padding: 6px;
@@ -113,6 +153,15 @@
     }
     dt,dd {
       display: inline;
+    }
+
+    @include breakpoint('s') {
+      @include grid-col-gap-dist("padding-left",0,0);
+      @include clearfix;
+      .tag {
+        clear: left;
+        line-height: 155%;
+      }
     }
   }
 

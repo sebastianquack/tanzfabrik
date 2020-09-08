@@ -140,6 +140,15 @@ main.page {
     &[data-border-bottom="m"] { margin-bottom: 100px; }
     &[data-border-bottom="s"] { margin-bottom: 50px; }
   }
+
+  @include breakpoint('s') {
+    margin-bottom: 50px;
+    &[data-border-bottom] {
+      &[data-border-bottom="l"] { margin-bottom: 100px; }
+      &[data-border-bottom="m"] { margin-bottom: 50px; }
+      &[data-border-bottom="s"] { margin-bottom: 20px; }
+    }    
+  }
 }
 
 /**

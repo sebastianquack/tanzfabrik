@@ -143,7 +143,7 @@ make_module({
   headline_en: "Work\\shops",
   rich_content_1_de: rich_content_1,
   rich_content_1_en: "",
-}, img_landscape)
+}, img_landscape, pdf)
 
 ### page_intro / Profiklassen
 
