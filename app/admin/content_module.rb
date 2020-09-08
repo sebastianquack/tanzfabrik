@@ -130,6 +130,8 @@ ActiveAdmin.register ContentModule do
             f.input field, :as => :select, :collection => Studio.all.map {|s| [s.location.name + " " + s.name, s.id]}, :include_blank => false            
           elsif field == "parameter" && (mtype == "people_gallery")
             f.input field, :label => t("attributes.person.tags", scope: [:activerecord]), :hint => ("<span class='people_tags_list'><u>Verwendete Tags</u><br /><span>" + Person.get_all_tags.join("</span><br /><span>") + "</span></span>").html_safe
+          elsif field == "parameter" && (mtype == "content_element")          
+            f.input field, :label => t("map_query"), :hint => "Optional Google Map einbinden"
           elsif field == "parameter" && (mtype == "page_intro")          
             f.input field, :label => t("video_url"), :hint => "Optional Video einbetten statt eines Bildes"
           elsif field == "parameter" && (mtype == "festival_archiv")
