@@ -218,6 +218,13 @@
       background-color: white;
       position: absolute; // remove whole thing from flow
 
+      > ul:not(#language_switcher),
+      > ul:not(#language_switcher) > li,
+      > ul:not(#language_switcher) > li > ul {
+        position: absolute;
+        z-index:-100vw; // move bottom layers out of the way
+      }
+
       > ul,
       > ul > li,
       > ul > li > ul,
@@ -288,6 +295,9 @@
             position: relative;
             top: -3px;
             > a {pointer-events: none;}
+            &.active {
+              font-style: italic;
+            }
           }
 
           ul {
