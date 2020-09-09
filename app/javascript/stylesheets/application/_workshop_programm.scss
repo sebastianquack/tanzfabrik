@@ -7,6 +7,10 @@
     @include page-dist("padding-right", "right");
   }
 
+  .project_list {
+    margin-bottom: 24px;
+  }
+
   h3, .project_list li {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -27,13 +31,17 @@
 
     .date {
       @include font-title;
-      grid-column: 1 / span 3;
+      grid-column: 1 / span 4;
+
+      span {
+        margin-right: 0.2em;
+      }
     }
 
-    .time {
+    /*.time {
       @include font-stripes;
       grid-column: 4 / span 1;
-    }
+    }*/
 
     .teacher {
       @include font-stripes;
