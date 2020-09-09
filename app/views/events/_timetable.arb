@@ -59,27 +59,12 @@ details_by_hour =
       end    
 
       #check if a detail has an occurrence during the upcoming weeks
-      upcoming_weeks = 12
       details.each do |detail|
-        if detail.start_date.wday == date.wday
-          # fast code
-          if detail.extend_empty_end_date.end_date >= Date.today && detail.start_date <= (Date.today + upcoming_weeks.week)
-            table_data[row_index][column_index + 1].push(detail)
-            tags += detail.tags
-          # slow code for events that happen between now and upcoming_weeks
-          elsif detail.start_date >= Date.today
-            logger.debug("UPCOMING " + detail.event.title + detail.event.type_id.to_s)
-            upcoming_weeks.times do |i|
-              if detail.extend_empty_end_date.occurs_on?(date + i.week)
-                table_data[row_index][column_index + 1].push(detail)
-                tags += detail.tags
-                break
-              end
-            end
-          end
+        if detail.show_in_kursplan_on(date)
+          table_data[row_index][column_index + 1].push(detail)
+          tags += detail.tags
         end
-      end  
-
+      end
     end
 
     # only if there was an occurrence in this row, add time to first column

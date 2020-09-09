@@ -197,5 +197,28 @@ class EventDetail < ActiveRecord::Base
       where("")
     end
   end
+
+
+  # check if a detail has an occurrence during the upcoming weeks
+  def show_in_kursplan_on(date)
+    upcoming_weeks = 12
+    if self.start_date.wday == date.wday
+      # fast code
+      if self.extend_empty_end_date.end_date >= Date.today && self.start_date <= (Date.today + upcoming_weeks.week)
+        return true
+      # slow code for events that happen between now and upcoming_weeks
+      elsif self.start_date >= Date.today
+        logger.debug("UPCOMING " + self.event.title + self.event.type_id.to_s)
+        upcoming_weeks.times do |i|
+          if self.extend_empty_end_date.occurs_on?(date + i.week)
+            return true
+            break
+          end
+        end
+      end
+    end
+
+    return false
+  end
       
 end
