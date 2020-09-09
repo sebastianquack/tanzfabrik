@@ -185,7 +185,7 @@
 
 @mixin font-fliesstext-m {
   font-size: 18px;
-  line-height: 22px;
+  line-height: 26px;
   @include breakpoint('s') {
     font-size: 14px;
     line-height: 18px;
