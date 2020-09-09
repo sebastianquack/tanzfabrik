@@ -204,42 +204,55 @@
 @include breakpoint('s-min','min') {
   body:not([data-menu-item-key="start"])
   { 
+
     &.featured_visible #main_nav {
       background-color: transparent;
     }
 
-    &.featured_visible[data-section="buehne"] #main_nav {
+    &.featured_visible[data-section="buehne"]  {
       color: white;
     }
 
-    #main_nav {
+    #main_nav {      
 
-      position: absolute;
+      background-color: white;
+      position: absolute; // remove whole thing from flow
 
       > ul,
       > ul > li,
       > ul > li > ul,
       > ul > li > ul > li {
-        visibility: hidden;
+        visibility: hidden; // hide the bottom layers
+        background-color: inherit;
+      }
+
+      #language_switcher {
+        &, * {visibility: visible;}
+        position: fixed;
+        z-index: 14;
+        @include page-dist("left", "left");
+        top: $header-height;
+        padding-top: 8px;
+        background-color: transparent
       }
 
       > ul > li > ul > li.active  {
-        position: absolute;
         display: flex;
 
         &, * {
           visibility: visible;
         }
-        > a {
-          display: none;
+        > span, > a {
+          display: none; // hide section name ("e.g. "schule")
         }
-
-
+      
         position: fixed;
         width: 100%;
+        @include page-dist("padding-left", "left");
+        @include page-dist("padding-right", "right");
         top: $header-height;
         z-index: 12;
-        background-color: white;
+        //padding-left: 2em; // roughly the width of the language selector
 
         overflow: hidden;
 
@@ -250,23 +263,18 @@
         }
         transition: max-height 0.3s, background-color 0.2s;
 
-        padding-top: 12px;
-        padding-bottom: 12px;
-
-        @include page-dist("padding-left", "left");
-        @include page-dist("padding-right", "right");
-
-        border-style: solid;
-        border-width: 1px 0 1px 0;
-        
-        
-
-
         > ul { // tree
+          @include debug(#0f05);
           flex: 1;
           display: flex;
           flex-direction: row;
           justify-content: space-around;
+
+          border-style: solid;
+          border-width: 1px 0 1px 0;
+
+          padding-top: 12px;
+          padding-bottom: 12px;
 
           a {
             text-decoration: none;
@@ -279,6 +287,7 @@
             @include font-menüpunkte;
             position: relative;
             top: -3px;
+            > a {pointer-events: none;}
           }
 
           ul {
