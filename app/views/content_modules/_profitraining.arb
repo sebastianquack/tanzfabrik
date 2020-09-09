@@ -34,7 +34,7 @@ def render_list_for(profitrainings)
 
           div :class => "teacher" do
             event_detail.event.people.map do |p| 
-              a p.name, :href => person_path(p)
+              a p.name, :href => event_path(event_detail.event)
             end
           end
           div :class => "title" do
