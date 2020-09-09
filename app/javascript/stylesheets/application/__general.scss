@@ -41,65 +41,6 @@ b, strong {
   letter-spacing: 0.16px;
 }
 
-#language_switcher {
-  @include font-language-select;
-  li.active, li.active a {
-    font-style: italic;
-  }
-}
-
-.horizontal_bar_container {
-
-  @include flex-row;
-  @include font-stripes;
-
-  .horizontal_bar_left {
-    @include flex-row-item(6,12);
-    a:hover, a:active {
-      text-decoration: none;
-    }
-  }
-
-  .horizontal_bar_center {
-    @include flex-row-item(3,12);
-  }
-
-  .horizontal_bar_right {
-    @include flex-row-item(3,12, false);
-    display: flex;
-    justify-content: flex-end;
-  }
-}
-
-header {
-  position: fixed;
-  top:0;
-  z-index: 11;
-  background-color: white;
-  body.featured_visible & {
-    background-color: transparent;
-  }
-  body.featured_visible[data-section="buehne"] & {
-    color: white;
-  }  
-  transition: background-color 0.2s;
-  //overflow: hidden;
-
-  height: $header-height;
-  box-sizing: border-box;
-
-  padding-top: 12px;
-  padding-bottom: 12px;
-
-  @include page-dist("padding-left", "left");
-  @include page-dist("padding-right", "right");
-
-  img {
-    height: $header-height-logo;
-  }
-
-}
-
 main.page {
   padding-top: $header-height + $menu-height + $page-top-padding;
   min-height: calc( 100vh - #{$header-height + $menu-height + $page-top-padding});

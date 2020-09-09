@@ -126,7 +126,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 })
 
-/*************** mobile menu ******************/
+/*************** mobile menu show/hide ******************/
+
+document.addEventListener("DOMContentLoaded", function () {
+  var openElem = document.querySelector("button.navTrigger.open")
+  var closeElem = document.querySelector("button.navTrigger.close")
+  openElem.addEventListener("click", function() {
+    document.body.classList.add("menu_open")
+  })
+  closeElem.addEventListener("click", function () {
+    document.body.classList.remove("menu_open")
+  })  
+})
+
+
+/*************** mobile menu navigation ******************/
 
 document.addEventListener("DOMContentLoaded", function () {
   var navElem = document.querySelector("#main_nav")

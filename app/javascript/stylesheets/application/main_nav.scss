@@ -24,7 +24,7 @@
   flex-direction: column;
   justify-content: space-around;
 
-  > ul, 
+  > ul:not(#language_switcher), 
   > ul > li,
   > ul > li > ul {
     height: 100%;
@@ -51,7 +51,7 @@
 
     padding-left: 12px;
 
-    > a { // HUGE LETTERS
+    > a, > span { // HUGE LETTERS
       font-weight: $font-weight-semibold-eps51;
       font-size: var(--start-font-size-large);
       line-height: 100%;
@@ -93,7 +93,7 @@
 
         min-height: var(--start-font-size-large);
 
-        > a { // HUGE LETTERS 
+        > a, > span { // HUGE LETTERS 
           letter-spacing: -10px;
           @include outline;
         }
@@ -132,7 +132,7 @@
 
     // BASE STATE
     > ul > li > ul > li {
-      > a { // HUGE LETTERS
+      > a, > span { // HUGE LETTERS
         color: $color-red;
         letter-spacing: 0;
         text-shadow: none;
@@ -152,7 +152,7 @@
     > ul > li.selected > ul > li { 
 
       &.selected {
-        > a {
+        > a, > span {
           left: 0%;
           transform: translateX(0%);             
         }
@@ -167,7 +167,7 @@
         height: calc(  var(--start-font-size-large-passive) / var(--start-font-line-factor) );
       }
 
-      &:not(.selected) > a { // HUGE LETTERS not selected
+      &:not(.selected) > a, &:not(.selected) > span { // HUGE LETTERS not selected
         @include outline;
         font-size: var(--start-font-size-large-passive);
       }
@@ -328,5 +328,43 @@
 @include breakpoint('s') {
   body:not([data-menu-item-key="start"]) {
 
+    &:not(.menu_open) {
+      #main_nav {
+        display: none;
+      }
+    }
+
+    &.menu_open {
+      overflow: hidden;
+    }
+
+    // &[data-section="buehne"] #main_nav * {
+    //   color: black !important;
+    //   border-color: black;
+    // }
+
+    #main_nav {
+
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: white;
+      z-index: 100;
+
+      ul#language_switcher {
+        position: fixed;
+        top:0;
+        right: 60px;
+        z-index: 20;
+        transform: translateX(-100%);
+        line-height: $header-height;
+        .active {
+          display: none;
+        }
+        :not(active) {
+          font-size:20px;
+        }
+      }
+    }
   }
 }
