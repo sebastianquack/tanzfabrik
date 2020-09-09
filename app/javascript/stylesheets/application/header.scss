@@ -47,6 +47,11 @@
           display: none;
         }
       }
+      body.featured_visible[data-section="buehne"]:not(.menu_open) & {
+        button.open path {
+          stroke: white;
+        }    
+      }
     }
   }
 
@@ -62,12 +67,12 @@ header {
   top:0;
   z-index: 11;
   background-color: white;
-  body.featured_visible & {
+  body.featured_visible:not(.menu_open) & {
     background-color: transparent;
   }
-  body.featured_visible[data-section="buehne"] & {
+  body.featured_visible[data-section="buehne"]:not(.menu_open) & {
     color: white;
-  }  
+  }
   transition: background-color 0.2s;
   //overflow: hidden;
 

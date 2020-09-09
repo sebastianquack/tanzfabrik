@@ -340,7 +340,7 @@
       }
       #main_nav > ul > li > ul > li {
         
-        transform: translateX(-100vw);
+        transform: translateY(100vw);
         overflow: hidden;
       }
     }
@@ -358,7 +358,7 @@
     // }
 
     #main_nav {
-      transition: all .35s;
+      transition: transform .35s, opacity 0.2s;
 
       position: fixed;
       top: 0;

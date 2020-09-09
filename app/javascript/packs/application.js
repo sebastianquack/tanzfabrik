@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (mobileMenuEnabled) {
       var targetElem = e.target
 
-      if (targetElem.tagName != "A") return;
+      if (targetElem.tagName != "SPAN" && targetElem.tagName != "A") return;
 
       var targetElemIsSelected = (targetElem.closest("li")).classList.contains("selected")
 
