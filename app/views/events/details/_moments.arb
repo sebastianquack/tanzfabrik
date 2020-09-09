@@ -9,7 +9,10 @@ event.event_details.each do |ed|
 end
 
 ul :class => "moments" do
-  occurrences.sort_by{ |oc| oc[0] }.each do |occurrence, ed|
+  occurrences
+    .sort_by{ |oc| oc[0] }
+    .select{ |oc,ed| (event.type.id != 4 || oc >= Date.today.beginning_of_week) } # if profitraining, then show only events from this week on
+    .each do |occurrence, ed|
     li :class => "moment" do
       time :datetime => (l occurrence, :format => :time_tag_datetime) do 
         span l occurrence, :format => :weekday
