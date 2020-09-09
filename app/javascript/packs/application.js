@@ -150,6 +150,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (mobileMenuEnabled) {
       var targetElem = e.target
 
+      if (targetElem.tagName != "A") return;
+
       var targetElemIsSelected = (targetElem.closest("li")).classList.contains("selected")
 
       // find all li elements that are parents

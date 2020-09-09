@@ -7,7 +7,7 @@
   --mobile-menu-enabled: 0;
   --start-font-line-factor: 0.78; // ration font-size to block height
   @include breakpoint('s') {
-    --start-font-size-large: 19.5vw;
+    --start-font-size-large: 19.5vmin;
     --mobile-menu-enabled: 1;
     --start-font-size-large-passive: 40px;
   }
@@ -29,6 +29,10 @@
   > ul > li > ul {
     height: 100%;
   }  
+
+  > ul > li:not(.selected) > ul > li {
+    min-height: var(--start-font-size-large);
+  }
 
   > ul > li > ul > li {
     height: 33.3333%;
@@ -330,12 +334,22 @@
 
     &:not(.menu_open) {
       #main_nav {
-        display: none;
+        pointer-events: none;
+        visibility: hidden;
+        opacity: 0;
+      }
+      #main_nav > ul > li > ul > li {
+        
+        transform: translateX(-100vw);
+        overflow: hidden;
       }
     }
 
     &.menu_open {
       overflow: hidden;
+      #main_nav {
+        opacity: 1;
+      }
     }
 
     // &[data-section="buehne"] #main_nav * {
@@ -344,6 +358,7 @@
     // }
 
     #main_nav {
+      transition: all .35s;
 
       position: fixed;
       top: 0;
@@ -351,20 +366,7 @@
       background-color: white;
       z-index: 100;
 
-      ul#language_switcher {
-        position: fixed;
-        top:0;
-        right: 60px;
-        z-index: 20;
-        transform: translateX(-100%);
-        line-height: $header-height;
-        .active {
-          display: none;
-        }
-        :not(active) {
-          font-size:20px;
-        }
-      }
+      @include mobile-language-switcher;
     }
   }
 }

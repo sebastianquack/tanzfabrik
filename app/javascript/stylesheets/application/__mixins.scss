@@ -437,3 +437,22 @@
     clear: both;
   }
 }
+
+@mixin mobile-language-switcher {
+  ul#language_switcher {
+    position: fixed;
+    opacity: 1;
+    top:0;
+    right: 60px;
+    height: $header-height;
+    z-index: 20;
+    transform: translateX(-100%);
+    line-height: $header-height;
+    .active {
+      display: none;
+    }
+    :not(active) {
+      font-size:20px;
+    }
+  }  
+}

@@ -27,7 +27,10 @@
       outline: none;
     };
     @include breakpoint('s') {
-      a {display: none;}
+      > a {display: none;}
+
+      @include mobile-language-switcher;
+
       button.open {
         display: initial;
       } 
@@ -38,6 +41,11 @@
         button.open {
           display: none;
         }        
+      }
+      body[data-menu-item-key="start"] & {
+        button {
+          display: none;
+        }
       }
     }
   }

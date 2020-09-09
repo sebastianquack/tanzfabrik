@@ -1,1 +1,7 @@
 @import "./__mixins.scss";
+
+body[data-menu-item-key="start"] {
+  @include breakpoint('s') {
+    overflow: hidden; // prevent scrollbar wobbling during animation
+  }
+}
