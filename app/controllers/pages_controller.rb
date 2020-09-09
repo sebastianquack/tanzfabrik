@@ -5,14 +5,14 @@ class PagesController < ApplicationController
   def show
 
     #@active_layout = "application";
-    @menu_tree = {}
+    @menu_tree = MenuItem.find_by(key: "start").subtree.arrange(:order => :position)
     @max_depth = 3
 
     # this finds the appropriate menu item from the section set in page
     def find_menu_item_for_orphan
       @menu_item = MenuItem.find_by key: @page.section
       if @menu_item
-        @menu_tree = @menu_item.descendants.arrange(:order => :position)
+        #@menu_tree = @menu_item.descendants.arrange(:order => :position)
       end
       if @page.section 
         section_landing_page = Page.where(slug: @page.section).first
@@ -39,10 +39,10 @@ class PagesController < ApplicationController
           # always show menu from landing pages down
           # this is a landing page, show full subtree
           if menu_items[0].ancestors.length == 1 and ["buehne", "schule", "fabrik"].include? @page.slug
-            @menu_tree = menu_items[0].descendants.arrange(:order => :position) 
+            #@menu_tree = menu_items[0].descendants.arrange(:order => :position) 
             @landing_page_menu_item = menu_items[0]
           elsif menu_items[0].ancestors.length > 1 # we are deeper, show from depth 1 down
-            @menu_tree = menu_items[0].ancestors[1].descendants.arrange(:order => :position) 
+            #@menu_tree = menu_items[0].ancestors[1].descendants.arrange(:order => :position) 
             @landing_page_menu_item = menu_items[0].ancestors[1]
           else
             # this is a menu item that is not in the tree
