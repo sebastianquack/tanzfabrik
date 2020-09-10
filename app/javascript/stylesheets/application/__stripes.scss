@@ -54,7 +54,7 @@ span[data-logo] {
   &:before {
     content: url("~svgs/Tanzfabrik_Signet-red.svg");
     .module__feature[data-section="buehne"] &,
-    body.featured_visible .horizontal_bar_container & {
+    body.featured_visible[data-section="buehne"]:not(.menu_open) .horizontal_bar_container & {
       content: url("~svgs/Tanzfabrik_Signet-white.svg");  
     }        
     display: block;
@@ -86,6 +86,10 @@ span[data-close] {
 svg.icon {
   width: 40px;
   height: 40px;
+  @include breakpoint('s') {
+    width: 32px;
+    height: 32px;    
+  }
   path {
     stroke-linecap:round;
     stroke-width:2px;

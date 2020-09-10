@@ -1,80 +1,398 @@
 @import "./__mixins.scss";
 
-body:not([data-menu-item-key="start"]) 
-{ 
-  &.featured_visible #main_nav {
-    background-color: transparent;
+$transition-duration: 0.35s;
+
+:root{
+  --start-font-size-large: 200px;
+  --mobile-menu-enabled: 0;
+  --start-font-line-factor: 0.78; // ration font-size to block height
+  @include breakpoint('s') {
+    --start-font-size-large: 19.5vmin;
+    --mobile-menu-enabled: 1;
+    --start-font-size-large-passive: 40px;
   }
+}
 
-  &.featured_visible[data-section="buehne"] #main_nav {
-    color: white;
-  }
+// START || MOBILE
+@mixin main_nav_start-or-mobile {
 
-  #main_nav {
-
-  position: fixed;
-  top: $header-height;
-  z-index: 12;
-  background-color: white;
-
-  overflow: hidden;
-
-  max-height: $menu-height;
+  font-weight: $font-weight-semibold;
+  margin-top: $header-height;
+  height: calc( 100vh - #{$header-height});
   box-sizing: border-box;
-  &:hover {
-    max-height: 100vh;
-  }
-  transition: max-height 0.3s, background-color 0.2s;
-
-  padding-top: 12px;
-  padding-bottom: 12px;
-
-  @include page-dist("padding-left", "left");
-  @include page-dist("padding-right", "right");
-
-  border-style: solid;
-  border-width: 1px 0 1px 0;
 
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  justify-content: space-around;
 
-  .active { 
-    font-style: italic; 
+  > ul:not(#language_switcher), 
+  > ul > li,
+  > ul > li > ul {
+    height: 100%;
+  }  
+
+  > ul > li:not(.selected) > ul > li {
+    //min-height: var(--start-font-size-large);
   }
 
-  > ul:nth-child(1) { // language switcher
-    @include font-language-select;
-    position: relative;
-    top: -5px;
-  }
+  > ul > li > ul > li {
+    height: 33.3333%;
+    
+    box-sizing: border-box;
+    @include debug(#f0f5);
+    transition: height $transition-duration;
 
-  > ul:nth-child(2) { // tree
-    flex: 1;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    justify-items: center;
+    justify-self: center;
 
-    a {
+      
+    border: solid 1px $color-red;
+    border-width: 0 0 1px 0;
+    &:last-child {
+      border:none;
+    }
+
+    padding-left: 12px;
+
+    > a, > span { // HUGE LETTERS
+      font-weight: $font-weight-semibold-eps51;
+      font-size: var(--start-font-size-large);
+      line-height: 100%;
+      display: block;
+      text-transform: uppercase;
+
+      transition: all $transition-duration, left $transition-duration, transform $transition-duration;
+
       text-decoration: none;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
 
-    > li { // section headers
-      @include font-menüpunkte;
-      position: relative;
-      top: -3px;
-    }
-
-    ul {
-      
-      li, a {
-        @include font-menü-unterpunkte;
+      &:hover, &:active {
+        color: $color-red;
+        text-shadow: none;
       }
-      
-    }
+    } 
   }
 
 }
+
+#main_nav {
+  user-select:none;
+  @include debug(yellow);
+
+  @include breakpoint('s') {
+    @include main_nav_start-or-mobile
+  }
+
+  body[data-menu-item-key="start"] & {
+    @include main_nav_start-or-mobile;
+  }
+}
+
+// START && DESKTOP
+#main_nav {
+  body[data-menu-item-key="start"] & {
+    @include breakpoint('s-min', 'min') {
+
+      > ul > li > ul > li {
+
+        min-height: var(--start-font-size-large);
+        align-items: center;
+        overflow: hidden;
+
+        > a, > span { // HUGE LETTERS 
+          letter-spacing: -10px;
+          @include outline;
+        }
+
+        ul, ul a { // Submenu typography
+          color: $color-red;
+          font-size: 16px;
+          line-height: 20px;
+          text-transform: uppercase;
+        }
+
+        ul { // submenu layout
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          margin-left: 1.5em;
+          height: calc( var(--start-font-line-factor) * var(--start-font-size-large));
+          box-sizing: border-box;
+          @include debug(#ff05);
+          //padding-bottom: calc( 20px + 0.5 * ( 100% - var(--start-font-size-large) ) );
+
+          ul { // sub submenu
+            display: none;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+// MOBILE
+
+#main_nav {
+  @include breakpoint('s') {
+
+    // BASE STATE
+    > ul > li > ul > li {
+
+        overflow: hidden;
+        flex-direction: column;
+        align-items: flex-start;
+        //place-items: stretch;        
+
+      > a, > span { // HUGE LETTERS
+        color: $color-red;
+        letter-spacing: 0;
+        text-shadow: none;
+        text-align: left;
+        padding-right: 12px;
+        display: block;
+        position: relative;
+        left: 50%;
+        top: calc( 0.5 * ( 100% - var(--start-font-size-large) ) );
+        transform: translateX(-50%);
+        transition: all $transition-duration;
+      }
+      > ul {
+        //display: none;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transform: translateY(100vh);
+        opacity: 0;
+        transition: transform $transition-duration, opacity $transition-duration;
+      }
+    }
+
+    // SELECTED ROOT LEVEL
+    > ul > li.selected > ul > li { 
+
+      &.selected {
+
+        > a, > span { // HUGE LETTERS
+          left: 0%;
+          top:0;
+          transform: translateX(0%) translateY(0);
+        }
+        
+        height: calc( 100% - ( 2 * ( var(--start-font-size-large-passive) / var(--start-font-line-factor) ) ) );
+        //height: auto;
+        overflow-y: auto;
+
+        ul {
+          opacity: 1;
+          max-height: 100vh;
+        }
+      }
+
+      &:not(.selected) {
+        height: calc(  var(--start-font-size-large-passive) / var(--start-font-line-factor) );
+      }
+
+      &:not(.selected) > a, &:not(.selected) > span { // HUGE LETTERS not selected
+        @include outline;
+        font-size: var(--start-font-size-large-passive);
+        top:calc( 0.5 * ( 100% - var(--start-font-size-large-passive) ) );
+      }
+
+      &.selected > ul {
+        display: block;
+        transform: translateY(0);
+        overflow-y: auto;
+        opacity: 1;
+      }
+
+      > ul {
+        ul { // sub submenu
+          display: block;
+          li, a { 
+            margin-left: 3em;
+            text-indent: -4em;
+            @include font-menü-unterpunkte;
+          }
+        }
+
+        li, a { // Submenu typography
+          color: $color-red;
+          @include font-menüpunkte;
+          text-align: left
+        }
+      }
+
+    }
+
+  }
+
+}
+
+// PAGE && DESKTOP
+
+@include breakpoint('s-min','min') {
+  body:not([data-menu-item-key="start"])
+  { 
+
+    &.featured_visible #main_nav {
+      background-color: transparent;
+    }
+
+    &.featured_visible[data-section="buehne"]  {
+      color: white;
+    }
+
+    #main_nav {      
+
+      background-color: white;
+      position: absolute; // remove whole thing from flow
+
+      > ul:not(#language_switcher),
+      > ul:not(#language_switcher) > li,
+      > ul:not(#language_switcher) > li > ul {
+        position: absolute;
+        z-index:-100vw; // move bottom layers out of the way
+      }
+
+      > ul,
+      > ul > li,
+      > ul > li > ul,
+      > ul > li > ul > li {
+        visibility: hidden; // hide the bottom layers
+        background-color: inherit;
+      }
+
+      #language_switcher {
+        &, * {visibility: visible;}
+        position: fixed;
+        z-index: 14;
+        @include page-dist("left", "left");
+        top: $header-height;
+        padding-top: 8px;
+        background-color: transparent
+      }
+
+      > ul > li > ul > li.active  {
+        display: flex;
+
+        &, * {
+          visibility: visible;
+        }
+        > span, > a {
+          display: none; // hide section name ("e.g. "schule")
+        }
+      
+        position: fixed;
+        width: 100%;
+        @include page-dist("padding-left", "left");
+        @include page-dist("padding-right", "right");
+        top: $header-height;
+        z-index: 12;
+        //padding-left: 2em; // roughly the width of the language selector
+
+        overflow: hidden;
+
+        max-height: $menu-height;
+        box-sizing: border-box;
+        &:hover {
+          max-height: 100vh;
+        }
+        transition: max-height $transition-duration, background-color 0.2s;
+
+        > ul { // tree
+          @include debug(#0f05);
+          flex: 1;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+
+          border-style: solid;
+          border-width: 1px 0 1px 0;
+
+          padding-top: 12px;
+          padding-bottom: 12px;
+
+          a {
+            text-decoration: none;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+
+          > li { // section headers
+            @include font-menüpunkte;
+            position: relative;
+            top: -3px;
+            > a {pointer-events: none;}
+            &.active {
+              font-style: italic;
+            }
+          }
+
+          ul {
+          
+            li, a {
+              @include font-menü-unterpunkte;
+            }
+          
+          }
+        }        
+      }
+
+      .active { 
+        font-style: italic; 
+      }
+
+      > ul:nth-child(1) { // language switcher
+        @include font-language-select;
+        position: relative;
+        top: -5px;
+      }
+
+    }
+  }
+}
+
+// MOBILE && PAGE
+@include breakpoint('s') {
+  body:not([data-menu-item-key="start"]) {
+
+    &:not(.menu_open) {
+      #main_nav {
+        pointer-events: none;
+        visibility: hidden;
+        opacity: 0;
+      }
+      #main_nav > ul > li > ul > li {
+        
+        transform: translateY(100vw);
+        overflow: hidden;
+      }
+    }
+
+    &.menu_open {
+      overflow: hidden;
+      #main_nav {
+        opacity: 1;
+      }
+    }
+
+    // &[data-section="buehne"] #main_nav * {
+    //   color: black !important;
+    //   border-color: black;
+    // }
+
+    #main_nav {
+      transition: transform $transition-duration, opacity 0.2s;
+
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: white;
+      z-index: 100;
+
+      @include mobile-language-switcher;
+    }
+  }
 }

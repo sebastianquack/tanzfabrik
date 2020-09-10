@@ -126,7 +126,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 })
 
-/*************** mobile menu ******************/
+/*************** mobile menu show/hide ******************/
+
+document.addEventListener("DOMContentLoaded", function () {
+  var openElem = document.querySelector("button.navTrigger.open")
+  var closeElem = document.querySelector("button.navTrigger.close")
+  openElem.addEventListener("click", function() {
+    document.body.classList.add("menu_open")
+  })
+  closeElem.addEventListener("click", function () {
+    document.body.classList.remove("menu_open")
+  })  
+})
+
+
+/*************** mobile menu navigation ******************/
 
 document.addEventListener("DOMContentLoaded", function () {
   var navElem = document.querySelector("#main_nav")
@@ -135,6 +149,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var mobileMenuEnabled = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mobile-menu-enabled'));
     if (mobileMenuEnabled) {
       var targetElem = e.target
+
+      if (targetElem.tagName != "SPAN" && targetElem.tagName != "A") return;
 
       var targetElemIsSelected = (targetElem.closest("li")).classList.contains("selected")
 
@@ -153,19 +169,30 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
       }
 
-      // clear marks
-      navElem.querySelectorAll("li").forEach(function(elem){
-        elem.classList.remove("selected")
+
+      // mark parent li as selected, other li not
+      navElem.querySelectorAll("li").forEach(function (elem) {
+        if (!targetElemIsSelected && elemInArray(elem, parentLiElems)) {
+          elem.classList.add("selected")  
+        } else {
+          elem.classList.remove("selected")
+        }
       })
 
-      // mark all parent li as selected
-      if (!targetElemIsSelected) {
-        parentLiElems.forEach(function(elem){
-          elem.classList.add("selected")
-        })
-      }
       //targetElem.parentElement.classList.toggle("selected")
       //targetElem.closest("#main_nav").classList.toggle("selected")
     }
   })
 })
+
+
+function elemInArray(elem, elemArray) {
+  var found = false
+  elemArray.forEach(function(elem0){
+    if (elem0 === elem) {
+      found = true
+      return
+    }
+  })
+  return found
+}
