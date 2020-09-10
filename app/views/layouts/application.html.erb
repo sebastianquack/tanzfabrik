@@ -18,11 +18,10 @@
   section = "schule"
   #section = @landing_page_menu_item if @landing_page_menu_item
   section = @page.section if @page and @page.section
+  menu_key = @is_start_page ? "start" : section
 %>
-<body data-menu-item-key="<%= @page ? section : "start" %>" data-section="<%= section %>">
-
+<body data-menu-item-key="<%= menu_key %>" data-section="<%= section %>">
   <% page_title = get_text_item("page_title").sub(" ", "<br />").html_safe %>
-  
   <header class="horizontal_bar_container">
     <div class="horizontal_bar_left">
       <%= !@page || @page && @page.slug != "start" ? (link_to page_title, root_url) : page_title %>

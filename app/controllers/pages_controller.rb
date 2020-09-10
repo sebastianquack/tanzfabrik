@@ -64,7 +64,7 @@ class PagesController < ApplicationController
       if @menu_item
         @menu_tree = @menu_item.subtree.arrange(:order => :position)
       end
-      
+      @is_start_page = true
       render "start"
     end
 
