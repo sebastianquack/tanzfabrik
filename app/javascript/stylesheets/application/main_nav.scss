@@ -1,6 +1,6 @@
 @import "./__mixins.scss";
 
-
+$transition-duration: 0.35s;
 
 :root{
   --start-font-size-large: 200px;
@@ -15,6 +15,7 @@
 
 // START || MOBILE
 @mixin main_nav_start-or-mobile {
+
   font-weight: $font-weight-semibold;
   margin-top: $header-height;
   height: calc( 100vh - #{$header-height});
@@ -31,7 +32,7 @@
   }  
 
   > ul > li:not(.selected) > ul > li {
-    min-height: var(--start-font-size-large);
+    //min-height: var(--start-font-size-large);
   }
 
   > ul > li > ul > li {
@@ -39,10 +40,9 @@
     
     box-sizing: border-box;
     @include debug(#f0f5);
-    transition: all 0.35s;
+    transition: height $transition-duration;
 
     display: flex;
-    align-items: center;
     justify-items: center;
     justify-self: center;
 
@@ -62,7 +62,7 @@
       display: block;
       text-transform: uppercase;
 
-      transition: all 0.35s;
+      transition: all $transition-duration, left $transition-duration, transform $transition-duration;
 
       text-decoration: none;
 
@@ -88,7 +88,7 @@
   }
 }
 
-// START & DESKTOP
+// START && DESKTOP
 #main_nav {
   body[data-menu-item-key="start"] & {
     @include breakpoint('s-min', 'min') {
@@ -96,6 +96,8 @@
       > ul > li > ul > li {
 
         min-height: var(--start-font-size-large);
+        align-items: center;
+        overflow: hidden;
 
         > a, > span { // HUGE LETTERS 
           letter-spacing: -10px;
@@ -136,6 +138,12 @@
 
     // BASE STATE
     > ul > li > ul > li {
+
+        overflow: hidden;
+        flex-direction: column;
+        align-items: flex-start;
+        //place-items: stretch;        
+
       > a, > span { // HUGE LETTERS
         color: $color-red;
         letter-spacing: 0;
@@ -145,10 +153,18 @@
         display: block;
         position: relative;
         left: 50%;
+        top: calc( 0.5 * ( 100% - var(--start-font-size-large) ) );
         transform: translateX(-50%);
+        transition: all $transition-duration;
       }
-      ul {
-        display: none;
+      > ul {
+        //display: none;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transform: translateY(100vh);
+        opacity: 0;
+        transition: transform $transition-duration, opacity $transition-duration;
       }
     }
 
@@ -156,15 +172,21 @@
     > ul > li.selected > ul > li { 
 
       &.selected {
-        > a, > span {
+
+        > a, > span { // HUGE LETTERS
           left: 0%;
-          transform: translateX(0%);             
+          top:0;
+          transform: translateX(0%) translateY(0);
         }
-                  height: calc( 100% - ( 2 * ( var(--start-font-size-large-passive) / var(--start-font-line-factor) ) ) );
-          //height: auto;
-          flex-direction: column;
-          place-items: stretch;
-          overflow: hidden;
+        
+        height: calc( 100% - ( 2 * ( var(--start-font-size-large-passive) / var(--start-font-line-factor) ) ) );
+        //height: auto;
+        overflow-y: auto;
+
+        ul {
+          opacity: 1;
+          max-height: 100vh;
+        }
       }
 
       &:not(.selected) {
@@ -174,16 +196,20 @@
       &:not(.selected) > a, &:not(.selected) > span { // HUGE LETTERS not selected
         @include outline;
         font-size: var(--start-font-size-large-passive);
+        top:calc( 0.5 * ( 100% - var(--start-font-size-large-passive) ) );
       }
 
       &.selected > ul {
         display: block;
+        transform: translateY(0);
+        overflow-y: auto;
+        opacity: 1;
       }
 
       > ul {
-        ul {
+        ul { // sub submenu
           display: block;
-          li, a { // sub submenu
+          li, a { 
             margin-left: 3em;
             text-indent: -4em;
             @include font-menü-unterpunkte;
@@ -203,7 +229,7 @@
 
 }
 
-// PAGE & DESKTOP
+// PAGE && DESKTOP
 
 @include breakpoint('s-min','min') {
   body:not([data-menu-item-key="start"])
@@ -272,7 +298,7 @@
         &:hover {
           max-height: 100vh;
         }
-        transition: max-height 0.3s, background-color 0.2s;
+        transition: max-height $transition-duration, background-color 0.2s;
 
         > ul { // tree
           @include debug(#0f05);
@@ -328,7 +354,7 @@
   }
 }
 
-// MOBILE & PAGE
+// MOBILE && PAGE
 @include breakpoint('s') {
   body:not([data-menu-item-key="start"]) {
 
@@ -358,7 +384,7 @@
     // }
 
     #main_nav {
-      transition: transform .35s, opacity 0.2s;
+      transition: transform $transition-duration, opacity 0.2s;
 
       position: fixed;
       top: 0;

@@ -169,19 +169,30 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
       }
 
-      // clear marks
-      navElem.querySelectorAll("li").forEach(function(elem){
-        elem.classList.remove("selected")
+
+      // mark parent li as selected, other li not
+      navElem.querySelectorAll("li").forEach(function (elem) {
+        if (!targetElemIsSelected && elemInArray(elem, parentLiElems)) {
+          elem.classList.add("selected")  
+        } else {
+          elem.classList.remove("selected")
+        }
       })
 
-      // mark all parent li as selected
-      if (!targetElemIsSelected) {
-        parentLiElems.forEach(function(elem){
-          elem.classList.add("selected")
-        })
-      }
       //targetElem.parentElement.classList.toggle("selected")
       //targetElem.closest("#main_nav").classList.toggle("selected")
     }
   })
 })
+
+
+function elemInArray(elem, elemArray) {
+  var found = false
+  elemArray.forEach(function(elem0){
+    if (elem0 === elem) {
+      found = true
+      return
+    }
+  })
+  return found
+}
