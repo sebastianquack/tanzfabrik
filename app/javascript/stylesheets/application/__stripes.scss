@@ -32,16 +32,20 @@
       &:before, &:after {
         display: block;
 
-        [data-section="schule"] & {
+        [data-section="schule"] &,
+        [data-section] [data-section="schule"] & { // override previous definition
           content: "Schule";
         }
-        [data-section="buehne"] & {
+        [data-section="buehne"] &,
+        [data-section] [data-section="buehne"] & {
           content: "Bühne";
         }        
-        [data-section="fabrik"] & {
+        [data-section="fabrik"] &,
+        [data-section] [data-section="fabrik"] & {
           content: "Fabrik";
         }
-        [data-section="festival"] & {
+        [data-section="festival"] &,
+        [data-section] [data-section="festival"] & {
           content: "Festival";
         }        
       }
