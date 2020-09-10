@@ -12,7 +12,7 @@ def subscribe_form(className, mode, value, prompt)
         input :type=>"email", :required=>true, :placeholder=>t(:newsletter_email_address), :name=>"email", :value=>params[:q], :onclick => "this.select()"
       end 
 
-      para prompt
+      div prompt, :class => "rich_content"
 
       ul :class=>"newsletter-options row" do
 
@@ -43,15 +43,17 @@ def subscribe_form(className, mode, value, prompt)
       end
 
 
-      div :class => "row" do
-        input :type=>"submit", :value=>value, :class=>"button", :title=>value
+      div :class => "submit" do
+        span "Abschicken", :class=>"button", :title=>value do
+          input :type=>"submit", :value=>value
+        end
       end
 
     end
   end
 end
 
-div :class => "module__newsletter", :"data-border-bottom" => content_module.border_bottom do
+div :class => "module__newsletter", :"data-border-bottom" => content_module.border_bottom, :"data-section" => content_module.section do
 
   h3 content_module.headline
     

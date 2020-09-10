@@ -98,13 +98,31 @@ main.page {
 
 .button {
   @include font-button;
-  border: 1px solid;
+  border-width: 1px;
+  border-style: solid;
   display: inline-block;
+  color: currentColor;
+  border-color: currentColor;
   border-radius: 7px;
   padding: 4px 11px 4px 12px;
   position: relative;
   white-space: nowrap;
   background-color: transparent;
+
+  input[type="submit"] {
+    position: absolute;
+    left: 0;
+    top:0;
+    right:0;
+    bottom:0;
+    width:100%;
+    margin:0;
+    padding:0;
+    color: transparent;
+    background-color: transparent;
+    border: none;
+    z-index: 10;
+  }
 
   &:hover {
     background-color:currentColor;
