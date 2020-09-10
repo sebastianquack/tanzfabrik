@@ -209,14 +209,14 @@ $transition-duration: 0.35s;
       > ul {
         ul { // sub submenu
           display: block;
-          li, a { 
+          li, a, span { 
             margin-left: 3em;
             text-indent: -4em;
             @include font-menü-unterpunkte;
           }
         }
 
-        li, a { // Submenu typography
+        li, a, span { // Submenu typography
           color: $color-red;
           @include font-menüpunkte;
           text-align: left
@@ -228,6 +228,19 @@ $transition-duration: 0.35s;
   }
 
 }
+
+//DESKTOP
+
+@include breakpoint('s-min','min') {
+  #main_nav {
+    > ul > li > ul > li {
+      > ul > li:first-child {
+        display: none; // hide the first entry in desktop because it should be a link to the landing page on mobile menu
+      }
+    }
+  }
+}
+
 
 // PAGE && DESKTOP
 
