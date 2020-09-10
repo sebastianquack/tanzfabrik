@@ -161,6 +161,14 @@
   font-weight: $font-weight-medium;
 }
 
+@mixin font-title-festival {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
 @mixin font-subtitle {
   font-size: 18px;
   line-height: 28px;
