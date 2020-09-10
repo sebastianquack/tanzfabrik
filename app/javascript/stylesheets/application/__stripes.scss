@@ -54,6 +54,7 @@ span[data-logo] {
   &:before {
     content: url("~svgs/Tanzfabrik_Signet-red.svg");
     .module__feature[data-section="buehne"] &,
+    .module__feature[data-section="festival"] &,
     body.featured_visible[data-section="buehne"]:not(.menu_open) .horizontal_bar_container & {
       content: url("~svgs/Tanzfabrik_Signet-white.svg");  
     }        
@@ -65,7 +66,10 @@ span[data-logo] {
     }
     [data-section="festival"] & {
       content: url("~svgs/Tanzfabrik_Signet-green.svg");
-    }        
+    }
+    [data-section] [data-section="schule"] & {
+      content: url("~svgs/Tanzfabrik_Signet-red.svg");
+    }    
   }
 }
 
