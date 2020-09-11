@@ -15,7 +15,7 @@
   grid-template-rows: 1fr;
   @include grid-gap;
 
-  @include breakpoint('xs') {
+  @include breakpoint('s') {
     grid-template-columns: 1fr auto;
   }
 
@@ -41,7 +41,7 @@
   .stripes_left {
     grid-column: 1 / span 2;
 
-    @include breakpoint('xs') {
+    @include breakpoint('s') {
       grid-column: 1;
       grid-row: 1;
       span:not(:first-child) {
@@ -53,7 +53,7 @@
   .content_left {
     grid-column: 3 / span 4;
 
-    @include breakpoint('xs') {
+    @include breakpoint('s') {
       grid-column: 1;
       grid-row: 2;
       margin-top:0;
@@ -64,13 +64,13 @@
   .stripes_mid {
     grid-column: 7 / span 2;
 
-    @include breakpoint('xs-min','min') {
+    @include breakpoint('s-min','min') {
       [data-logo] {
         display: none;
       }
     }
     
-    @include breakpoint('xs') {
+    @include breakpoint('s') {
       grid-column: 1;
       grid-row: 3;
 
@@ -82,7 +82,7 @@
   }
 
   .stripes_logos {
-    @include breakpoint('xs-min','min') {
+    @include breakpoint('s-min','min') {
       display: none;
     }
     @include breakpoint('s') {
@@ -94,7 +94,7 @@
   .content_right {
     grid-column: 9 / span 3;
 
-    @include breakpoint('xs') {
+    @include breakpoint('s') {
       grid-column: 1;
       grid-row: 4;
       margin-top:0;
@@ -106,7 +106,7 @@
     grid-column: 12 / span 1;
     text-align: right;
 
-    @include breakpoint('xs') {
+    @include breakpoint('s') {
       grid-column: 1;
       grid-row: 5;
       flex-direction: row;

@@ -28,7 +28,7 @@
     button { 
       display: none;
       
-      @include breakpoint('xs') {
+      @include breakpoint('s') {
         transform: translateX(-50%);
       }
       outline: none;
