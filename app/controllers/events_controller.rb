@@ -11,6 +11,13 @@ class EventsController < ApplicationController
     #render :layout => "application"
     @detail = @event.event_details.first
 
+    # find appropriate section and landing page
+    @section = @event.stage_event? ? "buehne" :  "schule"
+    @landing_page = Page.where(slug: @section).first
+    if @landing_page
+      @landing_page_menu_item = MenuItem.where(page_id: @landing_page.id).first
+    end
+
     @tag_string_1 = ""
     @tag_string_2 = ""
     if @detail.tags.length > 0 && @event.type.id == 3 # kurs

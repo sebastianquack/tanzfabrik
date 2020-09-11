@@ -1,4 +1,4 @@
-<div class="single-event-page" data-section="<%= @event.stage_event? ? "buehne" : "schule" %>">
+<div class="single-event-page" data-section="<%= @section %>">
 
   <% detail = @detail %>
 
@@ -16,7 +16,11 @@
           <br />
           <span><%= l(detail.starttime, :format => :hours_minutes) %> - <%= l(detail.endtime_clock, :format => :hours_minutes) %></span>
         <% else %>
-          <span data-text-section></span>        
+          <% if @landing_page %>
+            <%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.key) %>
+          <% else %>
+            <span data-text-section></span>
+          <% end %>
         <% end %>
       </span>
       <span>
@@ -33,7 +37,11 @@
             <span><%= @event.price_regular %>€ (<%= @event.price_reduced %>€)</span>
           <% end %>
         <% else %>
-          <span data-text-section></span>
+          <% if @landing_page %>
+            <%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.key) %>
+          <% else %>
+            <span data-text-section></span>
+          <% end %>
         <% end %>
       </span>
     </div>

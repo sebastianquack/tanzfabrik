@@ -1,6 +1,6 @@
 <% person=@person %>
 
-<div class="single-person-page" data-section="<%= person.artist? and !person.kurslehrer? and "buehne" %>">
+<div class="single-person-page" data-section="<%= @section  %>">
 
   <div class="info">
     <h3><%= person.name %></h3>
@@ -32,9 +32,15 @@
     </div>
 
     <div class="stripes_vertical stripes_mid">
-      <span data-text-section></span>
-      <span data-text-section></span>
-      <span data-text-section></span>
+      <% if @landing_page %>
+        <span><%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.key) %></span>
+        <span><%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.key) %></span>
+        <span><%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.key) %></span>
+      <% else %>
+        <span data-text-section></span>
+        <span data-text-section></span>
+        <span data-text-section></span>
+      <% end %>
     </div>        
 
     <div class="image">
