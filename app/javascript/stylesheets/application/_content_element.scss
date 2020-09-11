@@ -4,21 +4,35 @@
 
   display: flex;
 
+  @include breakpoint('s') {
+    flex-direction: column;
+  }
+
   @include page-dist("margin-left", "left");
   @include page-dist("margin-right", "right");
 
-  @include grid-dist("padding-left", 1);
-  @include grid-dist("padding-right", 1);
+  @include breakpoint('s-min', 'min') {
+    @include grid-dist("padding-left", 1);
+    @include grid-dist("padding-right", 1);
+  }
   
   .column_left {
     flex: 1;
     box-sizing: border-box;
 
+    @include breakpoint('s') {
+      margin-bottom: 30px;
+    }
+
     img {
       width: 100%;
-      padding-right: 16px;
+      @include breakpoint('s-min', 'min') {
+        padding-right: $grid-gap-l;
+      }
       box-sizing: border-box;
       display: block;
+      max-height: 100vh;
+      object-fit: cover;
     }
 
     .mapWrapper {
@@ -31,6 +45,11 @@
 
   .column_right {
     flex:1;
+
+    @include breakpoint('s') {
+      display: contents;
+    }
+
     > *:last-child {
       margin-bottom: 0;
     }
@@ -38,6 +57,10 @@
 
   h2 {
     margin-bottom: 20px;
+
+    @include breakpoint('s') {
+      order: -1;
+    }
   }
 
   h4{

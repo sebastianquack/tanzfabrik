@@ -67,6 +67,7 @@ task :create_example_page => :environment do
       # no problem
     end
   
+    # default module
     cm = ContentModule.create({
         id: $module_id_prefix + $counter,
         page_id: $p.id,
