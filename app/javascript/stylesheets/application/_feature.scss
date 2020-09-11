@@ -59,19 +59,35 @@
         display: flex;
         align-items: flex-end;
         order: 12;
+
+        @include breakpoint('s') {
+          display: none;
+        }
       }
 
       span:first-child {  visibility: hidden; }
+
+      @include breakpoint('s') {
+        display: none;
+      }
     }
 
     .dummy-content {
       @include flex-row-item(4,12);
       order: 2;
+
+      @include breakpoint('s') {
+        display: none;
+      }
     }
 
     .text_content {
       @include flex-row-item(4,12);
       order: 6;
+
+      @include breakpoint('s') {
+        @include flex-row-item(12,12);
+      }
 
       display: flex;
       flex-direction: column;
@@ -117,7 +133,9 @@
 
   .headline {
     @include font-h3;
-    hyphens: auto;
+    @include breakpoint('s-min','min') {
+      hyphens: auto;
+    }
   }
 
   .rich_content_1 {
