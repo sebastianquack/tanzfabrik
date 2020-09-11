@@ -2,7 +2,9 @@
 
 .module__reference {
 
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  @include grid-gap;
 
   @include page-dist("padding-left", "left");
   @include page-dist("padding-right", "right");
@@ -13,19 +15,18 @@
   padding-bottom: 1em;
   
   .column_left {
-    flex: 1;
+    grid-column: 1 / span 6;
     box-sizing: border-box;
 
     img {
       width: 100%;
-      padding-right: 16px;
       box-sizing: border-box;
       display: block;
     }
   }
 
   .column_right {
-    flex:1;
+    grid-column: 7 / span 6;
     display: flex;
 
     .text_content {

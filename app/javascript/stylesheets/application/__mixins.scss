@@ -390,8 +390,14 @@
   //box-sizing: border-box;
   @if($border) {
     margin-right: $grid-gap-l;
+    @include breakpoint('s') {
+      margin-right: $grid-gap-s;
+    }
   }
   flex: 0 0 calc(#{100 * $row-width / $total-rows}% - #{if($border, $grid-gap-l, "0px")});
+  @include breakpoint('s') {
+    flex: 0 0 calc(#{100 * $row-width / $total-rows}% - #{if($border, $grid-gap-s, "0px")});
+  }
   @if ($debug) {
     background: rgba(random(255), random(255), random(255), 0.5);
   }
@@ -403,8 +409,14 @@
   //box-sizing: border-box;
   @if($border) {
     margin-right: $grid-gap-l;
+    @include breakpoint('s') {
+      margin-right: $grid-gap-s;
+    }
   }
   width: calc(#{100 * $row-width / $total-rows}% - #{if($border, $grid-gap-l, "0px")});
+  @include breakpoint('s') {
+    width: calc(#{100 * $row-width / $total-rows}% - #{if($border, $grid-gap-s, "0px")});
+  }
   @if ($debug) {
     background: rgba(random(255), random(255), random(255), 0.5);
   }

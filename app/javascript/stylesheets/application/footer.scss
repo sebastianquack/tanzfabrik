@@ -13,7 +13,7 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 1fr;
-  @include grid-gap-dist("grid-gap");
+  @include grid-gap;
 
   @include breakpoint('xs') {
     grid-template-columns: 1fr auto;

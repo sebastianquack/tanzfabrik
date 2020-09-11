@@ -12,18 +12,25 @@
   @include flex-row;
   @include font-stripes;
 
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  @include grid-gap;
+
   .horizontal_bar_left {
-    @include flex-row-item(6,12);
+    grid-column: 1 / span 6;
     a:hover, a:active {
       text-decoration: none;
     }
   }
 
   .horizontal_bar_center {
-    @include flex-row-item(3,12);
+    grid-column: 7 / span 3;
     button { 
       display: none;
-      transform: translateX(-50%);
+      
+      @include breakpoint('xs') {
+        transform: translateX(-50%);
+      }
       outline: none;
     };
     @include breakpoint('s') {
@@ -56,7 +63,7 @@
   }
 
   .horizontal_bar_right {
-    @include flex-row-item(3,12, false);
+    grid-column: 10 / span 3;
     display: flex;
     justify-content: flex-end;
   }
