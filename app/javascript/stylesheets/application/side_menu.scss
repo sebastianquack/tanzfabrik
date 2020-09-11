@@ -2,6 +2,7 @@
 
 .side_menu {
   position: fixed;
+  z-index:20;
   @include page-dist("left", "left");
   top: 50%;
   transform: translateY(-50%);
@@ -10,7 +11,7 @@
     background-color: white;
     line-height: 1.2em;
     margin: -0.1em 0;
-    padding-right: .5ex;
+    padding-right: .4ex;
     display: inline-block;
   }
 
