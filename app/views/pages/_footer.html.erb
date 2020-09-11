@@ -11,6 +11,7 @@
 <% facebook =             get_text_item("footer_" + @page.section + "_facebook_link") %>
 
 <% tanzfabrik =           get_text_item("page_title").sub(" ", "<br />").html_safe %>
+
 <footer class="imprint_footer" data-section="<%= @page.section %>">
 
   <div class="stripes_vertical stripes_left">
@@ -23,6 +24,12 @@
     <span data-text-section></span>
   </div>
 
+  <div class="stripes_vertical stripes_logos">
+    <span data-logo></span>
+    <span data-logo></span>
+    <span data-logo></span>
+  </div>  
+
   <div class="stripes_vertical stripes_right">
     <% if vimeo %>
       <span data-text>
@@ -32,8 +39,8 @@
       </span> 
     <% end %>    
 
-     <% if instagram %>
-       <span data-text>
+    <% if instagram %>
+      <span data-text>
         <a href="<%= instagram %>">
           <%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_IG_red.svg", class: "icon section-fill-color") %>
         </a>
@@ -70,10 +77,5 @@
       <% end %>
     <% end %>
   </div>
-
-
-
-
-
 
 </footer>
