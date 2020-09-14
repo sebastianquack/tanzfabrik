@@ -334,10 +334,10 @@
    distances
    -------------------------------------------------- */
 
-@mixin page-dist($attr: "margin-top", $direction: "top", $add: 0) {
-  #{$attr}: map-get($page-dist-l, $direction) + $add;
+@mixin page-dist($attr: "margin-top", $direction: "top", $add: 0, $multiply: 1) {
+  #{$attr}: (map-get($page-dist-l, $direction) + $add) * $multiply;
   @include breakpoint('s') {
-    #{$attr}: map-get($page-dist-s, $direction) + $add;
+    #{$attr}: (map-get($page-dist-s, $direction) + $add) * $multiply;
   }
 }
 
