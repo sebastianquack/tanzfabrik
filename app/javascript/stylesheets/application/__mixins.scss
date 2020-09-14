@@ -422,6 +422,25 @@
   }
 }
 
+@mixin icon-width-height($elem: true, $background: false) {
+  @if ($elem) {
+    width: $icon-width-l;
+    height: $icon-height-l;
+  }
+  @if ($background) {
+    background-size: $icon-width-l $icon-height-l;
+  }  
+  @include breakpoint('s') {
+    @if ($elem) {
+      width: $icon-width-s;
+      height: $icon-height-s;
+    }
+    @if ($background) {
+      background-size: $icon-width-s $icon-height-s;
+    }  
+  }
+}
+
 /* --------------------------------------------------
    Other Mixins
    -------------------------------------------------- */

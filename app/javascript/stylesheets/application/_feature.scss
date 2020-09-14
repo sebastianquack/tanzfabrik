@@ -67,8 +67,38 @@
 
       span:first-child {  visibility: hidden; }
 
-      @include breakpoint('s') {
-        display: none;
+      @include breakpoint('s') { // stretch it for the hidden down arrow
+        visibility: hidden;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        padding:0;
+        margin:0;
+        left:0;
+        top:0;
+        box-sizing: border-box;
+        overflow:hidden;
+      }
+
+      [data-text-section]:last-child {
+        position: relative;
+        .icon {
+          position: absolute;
+          top: 0;
+          left: 0;
+          @include icon-width-height;
+          transform: translateY(-100%);
+          animation: mover 1s infinite  alternate;
+        }
+        @include breakpoint('s') {
+          position: initial;
+          .icon {
+            visibility: visible;
+            top: auto;
+            bottom: -30px;
+            left: calc(50% - 4px);
+          }
+        }
       }
     }
 
@@ -156,4 +186,9 @@
     margin-bottom: 5px;
   }  
 
+}
+
+@keyframes mover {
+  0% { transform: translateY(-110%); }
+  100% { transform: translateY(-100%); }
 }
