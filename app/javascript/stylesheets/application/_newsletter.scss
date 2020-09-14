@@ -10,7 +10,7 @@
     margin-bottom: 30px;
   }
 
-  .rich_content {
+  .rich_content:not(:empty) {
     margin-bottom: 30px;
   }
 
@@ -33,5 +33,28 @@
 
   .submit {
     margin-top: 30px;
+  }
+
+  // MOBILE
+
+  @include breakpoint('s') {
+    @include grid-col-gap-dist("padding-left", 0, 0, "left");
+    @include grid-col-gap-dist("padding-right", 0, 0, "right");
+
+    h3 {
+      margin-bottom: 20px;
+    }
+
+    .rich_content:not(:empty) {
+      margin-bottom: 20px;
+    }
+
+    li {
+      margin-bottom: 20px;
+    }
+
+    input[type="email"] {
+      width: #{7*100%/8};
+    }
   }
 }
