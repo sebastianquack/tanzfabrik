@@ -11,6 +11,32 @@
     bottom: 0.75em;
     margin-left: 1em;
   }
+
+  // MOBILE
+
+  @include breakpoint('s') {
+    @include grid-col-gap-dist("padding-left",  0,0, "left");
+    @include grid-col-gap-dist("padding-right", 0,0, "right");  
+
+    display: flex;
+    flex-direction: column;
+
+    .headline {
+      display: contents;
+      > span {
+        padding-bottom: 0.25em;
+      }
+    }
+
+    .headline .button {
+      order: 3;
+      bottom: 0;
+      margin: 1.25em 0 0 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+  }
 }
 
 
