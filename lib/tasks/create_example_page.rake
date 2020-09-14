@@ -1,17 +1,33 @@
 desc 'create example page containing all modules'
 task :create_example_page => :environment do
 
+# clean up
+begin
+  existing_page = Page.find("module")
+  existing_page.delete
+rescue ActiveRecord::RecordNotFound
+  # no problem
+end
+
+$module_id_prefix = 100000000
+$counter = 1
+
+["buehne", "schule", "fabrik"].each do |section|
+
+  $section=section
+
   begin
-    existing_page = Page.find("module")
+    existing_page = Page.find("module_"+section)
     existing_page.delete
   rescue ActiveRecord::RecordNotFound
     # no problem
-  end
+  end  
 
   $p = Page.create(
-    title_de: "Module",
-    title_en: "Modules",
-    section: "schule",
+    title_de: "Module " + section,
+    title_en: "Modules " + section,
+    section: section,
+    slug: "module_" + section
   )
 
   p=$p
@@ -19,9 +35,6 @@ task :create_example_page => :environment do
   if p.errors
     puts p.errors.full_messages
   end
-
-  $module_id_prefix = 100000000
-  $counter = 1
 
   img_landscape = {
     description: "description description description",
@@ -56,7 +69,7 @@ task :create_example_page => :environment do
   }
 
   def make_module(attributes_hash, images=nil, download=nil)
-    puts "creating " + ($module_id_prefix + $counter).to_s + " " + attributes_hash[:module_type].to_s + " / " + attributes_hash[:headline_de].to_s
+    puts "creating " + ($module_id_prefix + $counter).to_s + " " + $p.slug + " >>> " + attributes_hash[:module_type].to_s + " >>> " + attributes_hash[:headline_de].to_s
 
     begin
       #ContentModule.find($module_id_prefix + $counter).slides.destroy_all
@@ -72,7 +85,7 @@ task :create_example_page => :environment do
         id: $module_id_prefix + $counter,
         page_id: $p.id,
         module_type: "content_element",
-        section: "buehne",
+        section: $section,
         headline_de: "",
         headline_en: "",
         rich_content_1_de: "",
@@ -103,7 +116,6 @@ task :create_example_page => :environment do
 
   # BEGIN
 
-
 ### feature / The Morning Show of Celine and Renana - Focus: Choreographers
 
 rich_content_1 = <<~RICHCONTENT1
@@ -112,13 +124,13 @@ RICHCONTENT1
 
 make_module({
   module_type: "feature",
-  section: "buehne",
   headline_de: "The Morning Show of Celine and Renana - Focus: Choreographers",
   headline_en: "The Morning Show of Celine and Renana - Focus: Choreographers",
   rich_content_1_de: rich_content_1,
   rich_content_1_en: "",
   special_text_de: "02.02.2020, Kreuzberg 1",
   special_text_en: "02.02.2020, Kreuzberg 1",
+  link_href:"https://example.com",
 }, img_landscape)
 
 ### submenu_divider / page_intro
@@ -139,7 +151,6 @@ RICHCONTENT1
 
 make_module({
   module_type: "page_intro",
-  section: "schule",
   headline_de: "Work\\shops",
   headline_en: "Work\\shops",
   rich_content_1_de: rich_content_1,
@@ -161,7 +172,6 @@ RICHCONTENT2
 
 make_module({
   module_type: "page_intro",
-  section: "schule",
   headline_de: "Profi\\klassen",
   headline_en: "Profi\\klassen",
   rich_content_1_de: rich_content_1,
@@ -189,7 +199,6 @@ RICHCONTENT1
 
 make_module({
   module_type: "page_intro",
-  section: "schule",
   headline_de: "Dance In\\tgnsivg",
   headline_en: "Dance In\\tgnsivg",
   special_text_de: special_text.strip,
@@ -202,7 +211,6 @@ make_module({
 
 make_module({
   module_type: "page_intro",
-  section: "schule",
   headline_de: "Performance Projekte",
   headline_en: "Performance Projekte",
 }, false, pdf)
@@ -211,7 +219,6 @@ make_module({
 
 make_module({
   module_type: "page_intro",
-  section: "schule",
   headline_de: "Kontakt",
   headline_en: "Contact",
 })
@@ -220,7 +227,6 @@ make_module({
 
 make_module({
   module_type: "page_intro",
-  section: "schule",
   headline_de: "Kursplan",
   headline_en: "Kursplan",
   special_text_de: special_text.strip,
@@ -234,7 +240,6 @@ make_module({
 
 make_module({
   module_type: "page_intro",
-  section: "schule",
   headline_de: "Ganz lange Headline mit viel Text",
   style_option: "small_headline_font",
   rich_content_1_de: rich_content_1,
@@ -264,7 +269,6 @@ RICHCONTENT1
 
 make_module({
   module_type: "page_intro_magazine",
-  section: "buehne",
   headline_de: "Twists: Dance and De\\colonia\\lity",
   headline_en: "Twists: Dance and De\\colonia\\lity",
   sub_de: "40 Jahre Tanzfabrik",
@@ -273,7 +277,6 @@ make_module({
 
 make_module({
   module_type: "page_intro_magazine",
-  section: "buehne",
   headline_de: "Twists: Dance and De\\colonia\\lity",
   headline_en: "Twists: Dance and De\\colonia\\lity",
 }, img_landscape)
@@ -282,7 +285,6 @@ make_module({
 
 make_module({
   module_type: "page_intro_magazine",
-  section: "schule",
   headline_de: "Ganz lange Headline mit viel Text",
   style_option: "small_headline_font"
 }, img_landscape)
@@ -347,7 +349,6 @@ RICHCONTENT2
 
 make_module({
   module_type: "content_2_columns",
-  section: "schule",
   headline_de: "Bewerbung",
   headline_en: "Application",
   rich_content_1_de: rich_content_1,
@@ -358,7 +359,6 @@ make_module({
 
 make_module({
   module_type: "content_2_columns",
-  section: "schule",
   rich_content_1_de: rich_content_1,
   rich_content_1_en: "",
   rich_content_2_de: rich_content_2,
@@ -367,7 +367,6 @@ make_module({
 
 make_module({
   module_type: "content_2_columns",
-  section: "schule",
   style_option: "indent_more",
   headline_de: "Mehr eingerückt",
   headline_en: "Mehr eingerückt",
@@ -402,7 +401,6 @@ RICHCONTENT1
 
 make_module({
   module_type: "content_element",
-  section: "schule",
   headline_de: "Open Spaces",
   headline_en: "Open Spaces",
   special_text_de: special_text.strip,
@@ -431,7 +429,6 @@ RICHCONTENT1
 
 make_module({
   module_type: "content_element",
-  section: "buehne",
   headline_de: "Tanznacht Berlin",
   headline_en: "Tanznacht Berlin",
   special_text_de: "",
@@ -448,7 +445,6 @@ RICHCONTENT1
 
 make_module({
   module_type: "content_element",
-  section: "buehne",
   headline_de: "Werde Teil der Tanzfabrik!",
   headline_en: "Werde Teil der Tanzfabrik!",
   special_text_de: "",
@@ -475,7 +471,6 @@ RICHCONTENT1
 
 make_module({
   module_type: "content_element",
-  section: "buehne",
   headline_de: "Contact",
   headline_en: "Contact",
   special_text_de: special_text.strip,
@@ -506,7 +501,6 @@ RICHCONTENT1
 
 make_module({
   module_type: "content_element_magazine",
-  section: "schule",
   border_bottom: "s",
   rich_content_1_de: rich_content_1,
   rich_content_1_en: rich_content_1,
@@ -520,7 +514,6 @@ RICHCONTENT1
 
 make_module({
   module_type: "content_element_magazine",
-  section: "schule",
   border_bottom: "s",
   style_option: "large_left",  
   rich_content_1_de: rich_content_1,
@@ -535,7 +528,6 @@ RICHCONTENT1
 
 make_module({
   module_type: "content_element_magazine",
-  section: "schule",
   border_bottom: "s",
   style_option: "large_right",
   rich_content_1_de: rich_content_1,
@@ -551,7 +543,6 @@ RICHCONTENT1
 
 make_module({
   module_type: "content_element_magazine",
-  section: "buehne",
   border_bottom: "s",
   style_option: "centered",
   rich_content_1_de: rich_content_1,
@@ -570,7 +561,6 @@ make_module({
 Rails.configuration.module_border_bottom_types.each do |border|
   make_module({
     module_type: "content_element_magazine",
-    section: "buehne",
     border_bottom: border,
     style_option: "centered",
     rich_content_1_de: "Abstand: " + border,
@@ -642,6 +632,21 @@ make_module({
   link_href_en: "http://tanznachtberlin.de/",  
 }, img_landscape)
 
+### reference / Fabrik
+
+make_module({
+  module_type: "reference",
+  section: "fabrik",
+  headline_de: "Fabrik",
+  headline_en: "Fabrik",
+  sub_de: "Age of Displacement until the new line",
+  sub_en: "Age of Displacement until the new line",
+  link_title_de: "Tanznacht",
+  link_title_en: "Tanznacht",
+  link_href_de: "http://tanznachtberlin.de/",
+  link_href_en: "http://tanznachtberlin.de/",  
+}, img_landscape)
+
 ### submenu_divider / slideshow
 
 make_module({
@@ -678,7 +683,6 @@ images = [
 
 make_module({
   module_type: "slideshow",
-  section: "schule",
   headline_de: "Upcoming Workshops",
   headline_en: "Upcoming Workshops",
   link_title_de: "Workshops",
@@ -700,7 +704,6 @@ make_module({
 
 make_module({
   module_type: "video",
-  section: "schule",
   headline_de: "Video Youtube",
   headline_en: "Video Youtube",
   parameter: "https://www.youtube.com/watch?v=5inySyAPVOw",
@@ -714,7 +717,6 @@ make_module({
 
 make_module({
   module_type: "video",
-  section: "schule",
   headline_de: "Video Vimeo",
   headline_en: "Video Vimeo",
   parameter: "https://vimeo.com/415570097",
@@ -725,23 +727,24 @@ make_module({
 })
 
 
-### submenu_divider / today
+if section == "schule"
+  ### submenu_divider / today
 
-make_module({
-  module_type: "submenu_divider",
-  headline_de: "today",
-  headline_en: "today",
-  parameter: "today"
-})
+  make_module({
+    module_type: "submenu_divider",
+    headline_de: "today",
+    headline_en: "today",
+    parameter: "today"
+  })
 
-# today module
-
-make_module({
-  module_type: "today",
-  section: "schule",
-  headline_de: "Heute",
-  headline_en: "Today",
-})
+  # today module
+  make_module({
+    module_type: "today",
+    section: "schule",
+    headline_de: "Heute",
+    headline_en: "Today",
+  })
+end
 
 ### submenu_divider / newsletter
 
@@ -756,7 +759,6 @@ make_module({
 
 make_module({
   module_type: "newsletter",
-  section: "schule",
   headline_de: "Alle Highlights in unserem Newsletter!",
   headline_en: "Alle Highlights in unserem Newsletter!",
 })
@@ -765,7 +767,6 @@ make_module({
 
 make_module({
   module_type: "newsletter",
-  section: "buehne",
   headline_de: "Alle Highlights in unserem Newsletter!",
   headline_en: "Alle Highlights in unserem Newsletter!",
 })
@@ -787,7 +788,6 @@ RICHCONTENT1
 
 make_module({
   module_type: "image_element_magazine",
-  section: "fabrik",
   headline_de: "1990",
   headline_en: "1990",
   rich_content_1_de: rich_content_1,
@@ -868,10 +868,11 @@ images = [
 
 make_module({
   module_type: "festival_logos",
-  section: "buehne",
 }, [images])
 
 # END
+
+end # end loop
 
 end
 
