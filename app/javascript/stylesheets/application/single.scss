@@ -132,6 +132,14 @@
       margin-bottom: 12px;
     }
 
+    .logos img {
+      width:  100px;
+      @include grid-dist("margin-right");
+      @include grid-dist("margin-bottom");
+      object-fit:contain;
+      object-position: top left;
+    }
+
     .moments {
       @include font-stripes-infos;
       // @include grid-col-gap-dist("padding-left", 1,1);
