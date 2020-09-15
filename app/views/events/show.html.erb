@@ -10,7 +10,7 @@
     </div>
 
     <div class="stripes_vertical stripes_mid">
-      <span>
+      <span class="<%= "relevant" if @event.type.id == 3 %>">
         <% if @event.type.id == 3 # kurs %>
           <span><%= l(detail.start_date, :format => :weekday) %></span>
           <br />
@@ -23,11 +23,11 @@
           <% end %>
         <% end %>
       </span>
-      <span>
+      <span class="relevant">
         <span><%= detail.studio.location.name + " " + detail.studio.name %></span><br />
         <span><%= detail.studio.location.address.gsub(/,( +[0-9]{5})/, '<br>\1').html_safe %></span>
       </span>
-      <span>
+      <span class="<%= "relevant" if @event.type.id == 3 %>">
         <% if @event.type.id == 3 # kurs %>
           <% if !@tag_string_2.empty? || !@tag_string_2.empty? %>
             <span><%= @tag_string_1 %></span><br>
@@ -49,11 +49,11 @@
     <div class="image">
       <% if @event.type.id == 4 || @event.type.id == 3 # profitraining or kurs %>
         <%
-          imageSrc = @event.people.first.images.first.attachment.url(:medium)
+          imageSrc = @event.people.first.images.first.attachment.url(:large)
           caption = @event.people.first.images.first.license
         %>
-       <% else %>
-        <%  imageSrc = @event.no_logo_images.first.attachment.url(:medium_detail_column) if @event.no_logo_images.first
+      <% else %>
+        <%  imageSrc = @event.no_logo_images.first.attachment.url(:large) if @event.no_logo_images.first
           caption = @event.no_logo_images.first.license if @event.no_logo_images.first %>
       <% end %>
       <% if imageSrc %>
@@ -75,9 +75,9 @@
   
   <div class="info">
 
-    <h3><%= @event.title %></h3>
+    <h3 class="headline"><%= @event.title %></h3>
 
-    <p><b class="type"><%= @event.display_type %></b>
+    <p class="type_sentence"><b class="type"><%= @event.display_type %></b>
     <% if @event.people.first %>
       <%= t "with" %>
       <%= @event.people.map { |p| p.name }.join(", ") %>
@@ -124,7 +124,7 @@
       <div class="logos">
       <% @event.logos.each do |logo| %>
         <a href="<%= logo.link_href %>">
-          <img src="<%= logo.attachment.url(:thumb)%>"/>
+          <img src="<%= logo.attachment.url(:logo)%>"/>
         </a>
       <% end %>
       </div>
