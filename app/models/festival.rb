@@ -42,7 +42,7 @@ class Festival < ActiveRecord::Base
 
   def end_date
     if self.events.no_draft.length > 0
-      return self.events.no_draft.max_by { |e| e.end_date } .end_date
+      return self.events.no_draft.filter {|e| e.end_date }.max_by { |e| e.end_date } .end_date
     else
       return nil
     end
