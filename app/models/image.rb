@@ -60,6 +60,9 @@ class Image < ActiveRecord::Base
   end  
 
   private def extract_dimensions
+    if attachment.queued_for_write[:original] == nil 
+      return
+    end
     geometry = Paperclip::Geometry.from_file(attachment.queued_for_write[:original].path)
     #return unless geometry
     puts "XXX"
