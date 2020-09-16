@@ -6,6 +6,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <%= display_meta_tags :site => 'Tanzfabrik', :reverse => true %>
+
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>  
   
@@ -20,7 +22,7 @@
   section = @page.section if @page and @page.section
   menu_key = @is_start_page ? "start" : section
 %>
-<body data-menu-item-key="<%= menu_key %>" data-section="<%= section %>">
+<body <%= " data-no-turbolink" if admin_user_signed_in? %> data-menu-item-key="<%= menu_key %>" data-section="<%= section %>">
   <% page_title = get_text_item("page_title").sub(" ", "<br />").html_safe %>
   <header class="horizontal_bar_container">
     <div class="horizontal_bar_left">

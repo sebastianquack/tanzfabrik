@@ -28,8 +28,8 @@ class PagesController < ApplicationController
       @page = Page.no_draft.where(:slug => params[:id]).first 
       
       if @page
-        set_meta_tags :title => @page.title
-        set_meta_tags :description => choose_page_description(@page)
+        set_meta_tags :title => @page.title,
+                      :description => choose_page_description(@page)
       
         # load menu items referencing the page and use the one that is the deepest in the tree 
         menu_items = MenuItem.where(page_id: @page.id).sort {|a, b| b.depth <=> a.depth}
