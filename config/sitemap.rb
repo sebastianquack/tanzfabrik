@@ -8,7 +8,7 @@ SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(
   aws_access_key_id: ENV['S3_KEY'], 
   aws_secret_access_key: ENV['S3_SECRET'], 
   aws_region: ENV['AWS_REGION'],
-  aws_endpoint: "s3-#{ENV['AWS_REGION']}.amazonaws.com"
+  aws_endpoint: "https://s3-#{ENV['AWS_REGION']}.amazonaws.com"
 )
 # inform the map cross-linking where to find the other maps
 SitemapGenerator::Sitemap.sitemaps_host = "https://#{ENV['S3_TANZFABRIK_BUCKET']}.s3.amazonaws.com/"
