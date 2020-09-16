@@ -56,6 +56,7 @@ end
 div :class => "module__newsletter", :"data-border-bottom" => content_module.border_bottom, :"data-section" => content_module.section do
 
   h3 content_module.headline
+  a :name => "create"
     
   if notice == "ok"
     newsletter_success = TextItem.where(:name => "NewsletterErfolg").first

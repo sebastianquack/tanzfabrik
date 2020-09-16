@@ -35,7 +35,8 @@ class SubscriptionsController < ApplicationController
     subscription.save
     
     SubscriptionMailer.subscription_mail(subscription).deliver                  
-    redirect_to page_url('newsletter'), :notice => 'ok' 
+    #redirect_to page_url('newsletter'), :notice => 'ok' 
+    redirect_back :notice => 'ok', fallback_location: '/', allow_other_host: false
 
   end
 
