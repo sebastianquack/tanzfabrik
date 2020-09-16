@@ -110,8 +110,9 @@
       <% end %>
 
       <% if @event.signup_url and !@event.signup_url.empty? %>
-        <a class="button" title="<%= get_text_item("tanzklassen_anmeldung") %>" href="<%= @event.signup_url %>">
-          <%= get_text_item("tanzklassen_anmeldung") %>
+        <% title = @section == "schule" ? get_text_item("tanzklassen_anmeldung") : get_text_item("tickets") %>
+        <a class="button" title="<%= title %>" href="<%= @event.signup_url %>">
+          <%= title %>
         </a>
       <% end %>
 
