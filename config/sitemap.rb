@@ -2,16 +2,15 @@
 SitemapGenerator::Sitemap.default_host = "http://www.tanzfabrik-berlin.de"
 SitemapGenerator::Sitemap.public_path = 'tmp/' # because of heroku's write-only filesystem
 
-# store on S3 using Fog
-SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
+# store on S3
+SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(
+  ENV['S3_TANZFABRIK_BUCKET'],
   aws_access_key_id: ENV['S3_KEY'], 
   aws_secret_access_key: ENV['S3_SECRET'], 
-  fog_provider: 'AWS', 
-  fog_directory: ENV['S3_TANZFABRIK_BUCKET'], 
-  fog_region: 'eu-west-1'
+  aws_region: 'eu-west-1'
 )
 # inform the map cross-linking where to find the other maps
-SitemapGenerator::Sitemap.sitemaps_host = "http://#{ENV['S3_TANZFABRIK_BUCKET']}.s3.amazonaws.com/"
+SitemapGenerator::Sitemap.sitemaps_host = "https://#{ENV['S3_TANZFABRIK_BUCKET']}.s3.amazonaws.com/"
 # pick a namespace within your bucket to organize your maps
 SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
 
