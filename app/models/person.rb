@@ -22,6 +22,10 @@ class Person < ActiveRecord::Base
     order("LOWER(last_name) ASC")
   } 
 
+  scope :having_any_events, -> {
+    includes(:events).where.not(events: { id: nil })
+  }
+
   private def fix_trix
     self.rich_content_de = ModelHelpers.fix_trix self.rich_content_de.to_s
     self.rich_content_en = ModelHelpers.fix_trix self.rich_content_en.to_s

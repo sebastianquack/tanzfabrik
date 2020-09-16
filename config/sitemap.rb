@@ -41,18 +41,18 @@ SitemapGenerator::Sitemap.create do
         }
     end
 
-    Festival.all.each do |festival|
-      changefreq = (festival.start_date && festival.start_date >= Date.today) ? 'weekly' : 'never'
-      priority = (festival.end_date && festival.end_date >= Date.today) ? 0.6 : 0.3
-      add festival_path(festival, :locale => language0), 
-        :lastmod => festival.updated_at, 
-        :changefreq => changefreq,
-        :priority => priority,
-        :alternate => {
-          :href => festival_url(festival, :locale => language1, :host => SitemapGenerator::Sitemap.default_host ),
-          :lang => language1
-        }        
-    end
+    #Festival.all.each do |festival|
+    #  changefreq = (festival.start_date && festival.start_date >= Date.today) ? 'weekly' : 'never'
+    #  priority = (festival.end_date && festival.end_date >= Date.today) ? 0.6 : 0.3
+    #  add festival_path(festival, :locale => language0), 
+    #    :lastmod => festival.updated_at, 
+    #    :changefreq => changefreq,
+    #    :priority => priority,
+    #    :alternate => {
+    #      :href => festival_url(festival, :locale => language1, :host => SitemapGenerator::Sitemap.default_host ),
+    #      :lang => language1
+    #    }        
+    #end
 
     Event.all.have_own_page.each do |event|
       priority = (event.event_details.length > 0 && event.end_date >= Date.today) ? 0.5 : 0.3
@@ -65,6 +65,18 @@ SitemapGenerator::Sitemap.create do
           :lang => language1
         }        
     end
+
+  Person.having_any_events.each do |person|
+    priority = 0.7
+    add person_path(person, :locale => language0), 
+      :lastmod => person.updated_at, 
+      :changefreq => 'monthly', 
+      :priority => priority,
+      :alternate => {
+        :href => person_url(person, :locale => language1, :host => SitemapGenerator::Sitemap.default_host ),
+        :lang => language1
+      }        
+  end
 
   end
 
