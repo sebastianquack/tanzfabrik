@@ -2,17 +2,27 @@
 SitemapGenerator::Sitemap.default_host = "http://www.tanzfabrik-berlin.de"
 SitemapGenerator::Sitemap.public_path = 'tmp/' # because of heroku's write-only filesystem
 
-# store on S3
-SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(
-  ENV['S3_TANZFABRIK_BUCKET'],
-  aws_access_key_id: ENV['S3_KEY'], 
-  aws_secret_access_key: ENV['S3_SECRET'], 
-  aws_region: ENV['AWS_REGION'],
-  aws_endpoint: "https://s3-#{ENV['AWS_REGION']}.amazonaws.com"
-)
+if Rails.env.production?
+  # store on S3
+  SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(
+    ENV['S3_TANZFABRIK_BUCKET'],
+    aws_access_key_id: ENV['S3_KEY'], 
+    aws_secret_access_key: ENV['S3_SECRET'], 
+    aws_region: ENV['AWS_REGION'],
+    aws_endpoint: "https://s3-#{ENV['AWS_REGION']}.amazonaws.com"
+  )
+else
+
+  puts "SITEMAP note: Use \"rake sitemap:refresh:no_ping\" for testing. don't ping!"
+  puts "SITEMAP note: Not uploading sitemap unless RAILS_ENV=production"
+
+end
+
 # inform the map cross-linking where to find the other maps
 SitemapGenerator::Sitemap.sitemaps_host = "https://#{ENV['S3_TANZFABRIK_BUCKET']}.s3.amazonaws.com/"
 # pick a namespace within your bucket to organize your maps
+
+
 SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
 
 SitemapGenerator::Sitemap.compress = false
