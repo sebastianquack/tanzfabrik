@@ -218,6 +218,12 @@ newsletter:
   images: false
   downloads: false
   border-bottom-options: true
+accordeon_headline:
+  form-fields:
+    - headline
+  images: false
+  downloads: false
+  border-bottom-options: true
 accordeon_element:
   form-fields:
     - headline

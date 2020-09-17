@@ -1,0 +1,25 @@
+@import "./__mixins.scss";
+
+.module__accordeon_headline {
+
+  $margin-bottom: 100px;
+
+  margin-bottom: $margin-bottom;
+  + .module__accordeon_element {
+    margin-top: -$margin-bottom;
+  } 
+
+  
+  .headline {
+      @include grid-col-gap-dist("margin-left", 1,1,"left");
+      @include page-dist("margin-right", "right");
+      @include font-title;
+
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      padding: 12px 0;
+
+  }      
+
+}
+    
