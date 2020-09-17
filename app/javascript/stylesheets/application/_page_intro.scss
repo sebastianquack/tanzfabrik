@@ -81,6 +81,7 @@
   .rich_content_2 {
     @include font-fliesstext-s;
     padding-right: 17px;
+    align-self: start;
 
     @include breakpoint('s') {
       grid-column: 1;
@@ -92,6 +93,11 @@
     hyphens: auto; 
     @include font-h1(true);
     margin-bottom: 0.2em;
+  }
+
+  .button {
+    @include grid-gap-dist("margin-top");
+    @include grid-gap-dist("margin-right");
   }
 
   &[data-style-option="small_headline_font"] h1 {
