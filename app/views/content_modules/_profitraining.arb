@@ -18,31 +18,31 @@ def render_list_for(profitrainings)
   ul :class => "project_list" do
     profitrainings.each do |event_detail| 
       li do
-        div :class => "project" do 
-          
-          div :class => "time-duration" do
-            span l event_detail.starttime, :format => :day_month
-            text_node " - "
-            span l event_detail.endtime, :format => :day_month_year
-          end
-
-          div :class=>"time" do
-            span l event_detail.starttime, :format => :hours_minutes
-            text_node " - "
-            span l event_detail.starttime + event_detail.duration * 60, :format => :hours_minutes
-          end
-
-          div :class => "teacher" do
-            event_detail.event.people.map do |p| 
-              a p.name, :href => event_path(event_detail.event)
+        a :class => "project", :href => event_path(event_detail.event) do
+            div :class => "time-duration" do
+              span l event_detail.starttime, :format => :day_month
+              text_node " - "
+              span l event_detail.endtime, :format => :day_month_year
             end
-          end
-          div :class => "title" do
-            a event_detail.event.title, :href => event_path(event_detail.event), :class => "title-link"
-            if event_detail.event.signup_url  and !event_detail.event.signup_url.empty?
-              a inline_svg_pack_tag("media/svgs/TAFA20-Webseite_Ticket_red.svg", class: "tickets-icon"), title: get_text_item("tanzklassen_anmeldung"), href: event_detail.event.signup_url, target: "_blank"
+
+            div :class=>"time" do
+              span l event_detail.starttime, :format => :hours_minutes
+              text_node " - "
+              span l event_detail.starttime + event_detail.duration * 60, :format => :hours_minutes
             end
-          end
+
+            div :class => "teacher" do
+              event_detail.event.people.map do |p| 
+                text_node p.name
+              end
+            end
+            div :class => "title" do
+              text_node event_detail.event.title
+              if event_detail.event.signup_url  and !event_detail.event.signup_url.empty?
+                a inline_svg_pack_tag("media/svgs/TAFA20-Webseite_Ticket_red.svg", class: "tickets-icon"), title: get_text_item("tanzklassen_anmeldung"), href: event_detail.event.signup_url, target: "_blank"
+              end
+            end
+            
           
         end
       end
