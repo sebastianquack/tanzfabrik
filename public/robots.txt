@@ -4,4 +4,4 @@
 # User-agent: *
 # Disallow: /
 
-Sitemap: https://tanzfabrik-production.s3.amazonaws.com/sitemaps/sitemap.xml
+Sitemap: https://tanzfabrik-relaunch2020.s3.amazonaws.com/sitemaps/sitemap.xml

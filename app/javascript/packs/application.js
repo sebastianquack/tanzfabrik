@@ -185,7 +185,6 @@ document.addEventListener("DOMContentLoaded", function () {
   })
 })
 
-
 function elemInArray(elem, elemArray) {
   var found = false
   elemArray.forEach(function(elem0){
@@ -196,3 +195,28 @@ function elemInArray(elem, elemArray) {
   })
   return found
 }
+
+/****************** AUTO OPEN EXTERNAL LINKS IN NEW TAB ********************/
+
+// Define the Function targetBlank()
+
+function targetBlank() {
+  // remove subdomain of current site's url and setup regex
+  var internal = location.host.replace("www.", "");
+  internal = new RegExp(internal, "i");
+
+  var a = document.getElementsByTagName('a'); // then, grab every link on the page
+  for (var i = 0; i < a.length; i++) {
+    var href = a[i].host; // set the host of each link
+    if (!internal.test(href)) { // make sure the href doesn't contain current site's host
+      a[i].setAttribute('target', '_blank'); // if it doesn't, set attributes
+      a[i].setAttribute('rel', 'external'); // that's the proper way of doing it (valid XHTML 1.0 Strict)
+    }
+  }
+};
+
+// Run the function targetBlank()
+
+document.addEventListener("DOMContentLoaded", function () {
+  targetBlank();
+})

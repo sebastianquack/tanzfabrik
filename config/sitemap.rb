@@ -2,17 +2,27 @@
 SitemapGenerator::Sitemap.default_host = "http://www.tanzfabrik-berlin.de"
 SitemapGenerator::Sitemap.public_path = 'tmp/' # because of heroku's write-only filesystem
 
-# store on S3 using Fog
-SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(
-  aws_access_key_id: ENV['S3_KEY'], 
-  aws_secret_access_key: ENV['S3_SECRET'], 
-  fog_provider: 'AWS', 
-  fog_directory: ENV['S3_TANZFABRIK_BUCKET'], 
-  fog_region: 'eu-west-1'
-)
+if Rails.env.production?
+  # store on S3
+  SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(
+    ENV['S3_TANZFABRIK_BUCKET'],
+    aws_access_key_id: ENV['S3_KEY'], 
+    aws_secret_access_key: ENV['S3_SECRET'], 
+    aws_region: ENV['AWS_REGION'],
+    aws_endpoint: "https://s3-#{ENV['AWS_REGION']}.amazonaws.com"
+  )
+else
+
+  puts "SITEMAP note: Use \"rake sitemap:refresh:no_ping\" for testing. don't ping!"
+  puts "SITEMAP note: Not uploading sitemap unless RAILS_ENV=production"
+
+end
+
 # inform the map cross-linking where to find the other maps
-SitemapGenerator::Sitemap.sitemaps_host = "http://#{ENV['S3_TANZFABRIK_BUCKET']}.s3.amazonaws.com/"
+SitemapGenerator::Sitemap.sitemaps_host = "https://#{ENV['S3_TANZFABRIK_BUCKET']}.s3.amazonaws.com/"
 # pick a namespace within your bucket to organize your maps
+
+
 SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
 
 SitemapGenerator::Sitemap.compress = false
@@ -41,18 +51,18 @@ SitemapGenerator::Sitemap.create do
         }
     end
 
-    Festival.all.each do |festival|
-      changefreq = (festival.start_date && festival.start_date >= Date.today) ? 'weekly' : 'never'
-      priority = (festival.end_date && festival.end_date >= Date.today) ? 0.6 : 0.3
-      add festival_path(festival, :locale => language0), 
-        :lastmod => festival.updated_at, 
-        :changefreq => changefreq,
-        :priority => priority,
-        :alternate => {
-          :href => festival_url(festival, :locale => language1, :host => SitemapGenerator::Sitemap.default_host ),
-          :lang => language1
-        }        
-    end
+    #Festival.all.each do |festival|
+    #  changefreq = (festival.start_date && festival.start_date >= Date.today) ? 'weekly' : 'never'
+    #  priority = (festival.end_date && festival.end_date >= Date.today) ? 0.6 : 0.3
+    #  add festival_path(festival, :locale => language0), 
+    #    :lastmod => festival.updated_at, 
+    #    :changefreq => changefreq,
+    #    :priority => priority,
+    #    :alternate => {
+    #      :href => festival_url(festival, :locale => language1, :host => SitemapGenerator::Sitemap.default_host ),
+    #      :lang => language1
+    #    }        
+    #end
 
     Event.all.have_own_page.each do |event|
       priority = (event.event_details.length > 0 && event.end_date >= Date.today) ? 0.5 : 0.3
@@ -65,6 +75,18 @@ SitemapGenerator::Sitemap.create do
           :lang => language1
         }        
     end
+
+  Person.having_any_events.each do |person|
+    priority = 0.7
+    add person_path(person, :locale => language0), 
+      :lastmod => person.updated_at, 
+      :changefreq => 'monthly', 
+      :priority => priority,
+      :alternate => {
+        :href => person_url(person, :locale => language1, :host => SitemapGenerator::Sitemap.default_host ),
+        :lang => language1
+      }        
+  end
 
   end
 

@@ -46,7 +46,7 @@
     <div class="image">
       <%  if person.images.length > 0 %>
         <figure>
-            <img src="<%= person.images.first.attachment.url(:medium)%>" alt="<%= person.name %>">
+            <img src="<%= person.images.first.attachment.url(:large)%>" alt="<%= person.name %>">
             <figcaption>
               <%= person.images.first.license if person.images.first.license %>
             </figcaption>
