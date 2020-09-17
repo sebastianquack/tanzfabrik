@@ -20,6 +20,11 @@
 
   .event_list {
 
+    li:first-child { 
+      border-width: 1px 0 0 0;
+      border-style: solid;
+    }
+
     .event {
 
       display: grid;
@@ -37,8 +42,7 @@
       padding-bottom: 12px;
       border-width: 0 0 1px 0;
       border-style: solid;
-      &:first-child { border-top-width: 1px;}
-
+      
       .title {
         grid-column: 6 / span 5;
         @include font-title;

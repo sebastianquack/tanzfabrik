@@ -3,7 +3,9 @@
 
 workshops.group_by{|w| w.start_date.month}.each do |group| 
 
-  h3 l(group[1].first.start_date, :format => :month), :class => "month"
+  unless defined? in_festival 
+    h3 l(group[1].first.start_date, :format => :month), :class => "month"
+  end
 
   ul :class => "project_list" do
 

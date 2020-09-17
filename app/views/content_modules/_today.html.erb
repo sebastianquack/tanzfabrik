@@ -30,26 +30,30 @@
     <% event_detail = oc[1] %>
     <% event = event_detail.event %>
 
-    <li class="event">
+    <li>
 
-      <div class="time">
-        <%= l(occurrence, :format => :hours_minutes) %>
-        –
-        <%= l(occurrence + event_detail.duration * 60, :format => :hours_minutes) %>
-      </div>
+      <a class="event" href="<%= event_path(event) %>">
 
-      <div class="teacher">
-        <%= link_to(event.people[0].name, event_path(event)) if event.people.length > 0 %>
-      </div>
+        <div class="time">
+          <%= l(occurrence, :format => :hours_minutes) %>
+          –
+          <%= l(occurrence + event_detail.duration * 60, :format => :hours_minutes) %>
+        </div>
 
-      <div class="place">
-        <%= event.type.name %>
-        <%= event_detail.studio.location.name %>
-      </div>
+        <div class="teacher">
+          <%= event.people[0].name if event.people.length > 0 %>
+        </div>
 
-      <div class="title">
-        <%= event.title %>
-      </div>
+        <div class="place">
+          <%= event.type.name %>
+          <%= event_detail.studio.location.name %>
+        </div>
+
+        <div class="title">
+          <%= event.title %>
+        </div>
+
+      </a>
 
     </li>
 

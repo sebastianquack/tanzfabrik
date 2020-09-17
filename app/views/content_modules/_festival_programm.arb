@@ -15,16 +15,16 @@ div :class => "module__festival_programm" do
 
   festival_workshops = festival.events.no_draft.where(:type_id => 2)
 
-  workshops_details = []
-  festival_workshops.each do |w|
-    workshops_details.concat(w.event_details)
-  end
+  #workshops_details = []
+  #festival_workshops.each do |w|
+  #  workshops_details.concat(w.event_details)
+  #end
 
   # festival workshops
   if festival_workshops.length > 0
     h2 t(:festival_workshops)
     div :class => "module__workshop_programm indent" do
-      render :partial => "events/workshop_list_2020", :locals => {:workshops => workshops_details, :in_festival => true}
+      render :partial => "events/workshop_list_2020", :locals => {:workshops => festival_workshops, :in_festival => true}
     end
   end
 

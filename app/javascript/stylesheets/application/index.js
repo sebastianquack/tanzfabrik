@@ -29,6 +29,7 @@ import "./_festival_programm.scss"
 import "./_today.scss"
 import "./_video.scss"
 import "./_accordeon_element.scss"
+import "./_accordeon_headline.scss"
 import "./_image_element_magazine.scss"
 import "./_submenu_divider.scss"
 
