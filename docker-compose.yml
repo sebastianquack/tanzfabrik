@@ -14,6 +14,8 @@ services:
       - .:/app:cached
     ports:
       - "3000:3000"
+    networks:
+      - tanzfabrik
     environment:
       - RAILS_ENV=development
     # volumes_from: 
@@ -33,11 +35,15 @@ services:
       - .:/app:cached
     ports:
       - "3035:3035"
+    networks:
+      - tanzfabrik
     environment:
       - RAILS_ENV=development      
 
   db:
     image: postgres:12.3
+    networks:
+      - tanzfabrik    
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -72,10 +78,17 @@ services:
       - ./.data/minio:/data:cached
     ports:
       - 9000:9000
-    
+    networks:
+      tanzfabrik:
+        aliases:
+          - minio
+          - "${S3_TANZFABRIK_BUCKET}.minio"
+      
 
   minio-mc-init:
     image: minio/mc:RELEASE.2020-07-17T02-52-20Z-s390x
+    networks:
+      - tanzfabrik    
     entrypoint: >
       /bin/sh -c "
       sleep 10;
@@ -86,5 +99,5 @@ services:
       "
 
 networks:
-  default:
+  tanzfabrik:
     name: tanzfabrik
