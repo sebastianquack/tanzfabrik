@@ -3,7 +3,7 @@
   <% if content_module.headline %>
     <div class="headline_container">
       <h2 class="headline">
-        <%= content_module.headline %>
+        <span><%= content_module.headline %></span>
         <%= render :partial => "content_modules/_button", :locals => { :obj => content_module } %>
       </h2>      
     </div>

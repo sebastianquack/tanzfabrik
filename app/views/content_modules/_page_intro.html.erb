@@ -50,11 +50,9 @@
       </div>
     <% end %>
 
-    <div class="downloads">
-      <% content_module.downloads.each do |download| %>
-        <a class="button pdf" title="<%= download.description %>" href="<%= download.attachment.url %>"><%= download.description %></a>
-      <% end %>
-    </div>
+    <% content_module.downloads.each do |download| %>
+      <a class="button pdf downloads" title="<%= download.description %>" href="<%= download.attachment.url %>"><%= download.description %></a>
+    <% end %>
 
     <%= render :partial => "content_modules/_button", :locals => { :obj => content_module } %> 
 

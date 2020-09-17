@@ -94,4 +94,31 @@
 
   }
 
+  // MOBILE
+  @include breakpoint('s') {
+    .headline_container h2 {
+      @include flex-row-item(12,12);
+      flex-direction: column;
+      align-items: flex-start;
+      .button {
+        margin-left:0;
+      }
+    }
+
+    .slideshow {
+      .slides {
+
+        @include flex-row-item(12,12, true);
+        @include flex-row;
+        width: calc(100% - #{$grid-gap-s});
+        margin-right:0;
+        padding-left: $grid-gap-s;
+        
+        .slide {
+          @include flex-row-item(5,8);
+        }
+      }
+    }
+  }
+
 }

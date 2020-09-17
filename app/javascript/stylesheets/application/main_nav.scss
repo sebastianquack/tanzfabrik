@@ -19,6 +19,7 @@ $transition-duration: 0.35s;
   font-weight: $font-weight-semibold;
   margin-top: $header-height;
   height: calc( 100vh - #{$header-height});
+  height: calc( var(--100vh) - #{$header-height});
   box-sizing: border-box;
 
   display: flex;
@@ -186,6 +187,7 @@ $transition-duration: 0.35s;
         ul {
           opacity: 1;
           max-height: 100vh;
+          max-height: var(--100vh);
         }
       }
 
@@ -310,6 +312,7 @@ $transition-duration: 0.35s;
         box-sizing: border-box;
         &:hover {
           max-height: 100vh;
+          max-height: var(--100vh);
         }
         transition: max-height $transition-duration, background-color 0.2s;
 

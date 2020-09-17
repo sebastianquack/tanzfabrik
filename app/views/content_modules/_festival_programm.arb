@@ -22,7 +22,7 @@ div :class => "module__festival_programm" do
 
   # festival workshops
   if festival_workshops.length > 0
-    h2 t(:festival_workshops)
+    h2 t(:festival_workshops), class: "headline-workshops"
     div :class => "module__workshop_programm indent" do
       render :partial => "events/workshop_list_2020", :locals => {:workshops => festival_workshops, :in_festival => true}
     end
@@ -31,7 +31,7 @@ div :class => "module__festival_programm" do
   # festival events
   events = festival.events.no_draft.where.not(:type_id => 2)
   if events.length > 0
-    h2 t(:festival_programm)
+    h2 t(:festival_programm), class: "headline-buehne"
     div :class => "module__programm indent" do
       render :partial => "/events/event_list", :locals => {:events => events, :start_date => festival.start_date, :in_festival => festival, :is_archive => false, :display_year => with_year }
     end

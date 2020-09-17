@@ -14,8 +14,10 @@
   justify-content: flex-start;
 
   .text {
-    @include flex-row-item(11,12);
-    @include grid-dist("margin-left",1);
+    @include breakpoint('s-min', 'min') {
+      @include flex-row-item(11,12);
+      @include grid-dist("margin-left",1);
+    }
     padding: 30px 0;
   }
 
