@@ -38,9 +38,9 @@ def render_list_for(profitrainings)
             end
             div :class => "title" do
               text_node event_detail.event.title
-              if event_detail.event.signup_url  and !event_detail.event.signup_url.empty?
-                a inline_svg_pack_tag("media/svgs/TAFA20-Webseite_Ticket_red.svg", class: "tickets-icon"), title: get_text_item("tanzklassen_anmeldung"), href: event_detail.event.signup_url, target: "_blank"
-              end
+              #if event_detail.event.signup_url  and !event_detail.event.signup_url.empty?
+              #  a inline_svg_pack_tag("media/svgs/TAFA20-Webseite_Ticket_red.svg", class: "tickets-icon"), title: get_text_item("tanzklassen_anmeldung"), href: event_detail.event.signup_url, target: "_blank"
+              #end
             end
             
           
