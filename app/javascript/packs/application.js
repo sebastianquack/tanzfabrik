@@ -220,3 +220,14 @@ function targetBlank() {
 document.addEventListener("DOMContentLoaded", function () {
   targetBlank();
 })
+
+/**************** 100vh WORKAROUND for mobile Safari ************/
+
+function update100vh() {
+  document.querySelector(':root').style
+    .setProperty('--100vh', window.innerHeight + 'px');
+}
+
+window.addEventListener('resize', update100vh)
+window.addEventListener('orientationChange', update100vh)
+document.addEventListener('DOMContentLoaded', update100vh)
