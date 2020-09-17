@@ -93,4 +93,26 @@
     }
   }
 
+  // MOBILE
+
+  @include breakpoint('s') {
+    .project {
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: auto auto;
+      @include grid-gap;
+      .date {
+        grid-column: 1 / span 2;
+        grid-row: 1 / span 2;
+      }
+      .teacher {
+        grid-column: 3 / span 6;
+        grid-row: 2;
+      }
+      .festival-title {
+        grid-column: 3 / span 6;
+        grid-row: 1;
+      }
+    }
+  }
+
 }

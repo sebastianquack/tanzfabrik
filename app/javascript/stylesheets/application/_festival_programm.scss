@@ -1,10 +1,12 @@
 @import "./__mixins.scss";
 
 .module__festival_programm {
- > h2 {
+  > h2 {
     @include page-dist("padding-right", "right");
-    @include grid-col-gap-dist("padding-left", 1, 1, "left")
+    @include grid-col-gap-dist("padding-left", 1, 1, "left");
+    @include breakpoint('s') {
+      @include grid-col-gap-dist("padding-left", 0,0, "left")
+    }
   }
-
 
 }
