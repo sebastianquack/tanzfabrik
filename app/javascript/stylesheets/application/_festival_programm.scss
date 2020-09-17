@@ -1,11 +1,17 @@
 @import "./__mixins.scss";
 
 .module__festival_programm {
+
   > h2 {
-    @include page-dist("padding-right", "right");
-    @include grid-col-gap-dist("padding-left", 1, 1, "left");
+    @include page-dist("margin-right", "right");
+    @include grid-col-gap-dist("margin-left", 1, 1, "left");
     @include breakpoint('s') {
-      @include grid-col-gap-dist("padding-left", 0,0, "left")
+      @include grid-col-gap-dist("margin-left", 0,0, "left")
+    }
+    padding-bottom: 20px;
+
+    &.headline-buehne {
+      border-bottom: solid 1px black;
     }
   }
 
