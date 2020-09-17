@@ -4,7 +4,7 @@
   @include grid-col-gap-dist("padding-left", 0, 0, "left");
   @include grid-col-gap-dist("padding-right", 0, 0, "right");
 
-  display: grid;
+  //display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto auto;
   @include grid-gap;

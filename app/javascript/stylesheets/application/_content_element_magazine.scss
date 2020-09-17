@@ -4,8 +4,10 @@
 
   @include page-dist("padding-left", "left");
   @include page-dist("padding-right", "right");
-
-  display: grid;
+  
+  @include breakpoint('s-min', 'min') {
+    display: grid;
+  }
   grid-template-columns: repeat(12, 1fr);
   column-gap: $grid-gap-l;
   @include breakpoint('s') {
