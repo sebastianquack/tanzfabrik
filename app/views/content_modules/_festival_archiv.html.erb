@@ -15,7 +15,7 @@
   <%
 
   # get festivals in the past
-  past_festivals = Festival.no_draft.select { |f| f.events.length > 0 && f.end_date < Date.today }.sort { |a,b| b <=> a } 
+  past_festivals = Festival.no_draft.select { |f| f.events.length > 0 && f.end_date && f.end_date < Date.today }.sort { |a,b| b <=> a } 
   %>
 
   <ul class="archive-links">
