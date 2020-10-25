@@ -121,8 +121,56 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll("[data-close]").forEach((button) => {
     button.addEventListener('click', () => {
-      window.history.back();
+
+      console.log(document.referrer)
+
+      // if we are already on tanzfabrik page, just go back 
+      /*if(document.referrer.includes("localhost:3000")
+        || document.referrer.includes("tanzfabrik")) {
+          window.history.back();
+      } else {*/
+
+        let baseUrl = window.location.href.split('/').slice(0, 4).join('/')
+
+        if(window.location.href.includes("festivals")) {
+          window.location = window.location.href.split('/').slice(0, 6).join('/')
+          return
+        }
+        
+        // read event type encoded in meta tag
+        function getMeta(metaName) {
+          const metas = document.getElementsByTagName('meta');
+          for (let i = 0; i < metas.length; i++) {
+            if (metas[i].getAttribute('name') === metaName) {
+              return metas[i].getAttribute('content');
+            }
+          }
+          return '';
+        }
+        let destination_page = "";
+        let event_type_id = getMeta('event_type')
+
+        if(event_type_id == "2") {
+          destination_page = "workshop_programm"
+        }
+        else if(event_type_id == "3") {
+          destination_page = "kursplan"
+        }
+        else if(event_type_id == "4") {
+          destination_page = "profitraining"
+        }
+        else if(event_type_id == "5") {
+          destination_page = "performance_projekte"
+        }
+        else 
+          destination_page = "programm"
+
+        window.location = baseUrl + "/" + destination_page 
+
+      //}  
+
     });
+      
   });
 })
 

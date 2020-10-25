@@ -12,7 +12,7 @@ workshops.group_by{|w| w.start_date.month}.each do |group|
       group[1].each do |event|
     
         li do
-          a :class => "project", :href => event_path(event) do 
+          a :class => "project", :href => event_path_with_festival(event, in_festival) do 
 
             time :class => "date" do
 

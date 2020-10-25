@@ -104,6 +104,10 @@ $( document ).ready(function() {
     
     // always do direct submit & reload
     if(confirm("Modul wird gespeichert - fortfahren?")) {
+
+      // remove parameter when switching content module type
+      $("#content_module_parameter").val("");
+
       $("#edit_content_module").submit()
       return;
     }

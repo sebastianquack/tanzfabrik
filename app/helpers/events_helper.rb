@@ -1,8 +1,124 @@
 module EventsHelper
 
+ 
+  def get_prev_next_event_urls(event, time_url, in_festival)
+
+    p_url = nil
+    n_url = nil
+
+    festival = nil
+    if(in_festival != nil)
+      festival = Festival.find(in_festival)
+    end
+        
+    # stage events
+    if event.stage_event? 
+      list = []
+      if(festival == nil)
+        list = stage_events_occurrence_list(current_stage_events())
+      else 
+        festival_events = festival.events.no_draft.where.not(:type_id => 2)
+        list = stage_events_occurrence_list(festival_events)
+      end
+      i = list.index{|oc| oc[:event].id == event.id && l(oc[:time], :format => :url) == time_url}
+      if i != nil && i > 0
+        p_url = occurrence_path(list[i - 1][:event], list[i - 1][:time], in_festival)
+      end 
+      if i != nil && i < list.length - 1
+        n_url = occurrence_path(list[i + 1][:event], list[i + 1][:time], in_festival)
+      end
+    end
+
+    # workshops && performance projects
+    if event.type.id == 2 || event.type.id == 5
+      
+      if(festival == nil)
+        list = current_workshops() if event.type.id == 2
+        list = current_performance_projects() if event.type.id == 5
+      else
+        list = festival.events.no_draft.where(:type_id => 2)
+      end
+
+      i = list.index{|w| w.id == event.id}
+      if i != nil && i > 0
+        p_url = event_path(list[i - 1])
+      end 
+      if i != nil && i < list.length - 1
+        n_url = event_path(list[i + 1])
+      end
+    end
+
+    # proftrainings
+    if event.type.id == 4
+      list = current_profitrainings()
+      i = list.index{|ed| ed.event.id == event.id}
+      if i != nil && i > 0
+        p_url = event_path(list[i - 1].event)
+      end 
+      if i != nil && i < list.length - 1
+        n_url = event_path(list[i + 1].event)
+      end
+    end
+
+    return [p_url, n_url]
+
+  end
+
+  # get current workshops for workshop programm
+  def current_workshops()
+    return Event.no_draft.joins(:event_details).where('type_id = 2 AND event_details.end_date >= ?', Date.today).uniq.sort_by{ |e| e.start_date }
+  end
+
+  # get current profitrainings
+  def current_profitrainings()
+    return profitrainings = EventDetail.joins(:event).where('events.type_id = 4 AND end_date >= ?', Date.today).sort_by{ |e| e.start_date }
+  end
+
+  # get current performance projects
+  def current_performance_projects()
+    return Event.no_draft.joins(:type, :event_details).where('event_types.id = 5').currently_listed.sort_by{ |e| e.start_date }
+  end
+
+  # gets events on current programm bühne
+  def current_stage_events() 
+    start_date = Date.today.beginning_of_month
+    events = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ?', Rails.configuration.stage_event_types, start_date)
+  end
+
+  # gets list of occurences to display
+  def stage_events_occurrence_list(events)
+    # make a list of all occurences from given events
+    all_occurences = []
+    events.includes(:people, :event_details => [:repeat_mode, :studio]).each do |event|
+      event.event_details.each do |detail|
+      
+        # get occurrences
+        occurrences = detail.occurrences
+       
+        if occurrences.length > 0
+          occurrences.each do |oc|
+            all_occurences << { :time => oc, :event => event, :detail => detail }
+          end
+        end
+      end
+    end
+    return all_occurences.uniq.sort_by{ |o| o[:time] }
+  end
+
+  def event_path_with_festival(event, festival = nil)
+    if festival
+      if festival.is_a? Integer
+        festival = Festival.find(festival.id)
+      end
+      return festival_path(festival) + "/events/" + event.id.to_s  
+    else
+      return event_path(event)
+    end
+  end
+
   def occurrence_path(event, time, festival = nil)
     if festival
-      if !festival.is_a? Integer
+      if festival.is_a? Integer
         festival = Festival.find(festival.id)
       end
       return festival_path(festival) + "/events/" + event.id.to_s + "/" + l(time, :format => :url)  

@@ -5,10 +5,9 @@ def load_workshops(year)
   if year
     start_date = Date.parse('01-01-' + year.to_s)
     end_date = start_date.end_of_year
-    
     workshops = Event.no_draft.joins(:event_details).where('type_id = 2 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq.sort_by{ |e| e.start_date }
   else 
-    workshops = Event.no_draft.joins(:event_details).where('type_id = 2 AND event_details.end_date >= ?', Date.today).uniq.sort_by{ |e| e.start_date }
+    workshops = current_workshops()
   end
 
   return workshops
@@ -16,7 +15,7 @@ def load_workshops(year)
 end
 
 def render_list_for(workshops) 
-  render :partial => "events/workshop_list_2020", :locals => {:workshops => workshops}
+  render :partial => "events/workshop_list_2020", :locals => {:workshops => workshops, :in_festival => nil}
 end
 
 div :class => "module__workshop_programm" do

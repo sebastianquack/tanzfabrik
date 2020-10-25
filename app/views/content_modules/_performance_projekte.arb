@@ -6,7 +6,7 @@ def load_performance_projects(year)
     end_date = start_date.end_of_year
     performance_projekte = Event.no_draft.joins(:type, :event_details).where('event_types.id = 5 AND event_details.start_date >= ? AND event_details.start_date <= ?', start_date, end_date).uniq.sort_by{ |e| e.start_date }
   else 
-    performance_projekte = Event.no_draft.joins(:type, :event_details).where('event_types.id = 5').currently_listed.sort_by{ |e| e.start_date }
+    performance_projekte = current_performance_projects()
   end
 
   return performance_projekte

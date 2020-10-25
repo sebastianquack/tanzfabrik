@@ -91,6 +91,35 @@ span[data-close] {
   }
 }
 
+a[data-previous] {
+  cursor: pointer;
+  &:before {
+    content: url("~svgs/TAFA20-Webseite_Pfeil-links_red.svg");
+
+    display: block;
+    width: $logo-width;
+    height: $logo-height;
+    [data-section="buehne"] & {
+      content: url("~svgs/TAFA20-Webseite_Pfeil-links_black.svg");
+    }
+  }
+}
+
+a[data-next] {
+  cursor: pointer;
+  &:before {
+    content: url("~svgs/TAFA20-Webseite_Pfeil-rechts_red.svg");
+
+    display: block;
+    width: $logo-width;
+    height: $logo-height;
+    [data-section="buehne"] & {
+      content: url("~svgs/TAFA20-Webseite_Pfeil-rechts_black.svg");
+    }
+  }
+}
+
+
 svg.icon {
   @include icon-width-height;
   path {

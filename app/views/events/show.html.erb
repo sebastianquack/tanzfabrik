@@ -1,13 +1,18 @@
-<% set_meta_tags :canonical => event_url(@event) %>
+<% set_meta_tags :canonical => event_url(@event), :event_type => @event.type.id %>
 
 <div class="single-event-page" data-section="<%= @section %>">
 
   <% detail = @detail %>
+  <% prev_next_urls = get_prev_next_event_urls(@event, params[:time], params[:festival_id]) %>
 
   <div class="overlay">
     <div class="stripes_vertical stripes_left">
       <span data-close></span>
-      <span data-close></span>
+      <% if prev_next_urls[0] %>
+        <a href="<%= prev_next_urls[0] %>" data-previous></a>
+      <% else %>
+        <span data-close></span>
+      <% end %>
       <span data-close></span>
     </div>
 
@@ -68,7 +73,11 @@
 
     <div class="stripes_vertical stripes_right">
       <span data-close></span>
-      <span data-close></span>
+      <% if prev_next_urls[1] %>
+        <a href="<%= prev_next_urls[1] %>" data-next></a>
+      <% else %>
+        <span data-close></span>
+      <% end %>
       <span data-close></span>
     </div>
   
@@ -81,7 +90,7 @@
 
     <p class="type_sentence"><b class="type"><%= @event.display_type %></b>
     <% if @event.people.first %>
-      <%= t "with" %>
+      <%= @event.stage_event? ? (t "by") : (t "with") %>
       <%= @event.people.map { |p| p.name }.join(", ") %>
     <% end %>
     </p>

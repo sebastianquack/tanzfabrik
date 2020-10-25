@@ -18,7 +18,6 @@ module PagesHelper
     return nil
   end
 
-
   def person_link(person)
     if person.kurslehrer?
       page = "lehrer" 

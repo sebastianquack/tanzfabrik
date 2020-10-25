@@ -75,6 +75,7 @@ en:
   call: "Call"
   new: "New"
   with: "with"
+  by: "by"
   continue_to: "Continue to"
 
   kursplan_more: "Important info about the dance classes. The class schedule is subject to change."

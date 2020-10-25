@@ -6,7 +6,7 @@ def load_profitrainings(year)
     end_date = start_date.end_of_year
     profitrainings = EventDetail.joins(:event).where('events.type_id = 4 AND start_date >= ? AND start_date <= ?', start_date, end_date).uniq.sort_by{ |e| e.start_date }
   else 
-    profitrainings = EventDetail.joins(:event).where('events.type_id = 4 AND end_date >= ?', Date.today).sort_by{ |e| e.start_date }
+    profitrainings = current_profitrainings()
   end
 
   return profitrainings

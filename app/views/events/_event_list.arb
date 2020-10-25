@@ -8,25 +8,11 @@
 
 display_year = nil if !defined? display_year
 
-# make a list of all occurences
-all_occurences = []
-events.includes(:people, :event_details => [:repeat_mode, :studio]).each do |event|
-  event.event_details.each do |detail|
-      
-    # get occurrences
-    occurrences = detail.occurrences
-          
-    if occurrences.length > 0
-      occurrences.each do |oc|
-        all_occurences << { :time => oc, :event => event, :detail => detail }
-      end
-    end 
-  end
-end
+occurrences = stage_events_occurrence_list(events)
 
 # display list of all occurences
 ol :class => "event-calendar" do
-  all_occurences.uniq.sort_by{ |o| o[:time] }.group_by { |o| o[:time].to_date.beginning_of_month }.each do |month,o_per_month|
+  occurrences.group_by { |o| o[:time].to_date.beginning_of_month }.each do |month,o_per_month|
     # TODO: find out why there are dublicate entries in all_occurences which need to be uniqed 
     if in_festival.nil?
       # NOTE: having a li that acts as a heading is probable semantically wrong. instead, there should be sub-lists for monthly sections.

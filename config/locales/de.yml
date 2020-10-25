@@ -45,6 +45,7 @@ de:
   call: "Aufruf"
   new: "Neu"
   with: "mit"
+  by: "von"
   continue_to: "Weiter zu"
   open_festival_page: "zur Projekt-Seite"
 

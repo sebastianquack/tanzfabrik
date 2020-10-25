@@ -4,8 +4,7 @@ if params[:year]
   end_date = start_date.end_of_year
   events = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ? AND event_details.start_date <= ?', Rails.configuration.stage_event_types, start_date, end_date)
 else 
-  start_date = Date.today.beginning_of_month
-  events = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ?', Rails.configuration.stage_event_types, start_date)
+  events = current_stage_events()
 end
 
 div :class => "module__programm" do 
