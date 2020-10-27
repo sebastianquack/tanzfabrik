@@ -496,5 +496,10 @@ class Event < ActiveRecord::Base
   def logos
     return self.images.filter {|i| i.logo}
   end
+
+  # don't index incomplete events (courses without teachers) or drafts
+  def noindex
+    return self.draft || ( self.people.count == 0 && [3,4].include?(self.type_id) )
+  end
     
 end
