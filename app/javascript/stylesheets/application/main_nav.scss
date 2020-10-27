@@ -341,9 +341,6 @@ $transition-duration: 0.35s;
             position: relative;
             top: -3px;
             > a {pointer-events: none;}
-            &.active {
-              font-style: italic;
-            }
           }
 
           ul {
@@ -356,7 +353,9 @@ $transition-duration: 0.35s;
         }        
       }
 
-      .active { 
+      
+      .active > span,
+      .active > a { 
         font-style: italic; 
       }
 
