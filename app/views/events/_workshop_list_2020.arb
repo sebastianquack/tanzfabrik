@@ -3,7 +3,7 @@
 
 workshops.group_by{|w| w.start_date.month}.each do |group| 
 
-  unless defined? in_festival 
+  unless in_festival 
     h3 l(group[1].first.start_date, :format => :month), :class => "month"
   end
 
@@ -57,7 +57,7 @@ workshops.group_by{|w| w.start_date.month}.each do |group|
 
             # hide festival reference in festival program
             div :class => "festival-title" do
-              unless defined? in_festival 
+              unless in_festival 
                 div :class => "festival" do
                   render :partial => "events/in_festival", :locals => {:event => event, :link => false }
                 end

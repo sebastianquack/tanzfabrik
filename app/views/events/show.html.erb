@@ -93,6 +93,12 @@
       <%= @event.stage_event? ? (t "by") : (t "with") %>
       <%= @event.people.map { |p| p.name }.join(", ") %>
     <% end %>
+    
+    <% if @event.festivals %>
+      <br>
+      <%= render :partial => "events/in_festival", :locals => {:event => @event, :link => true } %>
+    <% end %>
+    
     </p>
     
     <div><%= @event.rich_content %></div>
