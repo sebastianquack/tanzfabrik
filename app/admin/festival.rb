@@ -169,6 +169,7 @@ ActiveAdmin.register Festival do
           [t(:section_stage), 'buehne'],
           [t(:section_factory), 'fabrik']
         ]
+      f.input :draft, :label => t(:draft)
     end
     
     f.actions
