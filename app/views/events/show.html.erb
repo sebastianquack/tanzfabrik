@@ -56,8 +56,8 @@
     <div class="image">
       <% if @event.type.id == 4 || @event.type.id == 3 # profitraining or kurs %>
         <%
-          imageSrc = @event.people.first.images.first.attachment.url(:large) if @event.people.first.images.first
-          caption = @event.people.first.images.first.license if @event.people.first.images.first
+          imageSrc = @event.people.first.images.first.attachment.url(:large) if @event.people.first && @event.people.first.images.first
+          caption = @event.people.first.images.first.license if @event.people.first && @event.people.first.images.first
         %>
       <% else %>
         <%  imageSrc = @event.no_logo_images.first.attachment.url(:large) if @event.no_logo_images.first

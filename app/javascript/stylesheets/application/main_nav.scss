@@ -250,6 +250,10 @@ $transition-duration: 0.35s;
   body:not([data-menu-item-key="start"])
   { 
 
+    .ticket-icon {
+      display: block;
+    }
+
     &.featured_visible #main_nav {
       background-color: transparent;
     }
@@ -341,9 +345,6 @@ $transition-duration: 0.35s;
             position: relative;
             top: -3px;
             > a {pointer-events: none;}
-            &.active {
-              font-style: italic;
-            }
           }
 
           ul {
@@ -356,7 +357,9 @@ $transition-duration: 0.35s;
         }        
       }
 
-      .active { 
+      
+      .active > span,
+      .active > a { 
         font-style: italic; 
       }
 
@@ -371,6 +374,7 @@ $transition-duration: 0.35s;
 }
 
 // MOBILE && PAGE
+
 @include breakpoint('s') {
   body:not([data-menu-item-key="start"]) {
 
@@ -410,5 +414,22 @@ $transition-duration: 0.35s;
 
       @include mobile-language-switcher;
     }
+  }
+}
+
+// Ticket Icon
+
+.ticket-icon {
+  display: none;
+  position: fixed;
+  @include page-dist("margin-top", "top");
+  @include page-dist("right", "right");
+  top: 52px; //calc( $header-height * 1px);
+  z-index: 100;
+  svg {
+    width: $logo-width;
+    height: $logo-height;
+    position: relative;
+    bottom: 0.4ex;
   }
 }

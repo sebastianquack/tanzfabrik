@@ -73,7 +73,7 @@ SitemapGenerator::Sitemap.create do
         :alternate => {
           :href => event_url(event, :locale => language1, :host => SitemapGenerator::Sitemap.default_host ),
           :lang => language1
-        }        
+        } unless event.noindex
     end
 
   Person.having_any_events.each do |person|

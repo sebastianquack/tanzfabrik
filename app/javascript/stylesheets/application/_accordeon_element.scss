@@ -3,12 +3,20 @@
 .module__accordeon_element {
 
   $margin-bottom: 100px;
+  $margin-bottom-s: 50px;
 
   margin-bottom: $margin-bottom;
   + .module__accordeon_element {
     margin-top: -$margin-bottom;
   } 
-  
+
+  @include breakpoint('s') {
+    margin-bottom: $margin-bottom-s;
+    + .module__accordeon_element {
+      margin-top: -$margin-bottom-s;
+    } 
+  }
+
   /**
    ** drawer
    **/
@@ -16,6 +24,10 @@
   details.drawer {
       @include grid-col-gap-dist("margin-left", 1,1,"left");
       @include page-dist("margin-right", "right");
+
+      @include breakpoint('s') {
+        @include grid-col-gap-dist("margin-left", 0,0,"left");
+      }
 
       summary::marker {
         color: transparent;

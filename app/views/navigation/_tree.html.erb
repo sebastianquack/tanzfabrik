@@ -1,4 +1,7 @@
 <nav id="main_nav">
   <%= render "/navigation/language_switcher" if defined?(withNavigation) && withNavigation %>
   <%= render :partial => "navigation/tree_node", :locals => {:tree => @menu_tree, :depth => 0, :max_depth => @max_depth} %>
+  <% if @page && @page.slug == "programm" %>
+    <a href="<%= page_url("tickets") %>" class="ticket-icon"><%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_Ticket_black.svg", class: "icon section-stroke-color") %></a>
+  <% end %>
 </nav>
