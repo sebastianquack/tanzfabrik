@@ -9,7 +9,7 @@ workshops.group_by{|w| w.start_date.month}.each do |group|
 
   ul :class => "project_list" do
 
-      group[1].each do |event|
+      group[1].sort_by {|e| [e.start_date, e.title]}.each do |event|
     
         li do
           a :class => "project", :href => event_path_with_festival(event, in_festival) do 
