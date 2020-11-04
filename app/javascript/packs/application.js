@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
     nextElem.addEventListener("click", function() { moveSlide(1) })
     previousElem.addEventListener("click", function () { moveSlide(-1) })
 
-    console.log(slideContainer, amountVisibleSlides)
+    //console.log("slideshow",slideContainer, amountVisibleSlides)
 
     function moveSlide(direction=1) {
 
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var scrollLeft = slideContainer.scrollLeft
       var targetSlide = slides.item(index + direction)
 
-      console.log(index, scrollLeft)
+      //console.log("slideshow 2", index, scrollLeft)
       var newIndex = index + direction
       if (newIndex >= 0 && newIndex <= slides.length - amountVisibleSlides + 1) {
         slideContainer.scrollTo({ left: targetSlide.offsetLeft - firstSlide.offsetLeft, behavior: 'smooth' })

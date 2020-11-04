@@ -47,6 +47,7 @@
 
       @include flex-row-item(11,12, true);
       @include flex-row;
+      flex-basis: auto;
       width: calc(#{100 * 11 / 12}% - #{$grid-gap-l});
       overflow: visible;
       margin-right: 0;
