@@ -9,7 +9,7 @@ class EventsController < ApplicationController
     set_meta_tags :keywords => (@event.keywords)
     add_to_jsonld event_jsonld(@event) if @event.stage_event?
     #render :layout => "application"
-    @detail = @event.event_details.first
+    @detail = @event.event_details.last
 
     # find appropriate section and landing page
     @section = @event.stage_event? ? "buehne" :  "schule"
