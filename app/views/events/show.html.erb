@@ -31,7 +31,7 @@
         <% end %>
       </span>
       <span class="relevant">
-        <% if detail.custom_place.length < 0 %>
+        <% if detail.custom_place.length > 0 %>
           <span><%= detail.custom_place %></span>
         <% else %>
           <span><%= detail.studio.location.name + " " + detail.studio.name %></span><br />
