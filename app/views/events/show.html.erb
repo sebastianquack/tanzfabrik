@@ -31,8 +31,12 @@
         <% end %>
       </span>
       <span class="relevant">
-        <span><%= detail.studio.location.name + " " + detail.studio.name %></span><br />
-        <span><%= detail.studio.location.address.gsub(/,( +[0-9]{5})/, '<br>\1').html_safe %></span>
+        <% if detail.custom_place.length < 0 %>
+          <span><%= detail.custom_place %></span>
+        <% else %>
+          <span><%= detail.studio.location.name + " " + detail.studio.name %></span><br />
+          <span><%= detail.studio.location.address.gsub(/,( +[0-9]{5})/, '<br>\1').html_safe %></span>
+        <% end %>
       </span>
       <span class="<%= "relevant" if @event.type.id == 3 %>">
         <% if @event.type.id == 3 # kurs %>
