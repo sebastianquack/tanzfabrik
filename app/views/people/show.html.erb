@@ -9,7 +9,7 @@
       <a href="<%= edit_admin_person_path(person) %>" class="admin-only classes">✎ Person bearbeiten</a>
     <% end %>    
     <ol class="events">
-      <% person.events.each do |e| %>
+      <% person.events.no_draft.each do |e| %>
         <li class="event" data-section="<%= e.stage_event? ? "buehne" : "schule" %>">
           <%= (link_to e.type.name + " " + e.title, event_path(e)).html_safe %>
         </li>
