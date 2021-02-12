@@ -18,10 +18,12 @@ ul :class => "moments" do
         span l occurrence, :format => :weekday
         span l occurrence, :format => :day
         span do 
-          text_node l occurrence, :format => :hours_minutes
-          unless event.stage_event?
-            text_node "–"
-            text_node l (occurrence + ed.duration * 60), :format => :hours_minutes
+          unless occurrence.hour == 0 && occurrence.min == 0 && ed.duration == 0
+            text_node l occurrence, :format => :hours_minutes
+            unless event.stage_event?
+              text_node "–"
+              text_node l (occurrence + ed.duration * 60), :format => :hours_minutes
+            end
           end
         end
       end

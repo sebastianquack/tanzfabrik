@@ -48,7 +48,9 @@ ol :class => "event-calendar" do
           end
 
           time(:class => "time") do
-            span l(time, :format => :hours_minutes), :class => "clock"
+            unless time.hour == 0 && time.min == 0 && detail.duration == 0
+              span l(time, :format => :hours_minutes), :class => "clock"
+            end
           end
 
           div :class => "type-location" do

@@ -220,7 +220,7 @@ ActiveAdmin.register Event do
           et_f.input :end_date, :include_blank => false, :start_year => 2014, :as => :datepicker
 
           et_f.input :time, :label => false, :include_blank => false, :as => :time_select
-          et_f.input :duration
+          et_f.input :duration, :hint => "Um für dieses Ereignis nur das Datum und keine Zeit anzuzeigen, Start auf 0:00 und Dauer auf 0 einstellen"
           
           et_f.input :studio, :include_blank => false, :collection => Studio.order(:location_id).load.map {|s| [ s.location.name + " " + s.name, s.id] }
           
