@@ -33,6 +33,13 @@
     end
   end
 
+  # make sure that section heading is marked active if page is in this section but not in tree
+  if @page
+    if depth == 1 && @page.section == k.page.slug
+      is_active = true
+    end
+  end
+
   # and don't link to the start page in the tree
   if k.key == "start"
     menu_item_name = ""
@@ -47,7 +54,7 @@
     <span><%= menu_item_name%></span>
   <% end %>
 
-<% if v  && depth < max_depth %>
+<% if v && depth < max_depth %>
   <%= render :partial => "navigation/tree_node", :locals => {:tree => v, :depth => depth + 1, :max_depth => max_depth} %>
 <% end %>
 
