@@ -1,6 +1,6 @@
 <% events_today = Event.no_draft.where(type: [4]).select {|e| e.occurs_on? Date.today } %>
 
-<% kurse_today = EventDetail.joins(:event).where('events.type_id = 3').filter {|ed| ed.start_date.wday == Date.today.wday and !ed.event.draft && ed.valid?} %>
+<% kurse_today = EventDetail.joins(:event).where('events.type_id = 3').filter {|ed| ed.start_date.wday == Date.today.wday and !ed.event.draft && ed.valid? && ed.start_date <= Date.today } %>
 
 <div class="module__today" data-border-bottom="<%= content_module.border_bottom%>">
 
