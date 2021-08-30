@@ -11,6 +11,7 @@ class Image < ActiveRecord::Base
       :medium => ["450x450>"], 
       :thumb => ["100x100>"],
       :logo => ["300x300>"],
+      :logo_panel => ["900x300>"],
       },
     :convert_options => { 
       :background => "-quality 90 -strip",
@@ -20,6 +21,7 @@ class Image < ActiveRecord::Base
       :people_hires => "-quality 80",
       :medium  => "-quality 85",
       :logo  => "-quality 90",
+      :logo_panel  => "-quality 90 -strip",
       },
     :path => "images/:id/:style.:extension"
   

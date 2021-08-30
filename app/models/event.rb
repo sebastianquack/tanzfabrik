@@ -490,11 +490,15 @@ class Event < ActiveRecord::Base
   end
 
   def no_logo_images 
-    return self.images.filter {|i| !i.logo}
+    return self.images.filter {|i| !i.logo && !i.logo_panel}
   end
 
   def logos
-    return self.images.filter {|i| i.logo}
+    return self.images.filter {|i| i.logo && !i.logo_panel}
+  end
+
+  def logo_panels
+    return self.images.filter {|i| i.logo_panel}
   end
 
   # don't index incomplete events (courses without teachers) or drafts

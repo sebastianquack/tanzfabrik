@@ -146,10 +146,18 @@
       <div class="logos">
       <% @event.logos.each do |logo| %>
         <a href="<%= logo.link_href %>">
-          <img src="<%= logo.attachment.url(:logo)%>"/>
+          <imgm src="<%= logo.attachment.url(:logo)%>"/>
         </a>
       <% end %>
       </div>
+    <% end %>
+
+    <% if @event.logo_panels.length %>
+      <% @event.logo_panels.each do |logo| %>
+        <div class="logo_panel">
+          <img src="<%= logo.attachment.url(:logo_panel)%>"/>
+        </div>
+      <% end %>
     <% end %>
   
     <% if admin_user_signed_in? %>

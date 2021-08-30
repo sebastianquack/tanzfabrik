@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_075814) do
+ActiveRecord::Schema.define(version: 2021_08_30_104734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -279,6 +279,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_075814) do
     t.boolean "logo", default: false
     t.integer "width"
     t.integer "height"
+    t.boolean "logo_panel", default: false
     t.index ["content_module_id"], name: "index_images_on_content_module_id"
   end
 

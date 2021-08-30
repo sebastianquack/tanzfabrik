@@ -480,6 +480,8 @@ de:
         link_title: "Button Text"
         link_href: "Button URL"        
         order: "Reihenfolge"
+        logo: Als Logo anzeigen
+        logo_panel: Als Logo-Leiste anzeigen
       event_detail:
         start_date: Startdatum
         end_date: Enddatum

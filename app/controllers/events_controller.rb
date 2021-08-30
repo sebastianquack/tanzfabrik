@@ -23,7 +23,7 @@ class EventsController < ApplicationController
     if @detail.tags.length > 0 && @event.type.id == 3 # kurs
       @tag_string_2 = @detail.tags.map { |t| 
         if t.short.match(/^[a-zA-Z0-9]*$/)
-           @tag_string_1 = helpers.get_text_item("tanklassen_level")+":" if @tag_string_1.empty?
+            @tag_string_1 = helpers.get_text_item("tanklassen_level")+":" if @tag_string_1.empty?
           t.short 
         else
           t.name

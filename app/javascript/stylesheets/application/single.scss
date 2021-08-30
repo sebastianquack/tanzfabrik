@@ -140,6 +140,11 @@
       object-position: top left;
     }
 
+    .logo_panel img {
+      display: block;
+      width: 100%;
+    }
+
     .moments {
       @include font-stripes-infos;
       // @include grid-col-gap-dist("padding-left", 1,1);

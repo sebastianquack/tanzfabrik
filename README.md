@@ -51,6 +51,7 @@ sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git postgres
 ```
 3. install dokku on client (mac): `brew install dokku/repo/dokku`
 4. on client in repo root: 
+
 ```
 dokku apps:create relaunch2020
 dokku postgres:create relaunch2020_postgres
@@ -62,10 +63,11 @@ dokku config:set BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-ruby P
 
 git push dokku relaunch2020:master
 
-# dokku postgres:import relaunch2020_postgres < .data/downloads/latest.dump
-# or 
-# dokku run rake db:create
-# dokku run rake db:migrate
+ # dokku postgres:import relaunch2020_postgres < .data/downloads/latest.dump
+ # or 
+ # dokku run rake db:create
+ # dokku run rake db:migrate
+
 dokku letsencrypt
 
 dokku apps:create minio
@@ -91,7 +93,8 @@ dokku config:set --no-restart relaunch2020 S3_MINIO_HOSTNAME=
 ```
 
 ## staging server
-https://relaunch2020.tanzfabrik.intergestalt.cloud/
+
+`https://relaunch2020.tanzfabrik.intergestalt.cloud/`
 
 ## convert pages from old site to content modules and seed menu items
 
@@ -123,6 +126,7 @@ brew install dip
   - `dip rake create_example_page`
   - `dip rake db:migrate`
   - `dip rails c`
+  - `paperclip:refresh:missing_styles`
 
 ## optimize svg for inline
 
