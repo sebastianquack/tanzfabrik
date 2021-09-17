@@ -12,4 +12,4 @@ curl -o .data/downloads/latest.dump `heroku pg:backups public-url --app tanzfabr
 
 # run restore
 echo "password: postgres"
-docker-compose run --rm db pg_restore --verbose --clean --no-acl --no-owner -U postgres -h db -d tanzfabrik/development /downloads/latest.dump
+docker-compose run --rm db pg_restore --verbose --clean --no-acl --no-owner -U postgres --host=db -d tanzfabrik/development /downloads/latest.dump
