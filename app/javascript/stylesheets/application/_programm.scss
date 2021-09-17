@@ -15,6 +15,10 @@
     .row {
       @include debug(rgba(0,0,255,0.5));
 
+      &.past {
+        opacity: .5;
+      }
+
       padding-top: 12px;
       padding-bottom: 12px;
 

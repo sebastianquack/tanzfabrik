@@ -25,8 +25,9 @@ ol :class => "event-calendar" do
       event = o[:event]
       time = o[:time]
       detail = o[:detail]
+      past = time < Date.today && time.month == Date.today.month
 
-      li :class => "row event event-programm" do
+      li :class => "row event event-programm " + (past ? "past" : "")  do
 
         a :href => occurrence_path(event, time, in_festival) do 
           
@@ -42,7 +43,7 @@ ol :class => "event-calendar" do
 
             span event.people_sorted.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
           end
-                   
+
           time(:class => "date") do
             span l(time, :format => (display_year ? :day_month_year : :day_month) ), :class => "day"
           end
