@@ -67,7 +67,7 @@ class Image < ActiveRecord::Base
     end
     geometry = Paperclip::Geometry.from_file(attachment.queued_for_write[:original].path)
     #return unless geometry
-    puts "XXX"
+    #puts "XXX"
     puts geometry.inspect
     puts geometry.horizontal?
     puts geometry.width
