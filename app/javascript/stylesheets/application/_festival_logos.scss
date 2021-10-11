@@ -30,10 +30,11 @@
     }
 
     img {
-      width: 8vw;
-      height: 8vw;
+      
+      height: 6vw;
       min-width:  100px;
-      min-height: 100px;      
+      max-height:  80px;
+      min-height: 50px;      
       object-fit: contain;
       object-position: top;
       margin-right: 24px;
