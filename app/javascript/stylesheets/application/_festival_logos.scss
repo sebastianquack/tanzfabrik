@@ -40,6 +40,13 @@
       margin-right: 24px;
       margin-bottom: 24px;
       //border: 1px solid;
+
+      &.portrait {
+        height: 12vw;
+        max-height: 160px;
+        min-height: 80px;
+        object-position: center;
+      }
     }
   }
 

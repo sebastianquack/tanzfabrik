@@ -12,7 +12,7 @@
         <% if image.link_href %>
           <a class="logo" href="<%= image.link_href%>" title="<%= image.description %>">
         <% end %>
-          <img alt="<%= image.description %>" src="<%= image.attachment.url(:medium) %>">
+          <img alt="<%= image.description %>" src="<%= image.attachment.url(:medium) %>" class="<%= 'portrait' if image.height > image.width %>">
         <% if image.link_href %>
           </a>
         <% end %>
