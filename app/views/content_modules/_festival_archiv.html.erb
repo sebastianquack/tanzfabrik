@@ -24,7 +24,11 @@
     <% if content_module.parameter == "" || !content_module.parameter || (content_module.parameter && content_module.parameter == festival.section) %>
 
     <li>
-      <a href="<%= page_url(festival.page)%>"><h3><%= festival.name %></h3></a>
+      <% if festival.page %>
+        <a href="<%= page_url(festival.page)%>"><h3><%= festival.name %></h3></a>
+      <% else %>
+        <h3><%= festival.name %></h3>
+      <% end %>
 
     </li>
 
