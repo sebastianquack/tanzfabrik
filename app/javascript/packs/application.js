@@ -279,3 +279,13 @@ function update100vh() {
 window.addEventListener('resize', update100vh)
 window.addEventListener('orientationChange', update100vh)
 document.addEventListener('DOMContentLoaded', update100vh)
+
+
+/************ auto scroll to first to today on programm page ********/
+
+window.addEventListener("load", function () {
+  var element = document.querySelector(".row.event.event-programm:not(.past)")
+  if (element) {
+  element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+  }
+})
