@@ -286,6 +286,15 @@ document.addEventListener('DOMContentLoaded', update100vh)
 window.addEventListener("load", function () {
   var element = document.querySelector(".row.event.event-programm:not(.past)")
   if (element) {
-  element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+    // scroll to center element
+    var elementRect = element.getBoundingClientRect();
+    var absoluteElementTop = elementRect.top + window.pageYOffset;
+    var middle = absoluteElementTop - (window.innerHeight / 2);
+    window.scrollTo({
+      top: middle,
+      left: 0,
+      behavior: 'smooth'
+    });
+
   }
 })
