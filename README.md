@@ -127,6 +127,7 @@ brew install dip
   - `dip rake db:migrate`
   - `dip rails c`
   - `paperclip:refresh:missing_styles`
+  - `dip yarn`
 
 ## optimize svg for inline
 
