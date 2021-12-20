@@ -237,6 +237,11 @@ today:
   images: false
   downloads: false
   border-bottom-options: true
+profitraining:
+  form-fields: []
+  images: false
+  downloads: false
+  border-bottom-options: true 
 default:
   style-options: 
     - default
