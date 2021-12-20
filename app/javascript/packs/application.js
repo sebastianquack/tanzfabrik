@@ -21,6 +21,7 @@ import "stylesheets/application/"
 // all other generic js imports here
 import "core-js/stable"
 import "regenerator-runtime/runtime"
+import smoothscroll from 'smoothscroll-polyfill';
 
 // stimulus
 import "controllers"
@@ -38,6 +39,9 @@ require("@rails/actiontext")
 
 // enable assets for webpacker
 require.context('../svgs', true)
+
+// kick off the smoothscroll polyfill
+smoothscroll.polyfill();
 
 /***************** feature module ****************/
 
@@ -279,3 +283,22 @@ function update100vh() {
 window.addEventListener('resize', update100vh)
 window.addEventListener('orientationChange', update100vh)
 document.addEventListener('DOMContentLoaded', update100vh)
+
+
+/************ auto scroll to first to today on programm page ********/
+
+window.addEventListener("load", function () {
+  var element = document.querySelector(".row.event.event-programm:not(.past)")
+  if (element) {
+    // scroll to center element
+    var elementRect = element.getBoundingClientRect();
+    var absoluteElementTop = elementRect.top + window.pageYOffset;
+    var middle = absoluteElementTop - (window.innerHeight / 3);
+    window.scrollTo({
+      top: middle,
+      left: 0,
+      behavior: 'smooth'
+    });
+
+  }
+})
