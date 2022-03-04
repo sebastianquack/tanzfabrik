@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_30_104734) do
+ActiveRecord::Schema.define(version: 2022_03_04_122354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,6 +191,9 @@ ActiveRecord::Schema.define(version: 2021_08_30_104734) do
     t.boolean "custom_sorting", default: false
     t.boolean "no_sign_up", default: false
     t.string "signup_url"
+    t.string "ticket_link_url"
+    t.string "ticket_link_text_de"
+    t.string "ticket_link_text_en"
   end
 
   create_table "festival_containers", id: :serial, force: :cascade do |t|

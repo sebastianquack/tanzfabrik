@@ -125,6 +125,7 @@ de:
   project_menu_order: Reihenfolge im Menu Projekte
   disable_close: Info-Schließmöglichkeit deaktivieren (für Kursplan)
   signup_url: Anmelde-URL
+  ticket_link_text_default: Tickets
 
   date:
     abbr_day_names:
@@ -460,6 +461,8 @@ de:
         images: Bilder
         custom_sorting: Manuelle Personen-Reihenfolge (nicht alphabetisch)
         rich_content: Text
+        ticket_link_url: Ticket-URL
+        ticket_link_text: Ticket-Link-Text
       image:
         description: Beschreibung
         license: Copyrightnotiz
