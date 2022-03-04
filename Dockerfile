@@ -1,4 +1,4 @@
-FROM ruby:2.7.1
+FROM timbru31/ruby-node:2.7-12
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
 #yarn
