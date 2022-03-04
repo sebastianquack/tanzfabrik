@@ -1,9 +1,8 @@
 <div class="module__vorschalt" data-section="<%= content_module.section %>">
 
-  <% if content_module.special_text %>
-    A<%= content_module.special_text %>B
+  <% if content_module.custom_html %>
     <ul class="vorschalt">
-      <% content_module.special_text.split("\n").each do |line|  %>
+      <% content_module.custom_html.split("\n").each do |line|  %>
         <li>
           <%= line %>
         </li>

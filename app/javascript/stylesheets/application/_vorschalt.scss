@@ -13,6 +13,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  padding: 5vmin;
   @include font-h1;
   cursor: pointer;
 }
