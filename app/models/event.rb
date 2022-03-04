@@ -11,7 +11,7 @@
 
 class Event < ActiveRecord::Base
 
-  translates :title, :description, :rich_content, :warning, :info, :info_rich, :credits_rich, fallback: :any
+  translates :title, :description, :rich_content, :warning, :info, :info_rich, :credits_rich, :ticket_link_text, fallback: :any
 
   has_rich_text :rich_content_de
   has_rich_text :rich_content_en

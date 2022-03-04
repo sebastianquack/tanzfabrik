@@ -15,6 +15,12 @@
     .row {
       @include debug(rgba(0,0,255,0.5));
 
+      display: flex;
+
+      .ticket-link {
+        width: 100px;
+      }
+
       &.past {
         opacity: .5;
       }
@@ -34,6 +40,7 @@
       
       a {
 
+        flex: 1;
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         @include grid-gap;
@@ -119,7 +126,18 @@
   }
 
   @include breakpoint('s') {
+
+    .event-calendar > .row {
+      flex-direction: column
+    }
+
+    .event-calendar > .row > .ticket-link {
+      margin-left: auto;
+      margin-top: 10px;
+    }
+
     .event-calendar > .row > a {
+
       grid-template-columns: repeat(8, 1fr);
       grid-template-rows: auto auto;
       .type-location {
