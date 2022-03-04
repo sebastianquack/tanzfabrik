@@ -62,7 +62,9 @@ ActiveAdmin.register Event do
   filter :title_de
   filter :type
   filter :festivals
-  filter :people, :collection => Person.ordered
+  filter :people, :collection => Person.ordered.all.map {
+    |p| "#{p.last_name}, #{p.first_name}"
+  }
   
   show do 
 
