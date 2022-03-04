@@ -248,6 +248,9 @@ programm:
   images: false
   downloads: false
   border-bottom-options: false
+vorschalt:
+  form-fields:
+    - custom_html
 default:
   style-options: 
     - default

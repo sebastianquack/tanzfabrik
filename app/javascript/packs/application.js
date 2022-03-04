@@ -305,3 +305,24 @@ window.addEventListener("load", function () {
 
   }
 })
+
+/************ vorschalt seite **************************************/
+
+window.addEventListener("DOMContentLoaded", function () {
+  var element = document.querySelector(".module__vorschalt")
+  if (element) {
+    // hide all li elements except a random one
+    var liElems = element.querySelectorAll("li")
+    var randomIndex = Math.floor(Math.random() * liElems.length)
+    liElems.forEach(function (elem) {
+      if (elem != liElems[randomIndex]) {
+        elem.style.display = "none"
+      }
+    })
+    // remove element when clicked on
+    element.addEventListener("click", function () {
+      element.style.display = "none"
+    })
+  }
+})
+

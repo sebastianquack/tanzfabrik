@@ -32,6 +32,7 @@ import "./_accordeon_element.scss"
 import "./_accordeon_headline.scss"
 import "./_image_element_magazine.scss"
 import "./_submenu_divider.scss"
+import "./_vorschalt.scss"
 
 // other views
 import "./start.scss"

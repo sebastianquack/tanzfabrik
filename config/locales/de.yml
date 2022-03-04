@@ -565,6 +565,7 @@ de:
       today: "Heute"
       festival_logos: "Festival-Logoleiste"
       programm: "Programm (flexibel)"
+      vorschalt: "Vorschaltseite"
     style_options:
       default: "Normal"
       indent_more: "Stärker eingerückt"
