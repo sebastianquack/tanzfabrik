@@ -1,0 +1,14 @@
+<div class="module__vorschalt" data-section="<%= content_module.section %>">
+
+  <% if content_module.special_text %>
+    A<%= content_module.special_text %>B
+    <ul class="vorschalt">
+      <% content_module.special_text.split("\n").each do |line|  %>
+        <li>
+          <%= line %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  </div>

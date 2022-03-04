@@ -561,6 +561,7 @@ de:
       accordeon_element: "Akkordeon-Element"
       today: "Heute"
       festival_logos: "Festival-Logoleiste"
+      vorschalt: "Vorschaltseite"
     style_options:
       default: "Normal"
       indent_more: "Stärker eingerückt"

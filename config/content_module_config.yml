@@ -242,6 +242,9 @@ profitraining:
   images: false
   downloads: false
   border-bottom-options: true 
+vorschalt:
+  form-fields:
+    - custom_html
 default:
   style-options: 
     - default
