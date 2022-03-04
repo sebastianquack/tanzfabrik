@@ -32,8 +32,11 @@ def render_list_for(profitrainings)
             end
 
             div :class => "teacher" do
-              event_detail.event.people.map do |p| 
+              event_detail.event.people.each_with_index do |p, index| 
                 text_node p.name
+                if index < event_detail.event.people.length - 1 
+                  br
+                end
               end
             end
             div :class => "title" do
