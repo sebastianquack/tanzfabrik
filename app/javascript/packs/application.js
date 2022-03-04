@@ -129,10 +129,10 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(document.referrer)
 
       // if we are already on tanzfabrik page, just go back 
-      /*if(document.referrer.includes("localhost:3000")
+      if(document.referrer.includes("localhost:3000")
         || document.referrer.includes("tanzfabrik")) {
           window.history.back();
-      } else {*/
+      } else {
 
         let baseUrl = window.location.href.split('/').slice(0, 4).join('/')
 
@@ -154,7 +154,10 @@ document.addEventListener("DOMContentLoaded", function () {
         let destination_page = "";
         let event_type_id = getMeta('event_type')
 
-        if(event_type_id == "2") {
+        if(event_type_id == "1") {
+          destination_page = "programm"
+        }
+        else if(event_type_id == "2") {
           destination_page = "workshop_programm"
         }
         else if(event_type_id == "3") {
@@ -167,11 +170,11 @@ document.addEventListener("DOMContentLoaded", function () {
           destination_page = "performance_projekte"
         }
         else 
-          destination_page = "programm"
+          destination_page = "fabrik"
 
         window.location = baseUrl + "/" + destination_page 
 
-      //}  
+      }  
 
     });
       

@@ -68,6 +68,16 @@ ol :class => "event-calendar" do
           end
 
         end
+
+        div :class => "ticket-link" do            
+          if event.ticket_link_url && !event.ticket_link_url.empty?
+            title = event.ticket_link_text || t(:ticket_link_text_default)
+            a :class => "button", :title=>title, :href=>event.ticket_link_url do
+              title
+            end
+          end
+        end
+        
       end  
     end
   end

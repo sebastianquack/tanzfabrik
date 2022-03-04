@@ -1,10 +1,18 @@
+# default, use stage event types from config
+event_types = Rails.configuration.stage_event_types
+
+if content_module.parameter
+  # configure event types through parameter, separated with comma: "1,7,9"
+  event_types = content_module.parameter.split(",").map {|p| Integer(p) }
+end
 
 if params[:year]
   start_date = Date.parse('01-01-' + params[:year])
   end_date = start_date.end_of_year
-  events = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ? AND event_details.start_date <= ?', Rails.configuration.stage_event_types, start_date, end_date)
+  events = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ? AND event_details.start_date <= ?', event_types, start_date, end_date)
 else 
-  events = current_stage_events()
+  start_date = Date.today.beginning_of_month
+  events = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ?', event_types, start_date)
 end
 
 div :class => "module__programm" do 
@@ -14,7 +22,7 @@ div :class => "module__programm" do
 end
 
 # figure out in which years event_details exist
-years = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?)', Rails.configuration.stage_event_types).group_by_year(:start_date).count
+years = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?)', event_types).group_by_year(:start_date).count
 
 # show links for these years
 section :class => "archive-section" do
@@ -23,7 +31,8 @@ section :class => "archive-section" do
     years.keys.reverse.each do |y|
       if y.year <= Time.now.year
         li do
-          a :href => (url_for :controller => 'pages', :action => 'show', :id => 'programm', :year => y.year.to_s) do
+          # todo: change this to link to the current page
+          a :href => (url_for :controller => 'pages', :action => 'show', :id => content_module.page.slug, :year => y.year.to_s) do
             h4 y.year.to_s 
           end
         end

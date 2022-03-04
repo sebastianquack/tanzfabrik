@@ -142,6 +142,8 @@ en:
   
   no_sign_up: Disable Workshop Registration
 
+  ticket_link_text_default: Tickets
+
   time:
     from: "from"
     formats:

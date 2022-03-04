@@ -5,6 +5,7 @@ ActiveAdmin.register Event do
   permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, 
     :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook, :draft, :custom_sorting, :no_sign_up, :signup_url, 
     :rich_content_de, :rich_content_en, :info_rich_de, :info_rich_en, :credits_rich_de, :credits_rich_en,
+    :ticket_link_url, :ticket_link_text_de, :ticket_link_text_en,
     :festival_ids => [], :person_ids => [],
     :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :custom_place, :repeat_mode_id, :_destroy, tag_ids: []],
     :people_attributes => [:id, :name, :_destroy],
@@ -62,7 +63,9 @@ ActiveAdmin.register Event do
   filter :title_de
   filter :type
   filter :festivals
-  filter :people, :collection => Person.ordered
+  filter :people, :collection => Person.ordered.all.map {
+    |p| "#{p.last_name}, #{p.first_name}"
+  }
   
   show do 
 
@@ -182,16 +185,21 @@ ActiveAdmin.register Event do
       f.input :credits_rich_de, :as => :action_text
       f.input :credits_rich_en, :as => :action_text
       
-      f.input :signup_url, :label => t(:signup_url)
-      
+      f.inputs "Preise, Anmeldung, Tickets" do
+        f.input :price_regular, :required => false
+        f.input :price_reduced, :required => false 
+
+        f.input :signup_url, :label => t(:signup_url)
+
+        f.input :ticket_link_url, :label => t(:ticket_link_url)
+        f.input :ticket_link_text_de, :placeholder => t(:ticket_link_text_default)
+        f.input :ticket_link_text_en, :placeholder => t(:ticket_link_text_default)
+      end
 
       f.inputs "Externe Links" do
         f.input :facebook, :required => false, :placeholder => "https://www.facebook.com/events/877048289058664/"
       end      
-      f.inputs "Preise" do
-        f.input :price_regular, :required => false
-        f.input :price_reduced, :required => false 
-      end
+      
 
       
     end

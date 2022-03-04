@@ -104,6 +104,14 @@
     <% end %>
     
     </p>
+
+    <% if @event.ticket_link_url and !@event.ticket_link_url.empty? %>
+        <% title = @event.ticket_link_text || t(:ticket_link_text_default) %>
+        <a class="button" title="<%= title %>" href="<%= @event.ticket_link_url %>">
+          <%= title %>
+        </a>
+        <br>
+    <% end %>
     
     <div><%= @event.rich_content %></div>
 
@@ -133,6 +141,13 @@
       <% if @event.signup_url and !@event.signup_url.empty? %>
         <% title = @section == "schule" ? get_text_item("tanzklassen_anmeldung") : get_text_item("tickets") %>
         <a class="button" title="<%= title %>" href="<%= @event.signup_url %>">
+          <%= title %>
+        </a>
+      <% end %>
+
+      <% if @event.ticket_link_url and !@event.ticket_link_url.empty? %>
+        <% title = @event.ticket_link_text || t(:ticket_link_text_default) %>
+        <a class="button" title="<%= title %>" href="<%= @event.ticket_link_url %>">
           <%= title %>
         </a>
       <% end %>
