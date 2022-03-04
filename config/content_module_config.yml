@@ -10,6 +10,7 @@ feature:
     - schule
     - fabrik
     - festival
+    - anthropausing
   form-fields:
     - headline
     - special_text

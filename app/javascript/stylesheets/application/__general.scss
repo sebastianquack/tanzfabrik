@@ -74,6 +74,14 @@ main.page {
   }
 }
 
+[data-section="anthropausing"] {
+  color: $color-violet;
+  border-color: $color-violet;
+  .embedded_preview_container & {
+    * { color: $color-violet; }
+  }
+}
+
 [class^="module__"] {
   margin-bottom: 100px;
   &[data-border-bottom] {

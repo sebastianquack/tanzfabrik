@@ -29,7 +29,8 @@
   }
 
   &[data-section="buehne"],
-  &[data-section="festival"] {
+  &[data-section="festival"],
+  &[data-section="anthropausing"] {
     color: white;
     .stripes_vertical {
       fill: white;
@@ -159,6 +160,10 @@
 
   &[data-section="festival"] .text_content {
     color: $color-green;
+  }
+
+  &[data-section="anthropausing"] .text_content {
+    color: $color-violet;
   }
 
   .headline {
