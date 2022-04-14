@@ -14,7 +14,13 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 5vmin;
   @include font-h1;
+  padding: 5vmin;
+  font-size: 6vmin !important;
   cursor: pointer;
+
+  .vorschalt {
+    position: relative;
+    top: -17vh;
+  }
 }
