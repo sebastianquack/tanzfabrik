@@ -11,7 +11,7 @@ class Image < ActiveRecord::Base
       :medium => ["450x450>"], 
       :thumb => ["100x100>"],
       :logo => ["300x300>"],
-      :logo_panel => ["900x300>"],
+      :logo_panel => ["1200x300>"],
       },
     :convert_options => { 
       :background => "-quality 90 -strip",
