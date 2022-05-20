@@ -66,7 +66,7 @@ module EventsHelper
 
   # get current workshops for workshop programm
   def current_workshops()
-    return Event.no_draft.joins(:event_details).where('type_id = 2 AND event_details.end_date >= ?', Date.today).uniq.sort_by{ |e| e.start_date }
+    return Event.no_draft.joins(:event_details).where('type_id = 2 AND event_details.end_date >= ?', Date.today).uniq.sort_by{ |e| [e.start_date, e.title] }
   end
 
   # get current profitrainings
