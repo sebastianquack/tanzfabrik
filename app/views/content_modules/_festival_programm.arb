@@ -1,5 +1,11 @@
 # load the festival
-festival = Festival.find(content_module.parameter)
+
+begin
+  festival = Festival.find(content_module.parameter)
+rescue ActiveRecord::RecordNotFound
+  div "festival not found"
+  return
+end
 
 if !festival
   return
