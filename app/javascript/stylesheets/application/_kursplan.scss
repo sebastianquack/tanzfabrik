@@ -78,6 +78,14 @@
           @include font-stripes;
           padding: 6px;
         }
+        .location-name {
+          text-align: left;
+        }
+        @include breakpoint('xs','min') {
+          .location-name {
+            white-space: nowrap;
+          }
+        }
       }
 
       tbody {
