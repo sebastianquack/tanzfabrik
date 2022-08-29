@@ -291,7 +291,9 @@ document.addEventListener('DOMContentLoaded', update100vh)
 /************ auto scroll to first to today on programm page ********/
 
 window.addEventListener("load", function () {
-  var element = document.querySelector(".row.event.event-programm:not(.past)")
+  var element = document.querySelector(
+    ".module__programm:not(.indent) .row.event.event-programm:not(.past)"
+  );
   if (element) {
     // scroll to center element
     var elementRect = element.getBoundingClientRect();
