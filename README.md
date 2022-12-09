@@ -39,6 +39,15 @@ docker-compose down
 * volatile data such as database files are stored in `.data/`
 * add gem: `docker-compose run -v $(pwd)/app web bundle install`followed by `docker-compose up --build`
 
+## simulate time
+
+you can simulate the site at a different time by adding `?t=<time>` to the url
+
+example: http://localhost:3000/?t=20211201 for december 1st 2021
+
+http://localhost:3000/?t=now to reset to current time
+
+this uses the `timecop` gem in `app/controllers/application_controller.rb`
 
 ## dokku deploy
 
