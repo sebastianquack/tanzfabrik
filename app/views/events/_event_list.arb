@@ -13,72 +13,77 @@ occurrences = stage_events_occurrence_list(events)
 # display list of all occurences
 ol :class => "event-calendar" do
   occurrences.group_by { |o| o[:time].to_date.beginning_of_month }.each do |month,o_per_month|
-    # TODO: find out why there are dublicate entries in all_occurences which need to be uniqed 
-    if in_festival.nil?
-      # NOTE: having a li that acts as a heading is probable semantically wrong. instead, there should be sub-lists for monthly sections.
-      li :class => "row event-programm event-programm-section" do
-        h3 l(month, :format => ( is_archive ? :month_year : :month )), :class => "month"
+    
+    # only show past months if we are in archive mode
+    if in_festival || is_archive || month == Date.today.beginning_of_month
+    
+      # TODO: find out why there are dublicate entries in all_occurences which need to be uniqed 
+      if in_festival.nil?
+        # NOTE: having a li that acts as a heading is probable semantically wrong. instead, there should be sub-lists for monthly sections.
+        li :class => "row event-programm event-programm-section" do
+          h3 l(month, :format => ( is_archive ? :month_year : :month )), :class => "month"
+        end
       end
-    end
 
-    o_per_month.each do |o|
-      event = o[:event]
-      time = o[:time]
-      detail = o[:detail]
-      past = time < Date.today && time.month == Date.today.month
+      o_per_month.each do |o|
+        event = o[:event]
+        time = o[:time]
+        detail = o[:detail]
+        past = time < Date.today && !is_archive && !in_festival 
 
-      li :class => "row event event-programm " + (past ? "past" : "")  do
+        li :class => "row event event-programm " + (past ? "past" : "")  do
 
-        a :href => occurrence_path(event, time, in_festival) do 
-          
-          span :class => "title-teacher" do 
+          a :href => occurrence_path(event, time, in_festival) do 
+            
+            span :class => "title-teacher" do 
 
-            if !in_festival
-              aside class: "in-festival" do
-                render :partial => "events/in_festival", :locals => {:event => event, :link => false }
-              end            
+              if !in_festival
+                aside class: "in-festival" do
+                  render :partial => "events/in_festival", :locals => {:event => event, :link => false }
+                end            
+              end
+
+              span event.title, :class => "title"
+
+              span event.people_sorted.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
             end
 
-            span event.title, :class => "title"
-
-            span event.people_sorted.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
-          end
-
-          time(:class => "date") do
-            span l(time, :format => (display_year ? :day_month_year : :day_month) ), :class => "day"
-          end
-
-          time(:class => "time") do
-            unless time.hour == 0 && time.min == 0 && detail.duration == 0
-              span l(time, :format => :hours_minutes), :class => "clock"
+            time(:class => "date") do
+              span l(time, :format => (display_year ? :day_month_year : :day_month) ), :class => "day"
             end
+
+            time(:class => "time") do
+              unless time.hour == 0 && time.min == 0 && detail.duration == 0
+                span l(time, :format => :hours_minutes), :class => "clock"
+              end
+            end
+
+            div :class => "type-location" do
+              span event.display_type, :class => "type"    
+              div :class => "address" do
+                if detail.custom_place?
+                  div detail.custom_place, :class => "location"
+                else
+                  too_long = (detail.studio.location.name.length + detail.studio.name.length) > 14
+                  div detail.studio.location.name, :class => "location"
+                  div detail.studio.name, :class => (too_long ? "location" : "studio")
+                end
+              end
+            end
+
           end
 
-          div :class => "type-location" do
-            span event.display_type, :class => "type"    
-            div :class => "address" do
-              if detail.custom_place?
-                div detail.custom_place, :class => "location"
-              else
-                too_long = (detail.studio.location.name.length + detail.studio.name.length) > 14
-                div detail.studio.location.name, :class => "location"
-                div detail.studio.name, :class => (too_long ? "location" : "studio")
+          div :class => "ticket-link" do            
+            if event.ticket_link_url && !event.ticket_link_url.empty?
+              title = event.ticket_link_text || t(:ticket_link_text_default)
+              a :class => "button", :title=>title, :href=>event.ticket_link_url do
+                title
               end
             end
           end
-
-        end
-
-        div :class => "ticket-link" do            
-          if event.ticket_link_url && !event.ticket_link_url.empty?
-            title = event.ticket_link_text || t(:ticket_link_text_default)
-            a :class => "button", :title=>title, :href=>event.ticket_link_url do
-              title
-            end
-          end
-        end
-        
-      end  
+          
+        end  
+      end
     end
   end
   

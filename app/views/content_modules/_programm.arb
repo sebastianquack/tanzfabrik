@@ -11,8 +11,9 @@ if params[:year]
   end_date = start_date.end_of_year
   events = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ? AND event_details.start_date <= ?', event_types, start_date, end_date)
 else 
+  # include all events with start_dates or end_dates in this month
   start_date = Date.today.beginning_of_month
-  events = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?) AND event_details.start_date >= ?', event_types, start_date)
+  events = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?) AND (event_details.start_date >= ? OR event_details.end_date >= ?)', event_types, start_date, start_date)
 end
 
 div :class => "module__programm" do 
