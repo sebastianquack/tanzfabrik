@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', update100vh)
 
 window.addEventListener("load", function () {
   var element = document.querySelector(
-    ".module__programm:not(.indent) .row.event.event-programm:not(.past)"
+    "[data-section=buehne] .module__programm:not(.indent) .row.event.event-programm:not(.past)"
   );
   if (element) {
     // scroll to center element
