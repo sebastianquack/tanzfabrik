@@ -7,7 +7,7 @@
     <% for cm in dividers %>
   
       <li>
-        <a href="#<%= cm.parameter %>">
+        <a href="#<%= cm.parameter.to_s.strip %>">
           <%= cm.headline %>
         </a>
       </li>
