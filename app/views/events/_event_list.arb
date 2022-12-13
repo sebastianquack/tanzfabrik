@@ -33,7 +33,7 @@ ol :class => "event-calendar" do
 
         li :class => "row event event-programm " + (past ? "past" : "")  do
 
-          a :href => occurrence_path(event, time, in_festival) do 
+          a :href => occurrence_path(event, time, in_festival), :class => "event-modal-link" do 
             
             span :class => "title-teacher" do 
 

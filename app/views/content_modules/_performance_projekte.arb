@@ -18,7 +18,7 @@ def render_list_for(performance_projekte)
   ul :class => "project_list" do
     performance_projekte.each do |project| 
       li do
-        a :class => "project", :href => event_path(project) do 
+        a :class => "project event-modal-link", :href => event_path(project) do 
           
           div :class => "time-duration" do
             span l project.event_details.first.starttime, :format => :day_month

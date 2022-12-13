@@ -18,7 +18,7 @@ def render_list_for(profitrainings)
   ul :class => "project_list" do
     profitrainings.each do |event_detail| 
       li do
-        a :class => "project", :href => event_path(event_detail.event) do
+        a :class => "project event-modal-link", :href => event_path(event_detail.event) do
             div :class => "time-duration" do
               span l event_detail.starttime, :format => :day_month
               text_node " - "

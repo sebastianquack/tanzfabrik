@@ -119,66 +119,116 @@ document.addEventListener("DOMContentLoaded", function () {
   })
 })
 
-/*******************************/
+/*************** event detail view modal ****************/
 
-// do something when X is clicked
+function showModal() {
+  let modalElem = document.querySelector('#event-modal');
+  modalElem.style.display = 'block';
+  modalElem.scrollTo(0, 0);
+}
+
+function hideModal(event) {
+  console.log("close")
+  event.preventDefault()
+  let modalElem = document.querySelector('#event-modal');
+  modalElem.style.display = 'none';
+  modalElem.innerHTML = "";
+  window.history.pushState("", "", "#");
+}
+
+function initEventModalEvents() {
+  console.log("init modal events")
+  // add the event handlers for close buttons
+  document.querySelectorAll("[data-close]").forEach((button) => {
+    button.addEventListener('click', hideModal);
+  })
+  initEventLinkEvents(".single-event-page .event-modal-link");
+}
+
+function initEventLinkEvents(query) {
+  document.querySelectorAll(query).forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault()
+      loadEventInModal(link)
+    })
+  })
+}
+
+function loadEventInModal(link) {
+  console.log("open event modal for", link)
+
+  //let baseUrl = window.location.href.split('/').slice(0, 4).join('/')
+  let modalElem = document.querySelector('#event-modal');
+
+  let linkParts = link.href.split("/");
+  console.log(linkParts)
+  let linkId = "";
+
+  // linkParts 0-3 "https" "" "tanzfabrik-berlin" "de" 
+  // there are three possible routes to events
+  // events/12345
+  // events/12345/2022-12-01
+  // festivals/bla/events/12345/2022-12-01
+
+  if(linkParts[4] == "festivals") {
+    linkId = link.href.split("/").slice(-5).join('/')
+  } else {
+    if(linkParts.length == 6) {
+      linkId = link.href.split("/").slice(-2).join('/')
+    }
+    if(linkParts.length == 7) {
+      linkId = link.href.split("/").slice(-3).join('/')
+    }    
+  }
+  
+  fetch(link.href + "?partial=1").then(function (response) {
+    // The API call was successful!
+    return response.text();
+  }).then(function (html) {
+    // This is the HTML from our response as a text string
+    modalElem.innerHTML = html;
+    initEventModalEvents();
+    showModal();
+    console.log("pushState", linkId)
+    window.history.pushState("", "", "#" + linkId);
+  }).catch(function (err) {
+    // There was an error
+    console.warn('Error loading event in modal: ', err);
+  });
+}
+
+// on page load
 document.addEventListener("DOMContentLoaded", function () {
+  let baseUrl = window.location.href.split('/').slice(0, 4).join('/')
+
+  // add the event handlers for links to events, previous and next buttons
+  initEventLinkEvents(".event-modal-link");
+
+  // add event handlers for data close buttons that are present on page load
+  // this happens when event is loaded through direct link or we are on a person page
   document.querySelectorAll("[data-close]").forEach((button) => {
     button.addEventListener('click', () => {
-
-      console.log(document.referrer)
-
-      // if we are already on tanzfabrik page, just go back 
+      // go back if referrer is tanzfabrik
       if(document.referrer.includes("localhost:3000")
-        || document.referrer.includes("tanzfabrik")) {
-          window.history.back();
-      } else {
+          || document.referrer.includes("tanzfabrik")) {
+            window.history.back();
+        } else {
+          // go to main site if referrer is not tanzfabrik
+          window.location = baseUrl;
+        }
+    })
+  })
 
-        let baseUrl = window.location.href.split('/').slice(0, 4).join('/')
+  // check if we should load an event modal
 
-        if(window.location.href.includes("festivals")) {
-          window.location = window.location.href.split('/').slice(0, 6).join('/')
-          return
-        }
-        
-        // read event type encoded in meta tag
-        function getMeta(metaName) {
-          const metas = document.getElementsByTagName('meta');
-          for (let i = 0; i < metas.length; i++) {
-            if (metas[i].getAttribute('name') === metaName) {
-              return metas[i].getAttribute('content');
-            }
-          }
-          return '';
-        }
-        let destination_page = "";
-        let event_type_id = getMeta('event_type')
-
-        if(event_type_id == "1") {
-          destination_page = "programm"
-        }
-        else if(event_type_id == "2") {
-          destination_page = "workshop_programm"
-        }
-        else if(event_type_id == "3") {
-          destination_page = "kursplan"
-        }
-        else if(event_type_id == "4") {
-          destination_page = "profitraining"
-        }
-        else if(event_type_id == "5") {
-          destination_page = "performance_projekte"
-        }
-        else 
-          destination_page = "fabrik"
-
-        window.location = baseUrl + "/" + destination_page 
-
-      }  
-
-    });
-      
-  });
+  console.log("hash", window.location.hash)
+  if(window.location.hash) {
+    let eventLink = window.location.hash.slice(1)
+    if(eventLink) {
+      loadEventInModal({href: baseUrl + "/" + eventLink})
+    }
+  }
+  
 })
 
 /*************** mobile menu show/hide ******************/
@@ -199,45 +249,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   var navElem = document.querySelector("#main_nav")
-  var ulLevel0Elem = navElem.querySelector("ul > li > ul")
-  ulLevel0Elem.addEventListener("click", function(e){
-    var mobileMenuEnabled = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mobile-menu-enabled'));
-    if (mobileMenuEnabled) {
-      var targetElem = e.target
+  if(navElem) {
+    var ulLevel0Elem = navElem.querySelector("ul > li > ul")
+    ulLevel0Elem.addEventListener("click", function(e){
+      var mobileMenuEnabled = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mobile-menu-enabled'));
+      if (mobileMenuEnabled) {
+        var targetElem = e.target
 
-      if (targetElem.tagName != "SPAN" && targetElem.tagName != "A") return;
+        if (targetElem.tagName != "SPAN" && targetElem.tagName != "A") return;
 
-      var targetElemIsSelected = (targetElem.closest("li")).classList.contains("selected")
+        var targetElemIsSelected = (targetElem.closest("li")).classList.contains("selected")
 
-      // find all li elements that are parents
-      var parentLiElems = []
-      var indexElem = targetElem
-      while (indexElem != navElem) {
-        indexElem = indexElem.parentElement
-        if (indexElem.tagName == "LI") {
-          parentLiElems.push(indexElem)
+        // find all li elements that are parents
+        var parentLiElems = []
+        var indexElem = targetElem
+        while (indexElem != navElem) {
+          indexElem = indexElem.parentElement
+          if (indexElem.tagName == "LI") {
+            parentLiElems.push(indexElem)
+          }
         }
-      }
 
-      // prevent click unless we are at root of the tree
-      if (parentLiElems.length < 3) {
-        e.preventDefault();
-      }
-
-
-      // mark parent li as selected, other li not
-      navElem.querySelectorAll("li").forEach(function (elem) {
-        if (!targetElemIsSelected && elemInArray(elem, parentLiElems)) {
-          elem.classList.add("selected")  
-        } else {
-          elem.classList.remove("selected")
+        // prevent click unless we are at root of the tree
+        if (parentLiElems.length < 3) {
+          e.preventDefault();
         }
-      })
 
-      //targetElem.parentElement.classList.toggle("selected")
-      //targetElem.closest("#main_nav").classList.toggle("selected")
-    }
-  })
+
+        // mark parent li as selected, other li not
+        navElem.querySelectorAll("li").forEach(function (elem) {
+          if (!targetElemIsSelected && elemInArray(elem, parentLiElems)) {
+            elem.classList.add("selected")  
+          } else {
+            elem.classList.remove("selected")
+          }
+        })
+
+        //targetElem.parentElement.classList.toggle("selected")
+        //targetElem.closest("#main_nav").classList.toggle("selected")
+      }
+    })
+  }
 })
 
 function elemInArray(elem, elemArray) {

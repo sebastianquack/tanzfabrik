@@ -1,0 +1,13 @@
+#event-modal {
+  display: block;
+  position: fixed;
+  height: 100%;
+  background-color: white;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  display: none;
+  overflow-y: scroll;
+}

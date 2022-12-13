@@ -173,7 +173,7 @@ div :class => "timetable-container" do
                       # title
                       div :class => "title-description" do
                         h6 :class => "title" do
-                          a detail.event.title.html_safe, :href => event_path(detail.event) if detail.event.title
+                          a detail.event.title.html_safe, :href => event_path(detail.event), :class => "event-modal-link" if detail.event.title
                         end
                         if  detail.event.signup_url and !detail.event.signup_url.empty?
                           a inline_svg_pack_tag("media/svgs/TAFA-Kurs-Anmeldung_Button.svg", class: "tickets-icon"), title: get_text_item("tanzklassen_anmeldung"), href: detail.event.signup_url, target: "_blank"

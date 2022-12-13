@@ -30,6 +30,10 @@ class EventsController < ApplicationController
         end
       }.join('/')
     end
+
+    if(params[:partial]) 
+      render :partial => "show_partial"
+    end
   end
 
   def index
