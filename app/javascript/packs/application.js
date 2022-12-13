@@ -221,10 +221,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // check if we should load an event modal
 
-  console.log("hash", window.location.hash)
   if(window.location.hash) {
-    let hashParts = window.location.hash.split("/")
-    if(hashParts[0] == "event" || hashParts[0] == "festival") {
+    let hashParts = window.location.hash.slice(1).split("/")
+    console.log("hashParts", hashParts)
+    if(hashParts[0] == "events" || hashParts[0] == "festivals") {
       let eventLink = window.location.hash.slice(1)
       if(eventLink) {
         loadEventInModal({href: baseUrl + "/" + eventLink})
