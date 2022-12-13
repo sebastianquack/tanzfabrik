@@ -223,9 +223,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   console.log("hash", window.location.hash)
   if(window.location.hash) {
-    let eventLink = window.location.hash.slice(1)
-    if(eventLink) {
-      loadEventInModal({href: baseUrl + "/" + eventLink})
+    let hashParts = window.location.hash.split("/")
+    if(hashParts[0] == "event" || hashParts[0] == "festival") {
+      let eventLink = window.location.hash.slice(1)
+      if(eventLink) {
+        loadEventInModal({href: baseUrl + "/" + eventLink})
+      }
     }
   }
   
