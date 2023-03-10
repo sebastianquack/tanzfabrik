@@ -1,0 +1,12 @@
+---
+:Image:
+  :attachment:
+  - :background
+  - :large
+  - :logo
+  #- :logo_panel
+  - :medium
+  - :medium_detail_column
+  - :people
+  - :people_hires
+  - :thumb

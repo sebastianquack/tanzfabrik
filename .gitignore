@@ -33,6 +33,7 @@
 # Other
 .DS_Store
 /public/system/*
+!/public/system/paperclip_attachments.yml
 /public/packs
 /public/packs-test
 /node_modules
