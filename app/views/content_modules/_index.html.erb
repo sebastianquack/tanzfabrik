@@ -18,6 +18,8 @@
   end
 %>
 
-<%= render :partial => "/content_modules/" + partial, :locals => {:content_module => content_module, :preview => preview} %>
+<% unless preview && content_module.module_type == "custom_html"%>
+  <%= render :partial => "/content_modules/" + partial, :locals => {:content_module => content_module, :preview => preview} %>
+<% end %>
 
 
