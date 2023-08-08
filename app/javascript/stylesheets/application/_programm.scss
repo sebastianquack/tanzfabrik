@@ -113,6 +113,9 @@
     .archive-headline {
       @include font-h3;
     }
+    .archive-headline:hover {
+      cursor: pointer;
+    }
 
     * {
       @include font-title;
