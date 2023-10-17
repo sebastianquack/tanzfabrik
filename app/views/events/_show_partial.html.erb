@@ -19,9 +19,7 @@
     <div class="stripes_vertical stripes_mid">
       <span class="<%= "relevant" if @event.type.id == 3 %>">
         <% if @event.type.id == 3 # kurs %>
-          <span><%= l(detail.start_date, :format => :weekday) %></span>
-          <br />
-          <span><%= l(detail.starttime, :format => :hours_minutes) %> - <%= l(detail.endtime_clock, :format => :hours_minutes) %></span>
+          <%= render :partial => "/events/details/kurs_moments", :locals => {:event => @event} %>
         <% else %>
           <% if @landing_page %>
             <%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.key) %>

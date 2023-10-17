@@ -1,0 +1,37 @@
+# local variable event
+
+#make a list of occurrences
+occurrences = []
+event.event_details.each do |ed|
+  ed.occurrences.each do |oc|
+    # only add occurence if the same weekday and time do not exist yet in list
+    if occurrences.select { |o, d| o.wday == oc.wday && o.hour == oc.hour } .length == 0
+      occurrences << [ oc, ed]
+    end
+    
+  end
+end
+
+ul :class => "moments" do
+  occurrences
+    .sort_by{ |oc| oc[0] }
+    .each do |occurrence, ed|
+    li :class => "moment" do
+      time :datetime => (l occurrence, :format => :time_tag_datetime) do 
+        span l occurrence, :format => :weekday
+        br
+        span do 
+          unless occurrence.hour == 0 && occurrence.min == 0 && ed.duration == 0
+            text_node l occurrence, :format => :hours_minutes
+            unless event.stage_event?
+              text_node "–"
+              text_node l (occurrence + ed.duration * 60), :format => :hours_minutes
+            end
+          end
+        end
+        br
+        br
+      end
+    end
+  end  
+end
