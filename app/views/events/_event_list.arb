@@ -46,6 +46,8 @@ ol :class => "event-calendar" do
               span event.title, :class => "title"
 
               span event.people_sorted.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
+            
+              span event.display_type, :class => "type"    
             end
 
             time(:class => "date") do
@@ -59,7 +61,7 @@ ol :class => "event-calendar" do
             end
 
             div :class => "type-location" do
-              span event.display_type, :class => "type"    
+              #span event.display_type, :class => "type"    
               div :class => "address" do
                 if detail.custom_place?
                   div detail.custom_place, :class => "location"

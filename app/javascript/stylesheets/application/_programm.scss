@@ -60,6 +60,9 @@
             @include font-stripes;
             margin-bottom: 0.1em;
           }
+          .type {
+            @include font-stripes;
+          }
         }
 
         .type-location {
