@@ -2,10 +2,10 @@ ActiveAdmin.register Event do
 
   menu :priority => 3
 
-  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id, :custom_type, 
+  permit_params :title_de, :description_de, :warning_de, :info_de, :info_en, :title_en, :description_en, :warning_en, :type_id,  
     :feature_on_welcome_screen, :price_regular, :price_reduced, :sequence, :facebook, :draft, :custom_sorting, :no_sign_up, :signup_url, 
     :rich_content_de, :rich_content_en, :info_rich_de, :info_rich_en, :credits_rich_de, :credits_rich_en,
-    :ticket_link_url, :ticket_link_text_de, :ticket_link_text_en,
+    :ticket_link_url, :ticket_link_text_de, :ticket_link_text_en, :custom_type_de, :custom_type_en,
     :festival_ids => [], :person_ids => [],
     :event_details_attributes => [:id, :start_date, :end_date, :time, :duration, :studio_id, :custom_place, :repeat_mode_id, :_destroy, tag_ids: []],
     :people_attributes => [:id, :name, :_destroy],
@@ -125,7 +125,9 @@ ActiveAdmin.register Event do
         number_to_currency price.price_reduced
       end       
       row :type
-      row :custom_type
+      row :custom_type_de
+      row :custom_type_en
+
       #row Tag.model_name.human do |event|
       #  event.tags.map { |t| (link_to t.name, admin_tag_path(t)) }.join(', ').html_safe
       #end
@@ -154,7 +156,8 @@ ActiveAdmin.register Event do
   form do |f|
     f.inputs do
       f.input :type, :include_blank => false#, :hint => (link_to "Verwalten", admin_event_types_path)
-      f.input :custom_type
+      f.input :custom_type_de
+      f.input :custom_type_en
     end
 
     f.inputs "Personen auswählen" do

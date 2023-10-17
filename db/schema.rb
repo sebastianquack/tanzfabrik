@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_04_122354) do
+ActiveRecord::Schema.define(version: 2023_10_17_124154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(version: 2022_03_04_122354) do
     t.boolean "feature_on_welcome_screen"
     t.decimal "price_regular", precision: 4
     t.decimal "price_reduced", precision: 4
-    t.string "custom_type", limit: 255
+    t.string "custom_type_de", limit: 255
     t.date "start_date_cache"
     t.date "end_date_cache"
     t.integer "sequence", default: 0
@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(version: 2022_03_04_122354) do
     t.string "ticket_link_url"
     t.string "ticket_link_text_de"
     t.string "ticket_link_text_en"
+    t.string "custom_type_en"
   end
 
   create_table "festival_containers", id: :serial, force: :cascade do |t|
