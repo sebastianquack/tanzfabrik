@@ -63,18 +63,8 @@ div :class => "module__profitraining" do
   years = Event.no_draft.joins(:type, :event_details).where('event_types.id = 4').group_by_year(:start_date).count
 
   # show links for these years
-  section :class => "archive-section" do
-    h3 t(:past_events), :class => "archive-headline"
-    ul :class => "archive-links" do
-      years.keys.reverse.each do |y|
-        li do
-          a :href => (url_for :controller => 'pages', :action => 'show', :id => 'profitraining', :year => y.year.to_s) do
-            h4 y.year, :class => "year"
-          end
-        end
-      end
-    end
-  end
+  render :partial => "navigation/archive_list", :locals => {:years => years, :content_module => content_module, :past_events_old_website => false}
+
 end
 
 

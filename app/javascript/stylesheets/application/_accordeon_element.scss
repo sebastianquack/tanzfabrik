@@ -44,6 +44,7 @@
       summary {
         @include font-title;
         cursor: pointer;
+        user-select: none;
         outline: none;
         background: transparent url("~svgs/TAFA20-Webseite_Pfeil-unten_red.svg") no-repeat 100% 50%;
         background-size: 40px 40px;
