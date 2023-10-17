@@ -17,7 +17,7 @@ WORKDIR /app
 
 # install bundle
 COPY Gemfile* /app/
-# RUN bundle update --bundler
+RUN bundle update --bundler
 RUN bundle install
 
 # ENV BUNDLE_PATH /gemcache

@@ -370,7 +370,7 @@ DEPENDENCIES
   ancestry (~> 3.0.7)
   arbre (~> 1.3)
   aws-sdk-s3 (~> 1)
-  bundler (= 2.1.4)
+  bundler
   ckeditor_rails
   countries
   devise
