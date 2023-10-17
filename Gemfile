@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.7.1"
+ruby "2.7.8"
 
 gem "bundler"
 
@@ -62,7 +62,7 @@ gem 'ancestry', '~> 3.0.7'
 gem "active_admin-sortable_tree", "~> 2.1.0"
 
 # webpack
-gem "webpacker", "~> 5.1"
+gem "webpacker", "~> 5.4.4"
 
 # embed svg files
 gem 'inline_svg'
