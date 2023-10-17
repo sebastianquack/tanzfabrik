@@ -16,14 +16,41 @@ ActiveAdmin.register Event do
   config.per_page = 100
 
   member_action :duplicate, method: :get do
-    @resource = resource.dup
-    @resource.people = resource.people.dup
-    #@resource.event_details = resource.event_details.dup
-    #@resource.images << resource.images
-    #@resource.festivals << resource.festivals.dup
-    render :new, layout: false
+
+    new_object = resource.dup # Duplicates main object without saving
+    new_object.title_de = "[DUPLIKAT] " + resource.title_de
+    new_object.title_en = "[DUPLICATE] " + resource.title_en     
+    
+    # duplicate associated records
+    new_object.people = resource.people.dup
+    new_object.festivals = resource.festivals.dup
+    new_object.event_details << resource.event_details.collect { |detail| detail.dup }
+    
+    # reuploads a copy of each image
+    new_images = []
+    resource.images.each { |image| 
+      new_image = image.dup 
+      new_image.attachment = image.attachment
+      new_images.push(new_image)
+    }
+    new_object.images = new_images
+
+    if new_object.save
+      # Duplicate the Action Text attributes manually
+      new_object.rich_content_de = resource.rich_content_de.body.to_trix_html
+      new_object.rich_content_en = resource.rich_content_en.body.to_trix_html
+      new_object.info_rich_de = resource.info_rich_de.body.to_trix_html
+      new_object.info_rich_en = resource.info_rich_en.body.to_trix_html
+      new_object.credits_rich_de = resource.credits_rich_de.body.to_trix_html
+      new_object.credits_rich_en = resource.credits_rich_en.body.to_trix_html
+      new_object.save
+      redirect_to admin_event_path(new_object)
+    else
+      redirect_to admin_event_path(resource), notice: "Could not duplicate."
+    end
   end
 
+    
   action_item :duplicate, :only => :show do
     link_to Event.model_name.human + " duplizieren", duplicate_admin_event_path(event)
   end
