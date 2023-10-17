@@ -67,6 +67,8 @@ gem "webpacker", "~> 5.4.4"
 # embed svg files
 gem 'inline_svg'
 
+gem 'nokogiri', "~> 1.11.0"
+
 group :production do
 	gem 'rails_12factor'
   #gem 'heroku_rails_deflate' # enables gzip compression
