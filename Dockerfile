@@ -18,9 +18,7 @@ WORKDIR /app
 # install bundle
 COPY Gemfile* /app/
 RUN gem update --system
-RUN gem install bundler -v 2.3.25 
 RUN bundle install
-RUN bundle update --bundler
 
 # ENV BUNDLE_PATH /gemcache
 
