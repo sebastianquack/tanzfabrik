@@ -43,3 +43,6 @@ import "./main_nav.scss"
 import "./trix.scss"
 import "./header.scss"
 import "./event_modal.scss"
+
+// other snippets
+import "./archive_links.scss"

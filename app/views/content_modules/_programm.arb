@@ -26,26 +26,4 @@ end
 years = Event.no_draft.joins(:type, :event_details).where('event_types.id IN (?)', event_types).group_by_year(:start_date).count
 
 # show links for these years
-section :class => "archive-section" do
-  details :class=>"drawer" do
-    summary do 
-      span t(:past_events), :class => "archive-headline"
-    end
-    div :class=>"content" do
-      ul :class => "archive-links" do
-        years.keys.reverse.each do |y|
-          if y.year <= Time.now.year
-            li do
-              # todo: change this to link to the current page
-              a :href => (url_for :controller => 'pages', :action => 'show', :id => content_module.page.slug, :year => y.year.to_s) do
-                h4 y.year.to_s 
-              end
-            end
-          end
-        end
-        li a t(:past_events_old_website), :href => "http://archiv.tanzfabrik-berlin.de/kalenderarchiv.php"
-      end
-    end
-  end
-end
-
+render :partial => "navigation/archive_list", :locals => {:years => years, :content_module => content_module, :past_events_old_website => true}
