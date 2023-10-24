@@ -19,20 +19,22 @@ ActiveAdmin.register Image do
     column "Image" do |image|
         link_to image_tag(image.attachment.url(:thumb), :height => '50'), admin_image_path(image)
     end
-    column :description
+    column :description_de
+    column :description_en
     column :license
     column :show_on_welcome_screen
     actions
   end
 
-  filter :description
+  filter :description_de
   filter :show_on_welcome_screen
 
   config.per_page = 100
 
   show do
     attributes_table do
-      row :description
+      row :description_de
+      row :description_en
       row :license
       row :show_on_welcome_screen
       row :image do
