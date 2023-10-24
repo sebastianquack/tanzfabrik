@@ -19,6 +19,9 @@ de:
     main_menu: "Hauptmenü"
     menu: "Menü"
     navigation: "Navigationsmenü"
+    close: "Schließen"
+    next: "Weiter"
+    prev: "Zurück"
 
   section_stage: "Bühne"
   section_school: "Schule"

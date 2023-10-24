@@ -53,6 +53,9 @@ en:
     main_menu: "Main Menu"
     menu: "Menu"
     navigation: "Site Navigation"
+    close: "Close"
+    next: "Next"
+    prev: "Previous"
 
   search_results: "Search Results"
   newsletter_subscribe: "Submit"

@@ -7,9 +7,15 @@
 
   <div class="overlay">
     <div class="stripes_vertical stripes_left">
-      <span data-close></span>
+      <span data-close aria-label="<%= t('a11y.close') %>"></span>
       <% if prev_next_urls[0] %>
-        <a href="<%= prev_next_urls[0] %>" data-previous class="event-modal-link"></a>
+        <a 
+          href="<%= prev_next_urls[0] %>" 
+          data-previous 
+          class="event-modal-link"
+          aria-label="<%= t('a11y.prev') %>"
+        >
+        </a>
       <% else %>
         <span data-close></span>
       <% end %>
@@ -24,7 +30,7 @@
           <% if @landing_page %>
             <%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.key) %>
           <% else %>
-            <span data-text-section></span>
+            <span data-text-section aria-hidden="true"></span>
           <% end %>
         <% end %>
       </span>
@@ -49,7 +55,7 @@
           <% if @landing_page %>
             <%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.key) %>
           <% else %>
-            <span data-text-section></span>
+            <span data-text-section aria-hidden="true"></span>
           <% end %>
         <% end %>
       </span>
@@ -75,9 +81,15 @@
     </div>    
 
     <div class="stripes_vertical stripes_right">
-      <span data-close></span>
+      <span data-close aria-label="<%= t('a11y.close') %>"></span>
       <% if prev_next_urls[1] %>
-        <a href="<%= prev_next_urls[1] %>" data-next class="event-modal-link"></a>
+        <a 
+          href="<%= prev_next_urls[1] %>" 
+          data-next 
+          class="event-modal-link"
+          aria-label="<%= t('a11y.next') %>"
+        >
+        </a>
       <% else %>
         <span data-close></span>
       <% end %>
