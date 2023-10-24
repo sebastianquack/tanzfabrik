@@ -18,6 +18,7 @@ de:
   a11y:
     main_menu: "Hauptmenü"
     menu: "Menü"
+    navigation: "Navigationsmenü"
 
   section_stage: "Bühne"
   section_school: "Schule"

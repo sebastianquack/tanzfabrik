@@ -1,4 +1,4 @@
-<nav id="main_nav">
+<nav id="main_nav" aria-label="<%= t('a11y.navigation') %>">
   <%= render "/navigation/language_switcher" if defined?(withNavigation) && withNavigation %>
   <%= render :partial => "navigation/tree_node", :locals => {:tree => @menu_tree, :depth => 0, :max_depth => @max_depth, :arialabel =>  t('a11y.main_menu')} %>
   <!--
