@@ -5,7 +5,7 @@ ActiveAdmin.register Studio do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :name, :description_de, :description_en, :rich_content_de, :rich_content_en, :location_id, :rentable, :images_attributes => [:id, :description, :license, :attachment, :_destroy]
+  permit_params :name, :description_de, :description_en, :rich_content_de, :rich_content_en, :location_id, :rentable, :images_attributes => [:id, :description_de, :description_en, :license, :attachment, :_destroy]
   #
   # or
   #
@@ -83,7 +83,8 @@ ActiveAdmin.register Studio do
       f.inputs "Images" do
         f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
           #f_f.inputs do
-            f_f.input :description
+            f_f.input :description_de
+            f_f.input :description_en
             f_f.input :license
             if f_f.object.attachment.exists?
               f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.image_tag(f_f.object.attachment.url(:thumb))

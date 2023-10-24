@@ -2,7 +2,7 @@ ActiveAdmin.register Person do
 
   menu :priority => 5  
 
-  permit_params :id, :first_name, :last_name, :bio_de, :bio_en, :rich_content_de, :rich_content_en, :role, :dance_intensive, :draft, :tags, :event_ids => [], :images_attributes => [:id, :description, :license, :attachment, :_destroy]
+  permit_params :id, :first_name, :last_name, :bio_de, :bio_en, :rich_content_de, :rich_content_en, :role, :dance_intensive, :draft, :tags, :event_ids => [], :images_attributes => [:id, :description_de, :description_en, :license, :attachment, :_destroy]
 
   config.sort_order = 'last_name_asc'
 
@@ -77,7 +77,8 @@ ActiveAdmin.register Person do
       f.inputs "Images" do
         f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
           #f_f.inputs do
-            f_f.input :description
+            f_f.input :description_de
+            f_f.input :description_en
             f_f.input :license
             if f_f.object.attachment.exists?
               f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.link_to(image_tag(f_f.object.attachment.url(:thumb)), f_f.object.attachment.url)

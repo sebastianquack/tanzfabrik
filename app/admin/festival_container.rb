@@ -3,7 +3,7 @@ ActiveAdmin.register FestivalContainer do
   menu false
 
   permit_params :name_de, :description_de, :name_en, :description_en, :display,
-    :images_attributes => [:id, :description, :license, :attachment, :_destroy],
+    :images_attributes => [:id, :description_de, :description_en, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
       
   index do
@@ -58,7 +58,8 @@ ActiveAdmin.register FestivalContainer do
     f.inputs "Images" do
       f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
         #f_f.inputs do
-          f_f.input :description
+          f_f.input :description_de
+          f_f.input :description_en
           f_f.input :license
           if f_f.object.attachment.exists?
             f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.image_tag(f_f.object.attachment.url(:thumb))

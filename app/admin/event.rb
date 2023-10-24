@@ -11,7 +11,7 @@ ActiveAdmin.register Event do
     :people_attributes => [:id, :name, :_destroy],
     :person_events_attributes => [:id, :person_id, :event_id, :_destroy],
     :festival_events_attributes => [:id, :event_id, :festival_id, :_destroy],
-    :images_attributes => [:id, :description, :license, :attachment, :logo, :logo_panel, :_destroy]
+    :images_attributes => [:id, :description_de, :description_en, :license, :attachment, :logo, :logo_panel, :_destroy]
 
   config.per_page = 100
 
@@ -237,7 +237,8 @@ ActiveAdmin.register Event do
     f.inputs Image.model_name.human do
       f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
         #f_f.inputs do
-          f_f.input :description
+          f_f.input :description_de
+          f_f.input :description_en
           f_f.input :license
           f_f.input :logo
           f_f.input :logo_panel # see also: https://github.com/blocknotes/activeadmin_dynamic_fields
