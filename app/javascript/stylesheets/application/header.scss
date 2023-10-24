@@ -31,7 +31,6 @@
       @include breakpoint('s') {
         transform: translateX(-50%);
       }
-      outline: none;
     };
     @include breakpoint('s') {
       > a {display: none;}
