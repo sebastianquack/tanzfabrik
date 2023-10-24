@@ -1,64 +1,60 @@
-<ul>
-<% tree.each_pair do |k,v| %>
-
-<% 
-  is_active = false
-  should_link = false
-  menu_item_name = k.name
-  
-  # in general, link to pagees
-  if k.page
-    should_link = true
-  end
-
-  # but don't link to the active page and add active
-  if @page
-    if k.page_id == @page.id
-      #menu_item_name += " (page active)"
-      is_active = true
+<% space = "  "*depth %>
+<%=space%><ul aria-label="<%= t("a11y.menu") + ": " + arialabel if !arialabel.empty? %>">
+  <% tree.each_pair do |k,v| %>
+    <% 
+      is_active = false
       should_link = false
-
-      # exception: this has an anchor link
-      if k.anchor
+      menu_item_name = k.name
+      
+      # in general, link to pagees
+      if k.page
         should_link = true
       end
-    end
-  end
 
-  # if this menu item is an ancestor of the one we want, mark as active
-  if @menu_item
-    if @menu_item.ancestor_ids.include? k.id
-      #menu_item_name += " (section active)"
-      is_active = true
-    end
-  end
+      # but don't link to the active page and add active
+      if @page
+        if k.page_id == @page.id
+          #menu_item_name += " (page active)"
+          is_active = true
+          should_link = false
 
-  # make sure that section heading is marked active if page is in this section but not in tree
-  if @page
-    if depth == 1 && @page.section == k.page.slug
-      is_active = true
-    end
-  end
+          # exception: this has an anchor link
+          if k.anchor
+            should_link = true
+          end
+        end
+      end
 
-  # and don't link to the start page in the tree
-  if k.key == "start"
-    menu_item_name = ""
-    should_link = false
-  end
-%>
+      # if this menu item is an ancestor of the one we want, mark as active
+      if @menu_item
+        if @menu_item.ancestor_ids.include? k.id
+          #menu_item_name += " (section active)"
+          is_active = true
+        end
+      end
 
-<li <%= is_active ? "class=\"active\"".html_safe : nil %>> 
-  <% if should_link %>
-    <%= (link_to menu_item_name, (page_path(k.page) + (k.anchor ? "#" + k.anchor : ""))) %>
-  <% else %>
-    <span><%= menu_item_name%></span>
+      # make sure that section heading is marked active if page is in this section but not in tree
+      if @page
+        if depth == 1 && @page.section == k.page.slug
+          is_active = true
+        end
+      end
+
+      # and don't link to the start page in the tree
+      if k.key == "start"
+        menu_item_name = ""
+        should_link = false
+      end
+    %>
+    <%=space%><li <%= is_active ? "class=\"active\"".html_safe : nil %>> 
+      <% if should_link %>
+        <%= (link_to menu_item_name, (page_path(k.page) + (k.anchor ? "#" + k.anchor : ""))) %>
+      <% else %>
+        <span><%= menu_item_name%></span>
+      <% end %>
+    <% if v && depth < max_depth %>
+      <%= render :partial => "navigation/tree_node", :locals => {:tree => v, :depth => depth + 1, :max_depth => max_depth, :arialabel => menu_item_name} %>
+    <% end %>
+    <%=space%></li>
   <% end %>
-
-<% if v && depth < max_depth %>
-  <%= render :partial => "navigation/tree_node", :locals => {:tree => v, :depth => depth + 1, :max_depth => max_depth} %>
-<% end %>
-
-</li>
-
-<% end %>
-</ul>
+<%=space%></ul>

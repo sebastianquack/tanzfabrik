@@ -49,6 +49,11 @@ en:
   section_about: "About Us"
   archive: "Archive"
 
+  a11y:
+    main_menu: "Main Menu"
+    menu: "Menu"
+    navigation: "Site Navigation"
+
   search_results: "Search Results"
   newsletter_subscribe: "Submit"
   newsletter_unsubscribe: "Unsubscribe"
