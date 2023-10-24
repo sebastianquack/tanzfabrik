@@ -14,17 +14,17 @@
 
 <footer class="imprint_footer" data-section="<%= @page.section %>">
 
-  <div class="stripes_vertical stripes_left">
+  <div class="stripes_vertical stripes_left" aria_hidden="true">
     <span data-text><%= tanzfabrik %></span>
     <span data-text><%= tanzfabrik %></span>
   </div>
 
-  <div class="stripes_vertical stripes_mid">
+  <div class="stripes_vertical stripes_mid" aria_hidden="true">
     <span data-text-section></span>
     <span data-text-section></span>
   </div>
 
-  <div class="stripes_vertical stripes_logos">
+  <div class="stripes_vertical stripes_logos" aria_hidden="true">
     <span data-logo></span>
     <span data-logo></span>
     <span data-logo></span>
@@ -33,24 +33,33 @@
   <div class="stripes_vertical stripes_right">
     <% if vimeo %>
       <span data-text>
-        <a href="<%= vimeo %>">
-          <%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_VIMEO_red.svg", class: "icon section-fill-color section-stroke-color") %>
+        <a href="<%= vimeo %>" aria-label="link vimeo tanzfabrik">
+          <%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_VIMEO_red.svg", 
+            class: "icon section-fill-color section-stroke-color",
+            aria_hidden: true
+          ) %>
         </a>
       </span> 
     <% end %>    
 
     <% if instagram %>
       <span data-text>
-        <a href="<%= instagram %>">
-          <%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_IG_red.svg", class: "icon section-fill-color") %>
+        <a href="<%= instagram %>" aria-label="link instagram tanzfabrik">
+          <%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_IG_red.svg", 
+            class: "icon section-fill-color",
+            aria_hidden: true
+          ) %>
         </a>
       </span>
     <% end %>
     
     <% if facebook %>
       <span data-text>
-        <a href="<%= facebook %>">
-          <%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_FB_red.svg", class: "icon section-fill-color section-stroke-color") %>
+        <a href="<%= facebook %>" aria-label="link facebook tanzfabrik">
+          <%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_FB_red.svg", 
+            class: "icon section-fill-color section-stroke-color",
+            aria_hiffen: true
+          ) %>
         </a>
       </span>
     <% end %>      
