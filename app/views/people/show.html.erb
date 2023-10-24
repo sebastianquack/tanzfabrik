@@ -20,12 +20,12 @@
   <div class="overlay">
 
     <div class="stripes_vertical stripes_left">
-      <span data-close></span>
+      <span data-close aria-label="<%= t('a11y.close') %>"></span>
       <span data-close></span>
       <span data-close></span>
     </div>
 
-    <div class="stripes_vertical stripes_right">
+    <div class="stripes_vertical stripes_right" aria-hidden="true">
       <span data-close></span>
       <span data-close></span>
       <span data-close></span>
@@ -34,12 +34,12 @@
     <div class="stripes_vertical stripes_mid">
       <% if @landing_page %>
         <span><%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.key) %></span>
-        <span><%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.key) %></span>
-        <span><%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.key) %></span>
+        <span aria-hidden="true"><%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.key) %></span>
+        <span aria-hidden="true"><%= link_to (@landing_page_menu_item.name+"<br />"+@landing_page_menu_item.name).html_safe, page_path(@landing_page_menu_item.key) %></span>
       <% else %>
-        <span data-text-section></span>
-        <span data-text-section></span>
-        <span data-text-section></span>
+        <span data-text-section aria-hidden="true"></span>
+        <span data-text-section aria-hidden="true"></span>
+        <span data-text-section aria-hidden="true"></span>
       <% end %>
     </div>        
 
