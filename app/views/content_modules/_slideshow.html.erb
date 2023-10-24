@@ -16,7 +16,7 @@
 
   <div class="slideshow">
 
-    <ol class="slides">
+    <ul class="slides">
 
       <% content_module.images.each do |image| %>
 
@@ -47,7 +47,7 @@
             <div class="rich_content_1">
               <%= image.rich_content_1 %>
             </div>
-          <% end %>        
+          <% end %>
 
           <%= render :partial => "content_modules/_button", :locals => { :obj => image } %>  
 
@@ -55,7 +55,7 @@
 
       <% end %>
     
-    </ol>
+    </ul>
         
   </div>
 
