@@ -56,6 +56,11 @@
             @include font-subtitle;
             display: block;
           }
+          .title {
+            @include font-title;
+            font-style: normal;
+            text-transform: none;
+          }
           .in-festival {
             @include font-stripes;
             margin-bottom: 0.1em;

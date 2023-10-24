@@ -11,7 +11,7 @@ display_year = nil if !defined? display_year
 occurrences = stage_events_occurrence_list(events)
 
 # display list of all occurences
-ol :class => "event-calendar" do
+ul :class => "event-calendar" do
   occurrences.group_by { |o| o[:time].to_date.beginning_of_month }.each do |month,o_per_month|
     
     # only show past months if we are in archive mode
@@ -43,7 +43,7 @@ ol :class => "event-calendar" do
                 end            
               end
 
-              span event.title, :class => "title"
+              h4 event.title, :class => "title"
 
               span event.people_sorted.map { |p| p.name }.join(', ').html_safe, :class => "teacher"
             
