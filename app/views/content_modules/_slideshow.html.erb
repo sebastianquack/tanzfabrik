@@ -1,4 +1,4 @@
-<div class="module__slideshow" data-section="<%= content_module.section %>" data-border-bottom="<%= content_module.border_bottom%>">
+<section class="module__slideshow" data-section="<%= content_module.section %>" data-border-bottom="<%= content_module.border_bottom%>">
 
   <% if content_module.headline %>
     <div class="headline_container">
@@ -16,7 +16,7 @@
 
   <div class="slideshow">
 
-    <ol class="slides">
+    <ul class="slides">
 
       <% content_module.images.each do |image| %>
 
@@ -47,7 +47,7 @@
             <div class="rich_content_1">
               <%= image.rich_content_1 %>
             </div>
-          <% end %>        
+          <% end %>
 
           <%= render :partial => "content_modules/_button", :locals => { :obj => image } %>  
 
@@ -55,8 +55,8 @@
 
       <% end %>
     
-    </ol>
+    </ul>
         
   </div>
 
-</div>
+</section>

@@ -17,7 +17,7 @@ end
 
 with_year = (festival.start_date.year < festival.end_date.year && (festival.end_date - festival.start_date) > 45)
 
-div :class => "module__festival_programm" do
+section :class => "module__festival_programm" do
 
   festival_workshops = festival.events.no_draft.where(:type_id => 2)
 
