@@ -9,42 +9,47 @@ def subscribe_form(className, mode, value, prompt)
     div :class => "form-newsletter" do
 
       div :class => "row" do    
-        input :type=>"email", :required=>true, :placeholder=>t(:newsletter_email_address), :name=>"email", :value=>params[:q], :onclick => "this.select()"
+        label t(:newsletter_email_address)
+        input :type=>"email", :required=>true, :name=>"email", :value=>params[:q], :onclick => "this.select()"
       end 
 
       div prompt, :class => "rich_content"
 
-      ul :class=>"newsletter-options row" do
+      fieldset do
 
-        li :class => "form-checkbox" do
-          input :type=>"checkbox", :name=>"newsletter_1"
-          div :class => "input-style-helper"
-          label t(:newsletter_label_1)
-        end
+        ul :class=>"newsletter-options row" do
 
-        li :class => "form-checkbox" do
-          input :type=>"checkbox", :name=>"newsletter_2"
-          div :class => "input-style-helper"
-          label t(:newsletter_label_2)
-        end
+            li :class => "form-checkbox" do
+              input :type=>"checkbox", :name=>"newsletter_1", :id=>"checkbox-newsletter-1"
+              div :class => "input-style-helper"
+              label t(:newsletter_label_1), :for=>"checkbox-newsletter-1"
+            end
 
-        li :class => "form-checkbox" do
-          input :type=>"checkbox", :name=>"newsletter_3"
-          div :class => "input-style-helper"
-          label t(:newsletter_label_3)
-        end
+            li :class => "form-checkbox" do
+              input :type=>"checkbox", :name=>"newsletter_2", :id=>"checkbox-newsletter-2"
+              div :class => "input-style-helper"
+              label t(:newsletter_label_2), :for=>"checkbox-newsletter-2"
+            end
 
-        li :class => "form-checkbox" do
-          input :type=>"checkbox", :name=>"unsubscribe"
-          div :class => "input-style-helper"
-          label t(:newsletter_unsubscribe_all)
+            li :class => "form-checkbox" do
+              input :type=>"checkbox", :name=>"newsletter_3", :id=>"checkbox-newsletter-3"
+              div :class => "input-style-helper"
+              label t(:newsletter_label_3), :for=>"checkbox-newsletter-3"
+            end
+
+            li :class => "form-checkbox" do
+              input :type=>"checkbox", :name=>"unsubscribe", :id=>"checkbox-newsletter-4"
+              div :class => "input-style-helper"
+              label t(:newsletter_unsubscribe_all), :for=>"checkbox-newsletter-4"
+            end
+
         end
 
       end
 
 
       div :class => "submit" do
-        span "Abschicken", :class=>"button", :title=>value do
+        span t(:newsletter_submit), :class=>"button", :title=>t(:newsletter_submit) do
           input :type=>"submit", :value=>value
         end
       end
