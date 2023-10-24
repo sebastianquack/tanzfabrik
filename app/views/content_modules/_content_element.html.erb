@@ -10,7 +10,10 @@
   <div class="column_left">
 
   <% if content_module.images.count > 0 %>
-    <img src=<%= content_module.images[0].attachment.url(:large) %>>
+    <img 
+      src="<%= content_module.images[0].attachment.url(:large) %>" 
+      alt="<%= content_module.images[0].description %>" 
+    >
   <% end %>
 
   <%#= content_module.inspect %>

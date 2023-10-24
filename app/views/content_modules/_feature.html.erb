@@ -4,9 +4,16 @@
     <!--img src=<%= content_module.images[0].attachment.url(:background) %>-->
   <% end %>
 
-  <div class="columns" style="background-image: url(<%= content_module.images[0].attachment.url(:background) if content_module.images[0] %>);">
+  <% if content_module.images[0] %>
+    <span role="img" aria-label="<%= content_module.images[0].description %>"></span>
+  <% end %>
 
-    <div class="stripes_vertical">
+  <div 
+    class="columns" 
+    style="background-image: url(<%= content_module.images[0].attachment.url(:background) if content_module.images[0] %>);"
+      
+  >
+    <div class="stripes_vertical" arial-hidden="true">
       <span data-text="Tanzfabrik &#10;Berlin"></span>
       <span data-text="Tanzfabrik &#10;Berlin"></span>
       <span data-text="Tanzfabrik &#10;Berlin"></span>
