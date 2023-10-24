@@ -27,7 +27,7 @@ ActiveAdmin.register ContentModule do
   #
   permit_params :module_type, :style_option, :section, :border_bottom, :draft, :headline_de, :headline_en, :super_de, :super_en, :sub_de, :sub_en, :special_text_de, :special_text_en, :rich_content_1_de, :rich_content_1_en, :rich_content_2_de, :rich_content_2_en, :custom_html_de, :custom_html_en, :parameter, :locale,
   :link_href_de, :link_href_en, :link_title_de, :link_title_en,
-  :images_attributes => [:id, :description, :license, :attachment, :_destroy, :super_de, :super_en, :headline_de, :headline_en, :rich_content_1_de, :rich_content_1_en, :link_title_de, :link_title_en, :link_href_de, :link_href_en, :order],
+  :images_attributes => [:id, :description_de, :description_en, :license, :attachment, :_destroy, :super_de, :super_en, :headline_de, :headline_en, :rich_content_1_de, :rich_content_1_en, :link_title_de, :link_title_en, :link_href_de, :link_href_en, :order],
   :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
 
   ActiveAdmin.register ContentModule do
@@ -214,7 +214,8 @@ ActiveAdmin.register ContentModule do
       if !CM_CONFIG[type].has_key? "images" || CM_CONFIG[type]["images"] != false
         f.inputs "Images", :id => "active_admin_cm_images" do
           f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
-            f_f.input :description, :hint => "für barrierefreie Browser"
+            f_f.input :description_de, :hint => "für barrierefreie Browser"
+            f_f.input :description_en, :hint => "für barrierefreie Browser"
             f_f.input :license
             f_f.input :order
             if type == "slideshow"

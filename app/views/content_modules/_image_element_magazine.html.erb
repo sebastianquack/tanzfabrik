@@ -5,7 +5,11 @@
   <% end %>
 
   <% if content_module.images.length > 0 %>
-    <img class="image" src="<%= content_module.images[0].attachment.url(:large) %>">
+    <img 
+      class="image" 
+      src="<%= content_module.images[0].attachment.url(:large) %>"
+      alt="<%= content_module.images[0].description %>"
+     >
   <% end %>
 
   <div class="text">

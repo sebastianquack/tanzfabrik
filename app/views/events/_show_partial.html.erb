@@ -59,6 +59,7 @@
       <% if @event.type.id == 4 || @event.type.id == 3 # profitraining or kurs %>
         <%
           imageSrc = @event.people.first.images.first.attachment.url(:large) if @event.people.first && @event.people.first.images.first
+          imageAlt = @event.people.first.images.first.description
           caption = @event.people.first.images.first.license if @event.people.first && @event.people.first.images.first
         %>
       <% else %>
@@ -67,7 +68,7 @@
       <% end %>
       <% if imageSrc %>
       <figure>
-        <img src="<%= imageSrc %>"/>
+        <img src="<%= imageSrc %>" alt="<%= imageAlt %>">
         <figcaption><%= caption %></figcaption>
       </figure>
       <% end %>
@@ -159,7 +160,7 @@
       <div class="logos">
       <% @event.logos.each do |logo| %>
         <a href="<%= logo.link_href %>">
-          <img src="<%= logo.attachment.url(:logo)%>"/>
+          <img src="<%= logo.attachment.url(:logo)%>" alt="<%= logo.description %>">
         </a>
       <% end %>
       </div>
@@ -168,7 +169,7 @@
     <% if @event.logo_panels.length %>
       <% @event.logo_panels.each do |logo| %>
         <div class="logo_panel">
-          <img src="<%= logo.attachment.url(:logo_panel)%>"/>
+          <img src="<%= logo.attachment.url(:logo_panel)%>" alt="<%= logo.description %>">
         </div>
       <% end %>
     <% end %>

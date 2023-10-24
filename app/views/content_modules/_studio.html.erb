@@ -8,7 +8,10 @@ studio = Studio.find(content_module.parameter.to_i)
   <div class="column_left">
 
   <% if studio.images.count > 0 %>
-    <img src=<%= studio.images[0].attachment.url(:large) %>>
+    <img 
+      src="<%= studio.images[0].attachment.url(:large) %>"
+      alt="<%= studio.images[0].description %>"
+    >
   <% end %>
 
   </div>

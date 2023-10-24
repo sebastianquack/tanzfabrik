@@ -4,7 +4,7 @@ ActiveAdmin.register TextItem do
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   permit_params :name, :content_de, :content_en, :rich_content_de, :rich_content_en,
-    :images_attributes => [:id, :description, :license, :attachment, :link_href_de, :link_href_en, :_destroy]
+    :images_attributes => [:id, :description_de, :description_en, :license, :attachment, :link_href_de, :link_href_en, :_destroy]
   
   index do 
     selectable_column
@@ -43,7 +43,8 @@ ActiveAdmin.register TextItem do
 
         f.inputs Image.model_name.human do
           f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
-            f_f.input :description
+            f_f.input :description_de
+            f_f.input :description_en
             f_f.input :license
             f_f.input :link_href_de
             f_f.input :link_href_en

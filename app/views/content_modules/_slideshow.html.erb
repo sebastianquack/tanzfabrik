@@ -18,63 +18,45 @@
 
     <ol class="slides">
 
-    <% content_module.images.each do |image| %>
+      <% content_module.images.each do |image| %>
 
-      <li class="slide">
+        <li class="slide">
 
-        <% if image.attachment%>
-          <figure class="image">
-            <img alt="<%= image.description %>" src="<%= image.attachment.url(:medium) %>">
-            <figcaption class="caption">
-              <span class="licence"><%= image.license %></span>
-            </figcaption>
-          </figure>
-        <% end %>
+          <% if image.attachment%>
+            <figure class="image">
+              <img alt="<%= image.description %>" src="<%= image.attachment.url(:medium) %>">
+              <figcaption class="caption">
+                <span class="licence"><%= image.license %></span>
+              </figcaption>
+            </figure>
+          <% end %>
 
-        <% if image.super%>
-          <div class="super">
-            <%= image.super %>
-          </div>
-        <% end %>
+          <% if image.super%>
+            <div class="super">
+              <%= image.super %>
+            </div>
+          <% end %>
 
-        <% if image.headline%>
-          <h6 class="headline">
-            <%= image.headline %>
-          </h6>
-        <% end %>
+          <% if image.headline%>
+            <h6 class="headline">
+              <%= image.headline %>
+            </h6>
+          <% end %>
 
-        <% if image.rich_content_1 %>
-          <div class="rich_content_1">
-            <%= image.rich_content_1 %>
-          </div>
-        <% end %>        
+          <% if image.rich_content_1 %>
+            <div class="rich_content_1">
+              <%= image.rich_content_1 %>
+            </div>
+          <% end %>        
 
-        <%= render :partial => "content_modules/_button", :locals => { :obj => image } %>  
+          <%= render :partial => "content_modules/_button", :locals => { :obj => image } %>  
 
-      </li>
+        </li>
 
-    <% end %>
-
-    <% unless preview %>
-      
-      <div>
-        <% if content_module.rich_content_1 %>
-          <%= content_module.rich_content_1 %>
-        <% end %>
-      </div>
-
-      <% if content_module.rich_content_2 %>
-        <div>
-          <%= content_module.rich_content_2 %>
-        </div>
       <% end %>
-
-    <% end %>
-      
-    <% if content_module.special_text %>
-      <div><%= content_module.special_text %></div>
-    <% end %>
-
-</div>
+    
+    </ol>
+        
+  </div>
 
 </section>

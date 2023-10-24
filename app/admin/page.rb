@@ -16,7 +16,7 @@ ActiveAdmin.register Page do
   # permit_params :list, :of, :attributes, :on, :model
   permit_params :slug, :title_de, :content_de, :title_en, :content_en, :description_de, :description_en, :priority, :changefreq, :draft, :feature_on_welcome_screen, :feature_on_welcome_screen_urgent, :feature_on_welcome_screen_note_en, :feature_on_welcome_screen_note_de, :hide_download_links, :start_page_order, :project_menu_order, :show_in_project_menu, :disable_close, :section,
     :content_modules_attributes => [:id, :module_type, :headline, :order, :_destroy],
-    :images_attributes => [:id, :description, :license, :attachment, :_destroy],
+    :images_attributes => [:id, :description_de, :description_en, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
     
   #

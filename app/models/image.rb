@@ -36,7 +36,7 @@ class Image < ActiveRecord::Base
   has_rich_text :rich_content_1_de
   has_rich_text :rich_content_1_en
 
-  translates :super, :headline, :rich_content_1, :link_title, :link_href
+  translates :super, :headline, :rich_content_1, :link_title, :link_href, :description
 
   belongs_to :studio
   belongs_to :person

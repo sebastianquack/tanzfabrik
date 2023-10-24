@@ -10,7 +10,10 @@
 
   <% if content_module.images.count > 0 %>
     <div class="grid_image">
-        <img src=<%= content_module.images[0].attachment.url(:large) %>>
+        <img 
+          src="<%= content_module.images[0].attachment.url(:large) %>"
+          alt="<%= content_module.images[0].description %>"
+        >
     </div>  
   <% end %>
 

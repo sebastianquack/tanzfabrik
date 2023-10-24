@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_17_124154) do
+ActiveRecord::Schema.define(version: 2023_10_24_105804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -254,7 +254,7 @@ ActiveRecord::Schema.define(version: 2023_10_17_124154) do
   end
 
   create_table "images", id: :serial, force: :cascade do |t|
-    t.string "description", limit: 255
+    t.string "description_de", limit: 255
     t.string "license", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -284,6 +284,7 @@ ActiveRecord::Schema.define(version: 2023_10_17_124154) do
     t.integer "width"
     t.integer "height"
     t.boolean "logo_panel", default: false
+    t.string "description_en"
     t.index ["content_module_id"], name: "index_images_on_content_module_id"
   end
 

@@ -4,7 +4,7 @@ ActiveAdmin.register Image do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :description, :license, :attachment, :studio_id, :person_id, :event_id, :festival_id, :show_on_welcome_screen
+  permit_params :description_en, :description_de, :license, :attachment, :studio_id, :person_id, :event_id, :festival_id, :show_on_welcome_screen
   #
   # or
   #
@@ -50,7 +50,8 @@ ActiveAdmin.register Image do
 
   form :html => { :enctype => "multipart/form-data" } do |f|
       f.inputs "Details" do
-      f.input :description
+      f.input :description_de
+      f.input :description_en
       f.input :license
       f.input :show_on_welcome_screen
     end

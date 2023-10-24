@@ -3,7 +3,7 @@ ActiveAdmin.register Festival do
   menu :priority => 4
 
   permit_params :page_id, :section, :name_de, :rich_content_de, :rich_content_en, :description_de, :name_en, :description_en, :feature_on_welcome_screen, :facebook,  :draft, :event_ids => [], :festival_ids => [], :festival_container_ids => [],
-    :images_attributes => [:id, :description, :license, :attachment, :_destroy],
+    :images_attributes => [:id, :description_de, :description_en, :license, :attachment, :_destroy],
     :downloads_attributes => [:id, :description_de, :description_en, :attachment_de, :attachment_en, :_destroy]
 
 
@@ -133,7 +133,8 @@ ActiveAdmin.register Festival do
 
     f.inputs "Images" do
       f.has_many :images, heading: false, :new_record => true, :allow_destroy => true do |f_f|
-          f_f.input :description
+          f_f.input :description_de
+          f_f.input :description_en
           f_f.input :license
           if f_f.object.attachment.exists?
             f_f.input :attachment, :as => :file, :required => false, :hint => f_f.template.image_tag(f_f.object.attachment.url(:thumb))
