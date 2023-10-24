@@ -56,11 +56,19 @@
     <% end %>
 
     <% unless preview %>
-      <div><%= content_module.rich_content_1 if content_module.rich_content_1 %></div>
+      
+      <div>
+        <% if content_module.rich_content_1 %>
+          <%= content_module.rich_content_1 %>
+        <% end %>
+      </div>
 
       <% if content_module.rich_content_2 %>
-        <div><%= content_module.rich_content_2 %></div>
+        <div>
+          <%= content_module.rich_content_2 %>
+        </div>
       <% end %>
+
     <% end %>
       
     <% if content_module.special_text %>
