@@ -27,6 +27,11 @@
   <header class="horizontal_bar_container">
     <div class="horizontal_bar_left">
       <%= !@page || @page && @page.slug != "start" ? (link_to page_title, root_url) : page_title %>
+      
+      <% if @page %>
+        <a href="#main-content" class="skip-link"><%= t("a11y.skip_to_content")%></a>
+      <% end %>
+
     </div>
     <div class="horizontal_bar_center">
       <% if @landing_page_menu_item %>

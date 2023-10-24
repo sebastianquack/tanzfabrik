@@ -1,11 +1,16 @@
-<main class="page">
-  
+<div class="page">
+
     <%= render :partial => "/navigation/tree", :locals => { :withNavigation => true } %>
 
     <%= render "/navigation/sidemenu" %>
 
-    <%= render "/pages/content_modules" %>
 
-</main>
+    <main id="main-content" style="display: contents">
+
+        <%= render "/pages/content_modules" %>
+
+    </main>
+
+</div>
 
 <%= render "/pages/footer" %>

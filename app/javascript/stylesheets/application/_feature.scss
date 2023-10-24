@@ -1,6 +1,6 @@
 @import "./__mixins.scss";
 
-#main_nav + .module__feature {
+#main_nav + main > .module__feature:first-child {
   margin-top: - $header-height - $menu-height - $page-top-padding;
 }
 

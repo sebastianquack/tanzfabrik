@@ -7,6 +7,16 @@
   }
 }
 
+.skip-link {
+  position: absolute;
+  top: -40px;
+  padding-left: 10px;
+}
+
+.skip-link:focus {
+  position: initial;
+}
+
 .horizontal_bar_container {
 
   @include flex-row;
