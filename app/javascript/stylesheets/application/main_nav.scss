@@ -1,5 +1,16 @@
 @import "./__mixins.scss";
 
+/**
+  * following logical combinations are used for styling this recursive menu:
+  *
+  * START || MOBILE
+  * START && DESKTOP
+  * MOBILE
+  * DESKTOP
+  * PAGE && DESKTOP
+  * MOBILE && PAGE
+*/
+
 $transition-duration: 0.35s;
 
 :root{
@@ -167,6 +178,11 @@ $transition-duration: 0.35s;
         opacity: 0;
         transition: transform $transition-duration, opacity $transition-duration;
       }
+    }
+
+    // HUTE LETTERS not selected - hide decendants for keyboard users
+    > ul > li > ul > li:not(.selected) > ul * {
+      display: none;
     }
 
     // SELECTED ROOT LEVEL

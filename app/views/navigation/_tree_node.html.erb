@@ -50,7 +50,7 @@
       <% if should_link %>
         <%= (link_to menu_item_name, (page_path(k.page) + (k.anchor ? "#" + k.anchor : ""))) %>
       <% else %>
-        <span><%= menu_item_name%></span>
+        <span tabindex="0"><%= menu_item_name%></span>
       <% end %>
     <% if v && depth < max_depth %>
       <%= render :partial => "navigation/tree_node", :locals => {:tree => v, :depth => depth + 1, :max_depth => max_depth, :arialabel => menu_item_name} %>

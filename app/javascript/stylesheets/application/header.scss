@@ -11,11 +11,14 @@
   position: absolute;
   top: -40px;
   padding-left: 10px;
+  @include breakpoint('s') {
+    display: none;
+  }
+  &:focus {
+    position: initial;
+  }
 }
 
-.skip-link:focus {
-  position: initial;
-}
 
 .horizontal_bar_container {
 

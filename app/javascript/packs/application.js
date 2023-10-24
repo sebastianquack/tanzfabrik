@@ -254,7 +254,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var navElem = document.querySelector("#main_nav")
   if(navElem) {
     var ulLevel0Elem = navElem.querySelector("ul > li > ul")
-    ulLevel0Elem.addEventListener("click", function(e){
+
+    function menuEngageEvent(e){
       var mobileMenuEnabled = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mobile-menu-enabled'));
       if (mobileMenuEnabled) {
         var targetElem = e.target
@@ -291,7 +292,10 @@ document.addEventListener("DOMContentLoaded", function () {
         //targetElem.parentElement.classList.toggle("selected")
         //targetElem.closest("#main_nav").classList.toggle("selected")
       }
-    })
+    }
+
+    ulLevel0Elem.addEventListener("click", menuEngageEvent)
+    ulLevel0Elem.addEventListener("keypress", menuEngageEvent)
   }
 })
 
