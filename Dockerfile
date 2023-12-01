@@ -22,12 +22,13 @@ RUN bundle install
 
 # ENV BUNDLE_PATH /gemcache
 
-# install node packages
-#COPY package.json /app/
-#COPY yarn.lock /app/
-#RUN yarn
-
 RUN apt-get install python -y
+
+# install node packages
+COPY package.json /app/
+COPY yarn.lock /app/
+RUN yarn
+
 
 EXPOSE 3000
 CMD ["rails", "server", "--binding=0.0.0.0"]
