@@ -1,4 +1,4 @@
-require_relative '../../app/services/ms_graph'
+require_relative '../../app/services/ms_graph_client'
 
 desc 'imports calendar events to database'
 task :run_ms_graph => :environment do
@@ -12,10 +12,12 @@ task :run_ms_graph => :environment do
   tf_programmer_account_id = "19ed95de-aa88-42fd-aeed-a2549fe4f47e"
   studio_1_calendar_id = "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAEGAAAkY2c3scT4QYtAGWXhfBH4AAAS2I3SAAA="
 
+  some_event_id = "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAS2CY4AAAkY2c3scT4QYtAGWXhfBH4AAAS2JHgAAA="
+
   ms_graph_client = MsGraphClient.new(tenant_id, client_id, client_secret, scope)
-  ms_graph_client.authenticate()
-  
-  events = ms_graph_client.get_events(tf_programmer_account_id, studio_1_calendar_id)
-  puts events
+
+  some_event = ms_graph_client.get_event(tf_programmer_account_id, studio_1_calendar_id, some_event_id) 
+
+  puts some_event
 end
 

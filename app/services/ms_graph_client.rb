@@ -3,20 +3,22 @@ require 'uri'
 require 'json'
 
 class MsGraphClient
-  attr_accessor :token
+  @@login_url = "https://login.microsoftonline.com"
+  @@ms_graph_url = "https://graph.microsoft.com/v1.0"
+  @@token = nil
+  @@last_authenticated_at = nil
 
   def initialize(tenant_id, client_id, client_secret, scopes)
     @client_id = client_id
     @client_secret = client_secret
     @scopes = scopes
-    @login_url = "https://login.microsoftonline.com"
-    @ms_graph_url = "https://graph.microsoft.com/v1.0"
     @tenant_id = tenant_id
   end
 
   def authenticate
+    puts "authenticating with ms graph."
     http_client = HttpClient.new()
-    data = http_client.post("#{@login_url}/#{@tenant_id}/oauth2/v2.0/token", {
+    data = http_client.post("#{@@login_url}/#{@tenant_id}/oauth2/v2.0/token", {
       client_id: @client_id,
       client_secret: @client_secret,
       scope: @scopes,
@@ -27,34 +29,69 @@ class MsGraphClient
     if data.key?("error")
       return {error: data["error"]["code"], message: data["error_description"]}
     end
-    @token = data["access_token"]
+    @@token = data["access_token"]
+    @@last_authenticated_at = Time.now
     return data["access_token"]
   end
 
-
   def get_events(user_id, calendar_id)
-    url_stub = "#{@ms_graph_url}/users/#{user_id}/calendars/#{calendar_id}/events"
+    maybe_reauthenticate()
+    url_stub = "#{@@ms_graph_url}/users/#{user_id}/calendars/#{calendar_id}/events"
     http_client = HttpClient.new()
     data = http_client.get(url_stub, {
-      "Authorization" => "Bearer #{@token}"
+      "Authorization" => "Bearer #{@@token}"
     })
     if data.key?("error")
       return {error: data["error"]["code"], message: data["error_description"]}
     end
     return data["value"]
+  end
+
+  def get_event(user_id, calendar_id, event_id)
+    maybe_reauthenticate()
+    url_stub = "#{@@ms_graph_url}/users/#{user_id}/calendar/events/#{event_id}"
+    http_client = HttpClient.new()
+    data = http_client.get(url_stub, {
+      "Authorization" => "Bearer #{@@token}"
+    })
+    if data.key?("error")
+      return {error: data["error"]["code"], message: data["error_description"]}
+    end
+    return data
   end
 
   def get_calendars(user_id)
-    url_stub = "#{@ms_graph_url}/users/#{user_id}/calendars"
+    maybe_reauthenticate()
+    url_stub = "#{@@ms_graph_url}/users/#{user_id}/calendars"
     http_client = HttpClient.new()
     data = http_client.get(url_stub, {
-      "Authorization" => "Bearer #{@token}"
+      "Authorization" => "Bearer #{@@token}"
     })
     if data.key?("error")
       return {error: data["error"]["code"], message: data["error_description"]}
     end
     return data["value"]
   end
+
+  def maybe_reauthenticate
+    if @@token.nil?
+      authenticate()
+      return
+    end
+    if diff_in_seconds(@@last_authenticated_at, Time.now) > fifty_minutes()
+      authenticate()
+      return
+    end
+  end
+
+  def diff_in_seconds(from, to)
+    (to - from).to_i
+  end
+
+  def fifty_minutes
+    3000
+  end
+
 end
 
 class HttpClient
