@@ -3,13 +3,12 @@ require 'uri'
 require 'json'
 
 class MsGraphClient
-  attr_accessor :auth_token
+  attr_accessor :token
 
-
-  def initialize(client_id, client_secret, scope)
+  def initialize(client_id, client_secret, scopes)
     @client_id = client_id
     @client_secret = client_secret
-    @scope = scope
+    @scopes = scopes
     @login_url = "https://login.microsoftonline.com"
     @ms_graph_url = "https://graph.microsoft.com/v1.0"
     @account_id = "2b07e5c4-cf90-4914-b15c-d83a785b1e5a"
@@ -20,15 +19,42 @@ class MsGraphClient
     data = http_client.post("#{@login_url}/#{@account_id}/oauth2/v2.0/token", {
       client_id: @client_id,
       client_secret: @client_secret,
-      scope: @scope,
+      scope: @scopes,
       grant_type: "client_credentials"
     }, {
       "Content-Type" => "application/x-www-form-urlencoded"
     })
-
-    return data
+    if data.key?("error")
+      return {error: data["error"], message: data["error_description"]}
+    end
+    @token = data["access_token"]
+    return data["access_token"]
   end
 
+
+  def get_events(user_id, calendar_id)
+    url_stub = "#{@ms_graph_url}/users/#{user_id}/calendars/#{calendar_id}/events"
+    http_client = HttpClient.new()
+    data = http_client.get(url_stub, {
+      "Authorization" => "Bearer #{@token}"
+    })
+    if data.key?("error")
+      return {error: data["error"], message: data["error_description"]}
+    end
+    return data["value"]
+  end
+
+  def get_calendars(user_id)
+    url_stub = "#{@ms_graph_url}/users/#{user_id}/calendars"
+    http_client = HttpClient.new()
+    data = http_client.get(url_stub, {
+      "Authorization" => "Bearer #{@token}"
+    })
+    if data.key?("error")
+      return {error: data["error"], message: data["error_description"]}
+    end
+    return data["value"]
+  end
 end
 
 class HttpClient
@@ -38,12 +64,17 @@ class HttpClient
     http.use_ssl = (url.scheme == 'https')
     request = Net::HTTP::Get.new(url)
 
+    headers.each do |header_name, header_value|
+      request[header_name] = header_value
+    end
+
     response = http.request(request)
 
     if response.code == '200'
       return JSON.parse(response.body)
     else
-      return response
+      puts "Failed to fetch data: #{response.code} #{response.message}"
+      return JSON.parse(response.body)
     end
   end
 
@@ -56,7 +87,6 @@ class HttpClient
     headers.each do |header_name, header_value|
       request[header_name] = header_value
     end
-
 
     body = build_body(headers, payload)
     request.body = body
@@ -72,52 +102,12 @@ class HttpClient
   end
 
   def build_body(headers, data)
-    puts headers['Content-Type']
     if(headers['Content-Type'] == 'application/x-www-form-urlencoded')
-      form_data = URI.encode_www_form(data)
-      puts form_data 
-      return form_data
+      return URI.encode_www_form(data)
     end
     if(headers['Content-Type'] == 'application/json')
       return data.to_json
     end
   end
-
-
 end
-
-
-# require 'microsoft_graph'
-
-
-# desc 'test ms_graph client'
-# task :test_ms_graph_client => :environment do
-
-#   puts "Hello world!"
-
-#   # Replace these variables with your actual values
-#   client_id = '7c7608bf-a091-4e6c-a5c1-301232ac6cb1'
-#   client_secret = '6nK8Q~9s22oDM3gh3.2C9O3PDTVqotYM5F76wb~-'
-#   scopes = ['https://graph.microsoft.com/.default'] # Add any required scopes
-
-#   # Initialize the client
-#   client = MicrosoftGraph::Client.new(
-#     client_id: client_id,
-#     client_secret: client_secret,
-#     scopes: scopes,
-#   )
-
-#   # Authenticate and obtain an access token
-#   client.authenticate!
-
-#   # Make an example request (e.g., list user's events)
-#   events = client.me.events.get
-
-#   # Print the response
-#   puts 'Events:'
-#   events.each do |event|
-#     puts "Subject: #{event.subject}"
-#   end
-# end
-
 
