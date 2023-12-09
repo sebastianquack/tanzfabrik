@@ -5,18 +5,18 @@ require 'json'
 class MsGraphClient
   attr_accessor :token
 
-  def initialize(client_id, client_secret, scopes)
+  def initialize(tenant_id, client_id, client_secret, scopes)
     @client_id = client_id
     @client_secret = client_secret
     @scopes = scopes
     @login_url = "https://login.microsoftonline.com"
     @ms_graph_url = "https://graph.microsoft.com/v1.0"
-    @account_id = "2b07e5c4-cf90-4914-b15c-d83a785b1e5a"
+    @tenant_id = tenant_id
   end
 
   def authenticate
     http_client = HttpClient.new()
-    data = http_client.post("#{@login_url}/#{@account_id}/oauth2/v2.0/token", {
+    data = http_client.post("#{@login_url}/#{@tenant_id}/oauth2/v2.0/token", {
       client_id: @client_id,
       client_secret: @client_secret,
       scope: @scopes,
@@ -25,7 +25,7 @@ class MsGraphClient
       "Content-Type" => "application/x-www-form-urlencoded"
     })
     if data.key?("error")
-      return {error: data["error"], message: data["error_description"]}
+      return {error: data["error"]["code"], message: data["error_description"]}
     end
     @token = data["access_token"]
     return data["access_token"]
@@ -39,7 +39,7 @@ class MsGraphClient
       "Authorization" => "Bearer #{@token}"
     })
     if data.key?("error")
-      return {error: data["error"], message: data["error_description"]}
+      return {error: data["error"]["code"], message: data["error_description"]}
     end
     return data["value"]
   end
@@ -51,7 +51,7 @@ class MsGraphClient
       "Authorization" => "Bearer #{@token}"
     })
     if data.key?("error")
-      return {error: data["error"], message: data["error_description"]}
+      return {error: data["error"]["code"], message: data["error_description"]}
     end
     return data["value"]
   end
