@@ -13,9 +13,6 @@ task :run_ms_graph => :environment do
   principal = ENV["MS_PRINCIPAL"]
 
   scope = ['https://graph.microsoft.com/.default']
-  
-  test_calendar_id = ""
-  some_event_id = ""
 
   ms_graph_client = MsGraphClient.new(tenant_id, client_id, client_secret, scope)
 
@@ -36,7 +33,12 @@ task :run_ms_graph => :environment do
     "allowNewTimeProposals": false
   }
 
-  event = ms_graph_client.get_event(principal, some_event_id)
-  puts event
+  calendars = ms_graph_client.get_calendars(principal)
+  calendar_id = calendars[0]["id"]
+  
+  events = ms_graph_client.get_events(principal, calendar_id)
+  event_id = events[0]["id"]
 
+  event = ms_graph_client.get_event(principal, event_id)
+  puts event
 end
