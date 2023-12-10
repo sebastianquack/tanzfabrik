@@ -15,6 +15,61 @@ class MsGraphClient
     @tenant_id = tenant_id
   end
 
+  def get_events(user_id, calendar_id)
+    auth_or_refresh_token()
+    url_stub = "#{@@ms_graph_url}/users/#{user_id}/calendars/#{calendar_id}/events"
+    http_client = HttpClient.new()
+    data = http_client.get(url_stub, {
+      "Authorization" => "Bearer #{@@token}"
+    })
+    if data.key?("error")
+      return {error: data["error"]["code"], message: data["error_description"]}
+    end
+    return data["value"]
+  end
+
+  def get_event(user_id, calendar_id, event_id)
+    auth_or_refresh_token()
+    url_stub = "#{@@ms_graph_url}/users/#{user_id}/calendar/events/#{event_id}"
+    http_client = HttpClient.new()
+    data = http_client.get(url_stub, {
+      "Authorization" => "Bearer #{@@token}"
+    })
+    if data.key?("error")
+      return {error: data["error"]["code"], message: data["error_description"]}
+    end
+    return data
+  end
+
+  def create_event(user_id, calendar_id, event_details)
+    auth_or_refresh_token()
+    url_stub = "#{@@ms_graph_url}/users/#{user_id}/calendar/events"
+    http_client = HttpClient.new()
+    data = http_client.post(url_stub, event_details, {
+      "Authorization" => "Bearer #{@@token}",
+      "Content-Type" => "application/json"
+    })
+    if data.key?("error")
+      return {error: data["error"]["code"], message: data["error_description"]}
+    end
+    return data
+  end
+
+  def get_calendars(user_id)
+    auth_or_refresh_token()
+    url_stub = "#{@@ms_graph_url}/users/#{user_id}/calendars"
+    http_client = HttpClient.new()
+    data = http_client.get(url_stub, {
+      "Authorization" => "Bearer #{@@token}"
+    })
+    if data.key?("error")
+      return {error: data["error"]["code"], message: data["error_description"]}
+    end
+    return data["value"]
+  end
+
+  private
+
   def authenticate
     puts "authenticating with ms graph."
     http_client = HttpClient.new()
@@ -34,46 +89,7 @@ class MsGraphClient
     return data["access_token"]
   end
 
-  def get_events(user_id, calendar_id)
-    maybe_reauthenticate()
-    url_stub = "#{@@ms_graph_url}/users/#{user_id}/calendars/#{calendar_id}/events"
-    http_client = HttpClient.new()
-    data = http_client.get(url_stub, {
-      "Authorization" => "Bearer #{@@token}"
-    })
-    if data.key?("error")
-      return {error: data["error"]["code"], message: data["error_description"]}
-    end
-    return data["value"]
-  end
-
-  def get_event(user_id, calendar_id, event_id)
-    maybe_reauthenticate()
-    url_stub = "#{@@ms_graph_url}/users/#{user_id}/calendar/events/#{event_id}"
-    http_client = HttpClient.new()
-    data = http_client.get(url_stub, {
-      "Authorization" => "Bearer #{@@token}"
-    })
-    if data.key?("error")
-      return {error: data["error"]["code"], message: data["error_description"]}
-    end
-    return data
-  end
-
-  def get_calendars(user_id)
-    maybe_reauthenticate()
-    url_stub = "#{@@ms_graph_url}/users/#{user_id}/calendars"
-    http_client = HttpClient.new()
-    data = http_client.get(url_stub, {
-      "Authorization" => "Bearer #{@@token}"
-    })
-    if data.key?("error")
-      return {error: data["error"]["code"], message: data["error_description"]}
-    end
-    return data["value"]
-  end
-
-  def maybe_reauthenticate
+  def auth_or_refresh_token
     if @@token.nil?
       authenticate()
       return
@@ -107,7 +123,7 @@ class HttpClient
 
     response = http.request(request)
 
-    if response.code == '200'
+    if response.code.start_with? '20'
       return JSON.parse(response.body)
     else
       puts "Failed to fetch data: #{response.code} #{response.message}"

@@ -1,4 +1,5 @@
 require_relative '../../app/services/ms_graph_client'
+require 'date'
 
 desc 'imports calendar events to database'
 task :run_ms_graph => :environment do
@@ -8,16 +9,73 @@ task :run_ms_graph => :environment do
   client_secret = '6nK8Q~9s22oDM3gh3.2C9O3PDTVqotYM5F76wb~-'
   scope = ['https://graph.microsoft.com/.default']
   
-  tf_it_assistant_account_id = "81b196f3-676a-4027-ba78-d2b492ba3f88"
   tf_programmer_account_id = "19ed95de-aa88-42fd-aeed-a2549fe4f47e"
-  studio_1_calendar_id = "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAEGAAAkY2c3scT4QYtAGWXhfBH4AAAS2I3SAAA="
+  test_calendar_id = "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAEGAAAkY2c3scT4QYtAGWXhfBH4AAAVJolvAAA="
 
-  some_event_id = "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAS2CY4AAAkY2c3scT4QYtAGWXhfBH4AAAS2JHgAAA="
+  some_event_id = "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAENAAAkY2c3scT4QYtAGWXhfBH4AAAVJpUtAAA="
 
   ms_graph_client = MsGraphClient.new(tenant_id, client_id, client_secret, scope)
 
-  some_event = ms_graph_client.get_event(tf_programmer_account_id, studio_1_calendar_id, some_event_id) 
+  event_details = {
+    "subject" => "Hello world",
+    "body" => {
+      "contentType" => "HTML",
+      "content" => "Does noon time work for you?"
+    },
+    "start": {
+      "dateTime" => DateTime.new(2023, 12, 10, 14, 30, 0).strftime("%Y-%m-%dT%H:%M:%S"),
+      "timeZone" => "Central European Standard Time"
+    },
+    "end": {
+      "dateTime" => DateTime.new(2023, 12, 10, 14, 30, 0).strftime("%Y-%m-%dT%H:%M:%S"),
+      "timeZone" => "Central European Standard Time"
+    },
+    "allowNewTimeProposals": false
+  }
 
-  puts some_event
+  # event = ms_graph_client.create_event(tf_programmer_account_id, test_calendar_id, event_details)
+  event = ms_graph_client.get_event(tf_programmer_account_id, test_calendar_id, some_event_id)
+  puts event
+
 end
 
+# {
+#   "subject": "Let's go for lunch",
+#   "body": {
+#     "contentType": "HTML",
+#     "content": "Does noon time work for you?"
+#   },
+#   "start": {
+#       "dateTime": "2017-09-04T12:00:00",
+#       "timeZone": "Pacific Standard Time"
+#   },
+#   "end": {
+#       "dateTime": "2017-09-04T14:00:00",
+#       "timeZone": "Pacific Standard Time"
+#   },
+#   "recurrence": {
+#     "pattern": {
+#       "type": "weekly",
+#       "interval": 1,
+#       "daysOfWeek": [ "Monday" ]
+#     },
+#     "range": {
+#       "type": "endDate",
+#       "startDate": "2017-09-04",
+#       "endDate": "2017-12-31"
+#     }
+#   },
+#   "location":{
+#       "displayName":"Harry's Bar"
+#   },
+#   "attendees": [
+#     {
+#       "emailAddress": {
+#         "address":"AdeleV@contoso.onmicrosoft.com",
+#         "name": "Adele Vance"
+#       },
+#       "type": "required"
+#     }
+#   ],
+#   "allowNewTimeProposals": true
+# }
