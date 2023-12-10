@@ -128,7 +128,7 @@ class HttpClient
     if response.code.start_with? '20'
       return JSON.parse(response.body)
     else
-      puts "Failed to fetch data: #{response.code} #{response.message}"
+      Rails.logger.debug "Failed to get data: #{response.code}, #{response.message}"
       return JSON.parse(response.body)
     end
   end
@@ -151,7 +151,7 @@ class HttpClient
     if response.code == '200'
       return JSON.parse(response.body)
     else
-      puts "Failed to fetch data: #{response.code} #{response.message}"
+      Rails.logger.debug "Failed to post data: #{response.code}, #{response.message}"
       return JSON.parse(response.body)
     end
   end

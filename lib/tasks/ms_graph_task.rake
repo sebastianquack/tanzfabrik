@@ -1,7 +1,10 @@
 require_relative '../../app/services/ms_graph_client'
 require 'date'
 
-desc 'imports calendar events to database'
+# This task is currently used for development
+# It will later be used to import existing outlook calendar events into the database in the next PR
+
+desc 'imports outlook calendar events to database'
 task :run_ms_graph => :environment do
 
   tenant_id = ENV["MS_TENANT_ID"]
@@ -11,8 +14,8 @@ task :run_ms_graph => :environment do
 
   scope = ['https://graph.microsoft.com/.default']
   
-  test_calendar_id = "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAEGAAAkY2c3scT4QYtAGWXhfBH4AAAVJolvAAA="
-  some_event_id = "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAENAAAkY2c3scT4QYtAGWXhfBH4AAAVJpUtAAA="
+  test_calendar_id = ""
+  some_event_id = ""
 
   ms_graph_client = MsGraphClient.new(tenant_id, client_id, client_secret, scope)
 
