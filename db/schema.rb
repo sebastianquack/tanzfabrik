@@ -88,8 +88,8 @@ ActiveRecord::Schema.define(version: 2024_01_27_112550) do
 
   create_table "calendar_events", force: :cascade do |t|
     t.bigint "calendar_id"
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.bigint "booking_id"
     t.string "subject"
     t.string "description"

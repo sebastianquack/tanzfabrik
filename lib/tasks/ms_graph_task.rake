@@ -54,7 +54,8 @@ task :run_ms_graph => :environment do
       "end_time" => event["end"]["dateTime"],
       "calendar_id" => calendar_id
     }
-    event = CalendarEvent.new(start: data["start_time"], end: data["end_time"], description: data["body"], subject: data["subject"], calendar_id: 1, outlook_id: data["ref_id"])
+    event = CalendarEvent.new(start_time: data["start_time"], end_time: data["end_time"], description: data["body"], subject: data["subject"], calendar_id: 1, outlook_id: data["ref_id"])
+    event.save()
   end
   puts events.size
 end
