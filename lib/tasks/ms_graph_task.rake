@@ -35,26 +35,30 @@ task :run_ms_graph => :environment do
 
   # calendars = ms_graph_client.get_calendars(principal)
   # calendar_id = calendars[0]["id"]
-  
+
   # Studio 1 rails id: 980190971
   # Studio 1 outlook id
   calendar_id = "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAEGAAAkY2c3scT4QYtAGWXhfBH4AAAS2I3SAAA="
   
-  now = Time.now.strftime("%Y-%m-%dT%H:%M:%SZ")
-  one_month_from_now = Date.today >> 1
-  one_month_from_now = Time.utc(one_month_from_now.year, one_month_from_now.month, one_month_from_now.day, 0, 0, 0)
+  from = to_iso_date(Date.today)
+  to = to_iso_date(Date.today >> 4)
 
-  events = ms_graph_client.get_events(principal, calendar_id, now, one_month_from_now)
-  event_id = events[0]["id"]
-
-  event = ms_graph_client.get_event(principal, event_id)
-
-  data = {
-    "ref_id" => event["id"],
-    "body" =>  event["bodyPreview"],
-    "start_time" => event["start"]["dateTime"],
-    "end_time" => event["end"]["dateTime"],
-    "calendar_id" => calendar_id
-  }
+  events = ms_graph_client.get_events(principal, calendar_id, from, to)
+  
+  events.each do |event|
+    data = {
+      "ref_id" => event["id"],
+      "body" =>  event["bodyPreview"],
+      "subject" => event["subject"],
+      "start_time" => event["start"]["dateTime"],
+      "end_time" => event["end"]["dateTime"],
+      "calendar_id" => calendar_id
+    }
+    event = CalendarEvent.new(start: data["start_time"], end: data["end_time"], description: data["body"], subject: data["subject"], calendar_id: 1, outlook_id: data["ref_id"])
+  end
   puts events.size
+end
+
+def to_iso_date(date)
+  Time.utc(date.year, date.month, date.day, 0, 0, 0).strftime("%Y-%m-%dT%H:%M:%S")
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_27_105755) do
+ActiveRecord::Schema.define(version: 2024_01_27_112550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,29 @@ ActiveRecord::Schema.define(version: 2024_01_27_105755) do
     t.datetime "updated_at"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "calendar_id"
+    t.string "booking_number"
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["calendar_id"], name: "index_bookings_on_calendar_id"
+  end
+
+  create_table "calendar_events", force: :cascade do |t|
+    t.bigint "calendar_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.bigint "booking_id"
+    t.string "subject"
+    t.string "description"
+    t.string "outlook_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["booking_id"], name: "index_calendar_events_on_booking_id"
+    t.index ["calendar_id"], name: "index_calendar_events_on_calendar_id"
   end
 
   create_table "calendars", force: :cascade do |t|
@@ -443,5 +466,8 @@ ActiveRecord::Schema.define(version: 2024_01_27_105755) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookings", "calendars"
+  add_foreign_key "calendar_events", "bookings"
+  add_foreign_key "calendar_events", "calendars"
   add_foreign_key "calendars", "studios"
 end
