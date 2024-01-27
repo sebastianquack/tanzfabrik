@@ -17,17 +17,32 @@ class MsGraphClient
     @scopes = scopes
   end
 
-  def get_events(user_id, calendar_id)
+  def get_events(user_id, calendar_id, from, to)
     auth_or_refresh_token()
-    url_stub = "#{@@ms_graph_url}/users/#{user_id}/calendars/#{calendar_id}/events"
     http_client = HttpClient.new()
-    data = http_client.get(url_stub, {
+    url = "#{@@ms_graph_url}/users/#{user_id}/calendars/#{calendar_id}/events?startDateTime=#{from}&endDateTime=#{to}&top=25"
+    data = http_client.get(url, {
       "Authorization" => "Bearer #{@@token}"
     })
     if data.key?("error")
       return {error: data["error"]["code"], message: data["error_description"]}
     end
-    return data["value"]
+
+    next_pointer = data["@odata.nextLink"]
+
+    events = [].concat(data["value"])
+    while(!data.key?("error") && !next_pointer.nil?) do
+      url = next_pointer
+      data = http_client.get(url, {
+        "Authorization" => "Bearer #{@@token}"
+      })
+      if data.key?("error")
+        return {error: data["error"]["code"], message: data["error_description"]}
+      end
+      next_pointer = data["@odata.nextLink"]
+      events.concat(data["value"])
+    end
+    return events
   end
 
   def get_event(user_id, event_id)
