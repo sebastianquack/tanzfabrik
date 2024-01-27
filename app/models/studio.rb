@@ -5,6 +5,7 @@ class Studio < ActiveRecord::Base
   has_rich_text :rich_content_en
   
   belongs_to :location
+  has_one :calendar
 
   has_many :event_details
   has_many :events, :through => :event_details

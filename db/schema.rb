@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_24_105804) do
+ActiveRecord::Schema.define(version: 2024_01_27_105755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,13 @@ ActiveRecord::Schema.define(version: 2023_10_24_105804) do
     t.datetime "updated_at"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "calendars", force: :cascade do |t|
+    t.string "name"
+    t.string "outlook_id"
+    t.bigint "studio_id"
+    t.index ["studio_id"], name: "index_calendars_on_studio_id"
   end
 
   create_table "content_modules", id: :serial, force: :cascade do |t|
@@ -436,4 +443,5 @@ ActiveRecord::Schema.define(version: 2023_10_24_105804) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "calendars", "studios"
 end
