@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Counter from './components/Counter';
+import BookingWidget from './components/BookingWidget';
 
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
-        <Counter />,
+        <BookingWidget />,
         document.getElementById('studio-booking-widget-container')
     );
 });

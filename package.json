@@ -1,28 +1,33 @@
 {
-  "dependencies": {
-    "@activeadmin/activeadmin": "^2.7.0",
-    "@babel/preset-react": "^7.23.3",
-    "@rails/actiontext": "^6.0.3-2",
-    "@rails/webpacker": "^5.2.1",
-    "autosize": "^4.0.2",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "babel-preset-env": "^1.7.0",
-    "core-js": "^3.6.5",
-    "jquery-ui": "^1.12.1",
-    "minimal-css-reset": "^2.0.0",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "regenerator-runtime": "^0.13.5",
-    "smoothscroll-polyfill": "^0.4.4",
-    "stimulus": "^1.1.1",
-    "trix": "^1.2.4",
-    "yaml-loader": "^0.6.0"
-  },
-  "devDependencies": {
-    "webpack-dev-server": "^3.11.0"
-  },
-  "engines": {
-    "node": "12.x"
-  }
+    "dependencies": {
+        "@activeadmin/activeadmin": "^2.7.0",
+        "@babel/preset-react": "^7.23.3",
+        "@emotion/react": "^11.11.3",
+        "@emotion/styled": "^11.11.0",
+        "@mui/material": "^5.15.6",
+        "@mui/x-date-pickers": "6.19.2",
+        "@rails/actiontext": "^6.0.3-2",
+        "@rails/webpacker": "^5.2.1",
+        "autosize": "^4.0.2",
+        "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+        "babel-preset-env": "^1.7.0",
+        "core-js": "^3.6.5",
+        "jquery-ui": "^1.12.1",
+        "minimal-css-reset": "^2.0.0",
+        "dayjs": "1.11.10",
+        "prop-types": "^15.8.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "regenerator-runtime": "^0.13.5",
+        "smoothscroll-polyfill": "^0.4.4",
+        "stimulus": "^1.1.1",
+        "trix": "^1.2.4",
+        "yaml-loader": "^0.6.0"
+    },
+    "devDependencies": {
+        "webpack-dev-server": "^3.11.0"
+    },
+    "engines": {
+        "node": "14.x"
+    }
 }
