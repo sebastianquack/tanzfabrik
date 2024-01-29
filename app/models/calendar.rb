@@ -2,6 +2,8 @@ class Calendar < ActiveRecord::Base
   belongs_to :studio
   has_many :bookings
   has_many :events, class_name: :CalendarEvent
+  has_many :availabilities, class_name: :CalendarBookingType
+  has_many :booking_types, through: :availabilities
 
   def get_availabilities
     now = DateHelper.to_iso_date_string(Date.today)
@@ -10,6 +12,8 @@ class Calendar < ActiveRecord::Base
     merged_bookings_by_day = merge_bookings_by_day(upcoming_events)
     return build_calendar_availabilities(28, merged_bookings_by_day)
   end
+
+  private
 
   def merge_bookings_by_day(intervals)
     return [] if intervals.empty?
@@ -23,10 +27,10 @@ class Calendar < ActiveRecord::Base
         booked_time = {start_time: intervals[i].start_time, end_time: intervals[i].end_time}
       end
     end
-    merge_by_day(res)
+    group_by_day(res)
   end
 
-  def merge_by_day(events)
+  def group_by_day(events)
     merged = events.reduce({}) do |result, event|
       start_time = event[:start_time]
       end_time = event[:end_time]
@@ -43,17 +47,31 @@ class Calendar < ActiveRecord::Base
     merged
   end
 
+  def availability_by_booking_type(booking_type_name)
+    booking_type = BookingType.where(name: booking_type_name).first
+    self.availabilities.where(booking_type_id: booking_type.id).first.settings
+  end
+
   def build_calendar_availabilities(days_forward, reservations_by_day)
-    opening_hour = 7
-    closing_hour = 17
     slot_time = 2
     
     calendar = {}
 
     for i in 0..days_forward do
       cur_day = Date.today + i
+      day_of_the_week = cur_day.strftime('%A').downcase
+      availability_of_the_day = availability_by_booking_type("Rehearsal 2hrs")[day_of_the_week]
+
       cur_day_key = DateHelper.to_iso_date_string(cur_day)
       calendar[cur_day_key] = []
+
+      if availability_of_the_day.nil?
+        next
+      end
+
+      opening_hour = availability_of_the_day["from"].to_i
+      closing_hour = availability_of_the_day["to"].to_i
+
       reservations = reservations_by_day[cur_day_key]
 
       cur_time = DateTime.new(cur_day.year, cur_day.month, cur_day.day, opening_hour, 0, 0)

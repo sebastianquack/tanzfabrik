@@ -11,6 +11,7 @@ task :run_ms_graph => :environment do
   client_id = ENV["MS_APP_CLIENT_ID"]
   client_secret = ENV["MS_APP_CLIENT_SECRET"]
   principal = ENV["MS_PRINCIPAL"]
+  calendar_id = "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAEGAAAkY2c3scT4QYtAGWXhfBH4AAAS2I3SAAA="
 
   scope = ['https://graph.microsoft.com/.default']
 
@@ -38,13 +39,36 @@ task :run_ms_graph => :environment do
 
   # Studio 1 rails id: 980190971
   # Studio 1 outlook id
-  calendar_id = "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAEGAAAkY2c3scT4QYtAGWXhfBH4AAAS2I3SAAA="
   
   from = to_iso_date(Date.today)
   to = to_iso_date(Date.today >> 4)
 
-  events = ms_graph_client.get_events(principal, calendar_id, from, to)
+
+  calendar = Calendar.find_or_initialize_by(studio_id: 980190971)
+  calendar.booking_types = []
+  calendar.save()
+
+  booking_type = BookingType.two_hour_rehearsal()
+  calendar.booking_types << booking_type
+
+  studio_one = {
+    internal_id: 980190971,
+    outlook_calendar_id: "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAEGAAAkY2c3scT4QYtAGWXhfBH4AAAS2I3SAAA=",
+    schedule: {
+      monday: {from: '9', to: '16'},
+      tuesday: {from: '9', to: '16'},
+      wednesday: {from: '9', to: '16'},
+      thursday: {from: '9', to: '16'},
+      friday: {from: '9', to: '16'},
+    }
+  }
+
+  calendar_booking_type = CalendarBookingType.where(calendar: calendar, booking_type: booking_type).first
+  calendar_booking_type.settings = studio_one[:schedule]
+  calendar_booking_type.save
   
+  events = ms_graph_client.get_events(principal, calendar_id, from, to)
+  CalendarEvent.delete_all()
   events.each do |event|
     data = {
       "ref_id" => event["id"],
@@ -54,7 +78,14 @@ task :run_ms_graph => :environment do
       "end_time" => event["end"]["dateTime"],
       "calendar_id" => calendar_id
     }
-    event = CalendarEvent.new(start_time: data["start_time"], end_time: data["end_time"], description: data["body"], subject: data["subject"], calendar_id: 1, outlook_id: data["ref_id"])
+
+    event = CalendarEvent.new(
+      start_time: data["start_time"],
+      end_time: data["end_time"],
+      description: data["description"],
+      subject: data["subject"],
+      calendar_id: 1
+    )
     event.save()
   end
   puts events.size

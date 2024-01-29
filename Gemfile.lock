@@ -167,7 +167,6 @@ GEM
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     i18n_data (0.10.0)
-    ice_cube (0.16.3)
     inherited_resources (1.11.0)
       actionpack (>= 5.0, < 6.1)
       has_scope (~> 0.6)
@@ -232,6 +231,10 @@ GEM
     nokogiri (1.11.7)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+    nokogiri (1.11.7-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.11.7-x86_64-linux)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
     pg (1.2.3)
     polyamorous (2.3.2)
@@ -263,6 +266,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.3.0)
       loofah (~> 2.3)
+    rails-settings-cached (2.9.4)
+      activerecord (>= 5.0.0)
+      railties (>= 5.0.0)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
@@ -383,7 +389,6 @@ DEPENDENCIES
   geocoder
   groupdate (>= 4)
   htmlentities
-  ice_cube
   inline_svg
   kt-paperclip (~> 6.2)
   letter_opener
@@ -392,6 +397,7 @@ DEPENDENCIES
   nokogiri (~> 1.11.0)
   pg
   rails (~> 6.0)
+  rails-settings-cached
   rails_12factor
   sdoc
   sitemap_generator (~> 6)

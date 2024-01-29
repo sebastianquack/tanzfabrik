@@ -30,9 +30,8 @@ gem 'aws-sdk-s3', '~> 1'
 
 gem "arbre", '~> 1.3'
 
-
-gem "ice_cube" # date recurrance library
 gem 'groupdate', '>=4' # group by date
+gem 'rails-settings-cached' # store instance settings as json column
 
 # translatable columns, translates model attributes
 gem 'traco'

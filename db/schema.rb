@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_27_112550) do
+ActiveRecord::Schema.define(version: 2024_01_29_165425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,14 @@ ActiveRecord::Schema.define(version: 2024_01_27_112550) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "booking_types", force: :cascade do |t|
+    t.string "name"
+    t.string "price_per"
+    t.string "time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "bookings", force: :cascade do |t|
     t.bigint "calendar_id"
     t.string "booking_number"
@@ -84,6 +92,17 @@ ActiveRecord::Schema.define(version: 2024_01_27_112550) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["calendar_id"], name: "index_bookings_on_calendar_id"
+  end
+
+  create_table "calendar_booking_types", force: :cascade do |t|
+    t.string "settings"
+    t.bigint "calendar_id"
+    t.bigint "booking_type_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["booking_type_id"], name: "index_calendar_booking_types_on_booking_type_id"
+    t.index ["calendar_id", "booking_type_id"], name: "index_calendar_booking_types_on_calendar_id_and_booking_type_id", unique: true
+    t.index ["calendar_id"], name: "index_calendar_booking_types_on_calendar_id"
   end
 
   create_table "calendar_events", force: :cascade do |t|
@@ -104,6 +123,7 @@ ActiveRecord::Schema.define(version: 2024_01_27_112550) do
     t.string "name"
     t.string "outlook_id"
     t.bigint "studio_id"
+    t.string "schedule"
     t.index ["studio_id"], name: "index_calendars_on_studio_id"
   end
 
@@ -467,6 +487,8 @@ ActiveRecord::Schema.define(version: 2024_01_27_112550) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "calendars"
+  add_foreign_key "calendar_booking_types", "booking_types"
+  add_foreign_key "calendar_booking_types", "calendars"
   add_foreign_key "calendar_events", "bookings"
   add_foreign_key "calendar_events", "calendars"
   add_foreign_key "calendars", "studios"
