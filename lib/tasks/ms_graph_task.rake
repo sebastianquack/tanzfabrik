@@ -4,7 +4,7 @@ require 'date'
 # This task is currently used for development
 # It will later be used to import existing outlook calendar events into the database in the next PR
 
-desc 'imports outlook calendar events to database'
+desc 'script used to discover the ms graph environment'
 task :run_ms_graph => :environment do
 
   tenant_id = ENV["MS_TENANT_ID"]
@@ -12,7 +12,6 @@ task :run_ms_graph => :environment do
   client_secret = ENV["MS_APP_CLIENT_SECRET"]
   principal = ENV["MS_PRINCIPAL"]
   calendar_id = "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAEGAAAkY2c3scT4QYtAGWXhfBH4AAAS2I3SAAA="
-
   scope = ['https://graph.microsoft.com/.default']
 
   ms_graph_client = MsGraphClient.new(tenant_id, client_id, client_secret, scope)
@@ -34,41 +33,15 @@ task :run_ms_graph => :environment do
     "allowNewTimeProposals": false
   }
 
-  # calendars = ms_graph_client.get_calendars(principal)
+  calendars = ms_graph_client.get_calendars(principal)
+  puts calendars
   # calendar_id = calendars[0]["id"]
 
   # Studio 1 rails id: 980190971
   # Studio 1 outlook id
   
-  from = to_iso_date(Date.today)
-  to = to_iso_date(Date.today >> 4)
-
-
-  calendar = Calendar.find_or_initialize_by(studio_id: 980190971)
-  calendar.booking_types = []
-  calendar.save()
-
-  booking_type = BookingType.two_hour_rehearsal()
-  calendar.booking_types << booking_type
-
-  studio_one = {
-    internal_id: 980190971,
-    outlook_calendar_id: "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAEGAAAkY2c3scT4QYtAGWXhfBH4AAAS2I3SAAA=",
-    schedule: {
-      monday: {from: '9', to: '16'},
-      tuesday: {from: '9', to: '16'},
-      wednesday: {from: '9', to: '16'},
-      thursday: {from: '9', to: '16'},
-      friday: {from: '9', to: '16'},
-    }
-  }
-
-  calendar_booking_type = CalendarBookingType.where(calendar: calendar, booking_type: booking_type).first
-  calendar_booking_type.settings = studio_one[:schedule]
-  calendar_booking_type.save
-  
   events = ms_graph_client.get_events(principal, calendar_id, from, to)
-  CalendarEvent.delete_all()
+  # CalendarEvent.delete_all()
   events.each do |event|
     data = {
       "ref_id" => event["id"],

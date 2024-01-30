@@ -5,12 +5,10 @@ class Calendar < ActiveRecord::Base
   has_many :availabilities, class_name: :CalendarBookingType
   has_many :booking_types, through: :availabilities
 
-  def get_availabilities
-    now = DateHelper.to_iso_date_string(Date.today)
-    to = DateHelper.to_iso_date_string(Date.today >> 2)
-    upcoming_events = events.where("start_time >= ? AND end_time <= ?", now, to).order(start_time: :asc)
+  def get_availabilities(from, to)
+    upcoming_events = events.where("start_time >= ? AND end_time <= ?", from, to).order(start_time: :asc)
     merged_bookings_by_day = merge_bookings_by_day(upcoming_events)
-    return build_calendar_availabilities(28, merged_bookings_by_day)
+    return build_calendar_availabilities(364, merged_bookings_by_day)
   end
 
   private
@@ -60,7 +58,7 @@ class Calendar < ActiveRecord::Base
     for i in 0..days_forward do
       cur_day = Date.today + i
       day_of_the_week = cur_day.strftime('%A').downcase
-      availability_of_the_day = availability_by_booking_type("Rehearsal 2hrs")[day_of_the_week]
+      availability_of_the_day = availability_by_booking_type("Rehearsal 2hrs")["schedule"][day_of_the_week]
 
       cur_day_key = DateHelper.to_iso_date_string(cur_day)
       calendar[cur_day_key] = []
@@ -71,6 +69,7 @@ class Calendar < ActiveRecord::Base
 
       opening_hour = availability_of_the_day["from"].to_i
       closing_hour = availability_of_the_day["to"].to_i
+
 
       reservations = reservations_by_day[cur_day_key]
 
