@@ -1,7 +1,26 @@
 @import './__mixins.scss';
 
 #studio-booking-widget-container {
-    display: flex;
+    .widget-content {
+        display: grid;
+        border-width: 1px;
+        border-style: solid;
+        margin: 2rem 0 2rem 0;
+        width: 100%;
+
+        .left-pane {
+            grid-column: 1 / span 4;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+        }
+        .middle-pane {
+            grid-column: 5 / span 6;
+        }
+        .right-pane {
+            grid-column: 13 / span 4;
+        }
+    }
 
     @include page-dist('margin-left', 'left');
     @include page-dist('margin-right', 'right');
@@ -9,6 +28,28 @@
     @include grid-dist('padding-left', 1);
     @include grid-dist('padding-right', 1);
 
+    .MuiPickersDay-root {
+        color: red;
+    }
+
+    .Mui-disabled {
+        color: rgb(192, 188, 188);
+    }
+    .MuiPickersDay-today {
+        background-color: white;
+        border: 1px solid red;
+    }
+    .Mui-selected {
+        background-color: red;
+        color: white;
+    }
+    .MuiPickersDay-today.Mui-selected {
+        background-color: red;
+        color: white;
+    }
+    .MuiDayCalendar-weekDayLabel {
+        color: red;
+    }
     .MuiSvgIcon-root.MuiSvgIcon-fontSizeInherit.css-1vooibu-MuiSvgIcon-root {
         path {
             color: red;
