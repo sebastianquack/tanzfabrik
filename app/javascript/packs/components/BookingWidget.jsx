@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from './Calendar';
+import dayjs from 'dayjs';
 
 const BASE_URL = 'http://localhost:3000/api';
 const CALENDAR_AVAILABILITY_URL = `${BASE_URL}/studios`;
@@ -7,16 +8,23 @@ const STUDIOS_BY_TYPE_URL = `${BASE_URL}/studios`;
 
 const BOOKING_TYPES = [{ value: 'two_hour_rehearsal', name: 'Rehearsal' }];
 const BookingWidget = () => {
-    const [data, setData] = useState(null);
+    const [availabilities, setAvailabilities] = useState(null);
     const [bookingType, setBookingType] = useState(BOOKING_TYPES[0].value);
     const [availableStudios, setAvailableStudios] = useState(null);
+    const [currentDay, setCurrentDay] = useState(dayjs());
+    const [availableToday, setAvailableToday] = useState(null);
+
+    const handleDateChange = (newDate) => {
+        setCurrentDay(newDate);
+        setAvailableToday(availabilities[newDate.format('YYYY-MM-DD')]);
+        console.log(newDate.format('YYYY-MM-DD'), availabilities);
+    };
 
     const fetchStudiosByType = async (type) => {
         return fetch(`${STUDIOS_BY_TYPE_URL}/${type}`)
             .then((response) => response.json())
             .then((result) => {
                 setAvailableStudios(result);
-                console.log(result);
                 return result;
             })
             .catch((error) => {
@@ -29,8 +37,8 @@ const BookingWidget = () => {
         )
             .then((response) => response.json())
             .then((result) => {
-                setData(result);
-                console.log(result);
+                setAvailabilities(result);
+                setAvailableToday(result[currentDay]);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -75,9 +83,24 @@ const BookingWidget = () => {
                     </select>
                 </div>
                 <div className='middle-pane'>
-                    {data && <Calendar availabilities={data} />}
+                    {availabilities && (
+                        <Calendar
+                            availabilities={availabilities}
+                            defaultDay={currentDay}
+                            setCurrentDay={handleDateChange}
+                        />
+                    )}
                 </div>
-                <div className='right-pane'></div>
+                <div className='right-pane'>
+                    {currentDay.format('YYYY-MM-DD')}
+
+                    {availableToday &&
+                        availableToday.map((time) => (
+                            <button type='button' className='select-time-btn'>
+                                {dayjs(time).format('HH:mm')}
+                            </button>
+                        ))}
+                </div>
             </div>
         </div>
     );

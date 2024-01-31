@@ -16,9 +16,22 @@
         }
         .middle-pane {
             grid-column: 5 / span 6;
+            display: flex;
+            justify-content: center;
         }
         .right-pane {
-            grid-column: 13 / span 4;
+            grid-column: 11 / span 6;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+        }
+
+        .select-time-btn {
+            width: 100%;
+            height: 32px;
+            border: 1px solid red;
+            color: red;
+            margin-bottom: 4px;
         }
     }
 

@@ -5,8 +5,11 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
-export default function DateCalendarViews({ availabilities }) {
-    console.log(availabilities);
+export default function DateCalendarViews({
+    availabilities,
+    defaultDay,
+    setCurrentDay,
+}) {
     const shouldDisableDate = (day) => {
         const formattedDay = dayjs(day).format('YYYY-MM-DD');
         return availabilities[formattedDay]?.length == 0 ? true : false;
@@ -24,7 +27,8 @@ export default function DateCalendarViews({ availabilities }) {
                 style={{
                     margin: '0',
                 }}
-                defaultValue={dayjs()}
+                defaultValue={defaultDay}
+                onChange={setCurrentDay}
                 views={['day']}
             />
         </LocalizationProvider>
