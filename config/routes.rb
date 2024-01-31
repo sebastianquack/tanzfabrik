@@ -17,6 +17,7 @@ Tanzfabrik::Application.routes.draw do
 
   namespace :api do
     get "/studios/:id/availabilities", to: 'studios#index'
+    get "/studios/:booking_type", to: 'studios#by_booking_type'
   end
 
   scope "/:locale" do

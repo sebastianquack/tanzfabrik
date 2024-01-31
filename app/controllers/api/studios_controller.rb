@@ -10,5 +10,13 @@ module Api
 
       render json: availabilities
     end
+
+    def by_booking_type
+      calendars = BookingType.find_by(name: params[:booking_type]).calendars
+      
+      studios = calendars.map do |c| {id: c.studio.id, name: c.studio.name, description: c.studio.description_de} end
+
+      render json: studios
+    end
   end
 end
