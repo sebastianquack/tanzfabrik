@@ -42,7 +42,9 @@ class Calendar < ActiveRecord::Base
 
       if reservations.nil?
         while cur_time + Rational(slot_time, 24) <= closes_at
-          calendar[cur_day_key] << DateHelper.berlin_time(cur_time)
+          start_time = DateHelper.berlin_time(cur_time)
+          end_time = cur_time + Rational(slot_time, 24)
+          calendar[cur_day_key] << {id: SecureRandom.uuid, start: start_time, end: end_time, studio: self.studio_id}
           cur_time += Rational(slot_time, 24)
         end
         next
@@ -54,13 +56,17 @@ class Calendar < ActiveRecord::Base
       while cur_time + Rational(slot_time, 24) <= closes_at
         if next_reservation.nil?
           while cur_time + Rational(slot_time, 24) <= closes_at
-            calendar[cur_day_key] << DateHelper.berlin_time(cur_time)
+            start_time = DateHelper.berlin_time(cur_time)
+            end_time = cur_time + Rational(slot_time, 24)
+            calendar[cur_day_key] << {id: SecureRandom.uuid, start: start_time, end: end_time, studio: self.studio_id}
             cur_time += Rational(slot_time, 24)
           end
           break
         end
         if cur_time + Rational(slot_time, 24) < next_reservation["start_time"]
-          calendar[cur_day_key] << DateHelper.berlin_time(cur_time)
+          start_time = DateHelper.berlin_time(cur_time)
+          end_time = cur_time + Rational(slot_time, 24)
+          calendar[cur_day_key] << {id: SecureRandom.uuid, start: start_time, end: end_time, studio: self.studio_id}
           cur_time += Rational(slot_time, 24)
         else
           cur_time = next_reservation["end_time"]

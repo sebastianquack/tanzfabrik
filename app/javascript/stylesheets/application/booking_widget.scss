@@ -1,37 +1,59 @@
 @import './__mixins.scss';
 
-#studio-booking-widget-container {
-    .widget-content {
-        display: grid;
+#studio-booking-widget-root {
+    .widget-container {
+        display: flex;
+        flex-direction: column;
         border-width: 1px;
-        border-style: solid;
-        margin: 2rem 0 2rem 0;
         width: 100%;
+        border-style: solid;
 
-        .left-pane {
-            grid-column: 1 / span 4;
-            display: flex;
-            flex-direction: column;
-            padding: 1rem;
-        }
-        .middle-pane {
-            grid-column: 5 / span 6;
-            display: flex;
-            justify-content: center;
-        }
-        .right-pane {
-            grid-column: 11 / span 6;
-            display: flex;
-            flex-direction: column;
-            padding: 1rem;
-        }
-
-        .select-time-btn {
+        .widget-content {
+            display: grid;
+            margin: 2rem 0 0 0;
             width: 100%;
+
+            .left-pane {
+                grid-column: 1 / span 4;
+                display: flex;
+                flex-direction: column;
+                padding: 1rem;
+            }
+            .middle-pane {
+                grid-column: 5 / span 6;
+                display: flex;
+                justify-content: center;
+            }
+            .right-pane {
+                grid-column: 11 / span 6;
+                display: flex;
+                flex-direction: column;
+                padding: 1rem;
+            }
+        }
+
+        .widget-footer {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            .selection-container {
+                display: flex;
+                flex-flow: column;
+            }
+            h4 {
+                margin-bottom: 1rem;
+            }
+        }
+        .select-time-btn {
+            width: 152px;
             height: 32px;
             border: 1px solid red;
             color: red;
             margin-bottom: 4px;
+        }
+        .select-time-btn.selected {
+            background-color: red;
+            color: white;
         }
     }
 
