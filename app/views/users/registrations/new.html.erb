@@ -25,6 +25,11 @@
       </div>
 
       <div class="field">
+        <%= f.label :billing_address %><br />
+        <%= f.text_field :billing_address, autofocus: true, autocomplete: "billing-address", class: "input-field" %>
+      </div>
+
+      <div class="field">
         <%= f.label :website %><br />
         <%= f.text_field :website, autofocus: true, autocomplete: "website", class: "input-field" %>
       </div>

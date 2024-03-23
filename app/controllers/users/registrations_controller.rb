@@ -10,9 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # GET /resource/edit
   # def edit
@@ -41,9 +41,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+  def sign_up_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :phone_number, :website, :is_krk_registered, :bio, :preferred_language, :is_workshop_newsletter_registered, :is_course_newsletter_registered, :agree_to_terms, :billing_address)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
