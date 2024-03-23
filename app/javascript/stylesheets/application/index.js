@@ -49,3 +49,6 @@ import './archive_links.scss';
 
 // booking widget
 import './booking_widget';
+
+// user account management
+import './user_account';
