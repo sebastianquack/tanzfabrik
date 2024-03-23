@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_23_130525) do
+ActiveRecord::Schema.define(version: 2024_03_23_162923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,16 @@ ActiveRecord::Schema.define(version: 2024_03_23_130525) do
     t.datetime "updated_at"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "booking_permission_requests", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "status"
+    t.string "type"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_booking_permission_requests_on_user_id"
   end
 
   create_table "booking_types", force: :cascade do |t|
@@ -508,6 +518,7 @@ ActiveRecord::Schema.define(version: 2024_03_23_130525) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "booking_permission_requests", "users"
   add_foreign_key "bookings", "calendars"
   add_foreign_key "calendar_booking_types", "booking_types"
   add_foreign_key "calendar_booking_types", "calendars"

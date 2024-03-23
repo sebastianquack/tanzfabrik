@@ -12,6 +12,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
+    if resource.persisted?
+      BookingPermissionRequest.create(user: resource, status: 'pending', type: 'rehearsal', description: 'Your description here')
+    end
   end
 
   # GET /resource/edit

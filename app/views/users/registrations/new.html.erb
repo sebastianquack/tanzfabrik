@@ -74,13 +74,17 @@
         <label for="dance_practice_description">Describe your artistic dance practice</label><br />
         <textarea id="dance_practice_description" name="dance_practice_description" class="text-area-field"> </textarea>
       </div>
+      <div class="field">
+        <label for="studio_usage">Tell us how you want to use the studio</label><br />
+        <textarea id="studio_usage" name="studio_usage" class="text-area-field"> </textarea>
+      </div>
     </fieldset>
 
     <fieldset>
       <legend><strong>Preferences</strong></legend>
       <div class="field">
         <%= f.label :preferred_language %><br />
-        <%= f.select :preferred_language, [['English', 'english'], ['German', 'german']], {}, class: "input-field" %>
+        <%= f.select :preferred_language, [['English', 'english'], ['German', 'german']], {}, class: "select-field" %>
       </div>
 
       <div class="field">
@@ -123,7 +127,11 @@
     </div>
   <% end %>
 
-  <%= render "users/shared/links" %>
+  <%
+=begin%>
+ <%= render "users/shared/links" %> 
+<%
+=end%>
 
   </div>
 </div>
