@@ -12,6 +12,7 @@ const BookingWidget = () => {
     const [availabilities, setAvailabilities] = useState(null);
     const [bookingType, setBookingType] = useState(BOOKING_TYPES[0].value);
     const [availableStudios, setAvailableStudios] = useState(null);
+    const [selectedStudio, setSelectedStudio] = useState(null);
     const [currentDay, setCurrentDay] = useState(dayjs());
     const [availableToday, setAvailableToday] = useState(null);
     const [selectedTimes, setSelectedTimes] = useState({});
@@ -25,15 +26,10 @@ const BookingWidget = () => {
 
     const handleTimeSelection = (time) => {
         if (selectedTimes[time.id]) {
-            console.log('REMOVING');
             delete selectedTimes[time.id];
             setSelectedTimes({ ...selectedTimes });
         } else {
-            console.log('ADDING');
-            console.log(`XXXXX time: ${time} XXXXXXXX`);
-            console.log(`XXXXX time.id: ${time.id} XXXXXXXX`);
             const data = { ...selectedTimes, [time.id]: time };
-            console.log({ data });
             setSelectedTimes(data);
         }
     };
@@ -42,6 +38,7 @@ const BookingWidget = () => {
         return fetch(`${STUDIOS_BY_TYPE_URL}/${type}`)
             .then((response) => response.json())
             .then((result) => {
+                console.log({ availableStudiosData: result });
                 setAvailableStudios(result);
                 return result;
             })
@@ -55,7 +52,7 @@ const BookingWidget = () => {
         )
             .then((response) => response.json())
             .then((result) => {
-                console.log({ result });
+                console.log({ calendarAvailabilities: result });
                 setAvailabilities(result);
                 setAvailableToday(result[currentDay]);
             })
@@ -63,8 +60,15 @@ const BookingWidget = () => {
                 console.error('Error:', error);
             });
     };
+
+    const handleChangeStudio = (studioId, bookingType) => {
+        const selectedStudio = availableStudios.find((s) => s.id == studioId);
+        setSelectedStudio(selectedStudio);
+        fetchCalendar(studioId, bookingType);
+    };
     useEffect(() => {
         fetchStudiosByType(bookingType).then((studios) => {
+            setSelectedStudio(studios[0]);
             fetchCalendar(studios[0].id, bookingType);
         });
     }, []);
@@ -89,7 +93,7 @@ const BookingWidget = () => {
                             id='studio-select'
                             name='studio-select'
                             onChange={(e) => {
-                                fetchCalendar(e.target.value, bookingType);
+                                handleChangeStudio(e.target.value, bookingType);
                             }}
                         >
                             {availableStudios &&
@@ -99,6 +103,14 @@ const BookingWidget = () => {
                                     </option>
                                 ))}
                         </select>
+                        {selectedStudio && (
+                            <div
+                                className='trix-content'
+                                dangerouslySetInnerHTML={{
+                                    __html: selectedStudio.description,
+                                }}
+                            />
+                        )}
                     </div>
                     <div className='middle-pane'>
                         {availabilities && (
@@ -110,8 +122,7 @@ const BookingWidget = () => {
                         )}
                     </div>
                     <div className='right-pane'>
-                        {currentDay.format('YYYY-MM-DD')}
-
+                        <p>{currentDay.format('DD-MM-YYYY')}</p>
                         {availableToday &&
                             availableToday.map((time) => {
                                 return (

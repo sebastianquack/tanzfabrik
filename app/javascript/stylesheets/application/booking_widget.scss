@@ -10,7 +10,7 @@
 
         .widget-content {
             display: grid;
-            margin: 2rem 0 0 0;
+            margin: 1rem 0 0 0;
             width: 100%;
 
             .left-pane {
@@ -28,7 +28,15 @@
                 grid-column: 11 / span 6;
                 display: flex;
                 flex-direction: column;
+                align-items: center;
                 padding: 1rem;
+                width: 100%;
+                p {
+                    font-weight: 500;
+                    font-size: 1rem;
+                    line-height: 1.5;
+                    letter-spacing: 0.00938em;
+                }
             }
         }
 
@@ -45,11 +53,11 @@
             }
         }
         .select-time-btn {
-            width: 152px;
-            height: 32px;
             border: 1px solid red;
             color: red;
             margin-bottom: 4px;
+            padding: 0.25rem 0.5rem;
+            width: 8.5rem;
         }
         .select-time-btn.selected {
             background-color: red;

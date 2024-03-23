@@ -18,7 +18,7 @@ task :sync_calendars_to_outlook => :environment do
 
   studios_config = {
     studio_one: {
-      internal_id: 980190971,
+      internal_id: 980190962,
       outlook_calendar_id: "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAEGAAAkY2c3scT4QYtAGWXhfBH4AAAS2I3SAAA=",
       availabilities: {
         two_hour_rehearsal: {
@@ -34,7 +34,7 @@ task :sync_calendars_to_outlook => :environment do
       }
     },
     studio_three: {
-      internal_id: 980190963,
+      internal_id: 980190966,
       outlook_calendar_id: "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAEGAAAkY2c3scT4QYtAGWXhfBH4AAAS2I3TAAA=",
       availabilities: {
         two_hour_rehearsal: {
@@ -50,7 +50,7 @@ task :sync_calendars_to_outlook => :environment do
       } 
     },
     studio_four: {
-      internal_id: 980190966,
+      internal_id: 980190967,
       outlook_calendar_id: "AAMkAGQzZTQ3NDlkLTkzNGYtNGVhOC04NmFiLTA1NzI2M2M5YTRlOQBGAAAAAACUojf8eQYPSpPKOfgiTlKLBwAkY2c3scT4QYtAGWXhfBH4AAAAAAEGAAAkY2c3scT4QYtAGWXhfBH4AAAS2I3UAAA=",
       availabilities: {
         two_hour_rehearsal: {
