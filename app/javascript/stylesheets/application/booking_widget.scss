@@ -1,0 +1,131 @@
+@import './__mixins.scss';
+
+#studio-booking-widget-root {
+    .widget-container {
+        display: flex;
+        flex-direction: column;
+        border-width: 1px;
+        width: 100%;
+        border-style: solid;
+
+        .widget-content {
+            display: grid;
+            margin: 1rem 0 0 0;
+            width: 100%;
+
+            .left-pane {
+                grid-column: 1 / span 4;
+                display: flex;
+                flex-direction: column;
+                padding: 1rem;
+            }
+            .middle-pane {
+                grid-column: 5 / span 6;
+                display: flex;
+                justify-content: center;
+            }
+            .right-pane {
+                grid-column: 11 / span 6;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem;
+                width: 100%;
+                p {
+                    font-weight: 500;
+                    font-size: 1rem;
+                    line-height: 1.5;
+                    letter-spacing: 0.00938em;
+                }
+            }
+        }
+
+        .widget-footer {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            .selection-container {
+                display: flex;
+                flex-flow: column;
+            }
+            h4 {
+                margin-bottom: 1rem;
+            }
+        }
+        .select-time-btn {
+            border: 1px solid red;
+            color: red;
+            margin-bottom: 4px;
+            padding: 0.25rem 0.5rem;
+            width: 8.5rem;
+        }
+        .select-time-btn.selected {
+            background-color: red;
+            color: white;
+        }
+    }
+
+    @include page-dist('margin-left', 'left');
+    @include page-dist('margin-right', 'right');
+
+    @include grid-dist('padding-left', 1);
+    @include grid-dist('padding-right', 1);
+
+    .MuiPickersDay-root {
+        color: red;
+    }
+
+    .Mui-disabled {
+        color: rgb(192, 188, 188);
+    }
+    .MuiPickersDay-today {
+        background-color: white;
+        border: 1px solid red;
+    }
+    .Mui-selected {
+        background-color: red;
+        color: white;
+    }
+    .MuiPickersDay-today.Mui-selected {
+        background-color: red;
+        color: white;
+    }
+    .MuiDayCalendar-weekDayLabel {
+        color: red;
+    }
+    .MuiSvgIcon-root.MuiSvgIcon-fontSizeInherit.css-1vooibu-MuiSvgIcon-root {
+        path {
+            color: red;
+        }
+    }
+
+    // .column_left {
+    //     flex: 1;
+    //     box-sizing: border-box;
+
+    //     img {
+    //         width: 100%;
+    //         padding-right: 16px;
+    //         box-sizing: border-box;
+    //         display: block;
+    //     }
+    // }
+
+    // .column_right {
+    //     flex: 1;
+    // }
+
+    // h2 {
+    //     margin-bottom: 30px;
+    // }
+
+    // .rich_content_1 {
+    //     @include font-fliesstext-m;
+    // }
+
+    // .special_text {
+    //     @include font-stripes-infos;
+    //     white-space: pre-line;
+    //     margin-bottom: 5px;
+    // }
+}

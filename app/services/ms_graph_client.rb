@@ -17,24 +17,75 @@ class MsGraphClient
     @scopes = scopes
   end
 
-  def get_events(user_id, calendar_id)
+  def get_events(user_id, calendar_id, from, to)
+    validate_date_range(from, to)
     auth_or_refresh_token()
-    url_stub = "#{@@ms_graph_url}/users/#{user_id}/calendars/#{calendar_id}/events"
     http_client = HttpClient.new()
-    data = http_client.get(url_stub, {
-      "Authorization" => "Bearer #{@@token}"
+    url = "#{@@ms_graph_url}/users/#{user_id}/calendars/#{calendar_id}/events?top=200"
+    data = http_client.get(url, {
+      "Authorization" => "Bearer #{@@token}",
     })
     if data.key?("error")
       return {error: data["error"]["code"], message: data["error_description"]}
     end
-    return data["value"]
+
+    next_pointer = data["@odata.nextLink"]
+
+    events = [].concat(data["value"])
+    while(!data.key?("error") && !next_pointer.nil?) do
+      url = next_pointer
+      data = http_client.get(url, {
+        "Authorization" => "Bearer #{@@token}"
+      })
+      if data.key?("error")
+        return {error: data["error"]["code"], message: data["error_description"]}
+      end
+      
+      data["value"].each do |event|
+        if !event["recurrence"].nil?
+          recurrences = get_recurrences(user_id, calendar_id, event["id"], from, to)
+          events.concat(recurrences)
+        end
+      end
+
+      next_pointer = data["@odata.nextLink"]
+      events.concat(data["value"])
+    end
+    return events
+  end
+
+  def get_recurrences(user_id, calendar_id, event_id, from, to)
+    http_client = HttpClient.new()
+    url = "#{@@ms_graph_url}/users/#{user_id}/calendars/#{calendar_id}/events/#{event_id}/instances?startDateTime=#{from}&endDateTime=#{to}&top=200"
+    data = http_client.get(url, {
+      "Authorization" => "Bearer #{@@token}",
+    })
+    if data.key?("error")
+      return {error: data["error"]["code"], message: data["error_description"]}
+    end
+
+    next_pointer = data["@odata.nextLink"]
+    events = [].concat(data["value"])
+
+    while(!data.key?("error") && !next_pointer.nil?) do
+      url = next_pointer
+      data = http_client.get(url, {
+        "Authorization" => "Bearer #{@@token}"
+      })
+      if data.key?("error")
+        return {error: data["error"]["code"], message: data["error_description"]}
+      end
+      next_pointer = data["@odata.nextLink"]
+      events.concat(data["value"])
+    end
+    return events
   end
 
   def get_event(user_id, event_id)
     auth_or_refresh_token()
-    url_stub = "#{@@ms_graph_url}/users/#{user_id}/events/#{event_id}"
+    url = "#{@@ms_graph_url}/users/#{user_id}/events/#{event_id}"
     http_client = HttpClient.new()
-    data = http_client.get(url_stub, {
+    data = http_client.get(url, {
       "Authorization" => "Bearer #{@@token}"
     })
     if data.key?("error")
@@ -73,7 +124,6 @@ class MsGraphClient
   private
 
   def authenticate
-    puts "authenticating with ms graph."
     http_client = HttpClient.new()
     data = http_client.post("#{@@login_url}/#{@tenant_id}/oauth2/v2.0/token", {
       client_id: @client_id,
@@ -108,6 +158,20 @@ class MsGraphClient
 
   def fifty_minutes
     3000
+  end
+
+  def validate_date_range(from, to)
+    validate_iso_date(from)
+    validate_iso_date(to)
+  end
+
+  def validate_iso_date(value)
+    iso8601_pattern = /\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\z/
+    if value.match?(iso8601_pattern)
+      return
+    else
+      raise ArgumentError, "Invalid date format. Must be ISO format: YYYY-MM-DDTHH:MM:SSZ."
+    end
   end
 
 end

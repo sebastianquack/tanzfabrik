@@ -15,6 +15,11 @@ Tanzfabrik::Application.routes.draw do
   get '/en/tanzklassen-weekend-special-gaga', to: redirect('/en/tanzklassen-weekend-special')
   get '/de/tanzklassen-weekend-special-gaga', to: redirect('/de/tanzklassen-weekend-special')
 
+  namespace :api do
+    get "/studios/:id/availabilities", to: 'studios#index'
+    get "/studios/:booking_type", to: 'studios#by_booking_type'
+  end
+
   scope "/:locale" do
     constraints(locale: /en|de/) do
       get 'festivals/tanznacht-forum', to: redirect('%{locale}/festivals/tanznacht-forum-2017')
