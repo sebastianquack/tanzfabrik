@@ -6,8 +6,6 @@ import BookingWidget from './components/BookingWidget';
 document.addEventListener('DOMContentLoaded', () => {
     const userId = getCookie('user_id');
 
-    console.log({ userId });
-
     const domNode = document.getElementById('studio-booking-widget-root');
     const root = createRoot(domNode);
     root.render(<BookingWidget />);

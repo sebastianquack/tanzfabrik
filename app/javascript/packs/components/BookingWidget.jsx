@@ -17,8 +17,6 @@ const BookingWidget = () => {
     const [availableToday, setAvailableToday] = useState(null);
     const [selectedTimes, setSelectedTimes] = useState({});
 
-    // console.log({ selectedTimes }, selectedTimes.entries());
-
     const handleDateChange = (newDate) => {
         setCurrentDay(newDate);
         setAvailableToday(availabilities[newDate.format('YYYY-MM-DD')]);
@@ -38,7 +36,6 @@ const BookingWidget = () => {
         return fetch(`${STUDIOS_BY_TYPE_URL}/${type}`)
             .then((response) => response.json())
             .then((result) => {
-                console.log({ availableStudiosData: result });
                 setAvailableStudios(result);
                 return result;
             })
@@ -52,7 +49,6 @@ const BookingWidget = () => {
         )
             .then((response) => response.json())
             .then((result) => {
-                console.log({ calendarAvailabilities: result });
                 setAvailabilities(result);
                 setAvailableToday(result[currentDay]);
             })
@@ -63,6 +59,7 @@ const BookingWidget = () => {
 
     const handleChangeStudio = (studioId, bookingType) => {
         const selectedStudio = availableStudios.find((s) => s.id == studioId);
+        console.log({ selectedStudio });
         setSelectedStudio(selectedStudio);
         fetchCalendar(studioId, bookingType);
     };
@@ -74,42 +71,34 @@ const BookingWidget = () => {
     }, []);
     return (
         <>
-            <h2 className='headline'>Studio Booking</h2>
             <div className='widget-container'>
                 <div className='widget-content'>
                     <div className='left-pane'>
-                        <label htmlFor='booking-type'>
-                            Select a booking type
-                        </label>
-                        <select id='booking-type' name='booking-type'>
-                            {BOOKING_TYPES.map((bt) => (
-                                <option key={bt.value} value={bt.value}>
-                                    {bt.name}
-                                </option>
-                            ))}
-                        </select>
-                        <label htmlFor='studio-select'>Pick a studio</label>
-                        <select
-                            id='studio-select'
-                            name='studio-select'
-                            onChange={(e) => {
-                                handleChangeStudio(e.target.value, bookingType);
-                            }}
-                        >
-                            {availableStudios &&
-                                availableStudios.map((studio) => (
-                                    <option key={studio.id} value={studio.id}>
-                                        {studio.name}
-                                    </option>
-                                ))}
-                        </select>
+                        <p className='title'>
+                            <strong>Studio Booking</strong>
+                        </p>
+                        <Selection
+                            availableStudios={availableStudios}
+                            bookingType={bookingType}
+                            handleChangeStudio={handleChangeStudio}
+                        />
                         {selectedStudio && (
-                            <div
-                                className='trix-content'
-                                dangerouslySetInnerHTML={{
-                                    __html: selectedStudio.description,
-                                }}
-                            />
+                            <>
+                                <img
+                                    src={selectedStudio.image.url}
+                                    alt={selectedStudio.image.url}
+                                />
+                                <p className='studio-title'>
+                                    {selectedStudio.name} <br />
+                                    {selectedStudio.address}
+                                </p>
+                                <div
+                                    className='trix-content'
+                                    dangerouslySetInnerHTML={{
+                                        __html: selectedStudio.description,
+                                    }}
+                                />
+                            </>
                         )}
                     </div>
                     <div className='middle-pane'>
@@ -144,6 +133,45 @@ const BookingWidget = () => {
                 </div>
             </div>
         </>
+    );
+};
+
+const Selection = ({ availableStudios, bookingType, handleChangeStudio }) => {
+    return (
+        <div className='studio-selection-container'>
+            <label htmlFor='booking-type'>
+                <p className='rich_content_2'>Pick a booking type</p>
+            </label>
+            <select
+                id='booking-type'
+                name='booking-type'
+                className='select-field'
+            >
+                {BOOKING_TYPES.map((bt) => (
+                    <option key={bt.value} value={bt.value}>
+                        {bt.name}
+                    </option>
+                ))}
+            </select>
+            <label htmlFor='studio-select'>
+                <p className='rich_content_2'>Pick a studio</p>
+            </label>
+            <select
+                id='studio-select'
+                name='studio-select'
+                className='select-field'
+                onChange={(e) => {
+                    handleChangeStudio(e.target.value, bookingType);
+                }}
+            >
+                {availableStudios &&
+                    availableStudios.map((studio) => (
+                        <option key={studio.id} value={studio.id}>
+                            {studio.name}
+                        </option>
+                    ))}
+            </select>
+        </div>
     );
 };
 

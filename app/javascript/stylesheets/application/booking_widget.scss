@@ -1,31 +1,61 @@
 @import './__mixins.scss';
 
 #studio-booking-widget-root {
+    .title {
+        font-size: 22px;
+        line-height: 32px;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+    }
+
+    .rich_content_2 {
+        font-size: 18px;
+        line-height: 26px;
+        font-weight: 500;
+        letter-spacing: normal;
+    }
+
+    .studio-title {
+        font-size: 18px;
+        line-height: 28px;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        margin: 0.25rem 0;
+    }
     .widget-container {
         display: flex;
         flex-direction: column;
         border-width: 1px;
         width: 100%;
-        border-style: solid;
+        border: 2px solid;
+        border-radius: 8px;
 
         .widget-content {
             display: grid;
-            margin: 1rem 0 0 0;
+            margin: 0 0 0 0;
             width: 100%;
+            grid-template-columns: repeat(18, 1fr);
 
             .left-pane {
-                grid-column: 1 / span 4;
+                grid-column: span 6;
                 display: flex;
                 flex-direction: column;
                 padding: 1rem;
+                border-right: 1px solid red;
+
+                .studio-selection-container {
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: 1rem;
+                }
             }
             .middle-pane {
-                grid-column: 5 / span 6;
+                grid-column: span 7;
                 display: flex;
                 justify-content: center;
             }
             .right-pane {
-                grid-column: 11 / span 6;
+                grid-column: span 5;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -62,6 +92,18 @@
         .select-time-btn.selected {
             background-color: red;
             color: white;
+        }
+    }
+
+    .select-field {
+        border: 2px solid red;
+        border-radius: 9px;
+        width: 14rem;
+        padding: 8px 8px;
+        &:focus {
+            outline: none;
+            border: 2px solid red;
+            border-radius: 9px;
         }
     }
 
