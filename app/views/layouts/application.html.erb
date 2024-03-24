@@ -48,7 +48,7 @@
 
     <div class="horizontal_bar_right">
         <% if user_signed_in? %>
-          <%= button_to 'Sign Out', destroy_user_session_path, method: :delete,  form: { class: "sign-out-btn" } %>
+          <%= button_to 'Log Out', destroy_user_session_path, method: :delete,  form: { class: "sign-out-btn" } %>
         <% else %>
           <%= link_to "Log in", new_user_session_path%>
         <% end %>

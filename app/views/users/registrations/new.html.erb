@@ -3,136 +3,132 @@
   <div class="content"> 
     <h3 class="title">Registration</h3>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form" }) do |f| %>
-    <%= render "users/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form" }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
 
-    <fieldset>
-      <legend><strong>Personal Information</strong></legend>
+      <fieldset>
+        <legend><strong>Personal Information</strong></legend>
 
-      <div class="field">
-        <%= f.label :first_name %><br />
-        <%= f.text_field :first_name, autofocus: true, autocomplete: "first name", class: "input-field" %>
+        <div class="field">
+          <%= f.label :first_name %><br />
+          <%= f.text_field :first_name, autofocus: true, autocomplete: "first name", class: "text-input-field" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :last_name %><br />
+          <%= f.text_field :last_name, autofocus: true, autocomplete: "last name", class: "text-input-field" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :phone_number %><br />
+          <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone-number", class: "text-input-field" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :billing_address %><br />
+          <%= f.text_field :billing_address, autofocus: true, autocomplete: "billing-address", class: "text-input-field" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :website %><br />
+          <%= f.text_field :website, autofocus: true, autocomplete: "website", class: "text-input-field" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :is_krk_registered, class: "checkbox-label" do %>
+            <%= f.check_box :is_krk_registered, class: "checkbox-input" %>
+            <span>I am registered in the KRK</span>
+          <% end %>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><strong>Account Information</strong></legend>
+
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "text-input-field" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: "text-input-field" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "text-input-field" %>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><strong>Artistic information</strong></legend>
+        <input type="hidden" id="permission_request_type" name="permission_request_type" value="rehearsal">
+        <div class="field">
+          <%= f.label :bio, "Bio (max 700 chars)" %><br />
+          <%= f.text_area :bio, autofocus: true, autocomplete: "bio", class: "text-area-field", maxlength: 700 %>
+        </div>
+        <div class="field">
+          <label for="dance_practice_description">Describe your artistic dance practice</label><br />
+          <textarea id="dance_practice_description" name="dance_practice_description" class="text-area-field"> </textarea>
+        </div>
+        <div class="field">
+          <label for="studio_usage">Tell us how you want to use the studio</label><br />
+          <textarea id="studio_usage" name="studio_usage" class="text-area-field"> </textarea>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><strong>Preferences</strong></legend>
+        <div class="field">
+          <%= f.label :preferred_language %><br />
+          <%= f.select :preferred_language, [['English', 'english'], ['German', 'german']], {}, class: "select-field" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :is_workshop_newsletter_registered, class: "checkbox-label" do %>
+            <%= f.check_box :is_workshop_newsletter_registered, class: "checkbox-input" %>
+            <span>Receive the upcoming workshops newsletter</span>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= f.label :is_course_newsletter_registered, class: "checkbox-label" do %>
+            <%= f.check_box :is_course_newsletter_registered, class: "checkbox-input" %>
+            <span>Receive the new classes newsletter</span>
+          <% end %>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><strong>Terms and conditions</strong></legend>
+        <p>
+          no loud music (not over 80 db), 
+          no bass frequencies, no live music, 
+          no food at the studio, 
+          no shoes on the dancefloor, 
+          no rehearsing in case of sickness, 
+          no performance/showing during half-residency, 
+          no technical hours from side of Tanzfabrik
+          <br>
+        </p>
+        <div class="field">
+          <label class="checkbox-label" for="agree_to_terms">
+            <input type="checkbox" class="checkbox-input" id="agree_to_terms" name="agree_to_terms">
+            <span>I agree to the terms and conditions.</span>
+          </label>      
+        </div>
+      </fieldset>
+
+      <div class="actions">
+        <%= f.submit "Register!", class: "btn" %>
       </div>
+    <% end %>
 
-      <div class="field">
-        <%= f.label :last_name %><br />
-        <%= f.text_field :last_name, autofocus: true, autocomplete: "last name", class: "input-field" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :phone_number %><br />
-        <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone-number", class: "input-field" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :billing_address %><br />
-        <%= f.text_field :billing_address, autofocus: true, autocomplete: "billing-address", class: "input-field" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :website %><br />
-        <%= f.text_field :website, autofocus: true, autocomplete: "website", class: "input-field" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :is_krk_registered, class: "checkbox-label" do %>
-          <%= f.check_box :is_krk_registered, class: "checkbox-input" %>
-          <span>I am registered in the KRK</span>
-        <% end %>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend><strong>Account Information</strong></legend>
-
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input-field" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :password %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "new-password", class: "input-field" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input-field" %>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend><strong>Artistic information</strong></legend>
-      <input type="hidden" id="permission_request_type" name="permission_request_type" value="rehearsal">
-      <div class="field">
-        <%= f.label :bio, "Bio (max 700 chars)" %><br />
-        <%= f.text_area :bio, autofocus: true, autocomplete: "bio", class: "text-area-field", maxlength: 700 %>
-      </div>
-      <div class="field">
-        <label for="dance_practice_description">Describe your artistic dance practice</label><br />
-        <textarea id="dance_practice_description" name="dance_practice_description" class="text-area-field"> </textarea>
-      </div>
-      <div class="field">
-        <label for="studio_usage">Tell us how you want to use the studio</label><br />
-        <textarea id="studio_usage" name="studio_usage" class="text-area-field"> </textarea>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend><strong>Preferences</strong></legend>
-      <div class="field">
-        <%= f.label :preferred_language %><br />
-        <%= f.select :preferred_language, [['English', 'english'], ['German', 'german']], {}, class: "select-field" %>
-      </div>
-
-      <div class="field">
-        <%= f.label :is_workshop_newsletter_registered, class: "checkbox-label" do %>
-          <%= f.check_box :is_workshop_newsletter_registered, class: "checkbox-input" %>
-          <span>Receive the upcoming workshops newsletter</span>
-        <% end %>
-      </div>
-
-      <div class="field">
-        <%= f.label :is_course_newsletter_registered, class: "checkbox-label" do %>
-          <%= f.check_box :is_course_newsletter_registered, class: "checkbox-input" %>
-          <span>Receive the new classes newsletter</span>
-        <% end %>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend><strong>Terms and conditions</strong></legend>
-      <p>
-        no loud music (not over 80 db), 
-        no bass frequencies, no live music, 
-        no food at the studio, 
-        no shoes on the dancefloor, 
-        no rehearsing in case of sickness, 
-        no performance/showing during half-residency, 
-        no technical hours from side of Tanzfabrik
-        <br>
-      </p>
-      <div class="field">
-        <label class="checkbox-label" for="agree_to_terms">
-          <input type="checkbox" class="checkbox-input" id="agree_to_terms" name="agree_to_terms">
-          <span>I agree to the terms and conditions.</span>
-        </label>      
-      </div>
-    </fieldset>
-
-    <div class="actions">
-      <%= f.submit "Register!", class: "btn" %>
-    </div>
-  <% end %>
-
-  <%
-=begin%>
- <%= render "users/shared/links" %> 
-<%
-=end%>
-
+    <%= render "users/shared/links" %> 
+    
   </div>
 </div>

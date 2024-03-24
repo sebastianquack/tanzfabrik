@@ -5,7 +5,8 @@ class Calendar < ActiveRecord::Base
   has_many :availabilities, class_name: :CalendarBookingType
   has_many :booking_types, through: :availabilities
 
-  def get_availabilities(from, availability_config)
+  def get_availabilities(from, booking_type)
+    availability_config = CalendarBookingType.find_by(calendar: self, booking_type: booking_type).settings
     to = DateHelper.to_iso_date_string(Date.today >> availability_config["bookable_months_in_advance"])
     upcoming_events = events.where("start_time >= ? AND end_time <= ?", from, to).order(start_time: :asc)
     merged_bookings_by_day = merge_bookings_by_day(upcoming_events)    

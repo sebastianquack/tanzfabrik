@@ -5,8 +5,7 @@ module Api
   
       booking_type = BookingType.find_by(name: params[:booking_type])
       calendar = Calendar.find_by(studio_id: params[:id])
-      availability_config = CalendarBookingType.find_by(calendar: calendar, booking_type: booking_type).settings
-      availabilities = calendar.get_availabilities(now, availability_config)
+      availabilities = calendar.get_availabilities(now, booking_type)
 
       render json: availabilities
     end
