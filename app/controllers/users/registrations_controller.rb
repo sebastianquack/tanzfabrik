@@ -13,7 +13,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
     if resource.persisted?
-      BookingPermissionRequest.create(user: resource, status: 'pending', type: 'rehearsal', description: 'Your description here')
+      description = BookingPermissionRequest.build_description_from_params(params)
+      Rails.logger.info params
+      Rails.logger.info description
+      BookingPermissionRequest.create(user: resource, status: 'pending', permission_type: 'rehearsal', description: description)
     end
   end
 
@@ -45,7 +48,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def sign_up_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :phone_number, :website, :is_krk_registered, :bio, :preferred_language, :is_workshop_newsletter_registered, :is_course_newsletter_registered, :agree_to_terms, :billing_address)
+    params.require(:user).permit(
+      :first_name,
+      :last_name,
+      :email,
+      :is_krk_registered,
+      :password,
+      :password_confirmation,
+      :phone_number,
+      :billing_address,
+      :website,
+      :bio,
+      :permission_request_type,
+      :dance_practice_description,
+      :studio_usage,
+      :preferred_language,
+      :is_workshop_newsletter_registered,
+      :is_course_newsletter_registered,
+      :agree_to_terms,
+    )
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -54,9 +75,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    super(resource)
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

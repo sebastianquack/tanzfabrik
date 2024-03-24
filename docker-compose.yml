@@ -1,102 +1,100 @@
 version: '2.4'
 services:
+    web:
+        image: rails-tanzfabrik
+        build:
+            context: .
+        #    command: /bin/bash
+        command: bash -c "bundle check && rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+        env_file:
+            - ./.env
+        volumes:
+            - .:/app:cached
+        ports:
+            - '3000:3000'
+        networks:
+            - tanzfabrik
+        environment:
+            - RAILS_ENV=development
+        # volumes_from:
+        #   - gemcache
+        depends_on:
+            # gemcache:
+            #   condition: service_started
+            db:
+                condition: service_healthy
+            minio:
+                condition: service_started
 
-  web:
-    image: rails-tanzfabrik
-    build:
-      context: .
-#    command: /bin/bash
-    command: bash -c "bundle check && rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    env_file:
-      - ./.env
-    volumes:
-      - .:/app:cached
-    ports:
-      - "3000:3000"
-    networks:
-      - tanzfabrik
-    environment:
-      - RAILS_ENV=development
-    # volumes_from: 
-    #   - gemcache
-    depends_on:
-      # gemcache:
-      #   condition: service_started
-      db:
-        condition: service_healthy
-      minio:
-        condition: service_started
+    webpacker:
+        image: rails-tanzfabrik
+        command: ['./scripts/start_webpack_dev.sh']
+        volumes:
+            - .:/app:cached
+        ports:
+            - '3035:3035'
+        networks:
+            - tanzfabrik
+        environment:
+            - RAILS_ENV=development
 
-  webpacker:
-    image: rails-tanzfabrik
-    command: ["./scripts/start_webpack_dev.sh"]
-    volumes:
-      - .:/app:cached
-    ports:
-      - "3035:3035"
-    networks:
-      - tanzfabrik
-    environment:
-      - RAILS_ENV=development      
+    db:
+        image: postgres:12.3
+        networks:
+            - tanzfabrik
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+        volumes:
+            - ./.data/db:/var/lib/postgresql/data:cached
+            - ./.data/downloads:/downloads
+        healthcheck:
+            test: pg_isready -U postgres -h 127.0.0.1
+            interval: 5s
 
-  db:
-    image: postgres:12.3
-    networks:
-      - tanzfabrik    
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    volumes:
-      - ./.data/db:/var/lib/postgresql/data:cached
-      - ./.data/downloads:/downloads
-    healthcheck:
-      test: pg_isready -U postgres -h 127.0.0.1
-      interval: 5s      
+    # gemcache:
+    #   image: busybox
+    #   volumes:
+    #     - /gemcache
 
-  # gemcache:
-  #   image: busybox
-  #   volumes:
-  #     - /gemcache
+    adminer:
+        image: adminer
+        ports:
+            - 3001:8080
+        depends_on:
+            - db
 
-  adminer:
-    image: adminer
-    ports:
-      - 3001:8080
-    depends_on:
-      - db     
+    minio:
+        image: minio/minio:RELEASE.2020-09-02T18-19-50Z
+        environment:
+            MINIO_ACCESS_KEY: '${S3_KEY}'
+            MINIO_SECRET_KEY: '${S3_SECRET}'
+        command:
+            - server
+            - /data
+        volumes:
+            - ./.data/minio:/data:cached
+        ports:
+            - 9000:9000
+        networks:
+            tanzfabrik:
+                aliases:
+                    - minio
+                    - '${S3_TANZFABRIK_BUCKET}.minio'
 
-  minio:
-    image: minio/minio:RELEASE.2020-09-02T18-19-50Z
-    environment:
-      MINIO_ACCESS_KEY: "${S3_KEY}"
-      MINIO_SECRET_KEY: "${S3_SECRET}"
-    command:
-      - server
-      - /data
-    volumes:
-      - ./.data/minio:/data:cached
-    ports:
-      - 9000:9000
-    networks:
-      tanzfabrik:
-        aliases:
-          - minio
-          - "${S3_TANZFABRIK_BUCKET}.minio"
-      
-
-  minio-mc-init:
-    image: minio/mc:RELEASE.2020-07-17T02-52-20Z-s390x
-    networks:
-      - tanzfabrik    
-    entrypoint: >
-      /bin/sh -c "
-      sleep 10;
-      /usr/bin/mc config host add myminio http://minio:9000 ${S3_KEY} ${S3_SECRET};
-      /usr/bin/mc mb myminio/${S3_TANZFABRIK_BUCKET};
-      /usr/bin/mc policy set public myminio/${S3_TANZFABRIK_BUCKET};
-      exit 0;
-      "
+    minio-mc-init:
+        image: minio/mc:RELEASE.2020-07-17T02-52-20Z-s390x
+        networks:
+            - tanzfabrik
+        entrypoint: >
+            /bin/sh -c "
+            sleep 10;
+            /usr/bin/mc config host add myminio http://minio:9000 ${S3_KEY} ${S3_SECRET};
+            /usr/bin/mc mb myminio/${S3_TANZFABRIK_BUCKET};
+            /usr/bin/mc policy set public myminio/${S3_TANZFABRIK_BUCKET};
+            exit 0;
+            "
 
 networks:
-  tanzfabrik:
-    name: tanzfabrik
+    tanzfabrik:
+        name: tanzfabrik

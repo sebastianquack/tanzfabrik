@@ -83,4 +83,5 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem "letter_opener" # for email testing
   gem 'listen' # auto reload on file change
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

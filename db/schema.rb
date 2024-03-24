@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 2024_03_23_162923) do
   create_table "booking_permission_requests", force: :cascade do |t|
     t.bigint "user_id"
     t.string "status"
-    t.string "type"
+    t.string "permission_type"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

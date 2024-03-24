@@ -66,6 +66,7 @@
 
     <fieldset>
       <legend><strong>Artistic information</strong></legend>
+      <input type="hidden" id="permission_request_type" name="permission_request_type" value="rehearsal">
       <div class="field">
         <%= f.label :bio, "Bio (max 700 chars)" %><br />
         <%= f.text_area :bio, autofocus: true, autocomplete: "bio", class: "text-area-field", maxlength: 700 %>

@@ -45,6 +45,7 @@
       <button class="navTrigger close"><%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_x_red.svg"        , class: "icon close" ) %></button>
       <button class="navTrigger open"><%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_Menu-icon_red.svg", class: "icon open  section-stroke-color" ) %></button>
     </div>
+    <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
     <div class="horizontal_bar_right">
       <span data-logo aria-hidden="true"></span>
     </div>
