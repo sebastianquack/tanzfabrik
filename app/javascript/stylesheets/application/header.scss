@@ -1,111 +1,131 @@
-@import "./__mixins.scss";
+@import './__mixins.scss';
 
 #language_switcher {
-  @include font-language-select;
-  li.active, li.active a {
-    font-style: italic;
-  }
+    @include font-language-select;
+    li.active,
+    li.active a {
+        font-style: italic;
+    }
 }
 
 .skip-link {
-  position: absolute;
-  top: -40px;
-  padding-left: 10px;
-  @include breakpoint('s') {
-    display: none;
-  }
-  &:focus {
-    position: initial;
-  }
+    position: absolute;
+    top: -40px;
+    padding-left: 10px;
+    @include breakpoint('s') {
+        display: none;
+    }
+    &:focus {
+        position: initial;
+    }
 }
 
-
 .horizontal_bar_container {
+    @include flex-row;
+    @include font-stripes;
 
-  @include flex-row;
-  @include font-stripes;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    @include grid-gap;
 
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  @include grid-gap;
-
-  .horizontal_bar_left {
-    grid-column: 1 / span 6;
-    a:hover, a:active {
-      text-decoration: none;
-    }
-  }
-
-  .horizontal_bar_center {
-    grid-column: 7 / span 3;
-    button { 
-      display: none;
-      
-      @include breakpoint('s') {
-        transform: translateX(-50%);
-      }
-    };
-    @include breakpoint('s') {
-      > a {display: none;}
-
-      @include mobile-language-switcher;
-
-      button.open {
-        display: initial;
-      } 
-      body.menu_open & {
-        button.close {
-          display: initial;
+    .horizontal_bar_left {
+        grid-column: 1 / span 6;
+        a:hover,
+        a:active {
+            text-decoration: none;
         }
-        button.open {
-          display: none;
-        }        
-      }
-      body[data-menu-item-key="start"] & {
+    }
+
+    .horizontal_bar_center {
+        grid-column: 7 / span 3;
         button {
-          display: none;
-        }
-      }
-      body.featured_visible[data-section="buehne"]:not(.menu_open) & {
-        button.open path {
-          stroke: white;
-        }    
-      }
-    }
-  }
+            display: none;
 
-  .horizontal_bar_right {
-    grid-column: 10 / span 3;
-    display: flex;
-    justify-content: flex-end;
-  }
+            @include breakpoint('s') {
+                transform: translateX(-50%);
+            }
+        }
+        @include breakpoint('s') {
+            > a {
+                display: none;
+            }
+
+            @include mobile-language-switcher;
+
+            button.open {
+                display: initial;
+            }
+            body.menu_open & {
+                button.close {
+                    display: initial;
+                }
+                button.open {
+                    display: none;
+                }
+            }
+            body[data-menu-item-key='start'] & {
+                button {
+                    display: none;
+                }
+            }
+            body.featured_visible[data-section='buehne']:not(.menu_open) & {
+                button.open path {
+                    stroke: white;
+                }
+            }
+        }
+    }
+
+    .horizontal_bar_right {
+        grid-column: 10 / span 3;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        .sign-out-btn input[type='submit'] {
+            background: none;
+            border: none;
+            font: inherit;
+            text-transform: uppercase;
+            cursor: pointer;
+            color: inherit;
+            padding: 0;
+            margin-right: 1rem;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        a {
+            margin-right: 1rem;
+        }
+    }
 }
 
 header {
-  position: fixed;
-  top:0;
-  z-index: 11;
-  background-color: white;
-  body.featured_visible:not(.menu_open) & {
-    background-color: transparent;
-  }
-  body.featured_visible[data-section="buehne"]:not(.menu_open) & {
-    color: white;
-  }
-  transition: background-color 0.2s;
-  //overflow: hidden;
+    position: fixed;
+    top: 0;
+    z-index: 11;
+    background-color: white;
+    body.featured_visible:not(.menu_open) & {
+        background-color: transparent;
+    }
+    body.featured_visible[data-section='buehne']:not(.menu_open) & {
+        color: white;
+    }
+    transition: background-color 0.2s;
+    //overflow: hidden;
 
-  height: $header-height;
-  box-sizing: border-box;
+    height: $header-height;
+    box-sizing: border-box;
 
-  padding-top: 12px;
-  padding-bottom: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
 
-  @include page-dist("padding-left", "left");
-  @include page-dist("padding-right", "right");
+    @include page-dist('padding-left', 'left');
+    @include page-dist('padding-right', 'right');
 
-  img {
-    height: $header-height-logo;
-  }
-
+    img {
+        height: $header-height-logo;
+    }
 }
