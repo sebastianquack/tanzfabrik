@@ -1,6 +1,22 @@
 require 'test_helper'
 
 class BookingPermissionRequestTest < ActiveSupport::TestCase
+  test "Correctly creates a permission request" do
+    
+    user = users(:one)
+    description = "This is a test description"
+
+    assert_difference 'BookingPermissionRequest.count', 1 do
+      BookingPermissionRequest.create(user: user, status: 'pending', permission_type: 'rehearsal', description: description)
+    end
+
+    created_request = BookingPermissionRequest.last
+    assert_equal user.id, created_request.user_id
+    assert_equal 'pending', created_request.status
+    assert_equal 'rehearsal', created_request.permission_type
+    assert_equal description, created_request.description
+  end
+
   test "build description from params" do
     params = {
       "user" => {

@@ -12,14 +12,14 @@ class BookingPermissionRequest < ActiveRecord::Base
 
   def map_to_rehearsal_request_description(params)
     return "
-Email: #{params["user"]["email"]}\n
-First name: #{params["user"]["first_name"]}\n
-Last name: #{params["user"]["last_name"]}\n
-Artist Bio:\n
+<b>Email:</b> #{params["user"]["email"]}\n
+<b>First name:</b> #{params["user"]["first_name"]}\n
+<b>Last name: #{params["user"]["last_name"]}\n
+<b>Artist Bio:</b>\n
 #{params["user"]["bio"]} \n
-Dance Practice: \n
+<b>Dance Practice:</b> \n
 #{params["dance_practice_description"]} \n
-Intended Studio usage:\n
+<b>Intended Studio usage:</b>\n
 #{params["studio_usage"]}
 "
   end

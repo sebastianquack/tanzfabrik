@@ -17,7 +17,7 @@ ActiveAdmin.register BookingPermissionRequest do
 
   index do
     selectable_column
-    column :type
+    column :permission_type
     column :user
     column :description
     column :status
@@ -26,9 +26,11 @@ ActiveAdmin.register BookingPermissionRequest do
   
   show do
     attributes_table do
-      row :type
+      row :permission_type
       row :user
-      row :description
+      row :description do |resource|
+        simple_format(resource.description)
+      end
       row :status
     end
   end
