@@ -19,6 +19,7 @@ const BookingWidget = () => {
 
     const handleDateChange = (newDate) => {
         setCurrentDay(newDate);
+        console.log({ newDate });
         setAvailableToday(availabilities[newDate.format('YYYY-MM-DD')]);
     };
 
@@ -102,30 +103,36 @@ const BookingWidget = () => {
                         )}
                     </div>
                     <div className='right-pane'>
-                        <div className='calendar-container'>
-                            {availabilities && (
-                                <Calendar
-                                    availabilities={availabilities}
-                                    defaultDay={currentDay}
-                                    setCurrentDay={handleDateChange}
-                                />
-                            )}
+                        <div className='upper-section'>
+                            <div className='calendar-container'>
+                                {availabilities && (
+                                    <Calendar
+                                        availabilities={availabilities}
+                                        defaultDay={currentDay}
+                                        setCurrentDay={handleDateChange}
+                                    />
+                                )}
+                            </div>
+                            <div className='available-times'>
+                                <p>{currentDay.format('dddd MMMM D')}</p>
+                                {availableToday &&
+                                    availableToday.map((time) => {
+                                        return (
+                                            <TimeSlotBtn
+                                                key={time.id}
+                                                time={time}
+                                                handleClick={
+                                                    handleTimeSelection
+                                                }
+                                                selected={
+                                                    selectedTimes[time.id]
+                                                }
+                                            />
+                                        );
+                                    })}
+                            </div>
                         </div>
-                        <div className='available-times'>
-                            <p>{currentDay.format('DD-MM-YYYY')}</p>
-                            {availableToday &&
-                                availableToday.map((time) => {
-                                    return (
-                                        <TimeSlotBtn
-                                            key={time.id}
-                                            time={time}
-                                            handleClick={handleTimeSelection}
-                                            selected={selectedTimes[time.id]}
-                                        />
-                                    );
-                                })}
-                        </div>
-                        <div className='widget-footer'>
+                        <div className='lower-section'>
                             <SelectedTimes
                                 times={selectedTimes}
                                 handleClick={handleTimeSelection}
@@ -179,25 +186,29 @@ const Selection = ({ availableStudios, bookingType, handleChangeStudio }) => {
 
 const SelectedTimes = ({ times, handleClick }) => {
     const entries = Object.entries(times);
-    if (entries.length == 0) return <></>;
+    console.log({ entries });
+
     return (
         <>
-            <h4 className='special-text'>Selected Times</h4>
-            <div className='selection-container'>
-                {entries.map(([id, time]) => {
-                    return (
-                        <button
-                            type='button'
-                            className='select-time-btn selected'
-                            key={`x-${id}-x`}
-                            onClick={() => handleClick(time)}
-                        >
-                            {dayjs(time.start).format('HH:mm')} -{' '}
-                            {dayjs(time.end).format('HH:mm')}
-                        </button>
-                    );
-                })}
-            </div>
+            <p className='title'>Currently picked</p>
+            {entries.length > 0 && (
+                <div className='selection-container'>
+                    {entries.map(([id, time]) => {
+                        return (
+                            <button
+                                type='button'
+                                className='selected-time'
+                                key={`x-${id}-x`}
+                                onClick={() => handleClick(time)}
+                            >
+                                {dayjs(time.start).format('dddd MMMM D')} |{' '}
+                                {dayjs(time.start).format('LT')} -{' '}
+                                {dayjs(time.end).format('LT')}
+                            </button>
+                        );
+                    })}
+                </div>
+            )}
         </>
     );
 };
@@ -210,8 +221,7 @@ const TimeSlotBtn = ({ time, handleClick, selected }) => {
             className={classNames('select-time-btn', selected && 'selected')}
             key={time.id}
         >
-            {dayjs(time.start).format('HH:mm')} -{' '}
-            {dayjs(time.end).format('HH:mm')}
+            {dayjs(time.start).format('LT')} - {dayjs(time.end).format('LT')}
         </button>
     );
 };
