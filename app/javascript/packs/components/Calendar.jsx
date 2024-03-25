@@ -18,6 +18,7 @@ export default function DateCalendarViews({
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateCalendar
+                fullWidth
                 shouldDisableDate={shouldDisableDate}
                 day={<PickersDay sx={{ background: 'red' }} />}
                 disablePast={true}
@@ -26,6 +27,7 @@ export default function DateCalendarViews({
                 maxDate={dayjs().add(2, 'month')}
                 style={{
                     margin: '0',
+                    width: '100%',
                 }}
                 defaultValue={defaultDay}
                 onChange={setCurrentDay}

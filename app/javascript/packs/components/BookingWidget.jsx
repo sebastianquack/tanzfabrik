@@ -101,35 +101,37 @@ const BookingWidget = () => {
                             </>
                         )}
                     </div>
-                    <div className='middle-pane'>
-                        {availabilities && (
-                            <Calendar
-                                availabilities={availabilities}
-                                defaultDay={currentDay}
-                                setCurrentDay={handleDateChange}
-                            />
-                        )}
-                    </div>
                     <div className='right-pane'>
-                        <p>{currentDay.format('DD-MM-YYYY')}</p>
-                        {availableToday &&
-                            availableToday.map((time) => {
-                                return (
-                                    <TimeSlotBtn
-                                        key={time.id}
-                                        time={time}
-                                        handleClick={handleTimeSelection}
-                                        selected={selectedTimes[time.id]}
-                                    />
-                                );
-                            })}
+                        <div className='calendar-container'>
+                            {availabilities && (
+                                <Calendar
+                                    availabilities={availabilities}
+                                    defaultDay={currentDay}
+                                    setCurrentDay={handleDateChange}
+                                />
+                            )}
+                        </div>
+                        <div className='available-times'>
+                            <p>{currentDay.format('DD-MM-YYYY')}</p>
+                            {availableToday &&
+                                availableToday.map((time) => {
+                                    return (
+                                        <TimeSlotBtn
+                                            key={time.id}
+                                            time={time}
+                                            handleClick={handleTimeSelection}
+                                            selected={selectedTimes[time.id]}
+                                        />
+                                    );
+                                })}
+                        </div>
+                        <div className='widget-footer'>
+                            <SelectedTimes
+                                times={selectedTimes}
+                                handleClick={handleTimeSelection}
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className='widget-footer'>
-                    <SelectedTimes
-                        times={selectedTimes}
-                        handleClick={handleTimeSelection}
-                    />
                 </div>
             </div>
         </>
@@ -140,7 +142,7 @@ const Selection = ({ availableStudios, bookingType, handleChangeStudio }) => {
     return (
         <div className='studio-selection-container'>
             <label htmlFor='booking-type'>
-                <p className='rich_content_2'>Pick a booking type</p>
+                <p className='rich_content_2'>Booking type</p>
             </label>
             <select
                 id='booking-type'
@@ -154,7 +156,7 @@ const Selection = ({ availableStudios, bookingType, handleChangeStudio }) => {
                 ))}
             </select>
             <label htmlFor='studio-select'>
-                <p className='rich_content_2'>Pick a studio</p>
+                <p className='rich_content_2'>Studio</p>
             </label>
             <select
                 id='studio-select'
