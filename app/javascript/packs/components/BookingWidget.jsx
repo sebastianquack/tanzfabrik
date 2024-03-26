@@ -137,6 +137,9 @@ const BookingWidget = () => {
                                 times={selectedTimes}
                                 handleClick={handleTimeSelection}
                             />
+                            <button type='button' className='next-btn'>
+                                <strong> Next Steps &#8594; </strong>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -190,25 +193,23 @@ const SelectedTimes = ({ times, handleClick }) => {
 
     return (
         <>
-            <p className='title'>Currently picked</p>
-            {entries.length > 0 && (
-                <div className='selection-container'>
-                    {entries.map(([id, time]) => {
-                        return (
-                            <button
-                                type='button'
-                                className='selected-time'
-                                key={`x-${id}-x`}
-                                onClick={() => handleClick(time)}
-                            >
-                                {dayjs(time.start).format('dddd MMMM D')} |{' '}
-                                {dayjs(time.start).format('LT')} -{' '}
-                                {dayjs(time.end).format('LT')}
-                            </button>
-                        );
-                    })}
-                </div>
-            )}
+            <p className='rich_content_2'>Currently picked</p>
+            <div className='selection-container'>
+                {entries.map(([id, time]) => {
+                    return (
+                        <button
+                            type='button'
+                            className='selected-time'
+                            key={`x-${id}-x`}
+                            onClick={() => handleClick(time)}
+                        >
+                            {dayjs(time.start).format('dddd MMMM D')} |{' '}
+                            {dayjs(time.start).format('LT')} -{' '}
+                            {dayjs(time.end).format('LT')}
+                        </button>
+                    );
+                })}
+            </div>
         </>
     );
 };
@@ -221,7 +222,7 @@ const TimeSlotBtn = ({ time, handleClick, selected }) => {
             className={classNames('select-time-btn', selected && 'selected')}
             key={time.id}
         >
-            {dayjs(time.start).format('LT')} - {dayjs(time.end).format('LT')}
+            {dayjs(time.start).format('LT')}
         </button>
     );
 };

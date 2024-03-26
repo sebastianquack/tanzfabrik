@@ -82,10 +82,13 @@
                 }
                 .lower-section {
                     padding: 0 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    height: 100%;
                     .selection-container {
-                        display: flex;
-                        flex-direction: column;
-                        flex-wrap: wrap;
+                        height: 100%;
+                        flex-flow: wrap;
                     }
                 }
             }
@@ -98,6 +101,10 @@
             margin-bottom: 4px;
             padding: 0.25rem 0.5rem;
             width: 100%;
+            &:hover {
+                color: white;
+                background-color: red;
+            }
         }
         .select-time-btn.selected {
             background-color: red;
@@ -108,9 +115,9 @@
             border-radius: 9px;
             background-color: red;
             color: white;
-            margin-bottom: 4px;
+            margin: 0.2rem;
             padding: 0.25rem 0.5rem;
-            width: fit-content;
+            width: 20rem;
         }
     }
 
@@ -123,6 +130,21 @@
             outline: none;
             border: 2px solid red;
             border-radius: 9px;
+        }
+    }
+
+    .next-btn {
+        border: 2px solid red;
+        color: red;
+        border-radius: 9px;
+        width: 8rem;
+        height: 4rem;
+        margin-bottom: 1rem;
+        padding: 8px 8px;
+        align-self: end;
+        &:hover {
+            color: white;
+            background-color: red;
         }
     }
 
@@ -176,6 +198,6 @@
 
     // Calendar height
     .css-1q04gal-MuiDateCalendar-root {
-        height: 340px;
+        height: 285px;
     }
 }
