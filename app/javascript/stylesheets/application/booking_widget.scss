@@ -6,6 +6,11 @@
         line-height: 32px;
         font-weight: 500;
         letter-spacing: -0.02em;
+        margin-bottom: 0.5rem;
+    }
+
+    #booking-type {
+        margin-bottom: 0.5rem;
     }
 
     .rich_content_2 {
@@ -118,6 +123,8 @@
             margin: 0.2rem;
             padding: 0.25rem 0.5rem;
             width: 20rem;
+            display: flex;
+            justify-content: space-around;
         }
     }
 

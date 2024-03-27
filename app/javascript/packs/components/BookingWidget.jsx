@@ -197,16 +197,17 @@ const SelectedTimes = ({ times, handleClick }) => {
             <div className='selection-container'>
                 {entries.map(([id, time]) => {
                     return (
-                        <button
-                            type='button'
-                            className='selected-time'
-                            key={`x-${id}-x`}
-                            onClick={() => handleClick(time)}
-                        >
-                            {dayjs(time.start).format('dddd MMMM D')} |{' '}
-                            {dayjs(time.start).format('LT')} -{' '}
-                            {dayjs(time.end).format('LT')}
-                        </button>
+                        <span key={`x-${id}-x`}>
+                            <button
+                                type='button'
+                                className='selected-time'
+                                onClick={() => handleClick(time)}
+                            >
+                                {dayjs(time.start).format('dddd MMMM D')} |{' '}
+                                {dayjs(time.start).format('LT')} -{' '}
+                                {dayjs(time.end).format('LT')} <span>✖</span>
+                            </button>
+                        </span>
                     );
                 })}
             </div>
