@@ -14,6 +14,7 @@
   <!--%= favicon_link_tag 'favicon.ico' %-->
   <%= stylesheet_pack_tag "application", 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'react_app' %>
 
   <script data-host=https://app.microanalytics.io data-dnt="false" src=https://app.microanalytics.io/js/script.js id="ZwSg9rf6GA" async defer></script>
   
@@ -44,7 +45,13 @@
       <button class="navTrigger close"><%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_x_red.svg"        , class: "icon close" ) %></button>
       <button class="navTrigger open"><%= inline_svg_pack_tag("media/svgs/TAFA20-Webseite_Menu-icon_red.svg", class: "icon open  section-stroke-color" ) %></button>
     </div>
+
     <div class="horizontal_bar_right">
+        <% if user_signed_in? %>
+          <%= button_to 'Log Out', destroy_user_session_path, method: :delete,  form: { class: "sign-out-btn" } %>
+        <% else %>
+          <%= link_to "Log in", new_user_session_path%>
+        <% end %>
       <span data-logo aria-hidden="true"></span>
     </div>
   </header>

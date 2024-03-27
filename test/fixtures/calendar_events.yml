@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+    calendar: one
+    start_time: 2024-01-27 11:25:50
+    end_time: 2024-01-27 11:25:50
+    booking: one
+    subject: MyString
+    description: MyString
+    outlook_id: MyString
+
+two:
+    calendar: two
+    start_time: 2024-01-27 11:25:50
+    end_time: 2024-01-27 11:25:50
+    booking: two
+    subject: MyString
+    description: MyString
+    outlook_id: MyString

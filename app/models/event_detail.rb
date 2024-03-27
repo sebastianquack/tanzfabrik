@@ -1,5 +1,3 @@
-include IceCube
-
 class EventDetail < ActiveRecord::Base
   belongs_to :event
   belongs_to :studio

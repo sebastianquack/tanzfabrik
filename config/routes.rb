@@ -1,4 +1,9 @@
 Tanzfabrik::Application.routes.draw do
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    passwords: 'users/passwords'
+  }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
     
@@ -14,6 +19,11 @@ Tanzfabrik::Application.routes.draw do
   # special route for wrong slug 
   get '/en/tanzklassen-weekend-special-gaga', to: redirect('/en/tanzklassen-weekend-special')
   get '/de/tanzklassen-weekend-special-gaga', to: redirect('/de/tanzklassen-weekend-special')
+
+  namespace :api do
+    get "/studios/:id/availabilities", to: 'studios#index'
+    get "/studios/:booking_type", to: 'studios#by_booking_type'
+  end
 
   scope "/:locale" do
     constraints(locale: /en|de/) do

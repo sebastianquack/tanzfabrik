@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_24_105804) do
+ActiveRecord::Schema.define(version: 2024_03_23_162923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,66 @@ ActiveRecord::Schema.define(version: 2023_10_24_105804) do
     t.datetime "updated_at"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "booking_permission_requests", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "status"
+    t.string "permission_type"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_booking_permission_requests_on_user_id"
+  end
+
+  create_table "booking_types", force: :cascade do |t|
+    t.string "name"
+    t.string "price_per"
+    t.string "time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "calendar_id"
+    t.string "booking_number"
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["calendar_id"], name: "index_bookings_on_calendar_id"
+  end
+
+  create_table "calendar_booking_types", force: :cascade do |t|
+    t.string "settings"
+    t.bigint "calendar_id"
+    t.bigint "booking_type_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["booking_type_id"], name: "index_calendar_booking_types_on_booking_type_id"
+    t.index ["calendar_id", "booking_type_id"], name: "index_calendar_booking_types_on_calendar_id_and_booking_type_id", unique: true
+    t.index ["calendar_id"], name: "index_calendar_booking_types_on_calendar_id"
+  end
+
+  create_table "calendar_events", force: :cascade do |t|
+    t.bigint "calendar_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.bigint "booking_id"
+    t.string "subject"
+    t.string "description"
+    t.string "outlook_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["booking_id"], name: "index_calendar_events_on_booking_id"
+    t.index ["calendar_id"], name: "index_calendar_events_on_calendar_id"
+  end
+
+  create_table "calendars", force: :cascade do |t|
+    t.string "name"
+    t.string "outlook_id"
+    t.bigint "studio_id"
+    t.string "schedule"
+    t.index ["studio_id"], name: "index_calendars_on_studio_id"
   end
 
   create_table "content_modules", id: :serial, force: :cascade do |t|
@@ -435,5 +495,34 @@ ActiveRecord::Schema.define(version: 2023_10_24_105804) do
     t.index ["name"], name: "index_text_items_on_name", unique: true
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "phone_number", null: false
+    t.string "website"
+    t.string "billing_address", null: false
+    t.string "preferred_language", null: false
+    t.boolean "is_krk_registered", default: false, null: false
+    t.boolean "is_workshop_newsletter_registered", default: false, null: false
+    t.boolean "is_course_newsletter_registered", default: false, null: false
+    t.text "bio", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "booking_permission_requests", "users"
+  add_foreign_key "bookings", "calendars"
+  add_foreign_key "calendar_booking_types", "booking_types"
+  add_foreign_key "calendar_booking_types", "calendars"
+  add_foreign_key "calendar_events", "bookings"
+  add_foreign_key "calendar_events", "calendars"
+  add_foreign_key "calendars", "studios"
 end
